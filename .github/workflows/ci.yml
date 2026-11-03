@@ -92,8 +92,24 @@ jobs:
           path: build/results
           retention-days: 7
 
+  # The Lean package (07). The Mathlib cache gives the compiled Mathlib, so the job builds only the Algo modules. The axiom audit fails if a declaration of Algo depends on an axiom other than propext, Classical.choice and Quot.sound (07.6).
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64 # v1.7.0
+        with:
+          lake-package-directory: lean
+          use-mathlib-cache: "true"
+          test: "true"
+          axiom-audit: "true"
+          axiom-audit-root: Algo
+
   site:
-    needs: [audit, test]
+    needs: [audit, test, lean]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

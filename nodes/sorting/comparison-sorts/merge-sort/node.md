@@ -20,6 +20,12 @@ history:
   note: Von Neumann wrote a merge sort program for the EDVAC in 1945.
 prereqs: [insertion-sort, loop-invariant, asymptotic-notation]
 see_also: [insertion-sort, binary-search]
+lean:
+  module: Algo.Sorting.MergeSort
+  model: Algo.Sorting.MergeSort.mergeSort
+  spec: Algo.Sorting.SortingProblem.IsSort
+  correct: Algo.Sorting.MergeSort.mergeSort_isSort
+  cost: Algo.Sorting.MergeSort.mergeSort_time_le
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition

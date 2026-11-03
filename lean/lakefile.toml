@@ -1,0 +1,27 @@
+name = "Algo"
+version = "0.1.0"
+defaultTargets = ["Algo"]
+testDriver = "AlgoTest"
+
+[leanOptions]
+autoImplicit = false
+relaxedAutoImplicit = false
+
+# Pin Mathlib and CSLib to release tags, the same tags as the toolchain. The monthly bump (07.17) moves the three together.
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0"
+
+[[require]]
+name = "cslib"
+git = "https://github.com/leanprover/cslib"
+rev = "v4.35.0"
+
+[[lean_lib]]
+name = "Algo"
+
+# The tests of the specs against the shared cases (rule L06). `lake test` builds them.
+[[lean_lib]]
+name = "AlgoTest"
+srcDir = "test"
