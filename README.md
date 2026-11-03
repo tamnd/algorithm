@@ -38,6 +38,10 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before you open a pull request.
 
 Each push to `main` runs the CI workflow. It runs the audit, the scene checks and the native tests of each language in its own job. Then it renders the site and deploys it to Cloudflare Pages. A pull request from this repository gets a preview site.
 
+## Roadmap
+
+The work is in six milestones, M0 to M5, from November 2026 to December 2028. [Spec 19](https://algorithm.tamnd.com/spec/19-milestones/) gives the goal and the exit criteria of each one. The [milestones](https://github.com/tamnd/algorithm/milestones) list the open issues. Issues with the label `good first issue` are small and clear.
+
 ## Licence
 
 | Part | Licence |
