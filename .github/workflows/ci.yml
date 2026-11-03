@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  ALGO_VERSION: v0.1.10
+  ALGO_VERSION: v0.1.11
   GO_VERSION: "1.27.x"
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
       - name: Audit all nodes
         if: github.event_name != 'pull_request'
         run: algo check -checkers -main
-      - name: Check the oracles against the shared cases
+      - name: Check the oracles against the shared cases and each other
         run: algo oracle
       - name: Check the scenes
         run: algo viz check
@@ -82,6 +82,11 @@ jobs:
           LANG_ID: ${{ matrix.lang }}
         # Each build and test runs in a container of the image that manifests/images.yaml pins, with no network (08.7).
         run: algo test -sandbox docker -lang "$LANG_ID" -cache build/test-cache -out build/results
+      # The differential test runs each implementation on the inputs of cases/generated.yaml against the oracle, and shrinks each failure (09.5, 09.11). The shrunk cases go to build/regress.
+      - name: Run the differential test
+        env:
+          LANG_ID: ${{ matrix.lang }}
+        run: algo test -kind diff -sandbox docker -lang "$LANG_ID"
       - uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         if: github.event_name != 'pull_request'
         with:
@@ -91,7 +96,9 @@ jobs:
         if: always()
         with:
           name: results-${{ matrix.lang }}
-          path: build/results
+          path: |
+            build/results
+            build/regress
           retention-days: 7
 
   # The Lean package (07). The Mathlib cache gives the compiled Mathlib, so the job builds only the Algo modules. The axiom audit fails if a declaration of Algo depends on an axiom other than propext, Classical.choice and Quot.sound (07.6). Then algo lean build runs AlgoExtract on the built package, checks the lean fields and the class claims, times each module (L10), and gives decls.jsonl to the site job.
