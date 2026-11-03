@@ -6,6 +6,9 @@ updates:
       interval: weekly
     cooldown:
       default-days: 7
+    labels: ["type: deps"]
+    commit-message:
+      prefix: "deps"
     groups:
       actions:
         patterns: ["*"]
