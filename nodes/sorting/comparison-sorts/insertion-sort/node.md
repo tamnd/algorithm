@@ -13,6 +13,10 @@ complexity:
   time: {worst: Θ(n²), average: Θ(n²), best: Θ(n), total: Θ(n + d)}
   space: {extra: Θ(1)}
 properties: {stable: true, in_place: true, adaptive: true, online: true, deterministic: true, comparison: true, recursive: false}
+history:
+  year: 1946
+  people: [John Mauchly]
+  note: Mauchly described insertion sort, with binary insertion, in the Moore School Lectures in 1946. Knuth gives this as the first published account of the method.
 prereqs: [loop-invariant, asymptotic-notation]
 see_also: [merge-sort, binary-search]
 sources:
@@ -22,7 +26,12 @@ sources:
   - book: isbn:9780201896855
     title: Donald E. Knuth, The Art of Computer Programming, Volume 3, second edition
     locator: Section 5.2.1, Algorithm S
+  - book: isbn:9780201657883
+    title: Jon Bentley, Programming Pearls, second edition
+    locator: Column 11, Sorting
 ---
+
+Insertion sort sorts an array in place. It takes each item in turn and moves it left into the sorted part before it. It solves the [sorting problem](/sorting-problem/) in $\Theta(n^2)$ time in the worst case and in $\Theta(n)$ time on an array that is already sorted. It is stable and uses $\Theta(1)$ extra space. Because it is fast on small and nearly sorted arrays, many library sorts use it for short runs.
 
 ## In plain words
 
@@ -107,5 +116,9 @@ Do not use it for large arrays in random order. The time grows as $n^2$.
 - **The index $j$ becomes $-1$.** In a language with unsigned indices, $j - 1$ can wrap around. Test $j > 0$ and use $A[j-1]$, or use a signed type.
 
 ## Implementations
+
+## History
+
+Insertion sort is the method that a person uses to sort a hand of playing cards, so it is older than computers. John Mauchly described it, together with binary insertion, in the Moore School Lectures in 1946. Knuth gives this as its first published account. Donald Shell published his faster variant with decreasing gaps in 1959.
 
 ## References

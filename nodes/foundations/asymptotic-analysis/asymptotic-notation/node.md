@@ -15,6 +15,8 @@ sources:
     title: Donald E. Knuth, Big Omicron and big Omega and big Theta (1976)
 ---
 
+Asymptotic notation compares the growth of two functions when the input becomes large. The statement $f(n) = O(g(n))$ says that $f$ grows at most as fast as $g$, up to a constant factor. $\Omega$ gives a lower bound in the same way, and $\Theta$ gives both bounds. Each cost in this encyclopedia uses this notation, because it ignores the constant factors that change from one machine to another.
+
 ## Definition
 
 Let $f$ and $g$ be functions from the natural numbers to the non-negative real numbers.

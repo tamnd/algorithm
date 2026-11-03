@@ -16,6 +16,8 @@ sources:
     locator: Section 5.3.1
 ---
 
+The comparison model is a model of computation where an algorithm learns about its input only by comparing two items. The cost of an algorithm is the number of comparisons. The model gives lower bounds that hold for each algorithm of the model, such as $\Omega(n \log n)$ comparisons for sorting and $\lceil \lg(n+1) \rceil$ comparisons for search in a sorted array.
+
 ## The machine
 
 The input is a sequence of items from a set with a total order. The algorithm cannot read the items. It can only ask "is $a_i < a_j$?" or, with a three-way comparison, "is $a_i$ less than, equal to or larger than $a_j$?". It can move and copy items, and it can do any other computation that does not look at the items.

@@ -15,6 +15,8 @@ sources:
     title: C. A. R. Hoare, An axiomatic basis for computer programming (1969)
 ---
 
+A loop invariant is a statement about the variables of a loop that is true before each test of the loop condition. To prove that a loop is correct, you show three facts: the statement is true at the start, each step keeps it true, and the statement together with the exit condition gives the result. It is the main tool to prove iterative algorithms such as [binary search](/binary-search/) and [insertion sort](/insertion-sort/).
+
 ## In plain words
 
 A loop changes its variables at each step. A loop invariant is a fact about these variables that does not change. It is true before the first step. Each step keeps it true. When the loop stops, the invariant and the reason for the stop together tell you that the result is correct.

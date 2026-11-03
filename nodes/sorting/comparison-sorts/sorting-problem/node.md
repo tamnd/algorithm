@@ -21,6 +21,8 @@ sources:
     locator: Part II
 ---
 
+The sorting problem asks to put the $n$ items of a sequence in non-decreasing order. In the [comparison model](/comparison-model/), each algorithm needs $\Omega(n \log n)$ comparisons in the worst case, and [merge sort](/merge-sort/) reaches this bound. Sorting is one of the most frequent steps in computing, because a sorted sequence makes search, the removal of copies and the merge of data fast.
+
 ## In plain words
 
 You have a list of things, such as numbers, names or dates. You want them in order, from the smallest to the largest. Sorting is the problem of finding this order. It is one of the most frequent steps in programs. Many other problems become easy when the data is sorted.
