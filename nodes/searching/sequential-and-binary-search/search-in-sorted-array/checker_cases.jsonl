@@ -1,0 +1,12 @@
+{"name":"index-of-x","args":{"a":[2,5,8,12,16,23,38],"x":23},"output":5,"valid":true}
+{"name":"none-when-absent","args":{"a":[2,5,8,12,16,23,38],"x":7},"output":null,"valid":true}
+{"name":"none-on-empty","args":{"a":[],"x":1},"output":null,"valid":true}
+{"name":"first-of-repeated","args":{"a":[1,3,3,3,5],"x":3},"output":1,"valid":true}
+{"name":"last-of-repeated","args":{"a":[1,3,3,3,5],"x":3},"output":3,"valid":true}
+{"name":"string-key","args":{"a":["apple","fig","kiwi","pear","plum"],"x":"pear"},"output":3,"valid":true}
+{"name":"off-by-one","args":{"a":[2,5,8,12,16,23,38],"x":23},"output":4,"valid":false,"note":"the index of the item before x, a common mistake in the update of hi"}
+{"name":"insertion-point","args":{"a":[2,5,8,12,16,23,38],"x":7},"output":2,"valid":false,"note":"the index where x would go, not none, when x is absent"}
+{"name":"minus-one","args":{"a":[2,5,8],"x":7},"output":-1,"valid":false,"note":"-1 in place of none"}
+{"name":"past-the-end","args":{"a":[10,20,30],"x":35},"output":3,"valid":false,"note":"the index after the last item, out of range"}
+{"name":"none-when-present","args":{"a":[4],"x":4},"output":null,"valid":false,"note":"none, but x is in a"}
+{"name":"bool-output","args":{"a":[4],"x":4},"output":true,"valid":false,"note":"a boolean in place of an index"}
