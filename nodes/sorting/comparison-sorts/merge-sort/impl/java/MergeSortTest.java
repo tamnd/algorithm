@@ -37,4 +37,11 @@ class MergeSortTest {
             assertArrayEquals(want, a);
         }
     }
+
+    @Test
+    void words() {
+        String[] w = {"pear", "fig", "apple", "fig"};
+        MergeSort.sort(w);
+        assertArrayEquals(new String[] {"apple", "fig", "fig", "pear"}, w);
+    }
 }

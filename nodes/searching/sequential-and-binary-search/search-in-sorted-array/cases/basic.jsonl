@@ -1,0 +1,5 @@
+{"name":"found","args":{"a":[2,5,8,12,16,23,38],"x":23}}
+{"name":"not-found","class":["absent-between"],"args":{"a":[2,5,8,12,16,23,38],"x":7}}
+{"name":"repeated-key","class":["duplicates"],"args":{"a":[1,3,3,3,5],"x":3}}
+{"name":"words","T":"string","args":{"a":["apple","fig","kiwi","pear","plum"],"x":"pear"}}
+{"name":"word-not-found","class":["absent-between"],"T":"string","args":{"a":["apple","fig","pear"],"x":"grape"}}
