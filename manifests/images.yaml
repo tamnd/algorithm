@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: CC0-1.0
+# The runner images of algo test (spec 08.7), pinned by digest. The Images workflow of tamnd/algorithm-agent builds them from images/ and pushes them to ghcr.io with build provenance. To update an image, take its digest from the summary of that workflow.
+python: ghcr.io/tamnd/algo-runner-python@sha256:aae55f23bbcd4f4bceb44e5991aecf53134145a708f84bdd78bd77512c9b38f1
+go: ghcr.io/tamnd/algo-runner-go@sha256:63a83bdcaac73cc0691a76e8249e5867926745165751c7211476bc152dc2ee1d
+rust: ghcr.io/tamnd/algo-runner-rust@sha256:36b20b78c57d4fae5c36c8c72e2fc3f901e5d485a7e79da1b8f47630f562479c
+c: ghcr.io/tamnd/algo-runner-gcc@sha256:8d85c5af1f73049528bcaadfff15742efd5abca9154a3a7384fed854a0c4d60a
+cpp: ghcr.io/tamnd/algo-runner-gcc@sha256:8d85c5af1f73049528bcaadfff15742efd5abca9154a3a7384fed854a0c4d60a
+javascript: ghcr.io/tamnd/algo-runner-node@sha256:310dcebd6b6ed59ed8edceec4ef18755371e9640f5547d335266ed03cdd1a0b8
+typescript: ghcr.io/tamnd/algo-runner-node@sha256:310dcebd6b6ed59ed8edceec4ef18755371e9640f5547d335266ed03cdd1a0b8
+java: ghcr.io/tamnd/algo-runner-jvm@sha256:0cf342a5d4db6b091db02bbe6e709c0b27e69a7a8235b3cf32b866ee3786c209
+kotlin: ghcr.io/tamnd/algo-runner-jvm@sha256:0cf342a5d4db6b091db02bbe6e709c0b27e69a7a8235b3cf32b866ee3786c209
+csharp: ghcr.io/tamnd/algo-runner-dotnet@sha256:e7fc1b63237cfd2facf921e0a6816dcb929ee7add52212878a3510f478f8d572
+lean: ghcr.io/tamnd/algo-runner-lean@sha256:6627f7b307b049dcb449eb1562469b51d7e851119a7e848c0b0f6c1f2e527800
