@@ -13,5 +13,5 @@ bounds:
 # When x is in a more than once, each of its indices is right, so checker.py decides.
 checker: custom
 # The oracle gives the reference output of any input (spec 09.5).
-oracle: {reference: reference.py}
+oracle: {reference: reference.py, brute: brute.py}
 edge_classes: [empty, single, absent-below, absent-above, absent-between, first, last, duplicates, all-equal, extremes, large]

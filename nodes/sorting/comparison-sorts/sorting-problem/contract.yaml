@@ -11,5 +11,5 @@ bounds:
   string: {len: [0, 20], alphabet: "a-z"}
 checker: exact
 # The oracle gives the reference output of any input (spec 09.5).
-oracle: {reference: reference.py}
+oracle: {reference: reference.py, brute: brute.py}
 edge_classes: [empty, single, all-equal, sorted, reversed, duplicates, extremes, deep]
