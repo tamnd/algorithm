@@ -33,7 +33,12 @@ sources:
   - book: isbn:9780201896855
     title: Donald E. Knuth, The Art of Computer Programming, Volume 3, second edition
     locator: Section 5.2.4
+  - book: isbn:9780321573513
+    title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
+    locator: Section 2.2, Mergesort
 ---
+
+Merge sort sorts an array by divide and conquer: it sorts each half, then merges the two sorted halves. It solves the [sorting problem](/sorting-problem/) in $\Theta(n \log n)$ time in each case, which is optimal for a sort in the [comparison model](/comparison-model/). It is stable and uses $\Theta(n)$ extra space for the merge. It is the base of the library sorts of many languages, and of the sort of files that do not fit in memory.
 
 ## In plain words
 

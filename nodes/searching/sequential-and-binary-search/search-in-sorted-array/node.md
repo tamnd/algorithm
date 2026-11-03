@@ -17,6 +17,8 @@ sources:
     locator: Section 6.2.1
 ---
 
+Search in a sorted array asks for an index of a key in an array whose items are in non-decreasing order, or for the answer that the key is not there. The order lets an algorithm skip most of the items. [Binary search](/binary-search/) needs only $\lceil \lg(n+1) \rceil$ comparisons in the worst case, and no algorithm in the [comparison model](/comparison-model/) needs fewer. The problem is a step of many other algorithms, such as a look-up in the index of a database.
+
 ## In plain words
 
 You have a list of items in order, such as the words in a dictionary. You want to know if a word is in the list, and where. Because the list is in order, you do not need to look at each item.
@@ -47,6 +49,11 @@ You have a list of items in order, such as the words in a dictionary. You want t
 ## Bounds
 
 In the [comparison model](/comparison-model/) with three-way comparisons, each algorithm needs $\lceil \lg(n+1) \rceil$ comparisons in the worst case. A decision tree for the problem must have a different outcome for each of the $n$ positions and for "not found". [Binary search](/binary-search/) reaches this bound. If the algorithm can do arithmetic on the keys, interpolation search uses $O(\log \log n)$ steps on average for keys from a uniform distribution.
+
+## Reductions
+
+- **Membership in a set reduces to this problem.** Sort the set once. Then each test "is $x$ in the set" is a search in a sorted array.
+- **This problem reduces to the predecessor problem.** Find the largest item that is at most $x$, and compare it with $x$.
 
 ## Applications
 

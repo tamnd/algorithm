@@ -32,6 +32,8 @@ sources:
     note: the overflow of (lo + hi) / 2
 ---
 
+Binary search finds a key in a sorted array of $n$ items with at most $\lfloor \lg n \rfloor + 1$ comparisons, so its time is $\Theta(\log n)$ in the worst case. It solves [search in a sorted array](/search-in-sorted-array/). Each comparison with the middle item removes half of the items that are left. No comparison algorithm can do better in the worst case, and the same loop is the base of the lower bound of a sorted range, of exponential search and of search on the answer.
+
 ## In plain words
 
 You look for a word in a printed dictionary. You do not read each page. You open the book at the middle. If your word comes before the words on that page, you keep the first half. If it comes after, you keep the second half. You do the same step again on the half that you keep. Each step removes half of the pages, so you find the word after a small number of steps.
@@ -95,6 +97,13 @@ Let $k$ be the size $hi - lo$ of the range. One step of the loop makes the new s
 - The extra space is $\Theta(1)$: three indices.
 
 In the [comparison model](/comparison-model/), each algorithm for this problem needs $\lceil \lg(n+1) \rceil$ three-way comparisons in the worst case. The argument uses a decision tree: the tree must tell apart the $n$ positions of $x$ and the case "not found". Because $\lfloor \lg n \rfloor + 1 = \lceil \lg(n+1) \rceil$, binary search is optimal in this model.
+
+## Properties
+
+- **Deterministic.** The same input gives the same steps and the same result.
+- **Only comparisons.** The algorithm reads the items only through the comparisons of lines L4 and L6, so it works for each type with a total order.
+- **In place.** The extra space is three indices. The array does not change.
+- **Not stable in its result.** When the array has more than one copy of $x$, the index that it returns depends on $n$, not on the order of the copies. Use the lower bound variant below to get the first copy.
 
 ## Variants and improvements
 
