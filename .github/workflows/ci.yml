@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  ALGO_VERSION: v0.1.8
+  ALGO_VERSION: v0.1.10
   GO_VERSION: "1.27.x"
 
 jobs:
@@ -48,6 +48,8 @@ jobs:
       - name: Audit all nodes
         if: github.event_name != 'pull_request'
         run: algo check -checkers -main
+      - name: Check the oracles against the shared cases
+        run: algo oracle
       - name: Check the scenes
         run: algo viz check
 
