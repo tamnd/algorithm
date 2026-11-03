@@ -8,12 +8,13 @@ level: intro
 summary: Sort an array one item at a time. Take the next item and move it left until the item before it is not larger.
 solves: [sorting-problem]
 model: comparison-model
-prereqs: [loop-invariant, asymptotic-notation]
 complexity:
   vars: {n: the number of items, d: the number of inversions in the input}
   time: {worst: Θ(n²), average: Θ(n²), best: Θ(n), total: Θ(n + d)}
   space: {extra: Θ(1)}
 properties: {stable: true, in_place: true, adaptive: true, online: true, deterministic: true, comparison: true, recursive: false}
+prereqs: [loop-invariant, asymptotic-notation]
+see_also: [merge-sort, binary-search]
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
@@ -21,7 +22,6 @@ sources:
   - book: isbn:9780201896855
     title: Donald E. Knuth, The Art of Computer Programming, Volume 3, second edition
     locator: Section 5.2.1, Algorithm S
-see_also: [merge-sort, binary-search]
 ---
 
 ## In plain words

@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  ALGO_VERSION: v0.1.0
+  ALGO_VERSION: v0.1.1
   GO_VERSION: "1.27.x"
 
 jobs:
@@ -35,6 +35,11 @@ jobs:
           cache: false
       - name: Install algo
         run: go install "github.com/tamnd/algorithm-agent/cmd/algo@${ALGO_VERSION}"
+      - name: Check the format
+        run: algo fmt -check
+      - name: Show the tags that the merge gives
+        if: github.event_name == 'pull_request'
+        run: algo mint -dry-run
       - name: Audit the changed nodes
         if: github.event_name == 'pull_request'
         env:
