@@ -1,0 +1,29 @@
+name: New node
+description: Ask for a page about an algorithm, a data structure, a problem or an idea.
+labels: ["type: node", "status: triage"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: For example "Timsort".
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options: [algorithm, data structure, problem, technique, concept, definition, model, theorem, other]
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Give one or two good sources, for example a textbook section or the first paper.
+  - type: checkboxes
+    id: write
+    attributes:
+      label: Help
+      options:
+        - label: I want to write this node.

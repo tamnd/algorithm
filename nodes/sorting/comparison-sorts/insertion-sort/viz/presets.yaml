@@ -1,0 +1,12 @@
+- name: A small array
+  input: {a: [5, 2, 4, 6, 1, 3]}
+  note: The example of the page.
+- name: An array in decreasing order
+  input: {a: [9, 8, 7, 6, 5, 4, 3, 2]}
+  note: The worst case. Each key moves to the start.
+- name: An array that is almost sorted
+  input: {a: [1, 2, 4, 3, 5, 6, 8, 7, 9]}
+  note: Few inversions, so few moves.
+- name: Equal keys
+  input: {a: [3, 1, 3, 2, 1, 3]}
+  note: Equal keys keep their order.

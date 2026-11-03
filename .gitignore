@@ -1,0 +1,10 @@
+/build/
+/.wrangler/
+__pycache__/
+.pytest_cache/
+target/
+node_modules/
+*.class
+bin/
+obj/
+.DS_Store

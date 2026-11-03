@@ -1,0 +1,22 @@
+version = 1
+
+[[annotations]]
+path = ["nodes/**/node.md", "nodes/**/proofs/**", "README.md", "CONTRIBUTING.md", "LICENSES/README.md", ".github/**.md"]
+SPDX-FileCopyrightText = "The algorithm contributors <https://algorithm.tamnd.com/about/>"
+SPDX-License-Identifier = "CC-BY-SA-4.0 AND CC0-1.0"
+
+[[annotations]]
+path = ["nodes/**/impl/**", "nodes/**/viz/**"]
+SPDX-FileCopyrightText = "The algorithm contributors <https://algorithm.tamnd.com/about/>"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["lean/**"]
+SPDX-FileCopyrightText = "The algorithm contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["registers/**", "topics/**", "prov/**", "reviews/**", "CITATION.cff", "REUSE.toml", ".gitignore", ".github/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "The algorithm contributors"
+SPDX-License-Identifier = "CC0-1.0"

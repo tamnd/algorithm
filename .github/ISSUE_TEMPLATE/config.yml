@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: A problem with the algo command
+    url: https://github.com/tamnd/algorithm-agent/issues/new/choose
+    about: The toolchain is in tamnd/algorithm-agent.

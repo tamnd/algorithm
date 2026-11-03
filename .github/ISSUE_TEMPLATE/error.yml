@@ -1,0 +1,18 @@
+name: Error on a page
+description: A page has a wrong claim, a bad proof step, a bug in the code or a broken scene.
+labels: ["type: error", "status: triage"]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Page
+      description: For example https://algorithm.tamnd.com/merge-sort/#correctness
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong
+      description: Quote the part and say why it is wrong. Give a source or a counterexample if you can.
+    validations:
+      required: true

@@ -1,0 +1,11 @@
+This repository has more than one licence. Each file has the licence of its part.
+
+Prose (nodes/**/node.md and nodes/**/proofs/**): Creative Commons Attribution-ShareAlike 4.0 International. See LICENSES/CC-BY-SA-4.0.txt.
+
+Code, tests and scenes (nodes/**/impl/** and nodes/**/viz/**): MIT. See LICENSES/MIT.txt.
+
+Lean proofs (lean/**): Apache License 2.0. See LICENSES/Apache-2.0.txt.
+
+Metadata (front matter, registers/**, topics/**, prov/**, reviews/**): CC0 1.0 Universal. See LICENSES/CC0-1.0.txt.
+
+REUSE.toml gives the exact paths. LICENSES/README.md tells more.

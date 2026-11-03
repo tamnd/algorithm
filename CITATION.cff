@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: If you use this work, please cite it as below.
+title: "Algorithm: a reference of algorithms with proofs, code and visualizations"
+type: dataset
+authors:
+  - name: The algorithm contributors
+repository-code: https://github.com/tamnd/algorithm
+url: https://algorithm.tamnd.com
+license: CC-BY-SA-4.0
+keywords:
+  - algorithms
+  - data structures
+  - proofs
+  - visualization
