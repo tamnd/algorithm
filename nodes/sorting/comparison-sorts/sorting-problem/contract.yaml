@@ -1,0 +1,13 @@
+# The contract of sorting (spec 09.1). Each sort of the encyclopedia sorts in place, so the contract has the in-place form: the value of xs after the call is the output.
+problem: sorting-problem
+entry: sort
+params:
+  - {name: xs, type: "list<T>", mode: inout}
+returns: {type: unit, post: "xs is a permutation of its old value, in non-decreasing order"}
+generic: {T: ordered}
+bounds:
+  len(xs): [0, 1000000]
+  int: [-2^63, 2^63-1]
+  string: {len: [0, 20], alphabet: "a-z"}
+checker: exact
+edge_classes: [empty, single, all-equal, sorted, reversed, duplicates, extremes, deep]

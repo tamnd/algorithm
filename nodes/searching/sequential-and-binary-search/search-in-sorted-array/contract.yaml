@@ -1,0 +1,15 @@
+# The contract of the search in a sorted array (spec 09.1). Each algorithm that solves this problem is tested against the cases in cases/.
+problem: search-in-sorted-array
+entry: search
+params:
+  - {name: a, type: "list<T>", pre: "sorted in non-decreasing order"}
+  - {name: x, type: T}
+returns: {type: "option<index>", post: "an index i with a[i] = x, or none when x is not in a"}
+generic: {T: ordered}
+bounds:
+  len(a): [0, 1000000]
+  int: [-2^63, 2^63-1]
+  string: {len: [0, 20], alphabet: "a-z"}
+# When x is in a more than once, each of its indices is right, so checker.py decides.
+checker: custom
+edge_classes: [empty, single, absent-below, absent-above, absent-between, first, last, duplicates, all-equal, extremes, large]
