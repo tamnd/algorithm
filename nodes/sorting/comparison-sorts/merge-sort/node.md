@@ -9,7 +9,6 @@ level: intro
 summary: Sort an array by divide and conquer. Sort each half, then merge the two sorted halves into one sorted array.
 solves: [sorting-problem]
 model: comparison-model
-prereqs: [insertion-sort, loop-invariant, asymptotic-notation]
 complexity:
   vars: {n: the number of items}
   time: {worst: Θ(n log n), average: Θ(n log n), best: Θ(n log n)}
@@ -19,6 +18,8 @@ history:
   year: 1945
   people: [John von Neumann]
   note: Von Neumann wrote a merge sort program for the EDVAC in 1945.
+prereqs: [insertion-sort, loop-invariant, asymptotic-notation]
+see_also: [insertion-sort, binary-search]
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
@@ -26,7 +27,6 @@ sources:
   - book: isbn:9780201896855
     title: Donald E. Knuth, The Art of Computer Programming, Volume 3, second edition
     locator: Section 5.2.4
-see_also: [insertion-sort, binary-search]
 ---
 
 ## In plain words

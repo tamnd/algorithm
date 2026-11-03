@@ -27,10 +27,12 @@ The kinds of node are algorithm, data structure, problem, technique, concept, de
 
 1. Install the toolchain: `go install github.com/tamnd/algorithm-agent/cmd/algo@latest`.
 2. Make a node: `algo new algorithm heap-sort -area sorting/comparison-sorts`.
-3. Check your work: `algo check -changed origin/main`.
-4. Run the tests of the code: `algo test -unsafe-local heap-sort`. Read the code first, because this runs it on your computer.
-5. Check the scene: `algo viz check heap-sort`.
-6. Look at the page: `algo site serve`, then open http://localhost:8150/heap-sort/.
+3. Put the files in canonical form: `algo fmt`.
+4. Check your work: `algo check -changed origin/main`.
+5. Run the tests of the code: `algo test -unsafe-local heap-sort`. Read the code first, because this runs it on your computer.
+6. Check the scene: `algo viz check heap-sort`.
+7. Look at the page: `algo site serve`, then open http://localhost:8150/heap-sort/.
+8. Before the merge, give the node its permanent tag: `algo mint heap-sort`.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before you open a pull request.
 
