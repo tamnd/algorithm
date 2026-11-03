@@ -1,0 +1,48 @@
+{
+  "lang": "cpp",
+  "version": "Apple clang version 17.0.0 (clang-1700.6.3.2)",
+  "tests": [
+    {
+      "slug": "binary-search",
+      "lang": "cpp",
+      "pass": true,
+      "output": "ok",
+      "ms": 5091,
+      "shared": [
+        {
+          "problem": "search-in-sorted-array",
+          "cases": 24,
+          "passed": 24
+        }
+      ]
+    },
+    {
+      "slug": "insertion-sort",
+      "lang": "cpp",
+      "pass": true,
+      "output": "ok",
+      "ms": 10599,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    },
+    {
+      "slug": "merge-sort",
+      "lang": "cpp",
+      "pass": true,
+      "output": "ok",
+      "ms": 14710,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    }
+  ]
+}

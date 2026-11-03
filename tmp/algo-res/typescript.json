@@ -1,0 +1,48 @@
+{
+  "lang": "typescript",
+  "version": "v26.10.0",
+  "tests": [
+    {
+      "slug": "binary-search",
+      "lang": "typescript",
+      "pass": true,
+      "output": "✔ examples (1.081042ms)\n✔ edges (0.304292ms)\n✔ random against a linear scan (13.230833ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 360.607041",
+      "ms": 566,
+      "shared": [
+        {
+          "problem": "search-in-sorted-array",
+          "cases": 24,
+          "passed": 24
+        }
+      ]
+    },
+    {
+      "slug": "insertion-sort",
+      "lang": "typescript",
+      "pass": true,
+      "output": "✔ example (10.142042ms)\n✔ edges (0.399875ms)\n✔ random against Array.prototype.sort (6.952583ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 441.822542",
+      "ms": 673,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    },
+    {
+      "slug": "merge-sort",
+      "lang": "typescript",
+      "pass": true,
+      "output": "✔ example (2.416666ms)\n✔ edges (1.039917ms)\n✔ random against Array.prototype.sort (12.540958ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1213.31875",
+      "ms": 1639,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    }
+  ]
+}

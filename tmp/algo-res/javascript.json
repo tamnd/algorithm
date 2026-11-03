@@ -1,0 +1,48 @@
+{
+  "lang": "javascript",
+  "version": "v26.10.0",
+  "tests": [
+    {
+      "slug": "binary-search",
+      "lang": "javascript",
+      "pass": true,
+      "output": "✔ examples (0.981125ms)\n✔ edges (0.205958ms)\n✔ random against a linear scan (13.38375ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 256.743792",
+      "ms": 583,
+      "shared": [
+        {
+          "problem": "search-in-sorted-array",
+          "cases": 24,
+          "passed": 24
+        }
+      ]
+    },
+    {
+      "slug": "insertion-sort",
+      "lang": "javascript",
+      "pass": true,
+      "output": "✔ example (2.094917ms)\n✔ edges (0.321875ms)\n✔ random against Array.prototype.sort (7.778416ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 225.463167",
+      "ms": 431,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    },
+    {
+      "slug": "merge-sort",
+      "lang": "javascript",
+      "pass": true,
+      "output": "✔ example (2.53875ms)\n✔ edges (0.622458ms)\n✔ random against Array.prototype.sort (14.717042ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 401.016125",
+      "ms": 806,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    }
+  ]
+}

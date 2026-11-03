@@ -1,0 +1,48 @@
+{
+  "lang": "rust",
+  "version": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+  "tests": [
+    {
+      "slug": "binary-search",
+      "lang": "rust",
+      "pass": true,
+      "output": "running 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 3 tests\n...\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "ms": 3749,
+      "shared": [
+        {
+          "problem": "search-in-sorted-array",
+          "cases": 24,
+          "passed": 24
+        }
+      ]
+    },
+    {
+      "slug": "insertion-sort",
+      "lang": "rust",
+      "pass": true,
+      "output": "running 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 3 tests\n...\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "ms": 3794,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    },
+    {
+      "slug": "merge-sort",
+      "lang": "rust",
+      "pass": true,
+      "output": "running 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 3 tests\n...\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "ms": 4085,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    }
+  ]
+}

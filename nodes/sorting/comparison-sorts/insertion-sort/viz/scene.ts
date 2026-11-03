@@ -52,6 +52,8 @@ export default scene({
       a.ptr("j", null);
       a.label("");
     }
+    v.line("L1", `i = ${n}, which is not less than n, so the loop ends and A is sorted.`);
+    v.vars({ i: n });
     a.mark([0, n - 1], "path");
     return a.values();
   },
