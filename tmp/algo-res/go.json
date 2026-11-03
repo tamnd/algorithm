@@ -1,0 +1,48 @@
+{
+  "lang": "go",
+  "version": "go version go1.27.3 darwin/arm64",
+  "tests": [
+    {
+      "slug": "binary-search",
+      "lang": "go",
+      "pass": true,
+      "output": "ok  \texample.com/impl\t0.350s",
+      "ms": 2430,
+      "shared": [
+        {
+          "problem": "search-in-sorted-array",
+          "cases": 24,
+          "passed": 24
+        }
+      ]
+    },
+    {
+      "slug": "insertion-sort",
+      "lang": "go",
+      "pass": true,
+      "output": "ok  \texample.com/impl\t0.395s",
+      "ms": 3162,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    },
+    {
+      "slug": "merge-sort",
+      "lang": "go",
+      "pass": true,
+      "output": "ok  \texample.com/impl\t0.346s",
+      "ms": 2782,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 18
+        }
+      ]
+    }
+  ]
+}

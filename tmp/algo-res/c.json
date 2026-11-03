@@ -1,0 +1,57 @@
+{
+  "lang": "c",
+  "version": "Apple clang version 17.0.0 (clang-1700.6.3.2)",
+  "tests": [
+    {
+      "slug": "binary-search",
+      "lang": "c",
+      "pass": true,
+      "output": "ok",
+      "ms": 1437,
+      "shared": [
+        {
+          "problem": "search-in-sorted-array",
+          "cases": 24,
+          "passed": 18,
+          "skipped": 6,
+          "skip_reason": "the language has no generics, so the entry works on int only (spec 08.3.4)",
+          "skip_expected": true
+        }
+      ]
+    },
+    {
+      "slug": "insertion-sort",
+      "lang": "c",
+      "pass": true,
+      "output": "ok",
+      "ms": 1777,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 13,
+          "skipped": 5,
+          "skip_reason": "the language has no generics, so the entry works on int only (spec 08.3.4)",
+          "skip_expected": true
+        }
+      ]
+    },
+    {
+      "slug": "merge-sort",
+      "lang": "c",
+      "pass": true,
+      "output": "ok",
+      "ms": 1453,
+      "shared": [
+        {
+          "problem": "sorting-problem",
+          "cases": 18,
+          "passed": 13,
+          "skipped": 5,
+          "skip_reason": "the language has no generics, so the entry works on int only (spec 08.3.4)",
+          "skip_expected": true
+        }
+      ]
+    }
+  ]
+}

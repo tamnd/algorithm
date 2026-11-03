@@ -1,0 +1,27 @@
+{
+  "lang": "csharp",
+  "version": "10.0.403",
+  "tests": [
+    {
+      "slug": "binary-search",
+      "lang": "csharp",
+      "pass": true,
+      "output": "Test run for /private/var/folders/_g/lq_pglm508df70x751kkxrl80000gp/T/algo-test-csharp-1838573466/bin/Debug/net10.0/Impl.Tests.dll (.NETCoreApp,Version=v10.0)\nA total of 1 test files matched the specified pattern.\n\nPassed!  - Failed:     0, Passed:     8, Skipped:     0, Total:     8, Duration: 102 ms - Impl.Tests.dll (net10.0)",
+      "ms": 26169
+    },
+    {
+      "slug": "insertion-sort",
+      "lang": "csharp",
+      "pass": true,
+      "output": "Test run for /private/var/folders/_g/lq_pglm508df70x751kkxrl80000gp/T/algo-test-csharp-96740677/bin/Debug/net10.0/Impl.Tests.dll (.NETCoreApp,Version=v10.0)\nA total of 1 test files matched the specified pattern.\n\nPassed!  - Failed:     0, Passed:     3, Skipped:     0, Total:     3, Duration: 49 ms - Impl.Tests.dll (net10.0)",
+      "ms": 9538
+    },
+    {
+      "slug": "merge-sort",
+      "lang": "csharp",
+      "pass": true,
+      "output": "Test run for /private/var/folders/_g/lq_pglm508df70x751kkxrl80000gp/T/algo-test-csharp-894125722/bin/Debug/net10.0/Impl.Tests.dll (.NETCoreApp,Version=v10.0)\nA total of 1 test files matched the specified pattern.\n\nPassed!  - Failed:     0, Passed:     3, Skipped:     0, Total:     3, Duration: 123 ms - Impl.Tests.dll (net10.0)",
+      "ms": 10149
+    }
+  ]
+}
