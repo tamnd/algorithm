@@ -10,4 +10,6 @@ bounds:
   int: [-2^63, 2^63-1]
   string: {len: [0, 20], alphabet: "a-z"}
 checker: exact
+# The oracle gives the reference output of any input (spec 09.5).
+oracle: {reference: reference.py}
 edge_classes: [empty, single, all-equal, sorted, reversed, duplicates, extremes, deep]
