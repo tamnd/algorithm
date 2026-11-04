@@ -11,17 +11,14 @@ summary: Measures running time on test inputs to check and calibrate the theoret
 prereqs: [time-complexity, order-of-growth, tilde-notation]
 see_also: [doubling-hypothesis, asymptotic-notation, worst-case-analysis, average-case-analysis, input-size, comparison-model]
 sources:
-  - url: "https://algs4.cs.princeton.edu/14analysis/"
-    locator: Section 1.4, Analysis of Algorithms (booksite)
+  - book: isbn:9780321573513
+    title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
+    locator: Section 1.4, Analysis of Algorithms (observations, the power-law hypothesis and the doubling ratio) and Section 2.1, Elementary Sorts (comparing two sorts by experiment)
   - book: isbn:9780521173018
-    title: Catherine C. McGeoch, A Guide to Experimental Algorithmics
-    locator: Chapter 2 (A plan of attack)
-  - book: isbn:9780321573513
-    title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
-    locator: Section 1.4, Analysis of Algorithms (observations and the power-law hypothesis)
-  - book: isbn:9780321573513
-    title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
-    locator: Section 2.1, Elementary Sorts (comparing algorithms by experiment)
+    title: Catherine C. McGeoch, A Guide to Experimental Algorithmics, Cambridge University Press, 2012
+    locator: Chapter 2 (a plan of attack), Chapter 3 (what to measure) and Chapter 7 (data analysis)
+  - paper: "David S. Johnson, A theoretician's guide to the experimental analysis of algorithms, in M. H. Goldwasser, D. S. Johnson and C. C. McGeoch (editors), Data Structures, Near Neighbor Searches, and Methodology, DIMACS Series in Discrete Mathematics and Theoretical Computer Science 59, American Mathematical Society, 2002, pages 215 to 250"
+    locator: the principles and pitfalls of experimental papers
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
     locator: Section 2.2, Analyzing algorithms (the RAM model of analysis)
@@ -65,6 +62,15 @@ Use a count to test the model and a time to test the program. Often both are rec
 **What an experiment can show.** It can refute a hypothesis: a program whose time grows by a factor of about eight at each doubling, over a series of sizes, is not quadratic. It can estimate $a$ and $b$ in the range of sizes tested, and use them to predict a nearby larger size. It can show which of two programs is faster in that range, and where they cross. It can find a part of the program that dominates the time.
 
 **What it cannot show.** It cannot prove that a bound holds for all $n$, because the sizes are finite and a change in behavior can lie beyond the range. It does not show a worst case unless the input is a worst case. It cannot tell $n\lg n$ from $n^{1.07}$ by a short series near $n = 10^6$, where the local exponent of $n\lg n$ is $1 + 1/\ln n \approx 1.07$ (see the pitfalls of the doubling hypothesis). It gives a result for one machine, one compiler and one implementation, and the result may not carry over. It does not replace a proof, and a proof does not replace it: an asymptotic bound says nothing about the constants or the memory behavior of the program that you run.
+
+### Pitfalls
+
+- **Timing the setup.** If the input generator or a copy of the input is inside the timed region, the measured time includes its cost, which can have a different order of growth.
+- **Too few sizes, too close together.** Sizes from one narrow range cannot separate two laws whose local exponents are almost equal there. Use a geometric series over as wide a range as the machine allows.
+- **Fitting the leading term to small sizes.** Lower-order terms can be large at small $n$, as in the quicksort example below. Check that $T(n)/f(n)$ settles before you quote a constant.
+- **Random inputs for a worst-case claim.** A random generator measures something close to the average case. It says little about the worst case.
+- **The cache boundary.** When the data stops fitting in a cache level, the time per operation jumps. A fit across the boundary mixes two regimes and gives an exponent that holds for neither.
+- **One machine, one compiler.** A ratio between two programs can change sign on another machine. Report the machine, the compiler, the flags and the seed.
 
 ## Examples
 

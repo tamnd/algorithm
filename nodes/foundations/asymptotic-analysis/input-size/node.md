@@ -14,13 +14,16 @@ see_also: [time-complexity, worst-case-analysis, pseudo-polynomial-time, unary-e
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Section 2.2 (input size) and Chapter 31 (Number-Theoretic Algorithms, size of integer inputs)
+    locator: Section 2.2 (input size), Section 34.1 (encodings and polynomially related encodings) and Chapter 31 (the size of integer inputs)
   - book: isbn:9781133187790
     title: Michael Sipser, Introduction to the Theory of Computation, third edition
     locator: Chapter 7 (Time Complexity, encodings of the input)
   - book: isbn:9780321295354
     title: Kleinberg and Tardos, Algorithm Design
     locator: Section 6.4 (Subset Sums and Knapsacks, pseudo-polynomial running time)
+  - book: isbn:9780716710455
+    title: "Michael R. Garey and David S. Johnson, Computers and Intractability: A Guide to the Theory of NP-Completeness"
+    locator: Section 2.1 (reasonable encoding schemes) and Section 4.2 (number problems and strong NP-completeness)
 ---
 
 The size of an input is the number that an analysis uses as the argument $n$ of a cost function such as the [time complexity](/time-complexity/) $T(n)$. Formally it is the length of the encoding of the instance in bits. In practice it is a simpler measure that is polynomially related to that length, such as the number of items in an array or the number of vertices and edges of a graph. When each item fits in a machine word, it is within a constant factor of the length in words.
@@ -48,10 +51,17 @@ The following measures are in common use. Each is justified when the items fit i
 ## Examples and non-examples
 
 - **Trial division.** To factor $N$, [trial division](/trial-division/) divides $N$ by $2, 3, \ldots$ up to $\lfloor \sqrt{N} \rfloor$. It makes at most $\lfloor \sqrt{N} \rfloor - 1$ divisions. In terms of the value, this is $O(\sqrt{N})$, which looks small. In terms of the size $b = \lfloor \lg N \rfloor + 1$, it is up to $2^{b/2}$ divisions, which is exponential. For the prime $N = 2^{61} - 1$, the size is $b = 61$ bits, and the test makes $1518500248$ divisions (the divisors $2$ to $1518500249$). If the number were written in unary, the same algorithm would take a time polynomial in the size.
-- **Pseudo-polynomial time.** The dynamic program for [subset sum](/subset-sum-problem/) fills a table with $n + 1$ rows and $W + 1$ columns, where $W$ is the target and $n$ is the number of items. Its time is $O(nW)$. The input has about $n \lceil \lg(W+1) \rceil$ bits or more, and $W$ can be as large as $2^{b} - 1$ for $b$ bits. So the time is polynomial in $n$ and in the value $W$, and exponential in the size. Such a bound is called [pseudo-polynomial](/pseudo-polynomial-time/). For $n = 100$ and $W = 2^{64}$ the table has more than $1.8 \times 10^{21}$ cells, although the input has fewer than $7000$ bits (for 100 items of 64 bits each plus the target).
+- **Pseudo-polynomial time.** The dynamic program for [subset sum](/subset-sum-problem/) fills a table with $n + 1$ rows and $W + 1$ columns, where $W$ is the target and $n$ is the number of items. Its time is $\Theta(nW)$. The target takes only $\lfloor \lg W \rfloor + 1$ bits of the input, so $W$ can be exponential in the input length. The time is polynomial in $n$ and in the value $W$, and exponential in the size. Such a bound is called [pseudo-polynomial](/pseudo-polynomial-time/). For 100 items of 64 bits each and $W = 2^{64}$, the input has $100 \cdot 64 + 65 = 6465$ bits, and the table has $101 \cdot (2^{64} + 1) \approx 1.86 \times 10^{21}$ cells.
 - **Counting loops over a value.** A routine that computes the $n$th [Fibonacci number](/fibonacci-numbers/) with a loop of $n - 1$ additions makes a number of additions that is linear in the value $n$. Its input $n$ has only $\lfloor \lg n \rfloor + 1$ bits, so it makes a number of additions exponential in the size of the input. Since $F_n$ has $\Theta(n)$ bits, the loop also costs $\Theta(n^2)$ bit operations in the logarithmic cost model.
 - **Items that are not of constant size.** Sorting $n$ strings of length $L$ with a comparison sort makes $\Theta(n \log n)$ comparisons, but one comparison of two equal strings reads $L$ characters. The input has $nL$ characters, and the cost of [merge sort](/merge-sort/) on strings can be $\Theta(L n \log n)$ character comparisons. The measure "$n$ items" hides $L$.
 - **Not a size.** The value of a number input is a magnitude, not a size. The number of vertices alone is not the size of a graph input, since a graph on $n$ vertices can have between $0$ and $n(n-1)/2$ edges. The size must grow with the amount of data that the algorithm may read.
+
+### Pitfalls
+
+- **Value for size.** A loop over $1, \ldots, N$ for an integer input $N$ is exponential in the input size. Always ask how many bits the input has.
+- **A size that misses part of the input.** "$n$ items" hides the length of the items when they do not fit in a word, as with strings or big numbers. Then add a second parameter, or use the total length.
+- **Comparing bounds with different sizes.** $O(n^2)$ for a graph with $n$ vertices and $O(m \log n)$ for the same graph use two parameters. Neither is better for all graphs. Compare them only with a relation between $n$ and $m$, such as $m \le n^2$.
+- **Unary input by accident.** A problem that is NP-hard with binary numbers can become easy when the numbers are small, since then the value is polynomial in the size. This does not make the problem easy in general. Problems that stay hard with numbers written in unary are [strongly NP-hard](/strong-np-hardness/).
 
 ## Related definitions
 

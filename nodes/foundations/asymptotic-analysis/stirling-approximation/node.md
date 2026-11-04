@@ -11,22 +11,22 @@ summary: Gives n! asymptotically as sqrt(2 pi n) (n/e)^n, which yields the log n
 prereqs: [asymptotic-notation, tilde-notation, logarithms, integral-bounds-for-sums]
 see_also: [comparison-sort-lower-bound, merge-sort, harmonic-series, factorial, binomial-coefficient-bounds, common-growth-rates]
 sources:
-  - url: "https://en.wikipedia.org/wiki/Stirling%27s_approximation"
-    locator: sections History and Speed of convergence and error estimates
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Section 3.3, Standard notations and common functions (factorials)
+    locator: Section 3.3, Standard notations and common functions (factorials, Stirling's approximation and the bounds of Robbins)
   - book: isbn:9780201896831
     title: Donald E. Knuth, The Art of Computer Programming, Volume 1, third edition
-    locator: Section 1.2.11.2, Euler's summation formula (Stirling's approximation)
+    locator: Section 1.2.5, Permutations and Factorials (the formula), and Section 1.2.11.2, Euler's Summation Formula (its derivation and the series)
   - book: isbn:9780201558029
     title: Graham, Knuth and Patashnik, Concrete Mathematics, second edition
-    locator: Chapter 9, Asymptotics (Stirling's approximation)
+    locator: Chapter 9, Asymptotics (Euler's summation formula and Stirling's approximation)
   - book: isbn:9780321573513
     title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
     locator: Section 1.4, Analysis of Algorithms (commonly encountered functions)
   - paper: "Herbert Robbins, A remark on Stirling's formula, American Mathematical Monthly 62 (1955), pages 26 to 29"
     locator: the bounds 1/(12n+1) < r_n < 1/(12n)
+  - url: "https://en.wikipedia.org/wiki/Stirling%27s_approximation"
+    locator: section History (de Moivre and Stirling, 1730)
 ---
 
 Stirling's approximation says that the [factorial](/factorial/) $n! \sim \sqrt{2\pi n}\,(n/e)^n$: the ratio of the two sides tends to 1 as $n \to \infty$. It turns the product $n!$ into a closed form that you can compare with other functions by [asymptotic notation](/asymptotic-notation/). Its weaker consequence, $\lg(n!) = n \lg n - n \lg e + O(\log n)$, gives the bound $\Omega(n \log n)$ for [comparison sorting](/comparison-sort-lower-bound/).
@@ -35,7 +35,7 @@ Stirling's approximation says that the [factorial](/factorial/) $n! \sim \sqrt{2
 
 For each integer $n \ge 1$ there is a real number $r_n$ such that
 $$ n! = \sqrt{2\pi n}\,\left(\frac{n}{e}\right)^{n} e^{r_n}, \qquad \frac{1}{12n+1} < r_n < \frac{1}{12n}. $$
-The upper bound and the positivity of $r_n$ are proved below. The lower bound $\frac{1}{12n+1} < r_n$ is Robbins' (1955). So $n! \sim \sqrt{2\pi n}\,(n/e)^n$ in the sense of [tilde notation](/tilde-notation/), and $\ln n! = n\ln n - n + \tfrac12\ln n + \tfrac12\ln(2\pi) + r_n$. The same asymptotic holds for $\Gamma(x+1)$ as $x \to \infty$ through the reals.
+Both bounds on $r_n$ are due to Robbins (1955), and both are proved below. So $n! \sim \sqrt{2\pi n}\,(n/e)^n$ in the sense of [tilde notation](/tilde-notation/), and $\ln n! = n\ln n - n + \tfrac12\ln n + \tfrac12\ln(2\pi) + r_n$. The same asymptotic holds for $\Gamma(x+1)$ as $x \to \infty$ through the reals.
 
 The weaker form has a short proof. For each integer $n \ge 1$,
 $$ \left(\frac{n}{e}\right)^{n} \le n! \le e\sqrt{n}\,\left(\frac{n}{e}\right)^{n}, $$
@@ -59,7 +59,11 @@ where we used $\ln 1 = 0$. The integral is $n\ln n - n + 1$. So $\ln n! \le n\ln
 
 This is the technique of [integral bounds for sums](/integral-bounds-for-sums/). It shows that $\ln n! = n\ln n - n + O(\log n)$, with the error between $0$ and $1 + \frac12\ln n$.
 
-**Sharp form.** The proof that $r_n$ exists, that $0 < r_n < \frac{1}{12n}$, and that the constant is $\sqrt{2\pi}$ is in [the proof of the sharp form](proofs/stirling-formula.md). It shows that $a_n = \ln n! - (n + \frac12)\ln n + n$ decreases, and that $a_n - \frac{1}{12n}$ increases, so both converge to the same limit. It finds the limit with the Wallis integrals $\int_0^{\pi/2}\sin^m x\,dx$. The lower bound $r_n > \frac1{12n+1}$ is Robbins' result (1955), and the page does not prove it.
+**Sharp form.** The full proof is in [the proof of the sharp form](proofs/stirling-formula.md). Its plan is as follows. Let $a_n = \ln n! - (n + \frac12)\ln n + n$. With $t = 1/(2n+1)$ the difference is an exact series,
+$$ a_n - a_{n+1} = \left(n + \tfrac12\right)\ln\frac{n+1}{n} - 1 = \sum_{j \ge 1}\frac{t^{2j}}{2j+1}. $$
+Comparing the series with $\frac13\sum_j t^{2j}$ from above and with $\sum_j (t^2/3)^j$ from below gives
+$$ \frac{1}{12n+1} - \frac{1}{12n+13} < a_n - a_{n+1} < \frac{1}{12n} - \frac{1}{12(n+1)}. $$
+So $a_n - \frac1{12n}$ increases, $a_n - \frac1{12n+1}$ decreases, and $a_n$ decreases. All three converge to one limit $L$, and $r_n = a_n - L$ lies strictly between $\frac{1}{12n+1}$ and $\frac{1}{12n}$. The Wallis integrals $I_m = \int_0^{\pi/2}\sin^m x\,dx$ satisfy $I_m I_{m+1} = \pi/(2(m+1))$ and $I_{2n} = \frac\pi2\binom{2n}{n}4^{-n}$, which gives $\binom{2n}{n} \sim 4^n/\sqrt{\pi n}$. Comparing this with the form $n! \sim e^L\sqrt n\,(n/e)^n$ gives $e^L = \sqrt{2\pi}$.
 
 ## Consequences
 
@@ -78,7 +82,7 @@ At $n = 10^6$ merge sort is about 2.5 percent above the lower bound. The gap bet
 
 **$\lg n! = \Theta(n\log n)$.** The upper bound is $\lg n! \le n\lg n$. For the lower bound, $n\lg n - n\lg e \ge \frac12 n\lg n$ exactly when $\lg n \ge 2\lg e$, that is $n \ge e^2 = 7.39\ldots$. So $\frac12 n\lg n \le \lg n! \le n\lg n$ for each $n \ge 8$. The simpler argument for this fact, which does not need Stirling's formula, is on the page of [asymptotic notation](/asymptotic-notation/).
 
-**The central binomial coefficient.** Step 6 and Step 7 of the sharp proof give $\binom{2n}{n} \sim 4^n/\sqrt{\pi n}$. For $n = 10$ this is $187079$ against the true value $184756$. See also [binomial coefficient bounds](/binomial-coefficient-bounds/).
+**The central binomial coefficient.** Step 7 of the sharp proof gives $\binom{2n}{n} \sim 4^n/\sqrt{\pi n}$. For $n = 10$ this is $187079$ against the true value $184756$. See also [binomial coefficient bounds](/binomial-coefficient-bounds/).
 
 **Orders of growth.** Since $n! \ge (n/e)^n$ and $(n/e)^n/c^n = (n/(ec))^n \to \infty$ for each constant $c$, the factorial grows faster than each exponential $c^n$. Since $n^n/n! \sim e^n/\sqrt{2\pi n} \to \infty$, it also grows slower than $n^n$. So $n! = o(n^n)$, and $n!$ is not $\Theta(n^n)$. For $n = 10$, $n^n/n! = 2755.7$ and $e^n/\sqrt{2\pi n} = 2778.8$.
 
@@ -90,7 +94,13 @@ The error exponent $r_n$ is $\sim \frac{1}{12n}$, by the two-sided bound in the 
 $$ n! \sim \sqrt{2\pi n}\left(\frac ne\right)^n\left(1 + \frac{1}{12n} + \frac{1}{288n^2} - \frac{139}{51840n^3} + \cdots\right). $$
 For $n = 10$ the factor $\sqrt{2\pi n}(n/e)^n$ is $3598695.6$, and $10! = 3628800$. With one, two and three correction terms the value is $3628684.7$, $3628809.7$ and $3628800.05$. The series is asymptotic and does not converge for any $n$.
 
-Two warnings. First, $\sim$ does not mean that the difference is small: $n! - \sqrt{2\pi n}(n/e)^n$ is about $\sqrt{2\pi n}\,(n/e)^n/(12n)$, which grows without bound. Second, $\ln n! \sim n\ln n$ does not give $n! \sim n^n$. Taking a logarithm hides a factor of size $e^{-n}$, as the paragraph on orders of growth shows.
+### Pitfalls
+
+- **Equivalence is not a small difference.** $n! \sim \sqrt{2\pi n}(n/e)^n$ says the ratio tends to 1. The difference $n! - \sqrt{2\pi n}(n/e)^n$ is about $\sqrt{2\pi n}\,(n/e)^n/(12n)$, and it grows without bound. At $n = 10$ it is already $30104.4$.
+- **Logarithms hide factors.** $\ln n! \sim n\ln n$ holds, but $n! \sim n^n$ is false. The ratio $n^n/n!$ is about $e^n/\sqrt{2\pi n}$, which tends to infinity.
+- **Base of the logarithm.** In base 2 the linear term is $n\lg e \approx 1.4427\,n$, not $n$. Writing $\lg n! \approx n\lg n - n$ is wrong by about $0.44\,n$ bits.
+- **Overflow in computation.** In IEEE double precision $170!$ is the largest factorial that fits; $171!$ overflows. To compute $\lg n!$ or a binomial coefficient for large $n$, use the log-gamma function, $\ln n! = \ln\Gamma(n+1)$, or the formula with the bounds of Robbins. Do not form $n!$ and then take its logarithm.
+- **Small $n$.** The relative error $e^{r_n} - 1$ is about $8.4\%$ at $n = 1$ and $0.83\%$ at $n = 10$. For small arguments, compute the factorial exactly.
 
 ## History
 

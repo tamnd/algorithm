@@ -12,8 +12,6 @@ summary: Estimates the exponent of a power-law running time by comparing timings
 prereqs: [tilde-notation, order-of-growth, logarithms]
 see_also: [empirical-analysis-of-algorithms, asymptotic-notation, common-growth-rates, comparing-growth-by-limits, stirling-approximation]
 sources:
-  - url: "https://algs4.cs.princeton.edu/14analysis/"
-    locator: Section 1.4, Analysis of Algorithms (booksite, doubling ratio experiments)
   - book: isbn:9780321573513
     title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
     locator: Section 1.4, Analysis of Algorithms (the doubling ratio experiment and the power-law hypothesis)
@@ -46,6 +44,13 @@ $$ \frac{T(2n)}{T(n)} = \frac{T(2n)}{a(2n)^b}\cdot\frac{a\,n^b}{T(n)}\cdot\frac{
 The first factor tends to 1 because $T \sim a n^b$ at the point $2n$, the second tends to 1, and the third is $2^b$. $\square$
 
 The hypothesis is about $\sim$, not about $\Theta$. If only $T(n) = \Theta(n^b)$ with $T > 0$, then for all large $n$ the ratio $T(2n)/T(n)$ stays between two positive constants, and it need not converge. For $T(n) = (2 + \sin n)\,n$ we have $T = \Theta(n)$, but the ratio does not settle at $2$.
+
+**The converse fails.** Ratios that tend to $2^b$ do not prove $T \sim a\,n^b$. Two counterexamples:
+
+- $T(n) = n\lg n$ has $T(2n)/T(n) \to 2$, but $T(n)/n \to \infty$, so $T \sim a\,n$ holds for no constant $a$.
+- $T(n) = n^2\,(2 + \sin(2\pi\lg n))$ has $T(2n)/T(n) = 4$ exactly for every $n > 0$, because $\lg(2n) = \lg n + 1$ and the sine has period 1 in $\lg n$. But $T(n)/n^2$ takes every value between 1 and 3, so $T$ is $\Theta(n^2)$ and not $\sim a\,n^2$. A doubling series never sees this oscillation, because it samples $T$ at the same phase each time.
+
+So the ratio test can refute the hypothesis, and it can estimate $b$ when the hypothesis holds, but it cannot confirm the hypothesis.
 
 **With a logarithmic factor.** If $T(n) \sim a\,n^b\lg n$, then $T(2n)/T(n) \to 2^b$, because $\lg(2n)/\lg n = 1 + 1/\lg n \to 1$. For the exact form $T(n) = a\,n^b\lg n$, the ratio is $2^b(1 + 1/\lg n)$, which is above $2^b$ and tends to it slowly. See the pitfalls.
 

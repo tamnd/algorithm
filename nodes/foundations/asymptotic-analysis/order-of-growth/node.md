@@ -13,22 +13,22 @@ see_also: [common-growth-rates, doubling-hypothesis, comparing-growth-by-limits,
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Chapter 3
+    locator: Chapter 3, Characterizing Running Times (Section 3.1 on dropping lower-order terms and constants, Section 3.2 on the formal definitions, Section 3.3 on standard functions)
   - book: isbn:9780321573513
     title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
-    locator: Section 1.4
+    locator: Section 1.4, Analysis of Algorithms (order-of-growth classifications and the table of common orders)
   - book: isbn:9780201896831
     title: Donald E. Knuth, The Art of Computer Programming, Volume 1, third edition
-    locator: Section 1.2.11.1
+    locator: Section 1.2.11.1, The O-notation
 ---
 
 The order of growth of a running time $T(n)$ is its $\Theta$-class: the set of functions that grow at the same rate as $T$ when $n$ becomes large. You usually find it by keeping the fastest-growing term of $T(n)$ and dropping its constant factor. When one order is $o$ of the other, the algorithm with the smaller order is faster for all large $n$, whatever the constants are.
 
 ## In plain words
 
-Take a program that does three times n squared, plus ten times n, plus seven steps on an input of size n. For an input of 10 items, the squared part is 300 steps and the linear part is 100 steps. For 1000 items, the squared part is three million steps and the linear part is only ten thousand. The small parts matter less and less as the input grows. In the end, only the square decides how the time grows. If you make the input ten times larger, the time becomes about a hundred times larger.
+Suppose a program has two parts. For each item, the first part looks at every item. The second part looks at each item once. With ten items, the first part takes a hundred steps and the second part takes ten. With a thousand items, the first part takes a million steps and the second part takes only a thousand. As the input grows, the part that grows fastest takes almost all of the time, and the other parts stop mattering.
 
-This is the order of growth. It says how the cost scales. It does not say the exact time. A machine that is twice as fast changes the constant. It does not change the order of growth. For large inputs, the order of growth decides which algorithm is faster.
+That fastest part gives the order of growth. It tells how the cost scales: here, an input ten times larger takes about a hundred times longer. It does not give the exact time. A machine that is twice as fast halves the time, but it does not change the order of growth. For large inputs, the order of growth decides which algorithm is faster.
 
 ## The idea
 
@@ -81,7 +81,7 @@ Non-examples:
 - **$O$ is not the order.** "Insertion sort is $O(n^3)$" is true, but $n^3$ is not its order of growth. The order of growth is a $\Theta$-class, so it needs a matching upper and lower bound.
 - **The order depends on the case.** [Insertion sort](/insertion-sort/) has worst-case order $n^2$ and best-case order $n$. Say which case you mean, see [worst-case analysis](/worst-case-analysis/).
 - **A sum with a growing number of terms.** The leading-term rule needs a fixed number of terms. In $\sum_{i=1}^{n} i$ no single term dominates, and keeping only the largest term $n$ gives the wrong order. Evaluate the sum first: it is $\Theta(n^2)$, see [arithmetic series](/arithmetic-series/).
-- **Equal order does not mean equal speed.** Two $\Theta(n \log n)$ sorts, for example [merge sort](/merge-sort/) and [heapsort](/heapsort/), can differ by a factor of two or more on a real machine.
+- **Equal order does not mean equal speed.** Two $\Theta(n \log n)$ sorts, for example [merge sort](/merge-sort/) and [heapsort](/heapsort/), have the same order, yet their running times on a real machine can differ by a clear constant factor, because heapsort jumps around the array and makes poor use of the cache. The order of growth does not show this.
 
 ## Where it is used
 

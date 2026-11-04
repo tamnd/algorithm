@@ -11,15 +11,21 @@ summary: A total recursive function that grows faster than any primitive recursi
 prereqs: [computable-function, primitive-recursive-function]
 see_also: [inverse-ackermann-function, iterated-logarithm, partial-recursive-function]
 sources:
-  - paper: "Wilhelm Ackermann, Zum Hilbertschen Aufbau der reellen Zahlen, Mathematische Annalen 99 (1928), pages 118 to 133"
-    locator: the three-argument function
-  - paper: "Rózsa Péter, Konstruktion nichtrekursiver Funktionen, Mathematische Annalen 111 (1935), pages 42 to 60"
-    locator: non-primitive-recursive functions by nested recursion
-  - paper: "Raphael M. Robinson, Recursion and double recursion, Bulletin of the AMS 54 (1948), pages 987 to 993"
-    locator: the two-argument form
+  - paper: doi:10.1007/BF01459088
+    title: Wilhelm Ackermann, Zum Hilbertschen Aufbau der reellen Zahlen, Mathematische Annalen 99, 1928, pages 118 to 133
+    locator: the three-argument function and the proof that it is not primitive recursive
+  - paper: doi:10.1007/BF01472200
+    title: Rózsa Péter, Konstruktion nichtrekursiver Funktionen, Mathematische Annalen 111, 1935, pages 42 to 60
+    locator: a two-argument function that is not primitive recursive
+  - paper: doi:10.1090/S0002-9904-1948-09121-2
+    title: Raphael M. Robinson, Recursion and double recursion, Bulletin of the American Mathematical Society 54(10), 1948, pages 987 to 993
+    locator: the two-argument form A(0, n) = n + 1, A(m + 1, 0) = A(m, 1), A(m + 1, n + 1) = A(m, A(m + 1, n))
+  - paper: doi:10.1126/science.194.4271.1235
+    title: Donald E. Knuth, Mathematics and computer science, coping with finiteness, Science 194(4271), 1976, pages 1235 to 1242
+    locator: the up-arrow notation
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Chapter 19 (the function A_k(j) in the analysis of disjoint-set forests)
+    locator: Section 19.4 (the function A_k(j) in the analysis of disjoint-set forests)
 ---
 
 The Ackermann function is a function of two natural numbers that is defined by a short recursion, always halts, and grows faster than every primitive recursive function. This page uses the two-argument Ackermann-Péter form $A(m, n)$ unless it says otherwise. Its slow inverse appears in the cost of [union-find](/disjoint-set-forest/), see [the inverse Ackermann function](/inverse-ackermann-function/).
@@ -47,13 +53,15 @@ $$A(m + 1, n + 1) = A(m, A(m + 1, n))$$
 
 Proof of 1, by induction on $m$ and, inside it, on $n$. For $m = 0$, $A(0, n) = n + 1 > n$. For $m + 1$ and $n = 0$, the outer hypothesis gives $A(m + 1, 0) = A(m, 1) > 1 > 0$. For $A(m + 1, n + 1) = A(m, k)$ with $k = A(m + 1, n)$: the inner hypothesis gives $k \ge n + 1$, and the outer hypothesis gives $A(m, k) \ge k + 1 \ge n + 2$. Proof of 2: for $m = 0$, $A(0, n + 1) = n + 2 > n + 1 = A(0, n)$. For $m + 1$, $A(m + 1, n + 1) = A(m, A(m + 1, n)) > A(m + 1, n)$ by property 1. Proof of 3, by induction on $n$: for $n = 0$ both sides are equal by rule 2. For $n + 1$, the hypothesis and property 1 give $A(m + 1, n) \ge A(m, n + 1) \ge n + 2$, so property 2 gives $A(m + 1, n + 1) = A(m, A(m + 1, n)) \ge A(m, n + 2)$. Property 4 follows from 3 and 2: $A(m + 1, n) \ge A(m, n + 1) > A(m, n)$.
 
-**It is not primitive recursive.** The method is due to Ackermann (1928) and Péter (1935), and Robinson (1948) gave it for this form. The key statement is:
+**Each row is primitive recursive.** Row 0 is the successor. If row $m$ is primitive recursive, then row $m + 1$ is defined by primitive recursion on $n$ from the constant $A(m, 1)$ and the step $A(m + 1, n + 1) = A(m, A(m + 1, n))$, so it is primitive recursive too. The function of two arguments is not, as we show next.
+
+**It is not primitive recursive.** Ackermann (1928) proved this for his three-argument function, and Péter (1935) for a function of two arguments. Robinson (1948) gave the form used on this page. The proof below is the standard domination argument. The key statement is:
 
 > For each [primitive recursive function](/primitive-recursive-function/) $f : \mathbb{N}^r \to \mathbb{N}$ there is a $k$ with $f(x_1, \dots, x_r) < A(k, \max_i x_i)$ for all arguments. In particular, for each primitive recursive $f : \mathbb{N} \to \mathbb{N}$ there is a $k$ with $f(n) < A(k, n)$ for all $n \ge 0$.
 
 *A lemma.* For all $m_1, m_2, n$, with $m = \max(m_1, m_2)$: $A(m_1, A(m_2, n)) < A(m + 2, n)$. Proof: by properties 2 and 4, $A(m_1, A(m_2, n)) \le A(m, A(m, n))$. By property 2 and then rule 3, $A(m, A(m, n)) < A(m, A(m + 1, n)) = A(m + 1, n + 1)$. By property 3, $A(m + 1, n + 1) \le A(m + 2, n)$.
 
-*Proof of the statement*, by induction on the definition of $f$. Write $X = \max_i x_i$.
+*Proof of the statement*, by induction on the definition of $f$. Write $X = \max_i x_i$, with $X = 0$ for a function of no arguments.
 
 - The zero function: $0 < X + 1 = A(0, X)$, so $k = 0$.
 - The successor: $x + 1 < x + 2 = A(1, x)$, so $k = 1$.
@@ -89,19 +97,32 @@ Each follows by induction on $n$ from the previous row. For $m = 1$: $A(1, 0) = 
 
 **Tower form for $m = 4$.** Let $t(k)$ be the tower of $k$ twos: $t(1) = 2$ and $t(k + 1) = 2^{t(k)}$. Then $A(4, n) = t(n + 3) - 3$ for all $n \ge 0$. The base case is $A(4, 0) = 13 = 16 - 3 = t(3) - 3$. The step is $A(4, n + 1) = A(3, A(4, n)) = 2^{A(4,n) + 3} - 3 = 2^{t(n+3)} - 3 = t(n + 4) - 3$. So $A(4, 1) = 2^{16} - 3 = 65533$ and $A(4, 2) = 2^{65536} - 3$, as above.
 
-**General form.** With Knuth's up-arrow notation, where $a \uparrow^{0} b = ab$, $a \uparrow^{1} b = a^b$, and $a \uparrow^{k+1} b$ is $a \uparrow^{k} (a \uparrow^{k} (\cdots))$ with $b$ copies of $a$, the rows for $m \ge 2$ are $A(m, n) = 2 \uparrow^{m-2} (n + 3) - 3$. The rows above are the cases $m = 2, 3, 4$. So row $m$ is one level of the hierarchy of addition, multiplication, power and tower.
+**General form.** Knuth's up-arrow notation (Knuth, 1976) sets $a \uparrow^{0} b = ab$, $a \uparrow^{k} 1 = a$ for $k \ge 1$, and $a \uparrow^{k} (b + 1) = a \uparrow^{k-1} (a \uparrow^{k} b)$ for $k \ge 1$. So $a \uparrow^1 b = a^b$, and $a \uparrow^{k} b$ for $k \ge 2$ applies $a \uparrow^{k-1} \cdot$ to $a$, $b - 1$ times. For all $m \ge 2$ and $n \ge 0$,
+
+$$A(m, n) = 2 \uparrow^{m-2} (n + 3) - 3.$$
+
+*Proof*, by induction on $m$, and inside it on $n$. The case $m = 2$ is $2(n + 3) - 3 = 2n + 3$. Let $m \ge 3$ and $k = m - 2 \ge 1$. First, $2 \uparrow^{j} 2 = 4$ for every $j \ge 0$: for $j = 0$ it is $2 \cdot 2$, and for $j \ge 1$ it is $2 \uparrow^{j-1} 2$. So $2 \uparrow^{k} 3 = 2 \uparrow^{k-1} (2 \uparrow^{k} 2) = 2 \uparrow^{k-1} 4$, and rule 2 with the hypothesis for $m - 1$ gives $A(m, 0) = A(m - 1, 1) = 2 \uparrow^{k-1} 4 - 3 = 2 \uparrow^{k} 3 - 3$. For the step, rule 3 and the two hypotheses give $A(m, n + 1) = A(m - 1, A(m, n)) = 2 \uparrow^{k-1} (A(m, n) + 3) - 3 = 2 \uparrow^{k-1} (2 \uparrow^{k} (n + 3)) - 3 = 2 \uparrow^{k} (n + 4) - 3$. $\square$
+
+The rows 2, 3 and 4 above are the cases $k = 0, 1, 2$. So row $m$ is one level of the hierarchy of multiplication, power, tower and the higher operations.
 
 **An example of the theorem.** $f(n) = 2^n$ is primitive recursive, and it is below row 3: $2^n < 2^{n+3} - 3 = A(3, n)$ for all $n \ge 0$, because $7 \cdot 2^n > 3$.
 
-**A non-example.** The function $n \mapsto A(n, n)$ is not below any single row, as the proof above shows.
+**A non-example.** The function $n \mapsto A(n, n)$ is not below any single row, as the proof above shows. Each row is below the diagonal from some point on: by property 4, $A(m, n) < A(n, n)$ for every $n > m$.
 
-**A trap in practice.** A direct recursive program for $A$ makes a very deep chain of calls. Already $A(4, 1)$ needs a call depth of more than 65000, so a program with the usual stack size fails with a stack overflow. A program with an explicit stack of pending first arguments avoids the overflow, but the number of steps stays huge.
+**A computation.** The rules can run as a program with an explicit stack of pending first arguments: rule 3 pushes $m$ and then $m + 1$, rule 2 pushes $m$, and rule 1 adds 1 to the current second argument. For $A(4, 1)$ this program applies a rule $2\,862\,984\,010$ times, and its stack grows to $65\,532$ entries before the result $65\,533$ appears. For $A(3, 3) = 61$ it applies a rule $2\,432$ times, with at most 60 entries on the stack.
+
+### Pitfalls
+
+- **Stack overflow.** A direct recursive program for $A(4, 1)$ nests more than 65 000 calls, so it fails with the usual stack size. The explicit stack above avoids the overflow, but not the billions of steps. $A(4, 2)$ is out of reach of the rules in practice: its value has 19 729 digits, and rule 1 adds only 1 at a time.
+- **Fast growth alone does not leave the class.** $2^n$, $n!$ and the tower $t(n)$ are primitive recursive. The theorem is about a function that is above every row, not about fast growth in general.
+- **Not every total computable function is primitive recursive.** $A$ is total and computable, but not primitive recursive. So "total and computable" and "primitive recursive" are different classes.
+- **Several functions share the name.** The function of Ackermann, the function of this page, the variant $A_k(j)$ of CLRS, and the function of the first edition of CLRS give different values at the same arguments. Read the definition first.
 
 ## Related definitions
 
 **Ackermann's original function (1928).** Ackermann used three arguments. A common statement of it is $\varphi(a, b, 0) = a + b$, $\varphi(a, 0, 1) = 0$, $\varphi(a, 0, 2) = 1$, $\varphi(a, 0, c) = a$ for $c > 2$, and $\varphi(a, b + 1, c + 1) = \varphi(a, \varphi(a, b, c + 1), c)$. So $c = 0, 1, 2$ give addition, multiplication and exponentiation. The two-argument function above is a later simplification. The names "Ackermann function" and "Ackermann-Péter function" are used for the two-argument form.
 
-**The variant of CLRS, chapter 19.** In the analysis of union by rank and path compression, CLRS defines for integers $k \ge 0$ and $j \ge 1$
+**The variant of CLRS, Section 19.4.** In the analysis of union by rank and path compression, CLRS defines for integers $k \ge 0$ and $j \ge 1$
 
 $$A_0(j) = j + 1, \qquad A_k(j) = A_{k-1}^{(j+1)}(j) \quad (k \ge 1),$$
 
@@ -109,6 +130,6 @@ where $f^{(i)}$ is $f$ applied $i$ times. This $A_k(j)$ is not the same function
 
 **Other forms.** The first edition of the book (Cormen, Leiserson and Rivest, 1990), in the spirit of Tarjan (1975), uses another two-argument function, with $A(1, j) = 2^j$. It is given on the page of the inverse function. The forms give different values at the same arguments. When a paper uses "the Ackermann function", read its definition first.
 
-The [iterated logarithm](/iterated-logarithm/) is the inverse of the tower function $t(k)$, so it inverts row 4 up to a constant, because $A(4, n) = t(n + 3) - 3$. The [inverse Ackermann function](/inverse-ackermann-function/) inverts the diagonal, so it grows far more slowly than $\lg^* n$.
+The [iterated logarithm](/iterated-logarithm/) is the inverse of the tower function $t(k)$, and it inverts row 4 exactly up to a shift: since $t(n + 2) < t(n + 3) - 3 < t(n + 3)$, we get $\lg^* A(4, n) = n + 3$. The [inverse Ackermann function](/inverse-ackermann-function/) inverts the diagonal, or the values $A_k(1)$ in CLRS, so it grows far more slowly than $\lg^* n$.
 
 ## References

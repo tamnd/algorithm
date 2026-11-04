@@ -13,13 +13,13 @@ see_also: [geometric-series, harmonic-series, integral-bounds-for-sums, quadrati
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Appendix A, Summations
+    locator: Appendix A, Section A.1, Summation formulas and properties (arithmetic series, sums of squares and cubes)
   - book: isbn:9780201558029
     title: Graham, Knuth and Patashnik, Concrete Mathematics, second edition
-    locator: Chapter 2, Sums
+    locator: Section 2.3, Manipulation of sums (the arithmetic progression by reversing the order of terms) and Section 2.5, General methods (the sum of squares by several methods)
   - book: isbn:9780201896831
     title: Donald E. Knuth, The Art of Computer Programming, Volume 1, third edition
-    locator: Section 1.2.3, Sums and products
+    locator: Section 1.2.3, Sums and Products (the sum of an arithmetic progression)
 ---
 
 An arithmetic series is the sum of the terms of an arithmetic progression: a list $a, a+d, a+2d, \dots$ in which each term is the previous term plus a fixed difference $d$. The sum of $n$ terms with first term $a$ and last term $\ell$ is $n(a+\ell)/2$. In algorithm analysis the main case is $1 + 2 + \dots + n = n(n+1)/2$, which is $\Theta(n^2)$ in [asymptotic notation](/asymptotic-notation/) and is the exact cost of many nested loops.
@@ -40,7 +40,9 @@ $$ S = \sum_{i=0}^{n-1} (a + id) = \frac{n(a + \ell)}{2} = na + d\,\frac{n(n-1)}
 
 *Proof by induction, for $T_n = 1 + 2 + \dots + n = n(n+1)/2$.* For $n = 0$ the sum is empty and the formula gives 0. Assume $T_n = n(n+1)/2$. Then $T_{n+1} = T_n + (n+1) = (n+1)(n/2 + 1) = (n+1)(n+2)/2$, which is the formula for $n+1$. $\square$
 
-**Number of terms.** When the first term $a$, the last term $\ell$ and the difference $d \ne 0$ are given, the number of terms is $n = (\ell - a)/d + 1$, provided $\ell$ is a term of the progression, that is, $d$ divides $\ell - a$ and $(\ell - a)/d \ge 0$. If you forget the $+1$, you count $n - 1$ terms, and for $1 + \dots + n$ you get $(n-1)(n+1)/2$ in place of $n(n+1)/2$. A related off-by-one error is a wrong last term: $1 + \dots + (n-1) = n(n-1)/2$ is not $1 + \dots + n = n(n+1)/2$.
+**Odd numbers.** The case $a = 1$, $d = 2$ gives $1 + 3 + 5 + \dots + (2n-1) = n \cdot \frac{1 + (2n-1)}{2} = n^2$. For $n = 100$ the sum is $10000$.
+
+**Number of terms.** When the first term $a$, the last term $\ell$ and the difference $d \ne 0$ are given, the number of terms is $n = (\ell - a)/d + 1$, provided $\ell$ is a term of the progression, that is, $d$ divides $\ell - a$ and $(\ell - a)/d \ge 0$. For example, $3 + 7 + 11 + \dots + 99$ has $(99 - 3)/4 + 1 = 25$ terms, and its sum is $25 \cdot (3 + 99)/2 = 1275$.
 
 The numbers $T_n$ are the *triangular numbers*. They also count the pairs: $T_{n-1} = \binom{n}{2}$ is the number of pairs $i < j$ in $\{1, \dots, n\}$.
 
@@ -60,6 +62,10 @@ $$ \sum_{j=1}^{n} j^2 = \frac{n(n+1)(2n+1)}{6}. $$
 
 The constant is known: the sum is $\sim n^{k+1}/(k+1)$. This follows from the [integral bounds for sums](/integral-bounds-for-sums/): $\int_0^n x^k\,dx \le \sum_{j=1}^n j^k \le \int_1^{n+1} x^k\,dx$, because $x^k$ is non-decreasing. The sum of the first $n$ integers is not $\Theta(n)$, and the sum of the first $n$ squares is not $\Theta(n^2)$: the exponent grows by one.
 
+*Proof of $\sim n^{k+1}/(k+1)$.* The two integrals are $\frac{n^{k+1}}{k+1}$ and $\frac{(n+1)^{k+1} - 1}{k+1}$. Divide both by $\frac{n^{k+1}}{k+1}$. The first ratio is 1, and the second is $(1 + 1/n)^{k+1} - n^{-k-1}$, which tends to 1 for fixed $k$. The sum lies between them, so its ratio to $\frac{n^{k+1}}{k+1}$ also tends to 1. $\square$
+
+For integer $k \ge 1$ the next term is $\frac{n^k}{2}$, from the [Euler-Maclaurin formula](/euler-maclaurin-formula/). The exact forms above show it: $\sum j^2 = \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6}$ and $\sum j^3 = \frac{n^4}{4} + \frac{n^3}{2} + \frac{n^2}{4}$.
+
 ## Examples
 
 Exact values for $n = 10$: $\sum j = 55$, $\sum j^2 = 385$, $\sum j^3 = 3025$. The ratio $\sum_{j \le n} j^2 / n^3$ is 0.385 for $n = 10$, 0.33835 for $n = 100$ and 0.3338335 for $n = 1000$, and it tends to $1/3$.
@@ -75,6 +81,14 @@ Exact values for $n = 10$: $\sum j = 55$, $\sum j^2 = 385$, $\sum j^3 = 3025$. T
 - The sum $\sum_{j=1}^{n} 1/j$ is not an arithmetic series: its terms have no fixed difference. It is the [harmonic series](/harmonic-series/) and it is $\Theta(\log n)$.
 - The sum $1 + 2 + 4 + \dots + 2^{n}$ is not arithmetic: each term is the previous term times 2. It is a [geometric series](/geometric-series/) and it is $\Theta(2^n)$.
 - The sum $\sum_{j=1}^{n} j^j$ is not a power sum: the exponent depends on $j$.
+
+### Pitfalls
+
+- **Off by one in the number of terms.** From $a$ to $\ell$ with step $d$ there are $(\ell - a)/d + 1$ terms. If you forget the $+1$ in $1 + \dots + n$, you get $(n-1)(n+1)/2$ in place of $n(n+1)/2$.
+- **The wrong last term.** $1 + \dots + (n-1) = n(n-1)/2$ and $1 + \dots + n = n(n+1)/2$ differ by $n$. Both are $\sim n^2/2$, but an exact count, such as the $45$ comparisons of selection sort on 10 keys, needs the right one.
+- **An upper bound is not a tight bound.** "Each of $n$ terms is at most $n$" gives $O(n^2)$. To get $\Omega(n^2)$ you need a lower bound too, for example from the largest half of the terms. Without it, a sum such as $\sum_{j=1}^n \lg j$ could be misread; that sum is $\Theta(n\log n)$.
+- **An exponent that depends on $n$.** The rule $\sum_{j \le n} j^k \sim n^{k+1}/(k+1)$ needs a fixed $k$. For $k = n$ the sum is $\sim \frac{e}{e-1}\, n^n$, and the ratio $\sum_{j \le n} j^n / n^n$ is $1.491$ at $n = 10$, $1.572$ at $n = 100$ and $1.581$ at $n = 1000$. The formula $n^{k+1}/(k+1)$ predicts a ratio near 1. The lower bound $n^{k+1}/2^{k+1}$ of the $\Theta$ proof also becomes useless.
+- **Terms that are only close to a progression.** $\sum_{j=1}^n \lfloor j/2 \rfloor$ has no fixed difference. Bound it by the progressions $\frac{j-1}{2}$ and $\frac{j}{2}$, which give $\frac{n(n-1)}{4} \le \sum \le \frac{n(n+1)}{4}$.
 
 ## Where it is used
 

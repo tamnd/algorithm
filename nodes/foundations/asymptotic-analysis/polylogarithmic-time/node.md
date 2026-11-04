@@ -11,63 +11,81 @@ summary: Running time bounded by a polynomial in log n.
 prereqs: [asymptotic-notation, logarithms, time-complexity]
 see_also: [logarithmic-time, constant-time, sublinear-time, polynomial-time, iterated-logarithm, nc, binary-search, common-growth-rates]
 sources:
-  - url: "https://en.wikipedia.org/wiki/Time_complexity"
-    locator: section Polylogarithmic time
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Chapter 3 (standard notations, polylogarithmically bounded functions)
+    locator: Section 3.3, Standard notations and common functions (polylogarithmically bounded functions, the notation lg^k n)
   - book: isbn:9780201896831
     title: Donald E. Knuth, The Art of Computer Programming, Volume 1, third edition
-    locator: Section 1.2.11.1
+    locator: Section 1.2.11.1, The O-notation
+  - book: isbn:9783540779735
+    title: Mark de Berg, Otfried Cheong, Marc van Kreveld and Mark Overmars, Computational Geometry, Algorithms and Applications, third edition
+    locator: Chapter 5, Orthogonal Range Searching (range trees)
+  - book: isbn:9780201530827
+    title: Christos H. Papadimitriou, Computational Complexity
+    locator: Chapter 15, Parallel Computation (the class NC)
   - book: isbn:9780521424264
-    title: Arora and Barak, Computational Complexity, A Modern Approach
-    locator: Chapter 6 (the class NC)
+    title: Sanjeev Arora and Boaz Barak, Computational Complexity, A Modern Approach
+    locator: Chapter 6, Boolean Circuits (the classes NC and AC)
 ---
 
-An algorithm runs in polylogarithmic time when its worst-case [time](/time-complexity/) is $O((\log n)^k)$ for some constant $k$, where $n$ is the input size. The class contains [constant time](/constant-time/) and [logarithmic time](/logarithmic-time/), which are the cases $k = 0$ and $k = 1$. It is a subclass of [sublinear time](/sublinear-time/): a power of a logarithm grows more slowly than each power $n^{\varepsilon}$ with $\varepsilon > 0$. It appears in the query time of data structures and in the parallel time of the class [NC](/nc/).
+An algorithm runs in polylogarithmic time when its worst-case [time](/time-complexity/) is $O((\log n)^k)$ for some constant $k$, where $n$ is the [input size](/input-size/) or, for a data structure, the number of stored items. The class contains [constant time](/constant-time/) and [logarithmic time](/logarithmic-time/), the cases $k = 0$ and $k = 1$. It is a subclass of [sublinear time](/sublinear-time/), because each power of a logarithm grows more slowly than each power $n^{\varepsilon}$ with $\varepsilon > 0$. It is the usual query time of data structures and the parallel time of the class [NC](/nc/).
 
 ## Definition
 
-Let $f$ be a function from the natural numbers to the non-negative reals. The function $f$ is *polylogarithmic* when there are constants $k \ge 0$, $c > 0$ and $n_0 \ge 2$ such that
+Let $f$ be a function from the positive integers to the non-negative reals. The function $f$ is *polylogarithmic* when there are constants $k \ge 0$, $c > 0$ and $n_0 \ge 2$ such that
 
 $$\forall n \ge n_0 : \ f(n) \le c\,(\lg n)^k.$$
 
-In words, $f(n) = O((\log n)^k)$ for some constant $k$. The threshold $n_0 \ge 2$ keeps $\lg n$ positive. An algorithm runs in *polylogarithmic time* when its worst-case time in a stated model is a polylogarithmic function of the input size.
+That is, $f(n) = O((\log n)^k)$ for some constant $k$. The threshold $n_0 \ge 2$ keeps $\lg n$ positive. An algorithm runs in *polylogarithmic time* when its worst-case time in a stated model is a polylogarithmic function of $n$. For an expected or amortized bound, the case must be named.
 
-A polylogarithmic-time algorithm reads only a tiny part of its input, so the model must give random access to the input, for example the [random-access machine](/random-access-machine/) or a Turing machine with random access. A machine with a sequential tape needs $n$ steps just to reach the end of its input. For a data structure, $n$ is the number of stored items: the query time is polylogarithmic in $n$ after a preprocessing that reads all $n$ items.
+**The model must give random access.** In $O((\log n)^k)$ steps an algorithm reads only a vanishing part of its input. On a Turing machine with one sequential input tape the head cannot even reach position $n$ in fewer than $n - 1$ steps. So the definition needs a [random-access machine](/random-access-machine/), a [word RAM](/word-ram/), or a Turing machine with an index tape that addresses the input. For a data structure, $n$ is the number of stored items, and the bound is the time of one query or update after a preprocessing that reads all $n$ items.
 
-The class is the union over $k$ of the classes $O((\log n)^k)$, and each class is contained in the next one, since $(\lg n)^k \le (\lg n)^{k+1}$ for $n \ge 2$. A real $k$ gives the same union as an integer $k$, because $(\lg n)^k \le (\lg n)^{\lceil k \rceil}$.
+**The union over $k$.** The class is $\bigcup_{k \ge 0} O((\log n)^k)$. Each class is contained in the next one, since $(\lg n)^k \le (\lg n)^{k+1}$ for $n \ge 2$. A real exponent $k$ gives the same union as an integer one, because $(\lg n)^k \le (\lg n)^{\lceil k \rceil}$ for $n \ge 2$.
 
-**The base does not matter.** For bases $a, b > 1$, $\log_a n = \log_b n / \log_b a$, so $(\log_a n)^k = (\log_b n)^k / (\log_b a)^k$, which differs from $(\log_b n)^k$ by a constant factor. So $O((\log_a n)^k) = O((\log_b n)^k)$, and the base needs no mention inside $O$. See [logarithms](/logarithms/).
+**The base does not matter.** For bases $a, b > 1$, $(\log_a n)^k = (\log_b n)^k / (\log_b a)^k$, a constant multiple of $(\log_b n)^k$. So $O((\log_a n)^k) = O((\log_b n)^k)$. See [logarithms](/logarithms/).
 
-**Notation.** The expression $\lg^k n$ means $(\lg n)^k$, the $k$-th power of the logarithm. It does not mean that the logarithm is applied $k$ times. That function is the *iterated logarithm* $\lg^{(k)} n$ with the number $k$ in parentheses, see [iterated logarithm](/iterated-logarithm/). Also $\log(n^k) = k \log n$ is $\Theta(\log n)$, and it is not $(\log n)^k$. For $n = 2^{20}$ we have $\lg^2 n = 400$, $\lg(n^2) = 40$ and $\lg \lg n = \lg 20 \approx 4.32$. The function $\lg \lg n$ is polylogarithmic, since $\lg \lg n \le \lg n$ for $n \ge 2$.
+**Notation.** The expression $\lg^k n$ means $(\lg n)^k$. It does not mean that the logarithm is applied $k$ times: that is the *iterated logarithm* $\lg^{(k)} n$, see [iterated logarithm](/iterated-logarithm/). Also $\lg(n^k) = k \lg n$ is $\Theta(\log n)$, not $(\lg n)^k$. For $n = 2^{20}$, $\lg^2 n = 400$, $\lg(n^2) = 40$ and $\lg \lg n = \lg 20 \approx 4.32$. The function $\lg \lg n$ is polylogarithmic, since $\lg \lg n \le \lg n$ for $n \ge 2$.
 
-**Order.** For each constant $k$ and $\varepsilon > 0$, $(\lg n)^k = o(n^{\varepsilon})$, see [asymptotic notation](/asymptotic-notation/). To see this, put $n = 2^m$. Then $(\lg n)^k / n^{\varepsilon} = m^k / 2^{\varepsilon m}$, and this tends to 0 as $m \to \infty$, because an exponential function beats each power of $m$. The class $O((\log n)^k)$ is strictly inside $O((\log n)^{k+1})$, because $(\lg n)^{k+1} / (\lg n)^k = \lg n \to \infty$. So a polylogarithmic function is $o(n^{\varepsilon})$ for every $\varepsilon$, and it is sublinear.
+**Order.** *Claim.* For each constant $k \ge 0$ and $\varepsilon > 0$, $(\lg n)^k = o(n^{\varepsilon})$.
 
-The soft-O notation hides polylogarithmic factors: $\tilde O(f(n))$ means $O(f(n) (\log n)^k)$ for some constant $k$. For example, an $O(n \log^2 n)$ time is $\tilde O(n)$.
+*Proof.* Put $m = \lg n$, so $n^{\varepsilon} = 2^{\varepsilon m}$, and the ratio is $m^k / 2^{\varepsilon m}$. Let $a_m = m^k / 2^{\varepsilon m}$ for real $m \ge 1$. The ratio $a_{m+1}/a_m = (1 + 1/m)^k \, 2^{-\varepsilon}$ tends to $2^{-\varepsilon} < 1$, so there are $r < 1$ and $M$ with $a_{m+1} \le r\,a_m$ for all $m \ge M$. Then $a_{M + j + t} \le r^j a_{M+t}$ for $t \in [0, 1]$, and $a$ is bounded on $[M, M+1]$, so $a_m \to 0$ as $m \to \infty$. $\square$
+
+The inclusions between the levels are strict: $(\lg n)^{k+1}/(\lg n)^k = \lg n \to \infty$, so $(\lg n)^{k+1} \ne O((\lg n)^k)$.
+
+**Soft-O.** The notation $\tilde O(g(n))$ hides polylogarithmic factors: it means $O(g(n)\,(\log n)^k)$ for some constant $k$. For example, $O(n \lg^2 n)$ is $\tilde O(n)$.
 
 ## Examples and non-examples
 
-- **Binary search** in a sorted array takes at most $\lfloor \lg n \rfloor + 1$ comparisons. This is $\Theta(\log n)$, so $k = 1$. For $n = 10^6$ it is 20. See [binary search](/binary-search/).
-- **Search trees and heaps.** A search, an insertion or a deletion in a balanced search tree such as an [AVL tree](/avl-tree/) takes $O(\log n)$ time, and the insertion in a [binary heap](/binary-heap/) takes $O(\log n)$ time, where $n$ is the number of stored items.
-- **Range queries.** A [segment tree](/segment-tree/) or a [Fenwick tree](/fenwick-tree/) answers a range-sum query and takes a point update in $O(\log n)$ time, after a preprocessing of $O(n)$ time, where $n$ is the number of stored items.
-- **A power of the logarithm.** A structure with query time $O(\log^2 n)$ is polylogarithmic with $k = 2$. Some structures for range queries in the plane have a query time of this form, where $n$ is the number of stored points.
-- **Parallel time.** The sum of $n$ numbers takes $\lceil \lg n \rceil$ rounds when each round adds the numbers in pairs, in parallel, with $\lfloor n/2 \rfloor$ processors in the first round. The parallel time is $O(\log n)$ while the work is $\Theta(n)$.
-- Non-example: $\sqrt{n}$, or $n^{\varepsilon}$ for a constant $\varepsilon > 0$. These are sublinear and not polylogarithmic.
-- Non-example: $n / \log n$ is sublinear. It is not polylogarithmic, because it is not bounded by $c (\lg n)^k$ for any $k$.
-- Non-example: $(\lg n)^{\lg n} = n^{\lg \lg n}$ grows faster than each $(\lg n)^k$, since for $n > 2^{k+1}$ the ratio $(\lg n)^{\lg n} / (\lg n)^k = (\lg n)^{\lg n - k}$ is at least $\lg n$, which grows without bound. It is *quasi-polynomial*, see [quasi-polynomial time](/quasi-polynomial-time/).
-- Non-example: $2^{\sqrt{\lg n}}$ is not polylogarithmic. Its logarithm is $\sqrt{\lg n}$, and the logarithm of $c(\lg n)^k$ is $\lg c + k \lg \lg n$, which grows more slowly.
-- Non-example: a time that is $\Theta(\log N)$ in the *value* $N$ of the input is linear in the length $b \approx \lg N$ of the input. The input size of an integer $N$ is $b \approx \lg N$ bits, so a time of $\log N$ steps is $\Theta(b)$ and not polylogarithmic in $b$. Fast exponentiation takes $O(\log e)$ multiplications for the exponent $e$, which is linear in the number of bits of $e$.
+- **Binary search**, $k = 1$. A search in a sorted array makes at most $\lfloor \lg n \rfloor + 1$ comparisons, which is 20 for $n = 10^6$. See [binary search](/binary-search/).
+- **Balanced trees and heaps**, $k = 1$. Search, insertion and deletion in an [AVL tree](/avl-tree/), and insertion in a [binary heap](/binary-heap/), take $O(\log n)$ worst-case time for $n$ stored items.
+- **Range trees**, $k = 2$. A two-dimensional range tree on $n$ points in the plane counts the points in an axis-parallel rectangle in $O(\lg^2 n)$ worst-case time, by a search over $O(\log n)$ canonical nodes of the first tree, each followed by a binary search of $O(\log n)$ steps in a sorted array of $y$-coordinates stored at that node. To report the points, the time is $O(\lg^2 n + r)$ for $r$ reported points (de Berg et al., Chapter 5), which is not polylogarithmic when $r$ is large.
+- **A two-dimensional [Fenwick tree](/fenwick-tree/)**, $k = 2$. On an $N \times N$ grid, a prefix-sum query or a point update visits at most $\lfloor \lg N \rfloor + 1$ indices in each coordinate, so at most $(\lfloor \lg N \rfloor + 1)^2$ cells.
+- **Parallel time.** The sum of $n$ numbers takes $\lceil \lg n \rceil$ rounds when each round adds the numbers in pairs, in parallel, with $\lfloor n/2 \rfloor$ processors in the first round. For $n = 10^6$ this is 20 rounds. The parallel time is $O(\log n)$, while the total work is $n - 1$ additions.
+- Non-example: $\sqrt{n}$, or $n^{\varepsilon}$ for a constant $\varepsilon > 0$. These are sublinear and not polylogarithmic, by the claim above.
+- Non-example: $n / \lg n$. It is sublinear, but $(n/\lg n)/(\lg n)^k = n / (\lg n)^{k+1} \to \infty$ for each $k$.
+- Non-example: $(\lg n)^{\lg n} = n^{\lg \lg n}$. For $n > 2^{k+1}$ the ratio $(\lg n)^{\lg n}/(\lg n)^k = (\lg n)^{\lg n - k}$ is at least $\lg n$, because $\lg n - k > 1$ and $\lg n > 1$, and $\lg n$ grows without bound. It is [quasi-polynomial](/quasi-polynomial-time/).
+- Non-example: $2^{\sqrt{\lg n}}$. Its logarithm is $\sqrt{\lg n}$, while the logarithm of $c(\lg n)^k$ is $\lg c + k \lg \lg n$, and $\sqrt{\lg n} - k \lg \lg n \to \infty$.
+- Non-example: a time of $\Theta(\log N)$ steps on an input integer $N$. The input size is $\beta = \lfloor \lg N \rfloor + 1$ bits, so this time is $\Theta(\beta)$, linear in the input size and not polylogarithmic in it. Fast exponentiation with $O(\log e)$ multiplications is linear in the length of the exponent $e$. Confusing the value with the length is the same error that turns a [pseudo-polynomial](/pseudo-polynomial-time/) time into a false claim of polynomial time.
 
-### A polylogarithm is not small for a small input
+### A polylogarithm is not small for every input
 
-Constants and exponents matter for the input sizes of practice. At $n = 2^{16} = 65536$, $\lg^2 n = 256 = \sqrt n$. Let $\ell = \lg n$. Then $\sqrt{n} / \lg^2 n = 2^{\ell/2} / \ell^2$, and the logarithm of this ratio increases when $\ell > 4/\ln 2 \approx 5.77$. The ratio is 1 at $\ell = 16$, so $\lg^2 n < \sqrt n$ for each $n > 2^{16}$. For $n = 2^{20}$ the values are $\lg n = 20$, $\lg^2 n = 400$, $\lg^3 n = 8000$ and $\sqrt n = 1024$, so $\lg^3 n$ is still larger than $\sqrt n$. Asymptotic notation says nothing about a fixed $n$.
+Asymptotic notation says nothing about a fixed $n$. Let $\ell = \lg n$.
+
+| $\ell = \lg n$ | $\lg^2 n$ | $\lg^3 n$ | $\sqrt n$ |
+| --- | --- | --- | --- |
+| 10 | 100 | 1000 | 32 |
+| 16 | 256 | 4096 | 256 |
+| 20 | 400 | 8000 | 1024 |
+| 30 | 900 | 27000 | 32768 |
+
+The ratio $\sqrt n / \lg^2 n = 2^{\ell/2}/\ell^2$ has logarithm $\ell/2 - 2\lg \ell$, whose derivative $1/2 - 2/(\ell \ln 2)$ is positive for $\ell > 4/\ln 2 \approx 5.77$. The ratio is 1 at $\ell = 16$, so $\lg^2 n < \sqrt n$ for each $n > 2^{16} = 65536$. The same computation with $\lg^3 n$ gives the derivative $1/2 - 3/(\ell \ln 2)$, positive for $\ell > 8.66$, and the first integer $\ell$ with $\ell^3 < 2^{\ell/2}$ is 30. So $\lg^3 n < \sqrt n$ only for $n \ge 2^{30}$, about $1.07 \times 10^9$. An $O(\lg^3 n)$ algorithm is not faster than an $O(\sqrt n)$ one on every input of practice, even with equal constants.
 
 ## Related definitions
 
 - [Constant time](/constant-time/) is $O(1)$, the case $k = 0$. [Logarithmic time](/logarithmic-time/) is $O(\log n)$, the case $k = 1$.
-- [Sublinear time](/sublinear-time/) is $o(n)$ and contains polylogarithmic time. [Polynomial time](/polynomial-time/) is $O(n^k)$ and contains it too.
-- The class $\mathrm{NC}$ is the set of problems that are solvable in polylogarithmic *parallel* time with polynomially many processors, in the following circuit form. For $k \ge 1$, $\mathrm{NC}^k$ is the class of decision problems that uniform families of Boolean circuits decide, with fan-in 2, size polynomial in $n$ and depth $O((\log n)^k)$. The class $\mathrm{NC}$ is the union of $\mathrm{NC}^k$ over $k$. It is contained in [P](/p/). It is open whether the two are equal. See [NC](/nc/) and the class P in [polynomial time](/polynomial-time/).
+- [Sublinear time](/sublinear-time/) is $o(n)$ and contains polylogarithmic time. [Polynomial time](/polynomial-time/) is $O(n^k)$ and also contains it.
+- The [iterated logarithm](/iterated-logarithm/) $\lg^* n$ and the [inverse Ackermann function](/inverse-ackermann-function/) $\alpha(n)$ grow more slowly than $\lg \lg n$. Both are $O(\log n)$, so both are polylogarithmic.
+- $\mathrm{NC}^k$, for $k \ge 1$, is the class of decision problems decided by uniform families of Boolean circuits with fan-in 2, size polynomial in $n$ and depth $O((\log n)^k)$. The class [NC](/nc/) is the union of the $\mathrm{NC}^k$. Its problems are solved in polylogarithmic *parallel* time with polynomially many processors. It is contained in [P](/p/), and whether $\mathrm{NC} = \mathrm{P}$ is open (Papadimitriou, Chapter 15; Arora and Barak, Chapter 6).
 - [Common growth rates](/common-growth-rates/) places the polylogarithmic functions between the constants and the powers of $n$.
 
 ## References

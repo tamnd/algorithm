@@ -14,16 +14,13 @@ see_also: [harmonic-series, arithmetic-series, geometric-series, stirling-approx
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Appendix A, Summations (approximation by integrals)
+    locator: Appendix A, Section A.2, Bounding summations (the subsection on approximation by integrals)
   - book: isbn:9780201896831
     title: Donald E. Knuth, The Art of Computer Programming, Volume 1, third edition
     locator: Section 1.2.11.2, Euler's summation formula
   - book: isbn:9780201558029
     title: Graham, Knuth and Patashnik, Concrete Mathematics, second edition
-    locator: Chapter 9, Asymptotics (Euler's summation formula)
-  - book: isbn:9780321573513
-    title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
-    locator: Section 1.4, Analysis of Algorithms (approximating sums by integrals)
+    locator: Section 2.5, General methods (the method of replacing sums by integrals); Section 9.5, Euler's summation formula
 ---
 
 Integral bounds for sums is a technique that bounds a sum $\sum_{k=a}^{b} f(k)$ of a monotone function $f$ by the integral $\int_a^b f(x)\,dx$ plus or minus an end term. It turns a sum with no closed form into an integral that you can compute, and it gives the order of growth of the sum, often with its leading constant. It proves that the [harmonic series](/harmonic-series/) is $\Theta(\log n)$, that $\sum k^p = \Theta(n^{p+1})$, and that $\lg n! = n\lg n - O(n)$.
@@ -90,7 +87,16 @@ So $\sum k\ln k \sim \frac{n^2}{2}\ln n$. For $n = 100$: $20\,526 \le 20\,757 \l
 
 **Concave and convex functions.** Let $f$ be concave on $[a - \frac12, b + \frac12]$. Then $$ \int_{a-1/2}^{b+1/2} f(x)\,dx \;\le\; \sum_{k=a}^{b} f(k) \;\le\; \int_a^b f(x)\,dx + \frac{f(a) + f(b)}{2}. $$ The first inequality comes from the tangent line at $k$, which lies above $f$, so $\int_{k-1/2}^{k+1/2} f \le f(k)$ (the tangent has the value $f(k)$ at the middle of the interval, and its slope term integrates to 0). The second comes from the chord: $\int_k^{k+1} f \ge \frac12(f(k) + f(k+1))$, and the sum of these over $k = a, \ldots, b-1$ gives it. For convex $f$ both inequalities reverse. For $f = \ln$ and $a = 1$, $b = n$ these are $\ln n! \le n\ln n - n + 1 + \frac12\ln n$ and $\ln n! \ge \int_{1/2}^{n+1/2}\ln x\,dx$. For $n = 10$ the bounds are $15.036 \le \ln 10! = 15.104 \le 15.177$. The proof of the upper bound on the page of [Stirling's approximation](/stirling-approximation/) is this chord argument.
 
-**Euler-Maclaurin summation.** The formula of [Euler and Maclaurin](/euler-maclaurin-formula/) writes $\sum_{k=a}^b f(k)$ as $\int_a^b f$ plus $\frac12(f(a) + f(b))$ plus a series of terms with the derivatives of $f$ at the ends, and an exact remainder. It gives as many terms as you need, for example the expansion of $H_n$ and the constant $\gamma$. See Knuth, Volume 1, Section 1.2.11.2, and Concrete Mathematics, Chapter 9.
+**The constant term.** The theorem leaves an error of up to one end term. For a decreasing function the error has a limit, and this gives a constant term and an error of size $f(n)$. Let $f \ge 0$ be non-increasing on $[1, \infty)$, and let
+$$ D_n = \sum_{k=1}^{n} f(k) - \int_1^n f(x)\,dx. $$
+Then $D_n$ converges to a limit $C$, and $0 \le D_n - C \le f(n)$ for each $n \ge 1$. So
+$$ \sum_{k=1}^{n} f(k) = \int_1^n f(x)\,dx + C + O(f(n)). $$
+
+*Proof.* $D_n - D_{n+1} = \int_n^{n+1} f - f(n+1)$. On $[n, n+1]$ we have $f(n+1) \le f(x) \le f(n)$, so $0 \le D_n - D_{n+1} \le f(n) - f(n+1)$. Thus $D_n$ is non-increasing. By the theorem, $D_n \ge f(n) \ge 0$, so $D_n$ is bounded below and converges to some $C$. Then $D_n - C = \sum_{m \ge n} (D_m - D_{m+1})$, a sum of non-negative terms, and it is at most $\sum_{m \ge n} (f(m) - f(m+1)) = f(n) - \lim_{m\to\infty} f(m) \le f(n)$, because the sum telescopes. $\square$
+
+For $f = 1/x$ the limit is Euler's constant $\gamma$, and the result is $0 \le H_n - \ln n - \gamma \le 1/n$, which is $H_n = \ln n + \gamma + O(1/n)$. For $f = x^{-1/2}$ it gives $\sum_{k=1}^n k^{-1/2} = 2\sqrt n + C' + O(n^{-1/2})$, where $C' = C - 2 = \zeta(\tfrac12) = -1.46035\ldots$. At $n = 100$ the gap $D_n - C$ is $0.04996$, within the bound $f(100) = 0.1$. For a convex $f$ the gap is close to $\frac12 f(n)$, as the trapezoid comparison of the next variation suggests. The proof does not give the value of $C$. That needs another argument, such as the Wallis product for the constant $\sqrt{2\pi}$ of Stirling's formula.
+
+**Euler-Maclaurin summation.** The formula of [Euler and Maclaurin](/euler-maclaurin-formula/) writes $\sum_{k=a}^b f(k)$ as $\int_a^b f$ plus $\frac12(f(a) + f(b))$ plus a series of terms with the derivatives of $f$ at the ends, and an exact remainder. It gives as many terms as you need, for example the expansion of $H_n$ and the constant $\gamma$. See Knuth, Volume 1, Section 1.2.11.2, and Concrete Mathematics, Section 9.5.
 
 **Functions with a turning point.** If $f$ is increasing on $[a, c]$ and decreasing on $[c, b]$ for an integer $c$, apply the theorem to each piece. The sum over $[a, b]$ is the sum over the pieces, with the term $f(c)$ counted once. The error is at most the sum of the end terms of the pieces.
 
@@ -101,6 +107,7 @@ So $\sum k\ln k \sim \frac{n^2}{2}\ln n$. For $n = 100$: $20\,526 \le 20\,757 \l
 - **Wrong end terms.** The decreasing case has $f(b)$ at the bottom and $f(a)$ at the top, and the increasing case has them the other way. A sketch with two bars catches the swap. Another common slip is the limits of the integral: the form above uses $\int_a^b$ with the end terms added, while the form $\int_{a-1}^{b}$ and $\int_a^{b+1}$ has no end terms but needs $f$ outside $[a, b]$.
 - **The error is not small when the terms grow fast.** For $f(k) = 2^k$ and $n = 10$ the bounds are $1476$ and $2498$, while the sum is $2046$. The bounds are correct, but they are loose, because the last term is half of the sum.
 - **Mixing a bound with an asymptotic form.** The theorem gives a bound for each $n$ with explicit constants. A statement like $\sum k^p \sim n^{p+1}/(p+1)$ is true for every $p > -1$, but it needs the argument that the end term is $o(n^{p+1})$.
+- **A constant that is not computed.** The constant-term variation proves that $C$ exists but does not say what it is. Writing $H_n = \ln n + O(1)$ is safe; writing a value for $C$ needs a separate proof or a source.
 - **Constants from the base of the logarithm.** The integral of $\lg x$ has the factor $\lg e = 1/\ln 2$. With $\ln$ the formula is $n\ln n - n + 1$. Use one base throughout.
 
 ## Exercises
