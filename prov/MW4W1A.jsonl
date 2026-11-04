@@ -1,1 +1,2 @@
 {"author":"tamnd","date":"2026-11-03","file":"*","op":"create","sources":[]}
+{"date":"2026-11-04","file":"node.md","op":"edit","hash":"sha256:adc1fd57fdac607b74b22226107829b82e35d57ba65c993d5cd006876c8d1b04","author":{"agent":"writer","models":["claude:sonnet","claude:opus"],"harness":"algorithm-work/prompts/foundations-brief.md"},"audit":"claude:opus","reviewer":"tamnd","note":"full page, fixed after the audit and checked by a second audit","sources":[]}
