@@ -1,0 +1,23 @@
+---
+title: The rope operations keep the invariant and compute concatenation, split and indexing
+proves: [correctness]
+status: full
+---
+
+We use the representation, the invariant (R1) and (R2), and the pseudocode of the page. Write $h(\text{NIL}) = -1$ and $len(\text{NIL}) = 0$, and $text(\text{NIL}) = \varepsilon$.
+
+**Lemma 1 (rotations).** Let $u$ be a node whose children are balanced trees (each satisfies (R1) and (R2)) with heights differing by at most 2. Then BALANCE($u$) returns a tree satisfying (R1) and (R2) with the same text, whose height is $h(u)$ or $h(u) - 1$.
+
+*Proof.* NODE computes $len$ and $h$ from the children, so (R1) holds for every node that BALANCE builds. A rotation replaces $((A\,B)\,C)$ by $(A\,(B\,C))$ or the reverse, which keeps the left-to-right order of the subtrees $A, B, C$, so the text is the same. The rest is the standard case analysis of AVL rebalancing after an insertion: if the taller child, say the left one with height $k + 2$ against $k$ for the right, has its left child of height $k + 1$, one right rotation gives children of heights $k + 1$ and $k + 1$ or $k + 2$ at the root, with all lower nodes balanced; if its left child has height $k$ and its right child height $k + 1$, the double rotation gives a root with children of heights $k + 1$ and $k + 1$. If the children of $u$ differ by at most 1, BALANCE returns $u$. $\square$
+
+**Lemma 2 (CONCAT).** If $a$ and $b$ satisfy (R1) and (R2), CONCAT($a$, $b$) returns a tree $c$ that satisfies (R1) and (R2), with $text(c) = text(a) \cdot text(b)$ and $\max(h(a), h(b)) \le h(c) \le \max(h(a), h(b)) + 1$, unless one of them is NIL, in which case $c$ is the other one.
+
+*Proof.* By induction on $\lvert h(a) - h(b) \rvert$. Line L5 is clear. In line L6, the new node is balanced and has height $\max + 1$. (Merging two leaves into one leaf when their total length is at most $L$ is also correct: the text is the concatenation, and the height 0 is the maximum.) In line L7, $h(a) \ge h(b) + 2$, so $a$ is an inner node, and $h(a.right) \ge h(a) - 2 \ge h(b)$; the difference $h(a.right) - h(b)$ is smaller than $h(a) - h(b)$, so by the induction hypothesis $c' = $ CONCAT($a.right$, $b$) is balanced, has text $text(a.right) \cdot text(b)$, and has height $h(a.right)$ or $h(a.right) + 1$. Since $h(a.left) \in \{h(a) - 2, h(a) - 1\}$ and $h(a.right) \in \{h(a) - 2, h(a) - 1\}$, the heights of $a.left$ and $c'$ differ by at most 2, and Lemma 1 applies. The text of NODE($a.left$, $c'$) is $text(a.left) \cdot text(a.right) \cdot text(b) = text(a) \cdot text(b)$. Its height is $1 + \max(h(a.left), h(c')) \le h(a) + 1$ and at least $h(a)$, and BALANCE lowers it by at most 1 only when the node was unbalanced, which can happen only when $h(c') = h(a)$, so the result has height at least $h(a)$. Line L8 is symmetric. $\square$
+
+**Lemma 3 (SPLIT).** If $t$ satisfies (R1) and (R2) and $0 \le i \le len(t)$, SPLIT($t$, $i$) returns $(x, y)$, both satisfying (R1) and (R2), with $text(x) = text(t)[0 .. i-1]$ and $text(y) = text(t)[i ..]$.
+
+*Proof.* By induction on the height of $t$. For a leaf, line L9 cuts its string; the pieces are nonempty or dropped as NIL, and shorter than $L$, so (R1) holds. For an inner node with $i \le len(t.left)$, the induction hypothesis splits $text(t.left)$ into $text(x)$ and $text(y)$ at $i$, and by Lemma 2, CONCAT($y$, $t.right$) is balanced with text $text(t.left)[i ..] \cdot text(t.right) = text(t)[i ..]$. The case $i > len(t.left)$ is symmetric, with the offset $i - len(t.left)$ into $t.right$, which is in range since $i \le len(t)$. $\square$
+
+**CHAR-AT.** The loop keeps the claim that the answer is character $i$ of $text(t)$ and $0 \le i < len(t)$. If $i < len(t.left)$, character $i$ of $text(t) = text(t.left) \cdot text(t.right)$ is character $i$ of $text(t.left)$; otherwise it is character $i - len(t.left)$ of $text(t.right)$, which is less than $len(t.right)$. By (R1) the stored lengths are correct. At a leaf, line L4 returns the character. The loop ends because the depth decreases.
+
+**INSERT and DELETE.** By Lemma 3, line L12 gives $x$ and $y$ with $text(x) \cdot text(y) = text(t)$ split at $i$; BUILD($s$) is a perfectly balanced tree, where the two halves of each node differ by at most one leaf and so their heights differ by at most 1, with leaves of length at most $L$; and by Lemma 2 the two concatenations give a balanced tree with text $text(t)[0 .. i-1] \cdot s \cdot text(t)[i ..]$. For DELETE, the two splits give $x$ with the first $i$ characters and $z$ with the characters from position $j$ on, and line L15 joins them. No operation modifies an existing node, so all earlier ropes keep their texts. $\blacksquare$
