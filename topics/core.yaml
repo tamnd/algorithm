@@ -1,0 +1,1039 @@
+# The core of spec 16.3: the items that two or more of the eight references cover.
+# The refs come from the tables of contents of the references. Each row needs a review (#14).
+
+- node: WR8F9R  # determinant
+  refs: [clrs4, skiena3]
+- node: 82ZZ65  # gaussian-elimination
+  refs: [clrs4, skiena3, cpalgo, usaco]
+- node: EH2SQ6  # lu-decomposition
+  refs: [clrs4, skiena3]
+- node: Q52APH  # matrix-inversion
+  refs: [clrs4, skiena3, cpalgo]
+- node: S0VPP8  # pivot
+  refs: [clrs4, erickson]
+- node: FSB95K  # rank
+  refs: [clrs4, sw4, cpalgo]
+- node: T1ZDPN  # convolution
+  refs: [clrs4, kt, skiena3]
+- node: 6GT3DW  # discrete-fourier-transform
+  refs: [clrs4, kt, skiena3, cpalgo]
+- node: 14CJHC  # fast-fourier-transform
+  refs: [clrs4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 7AWXWS  # number-theoretic-transform
+  refs: [clrs4, cpalgo]
+- node: 99C52W  # roots-of-unity
+  refs: [clrs4, kt, dpv]
+- node: 22K1SK  # fibonacci-numbers
+  refs: [clrs4, sw4, erickson, dpv, skiena3, cpalgo]
+- node: RZA6ZT  # integer-addition
+  refs: [clrs4, dpv]
+- node: QWY1MV  # karatsuba-multiplication
+  refs: [kt, erickson, dpv, skiena3, cpalgo]
+- node: ANVYVS  # russian-peasant-multiplication
+  refs: [erickson, dpv]
+- node: 7VTRV2  # schoolbook-multiplication
+  refs: [kt, erickson]
+- node: HAD331  # boolean-matrix-multiplication
+  refs: [clrs4, skiena3]
+- node: VTJXE5  # matrix-exponentiation
+  refs: [cpalgo, usaco]
+- node: F9X6P7  # naive-matrix-multiplication
+  refs: [clrs4, dpv, skiena3]
+- node: MZ8PBV  # strassen-algorithm
+  refs: [clrs4, kt, erickson, dpv, skiena3]
+- node: Q4JJ5P  # evaluation-interpolation-paradigm
+  refs: [kt, dpv]
+- node: WT2CHV  # fft-polynomial-multiplication
+  refs: [clrs4, cpalgo]
+- node: 947TVN  # horner-rule
+  refs: [clrs4, sw4, cpalgo]
+- node: YDJRCM  # polynomial-multiplication
+  refs: [clrs4, kt, erickson, dpv, usaco]
+- node: FMBMA1  # approximation-ratio
+  refs: [clrs4, erickson, skiena3]
+- node: JHS8TD  # fptas
+  refs: [clrs4, dpv, skiena3]
+- node: JZX9QJ  # ptas
+  refs: [clrs4, kt, erickson, dpv]
+- node: 4ZVTP9  # bin-packing
+  refs: [clrs4, skiena3]
+- node: FMYANK  # gonzalez-k-center
+  refs: [kt, erickson, dpv]
+- node: YWN3V4  # greedy-set-cover
+  refs: [clrs4, kt, erickson, dpv]
+- node: VJB6HH  # set-cover
+  refs: [clrs4, kt, erickson, dpv, skiena3]
+- node: EV36V3  # set-packing
+  refs: [kt, skiena3]
+- node: 34AFV7  # vertex-cover
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo]
+- node: MQCR0W  # vertex-cover-2-approximation
+  refs: [erickson, dpv, skiena3]
+- node: N0K1CG  # randomized-rounding
+  refs: [kt, erickson]
+- node: 5MX7DT  # makespan-minimization
+  refs: [kt, skiena3]
+- node: D732GH  # precedence-constrained-scheduling
+  refs: [sw4, skiena3]
+- node: YCHD4S  # metric-tsp
+  refs: [clrs4, dpv]
+- node: MBRBPG  # deterministic-finite-automaton
+  refs: [clrs4, sw4]
+- node: N6FNJ0  # dependency-pairs
+  refs: [cpalgo, usaco]
+- node: H9NYNK  # term-matching
+  refs: [kt, skiena3]
+- node: V7ZEFS  # pairwise-sequence-alignment
+  refs: [clrs4, kt]
+- node: 9YQ387  # binomial-coefficient
+  refs: [clrs4, skiena3, cpalgo, usaco]
+- node: QNA5R4  # burnside-lemma
+  refs: [cpalgo, usaco]
+- node: PY07JM  # catalan-numbers
+  refs: [clrs4, cpalgo, usaco]
+- node: WEMZ6K  # counting-lattice-paths
+  refs: [cpalgo, usaco]
+- node: MV23GB  # counting-problem
+  refs: [clrs4, usaco]
+- node: B2YNWT  # inclusion-exclusion-principle
+  refs: [clrs4, cpalgo, usaco]
+- node: RACQ8D  # pascal-triangle-dp
+  refs: [sw4, cpalgo]
+- node: 915W1R  # stars-and-bars
+  refs: [cpalgo, usaco]
+- node: RBNB5G  # brute-force-search
+  refs: [kt, dpv, skiena3, usaco]
+- node: 9TN7DN  # k-subset-enumeration
+  refs: [skiena3, cpalgo]
+- node: 0TS6SH  # power-set-enumeration
+  refs: [clrs4, skiena3, usaco]
+- node: RN20CX  # set-partitions
+  refs: [clrs4, skiena3]
+- node: MZ3GWV  # generating-all-permutations
+  refs: [skiena3, cpalgo]
+- node: AEJSBV  # heaps-algorithm
+  refs: [kt, skiena3]
+- node: 043TAT  # permutation-ranking
+  refs: [skiena3, cpalgo]
+- node: DYWN8S  # gray-code
+  refs: [erickson, skiena3, cpalgo]
+- node: RFB7M7  # co-np
+  refs: [clrs4, kt, dpv]
+- node: 2GXX9T  # np
+  refs: [clrs4, sw4, kt, dpv, skiena3]
+- node: G1SRVV  # p
+  refs: [clrs4, sw4, kt, dpv, skiena3]
+- node: VZ3B4A  # p-versus-np-problem
+  refs: [clrs4, sw4, kt, dpv, skiena3]
+- node: DWXYHV  # certificate
+  refs: [clrs4, kt]
+- node: W2EZWK  # cook-levin-theorem
+  refs: [sw4, kt, erickson, dpv, skiena3]
+- node: 48RQSB  # decision-problem
+  refs: [clrs4, skiena3]
+- node: B4BYY2  # np-complete
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: TJETK7  # np-hard
+  refs: [clrs4, erickson, dpv, skiena3]
+- node: 2B3896  # partition-problem
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: GA9ZR6  # pseudo-polynomial-time
+  refs: [kt, dpv]
+- node: PFB9XG  # subset-sum-problem
+  refs: [clrs4, kt, erickson, dpv, skiena3]
+- node: BP7SAV  # three-dimensional-matching
+  refs: [kt, dpv]
+- node: Z77TSA  # circuit-sat
+  refs: [clrs4, kt, erickson]
+- node: 5W5X6B  # clique-problem
+  refs: [clrs4, kt, erickson, dpv, skiena3]
+- node: W1RSQ7  # np-completeness-proof
+  refs: [clrs4, kt]
+- node: TPB4FR  # polynomial-time-reduction
+  refs: [clrs4, kt, erickson]
+- node: NS3NNE  # search-problem
+  refs: [clrs4, sw4, dpv, usaco]
+- node: 2BH6WA  # lzw
+  refs: [sw4, skiena3]
+- node: 06ZXXT  # huffman-coding
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: DRHZ6Y  # lossless-compression
+  refs: [clrs4, sw4]
+- node: 8V9YWA  # optimal-prefix-code
+  refs: [sw4, kt]
+- node: M6D811  # prefix-code
+  refs: [clrs4, sw4, kt, erickson, dpv]
+- node: A13CS0  # shannon-entropy
+  refs: [sw4, dpv]
+- node: VWBGTF  # berlekamp-massey
+  refs: [cpalgo, usaco]
+- node: HVMPK2  # cryptographic-hash-function
+  refs: [clrs4, sw4]
+- node: 47QEE6  # public-key-cryptography
+  refs: [clrs4, dpv]
+- node: D5K7RQ  # rsa-cryptosystem
+  refs: [clrs4, dpv, skiena3]
+- node: NK90JR  # balanced-binary-search-tree
+  refs: [clrs4, skiena3]
+- node: 47AZT5  # implicit-treap
+  refs: [cpalgo, usaco]
+- node: S2AJN7  # order-statistic-tree
+  refs: [clrs4, sw4]
+- node: 6S4865  # red-black-height-theorem
+  refs: [clrs4, sw4]
+- node: WQME6V  # red-black-tree
+  refs: [clrs4, sw4, skiena3]
+- node: S6DS4V  # treap
+  refs: [clrs4, erickson, usaco]
+- node: ZNK1BM  # tree-rotation
+  refs: [clrs4, sw4, erickson]
+- node: 0AZZFQ  # two-three-four-tree
+  refs: [clrs4, sw4]
+- node: 6TK8B6  # disjoint-set
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: B24A25  # disjoint-set-forest
+  refs: [clrs4, kt]
+- node: JWK9ZR  # dynamic-equivalence-problem
+  refs: [cpalgo, usaco]
+- node: R1127H  # equivalence-relation
+  refs: [clrs4, sw4]
+- node: 41H33R  # path-compression
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: E7GCG2  # quick-find
+  refs: [sw4, kt]
+- node: 2KJSKH  # union-by-rank
+  refs: [clrs4, sw4, erickson, dpv, skiena3, cpalgo]
+- node: DQPSA5  # union-by-size
+  refs: [clrs4, sw4, kt, usaco]
+- node: 5XSYZ5  # union-find-amortized-bound
+  refs: [clrs4, sw4]
+- node: NA7JW5  # b-epsilon-tree
+  refs: [clrs4, sw4, skiena3]
+- node: FHYWMC  # cuckoo-hashing
+  refs: [erickson, skiena3]
+- node: P48ZRM  # dictionary
+  refs: [clrs4, sw4, kt, erickson, skiena3, usaco]
+- node: 86006N  # dictionary-problem
+  refs: [clrs4, sw4]
+- node: A1WGV6  # division-method
+  refs: [clrs4, sw4, dpv]
+- node: PMZJW6  # double-hashing
+  refs: [clrs4, sw4]
+- node: D6GPVW  # hash-collision
+  refs: [clrs4, sw4, usaco]
+- node: DWJMXJ  # hash-function
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: 42GYZ4  # hash-table
+  refs: [clrs4, sw4, erickson, dpv, skiena3, usaco]
+- node: J1RWHQ  # linear-probing
+  refs: [clrs4, sw4]
+- node: X9QTNE  # load-factor
+  refs: [clrs4, sw4]
+- node: 5V7ZTB  # open-addressing
+  refs: [clrs4, erickson, skiena3]
+- node: 5SAP5S  # perfect-hashing
+  refs: [clrs4, erickson, skiena3]
+- node: JCNE9N  # separate-chaining
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: 7DQ08F  # uniform-hashing-assumption
+  refs: [clrs4, sw4]
+- node: YF8AZR  # universal-hashing
+  refs: [clrs4, kt, erickson, dpv, skiena3]
+- node: 1QKQ6A  # binary-heap
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: A5XZ80  # binomial-heap
+  refs: [sw4, skiena3]
+- node: Y99BAR  # d-ary-heap
+  refs: [clrs4, sw4, dpv]
+- node: 1EX9SR  # fibonacci-heap
+  refs: [sw4, erickson, skiena3]
+- node: ADHNWH  # floyd-heap-construction
+  refs: [clrs4, skiena3]
+- node: FPZBHW  # heap-construction
+  refs: [sw4, skiena3]
+- node: 8EXHCW  # heap-property
+  refs: [clrs4, sw4]
+- node: QQ610A  # indexed-priority-queue
+  refs: [sw4, kt]
+- node: ND3TVB  # priority-queue
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, usaco]
+- node: MFM3MX  # sift-down
+  refs: [clrs4, kt, skiena3]
+- node: 9J3JJD  # sift-up
+  refs: [clrs4, sw4, kt]
+- node: 43DJ9Z  # array
+  refs: [clrs4, sw4, kt, skiena3, usaco]
+- node: 1YYTP9  # balanced-parentheses
+  refs: [sw4, cpalgo]
+- node: 49QBMA  # deque
+  refs: [clrs4, sw4, usaco]
+- node: B9V487  # doubly-linked-list
+  refs: [clrs4, sw4, kt]
+- node: 9C8NGV  # dynamic-array
+  refs: [clrs4, erickson, skiena3, usaco]
+- node: WJYZSF  # floyd-cycle-detection
+  refs: [sw4, erickson, dpv, usaco]
+- node: T5ZQ6T  # list-access-problem
+  refs: [clrs4, skiena3]
+- node: 0ZSAES  # pointer
+  refs: [clrs4, sw4]
+- node: Q8RNN3  # queue
+  refs: [clrs4, sw4, kt, dpv, skiena3, usaco]
+- node: QXYA7A  # singly-linked-list
+  refs: [clrs4, sw4, kt, skiena3]
+- node: AEN74Z  # stack
+  refs: [clrs4, sw4, kt, skiena3, usaco]
+- node: KB52KZ  # persistent-segment-tree
+  refs: [cpalgo, usaco]
+- node: 3RBEYS  # bloom-filter
+  refs: [erickson, skiena3]
+- node: 6P1XHV  # dynamic-segment-tree
+  refs: [cpalgo, usaco]
+- node: T604D3  # fenwick-tree
+  refs: [cpalgo, usaco]
+- node: 8H8C9B  # interval-tree
+  refs: [clrs4, sw4]
+- node: 8PYVZ2  # lazy-propagation
+  refs: [cpalgo, usaco]
+- node: E3PVVE  # li-chao-tree
+  refs: [cpalgo, usaco]
+- node: 8KPVMD  # merge-sort-tree
+  refs: [cpalgo, usaco]
+- node: S9FYEP  # mo-algorithm
+  refs: [cpalgo, usaco]
+- node: R1WX72  # offline-query-processing
+  refs: [clrs4, usaco]
+- node: 5JQDTK  # range-minimum-query
+  refs: [cpalgo, usaco]
+- node: 7TXX03  # range-update-range-query
+  refs: [cpalgo, usaco]
+- node: P50MYS  # segment-tree
+  refs: [cpalgo, usaco]
+- node: VSD7FB  # sparse-table
+  refs: [cpalgo, usaco]
+- node: GE30M9  # square-root-decomposition
+  refs: [cpalgo, usaco]
+- node: RNZB8E  # two-dimensional-fenwick-tree
+  refs: [cpalgo, usaco]
+- node: QYYQT1  # two-dimensional-segment-tree
+  refs: [cpalgo, usaco]
+- node: MBF8HP  # binary-search-tree
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: RSMQKE  # bst-deletion
+  refs: [clrs4, sw4, skiena3]
+- node: 82JNAM  # bst-insertion
+  refs: [clrs4, sw4, skiena3]
+- node: EJR7Z3  # bst-search
+  refs: [clrs4, skiena3]
+- node: ZDXZ6S  # random-bst-expected-depth
+  refs: [clrs4, sw4]
+- node: XYVYKG  # skip-list
+  refs: [erickson, skiena3]
+- node: MX6QFK  # splay-tree
+  refs: [erickson, skiena3]
+- node: SJRBA7  # trie
+  refs: [sw4, skiena3, cpalgo, usaco]
+- node: 6G48XR  # bit-vector
+  refs: [clrs4, skiena3]
+- node: D9N3VE  # total-order
+  refs: [clrs4, sw4]
+- node: QPNA4W  # accounting-method
+  refs: [clrs4, erickson]
+- node: XAF6YT  # aggregate-method
+  refs: [clrs4, erickson]
+- node: W2TG3Y  # amortized-cost
+  refs: [clrs4, sw4, erickson]
+- node: Q7GMPG  # binary-counter-increment
+  refs: [clrs4, erickson]
+- node: 8R7E9B  # potential-function
+  refs: [clrs4, kt, erickson]
+- node: 888KHH  # stack-with-multipop
+  refs: [clrs4, erickson]
+- node: M3HCCH  # ackermann-function
+  refs: [clrs4, sw4]
+- node: 2Y3JCH  # arithmetic-series
+  refs: [clrs4, skiena3]
+- node: 8ASYMP  # asymptotic-notation
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: D3C8ZM  # geometric-series
+  refs: [clrs4, erickson, skiena3]
+- node: 42DC3Z  # harmonic-series
+  refs: [clrs4, skiena3]
+- node: B9R0C1  # inverse-ackermann-function
+  refs: [clrs4, sw4, kt, erickson]
+- node: 44165W  # iterated-logarithm
+  refs: [clrs4, dpv, skiena3]
+- node: CBSPT6  # logarithms
+  refs: [clrs4, skiena3]
+- node: 2YCV99  # order-of-growth
+  refs: [clrs4, sw4, skiena3]
+- node: 94GGN6  # tilde-notation
+  refs: [clrs4, sw4]
+- node: 1H3ZJ5  # time-complexity
+  refs: [clrs4, sw4, erickson, usaco]
+- node: B5285R  # worst-case-analysis
+  refs: [clrs4, kt]
+- node: R0YK57  # induction
+  refs: [clrs4, erickson]
+- node: GAZPHR  # proof-by-contradiction
+  refs: [kt, skiena3]
+- node: HPJEPD  # decision-tree-method
+  refs: [sw4, erickson]
+- node: 30GVXH  # element-distinctness
+  refs: [sw4, skiena3]
+- node: 8HFM94  # random-access-machine
+  refs: [clrs4, skiena3]
+- node: XWP8SM  # turing-machine
+  refs: [kt, erickson]
+- node: NMTCKZ  # average-case-analysis
+  refs: [clrs4, sw4]
+- node: 8V5HQT  # balls-into-bins
+  refs: [clrs4, skiena3]
+- node: MXGQM4  # binomial-distribution
+  refs: [clrs4, sw4]
+- node: ZWA9KR  # birthday-paradox
+  refs: [clrs4, erickson, skiena3]
+- node: D7FZ82  # chernoff-bound
+  refs: [kt, erickson]
+- node: QDJPW8  # conditional-probability
+  refs: [clrs4, kt, skiena3]
+- node: TBMM12  # coupon-collector-problem
+  refs: [clrs4, kt, skiena3]
+- node: K3RK0K  # expected-value
+  refs: [clrs4, kt, skiena3, usaco]
+- node: 0K6G57  # geometric-distribution
+  refs: [clrs4, kt]
+- node: XCKF51  # linearity-of-expectation
+  refs: [clrs4, kt, erickson, usaco]
+- node: 2N4TKH  # markov-inequality
+  refs: [clrs4, kt, erickson, skiena3]
+- node: X8VFRC  # probability-space
+  refs: [clrs4, skiena3]
+- node: ME8VP4  # quicksort-expected-running-time
+  refs: [clrs4, sw4]
+- node: 101AXP  # random-variable
+  refs: [clrs4, skiena3]
+- node: ERAPMK  # union-bound
+  refs: [clrs4, kt]
+- node: ZVHPRZ  # divide-and-conquer-recurrence
+  refs: [clrs4, kt]
+- node: Q3W4HY  # linear-recurrences-with-constant-coefficients
+  refs: [cpalgo, usaco]
+- node: 3QVT6M  # master-theorem
+  refs: [clrs4, erickson, dpv, skiena3]
+- node: Y8RFMF  # recurrence-relation
+  refs: [clrs4, kt, erickson, dpv, skiena3]
+- node: 9SPG7H  # recursion
+  refs: [sw4, erickson, usaco]
+- node: 7T161P  # recursion-tree-method
+  refs: [clrs4, kt, erickson, skiena3, usaco]
+- node: 0X7N0X  # substitution-method
+  refs: [clrs4, kt]
+- node: 02YCWR  # nim
+  refs: [cpalgo, usaco]
+- node: AMWPCY  # sprague-grundy-theorem
+  refs: [cpalgo, usaco]
+- node: 383VGH  # heuristic-function
+  refs: [sw4, skiena3]
+- node: 8ZZ2XW  # josephus-problem
+  refs: [clrs4, sw4, cpalgo]
+- node: 5N96QY  # sudoku
+  refs: [erickson, skiena3]
+- node: R30809  # convex-hull
+  refs: [clrs4, sw4, erickson, skiena3, cpalgo, usaco]
+- node: YMCTB9  # graham-scan
+  refs: [skiena3, cpalgo, usaco]
+- node: GQ6PG3  # half-plane-intersection
+  refs: [cpalgo, usaco]
+- node: DEG1N2  # segment-intersection-detection
+  refs: [skiena3, cpalgo]
+- node: NQ2MTE  # separating-axis-theorem
+  refs: [clrs4, erickson, dpv, skiena3]
+- node: VWN457  # picks-theorem
+  refs: [cpalgo, usaco]
+- node: EQ1YET  # point-in-polygon
+  refs: [skiena3, cpalgo, usaco]
+- node: N8YEH7  # closest-pair-divide-and-conquer
+  refs: [kt, cpalgo]
+- node: C3REVA  # closest-pair-of-points
+  refs: [clrs4, sw4, kt, erickson, skiena3, cpalgo, usaco]
+- node: SGPK44  # delaunay-triangulation
+  refs: [skiena3, cpalgo]
+- node: 6MC1K7  # voronoi-diagram
+  refs: [skiena3, cpalgo]
+- node: KNX3QB  # image-labeling
+  refs: [kt, cpalgo]
+- node: 6SZ1BS  # image-segmentation
+  refs: [kt, erickson]
+- node: 547NP2  # degeneracy
+  refs: [clrs4, erickson, dpv]
+- node: P9H73F  # graph-coloring
+  refs: [clrs4, kt, erickson, skiena3]
+- node: 6MYPVF  # independent-set
+  refs: [clrs4, kt, erickson, dpv, skiena3]
+- node: 1S3QJT  # maximum-independent-set
+  refs: [erickson, dpv]
+- node: 657AYN  # articulation-point
+  refs: [clrs4, sw4, dpv, skiena3, cpalgo, usaco]
+- node: 0TJM1C  # articulation-point-finding
+  refs: [skiena3, cpalgo]
+- node: J43BN8  # biconnected-components
+  refs: [clrs4, erickson, skiena3]
+- node: 4FNN59  # bridge
+  refs: [clrs4, sw4, cpalgo]
+- node: MFY06B  # condensation-graph
+  refs: [clrs4, erickson, cpalgo, usaco]
+- node: 4WXY88  # connected-components
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: XXWVNN  # connected-graph
+  refs: [clrs4, kt]
+- node: P6QNDH  # edge-connectivity
+  refs: [skiena3, cpalgo]
+- node: 5FKWBN  # graph-transpose
+  refs: [clrs4, sw4, erickson]
+- node: TA3TXZ  # kosaraju-sharir
+  refs: [sw4, erickson, cpalgo, usaco]
+- node: TDYP8H  # menger-theorem
+  refs: [kt, erickson]
+- node: BDXNZA  # reachability
+  refs: [sw4, kt, erickson]
+- node: PZF188  # strongly-connected-components
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: JH9ZVM  # tarjan-scc
+  refs: [sw4, usaco]
+- node: KFPNHK  # transitive-closure
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: R2NH2H  # vertex-connectivity
+  refs: [skiena3, cpalgo]
+- node: 7Y8SYW  # dynamic-connectivity
+  refs: [sw4, cpalgo]
+- node: DAB5AT  # offline-dynamic-connectivity
+  refs: [cpalgo, usaco]
+- node: 3X0TQT  # augmenting-path-flow
+  refs: [sw4, kt, erickson, skiena3, cpalgo]
+- node: F1YZ07  # baseball-elimination
+  refs: [kt, erickson]
+- node: H1FND5  # capacity-scaling
+  refs: [kt, erickson]
+- node: DKY4J6  # circulation-problem
+  refs: [kt, erickson, skiena3, cpalgo]
+- node: J9FYN4  # cut
+  refs: [clrs4, sw4]
+- node: K5ZN3K  # dinic
+  refs: [sw4, erickson, cpalgo, usaco]
+- node: DSS4VS  # edge-disjoint-paths
+  refs: [kt, erickson]
+- node: 2SESDD  # edmonds-karp
+  refs: [sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 8J2ZHT  # flow-network
+  refs: [sw4, kt, erickson]
+- node: AM5BV8  # ford-fulkerson
+  refs: [sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 1TS1R8  # global-min-cut-problem
+  refs: [kt, erickson]
+- node: 7KRE5V  # integrality-theorem
+  refs: [kt, erickson]
+- node: 981JCR  # karger-min-cut
+  refs: [kt, erickson, skiena3]
+- node: Q5M02Y  # max-flow-min-cut-theorem
+  refs: [sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: DN2MY5  # max-flow-problem
+  refs: [sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: SJPT89  # maximum-weight-closure
+  refs: [sw4, kt, erickson]
+- node: JJQ4RB  # min-cost-flow-problem
+  refs: [erickson, skiena3, cpalgo, usaco]
+- node: FZJKWS  # min-cut-problem
+  refs: [sw4, kt, erickson, dpv, skiena3]
+- node: FWV02C  # preflow
+  refs: [kt, cpalgo]
+- node: 56SN6Q  # push-relabel
+  refs: [sw4, kt, erickson, cpalgo]
+- node: 1G3HX1  # residual-graph
+  refs: [kt, erickson, skiena3, cpalgo]
+- node: 8X75AV  # subgraph-isomorphism
+  refs: [clrs4, skiena3]
+- node: E8XWKM  # acyclic-graph
+  refs: [clrs4, skiena3]
+- node: 3JK4BH  # adjacency-list
+  refs: [clrs4, sw4, kt, erickson, skiena3, usaco]
+- node: 4VK71J  # adjacency-matrix
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, usaco]
+- node: APQ4NP  # bipartite-graph
+  refs: [clrs4, kt, usaco]
+- node: YJVCAJ  # directed-acyclic-graph
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, usaco]
+- node: YDMNX2  # directed-graph
+  refs: [clrs4, sw4, kt]
+- node: 0MSSM6  # graph
+  refs: [clrs4, sw4, erickson, skiena3, usaco]
+- node: 5TZN3A  # in-degree-and-out-degree
+  refs: [clrs4, sw4]
+- node: G87QYC  # self-loop
+  refs: [sw4, skiena3, usaco]
+- node: WEB21S  # sparse-graph
+  refs: [clrs4, sw4, skiena3]
+- node: Q90FNQ  # transpose-graph
+  refs: [clrs4, sw4]
+- node: PHJCS4  # tree
+  refs: [clrs4, kt]
+- node: 2RCNV0  # undirected-graph
+  refs: [clrs4, kt, dpv]
+- node: TAHZEZ  # weighted-graph
+  refs: [clrs4, sw4, skiena3]
+- node: NWT4PF  # assignment-problem
+  refs: [sw4, kt, cpalgo]
+- node: NX93A8  # bipartite-matching
+  refs: [sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 6F205G  # edmonds-blossom
+  refs: [skiena3, cpalgo]
+- node: 9YR7J5  # gale-shapley
+  refs: [kt, erickson, skiena3]
+- node: QVNCXM  # hall-theorem
+  refs: [kt, erickson]
+- node: N33C44  # hungarian-algorithm
+  refs: [kt, erickson, skiena3, cpalgo, usaco]
+- node: HZG6X9  # konig-theorem
+  refs: [erickson, cpalgo, usaco]
+- node: 317S62  # maximum-matching
+  refs: [erickson, cpalgo]
+- node: ED689Z  # stable-matching
+  refs: [kt, erickson]
+- node: 8YZQWG  # erdos-renyi-model
+  refs: [sw4, skiena3]
+- node: YS8QZ8  # dfs-cycle-detection
+  refs: [clrs4, sw4, usaco]
+- node: G5EZFV  # eulerian-circuit
+  refs: [clrs4, sw4, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 93790T  # eulerian-path
+  refs: [cpalgo, usaco]
+- node: 26RENZ  # eulerian-path-problem
+  refs: [dpv, cpalgo]
+- node: NHWW8D  # hamiltonian-cycle
+  refs: [clrs4, sw4, kt, erickson, skiena3]
+- node: VYEN0Y  # hamiltonian-path
+  refs: [clrs4, sw4, kt]
+- node: 27BGH7  # longest-path-problem
+  refs: [clrs4, sw4, dpv, skiena3]
+- node: 9CK9Y1  # maximum-acyclic-subgraph
+  refs: [clrs4, skiena3]
+- node: SZHYV4  # simple-cycle
+  refs: [clrs4, kt]
+- node: BM6DJD  # simple-path
+  refs: [clrs4, sw4, kt]
+- node: 5ZRYH5  # planar-graph
+  refs: [sw4, skiena3]
+- node: 3YR346  # all-pairs-shortest-paths
+  refs: [clrs4, sw4, erickson, skiena3, cpalgo]
+- node: 2PW2HK  # bellman-ford
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 277N5Y  # dag-shortest-paths
+  refs: [clrs4, sw4, erickson, dpv]
+- node: X3KB9P  # difference-constraints
+  refs: [clrs4, sw4]
+- node: 27XR9T  # dijkstra
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 81HHQ6  # edge-relaxation
+  refs: [clrs4, sw4]
+- node: HSBPN7  # floyd-warshall
+  refs: [clrs4, sw4, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 758800  # generic-shortest-path-algorithm
+  refs: [sw4, erickson]
+- node: GE9795  # johnson
+  refs: [clrs4, erickson]
+- node: Z4CS42  # negative-cycle
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: HZW2DP  # negative-cycle-detection
+  refs: [clrs4, sw4, kt, erickson, cpalgo, usaco]
+- node: 7KEEDK  # shortest-path
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: 7NTSGR  # shortest-path-tree
+  refs: [clrs4, sw4, kt, erickson]
+- node: D7KE8A  # single-source-shortest-paths
+  refs: [clrs4, sw4, kt, dpv, cpalgo, usaco]
+- node: 1APEF6  # boruvka
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: 9P6A3Q  # cut-property
+  refs: [clrs4, sw4, kt, erickson, dpv]
+- node: NES9Z4  # cycle-property
+  refs: [sw4, kt]
+- node: AA7K7S  # generic-mst-method
+  refs: [clrs4, erickson]
+- node: 1DB0HR  # kruskal
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: J7EVGB  # maximum-spanning-tree
+  refs: [erickson, skiena3]
+- node: 22QWHV  # minimum-bottleneck-spanning-tree
+  refs: [clrs4, skiena3]
+- node: JNKP33  # minimum-spanning-tree
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 6NDZ9M  # prim
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: 3Q5221  # second-best-mst
+  refs: [clrs4, erickson, cpalgo]
+- node: QAACP7  # spanning-forest
+  refs: [clrs4, sw4]
+- node: DH4X7X  # spanning-tree
+  refs: [clrs4, sw4]
+- node: FY6JYX  # bfs-tree
+  refs: [clrs4, kt]
+- node: HAEH1M  # breadth-first-search
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: Q8B7W6  # depth-first-search
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: T9JPRR  # dfs-forest
+  refs: [clrs4, kt, dpv]
+- node: 425Q3K  # discovery-and-finish-times
+  refs: [clrs4, dpv]
+- node: 97Q3XX  # edge-classification
+  refs: [clrs4, skiena3]
+- node: M5TTW9  # flood-fill
+  refs: [erickson, usaco]
+- node: JVCQ4E  # kahns-algorithm
+  refs: [clrs4, usaco]
+- node: V34M1Z  # topological-ordering
+  refs: [clrs4, sw4, kt, erickson, dpv, cpalgo, usaco]
+- node: BSW47R  # binary-lifting
+  refs: [cpalgo, usaco]
+- node: KHSGX1  # binary-tree
+  refs: [clrs4, sw4]
+- node: NVB7AP  # heavy-light-decomposition
+  refs: [cpalgo, usaco]
+- node: JDE4T3  # inorder-traversal
+  refs: [clrs4, sw4, skiena3]
+- node: HDPHEH  # lowest-common-ancestor
+  refs: [cpalgo, usaco]
+- node: K1CRY0  # preorder-traversal
+  refs: [clrs4, erickson]
+- node: 71EN86  # tarjan-offline-lca
+  refs: [clrs4, cpalgo]
+- node: H6MPAB  # tree-diameter
+  refs: [clrs4, cpalgo, usaco]
+- node: K8YWXT  # 2-sat
+  refs: [clrs4, dpv, skiena3, cpalgo, usaco]
+- node: X424VA  # 3-sat
+  refs: [clrs4, kt, erickson, dpv, skiena3]
+- node: BD793D  # conjunctive-normal-form
+  refs: [clrs4, skiena3]
+- node: CA0ZDK  # sat
+  refs: [sw4, kt]
+- node: QZE4SH  # clustering-problem
+  refs: [clrs4, sw4, kt, dpv]
+- node: ND3FAB  # bayes-theorem
+  refs: [clrs4, skiena3]
+- node: KSAB3R  # viterbi-algorithm
+  refs: [clrs4, dpv]
+- node: MAZQJE  # discrete-logarithm-problem
+  refs: [clrs4, cpalgo]
+- node: 0J1WZZ  # bezouts-identity
+  refs: [clrs4, cpalgo]
+- node: NZK9TA  # binary-gcd
+  refs: [clrs4, cpalgo]
+- node: 4XB0RJ  # euclidean-algorithm
+  refs: [clrs4, sw4, erickson, skiena3, usaco]
+- node: QQCABS  # extended-euclidean-algorithm
+  refs: [clrs4, dpv, cpalgo]
+- node: CRFS04  # fundamental-theorem-of-arithmetic
+  refs: [clrs4, erickson]
+- node: ZH68PY  # greatest-common-divisor
+  refs: [clrs4, dpv, skiena3, cpalgo, usaco]
+- node: YNCKGG  # least-common-multiple
+  refs: [clrs4, skiena3, cpalgo, usaco]
+- node: PEWPF5  # integer-factorization
+  refs: [clrs4, sw4, skiena3, cpalgo, usaco]
+- node: ZGK3CY  # pollard-rho
+  refs: [clrs4, skiena3, cpalgo]
+- node: 1TKFVE  # trial-division
+  refs: [clrs4, skiena3, cpalgo]
+- node: D262EM  # binary-exponentiation
+  refs: [clrs4, erickson, skiena3, cpalgo, usaco]
+- node: M4X9A6  # chinese-remainder-theorem
+  refs: [clrs4, skiena3, cpalgo]
+- node: 8K64HH  # euler-theorem
+  refs: [clrs4, dpv, cpalgo]
+- node: XNH1YD  # euler-totient
+  refs: [clrs4, cpalgo]
+- node: Y34RMM  # fermat-little-theorem
+  refs: [clrs4, dpv, skiena3, cpalgo, usaco]
+- node: 6Z0RA0  # modular-exponentiation
+  refs: [clrs4, dpv, skiena3, cpalgo]
+- node: 3KEZYN  # modular-inverse
+  refs: [clrs4, dpv, cpalgo, usaco]
+- node: N6B914  # multiplicative-order
+  refs: [clrs4, cpalgo]
+- node: VGKN86  # primitive-root
+  refs: [clrs4, cpalgo]
+- node: AB3V76  # carmichael-number
+  refs: [clrs4, dpv, skiena3, cpalgo]
+- node: 8TFPRS  # fermat-primality-test
+  refs: [dpv, cpalgo]
+- node: T1483D  # miller-rabin
+  refs: [clrs4, dpv, skiena3, cpalgo]
+- node: QCSXFP  # primality-testing
+  refs: [sw4, dpv, skiena3, cpalgo]
+- node: H9E4HR  # prime-number-theorem
+  refs: [clrs4, dpv]
+- node: F0W4PP  # sieve-of-eratosthenes
+  refs: [sw4, erickson, skiena3, cpalgo, usaco]
+- node: HBBQX8  # numerical-stability
+  refs: [clrs4, sw4, skiena3]
+- node: FP385Q  # two-sum
+  refs: [clrs4, sw4]
+- node: NJ8RZY  # interpolation-problem
+  refs: [clrs4, dpv]
+- node: DKZGV6  # linear-system-solving
+  refs: [clrs4, skiena3]
+- node: A03S2V  # pseudorandom-number-generator
+  refs: [clrs4, skiena3]
+- node: WV8WGC  # newton-raphson-method
+  refs: [sw4, skiena3, cpalgo]
+- node: B1984T  # online-algorithm
+  refs: [clrs4, kt]
+- node: 6CTF08  # belady-algorithm
+  refs: [clrs4, kt]
+- node: 5WP5GD  # marking-algorithm
+  refs: [clrs4, kt]
+- node: 69X9SB  # two-stacks-queue
+  refs: [clrs4, sw4, erickson]
+- node: 8P17R0  # graph-partitioning-problem
+  refs: [dpv, skiena3]
+- node: STERX3  # knapsack-problem
+  refs: [clrs4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: ARJ659  # traveling-salesman-problem
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, usaco]
+- node: MYGDGH  # interior-point-method
+  refs: [clrs4, erickson, skiena3]
+- node: WZ9ATZ  # gradient-descent
+  refs: [clrs4, kt, skiena3]
+- node: VH5CWZ  # lp-relaxation
+  refs: [clrs4, erickson]
+- node: 57FP0C  # mixed-integer-programming
+  refs: [sw4, erickson, dpv]
+- node: AFFVTS  # complementary-slackness
+  refs: [clrs4, erickson]
+- node: S8AASR  # ellipsoid-method
+  refs: [clrs4, sw4, erickson]
+- node: 4YA31J  # farkas-lemma
+  refs: [clrs4, erickson]
+- node: PCX05V  # linear-programming-problem
+  refs: [clrs4, skiena3]
+- node: SVBFN1  # lp-duality
+  refs: [clrs4, erickson, skiena3]
+- node: EX9JNH  # lp-standard-form
+  refs: [clrs4, dpv]
+- node: 7DPCNC  # polyhedron
+  refs: [clrs4, erickson, dpv]
+- node: 1FHAJA  # simplex-method
+  refs: [clrs4, sw4, erickson, dpv, skiena3]
+- node: AK6PWF  # strong-duality
+  refs: [clrs4, dpv]
+- node: PCZ40E  # weak-duality
+  refs: [clrs4, dpv]
+- node: 5EJH5P  # local-search
+  refs: [kt, dpv, skiena3]
+- node: R8R2C0  # simulated-annealing
+  refs: [kt, dpv, skiena3]
+- node: 426R8D  # graph-contraction
+  refs: [clrs4, skiena3]
+- node: 9G5HDB  # merging-sorted-sequences
+  refs: [clrs4, sw4, erickson, dpv]
+- node: 7HB9EH  # parallel-reduction
+  refs: [sw4, erickson, dpv, skiena3]
+- node: AF18VA  # critical-path
+  refs: [clrs4, sw4, skiena3]
+- node: MH2W70  # shor-algorithm
+  refs: [dpv, skiena3]
+- node: YX77AF  # qubit
+  refs: [dpv, skiena3]
+- node: CCAFYB  # las-vegas-algorithm
+  refs: [sw4, kt, erickson, skiena3]
+- node: 2XRTQG  # monte-carlo-algorithm
+  refs: [sw4, erickson, skiena3]
+- node: FC22KF  # inverse-transform-sampling
+  refs: [clrs4, sw4]
+- node: G9Q1TB  # random-sampling
+  refs: [clrs4, sw4, skiena3]
+- node: NRAJQ8  # fisher-yates-shuffle
+  refs: [clrs4, sw4]
+- node: 823S59  # random-permutation
+  refs: [clrs4, skiena3]
+- node: 4PKE10  # binary-search-on-answer
+  refs: [cpalgo, usaco]
+- node: 2B7QDX  # binary-search
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3, cpalgo, usaco]
+- node: ZX47TN  # sentinel-search
+  refs: [clrs4, sw4]
+- node: EM0041  # triangle-inequality
+  refs: [clrs4, dpv, skiena3]
+- node: J9VDA4  # maximum-overlap
+  refs: [clrs4, kt]
+- node: D599TE  # counting-inversions
+  refs: [clrs4, sw4, kt, erickson]
+- node: 13T8RN  # permutation
+  refs: [clrs4, skiena3]
+- node: 0HV63V  # range-update-point-query
+  refs: [cpalgo, usaco]
+- node: 5VFF8X  # two-dimensional-prefix-sums
+  refs: [cpalgo, usaco]
+- node: ZW59T3  # maximum-subarray-problem
+  refs: [clrs4, skiena3]
+- node: Q8SJ29  # longest-common-subsequence
+  refs: [clrs4, erickson, dpv, skiena3, cpalgo]
+- node: 9KXYQ9  # longest-increasing-subsequence
+  refs: [clrs4, erickson, dpv, skiena3, cpalgo, usaco]
+- node: Q5069X  # longest-palindromic-subsequence
+  refs: [clrs4, sw4, kt, erickson, dpv]
+- node: JS56R4  # bubble-sort
+  refs: [clrs4, sw4]
+- node: A1A979  # comparison-sort-lower-bound
+  refs: [clrs4, sw4, erickson, dpv, skiena3]
+- node: CSPR1S  # heapsort
+  refs: [clrs4, sw4, kt, skiena3]
+- node: HR9MYC  # hoare-partition
+  refs: [clrs4, erickson]
+- node: 3NS7RT  # insertion-sort
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: 4MRG7S  # merge-sort
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: M8ZTQT  # merging-sorted-lists
+  refs: [clrs4, kt, skiena3]
+- node: 5TYMK3  # quicksort
+  refs: [clrs4, sw4, erickson, dpv, skiena3]
+- node: PP7XPG  # randomized-quicksort
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: 6ADSAW  # selection-sort
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: ZSYXJJ  # shell-sort
+  refs: [sw4, skiena3]
+- node: 5SRTPB  # sorting-problem
+  refs: [clrs4, sw4, kt, skiena3, usaco]
+- node: YVKHNF  # stable-sort
+  refs: [sw4, skiena3]
+- node: JD10F7  # three-way-quicksort
+  refs: [clrs4, sw4]
+- node: HHT9WC  # bucket-sort
+  refs: [clrs4, erickson, skiena3]
+- node: FQMV6V  # counting-sort
+  refs: [clrs4, sw4]
+- node: HB6K6X  # radix-sort
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: 04PNZQ  # k-way-merge
+  refs: [clrs4, sw4]
+- node: AYRX3B  # median
+  refs: [clrs4, sw4, dpv]
+- node: A5DV6Z  # median-of-medians
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: DB0KJF  # order-statistic
+  refs: [clrs4, skiena3]
+- node: TTGB6K  # quickselect
+  refs: [sw4, erickson, dpv, skiena3]
+- node: 2EJRTP  # selection-problem
+  refs: [clrs4, sw4, erickson, dpv, skiena3]
+- node: 9H7NX0  # comparator
+  refs: [sw4, usaco]
+- node: Z4GVFF  # edit-distance
+  refs: [clrs4, kt, erickson, dpv, skiena3, cpalgo]
+- node: GBSH7D  # boyer-moore
+  refs: [sw4, skiena3]
+- node: F0V6W1  # knuth-morris-pratt
+  refs: [clrs4, sw4, skiena3, usaco]
+- node: NM14X8  # naive-string-matching
+  refs: [clrs4, sw4]
+- node: 7DN50X  # prefix-function
+  refs: [clrs4, cpalgo]
+- node: 71WJZT  # string-matching
+  refs: [clrs4, sw4, erickson, skiena3]
+- node: 3VKE1X  # string-matching-automaton
+  refs: [clrs4, cpalgo]
+- node: 7JPXK4  # z-algorithm
+  refs: [cpalgo, usaco]
+- node: P3M1B3  # aho-corasick
+  refs: [cpalgo, usaco]
+- node: 25Z40B  # manacher
+  refs: [cpalgo, usaco]
+- node: C4WFX1  # polynomial-rolling-hash
+  refs: [clrs4, cpalgo, usaco]
+- node: 1B6QTQ  # rabin-karp
+  refs: [clrs4, sw4, erickson, skiena3, cpalgo, usaco]
+- node: 6RWY4Y  # lcp-array
+  refs: [clrs4, sw4, cpalgo, usaco]
+- node: YEMC7E  # longest-common-substring
+  refs: [clrs4, sw4, skiena3, cpalgo]
+- node: R5YHHT  # suffix-array
+  refs: [clrs4, sw4, skiena3, cpalgo, usaco]
+- node: XE8A8C  # suffix-automaton
+  refs: [cpalgo, usaco]
+- node: 21ZQTC  # suffix-tree
+  refs: [sw4, skiena3]
+- node: AH1HP7  # cache
+  refs: [clrs4, kt]
+- node: DTB1HB  # fifo-replacement
+  refs: [clrs4, kt]
+- node: C24R9P  # lru
+  refs: [clrs4, kt]
+- node: BY0B33  # load-balancing-problem
+  refs: [kt, erickson]
+- node: BD5KA9  # generic-backtracking-algorithm
+  refs: [erickson, dpv, skiena3]
+- node: E1MVVA  # bit-manipulation
+  refs: [cpalgo, usaco]
+- node: HKZG83  # divide-and-conquer-paradigm
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: 89CWA1  # bitmask-dp
+  refs: [cpalgo, usaco]
+- node: XE00JC  # bounded-knapsack
+  refs: [cpalgo, usaco]
+- node: A6NC0T  # broken-profile-dp
+  refs: [cpalgo, usaco]
+- node: HVHZZP  # coin-change-problem
+  refs: [clrs4, cpalgo, usaco]
+- node: MM27CJ  # convex-hull-trick
+  refs: [cpalgo, usaco]
+- node: V8CF6R  # digit-dynamic-programming
+  refs: [cpalgo, usaco]
+- node: AHWCKX  # divide-and-conquer-optimization
+  refs: [cpalgo, usaco]
+- node: 48Q02J  # interval-dp
+  refs: [kt, usaco]
+- node: ARYT52  # knuth-optimization
+  refs: [cpalgo, usaco]
+- node: ZN5HGJ  # matrix-chain-multiplication
+  refs: [clrs4, erickson, dpv, skiena3]
+- node: 1B1KF8  # memoization
+  refs: [clrs4, sw4, kt, erickson, dpv, skiena3]
+- node: JN2M83  # optimal-binary-search-tree
+  refs: [clrs4, erickson, cpalgo]
+- node: NB2NY6  # optimal-substructure
+  refs: [clrs4, kt]
+- node: B5EH8D  # tabulation
+  refs: [clrs4, kt]
+- node: XFJT3K  # traceback
+  refs: [clrs4, kt]
+- node: JY93E9  # tree-dynamic-programming
+  refs: [erickson, usaco]
+- node: Q2KGB0  # unbounded-knapsack
+  refs: [cpalgo, usaco]
+- node: AGT6N3  # activity-selection
+  refs: [clrs4, kt, erickson, skiena3]
+- node: 4XRAFH  # earliest-finish-time-first
+  refs: [clrs4, kt]
+- node: HF5WPF  # exchange-argument
+  refs: [kt, erickson]
+- node: M75C3A  # greedy-algorithm
+  refs: [clrs4, kt, erickson, dpv, usaco]
+- node: TJQZTD  # interval-partitioning
+  refs: [clrs4, kt]
+- node: YQS7JY  # matroid
+  refs: [erickson, dpv, usaco]
+- node: ZA8KYZ  # randomized-algorithm
+  refs: [clrs4, sw4, kt, erickson, dpv, usaco]
+- node: 8EXKBZ  # normal-form-representation
+  refs: [clrs4, erickson]
+- node: V0XMYJ  # presorting
+  refs: [sw4, skiena3]
+- node: 4966MT  # event-point
+  refs: [clrs4, sw4]
+- node: 877716  # sweep-line-technique
+  refs: [cpalgo, usaco]
+- node: 6RA926  # fast-and-slow-pointers
+  refs: [cpalgo, usaco]
