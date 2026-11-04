@@ -1,0 +1,32 @@
+---
+title: The left-child, right-sibling operations keep the invariant, and PREORDER visits the subtree in preorder
+proves: [correctness, termination]
+status: full
+---
+
+**Claim.** If (T1) to (T4) hold for all nodes before an operation, then: NEW-NODE, ADD-CHILD (with $y$ a root and $x$ not in the subtree of $y$) and DETACH keep them, and change the trees as the [tree](/tree/) type says; CHILDREN$(x)$ visits the children of $x$ from left to right; and PREORDER$(r)$ visits each node of the subtree of $r$ exactly once, in preorder, stops, and makes at most $2(m - 1)$ pointer moves, where $m$ is the size of the subtree.
+
+**Setup.** The preorder of the subtree of $v$, with children $c_1, \dots, c_d$, is $\mathrm{pre}(v) = (v, \mathrm{pre}(c_1), \dots, \mathrm{pre}(c_d))$. The invariant is (T1) to (T4) of the page: the child list of $x$ starts at $x.\text{left-child}$, follows right-sibling pointers through the children in order and ends with nil, each child points to $x$ with $p$, and a root has nil in $p$ and right-sibling.
+
+**Lemma 1 (ADD-CHILD).** Let $x$ have children $c_1, \dots, c_d$. After lines L2 to L4, $x.\text{left-child} = y$, $y.\text{right-sibling} = c_1$ (nil when $d = 0$), and $y.p = x$. So the child list of $x$ is $y, c_1, \dots, c_d$, which gives (T1) to (T3) for $x$. The only fields written are two fields of $y$ and one of $x$. Before the call, $y$ was a root, so it was in no child list, and by (T4) its two written fields were nil; the child lists of all other nodes are unchanged. Since $x$ is not in the subtree of $y$, the new edge from $x$ to $y$ closes no cycle, so the result is again a forest, in which the tree of $x$ now contains the subtree of $y$ as the leftmost subtree of $x$. $\square$
+
+**Lemma 2 (DETACH).** Let $x = y.p$. If $x$ is nil, $y$ is a root and nothing changes. Else let the child list of $x$ be $c_1, \dots, c_d$ with $y = c_i$. If $i = 1$, line D2 sets $x.\text{left-child} = c_2$ (nil when $d = 1$). If $i > 1$, the loop of line D4 starts at $c_1$ and follows the list; it stops at $c_{i-1}$, the first node whose right sibling is $y$, after $i - 2$ steps, because the list is finite by (T2) and contains $y$. Line D5 sets $c_{i-1}.\text{right-sibling} = c_{i+1}$. In both cases the child list of $x$ is now $c_1, \dots, c_{i-1}, c_{i+1}, \dots, c_d$. Line D6 gives (T4) for $y$. The fields of the nodes in the subtree of $y$ other than $y$ are not touched, so $y$ is now the root of its old subtree. The cost is $O(i) = O(d)$. $\square$
+
+**Lemma 3 (CHILDREN).** By (T1) and (T2), the variable $c$ takes the values $c_1, c_2, \dots, c_d$, nil, in this order: at the $t$-th test of line L6, $c = c_t$ (and $c = $ nil for $t = d + 1$), by induction on $t$ with line L7. So line L7 visits the children in order and the loop stops after $d$ steps. NEW-NODE makes a root with no child, which satisfies (T1) and (T4). $\square$
+
+**Lemma 4 (the successor in preorder).** Let $x$ be a node in the subtree of $r$, and let $S(x)$ be the node that follows $x$ in $\mathrm{pre}(r)$, or none.
+
+1. If $x$ has a child, $S(x) = x.\text{left-child}$.
+2. If $x$ is a leaf, let $z$ be the first node on the path $x, x.p, x.p.p, \dots$ that is $r$ or has a right sibling. If $z = r$, then $x$ is the last node of $\mathrm{pre}(r)$. Else $S(x) = z.\text{right-sibling}$.
+
+*Proof.* Part 1 follows from $\mathrm{pre}(x) = (x, \mathrm{pre}(c_1), \dots)$, which is a contiguous part of $\mathrm{pre}(r)$ (by induction on the depth of $x$ below $r$, from the recursive definition), and $\mathrm{pre}(c_1)$ starts with $c_1$. For part 2, a leaf $x$ is the last node of $\mathrm{pre}(x)$. For any node $v \ne r$ in the subtree, let $v$ be the child $c_i$ of $u = v.p$. If $i < d$, the part $\mathrm{pre}(v)$ in $\mathrm{pre}(u)$ is followed by $\mathrm{pre}(c_{i+1})$, which starts with $c_{i+1} = v.\text{right-sibling}$. If $i = d$, $v$ has no right sibling, and the last node of $\mathrm{pre}(v)$ is also the last node of $\mathrm{pre}(u)$. Apply this along the path from $x$: as long as the current node $v \ne r$ has no right sibling, the last node of $\mathrm{pre}(v)$, which is $x$, is also the last node of $\mathrm{pre}(v.p)$. At $z$: if $z = r$, $x$ is the last node of $\mathrm{pre}(r)$; else $x$ is the last node of $\mathrm{pre}(z)$ and is followed by $z.\text{right-sibling}$. $\square$
+
+**Lemma 5 (PREORDER).** Let $\mathrm{pre}(r) = (u_1, \dots, u_m)$ with $u_1 = r$. At the $t$-th test of line L9, $x = u_t$ for $1 \le t \le m$, and $x = $ nil at the test number $m + 1$.
+
+*Proof.* By induction on $t$. Line L8 gives $x = r = u_1$. Assume $x = u_t$ at the $t$-th test, $t \le m$. Line L10 visits $u_t$. If $u_t$ has a child, line L11 sets $x$ to $S(u_t) = u_{t+1}$ by Lemma 4, part 1. Else the loop of line L12 moves $x$ up the path from $u_t$ and stops at the first node that is $r$ or has a right sibling, which is $z$ of Lemma 4, part 2. It stops because each step moves to the parent, the depth below $r$ drops by exactly 1, and $r$ is on the path. Line L13 sets $x = z.\text{right-sibling} = u_{t+1}$ if $z \ne r$, and $x = $ nil if $z = r$, which by Lemma 4 happens exactly when $t = m$. $\square$
+
+So PREORDER visits $u_1, \dots, u_m$, each once, in preorder, and stops.
+
+**Lemma 6 (cost of PREORDER).** Each node $u_t$ with $t \ge 2$ is reached exactly once by line L11 or line L13, by Lemma 5. A climb $x \leftarrow x.p$ in line L12 leaves a node $v \ne r$ whose subtree is finished: by Lemma 4, all nodes visited after it lie outside $\mathrm{pre}(v)$, since $\mathrm{pre}(v)$ is contiguous and its last node was visited before the climb. A second climb from $v$ would need $x = v$ again, which is a node of $\mathrm{pre}(v)$, and line L12 only moves $x$ to ancestors of the last visited node, while lines L11 and L13 move it to the next node of the preorder. So each node other than $r$ is climbed from at most once, and the walk makes at most $(m - 1) + (m - 1) = 2(m - 1)$ moves. With one visit per node, the time is $\Theta(m)$, and the extra space is the one variable $x$. $\square$
+
+**Conclusion.** Lemmas 1 to 3 show that each update keeps (T1) to (T4) and that CHILDREN lists the children in order, and Lemmas 5 and 6 show that PREORDER is correct and runs in $\Theta(m)$ time with $O(1)$ extra space. By induction on the number of operations, any sequence of operations from single-node trees keeps the invariant. $\blacksquare$
