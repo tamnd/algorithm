@@ -7,7 +7,7 @@ area: foundations/probabilistic-analysis
 level: intro
 summary: Two events are independent when the probability that both occur equals the product of their individual probabilities.
 prereqs: [probability-space, conditional-probability]
-see_also: [independent-random-variables, pairwise-independence, k-wise-independent-hashing, universal-hash-family, limited-independence, bernoulli-trials, union-bound]
+see_also: [independence-of-events, independent-random-variables, pairwise-independence, k-wise-independent-hashing, universal-hash-family, limited-independence, bernoulli-trials, union-bound]
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
@@ -82,6 +82,7 @@ since $1 - x \le e^{-x}$ for all real $x$. So the probability that at least one 
 
 ## Related definitions
 
+- **Independence as a modelling choice.** The page [independence of events](/independence-of-events/) covers how independence is used and checked in the analysis of algorithms: when it may be assumed, how to show it, and what breaks when it fails. This page gives the formal definitions and their properties.
 - [Independent random variables](/independent-random-variables/): the events $\{X \in B\}$ and $\{Y \in C\}$ are independent for all sets $B$ and $C$.
 - [Pairwise independence](/pairwise-independence/) and [$k$-wise independent hashing](/k-wise-independent-hashing/) give limited independence with few random bits.
 - [Bernoulli trials](/bernoulli-trials/) are mutually independent trials with the same success probability.
