@@ -1,0 +1,56 @@
+---
+title: The finger tree operations keep the invariant and compute the right sequences
+proves: [correctness, termination]
+status: full
+---
+
+We use the definitions of the page. For an element $x$, $\text{items}(x)$ is the sequence of the items below it, and for a list of elements $xs$, $\text{items}(xs)$ is the concatenation of their items. For a tree, $\text{seq}(\text{Empty}) = \langle\rangle$, $\text{seq}(\text{Single}(x)) = \text{items}(x)$ and $\text{seq}(\text{Deep}(pr, m, sf)) = \text{items}(pr) \cdot \text{seq}(m) \cdot \text{items}(sf)$. The *depth* of a tree is 0 for Empty and Single, and $1 + \text{depth}(m)$ for $\text{Deep}(pr, m, sf)$. A *valid tree of level* $k$ is a finger tree of level $k$ that satisfies (F1) to (F3). Every constructor in the pseudocode computes its cached size from its parts, so (F3) holds for every new node and tree whose parts satisfy it; we do not repeat this below. No line changes a node or tree that already exists, so every earlier version keeps its sequence, and it suffices to prove the claims for the results.
+
+**Lemma 1 (CONS).** If $t$ is a valid tree of level $k$ and $a$ is an element of level $k$, then CONS$(a, t)$ returns a valid tree of level $k$ with sequence $\text{items}(a) \cdot \text{seq}(t)$.
+
+*Proof.* By induction on the depth of $t$. Lines L1 and L2 return a Single or a Deep tree with digits of one element and an empty middle, which are valid, with the right sequence. Otherwise $t = \text{Deep}(pr, m, sf)$. If $pr = [b, c, d, e]$ (line L4), then $\text{Node3}(c, d, e)$ is an element of level $k + 1$ by (F1), and $m$ is a valid tree of level $k + 1$ of smaller depth, so by the hypothesis the recursive call returns a valid tree $m'$ of level $k + 1$ with $\text{seq}(m') = \text{items}(c, d, e) \cdot \text{seq}(m)$. The new prefix $[a, b]$ has 2 elements, and the sequence is $\text{items}(a, b) \cdot \text{items}(c, d, e) \cdot \text{seq}(m) \cdot \text{items}(sf) = \text{items}(a) \cdot \text{seq}(t)$. Otherwise $pr$ has 1 to 3 elements and line L5 makes a prefix of 2 to 4 elements. $\square$
+
+By symmetry, SNOC$(t, a)$ returns a valid tree with sequence $\text{seq}(t) \cdot \text{items}(a)$. Then, by induction on the length of $xs$, CONS-ALL$(xs, t)$ has sequence $\text{items}(xs) \cdot \text{seq}(t)$ (line L6, the last element is added first), SNOC-ALL$(t, xs)$ has sequence $\text{seq}(t) \cdot \text{items}(xs)$ (line L7), and TREE-OF$(xs)$ has sequence $\text{items}(xs)$ (line L8), all valid of the level of the elements.
+
+**Lemma 2 (VIEWL and DEEPL).** Let $k \ge 0$.
+
+1. If $t$ is a valid tree of level $k$, VIEWL$(t)$ returns nil exactly when $t = \text{Empty}$, and otherwise a pair $(a, t')$ with $a$ an element of level $k$, $t'$ a valid tree of level $k$, and $\text{items}(a) \cdot \text{seq}(t') = \text{seq}(t)$.
+2. If $pr$ is a list of 0 to 4 elements of level $k$, $m$ a valid tree of level $k + 1$ and $sf$ a digit of level $k$, DEEPL$(pr, m, sf)$ returns a valid tree of level $k$ with sequence $\text{items}(pr) \cdot \text{seq}(m) \cdot \text{items}(sf)$.
+
+*Proof.* By induction on $D$, the depth of $t$ in part 1 and $1 + \text{depth}(m)$ in part 2. Part 1: lines L9 and L10 are direct. For $t = \text{Deep}([a] \mathbin{+\!\!+} pr, m, sf)$ (line L11), $pr$ has 0 to 3 elements, and part 2 applies to DEEPL$(pr, m, sf)$ with the same value of $D$, since $1 + \text{depth}(m) = \text{depth}(t)$. The sequences agree by the definition of seq. Part 2: if $pr$ is non-empty (line L13), the Deep tree is valid. Otherwise part 1 applies to VIEWL$(m)$, with a smaller value $\text{depth}(m) < D$. If it returns nil, $m$ is Empty, and line L14 returns TREE-OF$(sf)$, with sequence $\text{items}(sf)$. Otherwise it returns a node $n$ of level $k + 1$ and a valid tree $m'$ of level $k + 1$ with $\text{items}(n) \cdot \text{seq}(m') = \text{seq}(m)$. The children of $n$ are 2 or 3 elements of level $k$, a valid prefix, so the tree of line L15 is valid with sequence $\text{items}(n) \cdot \text{seq}(m') \cdot \text{items}(sf) = \text{seq}(m) \cdot \text{items}(sf)$. $\square$
+
+By symmetry the same holds for VIEWR and DEEPR. In part 1 the induction measure decreases from $D$ to a call of part 2 with the same $D$, which then calls part 1 with a smaller depth, so the recursion terminates.
+
+**Lemma 3 (NODES).** If $xs$ is a list of $j$ elements of level $k$ with $2 \le j \le 12$, then NODES$(xs)$ returns a list of $\lceil j/3 \rceil$ nodes of level $k + 1$, between 1 and 4, whose children, in order, are $xs$.
+
+*Proof.* By induction on $j$. Lines L16 to L18 cover $j = 2, 3, 4$, with $1, 1, 2$ nodes of 2 or 3 children, and $\lceil j/3 \rceil$ is $1, 1, 2$. For $j \ge 5$ (line L19), the rest has $j - 3 \ge 2$ elements, so the hypothesis applies, and the result has $1 + \lceil (j - 3)/3 \rceil = \lceil j/3 \rceil$ nodes. For $j \le 12$ this is at most 4, and for $j \ge 2$ at least 1. The children are $xs$ in order since the first node takes the first three elements. $\square$
+
+**Lemma 4 (APP3).** If $t_1$ and $t_2$ are valid trees of level $k$ and $ts$ is a list of 0 to 4 elements of level $k$, then APP3$(t_1, ts, t_2)$ returns a valid tree of level $k$ with sequence $\text{seq}(t_1) \cdot \text{items}(ts) \cdot \text{seq}(t_2)$.
+
+*Proof.* By induction on the depth of $t_1$. Lines L20 to L23 follow from Lemma 1, its mirror image and the facts after it. In line L24 both trees are Deep. The list $sf_1 \mathbin{+\!\!+} ts \mathbin{+\!\!+} pr_2$ has between $1 + 0 + 1 = 2$ and $4 + 4 + 4 = 12$ elements of level $k$, so by Lemma 3 NODES returns 1 to 4 nodes of level $k + 1$ with the same items in order. The middles $m_1$ and $m_2$ are valid of level $k + 1$ and $m_1$ has smaller depth than $t_1$, so by the hypothesis the recursive call returns a valid tree of level $k + 1$ with sequence $\text{seq}(m_1) \cdot \text{items}(sf_1) \cdot \text{items}(ts) \cdot \text{items}(pr_2) \cdot \text{seq}(m_2)$. With the digits $pr_1$ and $sf_2$ around it, the result has the sequence $\text{seq}(t_1) \cdot \text{items}(ts) \cdot \text{seq}(t_2)$. $\square$
+
+With $ts = [\,]$, APPEND is correct.
+
+**Lemma 5 (LOCATE).** If $0 \le i < \text{size}(xs)$, line L25 returns $(k, j)$ such that position $i$ of $\text{items}(xs)$ is position $j$ of $\text{items}(xs[k])$, with $0 \le j < \text{size}(xs[k])$.
+
+*Proof.* The prefix sizes $\text{size}(xs[1 .. k])$ increase with $k$ and reach $\text{size}(xs) > i$, so the least $k$ with $i < \text{size}(xs[1 .. k])$ exists, and $\text{size}(xs[1 .. k - 1]) \le i$ by minimality. The items of $xs[k]$ occupy the positions from $\text{size}(xs[1 .. k - 1])$ to $\text{size}(xs[1 .. k]) - 1$. $\square$
+
+**Lemma 6 (SPLIT-TREE).** If $t$ is a valid non-empty tree of level $k$ and $0 \le i < \text{size}(t)$, then SPLIT-TREE$(i, t)$ returns $(l, x, r)$ where $l$ and $r$ are valid trees of level $k$, $x$ is an element of level $k$, $\text{seq}(l) \cdot \text{items}(x) \cdot \text{seq}(r) = \text{seq}(t)$, and $\text{size}(l) \le i < \text{size}(l) + \text{size}(x)$.
+
+*Proof.* By induction on the depth of $t$. Line L26: $l$ and $r$ are empty and $0 \le i < \text{size}(x)$. Otherwise $t = \text{Deep}(pr, m, sf)$.
+
+*Case $i < \text{size}(pr)$ (line L27).* By Lemma 5, cutting $pr$ at LOCATE$(i, pr)$ gives lists $l$ and $r$ of at most 3 elements and the element $x$ that holds position $i$, with $\text{size}(l) \le i < \text{size}(l) + \text{size}(x)$. TREE-OF$(l)$ is valid with sequence $\text{items}(l)$, and DEEPL$(r, m, sf)$ is valid by Lemma 2 with sequence $\text{items}(r) \cdot \text{seq}(m) \cdot \text{items}(sf)$. The three parts concatenate to $\text{seq}(t)$.
+
+*Case $\text{size}(pr) \le i < \text{size}(pr) + \text{size}(m)$ (line L28).* Let $i' = i - \text{size}(pr)$, so $0 \le i' < \text{size}(m)$ and $m$ is non-empty. By the hypothesis, SPLIT-TREE$(i', m)$ returns valid trees $ml$ and $mr$ of level $k + 1$ and a node $n$ of level $k + 1$ with $\text{seq}(ml) \cdot \text{items}(n) \cdot \text{seq}(mr) = \text{seq}(m)$ and $\text{size}(ml) \le i' < \text{size}(ml) + \text{size}(n)$. So $0 \le i' - \text{size}(ml) < \text{size}(n)$, and Lemma 5 applies to the 2 or 3 children of $n$, giving lists $l$ and $r$ of at most 2 elements and an element $x$ of level $k$. DEEPR$(pr, ml, l)$ and DEEPL$(r, mr, sf)$ are valid by Lemma 2 and its mirror image, since $pr$ and $sf$ are digits. The sequences concatenate to $\text{items}(pr) \cdot \text{seq}(ml) \cdot \text{items}(n) \cdot \text{seq}(mr) \cdot \text{items}(sf) = \text{seq}(t)$. The left part has size $\text{size}(pr) + \text{size}(ml) + \text{size}(l)$, and by Lemma 5 position $i' - \text{size}(ml)$ of $\text{items}(n)$ lies in $x$ after the items of $l$, which gives the position bounds.
+
+*Case $i \ge \text{size}(pr) + \text{size}(m)$ (line L29).* Then $0 \le i - \text{size}(pr) - \text{size}(m) < \text{size}(sf)$ since $i < \text{size}(t)$. Note that line L29 computes $i - \text{size}(m)$ after line L28 has already subtracted $\text{size}(pr)$. Lemma 5 on $sf$ and the mirror image of Lemma 2 for DEEPR$(pr, m, l)$ give the claim as in the first case. $\square$
+
+**Corollary (SPLIT-AT).** For $0 < i < n$, SPLIT-TREE$(i, t)$ on a valid tree of level 0 returns an item $x$ with $\text{size}(l) \le i < \text{size}(l) + 1$, so $\text{size}(l) = i$, and $l$ and CONS$(x, r)$ hold the first $i$ items and the rest. For $i \le 0$ and $i \ge n$ the answer is direct.
+
+**Lemma 7 (LOOKUP).** If $t$ is a valid tree of level 0 and $0 \le i < \text{size}(t)$, LOOKUP$(i, t)$ returns the item at position $i$ of $\text{seq}(t)$.
+
+*Proof.* Let $y$ be the wanted item. The loop of lines L30 and L31 keeps the invariant: $t$ is a valid non-empty tree and $y$ is at position $i$ of $\text{seq}(t)$, with $0 \le i < \text{size}(t)$. When the loop condition holds, $y$ lies in $\text{seq}(m)$ at position $i - \text{size}(pr)$ by the definition of seq, and $m$ is non-empty, so the invariant holds for $m$. The loop stops, since the depth decreases. After it, $t$ is a Single, or a Deep tree with $i < \text{size}(pr)$ or $i \ge \text{size}(pr) + \text{size}(m)$. In the first case $y$ is at position $i$ of $\text{items}(x)$. In the second case, line L33 makes $y$ the item at position $i$ of $\text{items}(pr \mathbin{+\!\!+} sf)$: unchanged if it is in $pr$, and shifted by $\text{size}(m)$ if it is in $sf$. The loop of line L34 keeps the invariant "$y$ is at position $i$ of $\text{items}(xs)$, $0 \le i < \text{size}(xs)$" by Lemma 5. Each round goes one level down, so after at most the level of the elements of $xs$ rounds, $xs[k]$ is an item, and it is $y$. $\square$
+
+**Theorem.** Starting from Empty, every tree built by CONS, SNOC, VIEWL, VIEWR, APPEND and SPLIT-AT, applied to any earlier trees, is a valid tree of level 0, and each operation returns the sequences that the abstract type specifies. LOOKUP returns the item at the given position. All operations terminate.
+
+*Proof.* Empty is valid. Earlier trees are never changed, so they stay valid. Lemmas 1, 2, 4, 6 and 7, the corollary, and their mirror images give validity and the sequences. Each recursion is on a tree of smaller depth or a shorter list, and each loop goes down one level or along a list of at most 12 elements per round, so every call terminates. $\blacksquare$
