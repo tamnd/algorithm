@@ -11,17 +11,18 @@ summary: Gives the minimum running time over all inputs of a given size.
 prereqs: [time-complexity, input-size]
 see_also: [worst-case-analysis, average-case-analysis, adaptive-sorting, insertion-sort, asymptotic-notation]
 sources:
-  - url: "https://en.wikipedia.org/wiki/Best,_worst_and_average_case"
-    locator: article Best, worst and average case (definition of the best case)
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Section 2.2 (analysis of insertion sort, best case)
+    locator: Section 2.2, Analyzing algorithms (best case and worst case of insertion sort) and Section 3.1 (O, Omega and Theta for the best case)
+  - book: isbn:9780201896831
+    title: Donald E. Knuth, The Art of Computer Programming, Volume 1, third edition
+    locator: Section 1.2.10, Analysis of an Algorithm (the minimum, maximum and average of a step count)
   - book: isbn:9780321573513
     title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
     locator: Section 1.4 (Analysis of Algorithms) and Section 2.1 (insertion sort)
   - book: isbn:9780201896855
     title: Donald E. Knuth, The Art of Computer Programming, Volume 3, second edition
-    locator: Section 5.2.1 (sorting by insertion)
+    locator: Section 5.2.1 (sorting by insertion) and Section 6.2.1 (binary search, Algorithm B and the comparison tree)
 ---
 
 Best-case analysis measures the running time of an algorithm as the smallest time over all inputs of the same size. The result is a function $T_{\min}(n)$. It is a lower bound on the cost of the algorithm on every input, and it is not a promise of speed.
@@ -61,12 +62,19 @@ For sorting, take $x_n$ to be the sorted order. Test whether the array is sorted
 - **A lower bound for every input.** If an algorithm reads all its input, then $T_{\min}(n) = \Omega(n)$, and every input takes at least linear time.
 - **A check on a claimed lower bound.** The lower bound for sorting, $\lceil \lg n! \rceil$ comparisons, is a worst-case bound for the problem. It does not apply to the best case of one algorithm: insertion sort makes $n - 1$ comparisons on sorted input, which is fewer than $\lceil \lg n! \rceil$ for $n \ge 3$ (for $n = 8$: 7 against 16).
 
+### Pitfalls
+
+- **Best case is not small input.** "The best case is the empty array" is wrong. The best case is a minimum over the inputs of one fixed size $n$, so it is a function of $n$.
+- **Best case is not $\Omega$.** $\Omega$ is a kind of bound, and the best case is a function. The worst case has $\Omega$ bounds too, for example $T_{\max}(n) = \Omega(n^2)$ for insertion sort.
+- **A best case for the algorithm is not a bound for the problem.** A fast best case does not contradict a lower bound for the problem, because such a bound is about the worst case of every algorithm.
+- **Fast best case from a special test.** Before you quote a best case, check that it comes from a wide class of inputs and not from a test for one input, as in the trap above.
+
 The notations $O$, $\Omega$ and $\Theta$ are about functions and not about cases. "The best case of insertion sort is $O(n)$" and "the best case of insertion sort is $\Omega(n)$" are both correct and say $T_{\min}(n) = \Theta(n)$. See [asymptotic notation](/asymptotic-notation/).
 
 ## Examples
 
 - **[Linear search](/linear-search/).** The best case is a key in the first place: 1 comparison, for each $n \ge 1$. The worst case is $n$ comparisons.
-- **[Binary search](/binary-search/).** With a three-way comparison at each probe, the best case is a key at the middle probe: 1 probe. The worst case is $\lfloor \lg n \rfloor + 1$ probes. The variant that leaves the equality test to the end always makes about $\lg n$ probes.
+- **[Binary search](/binary-search/).** With a three-way comparison at each probe, the best case is a key at the middle probe: 1 probe. The worst case is $\lfloor \lg n \rfloor + 1$ probes. The variant that tests only "less than" in the loop and leaves the equality test to the end makes $\lfloor \lg n \rfloor$ or $\lceil \lg n \rceil$ such tests and then one equality test, on every input. Its best case and its worst case differ by at most one comparison, so a fast best case is not a property of binary search itself but of the three-way version.
 - **[Insertion sort](/insertion-sort/).** For $i = 2, \ldots, n$ the key $A[i]$ is compared with at least one item of the sorted part, so there are at least $n - 1$ comparisons. A sorted array, in which each key is not smaller than the item before it, gives exactly one comparison for each $i$. So $T_{\min}(n) = n - 1$ comparisons. For $n = 8$ this is 7, and the worst case is $n(n-1)/2 = 28$.
 - **[Bubble sort](/bubble-sort/) with an early exit.** If a pass makes no swap, the algorithm stops. On a sorted array the first pass makes $n - 1$ comparisons and no swap, so $T_{\min}(n) = n - 1$. In the usual version without the early exit, the count is $n(n-1)/2$ on every input.
 - **Top-down [merge sort](/merge-sort/).** A merge of two sorted runs with $a$ and $b$ items makes at least $\min(a, b)$ comparisons: each comparison moves one item to the output, and when one run is empty the other is copied without comparisons, so all items of the run that empties first were output by comparisons. This bound is reached when all items of the shorter run are smaller than all items of the longer one. If the array is split into runs of $\lceil n/2 \rceil$ and $\lfloor n/2 \rfloor$ items, the best case obeys $B(n) = B(\lceil n/2 \rceil) + B(\lfloor n/2 \rfloor) + \lfloor n/2 \rfloor$ with $B(1) = 0$. An input with distinct keys that reaches $B(n)$ for every $n$ exists: put the smallest $\lfloor n/2 \rfloor$ values in the right half and the others in the left half, and build each half in the same way. For $n$ equal to a power of 2 the sorted array reaches it, and $B(2^k) = k \, 2^{k-1}$. Proof by induction: $B(1) = 0$ and $B(2^k) = 2 B(2^{k-1}) + 2^{k-1} = (k-1) 2^{k-1} + 2^{k-1} = k \, 2^{k-1}$. So $B(8) = 12$, against 17 comparisons in the worst case. The best case is about half of the worst case, and both are $\Theta(n \log n)$: here the best case does not change the order of growth.

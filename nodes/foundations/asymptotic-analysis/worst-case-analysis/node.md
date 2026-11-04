@@ -13,15 +13,21 @@ see_also: [best-case-analysis, average-case-analysis, amortized-vs-worst-case, o
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Section 2.2
+    locator: Section 2.2, Analyzing algorithms (worst-case and average-case analysis of insertion sort) and Section 3.1 (worst-case bounds in O, Omega and Theta)
+  - book: isbn:9780201896831
+    title: Donald E. Knuth, The Art of Computer Programming, Volume 1, third edition
+    locator: Section 1.2.10, Analysis of an Algorithm (minimum, maximum and average)
   - book: isbn:9780321573513
     title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
-    locator: Section 1.4
+    locator: Section 1.4, Analysis of Algorithms
   - book: isbn:9780321295354
-    title: Kleinberg and Tardos, Algorithm Design
-    locator: Chapter 2
-  - paper: "Daniel A. Spielman and Shang-Hua Teng, Smoothed analysis of algorithms: why the simplex algorithm usually takes polynomial time, Journal of the ACM 51 (2004)"
-    locator: Introduction
+    title: Jon Kleinberg and Éva Tardos, Algorithm Design
+    locator: Section 2.1, Computational Tractability (the case for worst-case running time)
+  - paper: "Victor Klee and George J. Minty, How good is the simplex algorithm?, in O. Shisha (editor), Inequalities III, Academic Press, 1972, pages 159 to 175"
+    locator: the exponential example for Dantzig's rule
+  - paper: doi:10.1145/990308.990310
+    title: "Daniel A. Spielman and Shang-Hua Teng, Smoothed analysis of algorithms: why the simplex algorithm usually takes polynomial time, Journal of the ACM 51(3), 2004, pages 385 to 463"
+    locator: the definition of smoothed complexity and the main theorem
 ---
 
 Worst-case analysis measures the running time of an algorithm as the largest time over all inputs of the same size. The result is a function $T_{\max}(n)$ and a guarantee: no input of size $n$ makes the algorithm slower. It is the default way to state a [time complexity](/time-complexity/).
@@ -56,16 +62,21 @@ To prove a bound $T_{\max}(n) \le f(n)$, you show $t_A(x) \le f(n)$ for each $x 
 
 Always $T_{\min}(n) \le T_{\mathrm{avg}}(n) \le T_{\max}(n)$, for any distribution.
 
+**The worst case of a problem.** For a problem $P$ in a model, the worst-case complexity of $P$ is $C_P(n) = \min_A T^A_{\max}(n)$, the minimum over all algorithms $A$ for $P$ in the model. An algorithm gives an upper bound on $C_P$. A [lower bound](/lower-bound/) on $C_P$ must hold for every algorithm, and the standard tools are counting arguments, as for [comparison sorting](/comparison-sort-lower-bound/), and [adversary arguments](/adversary-argument/), where an adversary answers the questions of the algorithm so that it must work for a long time. An algorithm whose worst case matches the lower bound is [asymptotically optimal](/asymptotic-optimality/).
+
 **A limit.** The worst-case function can be far above the cost on inputs that occur in practice. In such a case the worst-case bound is still true, but it does not predict the time that you see in practice. Two classic cases:
 
-- [Quicksort](/quicksort/) with the first item as the pivot makes $\Theta(n^2)$ comparisons on a sorted array ($n(n-1)/2$ with Lomuto partitioning), so its worst case is $\Theta(n^2)$. Its average over random orders is $\Theta(n \log n)$.
-- The [simplex method](/simplex-method/) with Dantzig's pivot rule needs an exponential number of steps on the cubes of Klee and Minty (1972), and similar inputs are known for most other standard rules. But it is fast on most inputs that occur in practice. [Smoothed analysis](/smoothed-analysis/), by Spielman and Teng, explains this gap: it measures the worst case of the expected time after a small random change of the input.
+- [Quicksort](/quicksort/) with the first item as the pivot, and a partition that makes $m - 1$ comparisons on $m$ items, makes $(n-1) + (n-2) + \cdots + 1 = n(n-1)/2$ comparisons on a sorted array, because each partition leaves one side empty. So its worst case is $\Theta(n^2)$. Its average over random orders of distinct keys is $2(n+1)H_n - 4n = \Theta(n \log n)$ comparisons, with $H_n$ the [harmonic number](/harmonic-series/). For $n = 1000$ the two counts are $499\,500$ and about $10\,986$.
+- The [simplex method](/simplex-method/) with Dantzig's pivot rule needs $2^d - 1$ pivot steps on the deformed cubes of Klee and Minty (1972) in dimension $d$, and similar inputs are known for many other standard rules. But it is fast on most inputs that occur in practice. [Smoothed analysis](/smoothed-analysis/), by Spielman and Teng, explains this gap: it measures the worst case of the expected time after a small random change of the input.
 
 ### Pitfalls
 
 - **A worst-case $\Theta$ is not a statement about each input.** "The worst-case time of insertion sort is $\Theta(n^2)$" does not say that insertion sort takes quadratic time on each input. On a sorted input it takes linear time.
 - **A bare $O$.** When a source writes "the algorithm runs in $O(f(n))$ time" and names no case, it means a worst-case upper bound. A bare $\Omega$ or $\Theta$ claims the bound for every input. So "insertion sort runs in $\Theta(n^2)$ time" is false, and "its worst-case time is $\Theta(n^2)$" is true. Name the case when you use $\Theta$.
-- **One bad input is enough for a lower bound, not for an upper bound.** To show $T_{\max}(n) = O(f(n))$ you must cover every input of size $n$. Tests on many inputs do not prove it.
+- **One bad input is enough for a lower bound, not for an upper bound.** To show $T_{\max}(n) = O(f(n))$ you must cover every input of size $n$. Tests on many inputs do not prove it, because a random generator rarely produces the worst input.
+- **The worst input depends on the details.** For quicksort with the first item as pivot, a sorted array is a worst input. For the median of three items as pivot, a sorted array is a good input, and other inputs are bad. Prove the bound for the exact program.
+- **The set of inputs must be stated.** "Inputs of size $n$" may mean arrays of distinct keys, or arrays with repeated keys. Quicksort with a two-way partition that puts all keys equal to the pivot on one side takes $\Theta(n^2)$ time on an array of equal keys, so a bound proved for distinct keys does not cover this input.
+- **The worst case of an algorithm is not the complexity of a problem.** The worst-case complexity of a problem is the least worst-case cost over all algorithms for it. An upper bound for one algorithm bounds it from above. A lower bound for the problem needs an argument about every algorithm, see below.
 
 ## Examples
 
@@ -83,7 +94,7 @@ So $T_{\max}(n) = \Theta(n)$, and the average is half of the worst case. The fac
 - The upper bound is reached by the reverse-sorted input (all items distinct): each key is smaller than all items before it, so step $i$ makes exactly $i-1$ comparisons.
 - The lower bound is reached by the sorted input: each key is compared once.
 
-So, in comparisons, $T_{\max}(n) = n(n-1)/2 = \Theta(n^2)$ and $T_{\min}(n) = n - 1$. For $n = 8$ the two counts are $28$ and $7$. For the average over the $24$ orders of $4$ distinct items the count is $59/12 \approx 4.92$, between $3$ and $6$. See [insertion sort](/insertion-sort/) for the algorithm and its proof.
+So, in comparisons, $T_{\max}(n) = n(n-1)/2 = \Theta(n^2)$ and $T_{\min}(n) = n - 1$. For $n = 8$ the two counts are $28$ and $7$. The average over the uniform distribution on orders is $n(n-1)/4 + n - H_n$ (see [time complexity](/time-complexity/) for the proof). For the $24$ orders of $4$ distinct items it is $59/12 \approx 4.92$, between $3$ and $6$. See [insertion sort](/insertion-sort/) for the algorithm and its proof.
 
 ## Where it is used
 
