@@ -1,0 +1,33 @@
+---
+title: The SS-tree operations keep the invariant, stop, and the ball and nearest neighbor searches return the right points
+proves: [correctness, termination]
+status: full
+---
+
+Let $M \ge 2$ and $1 \le m \le M/2$. Heights count from the leaves: a leaf has height 0. For a node $u$, let $P(u)$ be the multiset of points below $u$. We use the invariant (S): (1) all leaves at one depth; (2) between $m$ and $M$ entries in each non-root node, at least 2 in an internal root; (3) $c_u$ is the mean of $P(u)$ and $n_u = |P(u)|$; (4) $\lVert p - c_u \rVert \le \rho_u$ for every $p \in P(u)$.
+
+**Lemma 1 (recompute).** If every child of $u$ satisfies (3) and (4), then lines L5 and L6 make (3) and (4) hold at $u$.
+
+*Proof.* For a leaf, $c_u$ is the mean of its points and $\rho_u$ is the largest distance to them, which is (3) and (4). For an internal node, $P(u)$ is the disjoint union of the $P(v)$ over its children, so $n_u = \sum_v n_v$ and the mean of $P(u)$ is $\frac{1}{n_u}\sum_v \sum_{p \in P(v)} p = \frac{1}{n_u}\sum_v n_v c_v$, which is (3). For $p \in P(v)$, $\lVert p - c_u \rVert \le \lVert p - c_v \rVert + \lVert c_v - c_u \rVert \le \rho_v + \lVert c_v - c_u \rVert \le \rho_u$ by the triangle inequality and the choice of $\rho_u$, which is (4). $\square$
+
+**Lemma 2 (split).** SPLIT of a node with $M + 1$ entries gives two groups that partition the entries, each with between $m$ and $M$ entries.
+
+*Proof.* Line L8 cuts a sorted list of the $M + 1$ entries at $k$ with $m \le k \le M + 1 - m$; this range is not empty since $2m \le M < M + 1$. The first group has $k \ge m$ entries and the second $M + 1 - k \ge m$, and both have at most $M + 1 - m \le M$. $\square$
+
+**Lemma 3 (INSERT).** Let (S) hold, and let $e$ be a point (level 0) or a node of height $\ell - 1$ whose subtree satisfies (S) inside, with $\ell \le$ the height of the tree. Then INSERT$(e, \ell)$ stops, and afterwards (S) holds for the old points plus those of $e$.
+
+*Proof.* Lines L1 and L2 follow one child per level, from the root down to a node $u$ of height $\ell$, which exists because $\ell$ is at most the height; this takes at most $h$ steps. Line L3 adds $e$ to $u$, so the leaves of $e$ are at the same depth as all other leaves. Line L4 walks from $u$ to the root, one level per step, so it stops. At each node on the walk, if it has $M + 1$ entries it is split, by Lemma 2, into two nodes with between $m$ and $M$ entries at the same height; if it is the root, a new root with two entries is made, and all leaves become one level deeper, which keeps (1); otherwise the new node goes into the parent, which is the next node of the walk and may then have $M + 1$ entries. The nodes off the walk keep their entries. So (1) and (2) hold at the end. For (3) and (4): the only nodes whose sets $P$ change are $u$, its ancestors, and the nodes made by splits on the walk. The walk recomputes each of them from the bottom up, after its children are final: the new node of a split is recomputed when it is made, and the node that was split, and then its parent, are recomputed by line L4. By Lemma 1 and induction on height, (3) and (4) hold at every node. $\square$
+
+**Lemma 4 (DELETE).** Let (S) hold. DELETE$(p, \text{id})$ stops, returns false if $(p, \text{id})$ is not stored, and otherwise leaves (S) for the points without it.
+
+*Proof.* The search of line L11 visits only nodes whose sphere contains $p$, and by (4) every node above the leaf that holds $(p, \text{id})$ contains $p$, so if the entry is stored, the search finds it; it visits each node at most once, so it stops. Line L12 walks from the leaf to the root. Each node with fewer than $m$ entries is removed from its parent, and its entries are kept with its height $h_u$; nodes that stay are recomputed by Lemma 1, from the bottom up, and the root is recomputed last. At this point, (1), (3) and (4) hold for the points still in the tree, and every non-root node has between $m$ and $M$ entries. If the root was a leaf and is now empty, the tree is empty. Otherwise the root keeps at least one entry: a child of an internal root other than the one on the path is unchanged. Each kept entry was in a node of height $h_u$ below the root, so the tree still has height at least $h_u + 1 > h_u$ when it is reinserted at line L13 (the height can only grow during reinsertion), and Lemma 3 applies. Line L14 removes roots with one child, each step lowering the height by one, which keeps (1) and gives an internal root at least 2 entries. Each step of every loop moves up a level or handles one of finitely many kept entries, so DELETE stops. $\square$
+
+**Lemma 5 (lower bound).** For every node $v$ and every $p \in P(v)$, $\lVert q - p \rVert \ge \beta(v) = \max(0, \lVert q - c_v \rVert - \rho_v)$.
+
+*Proof.* By the triangle inequality and (4), $\lVert q - p \rVert \ge \lVert q - c_v \rVert - \lVert c_v - p \rVert \ge \lVert q - c_v \rVert - \rho_v$, and distances are at least 0. $\square$
+
+**Theorem.** BALL$(q, r)$ reports exactly the stored points within distance $r$ of $q$. KNN$(q, k)$ returns $\min(k, n)$ points, in order of distance, whose distances are the $\min(k, n)$ smallest distances from $q$ to the stored points. Both stop.
+
+*Proof.* BALL. A point is reported only if its distance is at most $r$. If $\lVert q - p \rVert \le r$ for a stored $p$, then for every node $v$ above it, $\lVert q - c_v \rVert - \rho_v \le \lVert q - p \rVert \le r$ by Lemma 5, so line L15 does not skip $v$, and the search reaches the leaf of $p$ and reports it. Each node is visited at most once, so BALL stops.
+
+KNN. Every item in the queue has a key: a point its distance, a node $v$ its bound $\beta(v)$. Claim: when a point $p$ is popped, no stored point that has not been output is nearer than $p$. Every stored point $p'$ not yet output is in the queue itself, or below a node $v$ in the queue, since the root starts the queue and every popped node pushes all its entries. In the first case its key is $\lVert q - p' \rVert \ge \lVert q - p \rVert$, since $p$ had the least key. In the second, $\lVert q - p' \rVert \ge \beta(v) \ge \lVert q - p \rVert$, by Lemma 5 and the choice of $p$. So the points come out in order of distance, each stored point at most once, and the first $\min(k, n)$ points out are the nearest. Each node and each point is pushed at most once, so the loop runs at most $O(n)$ times and stops. $\blacksquare$

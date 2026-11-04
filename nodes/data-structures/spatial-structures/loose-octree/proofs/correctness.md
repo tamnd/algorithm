@@ -1,0 +1,21 @@
+---
+title: The loose octree places each box in a loose cell and reports exactly the boxes that meet a query
+proves: [correctness, termination]
+status: full
+---
+
+We use the names of the pseudocode. The root cube is $[0, 2^D)^3$, and boxes are closed with integer corners in it. A node at depth $d$ has side $s = 2^{D-d}$ and index $(i, j, k)$; on each axis its cell is $[is, (i+1)s)$ and its loose cell is $L = [is - s/2, (i+1)s + s/2]$. The placement of a box $b$ is the pair $(t, \iota)$ computed by lines L1 to L3. The invariant (P) asks: (1) each box is stored once, at the node of its placement; (2) the children of a node are its octants; (3) each node other than the root stores a box or has a child.
+
+**Lemma 1 (placement is valid).** The placement of $b$ has $0 \le t \le D$, its cell holds the center of $b$, and $b$ lies in its loose cell. *Proof.* All corners are in $[0, 2^D)$, so $e \le 2^D - 1$ and the least power of two $s \ge \max(e, 1)$ has $1 \le s \le 2^D$, which gives $0 \le t \le D$. On one axis, with $c = (lo + hi)/2$ and $i = \lfloor c / s \rfloor$, we have $is \le c < (i+1)s$, and $0 \le c < 2^D$ gives $0 \le i < 2^D / s$, so the cell is a cell of depth $t$. The box reaches from $c - (hi - lo)/2$ to $c + (hi - lo)/2$, and $(hi - lo)/2 \le e/2 \le s/2$, so it lies in $[is - s/2, (i+1)s + s/2]$. The code computes $i$ as $\lfloor (lo + hi) / (2s) \rfloor$, which is the same number. $\square$
+
+**Lemma 2 (paths).** The walk of line L4 reaches the node of index $\iota$ at depth $t$, and each node on the way is the octant of its parent that holds the cell of $\iota$. *Proof.* The cell of index $\iota$ at depth $t$ lies in the cell at depth $d$ whose index is $\iota$ shifted right by $t - d$ bits on each axis. The child of that cell that holds it has index $2 \iota' + b$ with $b$ the next bit, bit $t - d - 1$ of $\iota$. So taking these bits as the octant at each depth goes down the chain of cells that hold the cell of $\iota$. $\square$
+
+**Lemma 3 (nested loose cells).** The loose cell of a child lies in the loose cell of its parent, so every box stored at a node or below it lies in the loose cell of that node. *Proof.* On one axis, let the parent have side $s$ and index $i$, and the child side $s/2$ and index $2i + \beta$ with $\beta \in \{0, 1\}$. The child's loose cell is $[(2i + \beta)s/2 - s/4,\ (2i + \beta + 1)s/2 + s/4]$, which lies in $[is - s/4,\ (i+1)s + s/4] \subseteq [is - s/2,\ (i+1)s + s/2]$. The second claim follows from Lemma 1 and part 2, by induction up from the node of the box. $\square$
+
+**INSERT.** By Lemmas 1 and 2, lines L1 to L4 reach the node of the placement, making missing nodes as octants of their parents, so part 2 holds and the walk stops after $t \le D$ steps. The code checks that $b$ is not in the list, and by part 1 this is the only node where $b$ could be stored, so line L5 keeps part 1. The nodes made now have $b$ below them, so part 3 holds.
+
+**DELETE.** The placement depends only on $b$. If $b$ is stored, by part 1 it is at the node of its placement, whose path exists, so line L11 finds that node and line L12 removes $b$. If a node of the path is missing or the list does not hold $b$, then $b$ is not stored and nothing changes. After the removal, part 3 can fail only on the path, and lines L13 and L14 remove the empty nodes from the bottom up; when the loop stops at a node that stores a box or has a child, every node above it has that node below it. Each pass goes up one level, so the loop stops after at most $D$ passes. MOVE is a DELETE followed by an INSERT.
+
+**QUERY.** Each node is pushed once, by its parent, so the loop stops, and by part 1 no box is reported twice. Each reported box is stored and meets $q$, by line L9. Let a stored box $b$ meet $q$, at the node $u$. For each node $w$ on the path from the root to $u$, $b$ lies in the loose cell of $w$ by Lemma 3, so that loose cell meets $q$ and line L7 does not skip $w$. Line L10 pushes all children, so $u$ is visited, and line L9 reports $b$.
+
+**Uniqueness.** By part 1 the node of each box is its placement, which depends only on the box, and by part 3 a node exists if and only if it is on the path of a stored box. So the tree depends only on the set of boxes. $\blacksquare$
