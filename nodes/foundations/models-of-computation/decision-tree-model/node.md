@@ -10,17 +10,35 @@ area: foundations/models-of-computation
 level: core
 summary: Algorithms as trees of queries whose cost is the depth; gives lower bounds such as the sorting bound.
 prereqs: [comparison-model, asymptotic-notation, logarithms]
-see_also: [information-theoretic-bound, counting-argument, decision-tree-method, adversary-argument, comparison-sort-lower-bound, sorted-search-lower-bound, algebraic-decision-tree, yao-minimax-principle]
+see_also: [information-theoretic-bound, decision-tree-method, adversary-argument, comparison-sort-lower-bound, query-complexity, sensitivity-theorem, algebraic-decision-tree, yao-minimax-principle]
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
-    locator: Section 8.1
+    locator: Section 8.1 (the decision-tree model and Theorem 8.1)
   - book: isbn:9780201896855
     title: Donald E. Knuth, The Art of Computer Programming, Volume 3, second edition
-    locator: Section 5.3.1
-  - book: isbn:9780321573513
-    title: Robert Sedgewick and Kevin Wayne, Algorithms, fourth edition
-    locator: Section 2.2, Proposition I
+    locator: Section 5.3.1 (minimum-comparison sorting, the table of values of S(n))
+  - book: isbn:9780521424264
+    title: Sanjeev Arora and Boaz Barak, Computational Complexity, A Modern Approach
+    locator: Chapter 12, Decision trees (certificate complexity, randomized decision trees and Yao's principle)
+  - paper: doi:10.1016/S0304-3975(01)00144-X
+    title: Harry Buhrman and Ronald de Wolf, Complexity measures and decision tree complexity, a survey, Theoretical Computer Science 288(1) (2002)
+    locator: pp. 21 to 43 (sensitivity, block sensitivity, certificate complexity, degree and their relations)
+  - paper: doi:10.4007/annals.2019.190.3.6
+    title: Hao Huang, Induced subgraphs of hypercubes and a proof of the sensitivity conjecture, Annals of Mathematics 190(3) (2019)
+    locator: pp. 949 to 955
+  - paper: doi:10.1016/0304-3975(76)90053-0
+    title: Ronald L. Rivest and Jean Vuillemin, On recognizing graph properties from adjacency matrices, Theoretical Computer Science 3(3) (1976)
+    locator: pp. 371 to 384
+  - paper: doi:10.1007/BF02579140
+    title: Jeff Kahn, Michael Saks and Dean Sturtevant, A topological approach to evasiveness, Combinatorica 4(4) (1984)
+    locator: pp. 297 to 306
+  - paper: doi:10.1109/SFCS.1986.44
+    title: Michael Saks and Avi Wigderson, Probabilistic Boolean decision trees and the complexity of evaluating game trees, 27th IEEE Symposium on Foundations of Computer Science (FOCS 1986)
+    locator: pp. 29 to 38
+  - paper: doi:10.1109/SFCS.1977.24
+    title: Andrew Chi-Chih Yao, Probabilistic computations, toward a unified measure of complexity, 18th IEEE Symposium on Foundations of Computer Science (FOCS 1977)
+    locator: pp. 222 to 227 (the minimax principle)
 ---
 
 The decision tree model describes an algorithm as a rooted tree. Each inner node asks one query about the input, each branch is one answer, and each leaf gives the output. The cost of the algorithm on an input is the number of queries on the path that the input follows, and the cost of the algorithm is the height of the tree, the largest number of queries on any path. Only queries cost: all other work is free, so a lower bound in this model holds for every algorithm that learns about its input through these queries, however fast its other steps are.
@@ -49,6 +67,8 @@ Three common choices of $Q$:
 The **depth** of a leaf is the number of edges from the root to the leaf. The **height** of a tree is the largest depth of a leaf. Let $\mathrm{D}(f)$ be the least height of a decision tree over $Q$ that computes $f$. This is the **worst-case cost** of $f$ in the model: some input needs $\mathrm{D}(f)$ queries, and no algorithm of the model does better on its worst input.
 
 For a probability distribution $\mu$ on $X$, the **average cost** of a tree is $\sum_{x \in X} \mu(x) \cdot \mathrm{depth}(\text{leaf reached by } x)$. A **randomized** algorithm is a probability distribution over trees. Its expected cost on an input is the average over this distribution. The randomized cost of the algorithm is the largest expected cost over all inputs $x \in X$. See the [Yao minimax principle](/yao-minimax-principle/).
+
+For Boolean functions there are two standard randomized costs. $R_0(f)$ is the least randomized cost of an algorithm that is always correct (zero error). $R_2(f)$ is the least randomized cost of an algorithm that is correct with probability at least $2/3$ on each input (bounded error). Then $R_2(f) \le R_0(f) \le \mathrm{D}(f)$. The name *query complexity* is also used for these costs; see [query complexity](/query-complexity/).
 
 The model does not count the size of the tree, the memory, or any work between queries.
 
@@ -146,6 +166,48 @@ Counting needs many outputs. The function $f : \{0,1\}^n \to \{0,1\}$ has two ou
 
 *Proof.* The tree that reads $x_1, \dots, x_n$ in order has height $n$. Now take any tree of height less than $n$. Take a leaf and an input $x$ that reaches it. The path has fewer than $n$ queries, so some index $i$ is not queried on it. Let $x'$ be $x$ with bit $i$ changed. The run on $x'$ gives the same answers to the same queries, so it reaches the same leaf. The two inputs have different parity but the same output. So the tree is wrong. ∎
 
-This is an [adversary argument](/adversary-argument/): the adversary answers each query and keeps one free bit until the end.
+This is an [adversary argument](/adversary-argument/): the adversary answers each query and keeps one free bit until the end. The same argument shows $\mathrm{D}(\mathrm{OR}_n) = n$: the adversary answers 0 to each query, and while one bit is unread, the output can still be 0 or 1.
+
+### Sensitivity, certificates and degree
+
+Let $f : \{0,1\}^n \to \{0,1\}$. For $x \in \{0,1\}^n$ and a set $S$ of indices, let $x^S$ be $x$ with the bits in $S$ flipped. Four measures bound $\mathrm{D}(f)$ from below.
+
+- The **sensitivity** $s(f)$ is the largest, over $x$, number of indices $i$ with $f(x^{\{i\}}) \ne f(x)$.
+- The **block sensitivity** $bs(f)$ is the largest, over $x$, number of pairwise disjoint sets $S_1, \dots, S_k$ with $f(x^{S_j}) \ne f(x)$ for each $j$.
+- The **certificate complexity** $C(f)$ is the least $c$ such that each $x$ has a set of at most $c$ indices whose values in $x$ fix $f$: every $y$ that agrees with $x$ on the set has $f(y) = f(x)$. See [certificate complexity](/certificate-complexity/).
+- The **degree** $\deg(f)$ is the degree of the unique multilinear real polynomial that equals $f$ on $\{0,1\}^n$. See [polynomial degree](/polynomial-degree/).
+
+**Theorem 8.** For every $f$, $s(f) \le bs(f) \le C(f) \le \mathrm{D}(f)$ and $\deg(f) \le \mathrm{D}(f)$.
+
+*Proof.* A sensitive index $i$ is a block $\{i\}$, so $s(f) \le bs(f)$. Let $S_1, \dots, S_k$ be disjoint sensitive blocks at $x$, and let $T$ be a certificate for $x$. If $T$ misses a block $S_j$, then $x^{S_j}$ agrees with $x$ on $T$, so $f(x^{S_j}) = f(x)$, which is false. So $T$ meets each of the $k$ disjoint blocks, and $|T| \ge k$. This gives $bs(f) \le C(f)$. In a tree of height $\mathrm{D}(f)$, the queries on the path of $x$ form a certificate for $x$, because each $y$ that agrees with $x$ on them follows the same path. This gives $C(f) \le \mathrm{D}(f)$. For the degree, each leaf $\ell$ defines the product $p_\ell(x)$ of the factors $x_i$ (for the answer 1) and $1 - x_i$ (for the answer 0) over the queries on its path. Then $p_\ell(x) = 1$ when $x$ reaches $\ell$ and $0$ otherwise, and $f = \sum_\ell (\text{label of } \ell)\, p_\ell$ is a polynomial of degree at most the height. Replace each $x_i^2$ by $x_i$, which changes no value on $\{0,1\}^n$, to make it multilinear. The multilinear representation is unique, so $\deg(f) \le \mathrm{D}(f)$. $\square$
+
+For the majority of 3 bits, $s = bs = C = 2$ and $\mathrm{D} = \deg = 3$, since $\mathrm{MAJ}_3 = x_1x_2 + x_1x_3 + x_2x_3 - 2x_1x_2x_3$.
+
+The measures are also bounded in the other direction. $\mathrm{D}(f) \le C(f)^2$, $\mathrm{D}(f) \le bs(f)^3$, $bs(f) \le 2\deg(f)^2$, and $\mathrm{D}(f) = O(R_2(f)^3)$ (Buhrman and de Wolf, 2002, give these with their sources). The question whether $s(f)$ is also polynomially related to them was the *sensitivity conjecture*. Huang (2019) proved $s(f) \ge \sqrt{\deg(f)}$, which settles it: $s$, $bs$, $C$, $\deg$, $\mathrm{D}$ and $R_2$ are all polynomially related. See the [sensitivity theorem](/sensitivity-theorem/), [sensitivity](/sensitivity/) and [block sensitivity](/block-sensitivity/).
+
+### Graph properties and evasiveness
+
+A function is *evasive* if $\mathrm{D}(f) = n$, so that some input forces the tree to read every bit. A graph property on $v$ vertices is a function of the $\binom{v}{2}$ bits of the adjacency matrix that does not change when the vertices are renamed. It is *monotone* if adding an edge never changes the answer from 1 to 0, and *nontrivial* if it is not constant.
+
+- Rivest and Vuillemin (1976) proved that every nontrivial monotone graph property has $\mathrm{D} = \Omega(v^2)$. So for such properties, such as "the graph is connected" or "the graph has a triangle", no algorithm that reads the adjacency matrix is much faster than reading all of it.
+- Kahn, Saks and Sturtevant (1984) proved that every nontrivial monotone graph property is evasive when $v$ is a prime power, and improved the general bound to about $v^2/4$.
+- The conjecture that every nontrivial monotone graph property is evasive for all $v$ (the Aanderaa, Karp and Rosenberg conjecture) is open.
+
+Monotonicity is needed. Some graph properties that are not monotone are decided with $O(v)$ queries; the standard example is the property of being a *scorpion graph*.
+
+### Randomized trees
+
+A randomized tree can be much cheaper than a deterministic one. Let $f$ be the complete binary tree of NAND gates of height $h$, a function of $n = 2^h$ bits that evaluates a game tree. Every deterministic tree reads all $n$ bits on some input, so $\mathrm{D}(f) = n$. The randomized algorithm of Snir evaluates a random child first and skips the other child when the first one decides the gate. Saks and Wigderson (1986) proved that its expected cost is $\Theta(n^{\alpha})$ with $\alpha = \lg\big((1 + \sqrt{33})/4\big) \approx 0.7537$, and that no zero-error randomized algorithm does better. See [game tree evaluation](/game-tree-evaluation/).
+
+Lower bounds for randomized trees use the [Yao minimax principle](/yao-minimax-principle/) (Yao, 1977). For every distribution $\mu$ on inputs, the expected cost of the best zero-error randomized algorithm on its worst input is at least the least average cost under $\mu$ of a deterministic tree that computes $f$. The randomized sorting bound after Theorem 5 is this principle with the uniform distribution on the $n!$ orders.
+
+### Pitfalls
+
+- **A lower bound holds only for the queries in $Q$.** The sorting bound is for comparisons. Integer keys allow other operations, and [radix sort](/radix-sort/) uses them to beat it. Name the query set with every bound.
+- **The counting bound is only a lower bound.** It needs no tree to exist. For $n = 12$ the least height is 30, not $\lceil \lg(12!) \rceil = 29$.
+- **The counting bound is weak for few outputs.** For a function with two outputs it gives one query. Use an adversary, certificates or degree instead, as for parity and OR above.
+- **Height is not running time.** The model counts queries only. A tree of height $O(n \log n)$ can need exponential time to compute the next query, and a tree of small height can have exponentially many nodes.
+- **The model is non-uniform.** A bound for each $n$ separately does not give one algorithm for all $n$. An upper bound in the model is not an algorithm until someone gives a uniform way to build the trees.
+- **Randomized and deterministic costs differ.** A deterministic lower bound, such as $\mathrm{D}(f) = n$ for the NAND tree, does not hold for randomized algorithms. A randomized lower bound needs its own argument, usually Yao's principle.
 
 ## References
