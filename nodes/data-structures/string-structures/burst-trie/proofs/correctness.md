@@ -1,0 +1,21 @@
+---
+title: The burst trie operations keep the invariant and implement the symbol table
+proves: [correctness]
+status: full
+---
+
+We use the representation, the invariant (B1) to (B3) and the pseudocode of the page. The *place* of a key $s$ in the current structure is defined by the walk: start at the root with $d = 0$; while at an access node $x$ with $d < \lvert s \rvert$ whose slot for $s[d]$ holds an access node, move to it and add 1 to $d$. The walk stops at an access node $x$ with either $d = \lvert s \rvert$ (the place is $x.val$) or with the slot for $s[d]$ holding a container $c$ or empty (the place is the pair with string $s[d+1 ..]$ in $c$, or the empty slot). By construction $path(x) = s[0 .. d-1]$.
+
+**Lemma 1 (unique place).** Under (B1), if $s$ is stored, it is stored at its place.
+
+*Proof.* By (B1), $s$ is stored either as $path(y)$ for an access node $y$, or as $path(c) \cdot t$ for a container $c$. In the first case, $path(y) = s$, so $y$ lies on the walk of $s$ (each ancestor of $y$ is an access node whose path is a prefix of $s$, and its slot for the next symbol of $s$ leads towards $y$), and the walk reaches $y$ with $d = \lvert s \rvert$. In the second case, $path(c)$ is a prefix of $s$, of length $\lvert path(c) \rvert = e$, and $c$ hangs in the slot for $s[e - 1]$ of an access node $x$ with $path(x) = s[0 .. e-2]$. The walk reaches $x$ (same argument) with $d = e - 1 < \lvert s \rvert$ and stops there, because the slot holds a container. Its place is the pair with string $s[e ..] = t$ in $c$. $\square$
+
+**GET.** Lines L1 to L3 perform the walk of the definition. If the walk ends with $d = \lvert s \rvert$, line L2 returns $x.val$; else line L4 looks up $s[d+1 ..]$ in the container, correctly by (B3) for a binary search, and line L5 returns its value or NIL. By Lemma 1 and (B1), this is the value of $s$ or NIL.
+
+**PUT.** Line L6 performs the walk. If it ends at an access node with $d = \lvert s \rvert$, setting $x.val$ stores $s$ at its place. Otherwise, lines L7 to L9 put $(s[d+1 ..], v)$ in the container of the slot for $s[d]$, keeping it sorted and without repeats, so by Lemma 1 the key $s$ is stored once, with value $v$, and the other keys are untouched. Now (B1) and (B3) hold, and (B2) can fail only at that container, if it has $L + 1$ pairs.
+
+**BURST.** Let $c$ hang at path $q$ and be replaced by the access node $y$, so $path(y) = q$. Each pair $(t, v)$ of $c$ stood for the key $q \cdot t$. Line L11 stores it as $y.val$ if $t = \varepsilon$, which stands for $path(y) = q$; else as the pair $(t[1 ..], v)$ in the container at path $q \cdot t[0]$, which stands for $q \cdot t[0] \cdot t[1 ..] = q \cdot t$. So the set of stored keys and their values does not change, and (B1) holds. The strings of $c$ are distinct, so at most one has $t = \varepsilon$ and the new containers have no repeats; appending in the sorted order of $c$ keeps each new container sorted, since strings with the same first symbol are ordered by their remainders. So (B3) holds. Line L12 bursts each new container with more than $L$ pairs, by the same argument. Each burst at depth $e$ moves the pairs one symbol deeper, and the strings are finite, so the bursting ends; at the end every container has between 1 and $L$ pairs, and (B2) holds.
+
+**DELETE.** The walk finds the place of $s$ (Lemma 1). Removing the pair or clearing $x.val$ removes exactly the key $s$; a container that becomes empty is removed from its slot, so (B2) keeps its lower bound of 1.
+
+**Prefix queries and order.** The keys with prefix $p$ are those stored below the place where the walk of $p$ stops. If it stops in a container $c$ at path $p[0 .. d]$, they are the pairs of $c$ whose string starts with $p[d+1 ..]$, which form a contiguous run in sorted order (B3). If it stops at an access node $x$ with $path(x) = p$, they are all keys below $x$. A walk that reports $y.val$ before the children of $y$, takes the slots in increasing order of their symbols, and reports each container in its sorted order, lists keys in lexicographic order: a key $path(y)$ is a prefix of every other key below $y$, and keys in different slots of $y$ first differ at the symbol of the slot. $\blacksquare$
