@@ -1,0 +1,27 @@
+---
+title: Read-Tarjan lists every simple s-t path exactly once, with one branch per path
+proves: [correctness, termination]
+status: full
+---
+
+Let $G$ be a finite directed graph on $V = \{0, \ldots, n - 1\}$ with out-lists $\mathrm{out}(v)$; an undirected graph is the directed graph with both arcs of every edge, and loops and parallel edges are removed, which does not change the set of simple paths as vertex sequences. Fix $s$ and $t$. For a simple path $\pi$ from $s$ to $u$, let $S(\pi)$ be the set of simple $s$-$t$ paths that start with $\pi$. Call $\pi$ a *branch* if $S(\pi) \ne \emptyset$.
+
+**Lemma 1.** For a simple path $\pi$ from $s$ to $u$ with $u \ne t$, $S(\pi) \ne \emptyset$ if and only if $t$ is reachable from $u$ in $G - B$, where $B$ is the set of vertices of $\pi$ other than $u$.
+
+*Proof.* A path in $S(\pi)$ continues from $u$ to $t$ through vertices not in $\pi$, which is a path from $u$ to $t$ in $G - B$. Conversely, a path from $u$ to $t$ in $G - B$ can be taken simple, it meets $\pi$ only at $u$, and appending it to $\pi$ gives a path in $S(\pi)$. $\square$
+
+**Lemma 2 (the set $R$).** In the loop of lines L11 to L14, at the test of line L13 for index $i$, the blocked set is $X_i = B \cup \{p_0, \ldots, p_i\}$, and $R$ is the set $R_i$ of vertices $v \notin X_i$ from which $t$ is reachable in $G - X_i$.
+
+*Proof.* For $i = k - 1$, line L10 sets the blocked set to $X_{k-1}$ and computes $R_{k-1}$ by a reverse search from $t$ over unblocked vertices, which is correct because $t \notin X_{k-1}$ ($t = p_k$ and $\pi$ does not contain $t$). For $i < k - 1$, line L12 unblocks $p_{i+1}$, so the blocked set becomes $X_i = X_{i+1} \setminus \{p_{i+1}\}$. Every vertex of $R_{i+1}$ is in $R_i$, since $G - X_{i+1}$ is a subgraph of $G - X_i$. A vertex $v \in R_i \setminus R_{i+1}$ has a path to $t$ in $G - X_i$, and each such path passes through $p_{i+1}$; so $p_{i+1} \in R_i$, and $v$ reaches $p_{i+1}$ through vertices not in $X_i$. Moreover $p_{i+1} \in R_i$ if and only if it has an arc into $R_{i+1}$: a shortest path from $p_{i+1}$ to $t$ in $G - X_i$ does not return to $p_{i+1}$, so after its first arc it lies in $G - X_{i+1}$. Line L12 tests exactly this, adds $p_{i+1}$, and the reverse search from it over unblocked vertices not yet in $R$ adds every vertex that reaches $p_{i+1}$ in $G - X_i$. A vertex added this way reaches $t$ through $p_{i+1}$, so it is in $R_i$. Hence $R = R_i$. $\square$
+
+**Lemma 3 (partition).** Let $\pi$ be a branch ending at $u \ne t$, let $P = (p_0 = u, \ldots, p_k = t)$ be the path found at line L8, and for $0 \le i < k$ and $x \in \mathrm{out}(p_i)$ with $x \ne p_{i+1}$ let $\pi_{i,x} = \pi\, p_1 \cdots p_i\, x$. Then $S(\pi)$ is the disjoint union of $\{\pi P\}$ and the sets $S(\pi_{i,x})$ over all such $(i, x)$. Moreover $S(\pi_{i,x}) \ne \emptyset$ if and only if $x \in R_i$.
+
+*Proof.* By Lemma 1, $P$ exists, and $\pi P \in S(\pi)$ since $P$ avoids $B$. Let $Q \in S(\pi)$ with $Q \ne \pi P$. Let $i$ be the largest index with $\pi\, p_1 \cdots p_i$ a prefix of $Q$. Then $i < k$, since otherwise $Q$ starts with $\pi P$, which ends at $t$, so $Q = \pi P$. The path $Q$ does not end at $p_i$, because $p_i \ne t$ for $i < k$, so its next vertex $x$ is in $\mathrm{out}(p_i)$, and $x \ne p_{i+1}$ by the choice of $i$. So $Q \in S(\pi_{i,x})$. The pair $(i, x)$ is determined by $Q$, so the sets are disjoint, and none contains $\pi P$. If $x$ lies in $\pi$ or in $\{p_0, \ldots, p_i\}$, the sequence $\pi_{i,x}$ is not simple and $S(\pi_{i,x}) = \emptyset$, and also $x \in X_i$, so $x \notin R_i$. Otherwise $\pi_{i,x}$ is a simple path from $s$ to $x$; if $x = t$, $S(\pi_{i,x}) = \{\pi_{i,x}\}$ and $t \in R_i$; if $x \ne t$, Lemma 1 with the blocked set $X_i$ shows that $S(\pi_{i,x}) \ne \emptyset$ if and only if $x \in R_i$. $\square$
+
+**Lemma 4.** When a branch $\pi$ is popped at line L5, the algorithm outputs, at that time and later through the branches pushed for it and their descendants, exactly the paths of $S(\pi)$, each once.
+
+*Proof.* By induction on $n - |\pi|$, where $|\pi|$ is the number of vertices of $\pi$. If $u = t$, $S(\pi) = \{\pi\}$, since a simple path that contains $t$ ends there, and line L6 outputs $\pi$ and pushes nothing. Otherwise line L9 outputs $\pi P$, and by Lemmas 2 and 3, lines L13 and L14 push exactly the pairs $(i, x)$ with $S(\pi_{i,x}) \ne \emptyset$, each a branch with more vertices than $\pi$. Every pushed branch is popped later, because the loop runs until the stack is empty, and by induction it outputs exactly $S(\pi_{i,x})$. By Lemma 3 these sets and $\{\pi P\}$ are disjoint and their union is $S(\pi)$. $\square$
+
+**Theorem.** READ-TARJAN terminates and outputs every simple $s$-$t$ path exactly once. It pops exactly $N$ branches when $N \ge 1$ paths exist.
+
+*Proof.* If $s = t$, the only simple $s$-$t$ path is $(s)$, and line L1 outputs it. If $t$ is not reachable from $s$, there is no path and line L2 stops. Otherwise $(s)$ is a branch by Lemma 1, and by Lemma 4 the paths output are exactly $S((s))$, the set of all simple $s$-$t$ paths, each once. Every popped branch outputs one path at line L6 or L9, and different branches output different paths by Lemma 4, so at most $N$ branches are popped, which proves termination; each branch does finite work because the searches and loops run over finite lists. Each path is output by the branch that pops it or by an ancestor's line L9, and the counting above shows that there are exactly $N$ branches. $\blacksquare$
