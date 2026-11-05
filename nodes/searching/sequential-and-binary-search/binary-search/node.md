@@ -18,8 +18,8 @@ history:
   year: 1946
   people: [John Mauchly, Derrick Henry Lehmer]
   note: Mauchly described the method in the Moore School Lectures in 1946. Lehmer gave a version for any n in 1960.
-prereqs: [loop-invariant, asymptotic-notation]
-see_also: [insertion-sort, merge-sort]
+prereqs: [search-in-sorted-array, loop-invariant, asymptotic-notation]
+see_also: [lower-and-upper-bound-search, lower-bound-query, exponential-search, interpolation-search, branchless-binary-search, eytzinger-layout, search-lower-bound, binary-search-on-answer]
 sources:
   - book: isbn:9780201896855
     title: Donald E. Knuth, The Art of Computer Programming, Volume 3, second edition
@@ -30,6 +30,9 @@ sources:
   - url: https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/
     title: Joshua Bloch, Nearly all binary searches and mergesorts are broken (2006)
     note: the overflow of (lo + hi) / 2
+  - book: isbn:9780201657883
+    title: Jon Bentley, Programming Pearls, second edition
+    locator: Column 4, Writing correct programs (binary search and its invariant)
 ---
 
 Binary search finds a key in a sorted array of $n$ items with at most $\lfloor \lg n \rfloor + 1$ comparisons, so its time is $\Theta(\log n)$ in the worst case. It solves [search in a sorted array](/search-in-sorted-array/). Each comparison with the middle item removes half of the items that are left. No comparison algorithm can do better in the worst case, and the same loop is the base of the lower bound of a sorted range, of exponential search and of search on the answer.
@@ -90,13 +93,20 @@ At the start, the range is the full array, so the statement is true. Each step k
 
 ## Complexity
 
-Let $k$ be the size $hi - lo$ of the range. One step of the loop makes the new size at most $\lfloor k/2 \rfloor$. So after $t$ steps the size is at most $\lfloor n / 2^t \rfloor$, and the loop runs at most $\lfloor \lg n \rfloor + 1$ times. Each step does one three-way comparison of $A[mid]$ with $x$, and a fixed number of other operations.
+Let $k$ be the size $hi - lo$ of the range. One step that does not return makes the new size $\lfloor (k-1)/2 \rfloor$ or $\lceil (k-1)/2 \rceil$, and both are at most $\lfloor k/2 \rfloor$. So after $t$ steps the size is at most $\lfloor n / 2^t \rfloor$, which is 0 for $t = \lfloor \lg n \rfloor + 1$. So the loop runs at most $\lfloor \lg n \rfloor + 1$ times for $n \ge 1$, and 0 times for $n = 0$. Each step does one three-way comparison of $A[mid]$ with $x$ (two two-way tests in lines L4 and L6 at most), and a fixed number of other operations.
 
-- The time in the worst case is $\Theta(\log n)$. The worst case is a key that is not in the array.
-- The time in the best case is $\Theta(1)$. The key is the first middle item.
-- The extra space is $\Theta(1)$: three indices.
+- **Worst case.** $\lfloor \lg n \rfloor + 1$ steps, so $\Theta(\log n)$ time. An absent key always takes $\lfloor \lg n \rfloor$ or $\lfloor \lg n \rfloor + 1$ steps.
+- **Best case.** One step, $\Theta(1)$, when the key is the first middle item.
+- **Average case.** For a key at a uniformly random index of an array of distinct items, the average number of steps is about $\lg n - 1$, and for an absent key about $\lg n$. So the average time is $\Theta(\log n)$. The exact averages of this loop are in the table.
+- **Space.** $\Theta(1)$: three indices.
 
-In the [comparison model](/comparison-model/), each algorithm for this problem needs $\lceil \lg(n+1) \rceil$ three-way comparisons in the worst case. The argument uses a decision tree: the tree must tell apart the $n$ positions of $x$ and the case "not found". Because $\lfloor \lg n \rfloor + 1 = \lceil \lg(n+1) \rceil$, binary search is optimal in this model.
+| $n$ | 10 | 100 | 1000 | $10^6$ |
+|---|---|---|---|---|
+| worst case, $\lfloor \lg n \rfloor + 1$ | 4 | 7 | 10 | 20 |
+| average, key present | 2.9 | 5.8 | 8.987 | |
+| average, key absent (each of the $n+1$ gaps) | 3.545 | 6.733 | 9.977 | |
+
+In the [comparison model](/comparison-model/), each algorithm for this problem needs $\lceil \lg(n+1) \rceil$ three-way comparisons in the worst case. The argument uses a [decision tree](/search-decision-tree/): the tree must hold a comparison with each of the $n$ positions, and a binary tree with $n$ nodes has height at least $\lceil \lg(n+1) \rceil$. Because $\lfloor \lg n \rfloor + 1 = \lceil \lg(n+1) \rceil$, binary search is optimal in this model. The proof is on the page [lower bound for comparison-based search](/search-lower-bound/).
 
 ## Properties
 
@@ -107,11 +117,14 @@ In the [comparison model](/comparison-model/), each algorithm for this problem n
 
 ## Variants and improvements
 
-- **Lower bound.** Return the first index $i$ with $A[i] \ge x$. This answers "where does $x$ go" and "how many items are less than $x$". Remove line L8, change line L6 to "else $hi \gets mid$", and return $lo$ at line L9. The C++ function `std::lower_bound` and the Python function `bisect.bisect_left` do this.
-- **Upper bound.** Return the first index $i$ with $A[i] > x$. The number of copies of $x$ is the upper bound minus the lower bound.
-- **Search on the answer.** Use the same loop on any predicate that is false and then true over a range of integers. This finds the smallest value that satisfies the predicate.
-- **Exponential search.** When $n$ is not known, or the key is near the start, test the indices $1, 2, 4, 8, \ldots$ first. Then do a binary search in the last interval. The time is $O(\log i)$ for a key at index $i$.
-- **Interpolation search.** Guess the index from the values, as a person does with a phone book. On uniform data the average time is $O(\log \log n)$, but the worst case is $O(n)$.
+- **Lower bound.** Return the first index $i$ with $A[i] \ge x$, or $n$. Remove line L8, change line L6 to "else $hi \gets mid$", and return $lo$ at line L9. Each step then does one two-way comparison, and the loop always runs $\lfloor \lg n \rfloor$ or $\lfloor \lg n \rfloor + 1$ times. The C++ function `std::lower_bound` and the Python function `bisect.bisect_left` do this. See [lower and upper bound search](/lower-and-upper-bound-search/) and the [lower bound query](/lower-bound-query/).
+- **Upper bound.** Return the first index $i$ with $A[i] > x$: the same loop with the test $A[mid] \le x$. The number of copies of $x$ is the upper bound minus the lower bound. See the [upper bound query](/upper-bound-query/) and [first and last occurrence](/first-and-last-occurrence/).
+- **Closed range.** Many texts keep $[lo, hi]$ with both ends in the range: start with $hi \gets n - 1$, loop while $lo \le hi$, and set $hi \gets mid - 1$ in line L7. This is also correct. The two styles must not be mixed.
+- **Uniform and Fibonacci search.** [Uniform binary search](/uniform-binary-search/) keeps only the middle and a step from a precomputed table. [Fibonacci search](/fibonacci-search/) splits at Fibonacci numbers and uses only addition and subtraction.
+- **Faster on real hardware.** [Branchless binary search](/branchless-binary-search/) replaces the branch by a conditional move. The [Eytzinger layout](/eytzinger-layout/) stores the array in the order of the implicit search tree, so the first probes share cache lines.
+- **Search on the answer.** Use the same loop on any predicate that is false and then true over a range of integers. This finds the smallest value that satisfies the predicate. See [binary search on the answer](/binary-search-on-answer/).
+- **[Exponential search](/exponential-search/).** When $n$ is not known, or the key is near the start, test the indices $1, 2, 4, 8, \ldots$ first. Then do a binary search in the last interval. The cost is $O(\log i)$ for a key at index $i$.
+- **[Interpolation search](/interpolation-search/).** Guess the index from the values, as a person does with a phone book. On keys drawn uniformly at random the expected number of probes is $O(\log \log n)$, but the worst case is $\Theta(n)$.
 
 ## When to use it
 
@@ -121,13 +134,14 @@ Use binary search when the data is sorted and does not change often, and you sea
 
 - **Overflow.** The expression $\lfloor (lo + hi)/2 \rfloor$ can overflow a fixed-size integer when the array is very large. This bug was in the Java library for nine years. Use $lo + \lfloor (hi - lo)/2 \rfloor$, as line L3 does.
 - **An infinite loop.** With a closed range $[lo, hi]$, the update "$lo \gets mid$" can keep the range the same size. Each update must remove $mid$, or the range must be half-open as here.
-- **An off-by-one error.** Decide if $hi$ is in the range or not, and use the same rule in each line.
+- **An off-by-one error.** Decide if $hi$ is in the range or not, and use the same rule in each line. With the half-open range of line L1, the test of line L2 must be $lo < hi$, not $lo \le hi$ (which reads $A[n]$ when $lo = hi = n$), and line L7 must be $hi \gets mid$, not $hi \gets mid - 1$ (which skips the index $mid - 1$).
+- **A midpoint that rounds the wrong way.** With $mid = lo + \lceil (hi - lo)/2 \rceil$, the range $[lo, lo + 1)$ gives $mid = lo + 1 = hi$, outside the range. Line L3 rounds down so that $lo \le mid < hi$.
 - **Unsorted input.** On an array that is not sorted, the result has no meaning. The algorithm does not detect this.
 
 ## Implementations
 
 ## History
 
-John Mauchly described binary search in the Moore School Lectures in 1946. The first published version that works for each $n$, not only for $n = 2^k - 1$, is by Derrick Henry Lehmer in 1960. Knuth says that the idea is simple, but the details are hard. Jon Bentley found that most professional programmers in his courses wrote a binary search with a bug. In 2006 Joshua Bloch showed the overflow bug of the midpoint in the Java library.
+John Mauchly described binary search in the Moore School Lectures in 1946. The first published version that works for each $n$, not only for $n = 2^k - 1$, is by Derrick Henry Lehmer in 1960. Knuth says that the idea is simple, but the details are hard. Jon Bentley reports in Programming Pearls that, given ample time, only about ten percent of the professional programmers in his courses wrote a correct binary search. In 2006 Joshua Bloch showed the overflow bug of the midpoint in the Java library.
 
 ## References
