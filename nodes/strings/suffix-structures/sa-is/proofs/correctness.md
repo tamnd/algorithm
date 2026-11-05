@@ -1,0 +1,45 @@
+---
+title: SA-IS returns the suffix array in linear time
+proves: [correctness, termination, complexity]
+status: full
+---
+
+Let $T = T[0 \ldots n]$ with $T[n] = 0$ and $T[i] \ge 1$ for $i < n$, so the sentinel is the unique smallest symbol. Write $T_i = T[i \ldots n]$. All suffixes are distinct, since they have distinct lengths and each contains the sentinel exactly once, at its end. The types are as defined on the page: $n$ is S-type, and for $i < n$, $i$ is S-type if $T_i < T_{i+1}$ and L-type if $T_i > T_{i+1}$.
+
+**Lemma 1 (type rule).** For $i < n$: if $T[i] < T[i+1]$ then $i$ is S-type; if $T[i] > T[i+1]$ then $i$ is L-type; if $T[i] = T[i+1]$ then $i$ has the type of $i+1$.
+
+*Proof.* The first two cases are decided by the first symbol. If $T[i] = T[i+1] = c$, then $T_i = c\,T_{i+1}$ and $T_{i+1} = c\,T_{i+2}$, so $T_i < T_{i+1}$ if and only if $T_{i+1} < T_{i+2}$. For $i + 1 = n$ this case cannot happen, since $T[n]$ is unique. $\square$
+
+So the right-to-left scan of line L1 computes the types.
+
+**Lemma 2 (L before S in a bucket).** If $T[i] = T[j] = c$, $i$ is L-type and $j$ is S-type, then $T_i < T_j$.
+
+*Proof.* Let $T_i = c^a d \ldots$ with $d \ne c$ the first symbol different from $c$, $a \ge 1$. By Lemma 1 the type of $i$ is the type at the last $c$ of the run, which is L-type, so $d < c$. In the same way $T_j = c^b e \ldots$ with $e > c$. If $a \le b$, position $a$ of the two suffixes has $d < c \le$ the symbol of $T_j$ there (it is $c$ if $a < b$ and $e$ if $a = b$). If $a > b$, position $b$ has $c$ in $T_i$ and $e > c$ in $T_j$. Either way $T_i < T_j$. $\square$
+
+So each bucket $[\mathrm{head}(c), \mathrm{tail}(c))$ of $SA$ consists of the L-type suffixes that start with $c$, followed by the S-type suffixes that start with $c$.
+
+**Lemma 3 (successor order).** If $T[i] = T[j]$ and $i, j < n$, then $T_i < T_j$ if and only if $T_{i+1} < T_{j+1}$.
+
+*Proof.* $T_i = T[i]\,T_{i+1}$ and $T_j = T[j]\,T_{j+1}$ with equal first symbols. $\square$
+
+**Lemma 4 (induced sorting of suffixes).** Suppose $SA$ is empty except that the LMS positions are placed at the ends of their buckets, and within each bucket in increasing order of their suffixes. Then INDUCE-L followed by INDUCE-S leaves the suffix array of $T$ in $SA$.
+
+*Proof.* *INDUCE-L.* Every L-type $j$ has $T_{j+1} < T_j$, and $j + 1$ is either L-type or S-type; if it is S-type it is LMS, since its left neighbor $j$ is L-type. We show by induction on the rank of $T_j$ among the L-type suffixes that each L-type $j$ is written exactly once, at its final rank, and before the scan reaches that rank.
+
+Take an L-type $j$ and assume the claim for all smaller L-type suffixes. Its successor $j + 1$ is in $SA$ at its final rank before the scan reaches that rank: an LMS position was placed there at the start, and an L-type successor is smaller, so the induction applies. The L-type suffixes in bucket $T[j]$ that are smaller than $T_j$ have, by Lemma 3, smaller successors, so their successors are read before $j + 1$ and they are written before $j$; the larger ones have larger successors and are written after $j$. So when the scan reads $j + 1$, the head of bucket $T[j]$ is exactly at the final rank of $T_j$, by Lemma 2, and $j$ is written there. This rank is larger than the rank of $T_{j+1}$, since $T_j > T_{j+1}$, so the scan has not yet passed it and will read $j$ later. Each entry is read once, so $j$ is written once. The LMS entries are not moved, and empty slots are skipped.
+
+*INDUCE-S.* The scan goes right to left with fresh tail pointers, so the LMS entries placed before are overwritten as the S-type positions are written. Every S-type $j < n$ has $T_{j+1} > T_j$. By the symmetric induction, from the largest S-type suffix down: when the scan reads $j + 1$, which is either L-type (already in its final place after INDUCE-L) or S-type and larger (already written by this scan, at a rank to the right), $j$ is written at the tail of bucket $T[j]$. By Lemma 3, among S-type positions in one bucket the larger suffix has the larger successor, which is read earlier, so the S-part of each bucket is filled from its end in decreasing order. The sentinel $n$ is alone in bucket 0. Every S-type position $j < n$ has a successor that is read, so all S-type positions are written. With Lemma 2 this gives every bucket in sorted order, and the buckets are in order of their first symbols. $\square$
+
+**Lemma 5 (sorting the LMS substrings).** After lines L3 to L5, the LMS positions appear in $SA$ in an order in which their LMS substrings are nondecreasing, where LMS substrings are compared symbol by symbol, and at an equal symbol by type with L before S, up to and including the next LMS position.
+
+*Proof.* Run the argument of Lemma 4 with each suffix $T_i$ replaced by its *LMS prefix*, the string of pairs (symbol, type) from $i$ to the first LMS position after $i$, inclusive (for $i = n$, just the sentinel). Lemmas 2 and 3 hold for LMS prefixes with this order: the type pair settles the case of Lemma 2, and for a non-LMS successor the LMS prefix of $i$ is $T[i]$ followed by the LMS prefix of $i + 1$. At the start, the LMS positions are at the ends of their buckets in some order; their LMS prefixes are compared only at the first pair inside a bucket, which is (c, S) for all of them, so any order is consistent with the LMS prefixes truncated to one symbol. The induction then shows that every L-type and S-type non-LMS position is placed in the order of its LMS prefix, and in INDUCE-S the LMS positions themselves are rewritten, each induced from its successor, in the order of its LMS substring. $\square$
+
+**Lemma 6 (reduction).** Let $P = (p_0 < p_1 < \cdots < p_{m-1} = n)$ be the LMS positions and let $T'[k]$ be the name of the LMS substring at $p_k$ given by line L6. Then $T_{p_a} < T_{p_b}$ if and only if $T'_a < T'_b$, where $T'_a$ is the suffix of $T'$ from $a$.
+
+*Proof.* By Lemma 5 and line L6, names are equal exactly for equal LMS substrings (as strings of pairs), and a smaller name means a smaller LMS substring. $T'[m-1] = 0$ is the name of the sentinel substring, which is the smallest and unique, so $T'$ again ends with a unique smallest symbol. Compare $T_{p_a}$ and $T_{p_b}$: read their LMS substrings one after another. While the names agree, the substrings are equal, including the type of the last symbol, so the two suffixes continue from LMS positions $p_{a+k}$ and $p_{b+k}$. At the first $k$ where the names differ, the LMS substrings differ. If they differ at a symbol, that symbol decides both comparisons in the same way. If they first differ in type at some offset with equal symbols, then the suffix with the L-type position is smaller there by the argument of Lemma 2 (applied to the two positions, which have the same symbol), and the L type is also smaller in the pair order. One LMS substring cannot be a proper prefix of the other as a string of pairs: if the shorter one ends at the LMS position $q$, then $q$ is S-type and $q - 1$ is L-type, and the other substring has the same pairs at the same offsets, so its position at that offset is also LMS and it ends there too. So the first difference of names gives the order of the suffixes, which is also the order of $T'_a$ and $T'_b$. $\square$
+
+**Theorem.** SA-IS returns the suffix array of $T$.
+
+*Proof.* By strong induction on the length of $T$. If all names are distinct (line L8), the order of the names is the order of the LMS substrings, which by Lemma 6 with distinct names is the order of the LMS suffixes. Otherwise, $T'$ has length $m \le \lceil (n+1)/2 \rceil < n + 1$ for $n \ge 2$ (no two LMS positions are adjacent, and 0 is never LMS), its alphabet is $\{0, \ldots, m-1\}$, and it ends with a unique smallest 0; by induction line L7 returns its suffix array, and by Lemma 6 this is the order of the LMS suffixes. Lines L9 and L10 then satisfy the hypothesis of Lemma 4, which gives the suffix array. For $n \le 1$ there is at most one LMS position and the names are distinct. $\square$
+
+**Termination and time.** Each call on a string of length $N$ with alphabet size $K$ does $O(N + K)$ work outside the recursion: the type scan, four bucket computations, four induction scans and the placement loops are each linear. In the naming, the comparison of two neighboring LMS substrings runs over at most the length of the shorter one plus one; each position lies in at most two LMS substrings (its own and as the shared end of the previous one), and each substring is compared at most twice (with its left and right neighbor in $SA$), so the naming is $O(N)$. The recursive call is on $m \le \lceil N/2 \rceil$ symbols with alphabet size at most $m$. So $W(N) \le W(\lceil N/2 \rceil) + c(N + K)$, and with $K = O(N)$ at the top and $K \le N$ below, $W(N) = O(N)$. The length at least halves at each level and the recursion stops when the names are distinct, which happens at length 1 at the latest, so the depth is at most $\lceil \lg (n + 1) \rceil$ and the algorithm terminates. $\blacksquare$

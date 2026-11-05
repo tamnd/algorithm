@@ -1,0 +1,43 @@
+---
+title: Weiner's algorithm builds the suffix tree in linear time
+proves: [correctness, termination, complexity]
+status: full
+---
+
+Let $t = S\$$, $|t| = n + 1$, with $\$$ only at the end, and $t_i = t[i \ldots n]$. Let $\mathcal{T}_i$ be the compact trie of $t_i, \ldots, t_n$. Since $\$$ is unique, no suffix is a prefix of another, and each has a leaf. For a string $\beta$ that is a prefix of some $t_j$, $j \ge i$, call $\beta$ *present* in $\mathcal{T}_i$. Write $\mathrm{str}(v)$ for the string of a node.
+
+**Definitions at time $i$** (after inserting $t_i$). For an inner node or the root $v$ of $\mathcal{T}_i$: $I_v = \{x : x\,\mathrm{str}(v) \text{ is present in } \mathcal{T}_i\}$, and $L_v(x)$ is the node of $x\,\mathrm{str}(v)$ if that string is a node of $\mathcal{T}_i$, undefined otherwise.
+
+**Invariant.** After the step for $i$ (and after line L1 for $i = n$), the tree is $\mathcal{T}_i$, and $I$ and $L$ match the definitions at time $i$.
+
+For $i = n$: the tree is the root with the leaf of $\$$, $I_{root} = \{\$\}$, and no link is defined, since no nonempty string is an inner node.
+
+**Lemma 1 (branching is inherited to the right).** If $x\beta$ is an inner node of $\mathcal{T}_i$, then $\beta$ is an inner node of $\mathcal{T}_i$ (or the root, if $\beta$ is empty).
+
+*Proof.* $x\beta c$ and $x\beta d$ are present for two symbols $c \ne d$, as prefixes of $t_j$ and $t_k$. Then $\beta c$ and $\beta d$ are prefixes of $t_{j+1}$ and $t_{k+1}$, which are in the tree since $j + 1, k + 1 \le n$ (a suffix with $x\beta c$ as a prefix is not the last one). So $\beta$ branches. $\square$
+
+**Lemma 2 (the head).** Fix $i < n$ and $x = t[i]$, and let the tree be $\mathcal{T}_{i+1}$. Let $v$ be the lowest inner node or root on the path of $t_{i+1}$ with $x \in I_v$, if one exists. Then the longest prefix of $t_i$ present in $\mathcal{T}_{i+1}$ is $x\,\mathrm{str}(v)$ if $v$ exists, and the empty string otherwise.
+
+*Proof.* A nonempty prefix of $t_i = x\,t_{i+1}$ present in $\mathcal{T}_{i+1}$ has the form $x\beta$ with $\beta$ a prefix of $t_{i+1}$, and it is present exactly when $\beta$ has $x$ in front in some $t_j$, $j > i$. Presence of $x\beta$ is closed under taking prefixes. Let $\beta$ be the longest one and suppose it lies strictly below $v$ on the path of $t_{i+1}$; let $c$ be the first node at or below the place of $\beta$. Every suffix $t_{j+1}$ that has $\beta$ as a prefix passes through $c$ (no branching between), and $j + 1 \ne i + 1$, so if $c$ is the leaf of $t_{i+1}$ this is impossible; otherwise $x\,\mathrm{str}(c)$ is a prefix of $t_j$, so $x \in I_c$, and $c$ is lower than $v$, a contradiction. If no node has $x$, then even the root lacks $x$, so $x$ alone is not present. $\square$
+
+By Lemma 2 and the uniqueness of $\$$, the head of $t_i$ (its longest prefix present in $\mathcal{T}_{i+1}$) is shorter than $t_i$, so adding $t_i$ creates one leaf, below the place of the head, and at most one inner node, at the head.
+
+**Step $i$, line L4.** The walk starts at the parent of the leaf of $t_{i+1}$; the leaf itself cannot have $x$ in front, because only $t_{i+1}$ passes through it and $x\,t_{i+1} = t_i$ is not yet present. Since $I$ is closed upward (if $x\,\mathrm{str}(v)$ is present, so is $x$ times each prefix), the walk stops at the lowest node $v$ with $x \in I_v$, or at the root without $x$. After $t_i$ is inserted, $x\beta$ is present for every prefix $\beta$ of $t_{i+1}$, so $x$ must be in $I_w$ for every node $w$ on the path of $t_{i+1}$; the nodes above $v$ already have it, and line L4 adds it to the nodes passed and to $v$ or the root. No other indicator changes for old nodes: the only new present strings are the prefixes of $t_i$, and a string $y\,\mathrm{str}(w)$ that is a prefix of $t_i$ has $y = x$ and $\mathrm{str}(w)$ a prefix of $t_{i+1}$.
+
+**Line L5.** If no $v$ exists, the head is empty by Lemma 2, and the leaf of $t_i$ goes below the root. No new inner node and no new link are created: the only new node is the leaf.
+
+**Lines L6 to L9.** Let $v'$ be the lowest node at or above $v$ with $L_{v'}(x)$ defined, or $\bot$ if there is none, and $v'' = L_{v'}(x)$, so $\mathrm{str}(v'') = x\,\mathrm{str}(v')$ (with $\mathrm{str}(\bot)$ of length $-1$ and $v'' = $ root). The head $x\,\mathrm{str}(v)$ is present and lies on the path from $v''$ that starts with the symbols of $\mathrm{str}(v)$ after $\mathrm{str}(v')$. No node lies strictly between $v''$ and the place of the head: such a node would be $x\beta$ with $\mathrm{str}(v') \subsetneq \beta \subsetneq \mathrm{str}(v)$ (as prefixes), and by Lemma 1 $\beta$ would be an inner node, strictly between $v'$ and $v$ and with a link for $x$, contradicting the choice of $v'$; for $v' = \bot$, the same argument with $\beta$ ranging over the prefixes of $\mathrm{str}(v)$ including the empty one, whose link would make the root the choice of $v'$. If $g = 0$, then $v = v'$ and the head is the node $v''$. If $g > 0$, the head is not a node of $\mathcal{T}_{i+1}$ (it would give $L_v(x)$, so $v' = v$), so it is inside the edge entered from $v''$ by the symbol $t[i + 1 + |v'|]$, and the split creates the node $h$ of the head; walking down by $g$ symbols uses only the edge length.
+
+**Updates of $I$ and $L$ for the new node.** In $\mathcal{T}_i$, $h$ has two children: the old lower node $c$ and the leaf of $t_i$. A string $y\,\mathrm{str}(h)$ is present in $\mathcal{T}_i$ if and only if it is a prefix of some $t_j$, $j \ge i$, with $\mathrm{str}(h)$ a prefix of $t_{j+1}$; for $j = i$ this would need $t_{i-1}$, so $j > i$ and $t_{j+1}$ is an old suffix through $h$, hence through $c$. So $I_h = I_c$ at time $i$, where for a leaf $c$ of $t_k$ the set $I_c$ is $\{t[k-1]\}$ when $k \ge 1$ ($t_{k-1}$ is in $\mathcal{T}_i$ because $k - 1 \ge i$) and empty for $k = 0$. Note that $I_c$ for an inner node $c$ is already correct at time $i$ after line L4, since $c$ is not on the path of $t_{i+1}$ unless it was updated there, and in both cases it matches the definition. No string $y\,\mathrm{str}(h)$ is a node of $\mathcal{T}_i$: by Lemma 1, $\mathrm{str}(h)$ would have been an inner node of $\mathcal{T}_{i+1}$, but it is new. So $L_h$ is empty. The only new inner node is $h$, and its only incoming link is from the node of $\mathrm{str}(h)$ without its first symbol, which is $v$; line L9 sets $L_v(x) = h$. Old links stay correct, since nodes are never removed and an old node keeps its string.
+
+**Line L10.** The leaf of $t_i$ goes below the head, which gives $\mathcal{T}_i$. The invariant holds after step $i$, and after step 0 the tree is $\mathcal{T}_0$, the suffix tree of $S\$$. The loop has $n$ steps, and each walk goes up a finite path, so the algorithm terminates.
+
+**Time.** Let $nd(w)$ be the number of nodes on the root path of $w$, with $nd(\bot) = 0$.
+
+*Links raise the node depth by at most one.* If $L_u(x) = w$, each node on the root path of $w$ other than the root is $x\beta$ for a node $\beta$ on the root path of $u$ (Lemma 1), and distinct nodes give distinct $\beta$. So $nd(w) - 1 \le nd(u)$. For $\bot$, $nd(\text{root}) = 1 = nd(\bot) + 1$.
+
+*Walks.* Lines L4 and L6 pass from the parent of the leaf $\ell_{i+1}$ of $t_{i+1}$ up to $v'$, which is $nd(\ell_{i+1}) - nd(v') - 1$ steps, or up to the root in the case of line L5. The new leaf $\ell_i$ has $nd(\ell_i) \le nd(v'') + 2 \le nd(v') + 3$ (the split adds at most one node above it), and $nd(\ell_i) = 2$ in the case of line L5. In both cases the walk of step $i$ has at most $nd(\ell_{i+1}) - nd(\ell_i) + 3$ steps, and the sum over all $i$ is at most $nd(\ell_n) + 3n = O(n)$.
+
+*Sets.* Each indicator set only grows, and the copy in line L9 inserts exactly as many entries as it reads, so the total cost of all set operations is $O$ of the final number of entries plus the number of walk steps. The entries at the end are the pairs $(v, x)$ with $v$ an inner node or the root and $x\,\mathrm{str}(v)$ present. Reverse all strings: $\mathrm{str}(v)^R$ is a string of $t^R$ that is left-maximal (it has two different symbols on its left in $t^R$, or is the empty string), and $x$ is a symbol after it. Each pair is either an edge of the suffix tree of $t^R$ (when $\mathrm{str}(v)^R$ is right-maximal too, it is a node and $x$ starts one of its child edges) or the unique right extension of a left-maximal string that is not right-maximal, at most one per inner node $v$. The suffix tree of $t^R$ has $O(n)$ edges and the suffix tree of $t$ has $O(n)$ nodes, so there are $O(n)$ entries.
+
+*Total.* $O(n)$ steps, each with $O(1)$ map operations: $O(n)$ time for a constant alphabet or expected with hashing, and $O(n \log \sigma)$ with balanced maps. $\blacksquare$

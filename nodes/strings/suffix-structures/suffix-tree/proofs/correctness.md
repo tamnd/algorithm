@@ -1,0 +1,23 @@
+---
+title: The naive build gives the suffix tree, and LOCUS finds exactly the substrings
+proves: [correctness, termination]
+status: full
+---
+
+Let $T = S\$ = T[0 \ldots n]$, where $\$$ occurs only at index $n$, and $T_i = T[i \ldots n]$. For a node $v$, $str(v)$ is the concatenation of the labels from the root to $v$. Say that a string $x$ is *spelled* if $x$ is a prefix of $str(v)$ for some node $v$; then the position where $x$ ends is unique, at a node or inside an edge, when (T1) holds.
+
+**Lemma 1 (no suffix is a prefix of another).** For $i < j$, $T_j$ is not a prefix of $T_i$. *Proof.* $T_j$ has its $\$$ at offset $n - j$, and $T_i$ has at offset $n - j < n - i$ the symbol $T[i + n - j]$ with $i + n - j < n$, which is not $\$$. $\square$
+
+**Claim.** After the pass of line L1 for $i$, the tree satisfies (T1), (T3), and (T2') the leaves are exactly one leaf for each $i' \le i$, with $str = T_{i'}$; moreover, the spelled strings are exactly the prefixes of $T_0, \ldots, T_i$.
+
+*Proof by induction on $i$.* Before the first pass the tree is the root alone; it spells only the empty string, and (T1), (T3) hold.
+
+Consider the pass for $i$. The loop keeps: $T[i \ldots j-1] = str(v)$, so it is spelled. At line L3, if $v$ has no child edge with first symbol $T[j]$, then $T[i \ldots j]$ is not spelled, and line L4 adds a leaf whose label $T[j \ldots n]$ is nonempty (as $j \le n$), with a new first symbol; the new leaf has $str = T_i$. Otherwise line L6 matches $k$ symbols of the label of $w$. If $k = b - a$, the whole label matches, $T[i \ldots j + k - 1] = str(w)$, and the loop goes on with $v = w$. This cannot go on past $j = n$ with the label ending at $n$: if $str(w)$ equalled $T_i$ for an existing node $w$, then $T_i$ would be a prefix of some $T_{i'}$, $i' < i$, by the induction hypothesis, which Lemma 1 forbids. So line L6 compares at most to the end of $T_i$, and when $k < b - a$, the symbols $T[j + k]$ and $T[a + k]$ exist and differ. Line L8 splits the edge into a node $u$ with $str(u) = T[i \ldots j + k - 1]$ and label $T[a \ldots a + k - 1]$, nonempty because the first symbols agree ($k \ge 1$). Then $u$ has two children, $w$ with the label $T[a + k \ldots b - 1]$ and the new leaf with label $T[j + k \ldots n]$; their first symbols $T[a + k] \ne T[j + k]$ differ.
+
+So (T1) holds after the pass: labels are nonempty, first symbols at each node are distinct, the new inner node has two children and other nodes lose no children. (T3) holds since depths are set as the parent depth plus the label length, and the split does not change $str$ of any old node. The spelled strings are the old ones plus the prefixes of $T_i$, since the new leaf extends the spelled prefix of $T_i$ to all of it. The new leaf is the only new leaf, so (T2') holds. Each pass ends: $j$ increases by $k \ge 1$ in each repetition of line L7 (labels are nonempty) and stays at most $n$. $\square$
+
+**The final tree.** After $i = n$, (T2') is (T2). The spelled strings are the prefixes of the suffixes of $T$, which are the substrings of $T$. An inner node $v \ne root$ has two children with different first symbols $c \ne d$, so $str(v)c$ and $str(v)d$ are both substrings of $T$, and $str(v)$ is right-branching. Conversely, if $x$ is a substring of $S$ followed in $T$ by two different symbols $c, d$, the paths of $xc$ and $xd$ separate exactly where $x$ ends, which by (T1) can only be at a node.
+
+**LOCUS.** By (T1), at each node at most one child edge starts with a given symbol, so the walk of lines L10 to L12 follows the unique path that spells $P$ if $P$ is spelled, and returns NIL at the first symbol where no continuation exists. Since $P$ does not contain $\$$, $P$ is spelled if and only if it is a prefix of some $T_i$ with $i < n$, that is, if and only if $P$ occurs in $S$. When LOCUS returns $v$, $P$ is a prefix of $str(v)$ and $str(parent(v))$ is a proper prefix of $P$, so a node has $P$ as a prefix of its $str$ if and only if it is $v$ or below $v$. So the leaves below $v$ are exactly the leaves whose $str$ starts with $P$. By (T2), these are the suffixes $T_i$ that start with $P$, which are the occurrences. Excluding the leaf $i = n$, which starts with $\$$, changes nothing for a nonempty $P$ and gives the $n$ suffixes of $S$ for the empty $P$.
+
+**Size.** The tree has $n + 1$ leaves. Each inner node other than the root has at least two children, so by counting edges, the number of inner nodes is at most the number of leaves minus 1 when the root has at least two children, which holds for $n \ge 1$ (it has the children $\$$ and $S[0]$). So there are at most $2(n + 1) - 1 = 2n + 1$ nodes for $n \ge 1$, and 2 nodes for $n = 0$. $\blacksquare$
