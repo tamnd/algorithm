@@ -1,0 +1,19 @@
+---
+title: Dinic's algorithm returns a maximum flow and a minimum cut
+proves: [correctness, termination]
+status: full
+---
+
+Let $N = (G, c, s, t)$ be a flow network with real capacities $c(e) \ge 0$ and $s \ne t$. Write $c_f$ for the residual capacities, $f(e) = c_f(e^-)$, $G_f$ for the residual graph of arcs with $c_f > 0$, and $d(v)$ for the value $\text{level}[v]$ computed in line L3 of the current phase. The level graph $L_f$ is the set of arcs $(v, w)$ with $c_f > 0$ and $d(w) = d(v) + 1$; its arcs are tested with the residual capacities of the moment.
+
+**Claim 1 (each augmentation keeps a flow).** When line L9 runs, $P$ is a walk from $s$ to $u = t$ built by line L11, so each arc of $P$ had $c_f > 0$ and goes up one level. The levels along $P$ are $0, 1, \dots, d(t)$, so $P$ is a simple path. Every arc of $P$ still has $c_f > 0$ at line L9: an arc of $L_f$ loses residual capacity only through an augmentation, and an augmentation restarts the walk with $P$ empty. So $\Delta > 0$, and by the invariant proved for [Ford-Fulkerson](/ford-fulkerson/) (residual capacities stay nonnegative, $c_f(e^+) + c_f(e^-) = c(e)$, conservation holds) $f$ stays an s-t flow and its value grows by $\Delta$.
+
+**Claim 2 (level arcs only shrink in a phase).** An augmentation adds residual capacity only to reverses $(w, v)$ of arcs $(v, w)$ of $L_f$, which have $d(v) = d(w) - 1$, so they are not level arcs. The levels $d$ are fixed during the phase. Hence the set of arcs of $L_f$ with $c_f > 0$ only loses members during the phase.
+
+**Claim 3 (dead vertices are dead).** Call $u$ *dead* when $it[u]$ has run past the last arc of $u$. Invariant: no dead vertex has a path to $t$ in $L_f$ using arcs with $c_f > 0$, and every arc that a pointer has passed is either not a level arc, or has $c_f = 0$, or ends at a dead vertex. A pointer moves in line L12 only when the arc fails the test of line L10, that is, it is not a level arc or it has $c_f = 0$; by Claim 2 it stays so. A pointer moves in line L14 past the arc $(v, u)$ just after $u$ was found dead. Every arc of a dead $u$ has been passed, so each one is useless or ends at a dead vertex, and by induction on the order in which vertices die, $u$ has no path to $t$ with positive level arcs. The sink $t$ never dies, because line L8 runs before lines L10 to L14 whenever $u = t$.
+
+**Claim 4 (each phase ends and finds a blocking flow).** Each pass of the loop runs one of lines L9, L11, L12, L14. Lines L12 and L14 move a pointer, at most $2m$ times in all. Line L9 makes some arc of $P$ have $c_f = 0$, and by Claim 2 it stays so, so it is in no later $P$; $L_f$ has at most $m$ arcs, since the two arcs of one edge cannot both go up a level, so line L9 runs at most $m$ times. Line L11 runs at most $d(t) \le n - 1$ times between two runs of lines L9 or L14, since each run raises the level of $u$ by 1. So the loop ends, and it ends only in line L13, with $s$ dead. By Claim 3, $L_f$ then has no s-t path with all $c_f > 0$: the flow added in this phase is a blocking flow of the level graph of the phase start.
+
+**Claim 5 (termination).** By the lemma on [blocking flows](/blocking-flow/), adding a blocking flow of $L_f$ makes $d_f(t)$ strictly larger. While the loop of line L2 continues, $1 \le d_f(t) \le n - 1$. So there are at most $n - 1$ phases before line L4 leaves the loop.
+
+**Claim 6 (optimality).** In the last run of line L3, $t$ is not reached, and $S = \{v : d(v) \ge 0\}$ is exactly the set of vertices reachable from $s$ in $G_f$, with $s \in S$ and $t \notin S$. Each edge $(u, v)$ with $u \in S$, $v \notin S$ has $c_f(e^+) = 0$, so $f(e) = c(e)$; each edge $(v, u)$ with $v \notin S$, $u \in S$ has $c_f(e^-) = 0$, so $f(e) = 0$. By conservation, $|f| = f(S, \bar S) - f(\bar S, S) = c(S, \bar S)$. Since every s-t flow $g$ has $|g| \le c(S, \bar S)$ and every s-t cut $X$ has $c(X, \bar X) \ge |f|$, the flow is maximum and the cut is minimum. $\blacksquare$
