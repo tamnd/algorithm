@@ -1,0 +1,24 @@
+---
+title: The ALT query returns shortest paths
+proves: [correctness, termination]
+status: full
+---
+
+**Claim.** Let all weights be nonnegative, let the tables hold the exact distances from and to each landmark, and let $h$ be the bound of line L2. The query from $s$ to $t$ ends, scans each vertex at most once, and returns $\operatorname{dist}(s, t)$ with a path of that weight if $t$ is reachable from $s$, and $\infty$ otherwise.
+
+Write $\operatorname{dist}$ for distances in $G$, with $\operatorname{dist}(x, y) = \infty$ when $y$ is not reachable from $x$.
+
+**Step 1: each term is a valid lower bound or proves unreachability.** Fix a landmark $L$ and a vertex $v$.
+(a) Suppose $\operatorname{dist}(t, L) < \infty$. If $\operatorname{dist}(v, t) < \infty$, then $\operatorname{dist}(v, L) \le \operatorname{dist}(v, t) + \operatorname{dist}(t, L)$, so $\operatorname{dist}(v, L) - \operatorname{dist}(t, L) \le \operatorname{dist}(v, t)$, and in particular $\operatorname{dist}(v, L) < \infty$. So if $\operatorname{dist}(v, L) = \infty$, then $\operatorname{dist}(v, t) = \infty$.
+(b) Suppose $\operatorname{dist}(L, v) < \infty$. If $\operatorname{dist}(v, t) < \infty$, then $\operatorname{dist}(L, t) \le \operatorname{dist}(L, v) + \operatorname{dist}(v, t)$, so $\operatorname{dist}(L, t) - \operatorname{dist}(L, v) \le \operatorname{dist}(v, t)$. If $\operatorname{dist}(L, t) = \infty$, then $\operatorname{dist}(v, t) = \infty$.
+Terms of the form $\infty - \infty$ or with an infinite subtrahend are skipped. Taking the maximum with 0: $h(v) \le \operatorname{dist}(v, t)$ for every $v$, and $h(v) = \infty$ implies that $v$ cannot reach $t$. Also $h(t) = 0$, since each term at $v = t$ is $0$ or skipped.
+
+**Step 2: consistency.** Let $(u, v)$ be an edge with $h(u) < \infty$ and $h(v) < \infty$. Consider a term at $u$. For (a) with $\operatorname{dist}(t, L) < \infty$: $\operatorname{dist}(u, L) \le w(u, v) + \operatorname{dist}(v, L)$, and $\operatorname{dist}(v, L) < \infty$ since otherwise $h(v) = \infty$; so $\operatorname{dist}(u, L) - \operatorname{dist}(t, L) \le w(u, v) + (\operatorname{dist}(v, L) - \operatorname{dist}(t, L)) \le w(u, v) + h(v)$. For (b) with $\operatorname{dist}(L, u) < \infty$: $\operatorname{dist}(L, v) \le \operatorname{dist}(L, u) + w(u, v) < \infty$, and $\operatorname{dist}(L, t) < \infty$ since otherwise $h(u) = \infty$; so $\operatorname{dist}(L, t) - \operatorname{dist}(L, u) \le w(u, v) + (\operatorname{dist}(L, t) - \operatorname{dist}(L, v)) \le w(u, v) + h(v)$. The term 0 is at most $w(u, v) + h(v)$ since both are nonnegative. Taking the maximum, $h(u) \le w(u, v) + h(v)$.
+
+**Step 3: pruning is safe.** Let $V' = \{v : h(v) < \infty\}$ and $G'$ the subgraph induced by $V'$. Line L8 never puts a vertex outside $V'$ into $Q$, and if $h(s) = \infty$ the queue starts empty; so the query is A* on $G'$. By Step 1, every vertex on an $s$-$t$ path of $G$ can reach $t$, so if it had $h = \infty$ it could not; hence every $s$-$t$ path of $G$ lies in $G'$, and $\operatorname{dist}_{G'}(s, t) = \operatorname{dist}(s, t)$. If $h(s) = \infty$, then $s$ cannot reach $t$ and returning $\infty$ is correct.
+
+**Step 4: the query is Dijkstra on reduced weights.** On $G'$ define $w_h(u, v) = w(u, v) - h(u) + h(v)$, which is $\ge 0$ by Step 2. For a path $P$ from $s$ to $v$ in $G'$, the sum telescopes: $w_h(P) = w(P) - h(s) + h(v)$. Define $g'[v] = g[v] + h(v) - h(s)$. Line L3 sets $g'[s] = 0$; line L8 tests $g[u] + w(u, v) < g[v]$, which is $g'[u] + w_h(u, v) < g'[v]$; line L9 sets $g'[v] = g'[u] + w_h(u, v)$; and line L5 picks the least $g[u] + h(u) = g'[u] + h(s)$, the least $g'$. So the run is exactly Dijkstra's algorithm from $s$ on $G'$ with the nonnegative weights $w_h$, with labels $g'$, and stopped when $t$ is removed. (A vertex re-entered with a smaller key is a decrease-key; the implementation's stale heap entries are skipped.)
+
+**Step 5: conclusion.** By the correctness of Dijkstra's algorithm on nonnegative weights, each vertex is removed at most once, and when $u$ is removed, $g'[u] = \operatorname{dist}_{w_h}(s, u)$, the reduced distance in $G'$, and the predecessors give a path of that reduced weight. By Step 4 the reduced weight of any $s$-$u$ path differs from its weight by the constant $h(u) - h(s)$, so the same path is a shortest path in $G'$ and $g[u] = \operatorname{dist}_{G'}(s, u)$. If $t$ is removed, line L6 returns $g[t] = \operatorname{dist}_{G'}(s, t) = \operatorname{dist}(s, t)$ by Step 3, with a path of that weight. If $t$ is never removed, the queue empties, so Dijkstra has removed every vertex of $G'$ reachable from $s$, hence $t$ is not reachable from $s$ in $G'$, hence not in $G$ by Step 3, and line L10 returns $\infty$ correctly.
+
+**Termination.** Each vertex is removed at most once and each removal inserts at most one entry per edge, so the loop runs at most $n + m$ times. $\blacksquare$
