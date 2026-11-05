@@ -1,0 +1,23 @@
+---
+title: The auction algorithm returns an optimal assignment
+proves: [correctness, termination]
+status: full
+---
+
+Let $A = (a_{ij})$ be an $n \times n$ matrix of integers with forbidden pairs, and let $\ell$ and $h$ be the smallest and largest allowed entries ($\ell = h = 0$ if there are none). Line L2 replaces each forbidden entry by $F = \ell - n(h - \ell) - 1$; call the result $\bar A$, and let $a'_{ij} = (n + 1)\bar a_{ij}$. For $n = 0$ the queue is empty, the empty assignment is returned, and it is the only one; assume $n \ge 1$. For an assignment $\sigma$, a permutation, write $\bar A(\sigma) = \sum_i \bar a_{i\sigma(i)}$.
+
+**Claim 1 (the queue).** At the start of each iteration of line L4, the queue holds exactly the unassigned persons, each once, and the assignment is one-to-one: each assigned person holds one object and each object has at most one owner. *Proof.* True after line L3. In an iteration, the bidder $i$ leaves the queue unassigned, line L8 unassigns the previous owner $k$ of $j^*$, if any, and puts it in the queue, and line L9 gives $j^*$ to $i$ alone. Since $i$ was unassigned, $k \ne i$, and no other pair changes. $\square$
+
+**Claim 2 (every bid raises a price).** In line L7 the increment $v - w + 1$ is at least 1. *Proof.* $v$ is the largest value in the row, so $v \ge w$; for $n = 1$, $w = v$. $\square$
+
+**Claim 3 (1-CS invariant).** At the start of each iteration, every assigned person $i$ holding $j$ satisfies $a'_{ij} - p_j \ge \max_k (a'_{ik} - p_k) - 1$. *Proof.* True at the start, when nobody is assigned. Consider a bid by $i$ for $j^*$. After line L7, $a'_{ij^*} - p_{j^*} = v - (v - w + 1) = w - 1$, while every $k \ne j^*$ has $a'_{ik} - p_k \le w$ by the choice of $w$; for $n = 1$ there is no such $k$. So $i$ satisfies the condition. Every other assigned person $r$ holds an object $j \ne j^*$, by Claim 1, whose price did not change, and the only price that changed went up, so $\max_k (a'_{rk} - p_k)$ did not grow and $r$ still satisfies the condition. The outbid person is no longer assigned. $\square$
+
+**Claim 4 (termination).** The loop ends after at most $n((n + 1)\bar C + 1) + 1$ iterations, where $\bar C = \max \bar a - \min \bar a$. *Proof.* An object that has had an owner always has one: line L8 removes an owner only in the same iteration in which line L9 gives the object to the bidder. Suppose at some iteration an object $j_0$ has never been bid for. Then $p_{j_0} = 0$, and a bid by $i$ for $j \ne j_0$ has $w \ge a'_{ij_0} - p_{j_0} = a'_{ij_0}$, so the new price is $p_j = a'_{ij} - w + 1 \le a'_{ij} - a'_{ij_0} + 1 \le (n + 1)\bar C + 1$. By Claim 2 the $k$-th bid for $j$ leaves $p_j \ge k$, so each object gets at most $(n + 1)\bar C + 1$ bids while some object has never been bid for. Each iteration is one bid. So after at most $n((n + 1)\bar C + 1) + 1$ iterations every object has been bid for, hence has an owner; by Claim 1 the $n$ objects have $n$ distinct owners, all $n$ persons are assigned, and the queue is empty. $\square$
+
+**Claim 5 (near optimality).** At the end, the assignment $S$ is a permutation, and $\bar A(S) \ge \bar A(\sigma)$ for every permutation $\sigma$. *Proof.* By Claims 1 and 4, $S$ is a permutation. Let $\pi_i = \max_k (a'_{ik} - p_k)$. By Claim 3, $a'_{iS(i)} \ge \pi_i + p_{S(i)} - 1$ for every $i$, and by the definition of $\pi_i$, $a'_{i\sigma(i)} \le \pi_i + p_{\sigma(i)}$. Summing over $i$, and using that $S$ and $\sigma$ are both permutations, so $\sum_i p_{S(i)} = \sum_i p_{\sigma(i)} = \sum_j p_j$,
+$$(n + 1)\bar A(S) \ge \sum_i \pi_i + \sum_j p_j - n \ge (n + 1)\bar A(\sigma) - n.$$
+Dividing by $n + 1$ gives $\bar A(S) > \bar A(\sigma) - 1$, and both sides are integers, so $\bar A(S) \ge \bar A(\sigma)$. $\square$
+
+**Claim 6 (forbidden pairs).** If some permutation uses no forbidden pair, then every permutation that uses one has a smaller $\bar A$. *Proof.* A permutation $\tau$ with no forbidden pair has $\bar A(\tau) \ge n\ell$. A permutation $\rho$ with at least one forbidden pair has $\bar A(\rho) \le (n - 1)h + F = (n - 1)h + \ell - nh + n\ell - 1 = (n + 1)\ell - h - 1 \le n\ell - 1$, since $h \ge \ell$. $\square$
+
+**Theorem.** The algorithm terminates. If some permutation avoids the forbidden pairs, it returns one that maximizes $\sum_i a_{i\sigma(i)}$ among them; otherwise it reports infeasibility. *Proof.* Termination is Claim 4. If a feasible permutation exists, the returned $S$ maximizes $\bar A$ by Claim 5, so by Claim 6 it uses no forbidden pair, line L10 returns it, and on feasible permutations $\bar A$ equals the original objective, so $S$ is optimal. If no feasible permutation exists, $S$ uses a forbidden pair and line L10 reports infeasibility, which is correct. $\blacksquare$
