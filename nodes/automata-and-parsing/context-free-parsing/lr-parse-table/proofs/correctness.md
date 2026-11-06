@@ -1,0 +1,43 @@
+---
+title: A conflict-free LR(0), SLR or LR(1) table makes LR-DRIVE a correct parser with the valid prefix property
+proves: [correctness]
+status: full
+---
+
+**Setting.** Let $G$ be a grammar in which every nonterminal derives some terminal string (the implementation first drops the productions that use a nonterminal deriving none), augmented with $S' \to S$, where $S'$ is new. For a string $\gamma \in (V \cup \Sigma)^*$, write $\delta(\gamma)$ for the state reached from the start state $q_0$ by the automaton's transitions on the symbols of $\gamma$, if all these transitions exist. The automaton is the LR(0) automaton for the kinds LR(0) and SLR, and the canonical LR(1) automaton for LR(1). A *viable prefix* is a prefix $\gamma$ of a right-sentential form $\delta \beta y$ with $\gamma$ no longer than $\delta \beta$, where $S' \Rightarrow^*_{rm} \delta A y \Rightarrow_{rm} \delta \beta y$. An LR(0) item $A \to \mu \cdot \nu$ is *valid* for $\gamma$ if $S' \Rightarrow^*_{rm} \delta A z \Rightarrow_{rm} \delta \mu \nu z$ with $\gamma = \delta \mu$ and $z \in \Sigma^*$, and the LR(1) item $[A \to \mu \cdot \nu, b]$ is valid if moreover $b$ is the first symbol of $z \$$.
+
+We use Knuth's theorem on the [LR item](/lr-item/) page: $\delta(\gamma)$ is defined if and only if $\gamma$ is a viable prefix, and then it is the set of items valid for $\gamma$ (LR(0) items for the LR(0) automaton, LR(1) items for the LR(1) automaton).
+
+**Statement.** Suppose FILL, run on the automaton with the lookahead sets of the chosen kind, records no conflict. Let $w = a_1 \cdots a_n$ and $a_{n+1} = \$$. Then:
+
+1. (Soundness.) If LR-DRIVE accepts $w$, then the tree it returns is a parse tree of $w$, so $w \in L(G)$.
+2. (Completeness.) If $w \in L(G)$, LR-DRIVE accepts $w$ and reports no error.
+3. (Valid prefix.) LR-DRIVE shifts $a_i$ only if $a_1 \cdots a_i$ is a prefix of a sentence, and when it reports an error at $a_i$, the string $a_1 \cdots a_i$ (for $i = n + 1$, the string $w$ itself) is not a prefix of any sentence.
+
+Termination on inputs that are not sentences is not part of this statement; it is proved for LR(0) tables on the [LR(0) parsing](/lr0-parsing/) page and by Knuth (1965) for LR(k) in general.
+
+*Proof.*
+
+**Step 1 (cells).** Since there is no conflict, L7 assigns each cell at most one action, and by L1 to L5 the action $x$ is in cell $(q, a)$ exactly when some item of $q$ calls for it: shift to the successor of $q$ on $a$ when $q$ has an item with the dot before $a$ (then this transition exists), accept when $a = \$$ and $S' \to S \cdot \in q$, and reduce $A \to \beta$ when $q$ has a complete item $A \to \beta \cdot$ with $a$ in its lookahead set. The lookahead set is $\Sigma \cup \{\$\}$ for LR(0), $\mathrm{FOLLOW}(A)$ for SLR, and $\{b\}$ for the LR(1) item $[A \to \beta \cdot, b]$.
+
+**Step 2 (dots and stack).** For every item $A \to \mu \cdot \nu$ of $\delta(\gamma)$, $\mu$ is a suffix of $\gamma$, say $\gamma = \kappa \mu$, and $A \to \cdot \mu \nu$ is in $\delta(\kappa)$. By induction on $|\gamma|$: the items of $q_0$ have the dot at the start; an item of $\delta(\gamma X)$ either comes from closure, with the dot at the start, or is $A \to \mu' X \cdot \nu$ from $A \to \mu' \cdot X \nu \in \delta(\gamma)$. Moreover, an item $A \to \cdot \beta$ with $A \neq S'$ is in a state only through closure, so that state also has an item with the dot before $A$ and the transition on $A$ exists. The item $S' \to S \cdot$ is in $\delta(\gamma)$ only for $\gamma = S$, since $S'$ is on no right side and $S' \to \cdot S$ is only in $q_0$.
+
+Let $\psi$ be the string of grammar symbols on the stack. We claim that LR-DRIVE keeps the invariant: the states on the stack are $\delta$ of the prefixes of $\psi$, from $q_0 = \delta(\varepsilon)$ to $\delta(\psi)$ on top; the trees on the stack have the roots $\psi$ in order; and the yields of the trees, concatenated, are the tokens shifted so far. A shift of $a$ (L12) pushes $\delta(\psi a)$ and the leaf $a$. A reduction by $A \to \beta$ (L13) happens only when $A \to \beta \cdot \in \delta(\psi)$ (Step 1), so $\psi = \kappa \beta$ by Step 2; it pops $|\beta|$ states and trees, exposes $\delta(\kappa)$, which contains $A \to \cdot \beta$, so the GOTO entry for $A$ exists, and pushes $\delta(\kappa A)$ and the node $A$ whose children are the popped trees, a correct node of a parse tree since $A \to \beta \in R$.
+
+**Step 3 (soundness).** Accept (L14) happens only on $\$$, which comes only after all of $w$ has been shifted (L11 rejects a $\$$ token inside the input), and only when $S' \to S \cdot \in \delta(\psi)$, that is, $\psi = S$ by Step 2. By the invariant, the stack then holds one tree with root $S$ and yield $w$. This proves part 1.
+
+**Step 4 (completeness).** Let $w \in L(G)$ and fix a rightmost derivation $S' \Rightarrow_{rm} S = \zeta_m \Rightarrow_{rm} \cdots \Rightarrow_{rm} \zeta_0 = w$. Read backwards, it defines the *canonical run* of a shift-reduce parser: in configuration (stack $\psi$, unread input $x$) with $\psi x = \zeta_j$, let $\zeta_j = \delta \beta y$ where $\zeta_{j+1} = \delta A y \Rightarrow_{rm} \delta \beta y$; if $\psi = \delta \beta$, reduce by $A \to \beta$, reaching the configuration $(\delta A, y)$ with $\delta A y = \zeta_{j+1}$; otherwise shift. The canonical run ends with stack $S$ and empty input, and then accepts.
+
+We show that in every configuration of the canonical run, $\psi$ is a prefix of $\delta \beta$ and $\delta \beta = \psi \tau$ with $\tau \in \Sigma^*$. At the start $\psi = \varepsilon$, and the handle $\delta \beta$ of $\zeta_0 = w$ is a terminal string. Shifts keep the property as long as $\tau \neq \varepsilon$. After a reduction, the stack is $\delta A$ and $A$ is the rightmost nonterminal of $\zeta_{j+1} = \delta A y$. The next handle comes from the step $\zeta_{j+2} = \delta' B y' \Rightarrow_{rm} \delta' \theta y' = \zeta_{j+1}$. If $\theta$ contains a nonterminal, it contains the rightmost one, $A$, so $\theta = \theta' A \theta''$ with $\theta'' \in \Sigma^*$ and $\delta' \theta = \delta A \theta''$. Otherwise $\theta$ is terminal and lies to the right of $A$, inside $y$, so $\delta' \theta = \delta A \tau$ with $\tau \in \Sigma^*$. Both cases give the claim. So every stack $\psi$ of the canonical run is a viable prefix, and so is $\psi a$ whenever the canonical move is to shift $a$.
+
+Now we show by induction on the steps that LR-DRIVE makes the same moves as the canonical run. Both start in the same configuration, and by Step 2 the states of LR-DRIVE are determined by $\psi$, so it is enough to show that the cell $(\delta(\psi), a)$, with $a$ the next token, contains the canonical move: since the cell holds at most one action, it then holds exactly that move.
+
+- *Shift $a$.* $\psi a$ is a viable prefix, so by Knuth's theorem $\delta(\psi a)$ is defined, so $\delta(\psi)$ has an item with the dot before $a$ and the cell holds a shift.
+- *Reduce $A \to \beta$*, with $\psi = \delta \beta$, $S' \Rightarrow^*_{rm} \delta A y \Rightarrow_{rm} \delta \beta y$ and $a$ the first symbol of $y \$$. The LR(0) item $A \to \beta \cdot$ and the LR(1) item $[A \to \beta \cdot, a]$ are valid for $\psi$, so by Knuth's theorem they are in $\delta(\psi)$. For LR(0), every column gets the reduction. For SLR, $S' \$ \Rightarrow^* \delta A y \$$ shows $a \in \mathrm{FOLLOW}(A)$. For LR(1), $a$ is the lookahead of the item. In all three cases the cell holds the reduction.
+- *Accept.* The stack is $\psi = S$, the state $\delta(S)$ contains $S' \to S \cdot$, and the next token is $\$$, so the cell holds accept.
+
+So LR-DRIVE follows the canonical run, never reports an error, and accepts. This proves part 2.
+
+**Step 5 (valid prefix).** If LR-DRIVE shifts $a_i$ from stack $\psi$, the state $\delta(\psi a_i)$ is defined, so $\psi a_i$ is a viable prefix by Knuth's theorem, a prefix of a right-sentential form $\psi a_i \eta$. Every symbol of $\eta$ derives some terminal string $v$, and by the invariant $\psi \Rightarrow^* a_1 \cdots a_{i-1}$, so $a_1 \cdots a_i v \in L(G)$.
+
+Suppose LR-DRIVE reports an error at $a_i$ but $a_1 \cdots a_i$ is a prefix of a sentence $w'$ (for $i = n + 1$, suppose $w \in L(G)$, which part 2 excludes). Each move of LR-DRIVE depends only on its stack and the next token, so its runs on $w$ and on $w'$ coincide up to the first time it looks at token $i$ and moves on. By part 2 the run on $w'$ never reports an error and shifts its $i$-th token $a_i$ after finitely many moves, so the run on $w$ also shifts $a_i$ and does not report an error at it, a contradiction. This proves part 3. $\blacksquare$
