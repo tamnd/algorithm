@@ -12,7 +12,7 @@ summary: Isolates the lowest set bit, multiplies by a de Bruijn constant and ind
 solves: [trailing-zero-count]
 model: word-ram
 complexity:
-  vars: {w: the word size in bits, a power of two}
+  vars: {w: "the word size in bits, a power of two"}
   time: {worst: Θ(1), average: Θ(1), best: Θ(1)}
   space: {extra: Θ(w)}
 properties: {deterministic: true, recursive: false}

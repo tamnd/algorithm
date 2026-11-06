@@ -14,7 +14,7 @@ summary: Block-wise reduction that calls an SVP oracle on blocks of bounded size
 solves: [lattice-basis-reduction, approximate-svp]
 model: word-ram
 complexity:
-  vars: {n: the rank of the lattice, m: the length of the vectors, β: the block size, P: the number of steps (calls of the block oracle), finite but with no known polynomial bound, S: the cost of one block enumeration, at most 2^(O(β^2)) arithmetic operations on an LLL-reduced block, T: the cost of one LLL call, polynomial in n, m and the input size}
+  vars: {n: the rank of the lattice, m: the length of the vectors, β: the block size, P: "the number of steps (calls of the block oracle), finite but with no known polynomial bound", S: "the cost of one block enumeration, at most 2^(O(β^2)) arithmetic operations on an LLL-reduced block", T: "the cost of one LLL call, polynomial in n, m and the input size"}
   time: {worst: O(P (n^2 m + S + T)), best: O(T + n (n^2 m + S)), per_step: O(n^2 m + S + T)}
   space: {extra: O(n^2 + n m)}
 properties: {deterministic: true, recursive: false, exact: true, polynomial_time: false}

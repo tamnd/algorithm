@@ -14,7 +14,7 @@ summary: LLL variant that inserts a vector at any earlier position for stronger 
 solves: [lattice-basis-reduction]
 model: word-ram
 complexity:
-  vars: {n: the rank of the lattice, m: the length of the vectors, P: the number of passes of the main loop, finite but with no known polynomial bound}
+  vars: {n: the rank of the lattice, m: the length of the vectors, P: "the number of passes of the main loop, finite but with no known polynomial bound"}
   time: {worst: O(n^2 m P), best: O(n^2 m), per_pass: O(n^2 m)}
   space: {extra: O(n m)}
 properties: {deterministic: true, recursive: false, exact: true, polynomial_time: false}

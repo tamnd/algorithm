@@ -11,7 +11,7 @@ summary: Build the suffix tree from the suffix array and LCP array in linear tim
 solves: [suffix-tree-construction]
 model: word-ram
 complexity:
-  vars: {n: the length of the text, including the end marker}
+  vars: {n: "the length of the text, including the end marker"}
   time: {worst: Θ(n)}
   space: {extra: Θ(n)}
 properties: {stable: false, in_place: false, adaptive: false, online: false, deterministic: true, comparison: false, recursive: false}

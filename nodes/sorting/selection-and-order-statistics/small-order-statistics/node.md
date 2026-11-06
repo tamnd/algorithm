@@ -8,7 +8,7 @@ level: advanced
 summary: Finding the i-th smallest element for small i using fewer comparisons than general selection, via tournament style methods.
 model: comparison-model
 complexity:
-  vars: {n: the number of items, i: the rank sought, a constant or small compared with n}
+  vars: {n: the number of items, i: "the rank sought, a constant or small compared with n"}
   time: {worst: Θ(n)}
 prereqs: [selection-problem, tournament-method]
 see_also: [tournament-method, tournament-minimum, second-largest-lower-bound, selection-lower-bound, heap-select, top-k-selection, minimum-and-maximum-finding, floyd-rivest-select]

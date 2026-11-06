@@ -10,7 +10,7 @@ level: core
 summary: Problem of counting walks with exactly k edges between vertices, solved by the k-th power of the adjacency matrix; counting simple paths of length k is #P-hard.
 model: word-ram
 complexity:
-  vars: {n: the number of vertices, m: the number of edges, k: the number of edges of a walk, ω: the matrix multiplication exponent, counted in arithmetic operations on the walk counts}
+  vars: {n: the number of vertices, m: the number of edges, k: the number of edges of a walk, ω: "the matrix multiplication exponent, counted in arithmetic operations on the walk counts"}
   time: {worst: O(n^ω log k)}
 prereqs: [adjacency-matrix, matrix-exponentiation, counting-problem]
 see_also: [apsp-repeated-squaring, cayley-hamilton-theorem, linear-recurrence-nth-term, triangle-counting, k-path-color-coding, enumerating-simple-paths, parameterized-counting-complexity, counting-lattice-paths]

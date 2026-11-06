@@ -11,7 +11,7 @@ level: advanced
 summary: For every mask, computing the sum of f over all submasks of that mask.
 model: word-ram
 complexity:
-  vars: {n: the number of bits of a mask, so the input has 2^n values}
+  vars: {n: "the number of bits of a mask, so the input has 2^n values"}
   time: {worst: O(n 2^n)}
 prereqs: [bitmask, submask-enumeration, mobius-inversion]
 see_also: [sos-dp, sum-over-subsets-dp, submask-enumeration, fast-walsh-hadamard-transform, inclusion-exclusion-principle, bjorklund-chromatic-number, bitmask-dp]

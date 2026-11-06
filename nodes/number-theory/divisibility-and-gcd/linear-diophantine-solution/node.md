@@ -9,7 +9,7 @@ summary: Uses the extended Euclidean algorithm to find one integer solution of a
 solves: [linear-diophantine-equation]
 model: word-ram
 complexity:
-  vars: {m: the smaller of the absolute values of a and b, n: the largest bit length of a, b and c}
+  vars: {m: the smaller of the absolute values of a and b, n: "the largest bit length of a, b and c"}
   time: {worst: Θ(1 + log m), best: Θ(1)}
   space: {extra: Θ(1)}
   bit_operations: {worst: O(n^2)}

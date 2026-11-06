@@ -12,7 +12,7 @@ summary: Open addressing with probe offsets that grow quadratically, which reduc
 solves: [dictionary-problem]
 model: word-ram
 complexity:
-  vars: {m: the number of slots, a power of two, n: the number of keys}
+  vars: {m: "the number of slots, a power of two", n: the number of keys}
   time: {worst: Θ(m), expected: O(1), best: Θ(1)}
   space: {extra: Θ(m)}
 properties: {deterministic: true, comparison: false, recursive: false, in_place: true}

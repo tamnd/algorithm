@@ -11,7 +11,7 @@ level: advanced
 summary: Enumerate or count all occurrences of small subgraph patterns.
 model: word-ram
 complexity:
-  vars: {n: the number of vertices, k: the pattern size, a fixed constant}
+  vars: {n: the number of vertices, k: "the pattern size, a fixed constant"}
   time: {worst: O(n^k)}
 prereqs: [network-motif, subgraph-isomorphism, triangle-counting]
 see_also: [network-motif, triangle-counting, triangle-listing-by-degree, subgraph-isomorphism, color-coding, clique-problem, streaming-triangle-counting-problem, graph-isomorphism-problem]

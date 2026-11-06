@@ -14,7 +14,7 @@ summary: Enumeration with preprocessing that solves SVP in n^O(n) time.
 solves: [shortest-vector-problem]
 model: word-ram
 complexity:
-  vars: {n: the rank of the lattice, m: the length of the vectors, s: the size of the input basis, e: the base of the natural logarithm, about 2.718}
+  vars: {n: the rank of the lattice, m: the length of the vectors, s: the size of the input basis, e: "the base of the natural logarithm, about 2.718"}
   time: {worst: n^(n/(2e) + o(n)) s^(O(1)), kannan_1983_analysis: n^(O(n)) s^(O(1)), cvp_variant: n^(n/2 + o(n)) s^(O(1))}
   space: {extra: O(n^2 + n m)}
 properties: {deterministic: true, recursive: true, exact: true, polynomial_space: true}

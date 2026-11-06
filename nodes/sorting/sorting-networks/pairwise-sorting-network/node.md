@@ -12,7 +12,7 @@ summary: Parberry's network that sorts pairs, sorts the first and second items o
 solves: [sorting-problem]
 model: sorting-network
 complexity:
-  vars: {n: the number of items, a power of 2 in the exact counts}
+  vars: {n: "the number of items, a power of 2 in the exact counts"}
   time: {worst: Θ(n log² n), average: Θ(n log² n), best: Θ(n log² n)}
   space: {extra: Θ(log n)}
   depth: {worst: Θ(log² n)}

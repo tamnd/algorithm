@@ -11,7 +11,7 @@ summary: O(n log n) table answering any associative range query in O(1) using di
 implements: [range-query-structure]
 model: word-ram
 complexity:
-  vars: {n: the length of the array; the time is per query, and the build takes O(n log n)}
+  vars: {n: "the length of the array; the time is per query, and the build takes O(n log n)"}
   time: {worst: O(1)}
   space: {extra: Θ(n log n)}
 prereqs: [sparse-table, monoid, bit-manipulation]
