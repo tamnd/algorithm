@@ -12,7 +12,7 @@ summary: Runs Thompson's simulation with thread priorities so that it returns le
 solves: [submatch-extraction, regex-search]
 model: word-ram
 complexity:
-  vars: {m: the number of instructions of the compiled program, n: the length of the text, c: the number of capture groups, counting the whole match as group 0}
+  vars: {m: the number of instructions of the compiled program, n: the length of the text, c: "the number of capture groups, counting the whole match as group 0"}
   time: {worst: O(m n c)}
   space: {extra: O(m c)}
 properties: {deterministic: true, recursive: false, online: true}

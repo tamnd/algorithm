@@ -12,7 +12,7 @@ summary: Linear preprocessing and constant-time RMQ by reduction to LCA with blo
 solves: [range-minimum-query, lowest-common-ancestor]
 model: word-ram
 complexity:
-  vars: {n: the length of the array; the time is per query, after O(n) preprocessing}
+  vars: {n: "the length of the array; the time is per query, after O(n) preprocessing"}
   time: {worst: O(1)}
   space: {extra: Θ(n)}
 properties: {deterministic: true, online: true, recursive: false}

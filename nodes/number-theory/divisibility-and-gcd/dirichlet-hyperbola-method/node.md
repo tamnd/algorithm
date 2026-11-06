@@ -12,7 +12,7 @@ summary: Evaluates the divisor summatory function in O(sqrt n) by counting latti
 solves: [divisor-summatory-function]
 model: word-ram
 complexity:
-  vars: {n: the input value, the bound on the product ab}
+  vars: {n: "the input value, the bound on the product ab"}
   time: {worst: Θ(n^(1/2)), best: Θ(n^(1/2))}
   space: {extra: Θ(1)}
   bit_operations: {worst: O(n^(1/2) log(n)^2)}

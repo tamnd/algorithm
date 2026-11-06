@@ -12,7 +12,7 @@ summary: Transposes an n by n bit matrix in lg n rounds of block swaps with mask
 solves: [bit-matrix-transposition]
 model: word-ram
 complexity:
-  vars: {n: the number of rows and columns, a power of 2 with n at most the word size}
+  vars: {n: "the number of rows and columns, a power of 2 with n at most the word size"}
   time: {worst: Θ(n log n), average: Θ(n log n), best: Θ(n log n)}
   space: {extra: O(1)}
 prereqs: [bit-matrix-transposition, bitwise-operations, bitmask]

@@ -14,7 +14,7 @@ summary: Deterministic top-down parser that uses a parse table indexed by nonter
 solves: [cfg-parsing-problem]
 model: word-ram
 complexity:
-  vars: {n: the number of input tokens, the grammar being fixed}
+  vars: {n: "the number of input tokens, the grammar being fixed"}
   time: {worst: O(n), best: O(1)}
   space: {extra: O(n)}
 properties: {deterministic: true, recursive: false, online: true}

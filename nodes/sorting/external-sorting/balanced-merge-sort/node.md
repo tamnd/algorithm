@@ -12,7 +12,7 @@ summary: Merge runs in passes over a fixed set of tapes or files, with the same 
 solves: [sorting-problem]
 model: comparison-model
 complexity:
-  vars: {N: the number of items, S: the number of initial runs, P: the merge order, half the number of tapes}
+  vars: {N: the number of items, S: the number of initial runs, P: "the merge order, half the number of tapes"}
   time: {worst: O(N log N), average: O(N log N), best: O(N log N)}
   space: {extra: Θ(N)}
 properties: {stable: true, in_place: false, adaptive: false, online: false, deterministic: true, comparison: true, recursive: false}

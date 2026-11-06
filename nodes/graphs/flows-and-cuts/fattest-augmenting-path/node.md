@@ -12,7 +12,7 @@ summary: A maximum flow method that always augments along the path with the larg
 solves: [max-flow-problem, min-cut-problem]
 model: word-ram
 complexity:
-  vars: {n: the number of vertices, m: the number of edges, F: the maximum flow value, integer capacities}
+  vars: {n: the number of vertices, m: the number of edges, F: "the maximum flow value, integer capacities"}
   time: {worst: O(m^2 log n log F)}
   space: {extra: Θ(n + m)}
 properties: {deterministic: true, recursive: false}

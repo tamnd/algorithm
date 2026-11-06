@@ -12,7 +12,7 @@ summary: Fix a pair of rows, compress columns into a 1D array, then run Kadane; 
 solves: [maximum-sum-submatrix]
 model: word-ram
 complexity:
-  vars: {m: the number of rows, n: the number of columns, with m at most n}
+  vars: {m: the number of rows, n: "the number of columns, with m at most n"}
   time: {worst: Θ(m^2 n), average: Θ(m^2 n), best: Θ(m^2 n)}
   space: {extra: Θ(n)}
 properties: {stable: false, in_place: true, adaptive: false, online: false, deterministic: true, comparison: false, recursive: false}

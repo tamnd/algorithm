@@ -10,7 +10,7 @@ level: advanced
 summary: Transposing a square matrix of bits packed into words.
 model: word-ram
 complexity:
-  vars: {n: the number of rows and columns, with n at most the word size}
+  vars: {n: "the number of rows and columns, with n at most the word size"}
   time: {worst: O(n log n)}
 prereqs: [bitwise-operations, bitmask, word-ram]
 see_also: [bit-matrix-transpose, bit-slicing, bit-interleaving, bit-reversal, bitboard, bitset-gaussian-elimination, bitset-adjacency-matrix, graph-transpose]

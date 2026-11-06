@@ -11,7 +11,7 @@ summary: A randomized ordered dictionary made of layered linked lists, where hig
 implements: [ordered-set, ordered-symbol-table, dictionary]
 model: comparison-model
 complexity:
-  vars: {n: the number of keys, p: the promotion probability, a constant in (0, 1)}
+  vars: {n: the number of keys, p: "the promotion probability, a constant in (0, 1)"}
   time: {expected: Θ(log n), worst: Θ(n)}
   space: {expected: Θ(n)}
 properties: {persistent: false, concurrent: false, external: false}

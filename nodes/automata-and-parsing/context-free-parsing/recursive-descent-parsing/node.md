@@ -12,7 +12,7 @@ summary: Top-down parser implemented as mutually recursive procedures, one per n
 solves: [cfg-parsing-problem]
 model: word-ram
 complexity:
-  vars: {n: the number of input tokens, for a fixed LL(1) grammar}
+  vars: {n: "the number of input tokens, for a fixed LL(1) grammar"}
   time: {worst: O(n), best: Θ(1)}
   space: {extra: O(n)}
 properties: {deterministic: true, recursive: true, online: true}

@@ -11,7 +11,7 @@ summary: Green's 16-input sorting network with 60 comparators and depth 10, buil
 solves: [sorting-problem]
 model: sorting-network
 complexity:
-  vars: {n: the number of items, 16 for the network itself}
+  vars: {n: "the number of items, 16 for the network itself"}
   time: {worst: Θ(n log² n), average: Θ(n log² n), best: Θ(n log² n)}
   space: {extra: O(1)}
   depth: {worst: Θ(log² n)}

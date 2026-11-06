@@ -13,7 +13,7 @@ summary: Practical sieve that keeps a list of mutually reduced vectors to solve 
 solves: [shortest-vector-problem]
 model: word-ram
 complexity:
-  vars: {n: the rank of the lattice, m: the length of the vectors, τ_n: the kissing number in dimension n, at most 2^(0.401 n + o(n)), R: the total number of passes of the reduction loop over all iterations, finite but with no proved bound, H: the largest size of the stack}
+  vars: {n: the rank of the lattice, m: the length of the vectors, τ_n: "the kissing number in dimension n, at most 2^(0.401 n + o(n))", R: "the total number of passes of the reduction loop over all iterations, finite but with no proved bound", H: the largest size of the stack}
   time: {worst: O(R τ_n m), per_pass: O(τ_n m), heuristic: 2^(0.415 n + o(n))}
   space: {extra: O((τ_n + H) m), heuristic: 2^(0.208 n + o(n))}
 properties: {deterministic: false, randomized: true, recursive: false, exact_arithmetic: true, proved_optimal: false}

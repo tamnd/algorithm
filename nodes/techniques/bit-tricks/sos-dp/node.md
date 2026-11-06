@@ -13,7 +13,7 @@ summary: Computes all subset sums in O(k 2^k) time by adding one bit at a time t
 solves: [sum-over-subsets]
 model: word-ram
 complexity:
-  vars: {n: the number of bits of a mask, so the input has 2^n values}
+  vars: {n: "the number of bits of a mask, so the input has 2^n values"}
   time: {worst: Θ(n 2^n), average: Θ(n 2^n), best: Θ(n 2^n)}
   space: {extra: Θ(1)}
 prereqs: [bitmask, sum-over-subsets, submask-enumeration, loop-invariant]

@@ -12,7 +12,7 @@ summary: Succinct range minimum structure using 2n+o(n) bits with O(1) queries.
 solves: [range-minimum-query]
 model: word-ram
 complexity:
-  vars: {n: the length of the array; the time is per query after O(n) preprocessing, and the space is in bits, without the array}
+  vars: {n: "the length of the array; the time is per query after O(n) preprocessing, and the space is in bits, without the array"}
   time: {worst: O(1)}
   space: {extra: "2n + o(n)"}
 properties: {deterministic: true, online: true, recursive: false}

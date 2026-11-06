@@ -10,7 +10,7 @@ level: advanced
 summary: Find the k-th smallest entry of a matrix whose rows and columns are sorted.
 model: comparison-model
 complexity:
-  vars: {m: the number of rows, n: the number of columns, with m ≤ n}
+  vars: {m: the number of rows, n: "the number of columns, with m ≤ n"}
   time: {worst: Θ(m log(2n/m))}
 prereqs: [selection-problem, binary-search]
 see_also: [sorted-matrix-search, staircase-search, young-tableau, median-of-two-sorted-arrays, binary-search-on-answer, parametric-search, k-way-merge, binary-heap]

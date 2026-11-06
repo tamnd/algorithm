@@ -11,7 +11,7 @@ summary: Augment only along paths with residual capacity above a decreasing thre
 solves: [max-flow-problem, min-cut-problem]
 model: word-ram
 complexity:
-  vars: {n: the number of vertices, m: the number of edges, U: the largest capacity, integer capacities}
+  vars: {n: the number of vertices, m: the number of edges, U: "the largest capacity, integer capacities"}
   time: {worst: O(m^2 log U)}
   space: {extra: Θ(n + m)}
 properties: {deterministic: true, recursive: false}

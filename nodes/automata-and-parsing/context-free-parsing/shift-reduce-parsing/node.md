@@ -12,7 +12,7 @@ summary: Bottom-up parsing using a stack, shifting input and reducing handles to
 solves: [cfg-parsing-problem]
 model: word-ram
 complexity:
-  vars: {n: the number of input tokens, r: the number of reductions, which is the number of inner nodes of the parse tree}
+  vars: {n: the number of input tokens, r: "the number of reductions, which is the number of inner nodes of the parse tree"}
   time: {worst: O(n + r), best: Θ(1)}
   space: {extra: O(n + r)}
 properties: {deterministic: true, recursive: false, online: true}

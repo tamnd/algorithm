@@ -13,7 +13,7 @@ summary: LR(0) automaton with reductions limited to FOLLOW-set lookaheads.
 solves: [cfg-parsing-problem]
 model: word-ram
 complexity:
-  vars: {n: the number of input tokens, for a fixed grammar}
+  vars: {n: "the number of input tokens, for a fixed grammar"}
   time: {worst: O(n), best: Θ(1)}
   space: {extra: O(n)}
 properties: {deterministic: true, recursive: false, online: true}

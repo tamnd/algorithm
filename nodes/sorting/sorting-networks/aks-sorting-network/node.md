@@ -12,7 +12,7 @@ summary: A sorting network of depth O(log n) built from expander-based halvers, 
 solves: [sorting-problem]
 model: sorting-network
 complexity:
-  vars: {n: the number of items, a power of 2 in the construction}
+  vars: {n: "the number of items, a power of 2 in the construction"}
   time: {worst: Θ(n log n), average: Θ(n log n), best: Θ(n log n)}
   space: {extra: Θ(n log n)}
   depth: {worst: Θ(log n)}

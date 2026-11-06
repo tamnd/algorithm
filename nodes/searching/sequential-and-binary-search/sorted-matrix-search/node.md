@@ -10,7 +10,7 @@ level: core
 summary: Decide whether a key occurs in a matrix whose rows and columns are both sorted.
 model: comparison-model
 complexity:
-  vars: {m: the number of rows, n: the number of columns, with m ≤ n}
+  vars: {m: the number of rows, n: "the number of columns, with m ≤ n"}
   time: {worst: Θ(m log(2n/m))}
 prereqs: [search-in-sorted-array, binary-search]
 see_also: [staircase-search, young-tableau, sorted-matrix-selection, two-sum, adversary-argument, search-in-sorted-array, binary-search, dominance-counting]

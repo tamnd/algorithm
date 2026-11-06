@@ -10,7 +10,7 @@ level: core
 summary: Find a key in a sorted sequence whose length is not known in advance.
 model: comparison-model
 complexity:
-  vars: {N: the answer, the first index whose item is at least the key}
+  vars: {N: "the answer, the first index whose item is at least the key"}
   time: {worst: Θ(log N)}
 prereqs: [search-in-sorted-array, binary-search]
 see_also: [exponential-search, binary-search-on-answer, elias-gamma-coding, elias-delta-coding, elias-omega-coding, kraft-inequality, iterated-logarithm, decision-tree-model]

@@ -13,7 +13,7 @@ summary: Computes popcount by summing bits in parallel fields of a word using ma
 solves: [population-count]
 model: word-ram
 complexity:
-  vars: {w: the word size in bits, a power of two}
+  vars: {w: "the word size in bits, a power of two"}
   time: {worst: Θ(log w), average: Θ(log w), best: Θ(log w)}
   space: {extra: Θ(1)}
 properties: {deterministic: true, recursive: false}

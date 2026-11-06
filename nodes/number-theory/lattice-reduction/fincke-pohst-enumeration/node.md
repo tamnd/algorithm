@@ -14,7 +14,7 @@ summary: Enumeration of lattice points in a ball via Cholesky-based recursive pr
 solves: [closest-vector-problem, shortest-vector-problem, bounded-distance-decoding]
 model: word-ram
 complexity:
-  vars: {n: the rank of the lattice, m: the length of the vectors, R: the squared radius, T: the number of nodes of the search tree, at most the sum over k of the product over i >= k of (2 (R / ‖b_i*‖^2)^(1/2) + 1)}
+  vars: {n: the rank of the lattice, m: the length of the vectors, R: the squared radius, T: "the number of nodes of the search tree, at most the sum over k of the product over i >= k of (2 (R / ‖b_i*‖^2)^(1/2) + 1)"}
   time: {worst: O(n^2 m + n T), best: O(n^2 m), lll_basis_svp: 2^(O(n^2))}
   space: {extra: O(n m)}
 properties: {deterministic: true, recursive: false, exact: true, output_sensitive: true}

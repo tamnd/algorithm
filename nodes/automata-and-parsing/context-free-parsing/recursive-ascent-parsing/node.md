@@ -9,7 +9,7 @@ summary: LR parser encoded as mutually recursive procedures, one per LR state.
 solves: [context-free-language-recognition]
 model: word-ram
 complexity:
-  vars: {n: the number of input tokens, for a fixed grammar}
+  vars: {n: "the number of input tokens, for a fixed grammar"}
   time: {worst: O(n), best: Θ(1)}
   space: {extra: O(n)}
 properties: {deterministic: true, recursive: true, online: true}
