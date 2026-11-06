@@ -1,0 +1,53 @@
+---
+title: PREPARE followed by PAULL keeps the language and removes all left recursion
+proves: [correctness]
+status: full
+---
+
+**Statement.** Let $G = (V, \Sigma, R, S)$ be any grammar, and let $G'$ be the result of PREPARE, then PAULL, then the new start $S_0 \to S \mid \varepsilon$ when $\varepsilon \in L(G)$. Then $L(G') = L(G)$, and no nonterminal $X$ of $G'$ satisfies $X \Rightarrow^+ X \gamma$.
+
+Throughout, $L_K(X)$ is the set of terminal strings derived from $X$ in the grammar $K$, and trees are complete [parse trees](/parse-tree/).
+
+**Step 1 (PREPARE).** Let $H$ be the grammar after line P4. We show that $L_H(S) = L(G) \setminus \{\varepsilon\}$, that $H$ has no $\varepsilon$-production, that every nonterminal with a production derives a terminal string, and that no nonterminal satisfies $X \Rightarrow^+ X$ in $H$.
+
+- Lines P1 and P3 drop only productions that use a symbol deriving no terminal string. No complete tree uses such a production, so $L(X)$ is unchanged for every remaining $X$.
+- Line P2 is [epsilon-production elimination](/epsilon-production-elimination/), which gives $L(X) \setminus \{\varepsilon\}$ for each $X$ and no $\varepsilon$-production.
+- Without $\varepsilon$-productions a step never shortens a sentential form, so a derivation $X \Rightarrow^+ X$ goes through strings of length 1 only, and uses only unit productions $Y \to Z$. Thus such cycles are exactly the cycles of the *unit graph*, with an edge $Y \to Z$ for each unit production. Line P4 renames every nonterminal $Y$ to the representative $\rho(Y)$ of its strongly connected component in this graph and drops the productions $\rho \to \rho$. Claim: for every $X$, the new grammar derives $w$ from $\rho(X)$ exactly when the old one derives $w$ from $X$. From old to new, rename every node label of an old tree by $\rho$ and remove each node that now uses $\rho \to \rho$, putting its child in its place. From new to old, we show by induction on the size of a new tree $t$ with root $\rho(X)$ that, for every $X'$ with $\rho(X') = \rho(X)$, there is an old tree with root $X'$ and the same yield: the root of $t$ uses $\rho(X) \to \rho(\psi)$ for some old production $Z \to \psi$ with $\rho(Z) = \rho(X)$; in the old grammar $X' \Rightarrow^* Z$ by unit productions, because $X'$ and $Z$ lie in one component; apply $Z \to \psi$ and replace each child subtree by the old tree given by the induction hypothesis for the corresponding symbol of $\psi$. After the renaming the unit graph is the condensation of the old one without loops, so it is acyclic, and $H$ has no derivation $X \Rightarrow^+ X$. Renaming creates no $\varepsilon$-production and no unproductive symbol.
+
+Line P5 records $\varepsilon \in L(G)$ before line P2 removes it, and $S_0$ adds it back at the end.
+
+**Step 2 (substitution keeps the language).** Let $K$ have a production $p = A \to B \gamma$ with $B \ne A$, and let $K'$ be $K$ with $p$ replaced by $A \to \delta \gamma$ for every production $B \to \delta$ of $K$. Then $L_{K'}(X) = L_K(X)$ for every $X$. A step $A \to \delta \gamma$ of $K'$ is the two steps $A \to B \gamma$, $B \to \delta$ of $K$. Conversely, take a $K$-tree and a node that uses $p$. Its first child is labelled $B$ and is an inner node using some $B \to \delta$; this production is not $p$, because $B \ne A$, and it is still in $K'$, because the productions of $B$ do not change. Replace the two nodes by one node $A$ using $A \to \delta \gamma$, whose children are the children of the $B$ node followed by the other children of the $A$ node. The yield does not change, and the number of nodes using $p$ drops by one, so induction on this number gives a $K'$-tree.
+
+Lines L3 to L5 apply this step once for each replaced production, with $A = A_i$ and $B = A_j$, $j < i$, while $R_j$ stays fixed, so every set $L(X)$ is unchanged.
+
+**Step 3 (the direct step keeps the language).** Let $K$ have the productions $A \to A \alpha_1 \mid \cdots \mid A \alpha_p \mid \beta_1 \mid \cdots \mid \beta_q$, where no $\beta_k$ starts with $A$, and let $K'$ replace them by $A \to \beta_k A'$ and $A' \to \alpha_l A' \mid \varepsilon$, with $A'$ new. Then $L_{K'}(X) = L_K(X)$ for every nonterminal $X$ of $K$. In a $K$-tree, take a node $A$ that is not the first child of a node using some $A \to A \alpha_l$, and follow its first children down while they use productions $A \to A \alpha_{l_1}$, $A \to A \alpha_{l_2}$, ..., $A \to A \alpha_{l_t}$; the last $A$ on this spine uses some $A \to \beta_k$. The spine has yield $y(\beta_k) \, y(\alpha_{l_t}) \cdots y(\alpha_{l_1})$, where $y$ denotes the yields of the subtrees of these symbols. Replace it by the node $A \to \beta_k A'$ and the chain $A' \to \alpha_{l_t} A'$, ..., $A' \to \alpha_{l_1} A'$, $A' \to \varepsilon$, which has the same yield. Doing this for the topmost such spine and then, by induction on size, inside the subtrees of $\beta_k$ and of the $\alpha$s gives a $K'$-tree. Conversely, $A'$ occurs only at the right end of the new productions, so in a $K'$-tree every $A'$ node lies on a chain that hangs from a node $A \to \beta_k A'$ and ends with $A' \to \varepsilon$; the inverse rewriting turns this chain back into a left spine.
+
+By Steps 1 to 3, $L_{G'}(S) = L_H(S)$ after the loop, so $L(G') = L(G)$ once $S_0$ is added.
+
+**Step 4 (three invariants).** Call $A_1, \ldots, A_m$ the *original* nonterminals and the $A_k'$ the *primed* ones. We show that the following hold before round 1 and after every substitution and every direct step:
+
+- (P) every production of an original nonterminal is nonempty and starts with a terminal or an original nonterminal;
+- (U) if an original $X$ has a production $X \to Y \pi$ with $Y$ original and $\pi$ a string of primed symbols, then $X \Rightarrow^+ Y$ in $H$ by unit productions;
+- (I) after round $i$, every production of $A_k$ with $k \le i$ starts with a terminal or with some $A_l$, $l > k$.
+
+Before round 1 there are no primed symbols, so (P) is the absence of $\varepsilon$-productions in $H$ and (U) says that $X \to Y$ is a unit production of $H$.
+
+*Substitution.* The production $A_i \to A_j \gamma$ becomes $A_i \to \delta \gamma$ with $A_j \to \delta$. By (P) for $A_j$, $\delta$ is nonempty and starts with a terminal or an original, so (P) holds. If $\delta \gamma = Y \pi$ with $Y$ original and $\pi$ primed, then $\delta = Y \pi_1$ and $\gamma = \pi_2$ with $\pi_1, \pi_2$ primed. (U) for $A_i \to A_j \gamma$ gives $A_i \Rightarrow^+ A_j$, and (U) for $A_j \to Y \pi_1$ gives $A_j \Rightarrow^+ Y$, both by unit productions of $H$; so $A_i \Rightarrow^+ Y$ and (U) holds.
+
+*Direct step.* The new productions of $A_i$ are $A_i \to \beta_k A_i'$, where $A_i \to \beta_k$ was a production before the step. By (P), $\beta_k$ is nonempty and starts with a terminal or an original, so (P) holds. If $\beta_k A_i' = Y \pi$ with $\pi$ primed, then $\beta_k = Y \pi_1$ with $\pi_1$ primed, and (U) for $A_i \to \beta_k$ gives $A_i \Rightarrow^+ Y$. The productions of $A_i'$ are not productions of an original, so (P) and (U) say nothing about them.
+
+*Invariant (I).* Rounds before and after round $i$ do not change the productions of $A_k$, $k < i$. In round $i$, after iteration $j$ of line L3, no production of $A_i$ starts with $A_1, \ldots, A_j$: iteration $j$ replaces each production that starts with $A_j$ by productions that start with $\delta$, and by (I) for $k = j < i$, $\delta$ starts with a terminal or with $A_l$, $l > j$. So after line L5 every production of $A_i$ starts with a terminal or with $A_l$, $l \ge i$. Lines L6 to L9 replace those that start with $A_i$, and the new productions $\beta_k A_i'$ start with the first symbol of $\beta_k$, which is a terminal or an $A_l$ with $l > i$.
+
+*The direct step is well defined.* At line L6 there is at least one $\beta$: by Steps 2 and 3, $L(A_i)$ is still $L_H(A_i)$, which is not empty; if every production of $A_i$ started with $A_i$, the leftmost path of any tree with root $A_i$ would never end. Each $\alpha_l$ is not a string of primed symbols, and in particular not empty: otherwise (U) applied to $A_i \to A_i \alpha_l$ gives $A_i \Rightarrow^+ A_i$ in $H$, which Step 1 excludes.
+
+**Step 5 (nullable symbols).** In $G'$ every primed symbol is [nullable](/nullable-symbol/), by $A_k' \to \varepsilon$, and no original symbol is nullable. Suppose some original is; take one, $X$, with a tree of yield $\varepsilon$ of least height. By (P), $X$ uses a production that starts with a terminal, which cannot vanish, or with an original $Y$, whose subtree has yield $\varepsilon$ and smaller height. Both contradict the choice of $X$.
+
+**Step 6 (no left recursion).** Define the *left-corner graph* of $G'$: an edge $X \to Y$ whenever $G'$ has a production $X \to \mu Y \nu$ with $\mu$ nullable. If $X \Rightarrow^+ X \gamma$, take a tree with root $X$ and yield $X \gamma$ and the path from the root to the leaf $X$ at the left end of the yield. Every sibling to the left of a node on this path has yield $\varepsilon$, so every edge of the path is an edge of the graph, and the path is a closed walk of length at least 1 through $X$. So it suffices to show that the graph has no cycle.
+
+- *Edges from an original $A_k$.* By (I) the first symbol of each production of $A_k$ is a terminal or an $A_l$ with $l > k$, and by Step 5 it is not nullable. So the only edges from $A_k$ go to originals $A_l$ with $l > k$.
+- *Edges from a primed $A_k'$.* Its productions are $A_k' \to \varepsilon$ and $A_k' \to \alpha A_k'$ with $\alpha$ fixed in round $k$; they never change afterwards, since later rounds rewrite only productions of originals. At that time the primed symbols are $A_l'$ with $l < k$, so $\alpha$ contains no $A_k'$. By Step 4, $\alpha$ contains a terminal or an original; the left corners of $\alpha A_k'$ are the symbols of $\alpha$ up to the first of these. So the edges from $A_k'$ go to some $A_l'$ with $l < k$ and to at most one original or terminal, and never to $A_k'$.
+- *Edges from $S_0$* go to $S$, and no edge enters $S_0$, which occurs on no right side.
+
+A cycle that contains an original stays among originals, because no edge leads from an original to a primed symbol, and then the indices strictly increase along it, which is impossible. A cycle of primed symbols only has strictly decreasing indices, which is also impossible. So the graph is acyclic and $G'$ has no left-recursive nonterminal.
+
+**Termination.** PREPARE does a bounded amount of work, line P2 creating at most $2^r$ versions of a production with $r$ nullable symbols. The main loop does $m$ rounds of at most $m - 1$ substitutions, each over a finite set of productions. So the algorithm stops. $\blacksquare$
