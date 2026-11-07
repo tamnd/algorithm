@@ -1,0 +1,47 @@
+---
+title: Correctness of Wu's characteristic set method
+proves: [correctness]
+status: full
+---
+
+We prove that CHARSET terminates and returns a characteristic set with the two zero relations, that the zero decomposition terminates and covers exactly the zeros of the input, and that the prover is sound.
+
+**Setting.** $K$ is a field, $\bar K$ an algebraic closure, and $x_1 < \cdots < x_n$. For a set $P \subset K[x_1, \ldots, x_n]$, $\operatorname{Zero}(P) \subset \bar K^n$ is its common zero set, and for $h$ a polynomial, $\operatorname{Zero}(P / h) = \operatorname{Zero}(P) \setminus \operatorname{Zero}(h)$. The class $\operatorname{cls}(p)$ is the index of the main variable of $p$, and $-1$ for a constant. The rank of a nonzero $p$ is the pair $(\operatorname{cls}(p), \deg_{\operatorname{mvar}(p)} p)$, compared lexicographically (constants have rank $(-1, 0)$). A polynomial $p$ is reduced with respect to $q$ when $\operatorname{cls}(q) \ge 0$ and $\deg_{\operatorname{mvar}(q)} p < \deg_{\operatorname{mvar}(q)} q$. An ascending set is either one nonzero constant, or a list $A_1, \ldots, A_s$ of nonconstant polynomials with strictly increasing classes in which each $A_j$ is reduced with respect to every $A_i$, $i < j$. For an ascending set $C$, $h_k = \operatorname{init}(C_k)$ and $I_C = \prod_k h_k$.
+
+**Order on ascending sets.** Write $A \prec B$ if at the first index $j$ where the ranks differ $\operatorname{rank}(A_j) < \operatorname{rank}(B_j)$, or if $B$ is a proper prefix of $A$ in ranks (the longer set is lower). Write $A \sim B$ when the rank sequences are equal.
+
+**Lemma 1 (well-ordering).** There is no infinite sequence $A^{(1)} \succ A^{(2)} \succ \cdots$ of ascending sets.
+
+*Proof.* Map $A$ to its rank sequence followed by an end marker $\omega$ that is larger than every rank. Then $\prec$ is the lexicographic order on these words. Ranks lie in $\{-1, 0, \ldots, n\} \times \mathbb{N}$, which is well-ordered, and the words have length at most $n + 1$, since classes strictly increase. We prove by induction on $L$ that words of length at most $L$ have no infinite descending sequence. In such a sequence the first letters do not increase, so they are constant from some point on (a well-order has no infinite descent). If that letter is $\omega$ the words are equal, which is not a strict descent. Otherwise the remaining words of length at most $L - 1$ descend strictly forever, against the induction hypothesis. $\square$
+
+**Lemma 2 (pseudo-reduction).** For an ascending set $B$ and any $p$, $r = \operatorname{prem}(p, B)$ as computed by `prem_chain` is reduced with respect to every element of $B$, and $h_1^{e_1} \cdots h_s^{e_s}\, p - r \in (B)$ for some $e_k \ge 0$. Also $\operatorname{prem}(B_k, B) = 0$.
+
+*Proof.* A pseudo-division step by $B_k$ replaces $f$ by $h_k f - c\, y_k^{m - d_k} B_k$, where $y_k = \operatorname{mvar}(B_k)$, $d_k = \deg_{y_k} B_k$, $m = \deg_{y_k} f \ge d_k$ and $c$ is the coefficient of $y_k^m$ in $f$; it removes the top term in $y_k$. So the loop for $B_k$ ends with $\deg_{y_k} f < d_k$, after adding an element of $(B)$ and multiplying by a power of $h_k$. The reduction runs from $B_s$ down to $B_1$. When it uses $B_k$, both $h_k$ and $B_k$ have degree $0$ in $y_j$ for $j > k$, because their classes are smaller, so the degree in such $y_j$ does not grow and the earlier reductions stay valid. For $p = B_k$: the reductions by $B_j$, $j > k$, do nothing because $\deg_{y_j} B_k = 0$; one step by $B_k$ gives $h_k B_k - h_k B_k = 0$. $\square$
+
+**Lemma 3 (basic sets).** BASIC-SET$(P)$ is an ascending set contained in $P$, and $\operatorname{BASIC-SET}(P) \preceq A$ for every ascending set $A \subseteq P$.
+
+*Proof.* If $P$ contains a nonzero constant, the result is one such constant, whose rank is the smallest of all, and every ascending set starts with a rank at least as large; so the claim holds. Otherwise the scan goes through $P$ in increasing rank and appends $p$ when $\operatorname{cls}(p)$ exceeds the last class chosen and $p$ is reduced with respect to all chosen elements. So the output $G = (G_1, \ldots, G_t)$ is an ascending set. Whether $p$ is reduced with respect to a list depends only on the ranks in the list. Suppose $A \subseteq P$ is ascending and $A \prec G$. Let $j$ be the first index where the ranks differ, so $\operatorname{rank}(A_j) < \operatorname{rank}(G_j)$, or let $j = t + 1 \le s$ when $A$ is longer. Then $A_j$ is reduced with respect to $G_1, \ldots, G_{j-1}$ (same ranks as $A_1, \ldots, A_{j-1}$) and $\operatorname{cls}(A_j) > \operatorname{cls}(G_{j-1})$, so $A_j$ is later than $G_{j-1}$ in the scan order and is eligible when the scan looks at it. The scan takes the first eligible element after $G_{j-1}$, and later elements have rank at least as large, so $G_j$ exists and $\operatorname{rank}(G_j) \le \operatorname{rank}(A_j)$. Both cases contradict the choice of $j$. $\square$
+
+**Lemma 4 (descent).** Let $B = \operatorname{BASIC-SET}(P)$ be nonconstant, $r \ne 0$ reduced with respect to every element of $B$, and $P^{+} \supseteq P \cup \{r\}$. Then $\operatorname{BASIC-SET}(P^{+}) \prec B$.
+
+*Proof.* If $r$ is a constant, BASIC-SET$(P^+)$ is a constant, which is lower than the nonconstant $B$. Otherwise let $j$ be the number of $B_i$ with class less than $\operatorname{cls}(r)$, and $A = (B_1, \ldots, B_j, r)$. This is an ascending set in $P^{+}$. If $B$ has only $j$ elements, $A$ is longer and $A \prec B$. Otherwise $\operatorname{cls}(B_{j+1}) \ge \operatorname{cls}(r)$; if the classes are equal, $r$ reduced with respect to $B_{j+1}$ gives a smaller degree. Either way $\operatorname{rank}(r) < \operatorname{rank}(B_{j+1})$ and $A \prec B$. By Lemma 3, $\operatorname{BASIC-SET}(P^{+}) \preceq A \prec B$. $\square$
+
+**Theorem 1 (CHARSET).** CHARSET$(P)$ terminates and returns $(C, P')$ with $P \subseteq P' \subseteq (P)$ and $C \subseteq P'$ an ascending set. If $C$ is a nonzero constant, $\operatorname{Zero}(P) = \emptyset$. Otherwise $\operatorname{prem}(p, C) = 0$ for every $p \in P'$, and
+
+$$\operatorname{Zero}(C / I_C) \subseteq \operatorname{Zero}(P) \subseteq \operatorname{Zero}(C).$$
+
+*Proof.* Each round adds remainders $r = \operatorname{prem}(p, B)$ with $p, B \subseteq P_m$. By Lemma 2, $r \in (P_m)$, so by induction all sets stay inside the ideal $(P)$, and $\operatorname{Zero}(P_m) = \operatorname{Zero}(P)$. If a round adds a nonzero $r$, it is reduced with respect to $B$ (Lemma 2), so by Lemma 4 the next basic set is strictly lower. By Lemma 1 this happens only finitely often, so the loop stops at line L3 or L5. At L3 the constant $c \in (P)$ is a unit of $K$, so $\operatorname{Zero}(P) = \emptyset$. At L5 every $p \in P' \setminus C$ has remainder $0$, and so does every $C_k$ by Lemma 2. Since $C \subseteq (P)$, $\operatorname{Zero}(P) \subseteq \operatorname{Zero}(C)$. For $p \in P$, Lemma 2 gives $\prod_k h_k^{e_k} p \in (C)$. At a point of $\operatorname{Zero}(C)$ where no $h_k$ vanishes, this gives $p = 0$. $\square$
+
+**Theorem 2 (zero decomposition).** DECOMPOSE$(P)$ terminates and returns ascending sets $C^{(1)}, \ldots, C^{(m)}$ with $\operatorname{Zero}(P) = \bigcup_i \operatorname{Zero}(C^{(i)} / I_{C^{(i)}})$.
+
+*Proof.* For one popped set $Q$ with $(C, Q') = \operatorname{CHARSET}(Q)$ and $C$ nonconstant, we claim
+
+$$\operatorname{Zero}(Q) = \operatorname{Zero}(C / I_C) \cup \bigcup_{k : \operatorname{cls}(h_k) \ge 0} \operatorname{Zero}(Q' \cup \{h_k\}).$$
+
+The right side is in the left side: $\operatorname{Zero}(C / I_C) \subseteq \operatorname{Zero}(Q)$ by Theorem 1, and $\operatorname{Zero}(Q' \cup \{h_k\}) \subseteq \operatorname{Zero}(Q') = \operatorname{Zero}(Q)$ because $Q \subseteq Q' \subseteq (Q)$. Conversely, a point of $\operatorname{Zero}(Q)$ lies in $\operatorname{Zero}(C)$; either no $h_k$ vanishes there, or some $h_k$ does, and $h_k$ is then not a nonzero constant. If $C$ is a constant, $\operatorname{Zero}(Q) = \emptyset$ and the set is dropped. So the invariant "$\operatorname{Zero}(P)$ is the union of the output pieces and of $\operatorname{Zero}(Q)$ over the stack" holds after every round, and it gives the claim when the stack is empty.
+
+Termination: $h_k$ is nonzero and reduced with respect to every $C_i$. For $i < k$ this holds because $C_k$ is reduced with respect to $C_i$, so each coefficient of $C_k$ in $y_k$ has degree less than $d_i$ in $y_i$. For $i \ge k$, $\operatorname{cls}(h_k) < \operatorname{cls}(C_k) \le \operatorname{cls}(C_i)$, so $\deg_{y_i} h_k = 0$. By Lemma 4 the basic set of $Q' \cup \{h_k\}$ is lower than $C$, and the characteristic set of the child is at most that basic set, since CHARSET only lowers its basic sets. So along every path of the tree of popped sets the characteristic sets strictly decrease, and by Lemma 1 every path is finite. Each node has at most $n$ children, so by König's lemma the tree is finite. $\square$
+
+**Theorem 3 (soundness of the prover).** If WU-PROVE$(H, g)$ returns true with conditions $h_k$, then $g(a) = 0$ for every $a \in \operatorname{Zero}(H)$ with $h_k(a) \ne 0$ for all $k$.
+
+*Proof.* If $C$ is a constant, $\operatorname{Zero}(H)$ is empty. Otherwise $\operatorname{prem}(g, C) = 0$, so $\prod_k h_k^{e_k} g \in (C)$ by Lemma 2. Let $a \in \operatorname{Zero}(H)$ with all nonconstant $h_k(a) \ne 0$; the constant initials are nonzero elements of $K$. By Theorem 1, $a \in \operatorname{Zero}(C)$, so the product vanishes at $a$ and $g(a) = 0$. $\blacksquare$
