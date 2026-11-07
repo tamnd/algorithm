@@ -1,0 +1,43 @@
+---
+title: Subspace iteration returns a small symmetric backward error and its subspace converges at the rate |λ_(p+1)/λ_p|
+proves: [correctness, termination]
+status: full
+---
+
+Exact arithmetic throughout, except that Lemma 3 holds for any computed block that satisfies its hypotheses. Notation of the page: $A \in \mathbb R^{n \times n}$ symmetric with eigenvalues ordered by modulus, $|\lambda_1| \ge \dots \ge |\lambda_n|$, orthonormal eigenvectors $v_i$, $V_p = [v_1, \dots, v_p]$, $V_\perp = [v_{p+1}, \dots, v_n]$, $\Lambda_1 = \operatorname{diag}(\lambda_1, \dots, \lambda_p)$, $\Lambda_2 = \operatorname{diag}(\lambda_{p+1}, \dots, \lambda_n)$, $\mathcal V_p = \operatorname{span} V_p$. $Q_{k}$ is the basis $Q$ at the start of step $k + 1$ (so $Q_0$ comes from line L1), and line L10 computes an exact orthonormal basis of the span of $W$. For subspaces $\mathcal S$, $\mathcal T$ of equal dimension with orthogonal projectors $P_{\mathcal S}$, $P_{\mathcal T}$, $\theta(\mathcal S, \mathcal T)$ is the largest principal angle and $\sin\theta(\mathcal S, \mathcal T) = \|(I - P_{\mathcal T}) P_{\mathcal S}\|_2 = \|(I - P_{\mathcal S}) P_{\mathcal T}\|_2$. Write $\varrho = |\lambda_{p+1} / \lambda_p|$ and $\theta_k = \theta(\operatorname{span} Q_k, \mathcal V_p)$.
+
+**Lemma 1 (the Rayleigh-Ritz step keeps the span).** At every step, $Y$ is orthogonal, $X = QY$ has orthonormal columns with $\operatorname{span} X = \operatorname{span} Q$, and $W = AX$, so $\operatorname{span} W = A \operatorname{span} Q$.
+
+*Proof.* $H = Q^T A Q$ is symmetric, so line L5 gives an orthogonal $Y$ and a diagonal $\Theta$ with $H = Y \Theta Y^T$ (reordering the columns keeps $Y$ orthogonal). Then $X^T X = Y^T Q^T Q Y = I$, and since $Y$ is invertible, $\operatorname{span} QY = \operatorname{span} Q$. Finally $W = ZY = AQY = AX$, and $\operatorname{span} AX = A \operatorname{span} X = A \operatorname{span} Q$. $\square$
+
+**Lemma 2 (the subspace is $A^k \mathcal S_0$).** Let $\mathcal S_0 = \operatorname{span} X_0$ have dimension $p$, and suppose $V_p^T X_0$ is nonsingular and $\lambda_p \ne 0$. Then for every $k$ reached, $A^k X_0$ has rank $p$ and $\operatorname{span} Q_k = A^k \mathcal S_0$.
+
+*Proof.* $V_p^T A^k X_0 = \Lambda_1^k V_p^T X_0$ because $V_p^T A = \Lambda_1 V_p^T$. Both factors are nonsingular ($|\lambda_i| \ge |\lambda_p| > 0$ for $i \le p$), so $A^k X_0$ has rank $p$. For the span, induction on $k$: $\operatorname{span} Q_0 = \mathcal S_0$ by line L1, and if $\operatorname{span} Q_{k-1} = A^{k-1} \mathcal S_0$, then by Lemma 1 the matrix $W$ of step $k$ spans $A^k \mathcal S_0$, which has dimension $p$, so line L10 returns $Q_k$ with that span. $\square$
+
+**Lemma 3 (backward error).** Let $X \in \mathbb R^{n \times p}$ with $X^T X = I$, let $\Theta$ be diagonal, $R = AX - X\Theta$, and suppose $X^T R = 0$. Then $E = -(R X^T + X R^T)$ is symmetric, $(A + E) X = X \Theta$, and $\|E\|_2 = \|R\|_2 \le \sqrt p \max_i \|r_i\|_2$. At line L8 the hypotheses hold, so on CONVERGED $\|E\|_2 \le \sqrt p \, \mathrm{tol} \max_j |\theta_j| \le \sqrt p \, \mathrm{tol} \, \|A\|_2$.
+
+*Proof.* $E$ is symmetric by construction. $E X = -R (X^T X) - X (R^T X) = -R$, since $R^T X = (X^T R)^T = 0$. So $(A + E) X = AX - R = X\Theta$. For the norm, $E^2 = R X^T R X^T + R X^T X R^T + X R^T R X^T + X R^T X R^T = R R^T + X (R^T R) X^T$, because $X^T R = 0$ kills the first and last terms. The two terms act on the orthogonal subspaces $\operatorname{span} R$ and $\operatorname{span} X$ (they are orthogonal because $X^T R = 0$), so $\|E\|_2^2 = \|E^2\|_2 = \max(\|R R^T\|_2, \|R^T R\|_2) = \|R\|_2^2$. Also $\|R\|_2 \le \|R\|_F \le \sqrt p \max_i \|r_i\|_2$. At line L8, $X^T R = Y^T Q^T A Q Y - Y^T Q^T Q Y \Theta = Y^T H Y - \Theta = 0$. Each Ritz value is a Rayleigh quotient $x_i^T A x_i$ of a unit vector, so $|\theta_j| \le \|A\|_2$. $\square$
+
+**Lemma 4 (tangent of a graph).** Let $F \in \mathbb R^{(n-p) \times p}$ and $\mathcal S = \operatorname{span} \left( V_p + V_\perp F \right)$. Then $\tan\theta(\mathcal S, \mathcal V_p) = \|F\|_2$.
+
+*Proof.* $B = (V_p + V_\perp F)(I + F^T F)^{-1/2}$ has orthonormal columns and spans $\mathcal S$. The cosines of the principal angles between $\mathcal S$ and $\mathcal V_p$ are the singular values of $V_p^T B = (I + F^T F)^{-1/2}$, namely $1/\sqrt{1 + \sigma_i^2}$ for the singular values $\sigma_i$ of $F$. The largest angle has $\cos\theta = 1/\sqrt{1 + \sigma_{\max}^2}$, so $\tan\theta = \sigma_{\max} = \|F\|_2$. $\square$
+
+**Theorem 5 (convergence of the subspace).** Suppose $|\lambda_p| > |\lambda_{p+1}|$ and $C = V_p^T X_0$ is nonsingular. Then for every $k \ge 0$ reached,
+
+$$\tan\theta_k \le \varrho^k \tan\theta_0 .$$
+
+*Proof.* Write $X_0 = V_p C + V_\perp D$ with $D = V_\perp^T X_0$. Then $\mathcal S_0 = \operatorname{span} X_0 C^{-1} = \operatorname{span}(V_p + V_\perp F_0)$ with $F_0 = D C^{-1}$, and $\tan\theta_0 = \|F_0\|_2$ by Lemma 4. Since $A V_p = V_p \Lambda_1$ and $A V_\perp = V_\perp \Lambda_2$, $A^k X_0 = V_p \Lambda_1^k C + V_\perp \Lambda_2^k D$. Multiplying on the right by the nonsingular $C^{-1} \Lambda_1^{-k}$ does not change the span, so by Lemma 2
+
+$$\operatorname{span} Q_k = A^k \mathcal S_0 = \operatorname{span}\left(V_p + V_\perp \Lambda_2^k F_0 \Lambda_1^{-k}\right).$$
+
+By Lemma 4, $\tan\theta_k = \|\Lambda_2^k F_0 \Lambda_1^{-k}\|_2 \le \|\Lambda_2\|_2^k \, \|F_0\|_2 \, \|\Lambda_1^{-1}\|_2^k = |\lambda_{p+1}|^k \, \tan\theta_0 \, / \, |\lambda_p|^k$. $\square$
+
+**Lemma 6 (residual and size of the block).** Let $Q$ have orthonormal columns, $P = Q Q^T$, $H = Q^T A Q$, $s = \sin\theta(\operatorname{span} Q, \mathcal V_p)$ and $c = \cos\theta(\operatorname{span} Q, \mathcal V_p)$. Then $\|AQ - QH\|_2 \le 2 \|A\|_2 \, s$ and $\|H\|_2 \ge |\lambda_p| \, c - 3 \|A\|_2 \, s$.
+
+*Proof.* Let $P_V = V_p V_p^T$; it commutes with $A$. $AQ - QH = (I - P) A Q = (I - P) A P_V Q + (I - P) A (I - P_V) Q$. In the first term, $A P_V = P_V A P_V$, and $\|(I - P) P_V\|_2 = s$ by the definition of the angle, so its norm is at most $\|A\|_2 s$. In the second term, $\|(I - P_V) Q\|_2 = \|(I - P_V) P\|_2 = s$, so its norm is at most $\|A\|_2 s$. This gives the first bound. For the second, $\|H\|_2 = \|Q^T A Q\|_2 = \|P A Q\|_2 \ge \|AQ\|_2 - \|(I - P) A Q\|_2 \ge \|AQ\|_2 - 2 \|A\|_2 s$, and $\|AQ\|_2 \ge \|A P_V Q\|_2 - \|A (I - P_V) Q\|_2 \ge \|V_p \Lambda_1 V_p^T Q\|_2 - \|A\|_2 s$. The smallest singular value of $V_p^T Q$ is $c$ (the cosines of the principal angles are its singular values), and $\|\Lambda_1 M\|_2 \ge |\lambda_p| \, \|M\|_2$ for any $M$, so $\|V_p \Lambda_1 V_p^T Q\|_2 \ge |\lambda_p| \, c$. $\square$
+
+**Theorem 7 (correctness and termination).** The algorithm returns after at most $\mathrm{maxit}$ steps. Whenever it returns CONVERGED, the output is a block of exact eigenpairs of a symmetric matrix $A + E$ with $\|E\|_2 \le \sqrt p \, \mathrm{tol} \, \|A\|_2$. If moreover $|\lambda_p| > |\lambda_{p+1}|$, $V_p^T X_0$ is nonsingular and $\mathrm{tol} > 0$, it returns CONVERGED at the first step $k$ with $2 \|A\|_2 \sin\theta_{k-1} \le \mathrm{tol} \, (|\lambda_p| \cos\theta_{k-1} - 3 \|A\|_2 \sin\theta_{k-1})$ or earlier, and such a $k$ exists; so it returns CONVERGED whenever $\mathrm{maxit}$ is at least that $k$.
+
+*Proof.* The loop of line L2 runs at most $\mathrm{maxit}$ times, and line L9 returns on the last one, so the algorithm terminates. The backward error statement is Lemma 3. For the rest, at step $k$ the basis is $Q_{k-1}$. By Lemma 1, $R = (AQ_{k-1} - Q_{k-1} H) Y$, so $\max_i \|r_i\|_2 \le \|R\|_2 = \|A Q_{k-1} - Q_{k-1} H\|_2 \le 2 \|A\|_2 \sin\theta_{k-1}$ by Lemma 6. The Ritz values are the eigenvalues of the symmetric $H$, so $\max_j |\theta_j| = \|H\|_2 \ge |\lambda_p| \cos\theta_{k-1} - 3 \|A\|_2 \sin\theta_{k-1}$. Hence the test of line L8 holds at any step where the displayed inequality holds. By Theorem 5, $\sin\theta_{k} \le \tan\theta_{k} \le \varrho^{k} \tan\theta_0 \to 0$ and $\cos\theta_k \to 1$, while $|\lambda_p| > 0$ and $\mathrm{tol} > 0$, so the inequality holds for all large $k$. $\square$
+
+**Remark (what is not proved here).** The faster rates of the individual Ritz values, $|\theta_i^{(k)} - \lambda_i| = O(|\lambda_{p+1}/\lambda_i|^{2k})$, are proved in Parlett, The Symmetric Eigenvalue Problem, Chapter 14, and Saad 2011, Chapter 5; the tests measure them. The implementation's replacement of a column that loses almost all of its norm in Gram-Schmidt is a guard for rank-deficient blocks; under the hypotheses of Lemma 2 the blocks have full rank, and the proofs above assume that line L10 is an exact orthonormalization.
