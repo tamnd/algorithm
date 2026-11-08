@@ -1,0 +1,40 @@
+---
+title: Proof of the Minkowski-Weyl theorem by Fourier-Motzkin elimination and homogenization
+proves: [statement]
+status: full
+---
+
+**Claim.** (1) For finite sets $V, W \subseteq \mathbb{R}^d$, the set $\operatorname{conv}(V) + \operatorname{cone}(W)$ is a polyhedron, and every polyhedron has this form. (2) A set $P \subseteq \mathbb{R}^d$ is the convex hull of a finite set if and only if it is a bounded polyhedron.
+
+**Notation.** For a finite set $W = \{w_1, \ldots, w_m\}$, $\operatorname{cone}(W) = \{\sum_j \lambda_j w_j : \lambda_j \ge 0\}$, with $\operatorname{cone}(\emptyset) = \{0\}$, and $\operatorname{conv}(W) = \{\sum_j \lambda_j w_j : \lambda_j \ge 0, \sum_j \lambda_j = 1\}$, with $\operatorname{conv}(\emptyset) = \emptyset$. A **polyhedron** is a set $\{x : Ax \le b\}$ for a real $m \times d$ matrix $A$ and $b \in \mathbb{R}^m$, with $m \ge 0$; it is a **polyhedral cone** when $b = 0$. Vectors are columns, $a \cdot x$ is the dot product, and $A_i$ is row $i$ of $A$.
+
+**Lemma 1 (Fourier-Motzkin).** Let $Q = \{(x, t) \in \mathbb{R}^d \times \mathbb{R} : Ax + ct \le b\}$. Its projection $\pi(Q) = \{x : (x, t) \in Q \text{ for some } t\}$ is a polyhedron $\{x : A'x \le b'\}$, and $b' = 0$ when $b = 0$.
+
+*Proof.* Split the rows into $I_+ = \{i : c_i > 0\}$, $I_- = \{i : c_i < 0\}$ and $I_0 = \{i : c_i = 0\}$. Row $i \in I_+$ says $t \le (b_i - A_i x)/c_i$, and row $j \in I_-$ says $t \ge (b_j - A_j x)/c_j$. So a suitable $t$ exists exactly when the rows of $I_0$ hold and every lower bound is at most every upper bound:
+
+$$\frac{b_j - A_j x}{c_j} \le \frac{b_i - A_i x}{c_i} \quad \text{for all } i \in I_+,\ j \in I_-.$$
+
+Multiplying by $c_i > 0$ and $-c_j > 0$ gives the linear inequality $(c_i A_j - c_j A_i)\, x \le c_i b_j - c_j b_i$. If $I_+$ or $I_-$ is empty, $t$ is bounded on one side only and only the rows of $I_0$ remain. These finitely many inequalities define $\pi(Q)$, and their right sides are $0$ when $b = 0$. $\square$
+
+Applying Lemma 1 once per coordinate shows that the projection of a polyhedron in $\mathbb{R}^{d + k}$ onto the first $d$ coordinates is a polyhedron, and a polyhedral cone if the first set is one.
+
+**Lemma 2 (Weyl: finitely generated cones are polyhedral).** For a finite $W \subseteq \mathbb{R}^d$ there is a matrix $G$ with $\operatorname{cone}(W) = \{x : Gx \le 0\}$.
+
+*Proof.* Let $M$ be the $d \times m$ matrix with columns $w_1, \ldots, w_m$. Then $\operatorname{cone}(W)$ is the projection onto $x$ of
+$$\{(x, \lambda) \in \mathbb{R}^d \times \mathbb{R}^m : x - M\lambda \le 0,\ -x + M\lambda \le 0,\ -\lambda \le 0\},$$
+a polyhedral cone. By Lemma 1, applied $m$ times, the projection is a polyhedral cone. For $m = 0$ the set is $\{0\} = \{x : x \le 0, -x \le 0\}$. $\square$
+
+**Lemma 3 (Minkowski: polyhedral cones are finitely generated).** For a real $m \times d$ matrix $A$ there is a finite $W \subseteq \mathbb{R}^d$ with $\{x : Ax \le 0\} = \operatorname{cone}(W)$.
+
+*Proof.* Let $C = \{x : Ax \le 0\}$ and let $a_1, \ldots, a_m$ be the rows of $A$, as vectors. By Lemma 2 there is a matrix $B$, with rows $w_1, \ldots, w_p$, such that $\operatorname{cone}(a_1, \ldots, a_m) = \{y : By \le 0\}$. Let $W = \{w_1, \ldots, w_p\}$. We show $C = \operatorname{cone}(W)$.
+
+- *$\operatorname{cone}(W) \subseteq C$.* Each $a_i$ is in $\operatorname{cone}(a_1, \ldots, a_m)$, so $B a_i \le 0$, that is, $a_i \cdot w_k \le 0$ for all $i$ and $k$. So each $w_k$ is in $C$. $C$ is closed under sums and under multiplication by nonnegative numbers, so it contains $\operatorname{cone}(W)$.
+- *$C \subseteq \operatorname{cone}(W)$.* Let $x \in C$ and suppose $x \notin \operatorname{cone}(W)$. By Lemma 2, $\operatorname{cone}(W) = \{y : Gy \le 0\}$ for some $G$, so some row $g$ of $G$ has $g \cdot x > 0$ and $g \cdot w_k \le 0$ for all $k$. The second condition says $Bg \le 0$, so $g \in \operatorname{cone}(a_1, \ldots, a_m)$, say $g = \sum_i \mu_i a_i$ with $\mu_i \ge 0$. Then $g \cdot x = \sum_i \mu_i\, (a_i \cdot x) \le 0$, because $x \in C$. This contradicts $g \cdot x > 0$. $\square$
+
+**Part (1), from inequalities to points.** Let $P = \{x : Ax \le b\}$. Homogenize: let
+$$C = \{(x, t) \in \mathbb{R}^d \times \mathbb{R} : Ax - bt \le 0,\ -t \le 0\}.$$
+Then $x \in P$ exactly when $(x, 1) \in C$. By Lemma 3, $C = \operatorname{cone}\{(y_1, s_1), \ldots, (y_p, s_p)\}$, and $s_k \ge 0$ since every generator lies in $C$. Scaling a generator by a positive number does not change the cone, so assume $s_k \in \{0, 1\}$. Let $V = \{y_k : s_k = 1\}$ and $W = \{y_k : s_k = 0\}$. A point $(x, 1)$ is a nonnegative combination $\sum_k \lambda_k (y_k, s_k)$ exactly when the coefficients of the generators with $s_k = 1$ add up to $1$, so $x \in P$ exactly when $x \in \operatorname{conv}(V) + \operatorname{cone}(W)$. If $V = \emptyset$, both sets are empty.
+
+**Part (1), from points to inequalities.** Let $P = \operatorname{conv}(V) + \operatorname{cone}(W)$. Let $C'$ be the cone generated by the vectors $(v, 1)$ for $v \in V$ and $(w, 0)$ for $w \in W$. By Lemma 2, $C' = \{(x, t) : Ax + ct \le 0\}$ for some $A$ and $c$. As before, $(x, 1) \in C'$ exactly when $x \in P$, because the last coordinate forces the coefficients of the vectors $(v, 1)$ to add up to $1$. So $P = \{x : Ax \le -c\}$, a polyhedron.
+
+**Part (2).** If $P = \operatorname{conv}(V)$ for a finite $V$, then $P = \operatorname{conv}(V) + \operatorname{cone}(\emptyset)$ is a polyhedron by part (1), and it is bounded, since every point has norm at most $\max_{v \in V} \|v\|$. Conversely, let $P$ be a bounded polyhedron. By part (1), $P = \operatorname{conv}(V) + \operatorname{cone}(W)$. If $P = \emptyset$, then $P = \operatorname{conv}(\emptyset)$. Otherwise take $v \in \operatorname{conv}(V)$. For every $w \in W$ and $\lambda \ge 0$ the point $v + \lambda w$ lies in $P$, so boundedness forces $w = 0$. So $\operatorname{cone}(W) = \{0\}$ and $P = \operatorname{conv}(V)$. $\blacksquare$
