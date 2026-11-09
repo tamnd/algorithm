@@ -1,0 +1,41 @@
+---
+title: The visibility test is exact, and shortest obstacle-avoiding paths run along visibility graph edges
+proves: [correctness]
+status: full
+---
+
+**Setting.** The obstacles $P_1, \ldots, P_h$ are simple polygons whose boundaries are pairwise disjoint; each $P_j$ is a closed set with open interior $\operatorname{int} P_j$ and boundary $\partial P_j$, the union of its edges. The free space is $F = \mathbb{R}^2 \setminus \bigcup_j \operatorname{int} P_j$, a closed set. For a polygon $P$ and a vertex $a$ of $P$, the open interior cone at $a$ is the set of directions $u \ne 0$ such that $a + \varepsilon u \in \operatorname{int} P$ for all small $\varepsilon > 0$. Since $P$ is simple, near $a$ the polygon coincides with the angular sector at $a$ bounded by its two edges, so this set is the open sector, and lines L8 and L9 test membership in it with the formula on the main page. An open segment is a segment without its end points.
+
+**Lemma 1 (pieces).** Let $P$ be one obstacle, $p \ne q$, and suppose no edge of $P$ crosses $pq$ at a point interior to both. Let $J$ be an open subsegment of $pq$ that contains no vertex of $P$. Then either $J \cap \partial P = \emptyset$ or $J$ is contained in one edge of $P$.
+
+*Proof.* Let $y \in J \cap \partial P$. Then $y$ lies on an edge $ab$ and is not a vertex, so $y$ is interior to $ab$, and $y$ is interior to $pq$ because $J$ is open. If $ab$ is not parallel to $pq$, the lines of $ab$ and $pq$ meet only at $y$, so $a$ and $b$ lie strictly on opposite sides of the line $pq$ and $p$ and $q$ lie strictly on opposite sides of the line $ab$: a proper crossing, which is excluded. So $ab$ lies on the line of $pq$. Its end points $a$ and $b$ are vertices, so they are not in $J$, while $y \in J \cap ab$. The convex set $J$ meets the segment $ab$ on the same line and contains neither end of $ab$, so $J \subseteq ab$. $\square$
+
+**Lemma 2 (VISIBLE).** VISIBLE$(p, q)$ returns true iff the closed segment $pq$ misses $\operatorname{int} P_j$ for every $j$.
+
+*Proof.* For $p = q$ the implementation tests the point directly. Let $p \ne q$. The segment misses the union of the interiors iff it misses each one, and the procedure returns true only if no obstacle triggers a return at lines L6 to L10. So it suffices to fix one obstacle $P$ and show that a return happens for $P$ iff $pq$ meets $\operatorname{int} P$.
+
+*A return implies a hit.* At line L6, an edge $ab$ crosses $pq$ at a point $y$ interior to both. Near $y$, $P$ coincides with a half-disk bounded by the line of $ab$, since $y$ is not a vertex and the boundary of a simple polygon near an interior point of an edge is that edge. Points of $pq$ near $y$ lie on both sides of that line, so some of them lie in $\operatorname{int} P$. At line L8, $a + \varepsilon (q - p) \in \operatorname{int} P$ for small $\varepsilon > 0$, and these points lie on $pq$ because $a \in pq$ and $a \ne q$. Line L9 is the same with $p - q$. At line L10, the midpoint lies in $\operatorname{int} P$.
+
+*A hit implies a return.* Let $x \in pq \cap \operatorname{int} P$, and assume that line L6 never returns. Since $\operatorname{int} P$ is open, points of $pq$ near $x$ are also interior, so we may take $x$ to be interior to $pq$ and not a vertex of $P$ (vertices are on $\partial P$). Let $0 = e_0 < e_1 < \cdots < e_k = 1$ be the parameters along $pq$ of $p$, $q$ and the vertices of $P$ on $pq$, and let $J$ be the open piece between consecutive parameters that contains $x$. By Lemma 1, $J$ misses $\partial P$ or lies on an edge; it contains $x \notin \partial P$, so it misses $\partial P$. $J$ is connected and misses $\partial P$, so it lies in $\operatorname{int} P$ or in the exterior, and since $x \in J$, $J \subseteq \operatorname{int} P$.
+
+If no vertex of $P$ lies on $pq$, then $J$ is the whole open segment, $P$ is not touched, and the midpoint lies in $J \subseteq \operatorname{int} P$, so line L10 returns. Otherwise one end of $J$ is a vertex $a$ of $P$: if every vertex on $pq$ lay outside the closure of $J$, the ends of $J$ would be $p$ and $q$, and $J$ would be the whole segment, which contains a vertex. If $a$ is the end of $J$ toward $p$, then $a \ne q$ and the points $a + \varepsilon(q - p)$ for small $\varepsilon > 0$ lie in $J \subseteq \operatorname{int} P$, so $q - p$ is in the open interior cone at $a$, and line L8 returns when the loop reaches $a$, unless an earlier line returned. If $a$ is the end toward $q$, line L9 returns in the same way. $\square$
+
+So BUILD adds the edge $v_i v_j$ iff $v_i v_j \subseteq F$, which is the definition of $G$.
+
+**Lemma 3 (local straightness).** Let $z \in F$ be a point that is not an obstacle vertex. There is $r > 0$ such that $B(z, r) \cap F$ is convex.
+
+*Proof.* If $z$ lies on no obstacle, $z$ is at positive distance from the closed set $\bigcup_j P_j$, and $B(z, r) \subseteq F$ for $r$ below that distance. If $z \in \partial P_j$, then $z$ is interior to one edge of $P_j$, and since the boundaries are disjoint and closed, $z$ is at positive distance from the other obstacles and from the other edges of $P_j$. For $r$ below these distances, $B(z, r) \cap F$ is the disk minus the open half-disk on the interior side of that edge, a closed half-disk, which is convex. $\square$
+
+**Theorem.** Let $s, t \in F$, and let $G^*$ be the visibility graph on the obstacle vertices together with $s$ and $t$. The length of a shortest feasible path from $s$ to $t$ equals the distance from $s$ to $t$ in $G^*$, and a shortest feasible path is given by a shortest path in $G^*$.
+
+*Proof.* Every path in $G^*$ is a chain of segments contained in $F$, so it is feasible, and its length is its weight in $G^*$. It remains to show that some shortest feasible path is a path in $G^*$.
+
+*Existence.* Feasible paths from $s$ to $t$ exist: the obstacles are disjoint closed topological disks, so $F$ is connected, and a segment from $s$ to $t$ can be rerouted around each obstacle it enters along that obstacle's boundary. Those of length at most a fixed $L$, parametrized proportionally to arc length on $[0, 1]$, are uniformly Lipschitz and lie in a bounded set. By the Arzelà-Ascoli theorem a minimizing sequence has a uniformly convergent subsequence. The limit lies in $F$ because $F$ is closed, and its length is at most the limit of the lengths, because length is lower semicontinuous under uniform convergence. So a shortest feasible path $\gamma$ exists.
+
+*Straight away from vertices.* Let $z = \gamma(\tau)$ be a point of $\gamma$, other than $s$ and $t$, that is not an obstacle vertex, and take $r$ from Lemma 3. By continuity there is $\delta > 0$ such that $\gamma([\tau - \delta, \tau + \delta]) \subseteq B(z, r)$. The chord from $\gamma(\tau - \delta)$ to $\gamma(\tau + \delta)$ lies in the convex set $B(z, r) \cap F$, so replacing that part of $\gamma$ by the chord gives a feasible path. Since $\gamma$ is shortest, that part of $\gamma$ has the length of the chord, so it is the chord. Hence $\gamma$ is a straight segment near every such point.
+
+*Finitely many bends.* A shortest path does not pass through a point twice, since the loop between two visits could be removed. So $\gamma$ meets each of the finitely many obstacle vertices at most once, and the set $C$ of parameters where $\gamma$ is at $s$, $t$ or an obstacle vertex is finite. On each open interval between consecutive elements of $C$, $\gamma$ is locally a segment, so its direction is locally constant, hence constant on the connected interval, and $\gamma$ is one segment there.
+
+So $\gamma$ is a chain of segments whose ends are $s$, $t$ or obstacle vertices. Each segment lies in $F$, so it is an edge of $G^*$, and $\gamma$ is a path in $G^*$ of the same length. Hence the shortest feasible length is at least the distance in $G^*$, and the first paragraph gives the reverse inequality. $\blacksquare$
+
+**Remarks.** Dijkstra's algorithm computes the distance in $G^*$, since all weights are nonnegative. The implementation computes the lengths in floating point, so the returned length is exact only up to rounding; the returned vertex list is always a path in $G^*$, and it is a shortest one whenever rounding does not reverse the order of two path lengths.
