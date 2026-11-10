@@ -22,7 +22,7 @@ history:
   people: [David S. Johnson, Sherman K. Stein, László Lovász, Vašek Chvátal]
   note: Johnson (1974), Stein (1974) and Lovász (1975) analysed the unit-cost greedy; Chvátal (1979) extended the H_d bound to arbitrary costs.
 prereqs: [set-cover, greedy-algorithm, harmonic-series, weak-duality]
-see_also: [set-cover-primal-dual, dual-fitting, greedy-max-coverage, set-cover-inapproximability, dominating-set, lp-rounding-set-cover]
+see_also: [set-cover-primal-dual, dual-fitting, greedy-max-coverage, set-cover-inapproximability, dominating-set, lp-rounding-set-cover, frequency-rounding-set-cover]
 sources:
   - book: isbn:9780262046305
     title: Cormen, Leiserson, Rivest and Stein, Introduction to Algorithms, fourth edition
@@ -140,7 +140,7 @@ Let $s = \sum_j |S_j|$ be the total size of the input. The implementation keeps,
 - **Lazy greedy.** The lazy heap above is the "lazy evaluation" trick of Minoux (1978) for submodular functions. It saves much time in practice.
 - **Dominating set.** Run greedy on the closed neighbourhoods of a graph. This gives the $\ln(\Delta + 1) + 1$ ratio of [dominating set](/dominating-set/).
 - **Bounded set size.** For sets of size at most $d$, local search and semi-local improvements reach ratios below $H_d$, for example $H_d - 1/2$ (Duh and Fürer 1997).
-- **LP-based algorithms.** [LP rounding](/lp-rounding-set-cover/) and the [primal-dual method](/set-cover-primal-dual/) give ratio $f$, the largest [element frequency](/element-frequency/). This is better than $H_d$ when each element is in few sets, as in [vertex cover](/vertex-cover/).
+- **LP-based algorithms.** [Frequency rounding](/frequency-rounding-set-cover/) and the [primal-dual method](/set-cover-primal-dual/) give ratio $f$, the largest [element frequency](/element-frequency/). This is better than $H_d$ when each element is in few sets, as in [vertex cover](/vertex-cover/).
 
 ## When to use it
 
