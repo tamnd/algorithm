@@ -1,0 +1,21 @@
+---
+title: Dolev-Klawe-Rodeh tells every process the maximum with at most 2n⌊lg n⌋ + 2n messages
+proves: [correctness, termination, complexity]
+status: full
+---
+
+**Claim.** Run DOLEV-KLAWE-RODEH on an asynchronous unidirectional ring of $n \ge 1$ processes with distinct identifiers and reliable FIFO channels. Then every run is finite, every process ends with $\mathit{result}$ equal to the largest identifier $u_{\max}$, the process with identifier $u_{\max}$ has status *leader* and every other process has status *non-leader*. The run sends exactly $2nR + 2n$ messages, where $R \le \lfloor \lg n \rfloor$ is the number of phases with at least two active processes. In each phase the surviving values are the local maxima of the values of the phase, as in a round of Franklin's algorithm.
+
+**Setup.** Phase $r$ of an active process starts when it sends a *one* message (line L2 or L9) and ends when it runs line L5, L9 or L10. Let $a_1, \ldots, a_k$ be the processes that start phase $r$, in ring order with indices modulo $k$, and $t_j$ the value that $a_j$ sends at the start of phase $r$.
+
+**Lemma 1 (one phase).** Suppose the values $t_1, \ldots, t_k$ are distinct identifiers and all processes other than $a_1, \ldots, a_k$ are passive. Then $a_j$ receives in phase $r$ first $\langle \text{one}, t_{j-1} \rangle$ and, if $k \ge 2$, then $\langle \text{two}, t_{j-2} \rangle$. If $k \ge 2$, $a_j$ starts phase $r + 1$ with value $t_{j-1}$ exactly when $t_{j-1} > \max(t_{j-2}, t_j)$, and becomes passive otherwise. If $k = 1$, $a_1$ runs line L5.
+
+*Proof.* Passive processes forward each message and keep its kind (lines L4 and L8). In phase $r$, $a_{j-1}$ sends toward $a_j$ first $\langle \text{one}, t_{j-1} \rangle$, and then, after receiving its own first message, a *two* message with the value of that first message (line L6). All messages that $a_{j-1}$ sent in phase $r - 1$ were sent earlier, so by FIFO they reach $a_j$ earlier. So the first message of $a_j$ in phase $r$ is $\langle \text{one}, t_{j-1} \rangle$. If $k = 1$ this is its own value, which went round the ring, and line L5 applies. If $k \ge 2$, $t_{j-1} \ne t_j$, so $a_j$ runs line L6 and sets $\mathit{left} = t_{j-1}$. Its second message is the *two* message of $a_{j-1}$, whose value is the first value of $a_{j-1}$, which is $t_{j-2}$ by the same argument. Line L9 then tests $t_{j-1} > t_j$ and $t_{j-1} > t_{j-2}$. $\square$
+
+**Lemma 2 (survivors).** If $k \ge 2$, between $1$ and $\lfloor k/2 \rfloor$ processes start phase $r + 1$, their values are distinct, and the largest value of phase $r$ is among them.
+
+*Proof.* The values of phase $r + 1$ are the $t_{j-1}$ that are larger than both cyclic neighbours $t_{j-2}$ and $t_j$, that is, the local maxima of the cyclic sequence $t_1, \ldots, t_k$; for $k = 2$ this is the larger of the two. The largest value is a local maximum. Two cyclically adjacent values cannot both be local maxima, so there are at most $\lfloor k/2 \rfloor$. Each survivor carries the value of a different predecessor, so the values stay distinct. $\square$
+
+**Outputs.** Phase 1 has all $n$ processes with their distinct identifiers. By Lemmas 1 and 2, induction on $r$ shows that the hypothesis of Lemma 1 holds in every phase, that the number of active processes at least halves while it is at least 2, and that the largest identifier is always one of the values. After $R \le \lfloor \lg n \rfloor$ such phases one active process is left, and by Lemma 1 it runs line L5 with $\mathit{max} = u_{\max}$. It is the only process that sends a *found* message. Each other process receives it once, sets $\mathit{result} = u_{\max}$ and the status by line L12, and forwards it (line L13). The sender receives it last, sets its own result and status, and does not forward it.
+
+**Counting and termination.** In a phase with $k \ge 2$, each of the $k$ gaps between consecutive active processes is crossed by one *one* message and one *two* message, and the gaps add up to $n$: $2n$ messages. The last phase sends one *one* message round the ring, and the *found* message goes round once: $2n$ messages. The total is $2nR + 2n \le 2n \lfloor \lg n \rfloor + 2n$. The number of messages is finite, each delivery causes at most one send, and each active process receives the messages it waits for by Lemma 1, so the run ends. $\blacksquare$
