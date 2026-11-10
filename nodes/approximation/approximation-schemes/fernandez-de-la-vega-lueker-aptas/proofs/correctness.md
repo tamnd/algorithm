@@ -1,0 +1,37 @@
+---
+title: The Fernandez de la Vega-Lueker scheme uses at most (1 + ε) OPT + 1 bins
+proves: [correctness, time.worst]
+status: full
+---
+
+**Statement.** Let $s_1, \ldots, s_n \in (0, 1]$ and $0 < \varepsilon \le 1$. The algorithm FDLV-L of the page returns a packing into unit bins with at most $(1 + \varepsilon)\,\mathrm{OPT} + 1$ bins. For fixed $\varepsilon$ it runs in time $O(n \log n)$ plus a term that depends only on $\varepsilon$.
+
+**Setup.** We use the pseudocode of the page. Put $\delta = \varepsilon/2 \le \frac12$. Let $I_L$ be the $n'$ large items (size at least $\delta$) and $S = \sum_i s_i$. Two facts about $\mathrm{OPT}$ are used: $S \le \mathrm{OPT}$, since each bin holds total size at most 1; and $\mathrm{OPT}(X) \le \mathrm{OPT}$ for each sub-list $X$, since a packing of all items restricts to a packing of $X$. In particular $\delta n' \le S(I_L) \le \mathrm{OPT}(I_L) \le \mathrm{OPT}$.
+
+A *configuration* is a vector $C = (a_1, \ldots, a_d)$ of non-negative integers, not all zero, with $\sum_t a_t \sigma_t \le 1$, where $\sigma_1 > \cdots > \sigma_d$ are the distinct sizes of $J$. Let $A$ be the $d \times r$ matrix whose columns are the $r$ configurations and $b_t$ the number of items of $J$ of size $\sigma_t$. The configuration LP is
+$$\min \sum_C x_C \quad \text{subject to} \quad A x \ge b,\ x \ge 0, \qquad \max\ b \cdot y \quad \text{subject to} \quad A^{\mathsf T} y \le \mathbf 1,\ y \ge 0,$$
+the primal on the left and its dual on the right.
+
+**Lemma 1 (grouping).** If $K \ge 1$, then $\mathrm{OPT}(J) \le \mathrm{OPT}(I_L)$, and $J$ has $d \le g - 1$ distinct sizes, where $g = \lceil n'/K \rceil$ is the number of groups.
+
+*Proof.* Let $I_L$ be sorted by decreasing size and cut into $G_1, \ldots, G_g$. Each of $G_1, \ldots, G_{g-1}$ has exactly $K$ items, and $|G_g| \le K$. Map the $t$-th item of $G_h$ ($h \ge 2$) to the $t$-th item of $G_{h-1}$; this map is one to one. The rounded size of an item of $G_h$ is the first (largest) size of $G_h$, which is at most the last (smallest) size of $G_{h-1}$, since the list is sorted. So each item of $J$ is at most the item it is mapped to. Take an optimal packing of $I_L$, drop the items of $G_g$, and replace each image item by its preimage in $J$. No load grows, so this is a packing of $J$ with at most $\mathrm{OPT}(I_L)$ bins. The sizes of $J$ are the first sizes of $G_2, \ldots, G_g$, so $d \le g - 1$. $\square$
+
+**Lemma 2 (the LP solution).** Line L6 returns $x \ge 0$ with $A x \ge b$, $\sum_C x_C = \mathrm{LP}^*$, the optimum of the primal, and at most $d$ positive entries. Also $\mathrm{LP}^* \le \mathrm{OPT}(J)$.
+
+*Proof.* The simplex method runs on the dual in the form $A^{\mathsf T} y + w = \mathbf 1$ with slack variables $w \ge 0$, one per configuration. The origin $y = 0$, $w = \mathbf 1$ is a feasible basis. The dual is bounded: the configuration with one item of size $\sigma_t$ gives the row $y_t \le 1$. With Bland's rule the method does not cycle and stops at a basis $B$ with all reduced costs non-negative (Bland 1977). Let $x = (B^{-1})^{\mathsf T} c_B$ be the simplex multipliers, one per row, that is, one per configuration. The reduced cost of the slack $w_C$ is $x_C$, and the reduced cost of $y_t$ is $(A x)_t - b_t$. Both are non-negative at the end, so $x \ge 0$ and $A x \ge b$: $x$ is feasible for the primal. The objective value of the final basis is $\mathbf 1 \cdot x = b \cdot y^*$. By weak duality every primal feasible $x'$ has $\mathbf 1 \cdot x' \ge b \cdot y^*$, so $x$ is optimal. The reduced cost of a basic variable is 0. The basis has $r$ variables and at most $d$ of them are $y$ variables, so at least $r - d$ slacks are basic and at most $d$ entries $x_C$ are positive.
+
+For the last claim, an optimal packing of $J$ uses bins whose contents are configurations. Let $x'_C$ count the bins with contents $C$. Then $A x' = b$ and $\sum_C x'_C = \mathrm{OPT}(J)$, so $\mathrm{LP}^* \le \mathrm{OPT}(J)$. $\square$
+
+**Lemma 3 (rounding up).** Line L7 packs all items of $J$, using their original sizes, into at most $\mathrm{OPT}(J) + d$ bins.
+
+*Proof.* Line L7 opens $\lceil x_C \rceil$ bins for each configuration $C$, and each bin has $a_t$ slots of size $\sigma_t$. There are $\sum_C a_{t}(C) \lceil x_C \rceil \ge (A x)_t \ge b_t$ slots of size $\sigma_t$, so every item of $J$ gets a slot. An item in a slot of size $\sigma_t$ has original size at most $\sigma_t$, so the load of a bin is at most $\sum_t a_t \sigma_t \le 1$. Empty slots and empty bins are dropped, which keeps feasibility. The number of bins is $\sum_C \lceil x_C \rceil \le \sum_C x_C + |\{C : x_C > 0\}| \le \mathrm{LP}^* + d \le \mathrm{OPT}(J) + d$ by Lemma 2. $\square$
+
+**Lemma 4 (the large items).** After line L8 the bins hold all large items, each bin is feasible, and the number of bins is at most $(1 + \varepsilon)\,\mathrm{OPT}$.
+
+*Proof.* If $n' < 2/\delta^4$, line L3 packs $I_L$ optimally with $\mathrm{OPT}(I_L) \le \mathrm{OPT}$ bins. Otherwise $\delta^2 n' \ge 2/\delta^2 \ge 8$, so $K = \lfloor \delta^2 n' \rfloor \ge 1$ and $K \ge \delta^2 n'/2$, because $\lfloor z \rfloor \ge z/2$ for $z \ge 1$. By Lemmas 1 and 3 the items of $G_2, \ldots, G_g$ use at most $\mathrm{OPT}(I_L) + d$ bins, and line L8 adds $K$ bins of one item each. Now $K \le \delta^2 n' \le \delta\,\mathrm{OPT}$ because $\delta n' \le \mathrm{OPT}$. And $d \le g - 1 < n'/K \le 2/\delta^2$, while $\mathrm{OPT} \ge \delta n' \ge 2/\delta^3$, so $d < 2/\delta^2 \le \delta\,\mathrm{OPT}$. The total is at most $\mathrm{OPT} + 2\delta\,\mathrm{OPT} = (1 + \varepsilon)\,\mathrm{OPT}$. $\square$
+
+**Proof of the bound.** Line L9 places each small item $j$ into the first bin with room, or into a new bin. Each item placed fits, so all bins stay feasible, and every item is packed. Let $B$ be the final number of bins. If L9 opens no bin, $B \le (1 + \varepsilon)\,\mathrm{OPT}$ by Lemma 4. Otherwise, consider the last bin that L9 opens, for the item $j$. At that time every other bin had load more than $1 - s_j > 1 - \delta$, and loads only grow later. All bins except this last one existed at that time, so
+$$(B - 1)(1 - \delta) < S \le \mathrm{OPT}, \qquad B < \frac{\mathrm{OPT}}{1 - \delta} + 1 \le (1 + 2\delta)\,\mathrm{OPT} + 1 = (1 + \varepsilon)\,\mathrm{OPT} + 1.$$
+The step $\frac{1}{1-\delta} \le 1 + 2\delta$ holds because $(1 + 2\delta)(1 - \delta) = 1 + \delta(1 - 2\delta) \ge 1$ for $\delta \le \frac12$. $\square$
+
+**Proof of the time.** Line L2 sorts in $O(n \log n)$. If $n' < 2/\delta^4$, line L3 solves an instance whose size depends only on $\varepsilon$; trying all assignments of $N = n'$ items to $N$ bins costs $N^{O(N)} = 2^{O(\varepsilon^{-4} \log(1/\varepsilon))}$. Otherwise $d < 2/\delta^2 = 8/\varepsilon^2$, and a configuration holds at most $\lfloor 1/\delta \rfloor$ items, so $r \le \binom{d + \lfloor 1/\delta \rfloor}{d}$, a number that depends only on $\varepsilon$. The LP of line L6 has size $r \times d$ and is solved in time that depends only on $\varepsilon$. Lines L4, L5, L7 and L8 cost $O(n)$ after sorting. For line L9, the proof above uses only one property: a new bin is opened only when every bin has load more than $1 - \delta$. A list of the bins with load at most $1 - \delta$ gives this property in $O(1)$ time per item, since a small item always fits in such a bin. So the total is $O(n \log n)$ plus a term in $\varepsilon$ alone. $\blacksquare$
