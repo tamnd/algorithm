@@ -1,0 +1,347 @@
+# SPDX-License-Identifier: MIT
+# Part of https://algorithm.tamnd.com/supersingular-isogeny-problem/. The authors are listed in prov/QQP1FK.jsonl.
+
+"""Path finding in a toy supersingular 2-isogeny graph, by meet in the middle.
+
+- Fp2, Curve, velu, two_torsion, two_isogeny_graph: a toy supersingular
+  2-isogeny graph over F_{p^2} (p = 3 mod 4), built from y^2 = x^3 + x with
+  Velu's formulas (Washington, Elliptic Curves, Theorem 12.16).
+- bfs_path: a shortest path by breadth-first search from one end.
+- mitm_path: a shortest path by breadth-first search from both ends at once,
+  the meet-in-the-middle idea behind the generic O~(p^(1/2)) algorithms.
+- isogeny_from_path: turns a path of j-invariants into a chain of
+  2-isogenies, which is the answer the problem asks for.
+
+The graph is built in full, which is only possible for toy p (here p up to
+about 10^4, with about p / 12 vertices). The point is to count the vertices
+that each search touches. For study only; not constant time.
+"""
+
+import random
+from collections import deque
+
+
+class Fp2:
+    """An element a + b i of F_{p^2}, with i^2 = -1."""
+
+    __slots__ = ("a", "b", "p")
+
+    def __init__(self, a: int, b: int, p: int) -> None:
+        self.a, self.b, self.p = a % p, b % p, p
+
+    def _c(self, o):
+        return o if isinstance(o, Fp2) else Fp2(o, 0, self.p)
+
+    def __add__(self, o):
+        o = self._c(o)
+        return Fp2(self.a + o.a, self.b + o.b, self.p)
+
+    __radd__ = __add__
+
+    def __sub__(self, o):
+        o = self._c(o)
+        return Fp2(self.a - o.a, self.b - o.b, self.p)
+
+    def __rsub__(self, o):
+        return self._c(o) - self
+
+    def __neg__(self):
+        return Fp2(-self.a, -self.b, self.p)
+
+    def __mul__(self, o):
+        o = self._c(o)
+        return Fp2(self.a * o.a - self.b * o.b, self.a * o.b + self.b * o.a, self.p)
+
+    __rmul__ = __mul__
+
+    def inv(self):
+        n = (self.a * self.a + self.b * self.b) % self.p
+        if n == 0:
+            raise ZeroDivisionError("inverse of 0")
+        ni = pow(n, -1, self.p)
+        return Fp2(self.a * ni, -self.b * ni, self.p)
+
+    def __truediv__(self, o):
+        return self * self._c(o).inv()
+
+    def __rtruediv__(self, o):
+        return self._c(o) * self.inv()
+
+    def __pow__(self, e: int):
+        r, x = Fp2(1, 0, self.p), self
+        while e:
+            if e & 1:
+                r = r * x
+            x = x * x
+            e >>= 1
+        return r
+
+    def __eq__(self, o):
+        o = self._c(o)
+        return self.a == o.a and self.b == o.b
+
+    def __hash__(self):
+        return hash((self.a, self.b))
+
+    def is_zero(self) -> bool:
+        return self.a == 0 and self.b == 0
+
+    def key(self) -> int:
+        return self.a + self.b * self.p
+
+    def __repr__(self) -> str:
+        return f"{self.a}+{self.b}i" if self.b else f"{self.a}"
+
+
+def sqrt_fp(c: int, p: int):
+    """A square root of c mod p (p = 3 mod 4), or None."""
+    c %= p
+    if c == 0:
+        return 0
+    if pow(c, (p - 1) // 2, p) != 1:
+        return None
+    return pow(c, (p + 1) // 4, p)
+
+
+def sqrt_fp2(z: Fp2):
+    """A square root of z in F_{p^2} (p = 3 mod 4), or None."""
+    p, u, v = z.p, z.a, z.b
+    if v == 0:
+        r = sqrt_fp(u, p)
+        if r is not None:
+            return Fp2(r, 0, p)
+        return Fp2(0, sqrt_fp(-u, p), p)
+    n = sqrt_fp(u * u + v * v, p)
+    if n is None:
+        return None
+    half = pow(2, -1, p)
+    for s in (n, -n):
+        x = sqrt_fp((u + s) * half, p)
+        if x:
+            return Fp2(x, v * pow(2 * x, -1, p), p)
+    return None
+
+
+class Curve:
+    """y^2 = x^3 + a x + b over F_{p^2}."""
+
+    def __init__(self, a: Fp2, b: Fp2) -> None:
+        self.a, self.b, self.p = a, b, a.p
+
+    def rhs(self, x: Fp2) -> Fp2:
+        return x * x * x + self.a * x + self.b
+
+    def j(self) -> Fp2:
+        a3 = self.a * self.a * self.a * 4
+        return 1728 * a3 / (a3 + self.b * self.b * 27)
+
+    def add(self, P, Q):
+        if P is None:
+            return Q
+        if Q is None:
+            return P
+        if P[0] == Q[0]:
+            if (P[1] + Q[1]).is_zero():
+                return None
+            lam = (P[0] * P[0] * 3 + self.a) / (P[1] * 2)
+        else:
+            lam = (Q[1] - P[1]) / (Q[0] - P[0])
+        x = lam * lam - P[0] - Q[0]
+        return (x, lam * (P[0] - x) - P[1])
+
+    def mul(self, k: int, P):
+        R = None
+        while k:
+            if k & 1:
+                R = self.add(R, P)
+            P = self.add(P, P)
+            k >>= 1
+        return R
+
+    def random_point(self, rng: random.Random):
+        p = self.p
+        while True:
+            x = Fp2(rng.randrange(p), rng.randrange(p), p)
+            y = sqrt_fp2(self.rhs(x))
+            if y is not None:
+                return (x, y)
+
+
+def velu(E: Curve, K, order: int):
+    """Velu: the codomain and the map of the isogeny with kernel generated by K."""
+    pts, Q = [], K
+    for _ in range(order - 1):
+        pts.append(Q)
+        Q = E.add(Q, K)
+    assert Q is None, "K does not have the given order"
+    S, seen = [], set()
+    for Q in pts:
+        if (Q[0].key(), Q[1].key()) in seen:
+            continue
+        seen.add((Q[0].key(), Q[1].key()))
+        seen.add((Q[0].key(), (-Q[1]).key()))
+        S.append(Q)
+    data, v, w = [], Fp2(0, 0, E.p), Fp2(0, 0, E.p)
+    for Q in S:
+        gx = Q[0] * Q[0] * 3 + E.a
+        gy = Q[1] * -2
+        vq = gx if Q[1].is_zero() else gx * 2
+        uq = gy * gy
+        v, w = v + vq, w + uq + Q[0] * vq
+        data.append((Q, gx, gy, vq, uq))
+    E2 = Curve(E.a - v * 5, E.b - w * 7)
+
+    def phi(P):
+        if P is None:
+            return None
+        x, y = P
+        X, Y = x, y
+        for Q, gx, gy, vq, uq in data:
+            d = x - Q[0]
+            if d.is_zero():
+                return None
+            di = d.inv()
+            di2 = di * di
+            X = X + vq * di + uq * di2
+            Y = Y - (uq * y * 2 * di2 * di + vq * (y - Q[1]) * di2 - gx * gy * di2)
+        return (X, Y)
+
+    return E2, phi
+
+
+def two_torsion(E: Curve, rng: random.Random) -> list:
+    """The three points of order 2 of a supersingular curve with E(F_{p^2}) = (Z/(p+1))^2."""
+    p = E.p
+    odd = p + 1
+    while odd % 2 == 0:
+        odd //= 2
+    while True:
+        R = E.mul(odd, E.random_point(rng))
+        if R is not None:
+            break
+    while E.mul(2, R) is not None:
+        R = E.mul(2, R)
+    x0 = R[0]
+    s = sqrt_fp2(x0 * x0 - (x0 * x0 + E.a) * 4)
+    half = Fp2(pow(2, -1, p), 0, p)
+    xs = [x0, (-x0 + s) * half, (-x0 - s) * half]
+    return [(x, Fp2(0, 0, p)) for x in xs]
+
+
+def phi2(X, Y):
+    """The classical modular polynomial of level 2."""
+    return (
+        X**3 + Y**3 - X * X * Y * Y
+        + 1488 * (X * X * Y + X * Y * Y)
+        - 162000 * (X * X + Y * Y)
+        + 40773375 * X * Y
+        + 8748000000 * (X + Y)
+        - 157464000000000
+    )
+
+
+def two_isogeny_graph(p: int, seed: int = 1):
+    """The supersingular 2-isogeny graph over F_{p^2}: (adjacency lists, one curve per j)."""
+    rng = random.Random(seed)
+    E0 = Curve(Fp2(1, 0, p), Fp2(0, 0, p))
+    curves = {E0.j(): E0}
+    adj = {}
+    todo = [E0.j()]
+    while todo:
+        j = todo.pop()
+        E = curves[j]
+        nb = []
+        for T in two_torsion(E, rng):
+            j2 = velu(E, T, 2)[0].j()
+            nb.append(j2)
+            if j2 not in curves:
+                curves[j2] = velu(E, T, 2)[0]
+                todo.append(j2)
+        adj[j] = nb
+    return adj, curves
+
+
+def bfs_path(adj: dict, s, t):
+    """A shortest path from s to t by search from s. Returns (path, vertices touched)."""
+    parent = {s: None}
+    queue = deque([s])
+    while queue:
+        u = queue.popleft()
+        if u == t:
+            break
+        for v in adj[u]:
+            if v not in parent:
+                parent[v] = u
+                queue.append(v)
+    path, u = [], t
+    while u is not None:
+        path.append(u)
+        u = parent[u]
+    return path[::-1], len(parent)
+
+
+def mitm_path(adj: dict, s, t):
+    """A shortest path from s to t by meet in the middle. Returns (path, vertices touched).
+
+    Grow a breadth-first ball around each end, one full layer at a time,
+    always the smaller ball, until a new vertex of one ball is in the other.
+    """
+    if s == t:
+        return [s], 1
+    par = ({s: None}, {t: None})
+    frontier = ([s], [t])
+    best = None
+    while best is None:
+        side = 0 if len(par[0]) <= len(par[1]) else 1
+        mine, other = par[side], par[1 - side]
+        nxt = []
+        for u in frontier[side]:
+            for v in adj[u]:
+                if v in mine:
+                    continue
+                mine[v] = u
+                nxt.append(v)
+                if v in other and best is None:
+                    best = v
+        frontier = (nxt, frontier[1]) if side == 0 else (frontier[0], nxt)
+        if not nxt and best is None:
+            raise ValueError("no path")
+    # The layer just finished may hold several meeting points; take the one
+    # with the shortest total length.
+    def depth(tree, v):
+        d = 0
+        while tree[v] is not None:
+            v, d = tree[v], d + 1
+        return d
+
+    meets = [v for v in par[0] if v in par[1]]
+    best = min(meets, key=lambda v: depth(par[0], v) + depth(par[1], v))
+    left, u = [], best
+    while u is not None:
+        left.append(u)
+        u = par[0][u]
+    right, u = [], par[1][best]
+    while u is not None:
+        right.append(u)
+        u = par[1][u]
+    return left[::-1] + right, len(par[0]) + len(par[1])
+
+
+def isogeny_from_path(E: Curve, path: list, rng: random.Random):
+    """Follow a path of j-invariants from E by 2-isogenies.
+
+    Returns (codomain, the list of the maps). The composition is an isogeny of
+    degree 2^(len(path) - 1) from E to a curve with j-invariant path[-1].
+    """
+    assert E.j() == path[0]
+    maps = []
+    for j_next in path[1:]:
+        for T in two_torsion(E, rng):
+            E2, phi = velu(E, T, 2)
+            if E2.j() == j_next:
+                break
+        else:
+            raise ValueError("not a path in the 2-isogeny graph")
+        E = E2
+        maps.append(phi)
+    return E, maps
