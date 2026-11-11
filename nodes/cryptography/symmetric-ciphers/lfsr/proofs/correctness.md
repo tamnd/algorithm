@@ -1,0 +1,50 @@
+---
+title: A primitive LFSR has period 2^L - 1, the Galois form is a shift of the Fibonacci form, and Berlekamp-Massey finds the shortest LFSR
+proves: [correctness]
+status: full
+---
+
+All arithmetic is over $\mathbb{F}_2$. Let $C(x) = 1 + c_1 x + \cdots + c_L x^L$ with $c_L = 1$, and let $f(x) = x^L C(1/x) = x^L + c_1 x^{L-1} + \cdots + c_L$. A sequence $s = (s_t)_{t \ge 0}$ *satisfies* $f$ when $s_{t+L} = c_1 s_{t+L-1} \oplus \cdots \oplus c_L s_t$ for each $t \ge 0$. Let $E$ be the shift operator, $(E s)_t = s_{t+1}$. For a polynomial $g(x) = \sum_i g_i x^i$ write $g(E) s = \sum_i g_i E^i s$. Then $s$ satisfies $f$ if and only if $f(E) s = 0$.
+
+**Lemma 1 (the Fibonacci output satisfies $f$).** The output of FIBONACCI-STEP from each state satisfies $f$.
+
+*Proof.* The register holds $(s_t, \ldots, s_{t+L-1})$ before step $t$. Line L2 computes $c_1 s_{t+L-1} \oplus \cdots \oplus c_L s_t$, and line L3 appends it as $s_{t+L}$. Line L1 outputs $s_t$. So the output is $s$ and it satisfies the recurrence for each $t$. $\square$
+
+**Lemma 2 (the annihilator ideal).** For a sequence $s$ that satisfies $f$, the set $I_s = \{g \in \mathbb{F}_2[x] : g(E) s = 0\}$ is an ideal that contains $f$. If $s \ne 0$ and $f$ is irreducible, then $I_s = (f)$.
+
+*Proof.* If $g(E) s = 0$ and $h(E) s = 0$, then $(g + h)(E) s = 0$, and $(x g)(E) s = E(g(E) s) = 0$. So $I_s$ is an ideal of the principal ideal ring $\mathbb{F}_2[x]$, so $I_s = (m)$ for one monic $m$, the *minimal polynomial* of $s$. Since $f \in I_s$, $m$ divides $f$. If $f$ is irreducible, $m = 1$ or $m = f$. The case $m = 1$ means $s = 1(E) s = 0$, which is false. So $m = f$. $\square$
+
+**Theorem 1 (the period).** Let $f$ be primitive of degree $L$. Then each nonzero sequence that satisfies $f$ has period exactly $2^L - 1$.
+
+*Proof.* A primitive polynomial is irreducible, and $x$ has order $2^L - 1$ in the multiplicative group of the field $\mathbb{F}_2[x]/(f)$. That is, $f$ divides $x^T - 1$ if and only if $(2^L - 1)$ divides $T$.
+
+A positive $T$ is a period of $s$ if and only if $(E^T - 1) s = 0$, that is, $x^T - 1 \in I_s$. By Lemma 2, $I_s = (f)$, so $T$ is a period if and only if $f$ divides $x^T - 1$, if and only if $(2^L - 1)$ divides $T$. The least such $T$ is $2^L - 1$. $\square$
+
+By Lemma 1, this applies to the Fibonacci register from each nonzero state, which is the content of the test of the period. As a check on the count: there are $2^L - 1$ nonzero states, the step is a bijection on them because $c_L = 1$ lets line L2 be solved for the dropped bit, and Theorem 1 says that one orbit has $2^L - 1$ states. So all nonzero states lie on one cycle.
+
+**Lemma 3 (the Galois output satisfies $f$).** Let $R = \mathbb{F}_2[x]/(f)$ and let $\ell : R \to \mathbb{F}_2$ take the coefficient of $x^{L-1}$ of the reduced form. Lines L5 to L7 output $o_t = \ell(a_t)$ and set $a_{t+1} = x a_t$ in $R$. Then $(o_t)$ satisfies $f$.
+
+*Proof.* Line L6 multiplies by $x$ and drops the term $x^L$ when it appears. Line L7 adds $f(x) - x^L$ in that case, which equals $x^L$ in $R$ because $f = 0$ in $R$. So $a_{t+1} = x a_t$ in $R$, and $a_t = x^t a_0$. Then, since $\ell$ is linear over $\mathbb{F}_2$,
+$$o_{t+L} \oplus c_1 o_{t+L-1} \oplus \cdots \oplus c_L o_t = \ell\bigl((x^L + c_1 x^{L-1} + \cdots + c_L)\, x^t a_0\bigr) = \ell\bigl(f(x)\, x^t a_0\bigr) = \ell(0) = 0. \qquad \square$$
+
+**Theorem 2 (Galois is a shift of Fibonacci).** Let $f$ be primitive. For each nonzero Galois start $a_0$ and each nonzero Fibonacci state, the two output sequences are equal up to a shift.
+
+*Proof.* The sequences that satisfy $f$ form a vector space $V$ over $\mathbb{F}_2$ of dimension $L$: a sequence is fixed by its first $L$ terms, and each choice of them extends. The Galois output is in $V$ by Lemma 3. It is nonzero: if $o_t = 0$ for all $t$, then $\ell(x^t a_0) = 0$ for all $t$, so $\ell(b a_0) = 0$ for each $b \in R$, since $b$ is a sum of powers of $x$. As $a_0 \ne 0$ in the field $R$, $b a_0$ runs over all of $R$, which includes $x^{L-1}$ with $\ell(x^{L-1}) = 1$, a contradiction.
+
+Now fix a nonzero $u \in V$. Its shifts $u, Eu, \ldots, E^{2^L - 2} u$ are in $V$ and are pairwise different, because by Theorem 1 the period of $u$ is $2^L - 1$. So they are all $2^L - 1$ nonzero elements of $V$. Both the Galois output and the Fibonacci output (Lemma 1) are nonzero elements of $V$, so each is a shift of $u$, and so each is a shift of the other. $\square$
+
+**Theorem 3 (linear complexity and Berlekamp-Massey).** Let $\Lambda_N$ be the length of a shortest LFSR that generates $s_0, \ldots, s_{N-1}$.
+
+(a) (Massey 1969, Theorem 1.) If an LFSR of length $L$ generates $s_0, \ldots, s_{N-1}$ but not $s_0, \ldots, s_N$, then each LFSR that generates $s_0, \ldots, s_N$ has length at least $N + 1 - L$. Hence $\Lambda_{N+1} \ge \max(\Lambda_N, N + 1 - \Lambda_N)$.
+
+(b) BERLEKAMP-MASSEY returns $\Lambda_N$ and a connection polynomial of that length.
+
+(c) If $s$ is generated by an LFSR of length $L$ and $N \ge 2L$, the LFSR returned by (b), loaded with $s_0, \ldots, s_{\Lambda_N - 1}$, generates the whole of $s$.
+
+*Proof of (a).* Let $C$ of length $L$ generate $s_0 \ldots s_{N-1}$ but not $s_N$, and let $D$ of length $L'$ generate $s_0 \ldots s_N$. Suppose $L' \le N - L$. For $L \le t \le N$, write $\hat s_t = \sum_{i=1}^{L} c_i s_{t-i}$, so $s_t = \hat s_t$ for $t < N$ and $s_N \ne \hat s_N$. Since $N - L \ge L'$, each index $N - i$ with $1 \le i \le L$ is at least $L'$, so $s_{N-i} = \sum_{j=1}^{L'} d_j s_{N-i-j}$. Then
+$$\hat s_N = \sum_{i=1}^{L} c_i \sum_{j=1}^{L'} d_j s_{N-i-j} = \sum_{j=1}^{L'} d_j \sum_{i=1}^{L} c_i s_{N-j-i} = \sum_{j=1}^{L'} d_j s_{N-j} = s_N,$$
+where the third step uses $N - j \ge L$ and $N - j < N$, so $C$ predicts $s_{N-j}$ correctly. This contradicts $s_N \ne \hat s_N$. So $L' \ge N + 1 - L$. For the second claim, if $\Lambda_{N+1} > \Lambda_N$, then the shortest LFSR for the first $N$ bits fails at $s_N$, and (a) with $L = \Lambda_N$ gives the bound. $\square$
+
+*Proof of (b), a sketch after Massey (1969) and HAC Algorithm 6.30.* The invariant before step $n$ is: $C$ has length $L = \Lambda_n$ and generates $s_0 \ldots s_{n-1}$, and $B$ is the polynomial $C$ had at the last length change, with discrepancy $1$ at that position, $m$ steps ago. If $d = 0$ (line L12), $C$ also generates $s_n$, and $\Lambda_{n+1} = \Lambda_n$. If $d = 1$, the polynomial $C + x^m B$ has discrepancy $d + 1 = 0$ at position $n$, because the $x^m B$ term adds the old discrepancy of $B$, shifted by $m$ to land on $n$, and adds zero at earlier positions where $B$ had no discrepancy. Its length is $\max(L, m + L_B) = \max(L, n + 1 - L)$, which by (a) is the least possible. Lines L13 and L14 set $L$ to this value: line L13 when $2L \le n$, that is, $n + 1 - L > L$, and line L14 otherwise. So the invariant holds at $n + 1$, and line L15 returns $\Lambda_N$. $\square$
+
+*Proof of (c).* Let $D$ of length $L$ generate all of $s$, and let $C$ of length $\Lambda_N \le L$ generate $s_0 \ldots s_{N-1}$, with $N \ge 2L$. Suppose $C$ first fails at position $N' \ge N$. Then $C$ generates $s_0 \ldots s_{N'-1}$ but not $s_{N'}$, and $D$ generates $s_0 \ldots s_{N'}$. By (a), $L \ge N' + 1 - \Lambda_N \ge 2L + 1 - L = L + 1$, a contradiction. So $C$ never fails. $\blacksquare$
