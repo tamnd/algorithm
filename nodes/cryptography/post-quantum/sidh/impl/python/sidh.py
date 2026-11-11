@@ -1,0 +1,315 @@
+# SPDX-License-Identifier: MIT
+# Part of https://algorithm.tamnd.com/sidh/. The authors are listed in prov/HYTKQP.jsonl.
+
+"""Toy SIDH (Jao and De Feo, 2011) at p = 2^4 * 3^3 - 1 = 431.
+
+SIDH IS BROKEN. Castryck and Decru (2022) and later papers recover the
+secret from a public key in polynomial time, and the adaptive attack of
+Galbraith, Petit, Shani and Ti (2016) already broke static keys. This code is
+a toy for study only: the prime has 9 bits, the code is not constant time,
+and it has no key validation. Do not use SIDH or SIKE. For post-quantum key
+exchange use ML-KEM (FIPS 203) from a FIPS 140 validated module.
+
+The curves are in short Weierstrass form and the isogenies come from Velu's
+formulas (Washington, Elliptic Curves, Theorem 12.16). SIKE uses x-only
+arithmetic on Montgomery curves and optimal strategies instead; the maps are
+the same up to isomorphism, so the shared j-invariant is the same idea.
+
+SIKE_PARAMS lists the four SIKE round 4 primes p = 2^eA 3^eB - 1 with their
+NIST category, and sike_sizes gives the byte sizes of the uncompressed
+public key and ciphertext.
+"""
+
+import random
+from dataclasses import dataclass
+
+
+class Fp2:
+    """An element a + b i of F_{p^2}, with i^2 = -1."""
+
+    __slots__ = ("a", "b", "p")
+
+    def __init__(self, a: int, b: int, p: int) -> None:
+        self.a, self.b, self.p = a % p, b % p, p
+
+    def _c(self, o):
+        return o if isinstance(o, Fp2) else Fp2(o, 0, self.p)
+
+    def __add__(self, o):
+        o = self._c(o)
+        return Fp2(self.a + o.a, self.b + o.b, self.p)
+
+    __radd__ = __add__
+
+    def __sub__(self, o):
+        o = self._c(o)
+        return Fp2(self.a - o.a, self.b - o.b, self.p)
+
+    def __rsub__(self, o):
+        return self._c(o) - self
+
+    def __neg__(self):
+        return Fp2(-self.a, -self.b, self.p)
+
+    def __mul__(self, o):
+        o = self._c(o)
+        return Fp2(self.a * o.a - self.b * o.b, self.a * o.b + self.b * o.a, self.p)
+
+    __rmul__ = __mul__
+
+    def inv(self):
+        n = (self.a * self.a + self.b * self.b) % self.p
+        if n == 0:
+            raise ZeroDivisionError("inverse of 0")
+        ni = pow(n, -1, self.p)
+        return Fp2(self.a * ni, -self.b * ni, self.p)
+
+    def __truediv__(self, o):
+        return self * self._c(o).inv()
+
+    def __rtruediv__(self, o):
+        return self._c(o) * self.inv()
+
+    def __eq__(self, o):
+        o = self._c(o)
+        return self.a == o.a and self.b == o.b
+
+    def __hash__(self):
+        return hash((self.a, self.b))
+
+    def is_zero(self) -> bool:
+        return self.a == 0 and self.b == 0
+
+    def key(self) -> int:
+        return self.a + self.b * self.p
+
+    def __repr__(self) -> str:
+        return f"{self.a}+{self.b}i" if self.b else f"{self.a}"
+
+
+def sqrt_fp(c: int, p: int):
+    """A square root of c mod p (p = 3 mod 4), or None."""
+    c %= p
+    if c == 0:
+        return 0
+    if pow(c, (p - 1) // 2, p) != 1:
+        return None
+    return pow(c, (p + 1) // 4, p)
+
+
+def sqrt_fp2(z: Fp2):
+    """A square root of z in F_{p^2} (p = 3 mod 4), or None."""
+    p, u, v = z.p, z.a, z.b
+    if v == 0:
+        r = sqrt_fp(u, p)
+        if r is not None:
+            return Fp2(r, 0, p)
+        return Fp2(0, sqrt_fp(-u, p), p)
+    n = sqrt_fp(u * u + v * v, p)
+    if n is None:
+        return None
+    half = pow(2, -1, p)
+    for s in (n, -n):
+        x = sqrt_fp((u + s) * half, p)
+        if x:
+            return Fp2(x, v * pow(2 * x, -1, p), p)
+    return None
+
+
+class Curve:
+    """y^2 = x^3 + a x + b over F_{p^2}; points are pairs, None is infinity."""
+
+    def __init__(self, a: Fp2, b: Fp2) -> None:
+        self.a, self.b, self.p = a, b, a.p
+
+    def rhs(self, x: Fp2) -> Fp2:
+        return x * x * x + self.a * x + self.b
+
+    def on_curve(self, P) -> bool:
+        return P is None or P[1] * P[1] == self.rhs(P[0])
+
+    def j(self) -> Fp2:
+        a3 = self.a * self.a * self.a * 4
+        return 1728 * a3 / (a3 + self.b * self.b * 27)
+
+    def add(self, P, Q):
+        if P is None:
+            return Q
+        if Q is None:
+            return P
+        if P[0] == Q[0]:
+            if (P[1] + Q[1]).is_zero():
+                return None
+            lam = (P[0] * P[0] * 3 + self.a) / (P[1] * 2)
+        else:
+            lam = (Q[1] - P[1]) / (Q[0] - P[0])
+        x = lam * lam - P[0] - Q[0]
+        return (x, lam * (P[0] - x) - P[1])
+
+    def mul(self, k: int, P):
+        R = None
+        while k:
+            if k & 1:
+                R = self.add(R, P)
+            P = self.add(P, P)
+            k >>= 1
+        return R
+
+    def random_point(self, rng: random.Random):
+        p = self.p
+        while True:
+            x = Fp2(rng.randrange(p), rng.randrange(p), p)
+            y = sqrt_fp2(self.rhs(x))
+            if y is not None:
+                return (x, y)
+
+
+def velu(E: Curve, K, order: int):
+    """Velu: the codomain and the map of the isogeny with kernel generated by K."""
+    pts, Q = [], K
+    for _ in range(order - 1):
+        pts.append(Q)
+        Q = E.add(Q, K)
+    assert Q is None, "K does not have the given order"
+    S, seen = [], set()
+    for Q in pts:
+        if (Q[0].key(), Q[1].key()) in seen:
+            continue
+        seen.add((Q[0].key(), Q[1].key()))
+        seen.add((Q[0].key(), (-Q[1]).key()))
+        S.append(Q)
+    data, v, w = [], Fp2(0, 0, E.p), Fp2(0, 0, E.p)
+    for Q in S:
+        gx = Q[0] * Q[0] * 3 + E.a
+        gy = Q[1] * -2
+        vq = gx if Q[1].is_zero() else gx * 2
+        uq = gy * gy
+        v, w = v + vq, w + uq + Q[0] * vq
+        data.append((Q, gx, gy, vq, uq))
+    E2 = Curve(E.a - v * 5, E.b - w * 7)
+
+    def phi(P):
+        if P is None:
+            return None
+        x, y = P
+        X, Y = x, y
+        for Q, gx, gy, vq, uq in data:
+            d = x - Q[0]
+            if d.is_zero():
+                return None
+            di = d.inv()
+            di2 = di * di
+            X = X + vq * di + uq * di2
+            Y = Y - (uq * y * 2 * di2 * di + vq * (y - Q[1]) * di2 - gx * gy * di2)
+        return (X, Y)
+
+    return E2, phi
+
+
+def order_is(E: Curve, P, n: int, ell: int) -> bool:
+    """True when P has order exactly n = ell^e."""
+    return E.mul(n, P) is None and E.mul(n // ell, P) is not None
+
+
+def torsion_basis(E: Curve, ell: int, e: int, rng: random.Random):
+    """A basis (P, Q) of E[ell^e], for E(F_{p^2}) = (Z/(p+1))^2."""
+    n = ell**e
+    cof = (E.p + 1) // n
+    while True:
+        P = E.mul(cof, E.random_point(rng))
+        Q = E.mul(cof, E.random_point(rng))
+        P1, Q1 = E.mul(n // ell, P), E.mul(n // ell, Q)
+        if P1 is None or Q1 is None:
+            continue
+        span, R = set(), None
+        for _ in range(ell):
+            span.add(None if R is None else (R[0].key(), R[1].key()))
+            R = E.add(R, P1)
+        if (Q1[0].key(), Q1[1].key()) not in span:
+            return P, Q
+
+
+def isogeny(E: Curve, R, ell: int, e: int, push: list):
+    """The isogeny E -> E / <R> for R of order ell^e, as e steps of degree ell.
+
+    Returns the codomain and the images of the points in push.
+    """
+    for i in range(e):  # @line L5
+        T = E.mul(ell ** (e - 1 - i), R)  # @line L6
+        E, phi = velu(E, T, ell)  # @line L7
+        R = phi(R)  # @line L8
+        push = [phi(X) for X in push]  # @line L8
+    assert R is None
+    return E, push  # @line L9
+
+
+@dataclass(frozen=True)
+class Params:
+    """Public parameters: p = 2^eA 3^eB - 1, E0, and the two torsion bases."""
+
+    p: int
+    eA: int
+    eB: int
+    E0: Curve
+    PA: tuple
+    QA: tuple
+    PB: tuple
+    QB: tuple
+
+
+def setup(eA: int = 4, eB: int = 3, seed: int = 1) -> Params:
+    """Toy public parameters. The default prime is 2^4 * 3^3 - 1 = 431."""
+    p = 2**eA * 3**eB - 1
+    rng = random.Random(seed)
+    E0 = Curve(Fp2(1, 0, p), Fp2(0, 0, p))  # y^2 = x^3 + x, supersingular for p = 3 mod 4
+    PA, QA = torsion_basis(E0, 2, eA, rng)
+    PB, QB = torsion_basis(E0, 3, eB, rng)
+    return Params(p, eA, eB, E0, PA, QA, PB, QB)
+
+
+def keygen(pp: Params, side: str, rng: random.Random):
+    """Key generation for side "A" (degree 2^eA) or "B" (degree 3^eB).
+
+    Returns (secret, public key (E, phi(P'), phi(Q'))), where (P', Q') is the
+    torsion basis of the other side.
+    """
+    if side == "A":
+        ell, e, P, Q, others = 2, pp.eA, pp.PA, pp.QA, [pp.PB, pp.QB]
+    else:
+        ell, e, P, Q, others = 3, pp.eB, pp.PB, pp.QB, [pp.PA, pp.QA]
+    s = rng.randrange(ell**e)  # @line L1
+    R = pp.E0.add(P, pp.E0.mul(s, Q))  # @line L2
+    E, (U, V) = isogeny(pp.E0, R, ell, e, others)  # @line L3
+    return s, (E, U, V)  # @line L4
+
+
+def shared(pp: Params, side: str, secret: int, their_public) -> Fp2:
+    """The shared secret: the j-invariant of E / <U + [secret] V>."""
+    ell, e = (2, pp.eA) if side == "A" else (3, pp.eB)
+    E, U, V = their_public
+    R = E.add(U, E.mul(secret, V))  # @line L10
+    E2, _ = isogeny(E, R, ell, e, [])  # @line L11
+    return E2.j()  # @line L12
+
+
+# The SIKE round 4 parameter sets: name -> (eA, eB, NIST category, message bytes).
+SIKE_PARAMS = {
+    "SIKEp434": (216, 137, 1, 16),
+    "SIKEp503": (250, 159, 2, 24),
+    "SIKEp610": (305, 192, 3, 24),
+    "SIKEp751": (372, 239, 5, 32),
+}
+
+
+def sike_sizes(name: str):
+    """(public key bytes, ciphertext bytes) of SIKE without compression.
+
+    A public key is the x-coordinates of phi(P), phi(Q) and phi(P - Q): three
+    elements of F_{p^2}, so six elements of F_p. The ciphertext adds a
+    message-sized mask.
+    """
+    eA, eB, _, msg = SIKE_PARAMS[name]
+    p = 2**eA * 3**eB - 1
+    fp_bytes = (p.bit_length() + 7) // 8
+    pk = 6 * fp_bytes
+    return pk, pk + msg
