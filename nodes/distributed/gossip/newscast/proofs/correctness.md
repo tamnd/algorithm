@@ -1,0 +1,19 @@
+---
+title: Newscast keeps valid caches, never refreshes a crashed node, and heals like a rumor
+proves: [correctness]
+status: full
+---
+
+**Setting.** Nodes run NEWSCAST-CYCLE (lines L1 to L6). Time stamps are the global cycle number $t$, which increases by one per cycle, and every exchange of cycle $t$ uses $t$. A crashed node takes no further steps. Let $t_0$ be a time after which no node crashes, and call a node *dead* if it has crashed.
+
+**Claim.** (1) At all times, the cache of every node $p$ has at most $c$ items, has distinct addresses, does not contain $p$, and every time stamp in it is at most the current time. (2) Every item about a dead node $d$ in any cache has a time stamp at most the time of the last cycle in which $d$ was live, so at most $t_0$. (3) Call a cache *clean* if it holds exactly $c$ items, all with time stamps greater than $t_0$. After time $t_0$, if $p$ or $q$ has a clean cache before an exchange between them, both have clean caches after it, and a clean cache stays clean. A clean cache holds no item about a dead node. Hence, once some live node has a clean cache, every live node that is joined to it by a chain of later exchanges also has a clean cache, and no item about a dead node remains in it.
+
+**Proof of (1).** By induction over exchanges. An initial cache holds at most $c$ items with distinct addresses other than its owner, and time stamp 0. In an exchange at time $t$, line L4 leaves at most one item per address in $M$, line L5 removes the address $p$ and keeps at most $c$ items, and line L6 does the same for $q$. Every item in $M$ comes from an old cache, with time stamp at most $t$ by induction, or is one of the two new items with time stamp $t$. A join creates a cache with one item that is not the joiner. $\square$
+
+**Proof of (2).** A new item $(a, t)$ is created only in line L3, and only for $a \in \{p, q\}$, the two nodes that take part in the exchange. A dead node takes no steps, and line L2 stops the cycle when the chosen $q$ does not answer, so after $d$ crashes no exchange involves $d$ and no item $(d, t)$ is created. Lines L4 to L6 only copy existing items. So every item about $d$ was created while $d$ was live. $\square$
+
+**Proof of (3).** Suppose that before the exchange at time $t > t_0$ the cache of $q$ is clean. It has $c$ items with distinct addresses, all newer than $t_0$, and by (1) none of them is $q$. In $M$, line L4 keeps for each address the newest item, so each of these $c$ addresses has an item in $M$ newer than $t_0$. At most one of them is $p$. Also $(q, t) \in M$ with $t > t_0$, and $q$ is not among the $c$ addresses. So $M$ has at least $c$ addresses other than $p$ whose items are newer than $t_0$, and line L5 gives $p$ the $c$ newest items other than $p$: exactly $c$ items, all newer than $t_0$. For $q$, the $c$ addresses other than $q$ are the same $c$ addresses, all newer than $t_0$, so line L6 gives $q$ a clean cache too. The case in which the cache of $p$ is clean is the same with $p$ and $q$ exchanged, using the new item $(p, t)$.
+
+A clean cache stays clean when its owner takes part in an exchange, by the argument above, and it does not change otherwise. By (2), an item about a dead node has a time stamp at most $t_0$, so it is not in a clean cache. The last sentence of the claim follows by induction along the chain of exchanges. $\square$
+
+**What is not proved.** The claim does not say when the first clean cache appears, or how long the chains of exchanges take to reach all nodes. A node gains items newer than $t_0$ in every exchange it takes part in, so in the simulations of the page a clean cache exists after a few cycles, and the dead entries then disappear at a rate like rumor spreading. The uniformity of the samples is also not claimed; it does not hold exactly, as the in-degree measurements of the page show.
