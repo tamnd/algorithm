@@ -1,0 +1,49 @@
+---
+title: TL2 is opaque
+proves: [correctness, opacity]
+status: full
+---
+
+We prove that each history of TL2, as given by the pseudocode of the page (lines L1 to L18), is [opaque](/opacity/): there is one serial order of all transactions, committed, aborted and live, that respects real-time order, in which each committed transaction takes effect, the others take no effect, and each read of each transaction returns the value of that serial run.
+
+**Model.** The processes are asynchronous and may crash. The shared words are the data words, the clock GV, and one lock word per stripe. A lock word holds a pair (version, owner), where owner is FREE or a transaction. The primitives are atomic read, write, compare-and-swap and fetch-and-add, under sequential consistency. Each data word $a$ maps to one stripe $s(a)$, and several words may share a stripe. A lock acquisition at L11 that finds the lock taken aborts (bounded spinning would change nothing below). Times are positions in the run.
+
+**Notation.** For a transaction $T$, $rv_T$ is the value read at L1. An update transaction is one with a nonempty write set when it reaches L10; for it, $wv_T$ is the value computed at L12. We say that $T$ is *effective* if it has passed L14, that is, it has executed L15 or is about to. An effective transaction never aborts, because no line after L14 aborts.
+
+**Lemma 1 (the clock).** GV never decreases. Distinct executions of L12 give distinct values of $wv$, and if the FAA of $T$ comes before the FAA of $U$, then $wv_T < wv_U$. If an event $e$ of $T$ comes before L1 or L12 of $U$, and $e$ is L12 of $T$, then $wv_T \le rv_U$ in the first case and $wv_T < wv_U$ in the second.
+
+*Proof.* GV changes only by fetch-and-add with $+1$, so it grows by one at each L12, and each L12 returns the old value. The other claims follow at once. $\square$
+
+**Lemma 2 (ownership).** (a) While $T$ owns the lock of stripe $s$, no other transaction writes the lock word of $s$ or a data word of stripe $s$. (b) A data word is written only at L15, by an effective transaction that owns its stripe. (c) A transaction that owns a lock and aborts wrote no data word.
+
+*Proof.* A lock word is written only at L11 (a CAS that succeeds only if the owner is FREE), at L16 and at L18 (by the owner). So two transactions never own the same lock at the same time, and only the owner writes the lock word while it is owned. Data words are written only at L15, by a transaction that acquired the stripe of each word of its write set at L11 and has not yet released it at L16. Aborts happen only at L7, L11 and L14, all before L15. $\square$
+
+**Lemma 3 (versions).** The version of each lock word never decreases. If $T$ releases stripe $s$ at L16, it sets the version to $wv_T$, and $wv_T$ is larger than the version that $s$ had when $T$ acquired it. At each time, the version of each lock word is at most GV.
+
+*Proof.* L18 writes back the version that the lock had at the acquisition, and by Lemma 2 nobody changed it in between, so L18 leaves the version unchanged. Consider L16 of $T$ on stripe $s$. When $T$ acquired $s$ at L11, the version $v_0$ was either 0 or the $wv_U$ of the transaction $U$ whose L16 wrote it. In the second case, the FAA of $U$ came before its L16, which came before L11 of $T$, which came before the FAA of $T$, so $wv_U < wv_T$ by Lemma 1. In both cases $v_0 < wv_T$. Since $T$ owns $s$ from L11 to L16, the version at L16 rises from $v_0$ to $wv_T$. The bound by GV holds because $wv_T$ is a value that GV took at the FAA of $T$, and GV never decreases. $\square$
+
+**Lemma 4 (holders of a stripe).** For each stripe $s$, the effective transactions that wrote stripe $s$ hold its lock one after the other, and their $wv$ values increase in this order. If at time $t$ the lock of $s$ is FREE with version $v$, then each data word $a$ of stripe $s$ holds, at time $t$, the value written by the effective transaction with the largest $wv \le v$ that writes $a$ (or the initial value if there is none), and no effective transaction with $wv$ in $(v, \infty)$ has written a word of $s$ before $t$.
+
+*Proof.* The first sentence follows from Lemmas 2 and 3. Let $s$ be FREE with version $v$ at time $t$. By Lemma 3 the last release before $t$ was by the holder $H$ with $wv_H = v$ (or there was none, and $v = 0$). Every holder before $H$ has a smaller $wv$, and a holder that acquires $s$ after $t$ does its FAA after $t$, so its $wv$ exceeds GV at $t$, which is at least $v$ (Lemma 3). The holders that aborted wrote nothing (Lemma 2c). So the writes to the words of $s$ before $t$ are exactly those of the effective holders with $wv \le v$, in increasing order of $wv$, and the last write to $a$ wins. $\square$
+
+For each integer $x \ge 0$, let $S(x)$ be the memory state obtained from the initial state by applying the write sets of the effective transactions with $wv \le x$, in increasing order of $wv$.
+
+**Lemma 5 (reads).** If a read of $a$ by $T$ passes L7, it returns the value of $a$ in $S(rv_T)$.
+
+*Proof.* Let $l_1 = (v, \text{FREE})$ be the value read at L4. Then $v \le rv_T$, and L6 read the same pair. Suppose that some transaction wrote a word of stripe $s(a)$ between L4 and L6. It owned the lock then (Lemma 2b), so at L6 the lock was owned or had a new version larger than $v$ (Lemma 3), and $l_2 \ne l_1$. So the value read at L5 equals the value of $a$ at L4. By Lemma 4 that value is the write of the effective transaction with the largest $wv \le v$ that writes $a$. It remains to show that no effective transaction $U$ with $v < wv_U \le rv_T$ writes $a$. Such a $U$ did its FAA before L1 of $T$ (because $wv_U \le rv_T$ and GV grows by one per FAA), hence before L4 of $T$. It acquired $s(a)$ before its FAA. At L4 either $U$ still owned the lock, which contradicts $l_1$ being FREE, or $U$ had released it, and then the version at L4 was at least $wv_U > v$ (Lemma 3), a contradiction. $\square$
+
+**Lemma 6 (commit validation).** Let $T$ be an effective update transaction. Then for each $a$ in its read set, the value of $a$ in $S(rv_T)$ equals its value in $S(wv_T - 1)$.
+
+*Proof.* We must show that no effective $U \ne T$ with $rv_T < wv_U < wv_T$ writes $a$. If $wv_T = rv_T + 1$ (the skip at L13), no integer lies strictly between, and we are done. Otherwise $T$ ran L14 at some time $t$ after its FAA. The FAA of $U$ came before the FAA of $T$ (Lemma 1), so before $t$, and $U$ acquired $s(a)$ before its FAA. Case 1: $T$ owns $s(a)$. Then $T$ acquired it with a version $v_0 \le rv_T$ (checked at L14). The owners of $s(a)$ are ordered (Lemma 4). If $U$ owned it before $T$, then $v_0 \ge wv_U > rv_T$ by Lemma 3, a contradiction. If $U$ owned it after $T$, then $U$ acquired it after L16 of $T$, so its FAA came after the FAA of $T$, and $wv_U > wv_T$, a contradiction. Case 2: $T$ does not own $s(a)$. At $t$, L14 found the lock FREE with version at most $rv_T$. But $U$ acquired $s(a)$ before $t$: if $U$ still owns it at $t$ the lock is not FREE; if $U$ released it before $t$, the version at $t$ is at least $wv_U > rv_T$. Both contradict the check. $\square$
+
+**Theorem (opacity).** Each finite history of TL2 is opaque.
+
+*Proof.* Complete the history: each effective transaction that has no commit event is completed as committed, and each other live or commit-pending transaction is completed as aborted. The position of a transaction is $wv_T$ for an effective transaction, and $rv_T + \tfrac12$ for every other transaction (read-only, aborted or live). Order the transactions by position; break ties between non-effective transactions by the time of their L1. Effective transactions have distinct positions (Lemma 1), and they are the only ones with integer positions.
+
+*Legality.* In this serial order, the state before an effective transaction $T$ is $S(wv_T - 1)$, and the state seen by a transaction at position $rv + \tfrac12$ is $S(rv)$, because only effective transactions write. A read of $a$ by $T$ that finds $a$ in the write set (L3) returns the last value that $T$ wrote, as the serial run would. Any other read returns the value of $a$ in $S(rv_T)$ by Lemma 5. For a non-effective $T$, this is the value in its serial state. For an effective $T$, the first read of $a$ comes before any write of $a$ by $T$ (else L3 applies), so the serial run returns the value of $a$ in $S(wv_T - 1)$, which is the same value by Lemma 6. The read that makes $T$ abort at L7 returns nothing, so it adds no constraint. Each effective transaction writes its write set, and $S$ applies exactly these writes. So the serial run is legal.
+
+*Real-time order.* Let $T$ complete before $U$ begins. Each completed transaction executed L1, and an effective one also L12, before it completed. If $T$ is effective, $wv_T \le rv_U$ (Lemma 1), so $T$ precedes $U$ whether $U$ sits at $rv_U + \tfrac12$ or at $wv_U > rv_U$. If $T$ is not effective, $rv_T \le rv_U$ because GV never decreases. If $U$ is effective, $wv_U$ comes from an FAA after L1 of $T$, so $wv_U > rv_T$ and $U$ sits after $T$. If $U$ is not effective and $rv_U = rv_T$, the tie is broken by L1, and L1 of $T$ came first.
+
+So the completed history is equivalent to a legal serial history that respects real-time order, which is the definition of opacity. $\blacksquare$
+
+**Remarks.** The proof uses the post-validation at L7 in Lemma 5. Without it, a read can return a value from $S(x)$ for some $x > rv_T$ while an earlier read returned a value from $S(rv_T)$, and the transaction sees a state that no serial order gives (the test `test_without_post_validation...` shows such a run). The proof uses the locks of L11 in Lemma 6. Without them, two update transactions can both skip or pass validation on the same word, and one update is lost (the test `test_without_write_locks...`). TL2 is not obstruction-free: a transaction that crashes while it owns a lock makes every later transaction that reads or writes that stripe abort forever.
