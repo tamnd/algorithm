@@ -4,7 +4,6 @@ kind: algorithm
 slug: bilinear-interpolation
 name: Bilinear interpolation
 aliases:
-- Bilinear filtering
 - bilinear interpolant
 - Q1 interpolation
 area: numerical/interpolation-and-approximation
