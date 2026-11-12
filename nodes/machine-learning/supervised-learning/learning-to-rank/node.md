@@ -64,7 +64,7 @@ where $\pi^\ast$ sorts the documents by decreasing label. NDCG@k lies in $[0, 1]
 - **Ordinal regression.** Predict the label itself on an ordered scale, with learned thresholds on the score. Pointwise ranking methods often solve this problem.
 - **Top-k ranking.** Only the order of the first $k$ results matters; NDCG@k with a small $k$ such as 10 models this.
 - **Learning from clicks.** The labels come from user clicks, which favor documents shown near the top. Joachims (2002) used clicks as pairwise preferences: a clicked document is preferred to a skipped document ranked above it. Later "unbiased" methods weight clicks by the inverse of an estimated examination probability.
-- **Rank aggregation.** Combine several given rankings into one, for example by minimizing the total [Kendall tau distance](/kendall-tau-distance/) (the Kemeny ranking). This is NP-hard for four or more input rankings.
+- **Rank aggregation.** Combine several given rankings into one, for example by minimizing the total [Kendall tau distance](/kendall-tau-distance/) (the Kemeny ranking). This is NP-hard already for four input rankings (Dwork, Kumar, Naor and Sivakumar 2001), and for every even number of rankings from four on.
 
 ## Examples
 

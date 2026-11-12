@@ -8,11 +8,11 @@ aliases:
 - HLLE
 area: machine-learning/dimensionality-reduction
 level: advanced
-summary: "Estimate the Hessian of functions in local tangent coordinates and take the null space of the summed squared Hessian. It recovers isometric coordinates without convexity."
+summary: "Estimate the Hessian of functions in local tangent coordinates and take the null space of the summed squared Hessian. It recovers isometric coordinates up to an affine map, without convexity."
 model: real-ram
 complexity:
   vars: {n: the number of points, d: the input dimension, k: the number of neighbors, m: the output dimension}
-  time: {worst: "O(n^2 d + n k^2 d + n k^3 + n k^2 m^4 + n^3)"}
+  time: {worst: "O(n^2 d + n k^2 d + n k^3 + n k m^4 + n^3)"}
   space: {extra: "O(n^2)"}
 properties: {deterministic: true, exact: false, online: false, recursive: false}
 history:
@@ -33,7 +33,7 @@ sources:
     locator: the closely related alignment of local tangent coordinates
 ---
 
-Hessian eigenmaps, also called Hessian LLE, is a method of [manifold learning](/manifold-learning/) by Donoho and Grimes (2003). It estimates, in each neighborhood, the Hessian (the matrix of second derivatives) of a function on the data, in local tangent coordinates found by PCA. It sums the squared Hessian over all neighborhoods into one quadratic form, and returns a basis of its null space: the functions with zero Hessian, which are the constant and the linear functions of the true coordinates. If the manifold is locally isometric to a connected region of $\mathbb{R}^m$, the result is the isometric coordinates, even when the region is not convex, where [Isomap](/isomap/) fails.
+Hessian eigenmaps, also called Hessian LLE, is a method of [manifold learning](/manifold-learning/) by Donoho and Grimes (2003). It estimates, in each neighborhood, the Hessian (the matrix of second derivatives) of a function on the data, in local tangent coordinates found by PCA. It sums the squared Hessian over all neighborhoods into one quadratic form, and returns a basis of its null space: the functions with zero Hessian, which are the constant and the linear functions of the true coordinates. If the manifold is locally isometric to a connected region of $\mathbb{R}^m$, the result is the isometric coordinates up to an affine map, even when the region is not convex, where [Isomap](/isomap/) fails.
 
 ## In plain words
 
@@ -104,7 +104,7 @@ The number of columns grows as $m^2/2$, and the neighborhoods must be at least t
 
 ## Properties
 
-- **Isometric, not only affine.** With the final normalization, the output is the true coordinates up to a rigid motion, while [LLE](/locally-linear-embedding/) gives an affine image.
+- **Affine image of the isometric coordinates.** Lines L7 and L8 give the true coordinates up to an affine map, as the proof shows. Donoho and Grimes add a final normalization of the linear part to make the output isometric; this page does not prove that step, and the implementation does not run it.
 - **No convexity needed.** The parameter region only has to be open and connected. Holes and concave boundaries are allowed.
 - **Local and sparse.** Like LLE, each point interacts only with its neighbors.
 - **Sensitive to noise and to small neighborhoods.** Second derivatives are harder to estimate than first derivatives, so the local estimator needs more neighbors than LLE and is more sensitive to noise.

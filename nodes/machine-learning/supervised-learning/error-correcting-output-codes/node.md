@@ -70,7 +70,7 @@ $$M = \begin{pmatrix} + & + & + & + & + & + & + \\ - & - & - & - & + & + & + \\ 
 
 **Cost.** Training is $\ell$ runs of the binary learner, each on the examples of the classes with nonzero entries; prediction is $\ell$ score evaluations plus $O(k \ell)$ for decoding.
 
-**Worked example.** With the $k = 4$ code above, let the true class be row 2 and let classifier 1 err. The sign vector $(+, -, -, -, +, +, +)$ is at distances $3, 1, 5, 5$ from the four rows, so Hamming decoding returns row 2. Now let classifiers 1 and 2 both err, with outputs $z = (0.9, 0.1, -0.8, -0.7, 0.6, 0.5, 0.9)$. The signs $(+, +, -, -, +, +, +)$ are at Hamming distances $2, 2, 6, 4$: a tie, which the smallest-index rule breaks wrongly in favor of row 1. Loss-based decoding with $L(u) = e^{-u}$ gives $7.113, 6.073, 11.682, 10.716$ and returns row 2, because the wrong output $0.1$ of classifier 2 is weak. The logistic and hinge losses also return row 2.
+**Worked example.** With the $k = 4$ code above, let the true class be row 2 and let classifier 1 err. The sign vector $(+, -, -, -, +, +, +)$ is at distances $3, 1, 5, 5$ from the four rows, so Hamming decoding returns row 2. Now let classifiers 1 and 2 both err, with outputs $z = (0.9, 0.1, -0.8, -0.7, 0.6, 0.5, 0.9)$. The signs $(+, +, -, -, +, +, +)$ are at Hamming distances $2, 2, 6, 4$: a tie, which the smallest-index rule breaks wrongly in favor of row 1. Loss-based decoding with $L(u) = e^{-u}$ gives $7.113, 6.073, 11.681, 10.716$ and returns row 2, because the wrong output $0.1$ of classifier 2 is weak. The logistic and hinge losses also return row 2.
 
 ## Classic examples
 

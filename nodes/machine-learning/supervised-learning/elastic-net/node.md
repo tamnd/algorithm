@@ -113,7 +113,7 @@ The sweeps converge to the unique solution $\hat w = (26/171, 64/171) = (0.1520,
 
 ## Correctness
 
-Each step of line L6 minimizes $F$ exactly in one coordinate, and $F$ is $(a_j + \lambda_2)$-strongly convex in that coordinate, so each step lowers $F$ by at least $\frac{a_j + \lambda_2}{2}(\Delta w_j)^2$. The movement summed over all sweeps is finite, so line L8 stops. At a limit point no coordinate can move, which is the optimality condition above, and that is the global minimum because $F$ is convex. For $\lambda_2 > 0$, $F$ is strongly convex, so the minimizer is unique and the whole sequence converges to it. The proof below gives the details.
+Each step of line L6 minimizes $F$ exactly in one coordinate, and $F$ is $(a_j + \lambda_2)$-strongly convex in that coordinate, so each step lowers $F$ by at least $\frac{a_j + \lambda_2}{2}(\Delta w_j)^2$. The sum of the squared movements over all sweeps is finite, so the movements go to 0 and line L8 stops. At a limit point no coordinate can move, which is the optimality condition above, and that is the global minimum because $F$ is convex. For $\lambda_2 > 0$, $F$ is strongly convex, so the minimizer is unique and the whole sequence converges to it. The proof below gives the details.
 
 ## Complexity
 

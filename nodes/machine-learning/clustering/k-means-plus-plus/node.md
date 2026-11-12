@@ -14,7 +14,7 @@ solves: [k-means-problem]
 model: real-ram
 complexity:
   vars: {n: the number of points, d: the dimension, k: the number of clusters}
-  time: {expected: "O(n k d)"}
+  time: {worst: "Θ(n k d)"}
   space: {extra: "O(n)"}
 properties: {deterministic: false, exact: false, online: false, recursive: false}
 history:

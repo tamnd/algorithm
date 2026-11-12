@@ -84,7 +84,7 @@ L4      c̄_j ← c_j − Σ_i c(basis_i) · T[i][j] for each column j     ▷ r
 L5      if c̄_j ≥ 0 for each j then exit the loop                  ▷ optimal
 L6      e ← the smallest j with c̄_j < 0                           ▷ Bland's rule
 L7      R ← {i : T[i][e] > 0}                                     ▷ never empty, see below
-L8      r ← the i in R with the least T[i][b] / T[i][e], ties to the smallest basis index
+L8      r ← the i in R with the least T[i][b] / T[i][e], ties to the least basis_i
 L9      pivot on T[r][e]; basis_r ← e
 L10 read the basic solution: basic variables from column b, the others 0
 L11 return w = w⁺ − w⁻

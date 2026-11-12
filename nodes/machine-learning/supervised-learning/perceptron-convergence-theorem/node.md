@@ -29,7 +29,7 @@ sources:
     locator: Chapter 8, On-line learning (the perceptron algorithm, its mistake bound and the dual form)
 ---
 
-The perceptron convergence theorem bounds the number of mistakes of the [perceptron](/perceptron/). If every example has norm at most $R$, and some unit vector puts every example on its correct side with margin at least $\gamma > 0$, then the perceptron makes at most $(R/\gamma)^2$ mistakes, whatever the order of the examples and however long the sequence. Novikoff and Block proved it in 1962. The bound is the best possible for any deterministic online learner.
+The perceptron convergence theorem bounds the number of mistakes of the [perceptron](/perceptron/). If every example has norm at most $R$, and some unit vector puts every example on its correct side with margin at least $\gamma > 0$, then the perceptron makes at most $(R/\gamma)^2$ mistakes, whatever the order of the examples and however long the sequence. Novikoff and Block proved it in 1962. When the dimension is at least $(R/\gamma)^2$, the bound is the best possible for any deterministic online learner.
 
 ## Statement
 
@@ -90,7 +90,7 @@ The seeded test of the implementation runs the perceptron on 10 random streams o
 
 ## Tightness
 
-The bound is exact for the perceptron, and no deterministic online learner can do better in the worst case.
+The bound is exact for the perceptron. When $(R/\gamma)^2$ is an integer at most the dimension $d$, no deterministic online learner can do better in the worst case. In a lower dimension the bound can be loose: on the line, a learner can make far fewer mistakes than $(R/\gamma)^2$.
 
 **The perceptron.** Let $m \ge 1$ and $d = m$, and feed the unit vectors $e_1, \ldots, e_m$, each with label $+1$. Then $R = 1$, and $u = (1, \ldots, 1)/\sqrt{m}$ has margin $\gamma = 1/\sqrt{m}$, so $(R/\gamma)^2 = m$. Before the $i$-th example the weights are $e_1 + \cdots + e_{i-1}$, which is orthogonal to $e_i$, so the test $y\, w \cdot x \le 0$ fires. The perceptron makes exactly $m$ mistakes.
 

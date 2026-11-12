@@ -118,7 +118,7 @@ The second sweep changes nothing, so line L8 stops, and line L9 gives $b = 4 - 3
 
 ## Correctness
 
-Each update of line L6 is the exact minimizer of $F$ in one coordinate, so $F$ never increases. Since $F$ is strongly convex in each coordinate with $a_j > 0$, each update lowers $F$ by at least $\frac{a_j}{2}(\Delta w_j)^2$. So the total movement is finite, and line L8 stops. At any limit point no coordinate can move, which is the KKT conditions above, and for a convex $F$ these mean a global minimum. This argument is Tseng's theorem (2001) for a smooth function plus a separable convex function. The proof below gives it in full.
+Each update of line L6 is the exact minimizer of $F$ in one coordinate, so $F$ never increases. Since $F$ is strongly convex in each coordinate with $a_j > 0$, each update lowers $F$ by at least $\frac{a_j}{2}(\Delta w_j)^2$. So the sum of the squared movements is finite, the movements go to 0, and line L8 stops. At any limit point no coordinate can move, which is the KKT conditions above, and for a convex $F$ these mean a global minimum. This argument is Tseng's theorem (2001) for a smooth function plus a separable convex function. The proof below gives it in full.
 
 ## Complexity
 
