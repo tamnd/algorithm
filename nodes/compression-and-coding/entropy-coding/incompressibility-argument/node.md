@@ -7,7 +7,7 @@ aliases:
 - counting argument for compression
 area: compression-and-coding/entropy-coding
 level: intro
-summary: No lossless compressor shortens every input; fewer than 2^(1-c) of the n-bit strings shrink by c bits. With Kolmogorov complexity this proves lower bounds by the incompressibility method.
+summary: No lossless compressor shortens every input; fewer than a fraction 2^(1-c) of the n-bit strings shrink by c bits. With Kolmogorov complexity this proves lower bounds by the incompressibility method.
 prereqs: [pigeonhole-principle]
 see_also: [incompressibility-method, kolmogorov-complexity, counting-argument, information-theoretic-bound, comparison-sort-lower-bound, lossless-compression, source-coding-theorem, kraft-inequality]
 sources:

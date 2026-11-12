@@ -99,7 +99,7 @@ The split A / B C D E has a difference of 24 against 15, which is worse, so step
 | Shannon | 00 | 011 | 100 | 101 | 110 | 102 |
 | Huffman | 0 | 100 | 101 | 110 | 111 | 87 |
 
-Fano's code costs 89 bits and Huffman's 87, so Fano's code is not optimal here: putting A alone gives it a 1-bit codeword, which is worth more than the balance of the first split. For Shannon's code, $\lceil \log_2 (39/15) \rceil = 2$ and the other lengths are 3. The starting points are $P = 0, 15/39, 22/39, 28/39, 34/39$, which begin $0.00\ldots, 0.0110\ldots, 0.1001\ldots, 0.1011\ldots, 0.1101\ldots$ in binary, giving the codewords in the table. Shannon's code wastes room: the words 010 and 111 are unused, and the Kraft sum is $3/4$. The entropy is $H \approx 2.185$ bits per symbol, against $89/39 \approx 2.282$ for Fano and $102/39 \approx 2.615$ for Shannon.
+Fano's code costs 89 bits and Huffman's 87, so Fano's code is not optimal here: putting A alone gives it a 1-bit codeword, which is worth more than the balance of the first split. For Shannon's code, $\lceil \log_2 (39/15) \rceil = 2$ and the other lengths are 3. The starting points are $P = 0, 15/39, 22/39, 28/39, 34/39$, which begin $0.00\ldots, 0.0110\ldots, 0.1001\ldots, 0.1011\ldots, 0.1101\ldots$ in binary, giving the codewords in the table. Shannon's code wastes room: the words 010 and 111 are unused, and the Kraft sum is $3/4$. The entropy is $H \approx 2.186$ bits per symbol, against $89/39 \approx 2.282$ for Fano and $102/39 \approx 2.615$ for Shannon.
 
 ## Correctness
 

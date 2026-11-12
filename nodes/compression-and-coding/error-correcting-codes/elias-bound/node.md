@@ -8,7 +8,7 @@ aliases:
 - Bassalygo-Elias bound
 area: compression-and-coding/error-correcting-codes
 level: advanced
-summary: "Averaging codewords over Hamming balls of the Johnson radius gives R <= 1 - h_q(J_q(delta)), below both the Hamming and the Plotkin bounds."
+summary: "Averaging codewords over Hamming balls of the Johnson radius gives R <= 1 - h_q(J_q(delta)), below the Hamming bound, and below the Plotkin bound for q = 2 and q = 3."
 prereqs: [hamming-bound, plotkin-bound, binary-entropy-function]
 see_also: [list-decoding, gilbert-varshamov-bound, delsarte-lp-bound, singleton-bound, griesmer-bound, golay-code]
 sources:
@@ -31,7 +31,7 @@ sources:
     locator: the values of A(n, d) used to check the bound
 ---
 
-The Elias bound, also called the Elias-Bassalygo bound, is an upper bound on the size of a code that improves on both the [Hamming bound](/hamming-bound/) and the [Plotkin bound](/plotkin-bound/) for every relative distance $0 < \delta < 1 - 1/q$. It counts the codewords inside a Hamming ball of a well chosen radius. Some ball holds many codewords on average, but a ball smaller than the Johnson radius can hold only a few words that are pairwise far apart, by the Plotkin argument. In rates it gives $R \le 1 - h_q(J_q(\delta))$, where $J_q(\delta)$ is the Johnson radius. It holds for all codes, linear or not.
+The Elias bound, also called the Elias-Bassalygo bound, is an upper bound on the size of a code that improves on the [Hamming bound](/hamming-bound/) for every relative distance $0 < \delta < 1 - 1/q$. For $q = 2$ and $q = 3$ it also improves on the [Plotkin bound](/plotkin-bound/) at every such $\delta$. For $q \ge 4$ the Plotkin bound is lower when $\delta$ is near $1 - 1/q$: for $q = 16$ and $\delta = 0.5$, the Elias rate is 0.490 and the Plotkin rate is 0.467. It counts the codewords inside a Hamming ball of a well chosen radius. Some ball holds many codewords on average, but a ball smaller than the Johnson radius can hold only a few words that are pairwise far apart, by the Plotkin argument. In rates it gives $R \le 1 - h_q(J_q(\delta))$, where $J_q(\delta)$ is the Johnson radius. It holds for all codes, linear or not.
 
 ## Statement
 

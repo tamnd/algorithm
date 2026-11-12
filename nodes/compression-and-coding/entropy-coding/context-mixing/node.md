@@ -64,7 +64,7 @@ L10     UPDATE_i(x_t) for each model i
 
 ## Classic examples
 
-**PAQ.** PAQ1 (Mahoney, 2002) combined the bit counts of several models with fixed weights. PAQ6 adapted the weights to the coding cost, as described in the technical report CS-2005-16. PAQ7 and the paq8 series, from 2005 and 2006, introduced the logistic mixer of the template and many specialized models, for example for words, for sparse contexts, for records of fixed length, for images and for executables.
+**PAQ.** PAQ1 (Mahoney, 2002) combined the bit counts of several models with fixed weights. PAQ4 (2003) made the weights adapt to the coding cost, and the technical report CS-2005-16 describes this design as used in PAQ6. PAQ7 and the paq8 series, from 2005 and 2006, introduced the logistic mixer of the template and many specialized models, for example for words, for sparse contexts, for records of fixed length, for images and for executables.
 
 **lpaq, zpaq and cmix.** lpaq is a small, faster PAQ with a few models. zpaq describes its models and mixers in a configuration stored in the archive, so a decoder can run any CM design. cmix by Byron Knoll mixes a very large number of models, including neural networks, and is among the strongest compressors on the Large Text Compression Benchmark.
 

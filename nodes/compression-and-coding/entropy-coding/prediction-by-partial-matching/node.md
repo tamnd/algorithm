@@ -67,7 +67,8 @@ L7          if x_i ∈ C then code x_i with probability C[x_i] / (n_C + q), and 
 L8          code an escape with probability q / (n_C + q)
 L9          E ← E ∪ (the symbols of C), o ← o − 1
 L10     if o < 0 then code x_i with probability 1 / (m − |E|)
-L11     add 1 to the count of x_i in the contexts of orders max(o, 0) to min(k, i − 1)
+L11     add 1 to the count of x_i in the contexts of orders max(o, 0) to min(k, i − 1);
+        halve the counts of a context, rounded up, when its total gets too large
 
 PPM-DECODE(code, n, k)
 L12 for i ← 1 to n do

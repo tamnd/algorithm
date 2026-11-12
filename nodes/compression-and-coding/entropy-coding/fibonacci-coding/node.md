@@ -115,7 +115,7 @@ The greedy loop of lines L3 and L4 keeps this invariant: the digits chosen so fa
 
 $$\log_\varphi x < \ell(x) \le \log_\varphi x + 2, \qquad \log_\varphi x = \frac{\log_2 x}{\log_2 \varphi} \approx 1.4404\, \log_2 x.$$
 
-Against the [gamma code](/elias-gamma-coding/), the Fibonacci code is longer only for $x = 1$ and $x = 3$, has the same length for $x = 2, 5, 6, 7, 13, 14, 15$, and is shorter for every other $x$. The [delta code](/elias-delta-coding/), with $\log_2 x + 2\log_2\log_2 x$ bits, first beats it at $x = 6765 = F_{20}$, and beats it for each large enough $x$.
+Against the [gamma code](/elias-gamma-coding/), the Fibonacci code is longer only for $x = 1$ and $x = 3$, has the same length for $x = 2, 5, 6, 7, 13, 14, 15$, and is shorter for every other $x$. The [delta code](/elias-delta-coding/), with $\log_2 x + 2\log_2\log_2 x$ bits, is shorter at $x = 1$ (1 bit against 2), then next at $x = 6765 = F_{20}$, and it is shorter for each large enough $x$.
 
 **Kraft sum.** Exactly $F_{k+1} - F_k = F_{k-1}$ integers have codewords of length $k$, so the [Kraft sum](/kraft-inequality/) is $\sum_{k \ge 2} F_{k-1} 2^{-k} = 1$, by the generating function $\sum_{j \ge 1} F_j z^j = z/(1 - z - z^2)$ at $z = 1/2$. The code is complete.
 

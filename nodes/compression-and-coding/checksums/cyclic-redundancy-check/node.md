@@ -126,7 +126,7 @@ Write $M_j(x)$ for the polynomial of the first $j$ message bits and $I(x)$ for i
 
 $$(I(x)\, x^j + M_j(x)\, x^r) \bmod G(x).$$
 
-With init 0 this is $M(x) x^r \bmod G(x)$, the remainder of the message with $r$ zero bits appended. A nonzero init adds $I(x) x^k$, which is the same as an XOR of init into the first $r$ message bits. Lines L9 and L10 only rename the result.
+With init 0 this is $M(x) x^r \bmod G(x)$, the remainder of the message with $r$ zero bits appended. A nonzero init adds $I(x)\, x^{8n}$ for a message of $8n$ bits, which is the same as an XOR of init into the first $r$ message bits. Lines L9 and L10 only rename the result.
 
 When the sender appends the CRC, the receiver accepts a received word if and only if the error polynomial $E(x)$ is a multiple of $G(x)$. Every guarantee of a CRC follows from this fact. The [error-detection guarantees](/crc-error-detection-guarantees/) page gives them, and the full proof of the invariant and of this fact is below.
 

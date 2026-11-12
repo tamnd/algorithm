@@ -40,7 +40,7 @@ sources:
     locator: the chapter on the method of types, with the bounds on the size of a type class
 ---
 
-Enumerative coding codes a binary sequence of length $n$ by two numbers: its weight $k$, the number of ones, and its rank among all $\binom{n}{k}$ sequences of that weight in lexicographic order. The weight takes $\lceil \lg(n + 1) \rceil$ bits and the rank $\lceil \lg \binom{n}{k} \rceil$ bits. Since $\lg \binom{n}{k}$ is within $\lg(n + 1)$ of $n\,h(k/n)$, where $h$ is the [binary entropy function](/binary-entropy-function/), the code is within about $2 \lg n$ bits of the empirical [entropy](/shannon-entropy/) of the sequence, for every sequence and with no model of the source. The rank is a sum of binomial coefficients, given by Cover's formula, and it is an instance of [combinatorial ranking](/combinatorial-ranking-and-unranking/). The same idea codes any set of sequences that one can count.
+Enumerative coding codes a binary sequence of length $n$ by two numbers: its weight $k$, the number of ones, and its rank among all $\binom{n}{k}$ sequences of that weight in lexicographic order. The weight takes $\lceil \lg(n + 1) \rceil$ bits and the rank $\lceil \lg \binom{n}{k} \rceil$ bits. Since $\lg \binom{n}{k} \le n\,h(k/n)$, where $h$ is the [binary entropy function](/binary-entropy-function/), the code is at most $\lg(n + 1) + 2$ bits longer than the empirical [entropy](/shannon-entropy/) of the sequence, for every sequence and with no model of the source. The rank is a sum of binomial coefficients, given by Cover's formula, and it is an instance of [combinatorial ranking](/combinatorial-ranking-and-unranking/). The same idea codes any set of sequences that one can count.
 
 ## In plain words
 

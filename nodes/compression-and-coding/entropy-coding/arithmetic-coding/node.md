@@ -8,13 +8,13 @@ aliases:
 - Witten-Neal-Cleary coder
 area: compression-and-coding/entropy-coding
 level: advanced
-summary: Codes a whole message as one binary fraction inside a nested interval, so the length is within 2 bits of the sum of -lg p over the message, with no rounding per symbol.
+summary: Codes a whole message as one binary fraction inside a nested interval. With exact arithmetic the length is within 2 bits of the sum of -lg p over the message, with no rounding per symbol.
 solves: [lossless-compression]
 model: word-ram
 complexity:
-  vars: {n: the number of symbols, m: the length of the output, s: the alphabet size}
-  time: {worst: Θ(n s + m), average: Θ(n s + m), best: Θ(n s + m)}
-  space: {extra: Θ(s)}
+  vars: {n: the number of symbols, m: the length of the output, σ: the alphabet size}
+  time: {worst: Θ(n σ + m), average: Θ(n σ + m), best: Θ(n σ + m)}
+  space: {extra: Θ(σ)}
 properties: {deterministic: true, online: true, recursive: false, comparison: false}
 history:
   year: 1976
@@ -114,7 +114,7 @@ The exact interval of the message is $[7/36, 62/315)$, of width $\frac13 \cdot \
 
 ## Correctness
 
-The proof tracks the map from the original unit interval to the scaled registers. Each scaling step is a change of coordinates $y \mapsto 2y - a$ with $a \in \{0, \tfrac14, \tfrac12\}$. With $u$ the bits written and $m$ the pending count, the map is $\varphi(C) = 2^m(2^{|u|} C - u) - (2^m - 1)/2$, and this invariant shows that an E1 or E2 step writes exactly the bits that the pending E3 steps deferred. The intervals in original coordinates are nested, and the final two bits pick a dyadic interval inside the last one. The decoder's $value$ is $\lfloor 2^b \varphi(C) \rfloor$, so it lies in $[low, high]$, and line L20 finds the unique symbol whose subinterval holds it. The full proof is in [the correctness proof](#proof-correctness).
+The proof tracks the map from the original unit interval to the scaled registers. Each scaling step is a change of coordinates $y \mapsto 2y - a$ with $a \in \{0, \tfrac12, 1\}$. With $u$ the bits written and $m$ the pending count, the map is $\varphi(C) = 2^m(2^{|u|} C - u) - (2^m - 1)/2$, and this invariant shows that an E1 or E2 step writes exactly the bits that the pending E3 steps deferred. The intervals in original coordinates are nested, and the final two bits pick a dyadic interval inside the last one. The decoder's $value$ is $\lfloor 2^b \varphi(C) \rfloor$, so it lies in $[low, high]$, and line L20 finds the unique symbol whose subinterval holds it. The full proof is in [the correctness proof](#proof-correctness).
 
 ## Complexity
 

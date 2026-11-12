@@ -31,7 +31,7 @@ sources:
     locator: Chapter 9 (scalar quantization, uniform, adaptive and Lloyd-Max quantizers)
 ---
 
-Scalar quantization maps each real value, one at a time, to one of a finite set of *levels*, and sends only the index of the level. It is the step of a [lossy](/lossy-compression/) coder that throws information away: a uniform quantizer with step $\Delta$ gives a mean squared error near $\Delta^2/12$ at high rate, so each extra bit gains about 6.02 dB. The Lloyd-Max quantizer (Lloyd 1957, Max 1960) places the levels to minimize the error for a known density. Every transform and predictive coder, JPEG and JPEG 2000 among them, quantizes its coefficients with a scalar quantizer.
+Scalar quantization maps each real value, one at a time, to one of a finite set of *levels*, and sends only the index of the level. It is the step of a [lossy](/lossy-compression/) coder that throws information away: a uniform quantizer with step $\Delta$ gives a mean squared error near $\Delta^2/12$ at high rate, so each extra bit gains about 6.02 dB. The Lloyd-Max quantizer (Lloyd, in a Bell Labs memorandum of 1957 that was published in 1982; Max 1960) places the levels to minimize the error for a known density. Every transform and predictive coder, JPEG and JPEG 2000 among them, quantizes its coefficients with a scalar quantizer.
 
 ## In plain words
 

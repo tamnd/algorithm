@@ -107,7 +107,7 @@ At the start of step $r$, $(L, C)$ is a shortest LFSR for $s_0, \ldots, s_{r-1}$
 
 Step $r$ computes the discrepancy with $L + 1$ products and updates $C$ with at most $r + 1$ products, so the total is $O(n^2)$ field operations, and $\Theta(n^2)$ when $L$ grows with $r$, as it does for a typical sequence, where $L_r \approx r/2$. For the zero sequence each step costs $O(1)$. The space is $\Theta(n)$ for $C$, $B$ and $T$. Over $\mathrm{GF}(2^m)$ with log tables, one field operation is $O(1)$ word operations.
 
-In decoding, $n = 2t$, so the cost is $O(t^2)$, against $O(t^3)$ for the matrix method of [Peterson, Gorenstein and Zierler](/peterson-gorenstein-zierler/). Divide and conquer variants (the half-GCD form of the [extended Euclidean algorithm](/polynomial-extended-euclidean-algorithm/)) take $O(M(n) \log n)$ operations, where $M(n)$ is the cost of a polynomial product.
+In decoding, $n = 2t$, so the cost is $O(t^2)$, against $O(t^3)$ for each matrix solve of the method of [Peterson, Gorenstein and Zierler](/peterson-gorenstein-zierler/), and $\Theta(t^4)$ in its worst case. Divide and conquer variants (the half-GCD form of the [extended Euclidean algorithm](/polynomial-extended-euclidean-algorithm/)) take $O(M(n) \log n)$ operations, where $M(n)$ is the cost of a polynomial product.
 
 ## Properties
 
@@ -119,7 +119,7 @@ In decoding, $n = 2t$, so the cost is $O(t^2)$, against $O(t^3)$ for the matrix 
 ## Variants and improvements
 
 - **Binary BCH codes.** Over $\mathrm{GF}(2^m)$ with binary errors, $S_{2j} = S_j^2$, and every second discrepancy is zero. Berlekamp's binary form skips these steps and does $t$ iterations instead of $2t$.
-- **Errors and erasures.** Start with $C(x)$ equal to the erasure locator $\Gamma(x)$, and $L$ equal to the number of erasures, and process the modified syndromes. See [Reed-Solomon decoding](/reed-solomon-decoding/).
+- **Errors and erasures.** Start with $C(x)$ and $B(x)$ equal to the erasure locator $\Gamma(x)$, and $L$ equal to the number $\rho$ of erasures. Then process the plain syndromes from $r = \rho$, with the test $2L \le r + \rho$ at L5 and $L \leftarrow r + 1 + \rho - L$ at L8. The result is $\Lambda(x)\Gamma(x)$. The other method runs the plain algorithm on the modified syndromes, the coefficients $\rho$ to $2t - 1$ of $S(x)\Gamma(x)$, and gives $\Lambda(x)$. Do not use both, because that counts the erasures twice. See [Reed-Solomon decoding](/reed-solomon-decoding/).
 - **Inversion-free forms.** Burton (1971) and later authors scale $C$ and $B$ instead of dividing by $b$. This removes the field inversion from the inner loop, which is useful in hardware decoders.
 - **The Euclidean form.** Sugiyama, Kasahara, Hirasawa and Namekawa (1975) solve the same key equation with the extended Euclidean algorithm on $x^{2t}$ and $S(x)$. Dornstetter (1987) showed that the two methods compute the same sequence of polynomials.
 - **Other rings.** Reeds and Sloane (1985) extended the algorithm to sequences over $\mathbb{Z}/m\mathbb{Z}$.

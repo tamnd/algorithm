@@ -69,7 +69,7 @@ The slow way looks back over the whole text at every cut. The fast way first put
 | $\mathrm{PSV}[i]$ | 0 | 1 | 2 | 1 | 2 | 4 | 5 | 0 | 6 | 7 | 0 |
 | $\mathrm{NSV}[i]$ | 0 | 0 | 0 | 2 | 3 | 2 | 3 | 1 | 2 | 3 | 8 |
 
-The factors start at 1, 2, 3, 4, 5, 6, 7, 8. At $i = 4$, $\mathrm{lcp}(T[4..], T[1..]) = 1$ and $\mathrm{lcp}(T[4..], T[2..]) = 0$, so the factor is $a$ with source 1. At $i = 8$, $\mathrm{PSV}[8] = 0$ and $\mathrm{lcp}(T[8..], T[1..]) = 4$, so the factor is $abra$ with source 1. At $i = 2$, both candidates give lcp 0 and $b$ is a new symbol. The result is $a \mid b \mid r \mid a \mid c \mid a \mid d \mid abra$, $z = 8$.
+The factors start at 1, 2, 3, 4, 5, 6, 7, 8. At $i = 4$, $\mathrm{lcp}(T[4..], T[1..]) = 1$ and $\mathrm{lcp}(T[4..], T[2..]) = 0$, so the factor is $a$ with source 1. At $i = 8$, $\mathrm{PSV}[8] = 0$ and $\mathrm{lcp}(T[8..], T[1..]) = 4$, so the factor is $abra$ with source 1. At $i = 2$, $\mathrm{NSV}[2] = 0$, so the only candidate is $\mathrm{PSV}[2] = 1$; it gives lcp 0, and $b$ is a new symbol. The result is $a \mid b \mid r \mid a \mid c \mid a \mid d \mid abra$, $z = 8$.
 
 ## Known algorithms
 

@@ -67,7 +67,7 @@ There is only so much room for short strings. Only two strings have one bit, and
 - **Code alphabet of $D$ letters.** Replace 2 by $D$ in the Kraft inequality. Huffman's method merges the $D$ lightest items after padding with zero weights.
 - **Length-limited.** Add the constraint $l_i \le L_{\max}$. Formats such as DEFLATE need it. See [length-limited prefix code](/length-limited-prefix-code/); the [package-merge](/package-merge/) algorithm solves it in $O(n L_{\max})$ time.
 - **Alphabetic.** The codewords must be in the same lexicographic order as the symbols. See [optimal alphabetic code](/optimal-alphabetic-code/).
-- **Unequal letter costs.** The bits 0 and 1 have different costs, as the dot and the dash of Morse code. See [unequal letter cost coding](/unequal-letter-cost-coding/); no polynomial-time algorithm is known.
+- **Unequal letter costs.** The bits 0 and 1 have different costs, as the dot and the dash of Morse code. See [unequal letter cost coding](/unequal-letter-cost-coding/). The problem is polynomial for fixed integer costs, but no polynomial-time algorithm is known for general costs, and it is not known to be NP-hard.
 - **Minimax.** Minimize $\max_i (w_i + l_i)$ instead of the sum. This is the cost of a merge or a circuit in which a node of depth $l$ is ready at time $w_i + l_i$. Golumbic (1976) showed that Huffman's method with $\max(a, b) + 1$ in place of $a + b$ solves it. Hu, Kleitman and Tamaki (1979) studied a wider class of cost functions of this kind.
 - **Minimum variance.** Among all optimal codes, choose one with the smallest longest codeword or the smallest variance of the lengths. A tie rule in Huffman's method gives it.
 

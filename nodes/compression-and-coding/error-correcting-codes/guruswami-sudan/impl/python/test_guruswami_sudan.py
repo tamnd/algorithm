@@ -60,8 +60,9 @@ def test_page_example() -> None:
 def test_radius_values() -> None:
     # n = 16, k = 2: unique decoding 7, Sudan 10, r = 2 reaches the limit 11
     assert (n := 16) and decoding_radius(n, 2, 1) == 10 and decoding_radius(n, 2, 2) == 11
-    # n = 16, k = 4: unique decoding 6, Sudan 7, r = 2 reaches the limit 8
+    # n = 16, k = 4: unique decoding 6, Sudan 7, r = 2 gives 8, and the limit 9 is first reached at r = 28
     assert decoding_radius(n, 4, 1) == 7 and decoding_radius(n, 4, 2) == 8
+    assert decoding_radius(n, 4, 27) == 8 and decoding_radius(n, 4, 28) == 9
     # never at or beyond n - sqrt(n (k - 1)): the radius is at most n - floor(sqrt(n (k - 1))) - 1
     for n in range(4, 40):
         for k in range(2, n):

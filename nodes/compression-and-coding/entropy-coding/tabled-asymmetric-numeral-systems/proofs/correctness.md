@@ -1,5 +1,5 @@
 ---
-title: The FSE spread fills each cell once, each encoding step is undone by one decoding step, and each step costs lg((L + u)/(f + j)) bits at most
+title: The FSE spread fills each cell once, each encoding step is undone by one decoding step, and all steps together cost at most 1 bit more than the sum of lg((L + u)/(f + j))
 proves: [correctness, termination, length]
 status: full
 ---

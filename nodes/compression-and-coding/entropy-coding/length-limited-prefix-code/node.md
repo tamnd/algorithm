@@ -66,7 +66,7 @@ So the question is: what is the best code if no codeword may be longer than a fi
 
 ## Variants
 
-- **Optimal versus heuristic.** The exact problem has polynomial algorithms. The heuristics of zlib and JPEG repair a Huffman code in $O(L)$ steps on the counts of each length, and are not always optimal.
+- **Optimal versus heuristic.** The exact problem has polynomial algorithms. The heuristics of zlib and JPEG repair a Huffman code on the counts of each length, with one step for each pair of codewords that are too long, which can be $\Theta(n)$ steps. They are not always optimal.
 - **Alphabetic codes with a limit.** The codewords must also keep the order of the symbols. This is a limited [optimal alphabetic code](/optimal-alphabetic-code/), a search tree of bounded height. The interval dynamic program for alphabetic codes then gets an extra index for the height.
 - **$D$-ary codes.** The same problem with $D$ code letters; package-merge works with packages of $D$ items.
 - **A reserved codeword.** JPEG needs a code with Kraft sum below 1, with the codeword of all ones unused. Adding a dummy symbol of weight 1 before the construction does this.
