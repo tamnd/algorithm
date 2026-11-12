@@ -111,7 +111,7 @@ Take $w = 2$, $X = x_1 + 2 x_2$ and $Y = x_3 + 2 x_4$, with the order $x_1, x_2,
 **MUL$(X, Y)$.** Line L8 gives $v = 1$, $(a, b) = (A, 1)$ and $(c, d) = (Y, 0)$.
 
 - Line L10: MUL$(A, 0) = 0$, MUL$(1, Y) = Y$ and MUL$(1, 0) = 0$, so $\mathit{lin} = Y$.
-- Line L11 calls MUL$(A, Y)$. There $v = 2$, $(a, b) = (0, 2)$ and $(c, d) = (Y, 0)$. Line L10 gives $\mathit{lin} = $ MUL$(2, Y)$, which is $2Y = (x_3, (x_4, 0, 4), 2)$ by the same rules. Line L11 returns $P = (x_2, 0, 2Y)$, since MUL$(0, Y) = 0$.
+- Line L11 calls MUL$(A, Y)$. There $v = 2$, $(a, b) = (0, 2)$ and $(c, d) = (Y, 0)$. Line L10 gives $\mathit{lin} = \mathrm{MUL}(2, Y)$, which is $2Y = (x_3, (x_4, 0, 4), 2)$ by the same rules. Line L11 returns $P = (x_2, 0, 2Y)$, since MUL$(0, Y) = 0$.
 - The result is $(x_1, P, Y)$.
 
 The product $XY = x_1 x_3 + 2 x_1 x_4 + 2 x_2 x_3 + 4 x_2 x_4$ has 6 inner nodes, namely the root, $P$, $Y$, $B$, $2Y$ and $(x_4, 0, 4)$, and the sinks 0, 1, 2, 4. That is $10 = w^2 + 3w$ nodes. The path that takes $l$ at $x_2$ and at $x_4$ goes root, $P$, $2Y$, $(x_4, 0, 4)$, and ends at the sink 4, which is $C(\{2, 4\})$.

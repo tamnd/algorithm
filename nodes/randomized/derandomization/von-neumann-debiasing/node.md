@@ -92,7 +92,7 @@ Expected rates in output bits per input flip, as $n \to \infty$, for depth $\nu$
 
 For VON-NEUMANN: a pair is $01$ with probability $qp$ and $10$ with probability $pq$. Condition on the set of indices $i$ whose pair is unequal. The pairs are independent, so each of these pairs is $10$ or $01$ with probability $pq/(2pq) = 1/2$, independently of the others. The output is the list of first bits of these pairs, so given its length it is uniform.
 
-For PERES, the proof is an induction on the length with a stronger hypothesis: if $x$ is uniform among the strings of length $N$ with exactly $k$ ones, then $\Psi(x)$ is uniform given its length. An i.i.d. string, conditioned on its number of ones, is of this kind, and a mixture of distributions that are uniform given the length is uniform given the length. The key step is that, given the number $a$ of unequal pairs, the three parts $w = $ VON-NEUMANN$(x)$, $u$ and $v$ are independent, $w$ is uniform on $\{0,1\}^a$, and $u$ and $v$ are again uniform among strings of fixed length and weight. The full proof is in the proof file.
+For PERES, the proof is an induction on the length with a stronger hypothesis: if $x$ is uniform among the strings of length $N$ with exactly $k$ ones, then $\Psi(x)$ is uniform given its length. An i.i.d. string, conditioned on its number of ones, is of this kind, and a mixture of distributions that are uniform given the length is uniform given the length. The key step is that, given the number $a$ of unequal pairs, the three parts $w = \text{VON-NEUMANN}(x)$, $u$ and $v$ are independent, $w$ is uniform on $\{0,1\}^a$, and $u$ and $v$ are again uniform among strings of fixed length and weight. The full proof is in the proof file.
 
 ## Complexity
 

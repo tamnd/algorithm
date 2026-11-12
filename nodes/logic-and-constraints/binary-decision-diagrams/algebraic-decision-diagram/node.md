@@ -102,7 +102,7 @@ Let $n = 2$ and $f(x_1, x_2) = x_1 + x_2$, the number of ones. Its ADD has the s
 - APPLY$(\times, B, 1)$: the same steps give the sinks $1 \times 1 = 1$ and $2 \times 1 = 2$, and line L2 finds the stored node $B$.
 - Line L7 returns MK$(1, 0, B)$, a new node. The result has 5 nodes: the root, $B$, and the sinks 0, 1, 2.
 
-**SUM-OUT trace.** SUM-OUT$(f, 2) = f|_{x_2=0} + f|_{x_2=1} = 2 x_1 + 1$. The root tests $x_1$, above $x_2$, so it is rebuilt from SUM-OUT$(A, 2) = $ APPLY$(+, 0, 1) = 1$ and SUM-OUT$(B, 2) = $ APPLY$(+, 1, 2) = 3$. The result is $(x_1, 1, 3)$.
+**SUM-OUT trace.** SUM-OUT$(f, 2) = f|_{x_2=0} + f|_{x_2=1} = 2 x_1 + 1$. The root tests $x_1$, above $x_2$, so it is rebuilt from $\text{SUM-OUT}(A, 2) = \text{APPLY}(+, 0, 1) = 1$ and $\text{SUM-OUT}(B, 2) = \text{APPLY}(+, 1, 2) = 3$. The result is $(x_1, 1, 3)$.
 
 **Size.** The implementation measures these sizes, with the sinks:
 

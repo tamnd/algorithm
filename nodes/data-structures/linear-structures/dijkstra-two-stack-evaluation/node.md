@@ -36,7 +36,7 @@ $$E \to \textit{number} \mid (\; E \;\textit{op}\; E \;),$$
 
 where $\textit{op}$ is one of `+`, `-`, `*`, `/`. Every operator, with its two operands, is inside its own pair of parentheses, so the input needs no precedence rules.
 
-**Output.** The value $\text{val}(E)$, defined by $\text{val}(\textit{number}) = $ the number and $\text{val}((E_1 \textit{ op } E_2)) = \text{val}(E_1) \textit{ op } \text{val}(E_2)$.
+**Output.** The value $\text{val}(E)$, defined by $\text{val}(\textit{number}) = \text{the number}$ and $\text{val}((E_1 \textit{ op } E_2)) = \text{val}(E_1) \textit{ op } \text{val}(E_2)$.
 
 ## The algorithm
 

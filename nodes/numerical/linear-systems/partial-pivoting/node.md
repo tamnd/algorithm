@@ -79,7 +79,7 @@ The holes are the candidate set CAND$(k)$ (for dense LU, all rows $k, \ldots, n$
 
 **A tiny pivot.** For $A = \begin{pmatrix} \varepsilon & 1 \\ 1 & 1 \end{pmatrix}$ with $\varepsilon = 10^{-20}$ and $b = (1, 2)^T$, the exact solution is $x_1 = 1/(1 - \varepsilon)$, $x_2 = (1 - 2\varepsilon)/(1 - \varepsilon)$, both equal to $1$ to working precision. Without pivoting, binary64 gives $l_{21} = 10^{20}$, $\hat u_{22} = \mathrm{fl}(1 - 10^{20}) = -10^{20}$, $\hat x_2 = 1$ and $\hat x_1 = (1 - 1)/\varepsilon = 0$: a relative error of $1$ in $x_1$, although $\kappa_\infty(A) \approx 4$. With partial pivoting the rows are swapped, $l_{21} = 10^{-20}$, $\hat u_{22} = 1$, and $\hat x = (1, 1)$. The loss comes from $\|\,|\hat L|\,|\hat U|\,\| \approx 10^{20}$, not from $\kappa(A)$ (Trefethen and Bau, Lecture 21).
 
-**Dense LU.** CAND$(k) = $ TARGETS$(k) = \{k, \ldots, n\}$ and COLS$(k) = \{k+1, \ldots, n\}$ give the [LUP decomposition](/lup-decomposition/), $P A = L U$.
+**Dense LU.** $\mathrm{CAND}(k) = \mathrm{TARGETS}(k) = \{k, \ldots, n\}$ and COLS$(k) = \{k+1, \ldots, n\}$ give the [LUP decomposition](/lup-decomposition/), $P A = L U$.
 
 **Hessenberg matrices.** If $a_{ij} = 0$ for $i > j + 1$, only rows $k$ and $k+1$ are candidates and targets. Partial pivoting then costs $n - 1$ comparisons, and the growth factor is at most $n$ (Higham, Section 9.4). This is the elimination used in inverse iteration on a [Hessenberg](/hessenberg-reduction/) matrix.
 

@@ -28,7 +28,7 @@ The proof for [X25519](/x25519/) uses only these facts: $p$ is an odd prime, $A 
 
 *Proof.* The loop reads bits 447 down to 0 of the clamped $k < 2^{448}$, so $m_0 = k$, and line L10 undoes the last swap. By Lemma 4 the first slot is $(X : Z) = x(kP)$. Line L11 returns $X \cdot Z^{p - 2} = X/Z$ by Fermat's little theorem when $Z \ne 0$, and 0 when $Z = 0$. $\blacksquare$
 
-**Theorem 2 (agreement).** For the base point $P_0$ ($u = 5$, of prime order $\ell$) and clamped private keys $a$ and $b$, X448$(a, $X448$(b, 5)) = $ X448$(b, $X448$(a, 5))$, and the value is 0 only in the case described below.
+**Theorem 2 (agreement).** For the base point $P_0$ ($u = 5$, of prime order $\ell$) and clamped private keys $a$ and $b$, $\mathrm{X448}(a, \mathrm{X448}(b, 5)) = \mathrm{X448}(b, \mathrm{X448}(a, 5))$, and the value is 0 only in the case described below.
 
 *Proof.* By Theorem 1, Bob's public key is $x(bP_0)$. If $bP_0 \ne O$, it is the $u$-coordinate of $\pm bP_0$, a point of order $\ell$, and since $x(a(-Q)) = x(aQ)$, Theorem 1 gives Alice's output $x(a(bP_0)) = x((ab)P_0)$. In the same way Bob's output is $x(b(aP_0)) = x((ab)P_0)$, by commutativity of scalar multiplication. So the outputs are equal.
 
