@@ -17,7 +17,7 @@ complexity:
   space: {extra: Θ(n^2)}
 properties: {deterministic: true, recursive: false}
 prereqs: [dyck-word, lexicographic-order, ranking-unranking]
-see_also: [balanced-bracket-sequence-ranking, next-balanced-bracket-sequence, balanced-parentheses-generation, permutation-unranking, combinatorial-number-system, ballot-number, catalan-numbers, combinatorial-ranking-and-unranking]
+see_also: [balanced-bracket-sequence-ranking, next-balanced-bracket-sequence, balanced-parentheses-generation, permutation-unranking, combinatorial-number-system, ballot-theorem, catalan-numbers, combinatorial-ranking-and-unranking]
 sources:
   - url: https://cp-algorithms.com/combinatorics/bracket_sequences.html
     title: cp-algorithms, Balanced bracket sequences
@@ -30,7 +30,7 @@ sources:
     locator: Chapter 3, the section on Catalan families (ranking and unranking)
 ---
 
-The $k$-th balanced bracket sequence algorithm builds the [Dyck word](/dyck-word/) of length $2n$ at 0-based position $k$ in the [lexicographic order](/lexicographic-order/) of all $C_n$ Dyck words, with $\texttt{(} < \texttt{)}$. It writes the word from left to right. At each position it counts the balanced words that put an opening bracket there, and it takes the opening bracket if $k$ is below that count, else it subtracts the count and takes the closing bracket. The counts come from a table of [ballot numbers](/ballot-number/) built once by dynamic programming. It is the inverse of [ranking](/balanced-bracket-sequence-ranking/).
+The $k$-th balanced bracket sequence algorithm builds the [Dyck word](/dyck-word/) of length $2n$ at 0-based position $k$ in the [lexicographic order](/lexicographic-order/) of all $C_n$ Dyck words, with $\texttt{(} < \texttt{)}$. It writes the word from left to right. At each position it counts the balanced words that put an opening bracket there, and it takes the opening bracket if $k$ is below that count, else it subtracts the count and takes the closing bracket. The counts come from a table of [ballot numbers](/ballot-theorem/) built once by dynamic programming. It is the inverse of [ranking](/balanced-bracket-sequence-ranking/).
 
 ## In plain words
 

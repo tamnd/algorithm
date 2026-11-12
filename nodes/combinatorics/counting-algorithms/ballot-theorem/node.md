@@ -11,7 +11,7 @@ area: combinatorics/counting-algorithms
 level: core
 summary: Counts vote sequences in which one candidate stays strictly ahead.
 prereqs: [binomial-coefficient, bijective-proof]
-see_also: [cycle-lemma, catalan-numbers, reflection-principle, ballot-number, dyck-word, counting-lattice-paths, double-counting, binomial-coefficient]
+see_also: [cycle-lemma, catalan-numbers, reflection-principle, dyck-word, counting-lattice-paths, double-counting, binomial-coefficient]
 sources:
   - paper: doi:10.1080/0025570X.2007.11953509
     title: Marc Renault, Four proofs of the ballot theorem, Mathematics Magazine 80(5), 345 to 352 (2007)
@@ -66,7 +66,7 @@ Count the pairs $(w, i)$ with $w$ a ballot sequence and $\rho_i(w)$ good, in two
 - **Catalan numbers.** With $a = n + 1$ and $b = n$, the good words number $\frac{1}{2n+1}\binom{2n+1}{n} = C_n$. Removing the first A gives the Dyck words of semilength $n$; equivalently, the weak form with $a = b = n$ gives $\frac{1}{n+1}\binom{2n}{n} = C_n$. See [Catalan numbers](/catalan-numbers/) and [Dyck words](/dyck-word/).
 - **Random walks.** For a simple random walk $S_0 = 0, S_1, \ldots, S_n$ with steps $\pm 1$, and $h > 0$, $\Pr[S_1, \ldots, S_n > 0 \mid S_n = h] = h/n$. For $n = 10$ and $h = 4$, 48 of the $\binom{10}{7} = 120$ paths stay positive, and $48/120 = 2/5$. This is the form in Feller, Chapter III, and it leads to the arcsine laws and the distribution of first passage times.
 - **Lattice paths with a slope.** The paths with $a$ steps $(1, 1)$ and $b$ steps $(1, -k)$ that stay strictly above the axis after the start number $\frac{a - kb}{a + b}\binom{a+b}{a}$. For $a = 7$, $b = 3$ and $k = 2$ this gives $\frac{1}{10} \cdot 120 = 12$. The case $a - kb = 1$ counts $(k+1)$-ary trees, which gives the Fuss-Catalan numbers; see [counting lattice paths](/counting-lattice-paths/).
-- **Ballot numbers.** The counts of the theorem, and of the weak form, for all $(a, b)$ form Catalan's triangle; see [ballot numbers](/ballot-number/).
+- **Ballot numbers.** The counts of the theorem, and of the weak form, for all $(a, b)$ form Catalan's triangle.
 
 ## Tightness
 

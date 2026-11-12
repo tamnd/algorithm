@@ -99,7 +99,7 @@ Pass $i$ appends $2^i$ entries, so the passes append $2^n - 1$ entries in total.
 - **Reflection symmetry.** $g(2^n - 1 - k) = g(k) \oplus 2^{n-1}$, because $2^n - 1 - k = k \oplus (2^n - 1)$. So the list read backwards is the list with the first bit flipped.
 - **Prefix structure.** For each $m \le n$, the strings that share the same first $n - m$ bits form a block of $2^m$ consecutive entries, and the block is $\Gamma_m$ or $\Gamma_m^R$. This is the genlex property.
 - **Fixed weight.** The strings of $\Gamma_n$ with exactly $k$ ones, in the order of $\Gamma_n$, form the [revolving door order](/revolving-door-ordering/): each two neighbors differ by moving one 1 (Tang and Liu, 1973).
-- **Distances.** Two strings that differ in $t > 0$ bits are at least $\lceil 2t/3 \rceil$ steps apart in $\Gamma_n$ (Yuen 1974, Cavior 1975; see Mütze's survey, Section 3.1).
+- **Distances.** Two strings that differ in $t > 0$ bits are at least $\lceil 2^t/3 \rceil$ steps apart in $\Gamma_n$ (Yuen 1974, Cavior 1975; see Mütze's survey, Section 3.1).
 
 ## Variants and improvements
 

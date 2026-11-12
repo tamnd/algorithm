@@ -74,7 +74,7 @@ The trace of the Tsukiyama algorithm on $C_5$ is on [its page](/tsukiyama-algori
 | algorithm | time | space | notes |
 |---|---|---|---|
 | brute force over all $2^n$ subsets | $O(2^n (n + m))$ | $O(n)$ | test each subset |
-| [Tsukiyama, Ide, Ariyoshi, Shirakawa](/tsukiyama-algorithm/) (1977) | $O(nm)$ per output | $O(n + m)$ | polynomial delay |
+| [Tsukiyama, Ide, Ariyoshi, Shirakawa](/tsukiyama-algorithm/) (1977) | $O(n(n + m))$ per output | $O(n + m)$ | polynomial delay |
 | Johnson, Yannakakis, Papadimitriou (1988) | polynomial delay | exponential | lexicographic order |
 | [Bron-Kerbosch](/bron-kerbosch/) with Tomita's pivot (2006) | $O(3^{n/3})$ total | polynomial | on the complement; optimal in the worst case |
 | Makino and Uno (2004) | matrix multiplication time per output | polynomial | dense graphs; also a bound in the maximum degree |

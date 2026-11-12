@@ -71,7 +71,7 @@ L13 return x
 
 - [Combinatorial number system](/combinatorial-number-system/) and [ranking combinations](/combinatorial-ranking-and-unranking/): a $k$-subset $c_1 < \cdots < c_k$ in colex order has rank $\sum_i \binom{c_i}{i}$ (0-based elements); the count is a binomial coefficient.
 - [Permutation ranking](/permutation-ranking/) and [unranking](/permutation-unranking/): the count of completions is $(n - i)!$, and the rank is the [Lehmer code](/lehmer-code/) read in the [factorial number system](/factorial-number-system/).
-- [Ranking](/balanced-bracket-sequence-ranking/) and [unranking](/kth-balanced-bracket-sequence/) balanced bracket sequences: the state is the height, and the count is a [ballot number](/ballot-number/) from a table of size $\Theta(n^2)$.
+- [Ranking](/balanced-bracket-sequence-ranking/) and [unranking](/kth-balanced-bracket-sequence/) balanced bracket sequences: the state is the height, and the count is a [ballot number](/ballot-theorem/) from a table of size $\Theta(n^2)$.
 - [Restricted growth strings](/restricted-growth-string/) for set partitions: the state is the length and the current maximum, and the counts come from a table over both.
 - [Zaks' algorithm](/zaks-tree-generation/): binary and $t$-ary trees coded by the positions of their internal nodes, ranked with counts of the same ballot type.
 - [Prüfer decoding](/pruefer-decoding/): a labeled tree on $[n]$ is ranked by reading its Prüfer sequence as a number in base $n$, which gives all ranks $0$ to $n^{n-2} - 1$.

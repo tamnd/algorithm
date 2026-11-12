@@ -9,7 +9,7 @@ aliases:
 - Lexicographic generation of t-ary trees
 area: combinatorics/generating-partitions-and-trees
 level: advanced
-summary: Lists ordered trees with n nodes in lexicographic order of their Dyck word encodings.
+summary: Lists t-ary trees with n internal nodes in lexicographic order of their z-sequences; for t = 2, the ordered trees with n + 1 nodes in the order of their Dyck words.
 solves: [binary-tree-generation, ordered-tree-generation]
 model: word-ram
 complexity:

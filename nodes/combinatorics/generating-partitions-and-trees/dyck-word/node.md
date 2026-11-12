@@ -88,7 +88,7 @@ The counts for $n = 0, 1, \ldots, 10$ are $1, 1, 2, 5, 14, 42, 132, 429, 1430, 4
 - [Dyck language](/dyck-language/): the set of all Dyck words, a context-free language, and its form with several kinds of brackets.
 - [Balanced parentheses](/balanced-parentheses/): the decision problem "is this word a Dyck word?", solved with a counter or a stack in linear time.
 - [Catalan numbers](/catalan-numbers/): the counts $C_n$; [counting balanced bracket sequences](/counting-balanced-bracket-sequences/) is the counting problem.
-- [Ballot theorem](/ballot-theorem/) and [ballot numbers](/ballot-number/): the number of prefixes of Dyck words, or of paths that stay above the axis, with a given end height. The table $d(i, j)$ of [bracket sequence ranking](/balanced-bracket-sequence-ranking/) holds these numbers.
+- [Ballot theorem](/ballot-theorem/) and ballot numbers: the number of prefixes of Dyck words, or of paths that stay above the axis, with a given end height. The table $d(i, j)$ of [bracket sequence ranking](/balanced-bracket-sequence-ranking/) holds these numbers.
 - [Cycle lemma](/cycle-lemma/): among the $2n + 1$ rotations of a word with $n$ opening and $n + 1$ closing brackets, exactly one is a Dyck word followed by a closing bracket. This gives $C_n = \frac{1}{2n+1}\binom{2n+1}{n}$.
 - [Level sequence](/level-sequence/): the list of node depths of an ordered tree in preorder, the same data as the heights of a Dyck word.
 - Generation and ranking: [generating balanced parentheses](/balanced-parentheses-generation/), [next balanced bracket sequence](/next-balanced-bracket-sequence/), [ranking](/balanced-bracket-sequence-ranking/) and [unranking](/kth-balanced-bracket-sequence/), and [Zaks' sequences](/zaks-tree-generation/).
