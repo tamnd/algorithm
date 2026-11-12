@@ -5,7 +5,6 @@ slug: winding-number-algorithm
 name: Winding number algorithm
 aliases:
 - winding number test
-- nonzero winding rule
 - Sunday's winding number algorithm
 area: geometry/polygons
 level: core

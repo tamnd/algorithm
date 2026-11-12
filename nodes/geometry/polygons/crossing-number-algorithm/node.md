@@ -4,10 +4,7 @@ kind: algorithm
 slug: crossing-number-algorithm
 name: Crossing number algorithm
 aliases:
-- even-odd rule
-- ray casting
 - ray crossing test
-- ray casting algorithm
 - parity test for point in polygon
 area: geometry/polygons
 level: intro
