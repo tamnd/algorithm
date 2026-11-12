@@ -54,7 +54,7 @@ Some algorithms also support updates of all edges at one vertex in a single oper
 
 ## Variants
 
-- **Insertions only.** Italiano (1986) keeps, for each vertex $u$, a spanning tree of the vertices reachable from $u$. When $(a, b)$ is inserted, for each $u$ that reaches $a$ but not $b$, search from $b$ and add to the tree of $u$ only the vertices not yet in it. Each pair is added once, so the total time is $O(n m)$ over all insertions, or $O(n)$ amortized per insertion when $m = \Theta(n^2)$, with $O(1)$ query time; see [Italiano's algorithm](/italiano-dynamic-transitive-closure/).
+- **Insertions only.** Italiano (1986) keeps, for each vertex $u$, a spanning tree of the vertices reachable from $u$. When $(a, b)$ is inserted, for each $u$ that reaches $a$ but not $b$, search from $b$ and add to the tree of $u$ only the vertices not yet in it. Each pair is added once, so the total time is $O(n m + n^2)$ over $m$ insertions, or $O(n)$ amortized per insertion once $m \ge n$, with $O(1)$ query time; see [Italiano's algorithm](/italiano-dynamic-transitive-closure/).
 - **Deletions only.** Roditty and Zwick (2002, 2008) and Łącki (2011, 2013) keep the closure in $O(m n)$ total time.
 - **Fully dynamic.** Both, with the results below.
 - **Acyclic graphs.** Some bounds hold only for DAGs; on a general graph, a structure for [strongly connected components](/strongly-connected-components/) is needed as well.

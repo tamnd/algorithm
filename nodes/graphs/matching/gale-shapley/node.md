@@ -8,7 +8,7 @@ aliases:
 - stable marriage algorithm
 area: graphs/matching
 level: core
-summary: 'Deferred acceptance: proposers propose in turn until all are matched, producing a stable matching in O(n²) time.'
+summary: 'Deferred acceptance: proposers propose in turn until all are matched, producing a stable matching in O(n + m) time, O(n²) for complete lists.'
 solves: [stable-matching]
 model: word-ram
 complexity:

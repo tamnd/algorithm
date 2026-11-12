@@ -5,7 +5,7 @@ slug: universal-sink
 name: Universal sink
 area: graphs/graph-representation
 level: intro
-summary: Decide whether a directed graph has a vertex reachable from all others with no outgoing edges, using its adjacency matrix in linear time.
+summary: Decide whether a directed graph has a vertex with an edge from every other vertex and no outgoing edges, using its adjacency matrix in linear time.
 prereqs: [adjacency-matrix, directed-graph, in-degree-and-out-degree]
 see_also: [adjacency-matrix, in-degree-and-out-degree, adjacency-query, adversary-argument, lower-bound, vertex, decision-tree-model, adjacency-list]
 sources:

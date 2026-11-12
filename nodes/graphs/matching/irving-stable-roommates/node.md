@@ -7,7 +7,7 @@ aliases:
 - Irving algorithm
 area: graphs/matching
 level: advanced
-summary: Finds a stable matching in a general graph with preference lists, or reports that none exists, in O(n²) time for complete lists.
+summary: Finds a stable matching in a general graph with preference lists, or reports that none exists. The version here takes O(n + nm) time; Irving's own bookkeeping gives O(n²) for complete lists.
 solves: [stable-roommates-problem]
 model: word-ram
 complexity:

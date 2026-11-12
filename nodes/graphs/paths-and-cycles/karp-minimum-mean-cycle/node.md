@@ -7,7 +7,7 @@ aliases:
 - Karp's algorithm for the minimum cycle mean
 area: graphs/paths-and-cycles
 level: advanced
-summary: Solves the minimum mean cycle problem in O(nm) time with a dynamic program over walk lengths.
+summary: Solves the minimum mean cycle problem in O(n(n + m)) time with a dynamic program over walk lengths.
 solves: [minimum-mean-cycle-problem]
 model: word-ram
 complexity:
