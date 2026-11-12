@@ -34,7 +34,7 @@ sources:
     locator: the high and low bit representation of a sorted list that the SD-array stores
 ---
 
-The SD-array is a bit vector $B$ of $n$ bits with $m$ ones, stored as the [Elias-Fano code](/elias-fano-encoding/) of the positions of its 1s, in $m \lfloor \lg(n/m) \rfloor + 2m + o(m)$ bits, with $\text{select}_1$ in $O(1)$ time and $\text{rank}$ and access in $O(\lg(n/m))$ time on the [word RAM](/word-ram/). The space depends on $m$ and only logarithmically on $n$, so for a vector with very few 1s it is far below the $n$ bits of a plain [bit vector](/bit-vector/) and below the $o(n)$ redundancy of an [RRR bit vector](/rrr-bitvector/). Okanohara and Sadakane introduced it under the name sdarray in 2007. This page is about the bit-vector queries; the encoding of the sequence and its successor search are on the Elias-Fano page.
+The SD-array is a bit vector $B$ of $n$ bits with $m$ ones, stored as the [Elias-Fano code](/elias-fano-encoding/) of the positions of its 1s, in at most $m \lg(n/m) + 2m + o(m)$ bits, with $\text{select}_1$ in $O(1)$ time and $\text{rank}$ and access in $O(\lg(n/m))$ time on the [word RAM](/word-ram/). The space depends on $m$ and only logarithmically on $n$, so for a vector with very few 1s it is far below the $n$ bits of a plain [bit vector](/bit-vector/) and below the $o(n)$ redundancy of an [RRR bit vector](/rrr-bitvector/). Okanohara and Sadakane introduced it under the name sdarray in 2007. This page is about the bit-vector queries; the encoding of the sequence and its successor search are on the Elias-Fano page.
 
 ## In plain words
 

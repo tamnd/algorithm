@@ -127,7 +127,7 @@ by the [union bound](/union-bound/) over the at most $2b$ entries of its two buc
 |---|---|---|---|
 | 0.03 | 9 | 9.5 | 7.3 |
 | 0.01 | 10 | 10.5 | 9.6 |
-| 0.001 | 13 | 13.7 | 14.4 |
+| 0.001 | 14 | 14.7 | 14.4 |
 | 0.0001 | 17 | 17.9 | 19.2 |
 
 The space-optimized variant with semi-sorted buckets saves one more bit per entry. With it, Fan et al. report less space than a Bloom filter for rates below about 3 percent.

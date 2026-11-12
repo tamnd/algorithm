@@ -151,6 +151,6 @@ The Python class `BrodalQueue` is the teaching version. It keeps `roots` as a li
 
 ## History
 
-Brodal presented the structure at SODA 1996, as the first priority queue with the amortized bounds of Fredman and Tarjan's Fibonacci heap (1987) in the worst case and with MELD. It built on the relaxed heaps of Driscoll, Gabow, Shrairman and Tarjan (1988), which had worst-case decrease-key without meld. In the same year, Brodal and Okasaki gave the purely functional skew binomial queue. In 2012 Brodal, Lagogiannis and Tarjan gave the strict Fibonacci heap, with the same bounds and a simpler pointer-based structure.
+Brodal presented the structure at SODA 1996, as the first priority queue with the amortized bounds of Fredman and Tarjan's Fibonacci heap (FOCS 1984, journal version 1987) in the worst case and with MELD. It built on the relaxed heaps of Driscoll, Gabow, Shrairman and Tarjan (1988), which had worst-case decrease-key without meld. In the same year, Brodal and Okasaki gave the purely functional skew binomial queue. In 2012 Brodal, Lagogiannis and Tarjan gave the strict Fibonacci heap, with the same bounds and a simpler pointer-based structure.
 
 ## References

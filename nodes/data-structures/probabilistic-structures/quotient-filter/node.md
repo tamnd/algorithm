@@ -128,7 +128,7 @@ Here $C$ is the length of the cluster of the key. The set of non-empty slots is 
 
 **False positive rate.** A query for $x \notin S$ returns true exactly when $F(x)$ equals a stored fingerprint. With ideal hashing $F(x)$ is uniform on $2^{q+r}$ values, so by the [union bound](/union-bound/) the rate is at most $n/2^{q+r} = \alpha 2^{-r}$. The proof is in [the complexity proof](proofs/complexity.md).
 
-**Space per key.** At load $\alpha$, the space is $(r + 3)/\alpha$ bits per key. For a rate $\varepsilon$ take $r = \lceil \log_2(\alpha/\varepsilon) \rceil$. At $\alpha = 0.75$ and $\varepsilon = 2^{-8}$ this is $r = 8$ and 14.7 bits per key, against 11.5 for a Bloom filter. Since $1/\alpha < 1.44$ for $\alpha > 0.69$, the quotient filter needs less space than a Bloom filter only for small rates: at 90 percent load, for rates below about $2^{-10}$, and at 75 percent load, only below about $2^{-31}$. Its advantages are locality, deletes, merging and resizing.
+**Space per key.** At load $\alpha$, the space is $(r + 3)/\alpha$ bits per key. For a rate $\varepsilon$ take $r = \lceil \log_2(\alpha/\varepsilon) \rceil$. At $\alpha = 0.75$ and $\varepsilon = 2^{-8}$ this is $r = 8$ and 14.7 bits per key, against 11.5 for a Bloom filter. Since $1/\alpha < 1.44$ for $\alpha > 0.69$, the quotient filter needs less space than a Bloom filter only for small rates. If the rounding of $r$ is ignored, this holds at 90 percent load for rates below about $2^{-10}$, and at 75 percent load only below about $2^{-31}$; the rounding moves both limits lower. Its advantages are locality, deletes, merging and resizing.
 
 ## Variants
 

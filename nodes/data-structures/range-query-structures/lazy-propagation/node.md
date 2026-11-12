@@ -116,7 +116,7 @@ On a 0/1 array, values are (ones, length), the tag is a bit, MAP$(1, (c, \ell)) 
 - **Iterative lazy tree.** A bottom-up tree of size $2^k$ pushes the tags on the two root-to-leaf paths of $l$ and $r - 1$ first, then works on the loop from the leaves up, then pulls the values back up. The AtCoder Library uses this form.
 - **[Dynamic segment tree](/dynamic-segment-tree/).** PUSH creates the children of a node when they do not exist yet, so range updates work on index ranges of size $10^9$ or more.
 - **Two kinds of updates.** Assignment and addition together use the tag (set or none, add), with the rule that an assignment clears the pending add. This is the affine case with $a \in \{0, 1\}$.
-- **Beyond distributive maps.** [Segment tree beats](/segment-tree-beats/) keeps extra values (the maximum and the second maximum) so that "chmin" updates can stop at a node in amortized $O(\log^2 n)$ time. The [Chtholly tree](/chtholly-tree/) handles assignments by keeping runs of equal values.
+- **Beyond distributive maps.** [Segment tree beats](/segment-tree-beats/) keeps extra values (the maximum and the second maximum) so that "chmin" updates can stop early: range chmin with sum queries takes $O(\log n)$ amortized time, and mixes with range add take $O(\log^2 n)$. The [Chtholly tree](/chtholly-tree/) handles assignments by keeping runs of equal values.
 
 ## Pitfalls
 

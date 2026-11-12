@@ -35,7 +35,7 @@ sources:
     locator: the path copying method for linked data structures
 ---
 
-A persistent vector is an immutable sequence stored as a wide [trie](/persistent-trie/) on the digits of the index in base $M$, usually $M = 32$, with the items in leaves of $M$ items each and a separate *tail* leaf for the last items. Index $i$ is found by following its base-$M$ digits from the root, so `get` visits $1 + \lceil \log_M (n/M) \rceil$ nodes, which is at most 7 for $n < 2^{35}$. An update copies the one node on each level of that path, at most $M$ slots each, and shares the rest; push and pop at the end usually copy only the tail. It is the vector of Clojure, designed by Rich Hickey on the array mapped tries of Phil Bagwell, and the same design is the immutable vector of Scala and of several other libraries.
+A persistent vector is an immutable sequence stored as a wide [trie](/persistent-trie/) on the digits of the index in base $M$, usually $M = 32$, with the items in leaves of $M$ items each and a separate *tail* leaf for the last items. Index $i$ is found by following its base-$M$ digits from the root, so `get` visits at most $1 + \lceil \log_M (n/M) \rceil$ nodes, which is at most 7 for $n < 2^{35}$. An update copies the one node on each level of that path, at most $M$ slots each, and shares the rest; push and pop at the end usually copy only the tail. It is the vector of Clojure, designed by Rich Hickey on the array mapped tries of Phil Bagwell, and the same design is the immutable vector of Scala and of several other libraries.
 
 ## In plain words
 
@@ -128,7 +128,7 @@ Write $\text{items}(v)$ for the sequence read from the leaves of the trie, left 
 
 ## Complexity
 
-Let $h = s/B$ be the height of the trie, so $h \le 1 + \lceil \log_M \max(1, n/M) \rceil$, which is $1 + \log n / \log M$ up to rounding.
+Let $h = s/B$ be the height of the trie. The trie has at most $n/M$ leaves, so by (I4) $h \le \max(1, \lceil \log_M (n/M) \rceil)$, which is $\log n / \log M - 1$ up to rounding. GET in the trie visits $h + 1$ nodes.
 
 | operation | time | new slots |
 |---|---|---|
