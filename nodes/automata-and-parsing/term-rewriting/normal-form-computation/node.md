@@ -4,7 +4,6 @@ kind: problem
 slug: normal-form-computation
 name: Normal form computation
 aliases:
-- normalization
 - evaluation of terms
 area: automata-and-parsing/term-rewriting
 level: core

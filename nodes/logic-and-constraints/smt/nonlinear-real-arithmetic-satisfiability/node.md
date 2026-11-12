@@ -5,7 +5,6 @@ slug: nonlinear-real-arithmetic-satisfiability
 name: Nonlinear real arithmetic satisfiability
 aliases:
 - nonlinear real arithmetic
-- NRA
 - QF_NRA
 - existential theory of the reals
 area: logic-and-constraints/smt

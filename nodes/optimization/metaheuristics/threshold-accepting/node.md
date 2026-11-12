@@ -3,9 +3,6 @@ tag: 89MGMB
 kind: algorithm
 slug: threshold-accepting
 name: Threshold accepting
-aliases:
-- deterministic annealing
-- TA
 area: optimization/metaheuristics
 level: advanced
 summary: Local search that accepts each neighbor whose objective is worse by less than a threshold, and lowers the threshold over time. The acceptance test has no random number.
