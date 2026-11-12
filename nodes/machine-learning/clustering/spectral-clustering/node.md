@@ -36,7 +36,7 @@ sources:
     locator: the equivalence of the weighted kernel k-means objective and the normalized cut objective
 ---
 
-Spectral clustering groups $n$ data points by the eigenvectors of a [graph Laplacian](/laplacian-matrix/). It builds a similarity graph on the points, takes the [eigenvectors](/eigenvector/) of the $k$ smallest eigenvalues of a Laplacian of that graph, and runs [k-means](/k-means/) on the rows of the $n \times k$ eigenvector matrix. When the graph has exactly $k$ [connected components](/connected-components/), the rows are the same within a component and different across components, so the method returns the components. With a dense eigensolver it costs $O(n^3)$ time and $O(n^2)$ memory; like k-means, it has no global guarantee on general input.
+Spectral clustering groups $n$ data points by the eigenvectors of a [graph Laplacian](/laplacian-matrix/). It builds a similarity graph on the points, takes the [eigenvectors](/eigenvector/) of the $k$ smallest eigenvalues of a Laplacian of that graph, and runs [k-means](/k-means/) on the rows of the $n \times k$ eigenvector matrix. When the graph has exactly $k$ [connected components](/connected-components/) and the Laplacian is $L$ or $L_{\mathrm{rw}}$, the rows are the same within a component and different across components, so the method returns the components. With $L_{\mathrm{sym}}$ the rows of a component are only parallel, and they become the same after each row is scaled to unit length, as in the Ng-Jordan-Weiss algorithm. With a dense eigensolver it costs $O(n^3)$ time and $O(n^2)$ memory; like k-means, it has no global guarantee on general input.
 
 ## In plain words
 

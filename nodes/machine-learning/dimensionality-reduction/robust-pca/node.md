@@ -113,7 +113,7 @@ In the real RAM, each iteration costs one SVD of an $n_1 \times n_2$ matrix in L
 
 - **Convex.** PCP has no bad local minima; every method that solves it finds the same optimum value.
 - **Deterministic.** The method has no random choices.
-- **Exact recovery.** Under the conditions above the planted split is the unique solution, without knowing the rank or the support.
+- **Exact recovery.** Under the conditions above, with probability at least $1 - c\, n_{(1)}^{-10}$ over the random support, the planted split is the unique solution, without knowing the rank or the support.
 - **Parameter-free in theory.** The default $\lambda = 1/\sqrt{n_{(1)}}$ works for the whole range of the theorem.
 - **Not online.** Each iteration needs the whole matrix and an SVD.
 

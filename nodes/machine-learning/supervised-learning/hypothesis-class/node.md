@@ -47,7 +47,7 @@ A class is often given by parameters: $H = \{h_\theta : \theta \in \Theta\}$. Th
 
 $$L_D(h_S) - L_D^\star = \underbrace{\Big(\min_{h \in H} L_D(h) - L_D^\star\Big)}_{\text{approximation error}} + \underbrace{\Big(L_D(h_S) - \min_{h \in H} L_D(h)\Big)}_{\text{estimation error}}.$$
 
-The identity holds because the two middle terms cancel. A larger class can only lower the approximation error, and for a fixed $n$ it usually raises the estimation error. This is the bias-complexity tradeoff of Shalev-Shwartz and Ben-David, Section 5.2, which the page on the [bias-variance tradeoff](/bias-variance-tradeoff/) treats for the squared loss.
+The identity holds because the two middle terms cancel. A larger class can only lower the approximation error, and for a fixed $n$ it usually raises the estimation error. This is the bias-complexity tradeoff of Shalev-Shwartz and Ben-David, Section 5.2. Their approximation error is $\min_{h \in H} L_D(h)$ itself, with the Bayes risk included; this page subtracts $L_D^\star$, as the [generalization error](/generalization-error/) page explains. The page on the [bias-variance tradeoff](/bias-variance-tradeoff/) treats the tradeoff for the squared loss.
 
 ## Examples and non-examples
 

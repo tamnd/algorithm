@@ -110,7 +110,7 @@ In the seeded tests (3000 random examples per target, $\alpha = 2$, $\theta = n/
 
 - **Attribute efficient.** The number of mistakes grows with $k \log n$, not with $n$. The [perceptron](/perceptron/) on the same targets can be forced into a number of mistakes that grows linearly in $n$ (Kivinen, Warmuth and Auer 1997).
 - **Mistake driven and online.** The state changes only on a mistake, and each example is read once.
-- **Nonnegative weights.** Winnow represents only targets with nonnegative weights. A non-monotone disjunction is handled by doubling the features to $(x, 1 - x)$, which costs one more mistake in Littlestone's analysis.
+- **Nonnegative weights.** Winnow represents only targets with nonnegative weights. A non-monotone disjunction is handled by doubling the features to $(x, 1 - x)$, which doubles $n$. With $\alpha = 2$ and $\theta = n/2$ the bound $2k\log_2 n + 2$ grows by $2k$.
 - **Multiplicative.** The update is a step of the [multiplicative weights update](/multiplicative-weights-update/) method, the same family as [weighted majority](/weighted-majority/). Additive updates such as the perceptron's fit dense targets, and multiplicative updates fit sparse ones.
 
 ## Variants and improvements
@@ -126,7 +126,7 @@ Use Winnow when the examples are sparse Boolean vectors with very many features,
 
 ## Pitfalls
 
-- **Elimination on noisy data.** In line L7 a mislabelled negative example sets relevant weights to 0, and no later promotion can lift them (in the example, $w_8$ stays at 0 through the promotions of steps 6 and 8). Use WINNOW2 if labels can be wrong.
+- **Elimination on noisy data.** In line L7 a mislabelled negative example sets relevant weights to 0, and no later promotion can lift them. The example has no noise, but it shows the mechanism: $w_8$ stays at 0 through the promotions of steps 6 and 8. There $x_8$ is irrelevant, so no harm is done; a relevant variable would be lost in the same way. Use WINNOW2 if labels can be wrong.
 - **A threshold that is too small.** With $\theta < 1/\alpha$ the theorem does not apply. With $\theta = 1$, each single active feature already passes the threshold, and the $n/\theta$ term of the bound becomes $n$. Use $\theta$ of order $n$.
 - **Non-monotone targets.** Line L7 is sound only when the target is monotone. For a target with negated literals, add the complemented features first.
 - **Comparing $\ge$ and $>$ in line L3.** Both conventions give the same bound, but the traces differ. The test with $>$ is Littlestone's.

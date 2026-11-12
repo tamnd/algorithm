@@ -87,7 +87,7 @@ All nine values are 0.7183, 0.6418, 0.5657, 0.6418, 0.7183, 0.5657, 0.6636, 0.66
 
 ## Related definitions
 
-- [Calinski-Harabasz index](/calinski-harabasz-index/) and [Davies-Bouldin index](/davies-bouldin-index/): internal indices that use centroids, so they cost $O(nkd)$ instead of $O(n^2 d)$, but they need points in $\mathbb{R}^d$.
+- [Calinski-Harabasz index](/calinski-harabasz-index/) and [Davies-Bouldin index](/davies-bouldin-index/): internal indices that use centroids, so they cost $O(nd)$ and $O(nd + k^2 d)$ instead of $O(n^2 d)$, but they need points in $\mathbb{R}^d$.
 - [Dunn index](/dunn-index/): an internal index that uses the smallest gap and the largest diameter, not means.
 - [Partitioning around medoids](/partitioning-around-medoids/): the method with which Kaufman and Rousseeuw present the silhouette plot.
 - [Elbow method](/elbow-method/) and [gap statistic](/gap-statistic/): other ways to choose $k$.

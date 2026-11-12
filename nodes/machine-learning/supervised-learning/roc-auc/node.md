@@ -103,7 +103,7 @@ The area is $\frac{19}{24} = 0.7917$. The pair count agrees: the positive with s
 
 ## Where it is used
 
-- Medical diagnosis and radiology, where ROC analysis began for tests with a continuous reading and the threshold is set later.
+- Medical diagnosis and radiology, for tests with a continuous reading where the threshold is set later. ROC analysis began in radar and signal detection theory and came to medicine later.
 - Comparing scoring models in credit risk, fraud detection and information retrieval before a threshold is chosen.
 - Model selection in [classification](/classification/) when the class proportions at deployment are unknown or change.
 - As a ranking objective: maximizing AUC is a pairwise [learning to rank](/learning-to-rank/) problem.

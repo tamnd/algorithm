@@ -106,6 +106,6 @@ def uniform_inputs(n: int) -> Callable[[random.Random], list[float]]:
 
 if __name__ == "__main__":
     grid = [(i + 0.5) / 20 for i in range(20)]
-    for deg in (0, 1, 3, 5, 7, 9):
-        t = decompose(polynomial_learner(deg), target, 0.3, grid, uniform_inputs(20), 2000, random.Random(1))
+    for deg in (0, 1, 3, 5, 6, 7, 9):
+        t = decompose(polynomial_learner(deg), target, 0.3, grid, uniform_inputs(30), 2000, random.Random(1))
         print(deg, {k: round(v, 4) for k, v in t.items()})

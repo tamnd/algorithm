@@ -54,7 +54,7 @@ Recall is also called sensitivity or the true positive rate. $F_1 = 2PR/(P + R)$
 **Average precision, and what this page computes.** Three different numbers are all called the area under the PR curve:
 
 1. *Average precision (AP), the step sum.* $\mathrm{AP} = \sum_n (R_n - R_{n-1})\, P_n$ with $R_0 = 0$. Without ties it equals the mean, over the positive examples, of the precision at the rank of that example. It uses no interpolation. This is what this page and scikit-learn's `average_precision_score` compute.
-2. *The trapezoid area.* Join the points by straight lines and integrate. Davis and Goadrich (2006) show that straight lines in PR space are wrong: between two achievable points the achievable precision follows a curve that is not linear in recall, so the trapezoid rule tends to overestimate.
+2. *The trapezoid area.* Join the points by straight lines and integrate. Davis and Goadrich (2006) show that straight lines in PR space are wrong: between two achievable points the achievable precision follows a curve that is not linear in recall. So the trapezoid area is not the area of an achievable curve. It can be too high, for example when it joins two points far apart, as Davis and Goadrich show. It can also be too low: on the example below it is less than AP.
 3. *Interpolated AP.* Replace precision by the interpolated precision $P_{\mathrm{interp}}(r) = \max_{r' \ge r} P(r')$ and average it at fixed recall levels, for example the 11 levels $0, 0.1, \ldots, 1$ used in information retrieval (Manning, Raghavan and Schutze, Section 8.4). Interpolation never lowers a value.
 
 They are not interchangeable; state which one a table reports.
@@ -105,6 +105,6 @@ The same curve gives three values that differ in the second digit.
 - **Precision depends on the prevalence.** With the same true and false positive rates, precision falls when positives become rarer. A PR curve from a balanced test set does not transfer to a deployment with 1 percent positives; [ROC](/roc-auc/) rates do.
 - **$F_1$ ignores true negatives** and weights precision and recall equally. If the costs of FP and FN are known, use them.
 - **Averaged $F_1$ is not unique.** Micro, macro, weighted, the mean of per-class $F_1$ and $F_1$ of the means all differ, and so does the choice of 0 or 1 for $0/0$.
-- **Linear interpolation of PR points** overstates the area; see above.
+- **Linear interpolation of PR points** does not give an achievable curve, and its area can be too high or too low; see above.
 
 ## References

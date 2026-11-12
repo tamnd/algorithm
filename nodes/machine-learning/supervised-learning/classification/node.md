@@ -92,7 +92,7 @@ No rule has risk below $R^* = 0.27$, and at $c$ the two choices tie.
 
 ## Bounds
 
-- **The Bayes error is a floor.** For every classifier $h$, $R(h) \ge R^*$. It is positive whenever the label is not a function of the input.
+- **The Bayes error is a floor.** For every classifier $h$, $R(h) \ge R^*$. It is positive exactly when $\max_j \eta_j(x) < 1$ on a set of inputs with positive probability, that is, when the input does not fix the label almost surely.
 - **Sample complexity relative to a class.** For binary $H$ with [VC dimension](/vc-dimension/) $d < \infty$ the [fundamental theorem](/fundamental-theorem-of-statistical-learning/) (Shalev-Shwartz and Ben-David, Theorem 6.8) gives constants $C_1, C_2$ with: in the realizable case $C_1 \frac{d + \log(1/\delta)}{\varepsilon} \le m_H(\varepsilon, \delta) \le C_2 \frac{d \log(1/\varepsilon) + \log(1/\delta)}{\varepsilon}$, and in the agnostic case $C_1 \frac{d + \log(1/\delta)}{\varepsilon^2} \le m_H(\varepsilon, \delta) \le C_2 \frac{d + \log(1/\delta)}{\varepsilon^2}$. A class with infinite VC dimension is not PAC learnable.
 - **No universal rate.** A universally consistent rule exists, but for every rule and every sequence of numbers tending to 0 slowly there is a distribution on which its risk converges more slowly (Devroye, Gyorfi and Lugosi, Chapter 7). See also the [no free lunch theorem](/no-free-lunch-theorem-learning/).
 - **Computation.** Minimizing the empirical 0-1 loss over halfspaces in the agnostic setting is NP-hard in general (Shalev-Shwartz and Ben-David, Section 12.3). This is why practical algorithms minimize convex surrogates.

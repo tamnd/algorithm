@@ -87,7 +87,7 @@ The cuts into three clusters are $\{a, b, c, d\}, \{e\}, \{f\}$ for single linka
 | [nearest-neighbor chain](/nearest-neighbor-chain/) | $O(n^2)$ | $\Theta(n^2)$ | single, complete, average, weighted and Ward |
 | [SLINK](/slink/) | $O(n^2)$ | $O(n)$ | single linkage |
 | [minimum spanning tree](/minimum-spanning-tree/) | $O(n^2)$, or $O(n \log n)$ in the plane | $O(n)$ | single linkage |
-| [divisive clustering](/divisive-clustering/) (DIANA) | $O(n^3)$ | $\Theta(n^2)$ | top down |
+| [divisive clustering](/divisive-clustering/) (DIANA) | $O(n^3)$ | $\Theta(n^2)$ | top down; the matrix, and $O(n)$ beyond it |
 | recursive sparsest cut | polynomial | | $O(\sqrt{\log n})$ approximation of Dasgupta's cost |
 
 [Ward's method](/ward-method/) and the [complete-linkage](/complete-linkage-clustering/) method are agglomerative methods with their own linkage. [Bisecting k-means](/bisecting-k-means/) is a divisive method. [BIRCH](/birch/) and [HDBSCAN](/hdbscan/) build hierarchies for large or noisy data.

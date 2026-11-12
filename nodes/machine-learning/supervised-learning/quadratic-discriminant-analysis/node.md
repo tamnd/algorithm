@@ -19,7 +19,7 @@ complexity:
 properties: {deterministic: true, online: false, exact: true, recursive: false}
 history:
   year: 1947
-  people: [Cedric A. B. Smith, Jerome H. Friedman]
+  people: [Cedric A. B. Smith]
   note: Fisher's 1936 linear discriminant assumes a common covariance. The quadratic rule for normal classes with unequal covariances appears in Smith 1947. Friedman added regularized discriminant analysis in 1989.
 prereqs: [bayes-optimal-classifier, covariance-matrix, maximum-likelihood-estimation]
 see_also: [linear-discriminant-analysis, naive-bayes-classifier, gaussian-mixture-model, cholesky-decomposition, logistic-regression, generative-vs-discriminative-models, positive-definite-matrix, bias-variance-tradeoff]

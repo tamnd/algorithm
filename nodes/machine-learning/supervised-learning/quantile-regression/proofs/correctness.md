@@ -24,7 +24,7 @@ $$\min \; c^\top z = \tau \mathbf{1}^\top u + (1-\tau)\mathbf{1}^\top v \quad \t
 
 (c) The ratio test of line L8 keeps the right side $\ge 0$ after the pivot of line L9, so the new tableau is again a basic feasible solution, and the cost does not increase. This is the standard step of the simplex method.
 
-**Termination.** Line L6 chooses the smallest entering index, and line L8 breaks ties by the smallest basis index. This is Bland's rule, and Bland (1977) proved that the simplex method with this rule never repeats a basis. There are finitely many bases, so the loop of line L3 stops. By (a), it stops at an optimal basic feasible solution, and by Lemma 1, line L11 returns a minimizer of $Q$.
+**Termination.** Line L6 chooses the smallest entering index, and line L8 breaks ties by the row whose basic variable has the smallest index. This is Bland's rule, and Bland (1977) proved that the simplex method with this rule never repeats a basis. There are finitely many bases, so the loop of line L3 stops. By (a), it stops at an optimal basic feasible solution, and by Lemma 1, line L11 returns a minimizer of $Q$.
 
 **Theorem (interpolation, Koenker and Bassett 1978).** Assume that $X$ has rank $d$. Then some minimizer $w^\star$ of $Q$ has a set $Z = \{i : y_i = x_i^\top w^\star\}$ such that the rows $\{x_i : i \in Z\}$ span $\mathbb{R}^d$. In particular, $w^\star$ fits $d$ points with linearly independent rows exactly.
 

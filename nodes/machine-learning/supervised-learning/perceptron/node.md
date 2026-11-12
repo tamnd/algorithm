@@ -92,7 +92,7 @@ Take six points in $\mathbb{R}^2$ with the bias feature 1, in this order: $x_1 =
 
 The second epoch has no mistake, so the output is $w = (3, 2)$ and $b = -1$, after 3 mistakes. For the bound: the augmented points $(x_i, 1)$ have $R'^2 = 18 + 1 = 19$, from $x_6$. The unit vector $(2, 2, -1)/3$ gives each example an augmented margin of at least $1$ (the examples 2 to 5 have exactly 1). So the theorem allows at most $19/1^2 = 19$ mistakes, and the run makes 3.
 
-On XOR, the points $(0, 0)$ and $(1, 1)$ with $y = -1$ and $(1, 0)$ and $(0, 1)$ with $y = +1$, no separator exists. In this order, each epoch makes 4 mistakes and ends at the same state $w = (1, 1)$, $b = 1$, so the algorithm cycles forever. Line L10 is the only exit.
+On XOR, the points $(0, 0)$ and $(1, 1)$ with $y = -1$ and $(1, 0)$ and $(0, 1)$ with $y = +1$, no separator exists. In this order, the first epoch makes 3 mistakes and each later epoch makes 4. Every epoch ends at the same state $w = (1, 1)$, $b = 1$, so the algorithm cycles forever. Line L10 is the only exit.
 
 ## Correctness
 

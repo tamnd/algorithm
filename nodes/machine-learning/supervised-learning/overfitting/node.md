@@ -14,7 +14,7 @@ see_also: [bias-variance-tradeoff, regularization, cross-validation, early-stopp
 sources:
   - book: isbn:9780070428072
     title: Tom M. Mitchell, Machine Learning, McGraw-Hill, 1997
-    locator: Section 3.6.1 (the definition of overfitting, with the decision tree example)
+    locator: Section 3.7.1 (the definition of overfitting, with the decision tree example)
   - book: isbn:9781107057135
     title: Shai Shalev-Shwartz and Shai Ben-David, Understanding Machine Learning, Cambridge University Press, 2014
     locator: Section 2.2.1 (overfitting of empirical risk minimization) and Section 11.2 (validation)
@@ -39,7 +39,7 @@ A student who learns the answers to last year's exam by heart can score full mar
 
 **Setting.** Examples are drawn i.i.d. from an unknown distribution $D$. A learner picks $h_S$ from a [hypothesis class](/hypothesis-class/) $H$ using a training sample $S$ of $n$ examples. $L_S(h)$ is the training error and $L_D(h)$ the true risk, for a stated loss.
 
-**Definition.** Mitchell (1997, Section 3.6.1) gives the standard definition: a hypothesis $h \in H$ *overfits* the training data if some other $h' \in H$ has
+**Definition.** Mitchell (1997, Section 3.7.1) gives the standard definition: a hypothesis $h \in H$ *overfits* the training data if some other $h' \in H$ has
 
 $$L_S(h) < L_S(h') \quad \text{and} \quad L_D(h) > L_D(h').$$
 
@@ -79,7 +79,7 @@ The training error never rises with the degree, because each class contains the 
 
 **Memorizing a table.** A learner that stores the training pairs and answers 0 elsewhere has training error 0 on every sample with distinct inputs. If the labels are fair coins independent of $x$, every classifier has true risk $1/2$, so this learner has the largest possible gap of $1/2$; see [generalization error](/generalization-error/).
 
-**Non-example: a high training error.** A linear fit to $\sin(2\pi x)$ has a training error near 0.19 and a similar validation error. Its true error is high, but it does not overfit: no simpler model does better on new data. It underfits.
+**Non-example: a high training error.** A linear fit to $\sin(2\pi x)$ has a training error near 0.19 and a validation error near 0.32. Both errors are high, and the gap between them is small next to the gaps at degree 7 and above. Its true error is high, but it does not overfit: no simpler model does better on new data. It underfits.
 
 ## Where it is used
 
