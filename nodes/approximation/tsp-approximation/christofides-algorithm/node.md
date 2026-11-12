@@ -109,7 +109,7 @@ $$\text{ALG} = (n - 1) + \tfrac{n-1}{2}(1 + \varepsilon).$$
 
 The tour $1, 3, 5, \ldots, n, n-1, n-3, \ldots, 2, 1$ uses $n - 2$ edges of cost $1 + \varepsilon$ and two edges of cost 1, so OPT $\le (n - 2)(1 + \varepsilon) + 2$. When $n$ grows and $\varepsilon$ goes to 0, ALG/OPT tends to $3/2$. For $n = 201$ and $\varepsilon = 1/1000$ the ratio is more than 1.48. So the analysis cannot be improved.
 
-**Hardness.** No polynomial algorithm has a ratio below $123/122$ unless P = NP (Karlin, Lampis and Schmied 2015; see [metric TSP inapproximability](/metric-tsp-inapproximability/)). The best known ratio is $3/2 - 10^{-36}$, by the randomized [Karlin-Klein-Oveis Gharan algorithm](/karlin-klein-oveis-gharan-algorithm/).
+**Hardness.** No polynomial algorithm has a ratio below $123/122$ unless P = NP (Karpinski, Lampis and Schmied 2015; see [metric TSP inapproximability](/metric-tsp-inapproximability/)). The best known ratio is $3/2 - 10^{-36}$, by the randomized [Karlin-Klein-Oveis Gharan algorithm](/karlin-klein-oveis-gharan-algorithm/).
 
 ## Complexity
 

@@ -128,7 +128,7 @@ The full proof, and an outline of the KKO improvement, are in the proof file. Th
 
 **The KKO bound (cited).** Karlin, Klein and Oveis Gharan proved $\mathbb{E}[\text{ALG}] \le (\tfrac{3}{2} - \varepsilon)\,\text{OPT}$ for some $\varepsilon > 10^{-36}$ (STOC 2021), and then $\mathbb{E}[\text{ALG}] \le (\tfrac{3}{2} - \varepsilon)\,\text{LP}^*$ (FOCS 2022), which also shows that the [integrality gap](/integrality-gap/) of the subtour LP is below 3/2. The main idea is that the matching of step 2 can be paid with a vector cheaper than $x/2$: a cut that $T$ crosses an even number of times needs no matching edge, and max entropy trees, which are strongly Rayleigh, cross each near minimum cut an even number of times with a constant probability.
 
-**Hardness.** No polynomial algorithm has a ratio below $123/122$ for metric TSP unless P = NP (Karlin, Lampis and Schmied 2015; see [metric TSP inapproximability](/metric-tsp-inapproximability/)). The integrality gap of the subtour LP is at least $4/3$, so no analysis against LP* can give a ratio below $4/3$.
+**Hardness.** No polynomial algorithm has a ratio below $123/122$ for metric TSP unless P = NP (Karpinski, Lampis and Schmied 2015; see [metric TSP inapproximability](/metric-tsp-inapproximability/)). The integrality gap of the subtour LP is at least $4/3$, so no analysis against LP* can give a ratio below $4/3$.
 
 ## Complexity
 
