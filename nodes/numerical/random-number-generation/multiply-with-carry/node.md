@@ -34,7 +34,7 @@ sources:
     locator: Section 3.2.1.2, the period of the multiplicative congruential method x_(n+1) = a x_n mod m as the order of a modulo m
 ---
 
-A multiply-with-carry (MWC) generator in base $b$ keeps a value $x$ and a carry $c$. Each step computes $t = a x + c$, keeps the low digit $t \bmod b$ as the new value and output, and carries the high digit $\lfloor t / b \rfloor$ into the next step. With $b = 2^{32}$ this is one 64-bit multiply-add and a split into halves. George Marsaglia proposed it in the 1990s. The carry turns a weak recurrence into one with a clean theory: the generator is exactly a multiplicative [linear congruential generator](/linear-congruential-generator/) modulo the large number $m = a b - 1$ with multiplier $a$, so its period is the [multiplicative order](/multiplicative-order/) of $b$ modulo $m$. Choosing $m$ as a [safe prime](/safe-prime/) gives a period of $(m - 1)/2$.
+A multiply-with-carry (MWC) generator in base $b$ keeps a value $x$ and a carry $c$. Each step computes $t = a x + c$, keeps the low digit $t \bmod b$ as the new value and output, and carries the high digit $\lfloor t / b \rfloor$ into the next step. With $b = 2^{32}$ this is one 64-bit multiply-add and a split into halves. George Marsaglia proposed it in the 1990s. The carry turns a weak recurrence into one with a clean theory: the generator is exactly a multiplicative [linear congruential generator](/linear-congruential-generator/) modulo the large number $m = a b - 1$ with multiplier $a$, so its period is the [multiplicative order](/multiplicative-order/) of $b$ modulo $m$. If $m$ is a [safe prime](/safe-prime/) and $b$ is a [quadratic residue](/quadratic-residue/) modulo $m$, as $b = 2^{32}$ always is, the period is $(m - 1)/2$.
 
 ## In plain words
 

@@ -99,7 +99,7 @@ The procedures compute the recurrence exactly, and by induction the state after 
 
 - *Mixed generator* (Knuth, Section 3.2.1.2, Theorem A; Hull and Dobell 1962). The period is $m$ for every seed if and only if (i) $\gcd(c, m) = 1$, (ii) every prime that divides $m$ divides $a - 1$, and (iii) 4 divides $a - 1$ if 4 divides $m$. See the [Hull-Dobell theorem](/hull-dobell-theorem/).
 - *Multiplicative generator, $m$ prime.* The period from each seed in $1, \ldots, m-1$ equals the [multiplicative order](/multiplicative-order/) of $a$ modulo $m$, and it is $m - 1$ exactly when $a$ is a [primitive root](/primitive-root/) modulo $m$. The value 16807 is a primitive root modulo $2^{31} - 1$.
-- *Multiplicative generator, $m = 2^w$ with $w \ge 3$.* The period is at most $2^{w-2}$, and it equals $2^{w-2}$ exactly when $a \equiv 3$ or $5 \pmod 8$ and the seed is odd (Knuth, Section 3.2.1.2). For example $m = 2^{10}$, $a = 5$ gives period 256 from seed 1 and 128 from seed 2.
+- *Multiplicative generator, $m = 2^w$ with $w \ge 3$.* The period is at most $2^{w-2}$. For $w \ge 4$ it equals $2^{w-2}$ exactly when $a \equiv 3$ or $5 \pmod 8$ and the seed is odd (Knuth, Section 3.2.1.2). For $w = 3$ the bound is 2, and $a = 7$ also reaches it. For example $m = 2^{10}$, $a = 5$ gives period 256 from seed 1 and 128 from seed 2.
 
 ## Complexity
 

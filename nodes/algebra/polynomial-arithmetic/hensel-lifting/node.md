@@ -16,7 +16,7 @@ complexity:
   vars: {n: the degree of f, k: the target exponent in the modulus p^k, p: the prime, M: the cost function M(n) of multiplying two polynomials of degree less than n, I: the cost function I(l) of multiplying two integers of l digits}
   time: {worst: O(M(n) log k + M(n) log n)}
   space: {extra: O(n)}
-  lifting_steps: {worst: log2 k + 1}
+  lifting_steps: {worst: "⌈log2 k⌉"}
   word_operations: {worst: O(M(n) I(k log p))}
 properties: {deterministic: true, in_place: false, recursive: false, online: false}
 history:
