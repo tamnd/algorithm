@@ -1,0 +1,33 @@
+---
+title: The QI walk gives the exact quantitative invisibility of every edge point
+proves: [correctness]
+status: full
+---
+
+**Setting.** The scene is a set of closed polyhedral solids with disjoint interiors that do not touch, with faces oriented counterclockwise from outside. The view is parallel along $z$, with $\pi(x, y, z) = (x, y)$. For a front face $F$ and a point $p$, $F$ *covers* $p$ if $\pi(p)$ is in the interior of $\pi(F)$ and the plane of $F$ is above $p$ at $\pi(p)$. $\mathrm{QI}(p)$ is the number of front faces that cover $p$. General position: no vertex projects onto another edge or vertex, no face is vertical, and no three edges have projections through one point unless they share a vertex there.
+
+For a front face, $\pi$ maps $F$ one to one onto $\pi(F)$, and $\pi(F)$ is a simple polygon with counterclockwise boundary $\pi(\partial F)$, so its interior lies to the left of each directed boundary edge. For a back face the boundary of $\pi(F)$ is clockwise.
+
+**Lemma 1 (two front faces at an edge).** If both faces $F_1, F_2$ of an edge $e'$ are front faces, then near any inner point of $\pi(e')$ the projections $\pi(F_1)$ and $\pi(F_2)$ lie on opposite sides of $\pi(e')$.
+
+*Proof.* The two faces traverse $e'$ in opposite directions, because the surface is oriented. Each projected face lies to the left of its own direction of $\pi(e')$, so they are on opposite sides. $\square$
+
+**Lemma 2 (a contour edge).** If $e' = a b$ has exactly one front face $F$, directed as in $F$, then near an inner point of $\pi(e')$, $\pi(F)$ lies to the left of $\pi(a) \pi(b)$ and not to its right.
+
+*Proof.* $F$ lies to the left of its boundary edge, and near an inner point of $\pi(e')$ the projection of $F$ is a half disk on one side, because $\pi$ is one to one on $F$. $\square$
+
+**Lemma 3 (QI along an open edge).** Let $p(t) = p_0 + t (p_1 - p_0)$ be the edge $u w$ and let $0 < t_1 < \dots < t_k < 1$ be the parameters where $\pi(p(t))$ crosses $\pi(e')$ for an edge $e'$ that is not at $u$ or $w$ and is above $p(t)$ there. Then $\mathrm{QI}(p(t))$ is constant on each interval $(t_i, t_{i+1})$ and on $(0, t_1)$ and $(t_k, 1)$, and at $t_i$ it changes by 0 if $e'$ is not a contour edge, and by $+1$ if $e'$ is a contour edge and $\pi(p(t))$ moves from its right to its left, and by $-1$ in the other direction.
+
+*Proof.* Let $F$ be a front face that does not contain the edge. The set of $t$ where $F$ covers $p(t)$ is open in $(0, 1)$ and can change only at a $t$ where $\pi(p(t))$ is on the boundary of $\pi(F)$, or where $p(t)$ lies on the plane of $F$ with $\pi(p(t))$ inside $\pi(F)$. The second case means that the edge meets $F$ at a point other than its own vertices, which is impossible: for another solid the interiors and surfaces are apart, and for the same solid two distinct faces and edges of an embedded closed surface meet only along shared edges and vertices, and $F$ does not contain the edge. In the first case, by general position, $\pi(p(t))$ is an inner point of the projection of exactly one edge $e'$ of $F$, and $p(t)$ and $e'$ are not at the same height, because then the edge $u w$ would meet $e'$. If $e'$ is below $p(t)$, then near this $t$ the plane of $F$ is below $p(t)$ on both sides, so $F$ does not cover $p(t)$ on either side and nothing changes. If $e'$ is above, $F$ covers $p(t)$ exactly on the side of $\pi(e')$ where $\pi(F)$ lies. Each edge $e'$ has two faces. Summing over the front faces among them, Lemma 1 gives $-1 + 1 = 0$ for two front faces, there is no term for two back faces, and Lemma 2 gives $\pm 1$ with the stated sign for a contour edge. The faces that contain $u w$ never cover its inner points, because those points lie on their boundary. $\square$
+
+**Lemma 4 (the ends of an edge).** For the edge $u w$ and small $t > 0$, $\mathrm{QI}(p(t)) = \mathrm{QI}(u) + \mathrm{cover}(u, w)$, where $\mathrm{QI}(u)$ counts the front faces not at $u$ that cover $u$, and $\mathrm{cover}(u, w)$ counts the front faces $F$ at $u$ that do not contain $u w$, for which $\pi(w) - \pi(u)$ points into the interior of the corner of $\pi(F)$ at $\pi(u)$, and for which $p_1 - p_0$ points below the plane of $F$.
+
+*Proof.* A front face $F$ not at $u$ has $\pi(u)$ off the boundary of $\pi(F)$ by general position, and $u$ is not in the plane of $F$ where $\pi(u)$ is inside $\pi(F)$, since $u$ is not on $F$. So by continuity, $F$ covers $p(t)$ for small $t$ exactly when it covers $u$. A front face $F$ at $u$ contains $u$, so it does not cover $u$. For small $t$, $\pi(p(t))$ is in the interior of $\pi(F)$ exactly when the direction of the projected edge points into the corner of $\pi(F)$ at $\pi(u)$: it is not along a side of the corner, by general position, unless the side is the projection of $u w$ itself, which is the excluded case of $F$ containing $u w$. The plane of $F$ passes through $u$, so it is above $p(t)$ exactly when $p_1 - p_0$ points below it. Faces that contain $u w$ never cover $p(t)$. $\square$
+
+Applied to the reversed edge $w u$, Lemma 4 gives, for $t$ near 1, $\mathrm{QI}(p(t)) = \mathrm{QI}(w) + \mathrm{cover}(w, u)$.
+
+**Theorem.** Every edge gets the pieces with the true QI values, and every vertex the true QI.
+
+*Proof.* Line L3 computes $\mathrm{QI}(v_0)$ from the definition. Suppose that $\mathrm{QI}(u)$ is correct when $u$ is removed from the queue. For an edge $u w$, line L7 gives the true QI just after $u$ by Lemma 4. Line L8 lists exactly the crossings of Lemma 3 that can change the value, namely those with the contour edges, with their signs, so line L9 gives the true value on each piece by induction over the crossings. At the end, $q$ is the true QI just before $w$, and Lemma 4 for $w u$ gives $\mathrm{QI}(w) = q - \mathrm{cover}(w, u)$, which is line L10. So every vertex added to the queue has its true QI. The vertices and edges of a closed connected polyhedral surface form a connected graph, so the walk from $v_0$ reaches every vertex and every edge of its solid. Line L2 does this for every solid. $\square$
+
+**Running time.** Line L1 looks at each edge once. Line L3 tests every face once for each solid, $O(s n)$ in total. Each edge is handled once: line L8 tests it against the $c$ contour edges in $O(c)$ time and sorts at most $c$ crossings in $O(c \log c)$, and the two cover counts test each face at its two ends in $O(1)$ time. A vertex of degree $d_v$ has $d_v$ faces and $d_v$ edges, so the cover counts cost $O(\sum_v d_v^2)$ in total, which is $O(n)$ when the vertex degrees are bounded, as the bound on the page assumes. The total is then $O(n (c \log c + s))$. $\square$

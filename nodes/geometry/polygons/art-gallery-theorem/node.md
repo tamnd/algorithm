@@ -4,8 +4,6 @@ kind: theorem
 slug: art-gallery-theorem
 name: Art gallery theorem
 aliases:
-- Chvatal's art gallery theorem
-- Chvátal's art gallery theorem
 - Chvátal's theorem
 - art gallery theorem
 - Fisk's proof of the art gallery theorem
