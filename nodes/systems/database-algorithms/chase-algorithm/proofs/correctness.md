@@ -1,0 +1,29 @@
+---
+title: The chase stops and decides implication of functional and join dependencies
+proves: [correctness, termination]
+status: full
+---
+
+We use the pseudocode of the page. $R$ is a schema with $n$ attributes and $D$ is a finite set of functional dependencies (FDs) and join dependencies (JDs) over $R$. A tableau is a finite set of rows over $R$. Each column has its own symbols, and $0$ is the distinguished symbol of each column. A *valuation* $h$ maps each symbol of column $A$ to a value of $A$, and maps a row $w$ to the tuple $h(w)$ with $h(w)[A] = h(w[A])$. We say that $h$ *embeds* $T$ in a relation $r$ when $h(w) \in r$ for each row $w$ of $T$.
+
+**Claim.** CHASE$(T_0, D)$ stops and returns a tableau $T^*$. (a) $T^*$, read as a relation whose values are the symbols, satisfies $D$. (b) $D \models X \to Y$ exactly when, for the start $T_0 = \{u, v\}$ with $u$ all $0$ and $v$ equal to $0$ on $X$ and $1$ elsewhere, the symbol $1$ is gone from each column of $Y$ in $T^*$. (c) $D \models\ \bowtie[S_1, \ldots, S_k]$ exactly when, for the start $T_0$ with row $i$ equal to $0$ on $S_i$ and to the symbol $i$ elsewhere, $T^*$ contains the all-$0$ row.
+
+**Lemma 1 (one step keeps an embedding).** Let $r$ satisfy $D$, and let $h$ embed $T$ in $r$. If one step changes $T$ into $T'$, then $h$, restricted to the symbols of $T'$, embeds $T'$ in $r$. For an FD step that replaces $\mathit{old}$ by $\mathit{new}$ in column $A$, also $h(\mathit{old}) = h(\mathit{new})$.
+
+*Proof.* *FD step (lines L5 to L7).* Rows $u, v$ of $T$ agree on $X$ and $u[A] \ne v[A]$ for some $A \in Y$. Then $h(u), h(v) \in r$ agree on $X$. Since $r$ satisfies $X \to Y$, $h(u)[A] = h(v)[A]$, so $h(\mathit{old}) = h(\mathit{new})$. Each row of $T'$ is a row of $T$ with $\mathit{old}$ replaced by $\mathit{new}$, so it has the same image under $h$, and that image is in $r$. *JD step (lines L9 to L11).* Let $w$ be in the join of the projections of $T$ on $S_1, \ldots, S_k$. Then there are rows $t_1, \ldots, t_k$ of $T$ with $t_i[S_i] = w[S_i]$. So $h(t_i) \in r$ and $h(w)[S_i] = h(t_i)[S_i]$ for each $i$. So $h(w)$ is in the join of the projections of $r$ on the $S_i$, which equals $r$ because $r$ satisfies the JD. The rows of $T$ keep their images. $\square$
+
+**Lemma 2 (termination).** Let $s = |T_0|$. The symbols of column $A$ are always a subset of those of $T_0$, so there are at most $s$ in each column and at most $sn$ in all. An FD step removes the symbol $\mathit{old}$ from column $A$, because $\mathit{old}$ occurs only in column $A$ and each occurrence is replaced. So there are at most $sn$ FD steps in all. A JD step makes no new symbols, so it adds rows from a set of at most $s^n$ possible rows. Between two FD steps, there are thus at most $s^n$ JD steps that change $T$. The loop of line L5 stops for each FD, since each pass removes a symbol. Each round of line L2 other than the last one changes $T$, so there are at most $(sn + 1)(s^n + 1)$ rounds, and the chase stops. $\square$
+
+**Proof of (a).** The last round of line L2 sets *changed* to false at line L3 and does not set it again. So in that round no FD has two rows that agree on its left side and differ on its right side (line L5), and each JD adds no row (line L10). $T$ does not change in the round, so all these checks are on $T^*$. So $T^*$ satisfies each FD and each JD of $D$. $\square$
+
+**Two facts about symbols.** (F1) The symbol $0$ is never replaced, because line L6 replaces the larger symbol by the smaller one and $0$ is the smallest. (F2) Each row $w$ of $T_0$ has a *current version* in $T$ at each time: the row with each replaced symbol changed to its replacement. It stays in $T$, because an FD step maps each row to its new version and a JD step removes no row. A position of $w$ that holds $0$ holds $0$ in each version, by (F1).
+
+**Proof of (b).** *If the symbol $1$ is gone from each column of $Y$, then $D \models X \to Y$.* Let $r$ satisfy $D$ and let $t_1, t_2 \in r$ agree on $X$. Let $h(0) = t_1[A]$ and $h(1) = t_2[A]$ in column $A$. In a column of $X$ only $0$ occurs, and $t_1[A] = t_2[A]$ there, so $h(u) = t_1$ and $h(v) = t_2$, and $h$ embeds $T_0$ in $r$. Apply Lemma 1 at each step. Let $A \in Y$ with $A \notin X$. The symbol $1$ of column $A$ was replaced by $0$, the only smaller symbol, so $h(1) = h(0)$, that is $t_2[A] = t_1[A]$. So $r$ satisfies $X \to Y$.
+
+*If the symbol $1$ stays in some column $A \in Y$, then $D \not\models X \to Y$.* By (F2) the current versions $u^*$ and $v^*$ of $u$ and $v$ are rows of $T^*$, with $u^*$ all $0$, $v^*[X]$ all $0$ and $v^*[A] = 1$, since the symbol $1$ was never replaced. So $T^*$ violates $X \to Y$, and by (a) it satisfies $D$. $\square$
+
+**Proof of (c).** *If $T^*$ contains the all-$0$ row, then $D \models\ \bowtie[S_1, \ldots, S_k]$.* Let $r$ satisfy $D$ and let $w$ be in the join of the projections of $r$ on the $S_i$. Then there are $t_1, \ldots, t_k \in r$ with $t_i[S_i] = w[S_i]$. In column $A$ let $h(0) = w[A]$ and $h(i) = t_i[A]$. The symbol $i$ occurs only in row $i$, so $h$ is well defined, and $h(\text{row } i) = t_i$, since on $S_i$ we have $w[A] = t_i[A]$. So $h$ embeds $T_0$ in $r$. By Lemma 1, at the end $h$ embeds $T^*$ in $r$, and $h(0) = w[A]$ still, by (F1). The all-$0$ row is in $T^*$, so $w = h(\text{all-}0) \in r$. So $r$ satisfies the JD.
+
+*If $T^*$ does not contain the all-$0$ row, then $D \not\models\ \bowtie[S_1, \ldots, S_k]$.* By (F2) the current version of row $i$ is in $T^*$ and is $0$ on $S_i$. So the all-$0$ tuple is in the join of the projections of $T^*$ on the $S_i$, but not in $T^*$. So $T^*$ violates the JD, and by (a) it satisfies $D$. $\square$
+
+The claim follows from Lemma 2 and from (a), (b) and (c). The lossless-join test is (c) for the parts of the decomposition. $\blacksquare$

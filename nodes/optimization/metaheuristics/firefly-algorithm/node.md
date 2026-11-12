@@ -3,8 +3,6 @@ tag: BF1W32
 kind: algorithm
 slug: firefly-algorithm
 name: Firefly algorithm
-aliases:
-- FA
 area: optimization/metaheuristics
 level: research
 summary: A population method in which each point moves toward every better point by a pull that decays with distance, plus uniform noise. It is a form of particle swarm optimization.

@@ -6,8 +6,6 @@ name: Deadlock handling
 aliases:
 - deadlock prevention, avoidance, detection and recovery
 - deadlock handling for locks
-- wait-die
-- wound-wait
 area: concurrency/mutual-exclusion
 level: core
 summary: Keep programs that take several locks free of deadlock in practice, with lock order, trylock and back off, timeouts, a validator such as lockdep, or the wait-die and wound-wait rules.

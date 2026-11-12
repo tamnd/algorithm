@@ -4,7 +4,6 @@ kind: data-structure
 slug: implication-graph
 name: Implication graph
 aliases:
-- conflict graph
 - implication DAG
 area: logic-and-constraints/sat-solving
 level: core

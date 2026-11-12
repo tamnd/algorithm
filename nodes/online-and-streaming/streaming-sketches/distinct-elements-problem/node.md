@@ -6,7 +6,6 @@ name: Distinct elements problem
 aliases:
 - Count-distinct problem
 - F0 estimation
-- cardinality estimation
 - count distinct
 - distinct elements problem
 - number of distinct values
