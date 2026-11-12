@@ -111,7 +111,7 @@ CLOCK is conservative: in any part of $\sigma$ with at most $k$ distinct pages, 
 
 ## Properties
 
-- **Conservative, not marking.** The proof below shows the bound of $k$ misses in each part with at most $k$ distinct pages. CLOCK is not a [marking algorithm](/marking-algorithm/): at $t = 5$ above it evicts $a$, which was requested in the current phase.
+- **Conservative, not marking.** The proof below shows the bound of $k$ misses in each part with at most $k$ distinct pages. CLOCK is not a [marking algorithm](/marking-algorithm/): with $k = 4$ on $5, 0, 1, 4, 6, 0, 5, 2, 4, 6, 5, 1$, the last request evicts 5, which was requested at $t = 11$ in the current phase.
 - **Not a stack algorithm.** On $1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5$, CLOCK has 9 misses with $k = 3$ and 10 with $k = 4$, the same [Belady anomaly](/belady-anomaly/) as FIFO.
 - **One bit of history.** CLOCK sorts the pages into two classes, used and not used since the last pass of the hand. Within a class it falls back to load order.
 - **Cheap hits.** A hit writes one bit and moves nothing, so CLOCK needs no lock on a shared list for hits. This is why kernels and databases use it in place of exact LRU.

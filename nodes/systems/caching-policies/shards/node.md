@@ -31,7 +31,7 @@ sources:
     locator: the exact tree method for LRU stack distances in O(n log m) time, which SHARDS runs on its sample
 ---
 
-SHARDS is a sampling method that estimates the [miss ratio curve](/miss-ratio-curve/) of an [LRU](/lru/) cache for all sizes. It samples items, not requests: an item $L$ is in the sample when $\mathrm{hash}(L) \bmod P < T$, so the rate is $R = T/P$ and each request to a sampled item is seen. It computes exact [reuse distances](/reuse-distance/) among the sampled items and divides each by $R$. Waldspurger, Park, Garthwaite and Ahmad (FAST 2015) report errors near $0.01$ at $R = 0.001$, with up to about 10,800 times less memory and 204 times less time than an exact method. A fixed-size form keeps at most $s_{\max}$ items by lowering $T$, so it uses constant memory on any trace.
+SHARDS is a sampling method that estimates the [miss ratio curve](/miss-ratio-curve/) of an [LRU](/lru/) cache for all sizes. It samples items, not requests: an item $L$ is in the sample when $\mathrm{hash}(L) \bmod P < T$, so the rate is $R = T/P$ and each request to a sampled item is seen. It computes exact [reuse distances](/reuse-distance/) among the sampled items and divides each by $R$. Waldspurger, Park, Garthwaite and Ahmad (FAST 2015) report a median mean absolute error below $0.02$ at $R = 0.001$, with up to about 10,800 times less memory and 204 times less time than an exact method. A fixed-size form keeps at most $s_{\max}$ items by lowering $T$, so it uses constant memory on any trace.
 
 ## In plain words
 

@@ -24,10 +24,10 @@ sources:
     locator: the history of the working set, thrashing, and the phase and transition view of program behavior
   - url: "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-beyondphys-policy.pdf"
     title: Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, Operating Systems, Three Easy Pieces, Chapter 22, Beyond Physical Memory, Policies
-    locator: Section 22.12, Thrashing, which uses the working set to decide which processes to run
+    locator: Section 22.11, Thrashing, which uses the working set to decide which processes to run
 ---
 
-The working set model, introduced by Peter Denning in 1968, describes the memory demand of a program by the set of pages it used recently. For a time $t$, counted in references of the program, and a window $\tau$, the working set $W(t, \tau)$ is the set of distinct pages referenced in the last $\tau$ references, those at times $t - \tau + 1, \ldots, t$. Its size $\omega(t, \tau) = |W(t, \tau)|$ estimates how much memory the program needs now. The working set is a model of program behavior. The *working set policy*, which keeps exactly $W(t, \tau)$ in memory, is one use of it, and it differs from a fixed-size replacement policy such as [LRU](/lru/) because the memory it gives a program grows and shrinks.
+The working set model, introduced by Peter Denning at the first Symposium on Operating Systems Principles in 1967 and published in 1968, describes the memory demand of a program by the set of pages it used recently. For a time $t$, counted in references of the program, and a window $\tau$, the working set $W(t, \tau)$ is the set of distinct pages referenced in the last $\tau$ references, those at times $t - \tau + 1, \ldots, t$. Its size $\omega(t, \tau) = |W(t, \tau)|$ estimates how much memory the program needs now. The working set is a model of program behavior. The *working set policy*, which keeps exactly $W(t, \tau)$ in memory, is one use of it, and it differs from a fixed-size replacement policy such as [LRU](/lru/) because the memory it gives a program grows and shrinks.
 
 ## In plain words
 

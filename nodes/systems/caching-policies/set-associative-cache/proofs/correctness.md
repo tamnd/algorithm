@@ -30,7 +30,7 @@ So inside one set, the tag names the block. Two addresses in the same block give
 
 **Direct mapped.** With $W = 1$ each set has one way, line L7 has one choice, and every policy is the same: block $\beta$ goes to set $\beta \bmod S$ and replaces what was there.
 
-**Tree PLRU with two ways.** With $W = 2$ the tree has one bit, and each use sets it to point at the other way. When both ways are full, the other way is the one used less recently, so PLRU evicts the same way as LRU. With $W \ge 4$ the two differ; the page gives a sequence of seven accesses where they evict different blocks.
+**Tree PLRU with two ways.** With $W = 2$ the tree has one bit, and each use sets it to point at the other way. When both ways are full, the other way is the one used less recently, so PLRU evicts the same way as LRU. With $W \ge 4$ the two differ. Take $W = 4$, an empty set and the accesses A, B, C, D, A, E, which fill the ways in order. At E, LRU evicts B. In the tree, the access to A made the root point to the right half, and the access to D made the right bit point to the way of C, so PLRU evicts C.
 
 ## 4. Conflict misses
 

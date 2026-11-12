@@ -80,7 +80,7 @@ Both methods give the same answers to get; they differ only in memory use and in
 
 ## Examples
 
-**Absolute against sliding.** A key is set at time 0 with $T = 10$ and then requested at times 9, 18, 27 and 37. With an absolute TTL the request at 9 hits and the others miss, because the entry dies at 10. With a sliding TTL the requests at 9, 18 and 27 hit (each gap is 9) and move the expiry to 19, 28 and 37, so the request at 37 misses. Note that the value served at time 27 was loaded before time 0.
+**Absolute against sliding.** A key is set at time 0 with $T = 10$ and then requested at times 9, 18, 27 and 37. With an absolute TTL the request at 9 hits and the entry dies at 10, so the request at 18 misses and reloads it with expiry 28; then 27 hits and 37 misses. With a sliding TTL the requests at 9, 18 and 27 hit (each gap is 9) and move the expiry to 19, 28 and 37, so the request at 37 misses. Note that the value served at time 27 was loaded before time 0.
 
 **Lazy and active.** Keys 0 to 4 are set at time 0 with lifetimes 1 to 5. At time 3, a get of key 0 removes it lazily and reports a miss; keys 1 and 2 are also dead but still use memory. A sweep at time 3 removes keys 1 and 2 (expiry times 2 and 3, since an entry is dead when the clock reaches its expiry time), and keys 3 and 4 stay.
 

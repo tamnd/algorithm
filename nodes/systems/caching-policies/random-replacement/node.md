@@ -38,7 +38,7 @@ sources:
     locator: Chapter 22, Beyond Physical Memory, Policies (the random policy and the looping sequential workload)
 ---
 
-Random replacement (RAND) is the [cache replacement policy](/cache-replacement-policy/) that, on a miss with a full cache, evicts a cached page chosen uniformly at random. It keeps no history at all, so a hit costs nothing and the state is just the set of cached pages. On a loop over $k + 1$ pages, where [LRU](/lru/) and [FIFO](/fifo-replacement/) miss on every request, it misses on about $2/(k + 1)$ of the requests. Raghavan and Snir proved that it is $k$-competitive in expectation for the [paging problem](/paging-problem/), even against an [adaptive adversary](/adaptive-adversary/).
+Random replacement (RAND) is the [cache replacement policy](/cache-replacement-policy/) that, on a miss with a full cache, evicts a cached page chosen uniformly at random. It keeps no history at all, so a hit costs nothing and the state is just the set of cached pages. On a loop over $k + 1$ pages, where [LRU](/lru/) and [FIFO](/fifo-replacement/) miss on every request, it misses, in the long run, on exactly $2/(k + 1)$ of the requests. Raghavan and Snir proved that it is $k$-competitive in expectation for the [paging problem](/paging-problem/), even against an adaptive online [adversary](/adaptive-adversary/).
 
 ## In plain words
 
@@ -86,7 +86,7 @@ After each request, the requested page is cached and $|C| \le k$: a hit changes 
 
 - **Time.** $O(1)$ expected time per request: one hash lookup, one random number on a miss, and a constant number of array writes. So $O(n)$ expected in total. A hit writes nothing.
 - **Space.** $\Theta(k)$ for the array and the map. There is no per-page history.
-- **Against the optimum.** For each $\sigma$, $\mathbb{E}[\mathrm{RAND}_k(\sigma)] \le k \cdot \mathrm{OPT}_k(\sigma) + c$ for a constant $c$, against an adaptive online adversary (Raghavan and Snir 1989). An oblivious adversary is weaker, so the same bound holds against it. This is the same ratio $k$ as LRU and FIFO, and it is far above the ratio $2H_k$ of [randomized marking](/randomized-marking/), where $H_k = 1 + 1/2 + \cdots + 1/k$. No randomized policy beats $H_k$ against an oblivious adversary; see the [harmonic paging bound](/harmonic-paging-bound/).
+- **Against the optimum.** For each $\sigma$, $\mathbb{E}[\mathrm{RAND}_k(\sigma)] \le k \cdot \mathrm{OPT}_k(\sigma) + c$ for a constant $c$, against an adaptive online adversary (Raghavan and Snir 1989). An oblivious adversary is weaker, so the same bound holds against it. This is the same ratio $k$ as LRU and FIFO, and it is far above the ratio $2H_k - 1$ of [randomized marking](/randomized-marking/), where $H_k = 1 + 1/2 + \cdots + 1/k$. No randomized policy beats $H_k$ against an oblivious adversary; see the [harmonic paging bound](/harmonic-paging-bound/).
 - **The loop.** A long-run miss rate of $2/(k + 1)$ on the loop of $k + 1$ pages, against 1 for LRU and FIFO and about $1/k$ for MIN.
 
 ## Properties
@@ -94,11 +94,11 @@ After each request, the requested page is cached and $|C| \le k$: a hit changes 
 - **Memoryless.** The state is only the set of cached pages. Raghavan and Snir used RAND to show that randomization can stand in for memory: a policy with no history matches the best deterministic ratio $k$.
 - **No fixed worst case.** A single fixed trace cannot force a miss on each request with probability 1 once the trace repeats pages, as the loop shows. A deterministic policy always has such a trace.
 - **Not a marking algorithm.** RAND can evict a page that was requested a moment ago.
-- **Not a stack algorithm in the usual sense.** Two runs with different sizes make independent choices, so the cache of size $k$ need not be inside the cache of size $k + 1$.
+- **A stack algorithm only with shared choices.** Mattson and others list a form of random replacement among the [stack algorithms](/stack-algorithms/), in which all cache sizes use the same random choices. If two runs with different sizes make independent choices, the cache of size $k$ need not be inside the cache of size $k + 1$.
 
 ## Variants and improvements
 
-- **Randomized marking.** [Randomized marking](/randomized-marking/) evicts a random page among the pages not yet requested in the current phase. This one change brings the ratio from $k$ down to $2H_k$ against an oblivious adversary.
+- **Randomized marking.** [Randomized marking](/randomized-marking/) evicts a random page among the pages not yet requested in the current phase. This one change brings the ratio from $k$ down to $2H_k - 1$ against an oblivious adversary.
 - **Sampled LRU.** Draw a few cached pages at random and evict the least recently used of them. Redis approximates LRU in this way, with a sample of a few keys.
 - **Pseudo-random replacement in hardware.** Caches with many ways use a linear feedback shift register in place of true random numbers. See [set-associative cache](/set-associative-cache/).
 

@@ -16,7 +16,7 @@ solves: [paging-problem]
 model: word-ram
 complexity:
   vars: {n: the number of requests, k: the cache size in pages}
-  time: {worst: O(n), expected: O(n)}
+  time: {expected: O(n)}
   space: {extra: Θ(k)}
 properties: {online: true, deterministic: true, recursive: false}
 history:
@@ -99,7 +99,7 @@ Run LRU with $k = 3$ on the reference string $\sigma = 7, 0, 1, 2, 0, 3, 0, 4, 2
 | 19 | 0 | hit | | 1 7 0 |
 | 20 | 1 | hit | | 7 0 1 |
 
-LRU has 12 misses and 8 hits. On the same string, [FIFO](/fifo-replacement/) has 15 misses and the offline optimum [MIN](/belady-optimal/) has 9. At $t = 6$, LRU evicts 1 and keeps 2, because 2 was requested at $t = 4$ and 1 at $t = 3$. MIN evicts 7 there, because 7 comes back last.
+LRU has 12 misses and 8 hits. On the same string, [FIFO](/fifo-replacement/) has 15 misses and the offline optimum [MIN](/belady-optimal/) has 9. At $t = 6$, LRU evicts 1 and keeps 2, because 2 was requested at $t = 4$ and 1 at $t = 3$; MIN evicts 1 there too. The two first differ at $t = 8$: LRU evicts 2, the least recently used page, while MIN evicts 0, whose next request at $t = 11$ is the latest, so MIN hits at $t = 9$ and $t = 10$.
 
 **The loop.** Request the pages $0, 1, \ldots, k$ in a cycle. Each requested page is the one page of the cycle that is not among the last $k$ distinct pages, so LRU misses on every request. MIN misses about once in $k$ requests on the same trace, and [MRU](/mru/) does as well as MIN there.
 
@@ -147,6 +147,6 @@ Use LRU as the default policy when the workload has temporal locality and no lon
 
 ## History
 
-Replacement by recency was in use in the virtual memory systems of the 1960s. Belady compared replacement rules by simulation in 1966, with the offline optimum MIN as the reference. Mattson, Gecsei, Slutz and Traiger defined stack algorithms in 1970 and showed that LRU is one, which gave the one-pass method to measure all cache sizes. Sleator and Tarjan proved in 1985 that LRU and FIFO with $k$ pages miss at most $k/(k - h + 1)$ times as often as MIN with $h$ pages, and that no online rule does better.
+Replacement by recency was in use in the virtual memory systems of the 1960s. Belady compared replacement rules by simulation in 1966, with the offline optimum MIN as the reference. Mattson, Gecsei, Slutz and Traiger defined stack algorithms in 1970 and showed that LRU is one, which gave the one-pass method to measure all cache sizes. Sleator and Tarjan proved in 1985 that LRU and FIFO with $k$ pages miss at most $k/(k - h + 1)$ times as often as MIN with $h$ pages, and that no deterministic online rule does better.
 
 ## References

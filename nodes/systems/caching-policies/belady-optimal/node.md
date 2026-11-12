@@ -14,7 +14,7 @@ solves: [paging-problem]
 model: word-ram
 complexity:
   vars: {n: the number of requests, k: the cache size}
-  time: {worst: O(n log n)}
+  time: {expected: O(n log n)}
   space: {extra: Θ(n)}
 properties: {online: false, deterministic: true, recursive: false}
 history:

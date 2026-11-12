@@ -21,7 +21,7 @@ sources:
     locator: stack algorithms, which have the inclusion property and so cannot show the anomaly; FIFO is not one
   - url: "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-beyondphys-policy.pdf"
     title: Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, Operating Systems, Three Easy Pieces, Chapter 22, Beyond Physical Memory, Policies
-    locator: Section 22.4, the aside on Belady's anomaly
+    locator: Section 22.3, the aside on Belady's anomaly
 ---
 
 Belady's anomaly is the fact that some replacement policies, FIFO first among them, can have more misses with a larger cache on the same request sequence. Belady, Nelson and Shedler showed it in 1969 with the trace $1\,2\,3\,4\,1\,2\,5\,1\,2\,3\,4\,5$: FIFO has 9 page faults with 3 frames and 10 with 4. The anomaly cannot happen for a *stack algorithm*, such as LRU or Belady's MIN, because there the content of the smaller cache is always part of the content of the larger one. This is the [inclusion property](/inclusion-property/), and the anomaly is the simplest sign that a policy lacks it.
@@ -56,7 +56,7 @@ With 3 frames there are 9 faults; with 4 frames there are 10. The two runs part 
 
 **LRU, a non-example.** On the same trace, LRU has $12, 12, 10, 8, 5$ faults, and MIN has $12, 9, 7, 6, 5$. Both lists never rise. LRU is a stack algorithm: the cache of size $k$ is always the $k$ most recently used items, which lie in the $k + 1$ most recently used items.
 
-**CLOCK, a variant that shows it.** [CLOCK](/clock/) is a cheap form of LRU with one reference bit per frame, and it is not a stack algorithm. In the form that sets the bit on a hit but not on a load, the trace $1\,1\,2\,2\,3\,4\,3$ gives 4 faults with 2 frames and 5 with 3 frames. With 3 frames, the hand clears the bits of 1 and 2 and then evicts 3 to load 4, so the last request for 3 misses. With 2 frames, the hand evicts 1 and then 2, and 3 stays. The more common form, which also sets the bit on a load, showed no anomaly in a search over all traces of at most 9 requests over 4 pages; that does not prove that it has none.
+**CLOCK, a variant that shows it.** [CLOCK](/clock/) is a cheap form of LRU with one reference bit per frame, and it is not a stack algorithm. In the form that sets the bit on a hit but not on a load, the trace $1\,1\,2\,2\,3\,4\,3$ gives 4 faults with 2 frames and 5 with 3 frames. With 3 frames, the hand clears the bits of 1 and 2 and then evicts 3 to load 4, so the last request for 3 misses. With 2 frames, the hand evicts 1 and then 2, and 3 stays. The more common form, which also sets the bit on a load, shows it too: on the classic trace it has 9 misses with 3 frames and 10 with 4, as FIFO does.
 ## Where it is used
 
 - **Choosing a policy.** The anomaly is a standard argument for stack algorithms in operating systems. A policy without inclusion can surprise an administrator who adds memory and sees more faults.

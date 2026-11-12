@@ -133,6 +133,6 @@ These numbers come from small synthetic traces and say nothing about real worklo
 
 ## History
 
-Aaron Blankstein, Siddhartha Sen and Michael J. Freedman presented hyperbolic caching at USENIX ATC 2017. They built it into Redis, which already evicts by sampling, and into the Django caching framework, and they showed how costs, cost classes, expiration and windowing fit into the same priority function. The analysis of sampling for eviction follows earlier work by Konstantinos Psounis and Balaji Prabhakar.
+Aaron Blankstein, Siddhartha Sen and Michael J. Freedman presented hyperbolic caching at USENIX ATC 2017. They built prototypes of it in Redis, which already evicts by sampling, and in the Django caching framework, and they showed how costs, cost classes, expiration and windowing fit into the same priority function. The analysis of sampling for eviction follows earlier work by Konstantinos Psounis and Balaji Prabhakar.
 
 ## References
