@@ -9,7 +9,7 @@ aliases:
 - dynamic planar convex hull
 area: geometry/convex-hulls
 level: advanced
-summary: Maintains the hull of a point set under insertions and deletions in O(log^2 n) time per update.
+summary: Maintains the hull of a point set under insertions and deletions in O(log^2 n) time per update, worst case for Overmars and van Leeuwen and expected for the treap version here.
 model: real-ram
 complexity:
   vars: {n: the number of points in the set, h: the number of hull vertices}

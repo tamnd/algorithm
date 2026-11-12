@@ -9,7 +9,7 @@ aliases:
 - Euclidean shortest path problem
 area: geometry/geometric-optimization
 level: core
-summary: Find the shortest path between two points in the plane that avoids polygonal obstacles. It bends only at obstacle corners and takes O(n log n) time.
+summary: Find the shortest path between two points in the plane that avoids polygonal obstacles. It bends only at obstacle corners. O(n log n) time, or O(n + h log h) for h obstacles after a triangulation.
 prereqs: [polygon-with-holes, euclidean-distance, single-source-shortest-paths]
 see_also: [visibility-graph, euclidean-shortest-path-in-polygon, lee-preparata-algorithm, funnel-algorithm, minimum-link-path, motion-planning, shortest-path-tree, dijkstra]
 sources:

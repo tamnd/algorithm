@@ -111,7 +111,7 @@ The answers are $3$ and $4$: $Q_1$ holds $(5,4), (6,6), (7,2)$, and $Q_2$ holds 
 ## Variants and improvements
 
 - **Dominance counting.** For $(-\infty, x] \times (-\infty, y]$ only the CLOSE event is needed, and one prefix sum; see [dominance counting](/dominance-counting/). Counting inversions of a permutation is the case where the points are $(i, \pi(i))$; see [inversion counting with a Fenwick tree](/inversion-count-with-fenwick-tree/).
-- **Higher dimensions.** Bentley's multidimensional divide and conquer, often called CDQ divide and conquer in programming contests, reduces $d$-dimensional offline dominance counting to $(d-1)$-dimensional sweeps and runs in $O(n \log^{d-1} n)$ time with linear space.
+- **Higher dimensions.** Bentley's multidimensional divide and conquer reduces $d$-dimensional offline dominance counting to $(d-1)$-dimensional sweeps and runs in $O(n \log^{d-1} n)$ time with linear space.
 - **Online counterparts.** If the boxes arrive one at a time, a [persistent segment tree](/persistent-segment-tree/) on the sweep, a [merge sort tree](/merge-sort-tree/), a [wavelet tree](/wavelet-tree/) or a [range tree](/range-tree/) answers each in $O(\log n)$ or $O(\log^2 n)$ time with $O(n \log n)$ space; see [offline query processing](/offline-query-processing/) for the general trade.
 - **Sweeping the other way.** Sweeping by $y$ with a Fenwick tree on $x$-ranks is the same algorithm with the coordinates swapped.
 

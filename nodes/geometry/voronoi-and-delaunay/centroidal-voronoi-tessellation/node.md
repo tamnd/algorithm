@@ -9,7 +9,7 @@ aliases:
 area: geometry/voronoi-and-delaunay
 level: advanced
 summary: Voronoi tessellation in which each site coincides with the centroid of its own cell.
-prereqs: [voronoi-diagram, voronoi-cell, centroid]
+prereqs: [voronoi-diagram, voronoi-cell]
 see_also: [lloyds-algorithm, k-means, k-means-problem, mesh-generation, power-diagram, gradient-descent, fixed-point-iteration, delaunay-triangulation]
 sources:
   - paper: doi:10.1137/S0036144599352836
@@ -23,7 +23,7 @@ sources:
     locator: the chapter on locational optimization through Voronoi diagrams
 ---
 
-A centroidal Voronoi tessellation (CVT) of a region $\Omega$ is a [Voronoi diagram](/voronoi-diagram/) of $n$ sites in $\Omega$ in which every site is the [centroid](/centroid/) (the center of mass) of its own [Voronoi cell](/voronoi-cell/). With a density $\rho$, the centroid is taken with respect to $\rho$. CVTs are the critical points of the **quantization energy**, the integral of the squared distance from a point of $\Omega$ to its nearest site. So the best placement of $n$ sites for that energy is always a CVT, although a CVT need not be the best placement. [Lloyd's algorithm](/lloyds-algorithm/) finds CVTs by moving each site to the centroid of its cell again and again.
+A centroidal Voronoi tessellation (CVT) of a region $\Omega$ is a [Voronoi diagram](/voronoi-diagram/) of $n$ sites in $\Omega$ in which every site is the centroid (the center of mass) of its own [Voronoi cell](/voronoi-cell/). With a density $\rho$, the centroid is taken with respect to $\rho$. CVTs are the critical points of the **quantization energy**, the integral of the squared distance from a point of $\Omega$ to its nearest site. So the best placement of $n$ sites for that energy is always a CVT, although a CVT need not be the best placement. [Lloyd's algorithm](/lloyds-algorithm/) finds CVTs by moving each site to the centroid of its cell again and again.
 
 ## In plain words
 

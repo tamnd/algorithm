@@ -9,7 +9,7 @@ aliases:
 - three collinear points
 area: geometry/proximity
 level: core
-summary: Problem of finding four or more points of a set that lie on one line, solved by sorting points by slope.
+summary: Problem of finding the lines that hold k or more points of a set, for a given k ≥ 3, solved by sorting points by slope.
 prereqs: [orientation-test, cross-product, general-position]
 see_also: [3sum-hardness, line-arrangement, hough-transform, angular-sort, hash-table, line-arrangement-construction, proximity-problems]
 sources:
@@ -27,7 +27,7 @@ The collinear points problem asks which points of a set lie on a common line: fi
 
 ## In plain words
 
-You have a set of dots and want to find every straight line that passes through four or more of them.
+You have a set of dots and want to find every straight line that passes through many of them, say four or more.
 
 Checking every group of four dots works, but the number of groups grows very fast. A better idea: stand on one dot and look at all the others. Dots that lie on one line through your dot are seen in exactly the same direction. So sort the other dots by direction, and the dots that share a direction come out next to each other. Do this from every dot, and every line with many dots is found.
 

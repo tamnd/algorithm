@@ -37,7 +37,7 @@ sources:
     locator: the survey sections on the closest pair in models with the floor function and on randomized algorithms
 ---
 
-The randomized closest pair algorithm finds the [closest pair of points](/closest-pair-of-points/) in $O(n)$ expected time, which beats the $\Omega(n \log n)$ [lower bound](/closest-pair-lower-bound/) of the algebraic decision tree model. It inserts the points in random order into a grid whose cell side is about the current smallest distance $\delta$, so each new point is compared with the few points in nearby cells. When a new point gives a smaller $\delta$, the grid is rebuilt from scratch; a backwards analysis shows this happens at step $k$ with probability at most $2/k$, so the rebuilds cost $O(n)$ in expectation. The algorithm needs the floor function to find cells and [hashing](/hash-table/) to store the non-empty cells, which is why the algebraic lower bound does not apply.
+The randomized closest pair algorithm finds the [closest pair of points](/closest-pair-of-points/) in $O(n)$ expected time, which beats the $\Omega(n \log n)$ [lower bound](/closest-pair-lower-bound/) of the algebraic decision tree model. It inserts the points in random order into a grid whose cell side is about the current smallest distance $\delta$, so each new point is compared with the few points in nearby cells. When a new point gives a smaller $\delta$, the grid is rebuilt from scratch; a backwards analysis shows this happens at the insertion of the $i$-th point with probability at most $2/i$, so the rebuilds cost $O(n)$ in expectation. The algorithm needs the floor function to find cells and [hashing](/hash-table/) to store the non-empty cells, which is why the algebraic lower bound does not apply.
 
 ## In plain words
 

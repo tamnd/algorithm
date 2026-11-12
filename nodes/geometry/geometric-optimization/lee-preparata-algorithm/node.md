@@ -8,7 +8,7 @@ aliases:
 - Lee-Preparata shortest path algorithm
 area: geometry/geometric-optimization
 level: advanced
-summary: Shortest path between two points of a simple polygon. Triangulate, take the dual tree path between the two triangles, and push a funnel through its diagonals in linear time.
+summary: Shortest path between two points of a simple polygon. Triangulate, take the dual tree path, and push a funnel through its diagonals in linear time; O(n log n) with the triangulation of 1984.
 solves: [euclidean-shortest-path-in-polygon]
 model: real-ram
 complexity:

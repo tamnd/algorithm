@@ -12,7 +12,7 @@ area: geometry/point-location
 level: core
 summary: Problem of finding which region of a planar subdivision contains a query point, solved in logarithmic time with a sweep and persistent or ordered structures.
 prereqs: [planar-subdivision, orientation-test, binary-search]
-see_also: [vertical-ray-shooting, slab-method-point-location, sarnak-tarjan-point-location, kirkpatrick-point-location, seidel-point-location, chazelle-monotone-point-location, triangle-walk-point-location, post-office-problem]
+see_also: [vertical-ray-shooting, slab-method-point-location, sarnak-tarjan-point-location, kirkpatrick-point-location, seidel-point-location, chazelle-monotone-point-location, triangle-walk-point-location, nearest-neighbor-search]
 sources:
   - book: isbn:9783540779735
     title: Mark de Berg, Otfried Cheong, Marc van Kreveld and Mark Overmars, Computational Geometry, Algorithms and Applications, third edition, Springer, 2008
@@ -109,7 +109,7 @@ The table gives preprocessing time, space and query time for a subdivision with 
 | [triangle walk](/triangle-walk-point-location/) in a triangulation | none | $O(n)$ W | $O(n)$ W |
 | [convex polygon](/convex-polygon-point-location/), one face | none | $O(n)$ W | $O(\log n)$ W |
 
-The $O(n \log n)$ preprocessing of the chain method and of Kirkpatrick's method includes making the subdivision monotone or triangulating it, which takes $O(n \log n)$ by a plane sweep. The first method with $O(\log n)$ query and $O(n)$ space was by Lipton and Tarjan (1980), from the [planar separator theorem](/planar-separator-theorem/); it is of theoretical interest only. The trapezoidal map structure is also the [data structure page](/trapezoidal-map/) that the randomized method builds.
+The $O(n \log n)$ preprocessing of the chain method and of Kirkpatrick's method includes making the subdivision monotone or triangulating it, which takes $O(n \log n)$ by a plane sweep. The first method with $O(\log n)$ query and $O(n)$ space was by Lipton and Tarjan (FOCS 1977, journal version 1980), from the [planar separator theorem](/planar-separator-theorem/); it is of theoretical interest only. The trapezoidal map structure is also the [data structure page](/trapezoidal-map/) that the randomized method builds.
 
 ## Bounds
 
@@ -119,7 +119,7 @@ The $O(n \log n)$ preprocessing of the chain method and of Kirkpatrick's method 
 
 The bound needs no restriction on the preprocessing or on the space. A triangulated convex polygon with $m$ vertices has $F = m - 1$, so every algebraic decision tree for it has depth at least $\log_2(m - 1)$, and $Q(n) = \Omega(\log n)$ for all of the methods above. The query algorithms above are decision trees of degree $1$ (for a fixed edge, the $\mathrm{orient}$ test is a polynomial of degree $1$ in $q$, and so is the comparison of $q$ with a vertex), so the theorem applies to them. The same counting holds in the algebraic computation tree model, where the query may also compute with the coordinates of $q$, since its branch nodes are also ternary.
 
-**Constant factors.** The depth of the best tree is $\log_2 n + O(\sqrt{\log n})$ in the model of above or below tests against lines: Seidel and Adamy (2000) found the second-order term and a matching lower bound (exact form to be checked against their paper). The constant factors of the practical methods differ: the proof for the trapezoidal map gives at most $12 H_n \approx 12 \ln n$ expected tests, and fewer are observed; Kirkpatrick's method has a large constant from the degree bound and the fraction of removed vertices.
+**Constant factors.** The depth of the best tree is $\log_2 n + O(\sqrt{\log n})$ in the model of above or below tests against lines: Seidel and Adamy (2000) found the second-order term and a matching lower bound. The constant factors of the practical methods differ: the proof for the trapezoidal map gives at most $12 H_n \approx 12 \ln n$ expected tests, and fewer are observed; Kirkpatrick's method has a large constant from the degree bound and the fraction of removed vertices.
 
 **Preprocessing and space.** $\Omega(n)$ space is needed to store the subdivision. When the subdivision is given as an unordered list of segments, building its DCEL takes $\Omega(n \log n)$ time in the [algebraic computation tree](/algebraic-computation-tree/) model: for the star of segments from $(0,0)$ to $(x_i, 1)$, the $\mathrm{next}$ pointers give the angular order of the end points, which is the sorted order of the $x_i$, and sorting has that lower bound. For a triangulation given as a DCEL, Kirkpatrick's method builds in $O(n)$.
 
@@ -127,7 +127,7 @@ The bound needs no restriction on the preprocessing or on the space. A triangula
 
 **Point location to vertical ray shooting.** Given the edge $e$ directly above $q$, the face of $q$ is the face below $e$, which the DCEL stores on one half-edge of $e$. If no edge is above $q$, use the edge below, or report the unbounded face. So every vertical ray shooting structure answers point location with $O(1)$ extra time. The converse also holds for the methods based on trapezoids or slabs, which return both edges.
 
-**Nearest neighbor to point location.** The [post office problem](/post-office-problem/) asks for the nearest of $n$ sites to a query point. The nearest site is the site of the [Voronoi cell](/voronoi-diagram/) that contains $q$, so a point location structure on the Voronoi diagram, of size $O(n)$, answers each query in $O(\log n)$. Other locus problems reduce in the same way, for example to point location in an arrangement of lines.
+**Nearest neighbor to point location.** The [post office problem](/nearest-neighbor-search/) asks for the nearest of $n$ sites to a query point. The nearest site is the site of the [Voronoi cell](/voronoi-diagram/) that contains $q$, so a point location structure on the Voronoi diagram, of size $O(n)$, answers each query in $O(\log n)$. Other locus problems reduce in the same way, for example to point location in an arrangement of lines.
 
 **Sorted search to point location.** Searching a sorted list $y_1 < \cdots < y_n$ is point location in a ladder: the $n$ horizontal segments $[0, 1] \times \{y_i\}$ and the vertical segments that join $(0, y_i)$ to $(0, y_{i+1})$ and $(1, y_i)$ to $(1, y_{i+1})$. A query $(1/2, y)$ falls in the rectangle between the two list entries around $y$, on a rung, or in the unbounded face. So point location is at least as hard as [searching a sorted list](/sorted-search-lower-bound/).
 
