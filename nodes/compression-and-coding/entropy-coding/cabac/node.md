@@ -166,6 +166,6 @@ Use CABAC when the standard asks for it: in H.264 Main and High profiles and in 
 
 ## History
 
-Binary arithmetic coding with a state machine for the probability goes back to the Q-coder of IBM in 1988 and to its successor, the MQ-coder of JBIG2 and JPEG 2000. Marpe, Schwarz and Wiegand developed CABAC for the H.264/AVC standard of the ITU-T and ISO/IEC, which was approved in 2003, and described it the same year. They kept the idea of a table-driven engine and added a systematic design of binarization and context selection for video syntax. HEVC, approved in 2013, uses CABAC as its only entropy coder, and VVC (2020) keeps the scheme with a new probability estimate.
+Binary arithmetic coding with a state machine for the probability goes back to the Q-coder of IBM in 1988 and to its successors, the QM-coder of JBIG and JPEG and the MQ-coder of JBIG2 and JPEG 2000. Marpe, Schwarz and Wiegand developed CABAC for the H.264/AVC standard of the ITU-T and ISO/IEC, which was approved in 2003, and described it the same year. They kept the idea of a table-driven engine and added a systematic design of binarization and context selection for video syntax. HEVC, approved in 2013, uses CABAC as its only entropy coder, and VVC (2020) keeps the scheme with a new probability estimate.
 
 ## References

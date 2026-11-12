@@ -57,7 +57,7 @@ L2  for i ← 0 to n − 1
 L3      v ← code(x[i]) if x[i] ∈ {A, C, G, T}, else 0
 L4      B[⌊i/4⌋] ← B[⌊i/4⌋] OR (v << (6 − 2(i mod 4)))
 L5      if x[i] = N then extend the last run of N if it ends at i, else append (i, 1) to N
-L6      else if x[i] ∉ {A, C, G, T} then append (i, x[i]) to E
+L6      else if x[i] ∉ {A, C, G, T} then fail if x[i] is not an upper-case IUPAC code, else append (i, x[i]) to E
 L7  return (n, B, N, E)
 
 UNPACK(n, B, N, E)

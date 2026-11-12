@@ -11,9 +11,9 @@ level: research
 summary: "Decoder of polar codes that decides u_0, u_1, ... in order. Each bit uses the channel LLRs and the earlier decisions. It takes O(N log N) time."
 model: word-ram
 complexity:
-  vars: {n: the block length N of the polar code}
-  time: {worst: Θ(n log n), average: Θ(n log n), best: Θ(n log n)}
-  space: {extra: Θ(n)}
+  vars: {N: the block length of the polar code, N = 2^n}
+  time: {worst: Θ(N log N), average: Θ(N log N), best: Θ(N log N)}
+  space: {extra: Θ(N)}
 properties: {deterministic: true, recursive: true, soft_decision: true, maximum_likelihood: false}
 history:
   year: 2009

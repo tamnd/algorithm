@@ -77,7 +77,7 @@ The two CRC values are the check values in the catalogue of Greg Cook.
 | burst of 2 to 8 bits | 0.5714 | 0 | 0 | 0 | 0 |
 | burst of 9 to 32 bits | 0.5049 | 0.0039 | 0.0037 | 0.0040 | 0 |
 
-The values follow from the structure. Parity misses every even number of errors. The LRC misses two errors in the same bit column, with probability $63/511 \approx 0.123$ for random positions in 512 bits. The sum misses two errors in the same column when one flips a 0 to 1 and the other a 1 to 0, and also any two errors in the top bit, where $128 + 128 = 256$: probability $\frac{63}{511} \cdot \frac{9}{16} \approx 0.069$. CRC-8/SMBUS misses two errors only when they are a multiple of 127 bits apart, its period: probability $774/130816 \approx 0.006$. For long bursts the three 8-bit checks all miss about $2^{-8} \approx 0.0039$. CRC-32 missed nothing. The tests also check the rules for two errors exhaustively over every pair of positions in a message of 32 bytes.
+The values follow from the structure. Parity misses every even number of errors. The LRC misses two errors in the same bit column, with probability $63/511 \approx 0.123$ for random positions in 512 bits. The sum misses two errors in the same column when one flips a 0 to 1 and the other a 1 to 0, and also any two errors in the top bit, where $128 + 128 = 256$: probability $\frac{63}{511} \cdot \frac{9}{16} \approx 0.069$. CRC-8/SMBUS misses two errors only when they are a multiple of 127 bits apart, its period: probability $778/130816 \approx 0.006$. For long bursts the three 8-bit checks all miss about $2^{-8} \approx 0.0039$. CRC-32 missed nothing. The tests also check the rules for two errors exhaustively over every pair of positions in a message of 32 bytes.
 
 **Non-examples.**
 

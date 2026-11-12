@@ -9,7 +9,7 @@ aliases:
 - optimal alphabetic tree problem
 area: compression-and-coding/entropy-coding
 level: advanced
-summary: Find a prefix code of least weighted length whose codewords keep a given order of the symbols. Interval DP solves it in O(n^2); Hu-Tucker and Garsia-Wachs in O(n log n).
+summary: Find a prefix code of least weighted length whose codewords keep a given order of the symbols. Interval DP with Knuth's speedup solves it in O(n^2); Hu-Tucker and Garsia-Wachs in O(n log n).
 prereqs: [optimal-prefix-code, interval-dp]
 see_also: [hu-tucker-algorithm, garsia-wachs-algorithm, gilbert-moore-code, optimal-binary-search-tree, huffman-coding, length-limited-prefix-code]
 sources:

@@ -125,7 +125,7 @@ Model: [word RAM](/word-ram/).
 
 - **Time.** Building the tables costs $O(L + k)$. Each symbol costs a constant number of operations to encode and to decode. So the total is $\Theta(n + k + L)$.
 - **Space.** The decoding table has $L$ cells, and the encoding table $L$ entries plus $O(k)$ for the symbol data.
-- **Code length.** The proof shows that the step that moves to the cell $u$ with number $t$ writes at most $\lg((L + u)/t)$ bits, up to a total of 1 bit for the whole message. If the cells of $s$ were placed exactly at $u = jL/f_s$, this would be the ideal $\lg(L/f_s)$. The spread places them close to these points, and the loss shrinks as $L$ grows; Duda (2013) gives an analysis. The stream adds $R + 1$ bits and the padding. On 20000 symbols drawn with weights 8, 4, 2, 1, 1 and $L = 2^{11}$, the implementation wrote 37824 bits (with the padding) against an ideal of about 37812 bits under the table.
+- **Code length.** The proof shows that the steps of a message write at most 1 bit more than the sum of $\lg((L + u)/t)$ over its steps, where a step moves to the cell $u$ with number $t$. One step alone can write more than its term. If the cells of $s$ were placed exactly at $u = jL/f_s$, this would be the ideal $\lg(L/f_s)$. The spread places them close to these points, and the loss shrinks as $L$ grows; Duda (2013) gives an analysis. The stream adds $R + 1$ bits and the padding. On 20000 symbols drawn with weights 8, 4, 2, 1, 1 by Python's `random.Random(2013)`, and $L = 2^{11}$, the implementation wrote 37824 bits (with the padding) against an ideal of about 37812 bits under the table.
 
 ## Properties
 

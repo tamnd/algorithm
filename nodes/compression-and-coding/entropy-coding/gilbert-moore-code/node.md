@@ -105,7 +105,7 @@ Use the Gilbert-Moore code when the order of the codewords must match the order 
 ## Pitfalls
 
 - **Sorting the symbols.** Sorting by probability, as in Shannon's code, destroys the alphabetic property, which is the point of the code.
-- **Dropping the extra bit.** Without it, the truncated start of one interval can be a prefix of the next codeword when a large probability follows a small one.
+- **Dropping the extra bit.** Without it, when a large probability follows a small one, the later, shorter codeword can be a prefix of the earlier one. For the probabilities 1/6, 1/2 and 1/3, the first two codewords become 000 and 0.
 - **Floating point.** Compute the midpoint bits with integers, as in line L5; rounding errors can break the prefix property.
 - **Mixing up the two problems.** The interval program for alphabetic codes puts weight only on the leaves. The optimal binary search tree problem also has weights on the inner keys; the two share the recurrence shape but not the costs.
 

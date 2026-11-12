@@ -57,7 +57,7 @@ Define
 
 $$\tau(d) = \begin{cases} \dfrac{R}{d k} & d = 1, \ldots, k/R - 1, \\[2mm] \dfrac{R \ln(R/\delta)}{k} & d = k/R, \\[2mm] 0 & d > k/R, \end{cases} \qquad \beta = \sum_{d=1}^{k} \bigl(\rho(d) + \tau(d)\bigr), \qquad \mu(d) = \frac{\rho(d) + \tau(d)}{\beta}.$$
 
-Luby assumes that $k/R$ is an integer. When it is not, implementations put the spike at a nearby integer; the implementation here uses $\lfloor k/R \rfloor$. The extra mass $\tau$ keeps the expected ripple at about $R$, which is $\Theta(\sqrt{k})$ standard deviations of a random walk, and the spike at $k/R$ makes sure that every source symbol is covered.
+Luby assumes that $k/R$ is an integer. When it is not, implementations put the spike at a nearby integer; the implementation here uses $\lfloor k/R \rfloor$. The extra mass $\tau$ keeps the expected ripple at about $R$, which is about $c \ln(k/\delta)$ standard deviations of a random walk of $k$ steps, since one standard deviation is about $\sqrt{k}$, and the spike at $k/R$ makes sure that every source symbol is covered.
 
 **Theorem (Luby 2002).** With the robust soliton distribution, the decoder recovers all $k$ source symbols from any $K = k\beta$ encoded symbols with probability at least $1 - \delta$. Here $k\beta = k + O(\sqrt{k} \ln^2(k/\delta))$, and the mean degree is $O(\ln(k/\delta))$. So encoding costs $O(\ln(k/\delta))$ symbol operations per encoded symbol and decoding costs $O(k \ln(k/\delta))$.
 

@@ -88,7 +88,7 @@ With $2\nu + \rho \le r$, the pair $(\Lambda, \Omega)$ with $\Lambda(0) = 1$ is 
 
 **Errors and erasures.** The same code with $r = 4$ can correct 2 errors, or 1 error and 2 erasures, or 4 erasures, but not 2 errors and 1 erasure ($2 \cdot 2 + 1 = 5 > 4$).
 
-**QR codes.** A version 1-M QR symbol has 26 codewords, 16 data and 10 error correction codewords, over $\mathrm{GF}(256)$ with the polynomial 0x11D and $b = 0$. It corrects 5 codeword errors, or 10 erasures, for example parts of the symbol that are covered or damaged.
+**QR codes.** A version 1-M QR symbol has 26 codewords, 16 data and 10 error correction codewords, over $\mathrm{GF}(256)$ with the polynomial 0x11D and $b = 0$. The code can correct 5 codeword errors, or 10 erasures, for example parts of the symbol that are covered or damaged. ISO/IEC 18004 rates it at 4 errors, because it keeps 2 codewords as a reserve against misdecoding.
 
 **CCSDS RS(255, 223).** With $E = 16$ and the zeros $\beta^{112}, \ldots, \beta^{143}$, $\beta = \alpha^{11}$, the decoder corrects 16 symbol errors per codeword. With interleaving depth $I$, it corrects a burst of up to $16 I$ consecutive symbols.
 
@@ -99,14 +99,14 @@ With $2\nu + \rho \le r$, the pair $(\Lambda, \Omega)$ with $\Lambda(0) = 1$ is 
 | algorithm | stage | operations | notes |
 |---|---|---|---|
 | syndromes by Horner's rule | syndromes | $O(n r)$ | $r$ evaluations of a degree $n-1$ polynomial |
-| [Peterson-Gorenstein-Zierler](/peterson-gorenstein-zierler/) (1960, 1961) | locator | $O(t^3)$ | solve the syndrome matrix, reduce $\nu$ until it is nonsingular |
+| [Peterson-Gorenstein-Zierler](/peterson-gorenstein-zierler/) (1960, 1961) | locator | $O(t^4)$ | solve the syndrome matrix, $O(t^3)$ for each try, and reduce $\nu$ until it is nonsingular |
 | [Berlekamp-Massey](/berlekamp-massey/) (1968, 1969) | locator | $O(t^2)$ | shortest LFSR of the syndromes; erasures by a start at $\Gamma$ |
 | Euclid: Sugiyama, Kasahara, Hirasawa and Namekawa (1975) | locator and evaluator | $O(t^2)$ | extended Euclid on $x^r$ and $S(x)\Gamma(x)$, stop when $\deg < (r + \rho)/2$ |
 | [Chien search](/chien-search/) (1964) | positions | $O(n t)$ | test each position with fixed multipliers |
 | [Forney](/forney-algorithm/) (1965) | values | $O(t^2)$ | $Y = -X^{1-b}\Omega(X^{-1})/\Psi'(X^{-1})$ |
 | [Berlekamp-Welch](/berlekamp-welch/) (1986) | all, evaluation view | $O(n^3)$ | one linear system for $E$ and $Q = E f$ |
 | Gao (2003), fast Euclid and FFT methods | all | $O(n \log^2 n)$ or less | for long codes |
-| [Guruswami-Sudan](/guruswami-sudan/) (1999) | list decoding | polynomial | radius up to $n - \sqrt{n(k-1)}$ |
+| [Guruswami-Sudan](/guruswami-sudan/) (1999) | list decoding | polynomial | radius below $n - \sqrt{n(k-1)}$ |
 
 The syndrome pipeline costs $O(n t)$ field operations in total, with $O(n t)$ for the syndromes and the Chien search and $O(t^2)$ for the rest.
 
@@ -116,7 +116,7 @@ The syndrome pipeline costs $O(n t)$ field operations in total, with $O(n t)$ fo
 
 - **Unique decoding radius.** No decoder can always correct $\nu$ errors and $\rho$ erasures with $2\nu + \rho \ge d = n - k + 1$: two codewords at distance $d$ have a received word between them. So $2\nu + \rho \le n - k$ is the exact limit for unique decoding, and the syndrome pipeline reaches it.
 - **Erasures.** $n - k$ erasures are the limit, because $k$ symbols are needed to fix a polynomial of degree below $k$.
-- **List decoding.** With a list of polynomial size, the Guruswami-Sudan algorithm corrects up to $n - \sqrt{n(k-1)} - 1$ errors, the Johnson radius. See [list decoding](/list-decoding/).
+- **List decoding.** With a list of polynomial size, the Guruswami-Sudan algorithm corrects any number of errors below $n - \sqrt{n(k-1)}$, the Johnson radius. See [list decoding](/list-decoding/).
 - **Maximum likelihood decoding.** Finding the nearest codeword of a Reed-Solomon code is NP-hard in general (Guruswami and Vardy, 2005).
 - **Time.** Any decoder must read the $n$ symbols, so $\Omega(n)$ operations are necessary; the fast methods reach $O(n \log^2 n)$ or less.
 

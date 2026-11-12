@@ -75,7 +75,7 @@ Here $\varphi = (1 + \sqrt 5)/2$. The limits in the last column are those of uni
 | geometric, $\theta = 0.99$ | 8.08 | 12.38 | 1.46 | 1.33 | 1.48 | 1.19 |
 | Zipf, $P(x) \propto 1/x$ | 11.14 | 504.2 | 1.38 | 1.14 | 1.20 | 1.10 |
 | power law, $P(x) \propto 1/x^2$ | 2.36 | 3.00 | 1.04 | 1.13 | 1.09 | 1.26 |
-| uniform | 16.00 | 2048 | 1.81 | 1.38 | 1.38 | 1.38 |
+| uniform | 16.00 | 2048 | 1.81 | 1.37 | 1.37 | 1.38 |
 
 The geometric law with $\theta = 0.5$ is $P(x) = 2^{-x}$, for which unary is the optimal code. No single code is the best on every row; universality is a guarantee for the worst case, not a promise to be the best.
 

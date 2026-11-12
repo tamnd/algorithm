@@ -36,7 +36,7 @@ sources:
     locator: Chapter 2, Entropy and Coding (variable-length codes for integers)
 ---
 
-The Elias gamma code writes an integer $x \ge 1$ as $\lfloor \log_2 x \rfloor$ zero bits followed by the binary digits of $x$. The zeros tell the decoder how many digits follow, so the code is a [prefix code](/prefix-code/) that needs no parameter and no table. A codeword has $2\lfloor \log_2 x \rfloor + 1$ bits, about twice the length of $x$ in binary. Peter Elias defined it in 1975 as one of his [universal codes](/universal-code/), and it is the ue(v) code of H.264 under another name.
+The Elias gamma code writes an integer $x \ge 1$ as $\lfloor \log_2 x \rfloor$ zero bits followed by the binary digits of $x$. The zeros tell the decoder how many digits follow, so the code is a [prefix code](/prefix-code/) that needs no parameter and no table. A codeword has $2\lfloor \log_2 x \rfloor + 1$ bits, about twice the length of $x$ in binary. Peter Elias defined it in 1975 as one of his [universal codes](/universal-code/), and the ue(v) code of H.264 writes a value $v$ as the gamma code of $v + 1$.
 
 ## In plain words
 

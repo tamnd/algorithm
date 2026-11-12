@@ -79,7 +79,7 @@ The protocols differ only in what they sum.
 
 **RFC 1071 Section 3.** The bytes 00 01 f2 03 f4 f5 f6 f7 give the words 0001, f203, f4f5 and f6f7. The plain total is 0x2DDF0. Lines L5 and L6 fold it to $0xDDF0 + 0x2 = 0xDDF2$, the sum that the RFC prints. The checksum is $\lnot 0xDDF2 = 0x220D$. (The RFC prints the sum, not the checksum.)
 
-**An IPv4 header.** The header 4500 0073 0000 4000 4011 xxxx c0a8 0001 c0a8 00c7 is a 20-byte UDP packet from 192.168.0.1 to 192.168.0.199. The checksum field xxxx counts as 0000.
+**An IPv4 header.** The header 4500 0073 0000 4000 4011 xxxx c0a8 0001 c0a8 00c7 is the 20-byte header of a 115-byte IPv4 packet (total length 0x73) that carries UDP from 192.168.0.1 to 192.168.0.199. The checksum field xxxx counts as 0000.
 
 | word | 4500 | 0073 | 0000 | 4000 | 4011 | 0000 | c0a8 | 0001 | c0a8 | 00c7 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -103,7 +103,7 @@ Since the sum is commutative and associative, partial sums from several cores or
 ## Properties
 
 - **Exact miss rule.** A change is missed if and only if the new words have the same ones' complement sum. Apart from the special case of an all-zero message, this means the total changes by a multiple of 65535.
-- **Detected always.** Every single-bit error. Every error in a single word, except 0x0000 replaced by 0xFFFF or back. Every burst of at most 15 bits. Every 16-bit burst except the replacement of 0x0000 by 0xFFFF or back (Stone and Partridge, Section 3.1).
+- **Detected always.** Every single-bit error. Every error in a single word, except 0x0000 replaced by 0xFFFF or back. Every burst of at most 15 bits. Every 16-bit burst except one that turns 16 zero bits into 16 one bits or back, at any offset, not only in one word: 0x1200 0x0034 to 0x12FF 0xFF34 is missed (Stone and Partridge, Section 3.1).
 - **Missed always.** Any reordering of 16-bit words, such as two swapped aligned words. Any insertion or deletion of 0x0000 words. Changes that cancel, such as $+d$ in one word and $-d$ in another.
 - **Rate on random data.** On uniform random corruption the miss rate is near $1/65535$. On real data the sums of the words are not uniform, and Stone and Partridge found the checksum much weaker than that figure suggests. They cite a study with a rate near 1 in $2^{10}$.
 - **Byte order independence.** The same code works on big-endian and little-endian machines if it swaps the result. See [ones' complement arithmetic](/ones-complement-arithmetic/).

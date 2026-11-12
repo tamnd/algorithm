@@ -9,7 +9,7 @@ aliases:
 - Sudan list decoder
 area: compression-and-coding/error-correcting-codes
 level: research
-summary: "List decoder for Reed-Solomon codes: interpolate a bivariate polynomial with zeros of multiplicity r at the received points, then find its y-roots. Corrects up to n - sqrt(n(k-1)) errors."
+summary: "List decoder for Reed-Solomon codes: interpolate a bivariate polynomial with zeros of multiplicity r at the received points, then find its y-roots. Corrects any error count below n - sqrt(n(k-1))."
 solves: [list-decoding]
 model: word-ram
 complexity:
@@ -133,7 +133,7 @@ Faster interpolation methods replace the generic elimination. Koetter's algorith
 | $k$ | unique decoding | Sudan ($r = 1$) | $r = 2$ | limit |
 |---|---|---|---|---|
 | 2 | 7 | 10 ($D = 5$, $t = 6$) | 11 ($D = 9$, $t = 5$) | 11 |
-| 4 | 6 | 7 ($D = 8$, $t = 9$) | 8 ($D = 15$, $t = 8$) | 8 |
+| 4 | 6 | 7 ($D = 8$, $t = 9$) | 8 ($D = 15$, $t = 8$) | 9 (first at $r = 28$) |
 
 - **List size.** Every output is a factor $y - f(x)$ of $Q$, so the list has at most $\deg_y Q \le D/(k-1)$ entries.
 - **Deterministic.** Over a small field with the brute force root search, every step is deterministic. Over a large field, the fastest univariate root finders are randomized.
@@ -157,7 +157,7 @@ Use it when the channel can make more errors than half the minimum distance and 
 - **Line L5 is needed.** $Q$ can have factors $y - f(x)$ with less agreement than $t$. Without the filter, the output is not the promised list.
 - **Divide by $x^m$ before the root search.** If $x$ divides $Q$, then $Q(0, y)$ is zero and every field element looks like a root. The division keeps the search finite and correct.
 - **The weighted degree.** The degree bound is on $i + (k-1) j$, not on the total degree $i + j$. With the total degree, the bound $\deg Q(x, f(x)) \le D$ fails.
-- **Multiplicity costs much more time.** The number of conditions grows like $r^2$, and the cost of elimination like $r^6$. A small $r$ often gives most of the gain. In the table above, $r = 2$ already reaches the limit.
+- **Multiplicity costs much more time.** The number of conditions grows like $r^2$, and the cost of elimination like $r^6$. A small $r$ often gives most of the gain. In the table above, $r = 2$ already reaches the limit for $k = 2$, but for $k = 4$ the limit 9 needs $r = 28$.
 - **Off by one in $k$.** Some texts use $k$ for the dimension and others for the degree bound. The limit is $n - \sqrt{n(k-1)}$ for the dimension $k$ and $n - \sqrt{nk}$ for the degree bound $k$.
 - **$k = 1$.** With constant messages, the weight $k - 1$ is $0$ and the weighted degree no longer bounds the $y$-degree. Constant messages are decoded by a majority vote in any case.
 

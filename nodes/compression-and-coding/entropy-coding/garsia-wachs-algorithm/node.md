@@ -89,7 +89,7 @@ Six symbols A to F with weights 10, 8, 3, 6, 2, 1. The sentinels are written ∞
 
 At step 2 the triples ∞ A B, A B C and B C D fail, because $\infty > 8$, $10 > 3$ and $8 > 6$; the triple C D (EF) passes, because $3 \le 3$. After step 2 the list is A, (CD), B, out of order. The final tree has the depths A 2, B 2, C 3, D 3, E 3, F 3. BUILD turns them into ((A, B), ((C, D), (E, F))), with cost $20 + 16 + 9 + 18 + 6 + 3 = 72$, which is also $3 + 9 + 11 + 19 + 30$, the sum of the new items. The interval dynamic program and the Hu-Tucker algorithm give the same cost.
 
-**Why the move matters.** For the weights 2, 2, 1, 2 the first triple is 2, 1, 2, so the second and third items join into 3. The move takes 3 past the first 2 to the front: 3, 2, 2. The two 2s then join, and the tree has all four leaves at depth 2, cost 14. Without the move, 3 would stay in the middle, join with the last 2, and the cost would be 15.
+**Why the move matters.** For the weights 2, 2, 1, 2 the first triple is 2, 1, 2, so the second and third items join into 3. The move takes 3 past the first 2 to the front: 3, 2, 2. The two 2s then join, and the tree has all four leaves at depth 2, cost 14. Without the move, 3 would stay in the middle of 2, 3, 2. The first triple is then 2, 3, 2, so 3 would join the first 2, and the cost would be 15.
 
 ## Correctness
 

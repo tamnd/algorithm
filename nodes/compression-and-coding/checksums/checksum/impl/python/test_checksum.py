@@ -38,7 +38,7 @@ def test_harness_with_fixed_seed() -> None:
     res = miss_rates(t, 64, seed=2024)
     assert all(v == 0 for v in res["single"].values())
     assert res["double"]["parity"] == t and res["double"]["crc32"] == 0
-    for name, want in (("lrc", 63 / 511), ("sum8", 63 / 511 * 9 / 16), ("crc8", 774 / 130816)):
+    for name, want in (("lrc", 63 / 511), ("sum8", 63 / 511 * 9 / 16), ("crc8", 778 / 130816)):
         sigma = (want * (1 - want) / t) ** 0.5
         assert abs(res["double"][name] / t - want) < 5 * sigma, name
     for name in ("lrc", "sum8", "crc8", "crc32"):

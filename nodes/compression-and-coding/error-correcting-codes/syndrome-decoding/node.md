@@ -12,7 +12,7 @@ solves: [nearest-codeword-problem]
 model: word-ram
 complexity:
   vars: {n: the code length, k: the code dimension, q: the field size}
-  time: {worst: Θ(n^2), total: O(q^n n^2)}
+  time: {worst: Θ((n - k) n), total: O(q^n n^2)}
   space: {extra: Θ(q^(n-k) n)}
 properties: {deterministic: true, recursive: false, online: false}
 history:

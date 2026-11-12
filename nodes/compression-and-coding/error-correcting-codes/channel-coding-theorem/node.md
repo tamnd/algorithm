@@ -62,7 +62,7 @@ The full proof is in the proof file. It has two halves, in the plan of Cover and
 
 **A Monte Carlo view.** The implementation draws a new random codebook in each trial on the [binary symmetric channel](/binary-symmetric-channel/) with $p = 0.11$, where $C \approx 0.500$, and decodes by maximum likelihood (nearest codeword, ties broken at random). With seed 1 it gives these block error rates, with 2000 trials at rate $1/4$ and 500 at rate $3/4$.
 
-| $n$ | rate $1/4$, error | union bound of the proof | $n$ | rate $3/4$, error | Fano lower bound |
+| $n$ | rate $1/4$, error | union bound, ML decoding | $n$ | rate $3/4$, error | Fano lower bound |
 |---|---|---|---|---|---|
 | 8 | 0.086 | 0.167 | 4 | 0.384 | 0.000 |
 | 16 | 0.062 | 0.099 | 8 | 0.508 | 0.167 |
@@ -70,7 +70,7 @@ The full proof is in the proof file. It has two halves, in the plan of Cover and
 | 32 | 0.017 | 0.036 | 16 | 0.640 | 0.250 |
 | 40 | 0.020 | 0.022 | | | |
 
-Below capacity the error falls with $n$ and stays under the union bound; the last row differs from the one above it by sampling noise only. Above capacity it grows with $n$ and stays above the Fano bound, which tends to $1 - C/R = 1/3$. These lengths are tiny: a code of rate $3/4$ and length 16 has $2^{12}$ codewords, and exhaustive decoding of a random code becomes impossible long before the asymptotic regime.
+Below capacity the error falls with $n$ and stays under the union bound for maximum likelihood decoding of a random code; the last row differs from the one above it by sampling noise only. Above capacity it grows with $n$ and stays above the Fano bound, which tends to $1 - C/R = 1/3$. These lengths are tiny: a code of rate $3/4$ and length 16 has $2^{12}$ codewords, and exhaustive decoding of a random code becomes impossible long before the asymptotic regime.
 
 ## Consequences
 
