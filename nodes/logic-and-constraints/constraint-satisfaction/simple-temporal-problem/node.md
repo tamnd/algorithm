@@ -4,7 +4,6 @@ kind: problem
 slug: simple-temporal-problem
 name: Simple temporal problem
 aliases:
-- STP
 - temporal constraint network
 - simple temporal network
 - STN

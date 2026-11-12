@@ -7,7 +7,6 @@ aliases:
 - sieve formula
 - Poincaré sieve
 - principle of inclusion and exclusion
-- PIE
 area: combinatorics/counting-algorithms
 level: core
 summary: Counts a union by alternately adding and subtracting intersections.
