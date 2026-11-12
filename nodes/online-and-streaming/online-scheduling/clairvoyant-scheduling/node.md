@@ -53,7 +53,7 @@ $$C_j = \sum_{i < j} p_i + (n - j + 1)\, p_j, \qquad \sum_j C_j = \sum_j (2n - 2
 
 Each coefficient is less than twice the coefficient $n - j + 1$ of $\mathrm{OPT}$, so round robin is strictly $2$-competitive here, without knowing any size. For two jobs of sizes $1$ and $3$: round robin ends them at $2$ and $4$, cost $6$; the optimum ends them at $1$ and $4$, cost $5$.
 
-**Total flow time with arrivals.** On one machine, [SRPT](/srpt/) is clairvoyant and optimal for $\sum_j F_j$ ([SRPT optimality](/srpt-optimality/)). Every deterministic non-clairvoyant algorithm has ratio $\Omega(n^{1/3})$ (Motwani, Phillips and Torng 1994, cited). Randomized multilevel feedback is $O(\log n)$-competitive against an oblivious adversary, and SETF with speed $1 + \varepsilon$ is $O(1 + \frac1\varepsilon)$-competitive (Kalyanasundaram and Pruhs 2000, cited). See [non-clairvoyant flow time minimization](/non-clairvoyant-flow-time-minimization/).
+**Total flow time with arrivals.** On one machine, [SRPT](/srpt/) is clairvoyant and optimal for $\sum_j F_j$ ([SRPT optimality](/srpt-optimality/)). Every deterministic non-clairvoyant algorithm has ratio $\Omega(n^{1/3})$ (Motwani, Phillips and Torng 1994, cited). Randomized multilevel feedback is $O(\log n)$-competitive against an oblivious adversary, and SETF with speed $1 + \varepsilon$ is $(1 + \frac1\varepsilon)$-competitive (Kalyanasundaram and Pruhs 2000, cited). See [non-clairvoyant flow time minimization](/non-clairvoyant-flow-time-minimization/).
 
 **Non-examples.**
 

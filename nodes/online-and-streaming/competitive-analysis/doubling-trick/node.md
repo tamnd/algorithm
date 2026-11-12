@@ -27,6 +27,9 @@ sources:
   - paper: doi:10.1006/inco.1993.1054
     title: "Ricardo A. Baeza-Yates, Joseph C. Culberson and Gregory J. E. Rawlins, Searching in the plane, Information and Computation 106(2) (1993), 234-252"
     locator: the doubling strategy on the line (the cow path problem) and its optimal competitive ratio 9
+  - paper: "Anatole Beck and Donald J. Newman, Yet more on the linear search problem, Israel Journal of Mathematics 8 (1970)"
+    title: "Beck and Newman, Yet more on the linear search problem (1970)"
+    locator: the lower bound 9 for deterministic search on the line
 ---
 
 The doubling trick turns an algorithm that needs to know a parameter in advance, such as the number of rounds $T$, the size of the answer, or the optimal cost, into one that does not. It guesses a value, runs the algorithm tuned for that guess, and when the guess turns out too small it doubles the guess and starts again. Because the costs of the phases grow geometrically, the last phase dominates, and the total is within a constant factor of the cost with the right guess: for a [regret](/regret/) bound $\alpha\sqrt{T}$ the factor is $\sqrt2/(\sqrt2 - 1) = 2 + \sqrt2 \approx 3.41$. The same idea gives [exponential search](/exponential-search/), [array doubling](/array-doubling/) and the 9-competitive strategy for the [linear search problem](/linear-search-problem/).
@@ -73,7 +76,7 @@ The same proof for a bound $\alpha N^\gamma$ with $\gamma > 0$ gives the factor 
 - **Unknown loss of the best expert.** Bounds of the form $O(\sqrt{L^*\ln n} + \ln n)$ need $L^*$ to set $\eta$. Guess $L^* \le 4^m$, and restart when the best expert of the phase passes the guess (Cesa-Bianchi et al. 1997). Exp3.1 does the same for the [multi-armed bandit](/multi-armed-bandit/) with a guess of the best total reward (Auer et al. 2002).
 - **Exponential search.** To find a key in a sorted list of unknown length, probe the positions $1, 2, 4, \ldots$ until an entry is at least the key, then binary search in the last range. This takes about $2\log_2 p$ comparisons for a key at position $p$ (Bentley and Yao 1976); see [exponential search](/exponential-search/).
 - **Array doubling.** A [dynamic array](/dynamic-array/) doubles its capacity when it is full. The copies cost $1 + 2 + 4 + \cdots < 2n$ for $n$ appends, so each append costs $O(1)$ amortized; see [array doubling](/array-doubling/).
-- **Searching on a line.** A target lies at an unknown distance $d \ge 1$ on one side of the start. Walk to $+1$, back to $-2$, to $+4$, and so on. The total distance is at most $9d$, and no deterministic strategy has a smaller competitive ratio (Baeza-Yates, Culberson and Rawlins 1993); see the [linear search problem](/linear-search-problem/).
+- **Searching on a line.** A target lies at an unknown distance $d \ge 1$ on one side of the start. Walk to $+1$, back to $-2$, to $+4$, and so on. The total distance is at most $9d$, and no deterministic strategy has a smaller competitive ratio (Beck and Newman 1970; Baeza-Yates, Culberson and Rawlins 1993 proved it again, together with the case of $m$ rays); see the [linear search problem](/linear-search-problem/).
 - **Contention.** [Exponential backoff](/exponential-backoff/) doubles the waiting window after each collision, which is a doubling guess of the number of competing senders.
 
 ## Variations
