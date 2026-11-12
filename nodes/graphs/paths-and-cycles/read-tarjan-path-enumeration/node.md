@@ -30,7 +30,7 @@ sources:
     locator: the binary partition method for st-paths and the comparison with Read and Tarjan
   - paper: doi:10.1137/0208032
     title: Leslie G. Valiant, The complexity of enumeration and reliability problems, SIAM Journal on Computing 8(3), 1979
-    locator: the #P-completeness of counting the simple s-t paths
+    locator: "the #P-completeness of counting the simple s-t paths"
 ---
 
 The Read-Tarjan method lists all [simple paths](/simple-path/) from a vertex $s$ to a vertex $t$ so that the work is proportional to the output: $O(n + m)$ per path, and $O(n + m)$ between two consecutive outputs. Plain backtracking can spend exponential time in dead ends that lead to no path. Read-Tarjan never enters a dead end: before it follows a branch it checks, by a [reachability](/reachability/) search, that the branch can still reach $t$, so every branch it opens yields at least one new path. This page gives the method in the binary partition form: find one path, then split the other paths by the place where they first leave it. The graph may be directed or undirected; parallel edges are merged and self-loops are ignored, since a simple path uses neither. See [enumerating simple paths](/enumerating-simple-paths/) for the problem.

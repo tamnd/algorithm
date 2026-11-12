@@ -16,7 +16,7 @@ sources:
     title: Victor Shoup, A Computational Introduction to Number Theory and Algebra, second edition
     locator: Section 6.5, the exponent of an abelian group (Theorems 6.39, 6.40 and 6.41, Example 6.67); Section 7.5, Theorem 7.28 (the structure of Z_(p^e)^*); Section 10.4 (the formula for λ(n) and factoring n from a multiple of λ(n)) and Section 10.5 (attribution to Miller)
   - url: https://www.rfc-editor.org/rfc/rfc8017
-    title: K. Moriarty, B. Kaliski, J. Jonsson and A. Rusch, PKCS #1, RSA Cryptography Specifications Version 2.2, RFC 8017, 2016
+    title: "K. Moriarty, B. Kaliski, J. Jonsson and A. Rusch, PKCS #1, RSA Cryptography Specifications Version 2.2, RFC 8017, 2016"
     locator: Section 3.1 (λ(n) as the least common multiple of r_i - 1) and Section 3.2 (the private exponent d with e d ≡ 1 mod λ(n))
   - url: https://en.wikipedia.org/wiki/Carmichael_function
     title: Carmichael function, Wikipedia

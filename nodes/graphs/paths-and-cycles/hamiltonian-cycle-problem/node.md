@@ -41,8 +41,8 @@ sources:
     title: Itai, Papadimitriou and Szwarcfiter, NP-completeness for grid graphs
     locator: the main theorem
   - paper: Leslie G. Valiant, The complexity of enumeration and reliability problems, SIAM Journal on Computing 8(3), 1979
-    title: Valiant, #P-completeness of counting problems, including Hamiltonian cycles
-    locator: the list of #P-complete problems
+    title: "Valiant, #P-completeness of counting problems, including Hamiltonian cycles"
+    locator: "the list of #P-complete problems"
   - book: isbn:9783319212746
     title: Marek Cygan, Fedor V. Fomin, Łukasz Kowalik, Daniel Lokshtanov, Dániel Marx, Marcin Pilipczuk, Michał Pilipczuk and Saket Saurabh, Parameterized Algorithms, Springer, 2015
     locator: Chapter 14 (Lower bounds based on the Exponential-Time Hypothesis), the lower bounds for Hamiltonian cycle and path

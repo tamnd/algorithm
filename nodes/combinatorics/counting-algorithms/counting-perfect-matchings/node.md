@@ -15,7 +15,7 @@ see_also: [kasteleyn-method, ryser-formula, glynn-formula, domino-tiling-problem
 sources:
   - paper: doi:10.1016/0304-3975(79)90044-6
     title: Leslie G. Valiant, The complexity of computing the permanent, Theoretical Computer Science 8(2), 189 to 201, 1979
-    locator: the main theorem (the permanent of a 0-1 matrix, hence the number of perfect matchings of a bipartite graph, is #P-complete)
+    locator: "the main theorem (the permanent of a 0-1 matrix, hence the number of perfect matchings of a bipartite graph, is #P-complete)"
   - paper: doi:10.1016/0031-8914(61)90063-5
     title: P. W. Kasteleyn, The statistics of dimers on a lattice, Physica 27(12), 1209 to 1225, 1961
     locator: the Pfaffian method and the product formula for the dimer coverings of a rectangle

@@ -13,7 +13,7 @@ see_also: [map-inference, partition-function-computation, variable-elimination, 
 sources:
   - paper: doi:10.1016/0004-3702(94)00092-1
     title: "Dan Roth, On the hardness of approximate reasoning, Artificial Intelligence 82(1-2), 1996, pages 273 to 302"
-    locator: computing probabilities in Bayesian networks is #P-complete, by a reduction from counting the satisfying assignments of a formula
+    locator: "computing probabilities in Bayesian networks is #P-complete, by a reduction from counting the satisfying assignments of a formula"
   - paper: doi:10.1016/0004-3702(90)90060-D
     title: "Gregory F. Cooper, The computational complexity of probabilistic inference using Bayesian belief networks, Artificial Intelligence 42(2-3), 1990, pages 393 to 405"
     locator: the decision version of exact inference is NP-hard, by a reduction from 3SAT

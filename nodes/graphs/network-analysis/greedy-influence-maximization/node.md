@@ -39,7 +39,7 @@ sources:
     locator: the IMM algorithm, which picks the number of reverse reachable sets by martingale bounds
   - paper: doi:10.1145/1835804.1835934
     title: Wei Chen, Chi Wang and Yajun Wang, Scalable influence maximization for prevalent viral marketing in large-scale social networks, Proceedings of the 16th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1029 to 1038 (2010)
-    locator: the proof that computing the spread of a seed set under the independent cascade model is #P-hard
+    locator: "the proof that computing the spread of a seed set under the independent cascade model is #P-hard"
   - paper: doi:10.1145/285055.285059
     title: Uriel Feige, A threshold of ln n for approximating set cover, Journal of the ACM 45(4), 634 to 652 (1998)
     locator: the hardness of approximating maximum coverage within 1 - 1/e + ε unless P = NP

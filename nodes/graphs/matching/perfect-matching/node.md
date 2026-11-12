@@ -27,7 +27,7 @@ sources:
     locator: the whole paper
   - paper: doi:10.1016/0304-3975(79)90044-6
     title: Leslie G. Valiant, The complexity of computing the permanent, Theoretical Computer Science 8(2), 189 to 201 (1979)
-    locator: the whole paper (counting perfect matchings of bipartite graphs is #P-complete)
+    locator: "the whole paper (counting perfect matchings of bipartite graphs is #P-complete)"
   - paper: "László Lovász, On determinants, matchings, and random algorithms, Fundamentals of Computation Theory (FCT 1979), Akademie-Verlag Berlin, 565 to 574 (1979)"
     locator: the whole paper (the randomized test by the Tutte matrix)
   - paper: doi:10.1145/1008731.1008738

@@ -16,7 +16,7 @@ sources:
     locator: the definition of the dichromate and its deletion-contraction recurrence
   - paper: doi:10.1017/S0305004100068936
     title: F. Jaeger, D. L. Vertigan and D. J. A. Welsh, On the computational complexity of the Jones and Tutte polynomials, Mathematical Proceedings of the Cambridge Philosophical Society 108(1), 35 to 53 (1990)
-    locator: the main theorem (the points where evaluation is easy and #P-hardness everywhere else)
+    locator: "the main theorem (the points where evaluation is easy and #P-hardness everywhere else)"
   - paper: "R. P. Stanley, Acyclic orientations of graphs, Discrete Mathematics 5, 171 to 178 (1973)"
     locator: the number of acyclic orientations as the chromatic polynomial at minus one
   - paper: "A. Björklund, T. Husfeldt, P. Kaski and M. Koivisto, Computing the Tutte polynomial in vertex-exponential time, Proceedings of the 49th IEEE Symposium on Foundations of Computer Science, 677 to 686 (2008)"

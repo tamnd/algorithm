@@ -23,7 +23,7 @@ sources:
     locator: pages 1639 to 1646 (the reduction by the Weil pairing, polynomial time for supersingular curves)
   - paper: doi:10.1007/s001459900052
     title: Nigel P. Smart, The discrete logarithm problem on elliptic curves of trace one, Journal of Cryptology 12(3), 1999
-    locator: pages 193 to 196 (a linear time attack when #E(F_p) = p)
+    locator: "pages 193 to 196 (a linear time attack when #E(F_p) = p)"
   - paper: doi:10.1090/s0025-5718-1987-0866109-5
     title: Neal Koblitz, Elliptic curve cryptosystems, Mathematics of Computation 48(177), 1987
     locator: pages 203 to 209 (the proposal to base cryptography on this problem)

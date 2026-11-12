@@ -27,7 +27,7 @@ sources:
   - paper: "Eric Allender, Michael Bauland, Neil Immerman, Henning Schnoor and Heribert Vollmer, The complexity of satisfiability problems, refining Schaefer's theorem, Journal of Computer and System Sciences 75(4), 2009, pages 245 to 254"
     locator: the classification of SAT(Gamma) up to AC0 reductions into AC0, L, NL, parity L, P-complete and NP-complete cases
   - paper: "Nadia Creignou and Miki Hermann, Complexity of generalized satisfiability counting problems, Information and Computation 125(1), 1996, pages 1 to 12"
-    locator: counting the solutions of SAT(Gamma) is in FP when Gamma is affine and #P-complete otherwise
+    locator: "counting the solutions of SAT(Gamma) is in FP when Gamma is affine and #P-complete otherwise"
 ---
 
 The Boolean constraint satisfaction problem, also called *generalized satisfiability* and written SAT($\Gamma$), fixes a finite set $\Gamma$ of relations on $\{0, 1\}$, the *constraint language*. An instance is a set of Boolean variables and a list of constraints, each of which applies a relation of $\Gamma$ to some of the variables, and the question is whether some assignment satisfies all of them. It is the [constraint satisfaction problem](/constraint-satisfaction-problem/) with domain size 2. [SAT](/sat/) in CNF, [3-SAT](/3-sat/), [2-SAT](/2-sat/), [Horn-SAT](/horn-sat/), [XOR-SAT](/xor-sat/), [one-in-three SAT](/one-in-three-sat/) and [not-all-equal SAT](/not-all-equal-sat/) are all of this form, for different $\Gamma$. Schaefer (1978) introduced the problem and showed that each SAT($\Gamma$) is either in P or NP-complete ([Schaefer's dichotomy theorem](/schaefer-dichotomy-theorem/)).

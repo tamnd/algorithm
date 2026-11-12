@@ -26,7 +26,7 @@ sources:
     locator: the whole paper
   - paper: doi:10.1017/S0305004100068936
     title: "François Jaeger, Dirk L. Vertigan and Dominic J. A. Welsh, On the computational complexity of the Jones and Tutte polynomials, Mathematical Proceedings of the Cambridge Philosophical Society 108 (1990), 35-53"
-    locator: the main theorem on the points of the Tutte plane at which evaluation is easy or #P-hard
+    locator: "the main theorem on the points of the Tutte plane at which evaluation is easy or #P-hard"
 ---
 
 The counting spanning trees problem asks for the number $\tau(G)$ of [spanning trees](/spanning-tree/) of an undirected graph $G$. The number can be as large as $n^{n-2}$, so listing the trees is not an option for large graphs, but [Kirchhoff's matrix-tree theorem](/matrix-tree-theorem/) gives $\tau(G)$ as one [determinant](/determinant/) of a reduced [Laplacian matrix](/laplacian-matrix/). The problem is therefore solved in $O(n^3)$ arithmetic operations by Gaussian elimination, or in the time of matrix multiplication. Close relatives are harder: counting all spanning forests, or the spanning trees with at most two edges at each vertex (Hamiltonian paths), is #P-hard.

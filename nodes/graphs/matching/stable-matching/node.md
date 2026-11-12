@@ -30,7 +30,7 @@ sources:
     locator: Section 1.1, A First Problem, Stable Matching
   - paper: doi:10.1137/0215048
     title: Robert W. Irving and Paul Leather, The complexity of counting stable marriages, SIAM Journal on Computing 15(3), 655 to 667 (1986)
-    locator: the whole paper (counting stable matchings is #P-complete)
+    locator: "the whole paper (counting stable matchings is #P-complete)"
   - paper: "Cheng Ng and Daniel S. Hirschberg, Lower bounds for the stable marriage problem and its variants, SIAM Journal on Computing 19(1), 71 to 77 (1990)"
     locator: the whole paper (the quadratic lower bound)
 ---

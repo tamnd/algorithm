@@ -14,7 +14,7 @@ see_also: [ryser-formula, glynn-formula, counting-perfect-matchings, kasteleyn-m
 sources:
   - paper: doi:10.1016/0304-3975(79)90044-6
     title: Leslie G. Valiant, The complexity of computing the permanent, Theoretical Computer Science 8(2), 189 to 201, 1979
-    locator: the main theorem (the permanent of a 0-1 matrix is #P-complete) and the result on the permanent modulo powers of 2
+    locator: "the main theorem (the permanent of a 0-1 matrix is #P-complete) and the result on the permanent modulo powers of 2"
   - book: isbn:9780521006019
     title: J. H. van Lint and R. M. Wilson, A Course in Combinatorics, second edition, Cambridge University Press, 2001
     locator: Chapter 11, Permanents (Bregman's theorem); Chapter 12, The Van der Waerden conjecture

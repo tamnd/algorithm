@@ -22,7 +22,7 @@ sources:
     locator: Section 7.2.2, Backtrack programming (the n queens problem as the main example, with bitwise methods and the counts)
   - paper: doi:10.1613/jair.5512
     title: Ian P. Gent, Christopher Jefferson and Peter Nightingale, Complexity of n-Queens Completion, Journal of Artificial Intelligence Research 59, 2017, 815 to 848
-    locator: the NP-completeness and the #P-completeness of n-queens completion
+    locator: "the NP-completeness and the #P-completeness of n-queens completion"
   - paper: "Michael Simkin, The number of n-queens configurations, Advances in Mathematics 427 (2023) 109127, arXiv:2107.13460"
     locator: the main theorem, Q(n) = ((1 ± o(1)) n e^(-α))^n with α = 1.942 ± 0.003
   - url: https://oeis.org/A000170

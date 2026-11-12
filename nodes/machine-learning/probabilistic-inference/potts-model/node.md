@@ -17,10 +17,10 @@ sources:
     locator: survey of the definition, the critical point of the square lattice, the order of the transition, and the relation to the Tutte polynomial and the random-cluster model
   - paper: doi:10.1137/0222066
     title: Mark Jerrum and Alistair Sinclair, Polynomial-time approximation algorithms for the Ising model, SIAM Journal on Computing 22(5), 1993, pages 1087 to 1116
-    locator: exact computation of the Ising partition function is #P-hard; an FPRAS for the ferromagnetic case; no FPRAS for the antiferromagnetic case unless RP = NP
+    locator: "exact computation of the Ising partition function is #P-hard; an FPRAS for the ferromagnetic case; no FPRAS for the antiferromagnetic case unless RP = NP"
   - paper: "François Jaeger, Dirk L. Vertigan and Dominic J. A. Welsh, On the computational complexity of the Jones and Tutte polynomials, Mathematical Proceedings of the Cambridge Philosophical Society 108(1), 1990, pages 35 to 53"
     title: Jaeger, Vertigan and Welsh 1990
-    locator: evaluating the Tutte polynomial is #P-hard at all but a few points of the plane, which covers the Potts partition function for integer q of at least 2
+    locator: "evaluating the Tutte polynomial is #P-hard at all but a few points of the plane, which covers the Potts partition function for integer q of at least 2"
   - paper: doi:10.1103/PhysRevLett.58.86
     title: Robert H. Swendsen and Jian-Sheng Wang, Nonuniversal critical dynamics in Monte Carlo simulations, Physical Review Letters 58(2), 1987, pages 86 to 88
     locator: the cluster algorithm for the Potts model based on the random-cluster representation

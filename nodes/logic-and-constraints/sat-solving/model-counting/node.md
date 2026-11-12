@@ -8,19 +8,19 @@ aliases:
 - sharpSAT
 area: logic-and-constraints/sat-solving
 level: advanced
-summary: Count the satisfying assignments of a CNF formula. #P-complete, even for monotone 2-CNF (Valiant 1979). Exact DPLL counters split into components; ApproxMC uses random XOR hashes.
+summary: "Count the satisfying assignments of a CNF formula. #P-complete, even for monotone 2-CNF (Valiant 1979). Exact DPLL counters split into components; ApproxMC uses random XOR hashes."
 prereqs: [sat, conjunctive-normal-form, dpll, counting-problem]
 see_also: [sat, 2-sat, xor-sat, valiant-vazirani-theorem, toda-theorem, karp-luby-algorithm, bdd-satisfy-count, k-wise-independence]
 sources:
   - paper: doi:10.1137/0208032
     title: "Leslie G. Valiant, The complexity of enumeration and reliability problems, SIAM Journal on Computing 8 (1979), 410 to 421"
-    locator: the #P-completeness of counting the models of monotone 2-CNF formulas
+    locator: "the #P-completeness of counting the models of monotone 2-CNF formulas"
   - paper: doi:10.1016/0304-3975(79)90044-6
     title: "Leslie G. Valiant, The complexity of computing the permanent, Theoretical Computer Science 8 (1979), 189 to 201"
-    locator: the class #P and #P-completeness
+    locator: "the class #P and #P-completeness"
   - paper: doi:10.1137/0220053
     title: "Seinosuke Toda, PP is as hard as the polynomial-time hierarchy, SIAM Journal on Computing 20 (1991), 865 to 877"
-    locator: the polynomial hierarchy is in P with a #P oracle
+    locator: "the polynomial hierarchy is in P with a #P oracle"
   - paper: "Roberto J. Bayardo Jr. and Joseph D. Pehoushek, Counting models using connected components, Proceedings of the 17th National Conference on Artificial Intelligence (AAAI-2000), 157 to 162"
     locator: the DPLL counter with component decomposition (relsat)
   - paper: "Tian Sang, Fahiem Bacchus, Paul Beame, Henry Kautz and Toniann Pitassi, Combining component caching and clause learning for effective model counting, Theory and Applications of Satisfiability Testing (SAT 2004)"

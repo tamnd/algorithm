@@ -37,7 +37,7 @@ sources:
     locator: the Las Vegas algorithm for the determinant of an integer matrix in about n^ω b bit operations, up to logarithmic factors
   - paper: doi:10.1016/0304-3975(79)90044-6
     title: Leslie G. Valiant, The complexity of computing the permanent, Theoretical Computer Science 8(2), 1979
-    locator: pp. 189 to 201 (the permanent, with the same formula without signs, is #P-complete)
+    locator: "pp. 189 to 201 (the permanent, with the same formula without signs, is #P-complete)"
 ---
 
 Determinant computation asks for the exact value of $\det A$ for a square matrix $A$ over a field or a commutative ring, most often over $\mathbb{Z}$ or $\mathbb{Q}$. The defining Leibniz formula has $n!$ terms, but elimination needs only $O(n^3)$ field operations, and with fast matrix multiplication $O(n^\omega)$, which is optimal up to a constant factor because the determinant and matrix multiplication have the same algebraic cost. Over $\mathbb{Z}$, the problem has a second side: the determinant can have about $n(b + \tfrac12 \log_2 n)$ bits, and the methods differ mainly in how they keep the intermediate numbers small. The main approaches are elimination over $\mathbb{Q}$, fraction-free elimination, modular methods with the Chinese remainder theorem, division-free methods for rings, and black-box methods for sparse matrices.

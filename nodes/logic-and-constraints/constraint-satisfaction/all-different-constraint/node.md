@@ -25,7 +25,7 @@ sources:
   - paper: "Philip Hall, On representatives of subsets, Journal of the London Mathematical Society 10, 1935, pages 26 to 30"
     locator: the marriage theorem (a system of distinct representatives exists if and only if Hall's condition holds)
   - paper: "Leslie G. Valiant, The complexity of computing the permanent, Theoretical Computer Science 8(2), 1979, pages 189 to 201"
-    locator: the permanent of a 0/1 matrix is #P-complete
+    locator: "the permanent of a 0/1 matrix is #P-complete"
 ---
 
 The all-different constraint on variables $x_1, \ldots, x_n$ says that no two of them take the same value. As a relation it is the same as the conjunction of the $n(n-1)/2$ binary constraints $x_i \ne x_j$, but as a [global constraint](/global-constraint/) it can be propagated much more strongly: [Régin's filter](/regin-all-different-filtering/) removes every value that is in no solution, while [arc consistency](/arc-consistency/) on the binary constraints only removes the value of a variable whose domain is a single value. The constraint is a model of a [bipartite matching](/bipartite-matching/) that covers all variables, and it occurs in [Sudoku](/sudoku/), timetabling, [graph coloring](/graph-coloring/) cliques and permutation problems.

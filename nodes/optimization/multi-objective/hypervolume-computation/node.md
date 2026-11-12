@@ -9,7 +9,7 @@ aliases:
 - computing the hypervolume indicator
 area: optimization/multi-objective
 level: advanced
-summary: Compute the volume that a finite set of N points dominates up to a reference point. O(N log N) for two and three objectives, #P-hard when the number of objectives is part of the input.
+summary: "Compute the volume that a finite set of N points dominates up to a reference point. O(N log N) for two and three objectives, #P-hard when the number of objectives is part of the input."
 prereqs: [hypervolume-indicator, klee-measure-problem, pareto-dominance]
 see_also: [overmars-yap-algorithm, sweep-line-technique, segment-tree, area-of-union-of-rectangles, epsilon-indicator, igd-indicator, multi-objective-evolutionary-algorithm, kung-algorithm]
 sources:
@@ -18,7 +18,7 @@ sources:
     locator: the dimension-sweep algorithm with O(N log N) time for three objectives and the Ω(N log N) lower bound
   - paper: doi:10.1016/j.comgeo.2010.03.004
     title: Karl Bringmann and Tobias Friedrich, Approximating the volume of unions and intersections of high-dimensional geometric objects, Computational Geometry 43(6-7), 2010, 601-610
-    locator: the #P-hardness of the hypervolume and the randomized approximation scheme for the volume of a union
+    locator: "the #P-hardness of the hypervolume and the randomized approximation scheme for the volume of a union"
   - paper: doi:10.1109/FOCS.2013.51
     title: Timothy M. Chan, Klee's measure problem made easy, 54th IEEE Symposium on Foundations of Computer Science, FOCS 2013, 410-419
     locator: O(n^(d/2)) time for Klee's measure problem and O(n^(d/3) polylog n) time for orthants, which includes the hypervolume
