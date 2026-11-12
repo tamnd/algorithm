@@ -15,10 +15,10 @@ see_also: [karp-luby-algorithm, fpras, approximate-counting, karp-luby-estimator
 sources:
   - paper: doi:10.1137/0208032
     title: Leslie G. Valiant, The complexity of enumeration and reliability problems, SIAM Journal on Computing 8(3), 410 to 421, 1979
-    locator: the #P-completeness results for counting problems with easy decision versions, including monotone 2-CNF
+    locator: "the #P-completeness results for counting problems with easy decision versions, including monotone 2-CNF"
   - paper: doi:10.1137/0212053
     title: J. Scott Provan and Michael O. Ball, The complexity of counting cuts and of computing the probability that a graph is connected, SIAM Journal on Computing 12(4), 777 to 788, 1983
-    locator: the #P-completeness of counting independent sets and vertex covers
+    locator: "the #P-completeness of counting independent sets and vertex covers"
   - paper: doi:10.1109/SFCS.1983.35
     title: Richard M. Karp and Michael Luby, Monte-Carlo algorithms for enumeration and reliability problems, 24th Annual Symposium on Foundations of Computer Science (FOCS 1983), 56 to 64
     locator: the FPRAS for DNF counting

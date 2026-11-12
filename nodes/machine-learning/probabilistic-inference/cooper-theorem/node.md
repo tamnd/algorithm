@@ -17,7 +17,7 @@ sources:
     locator: the reduction from 3SAT that shows probabilistic inference in belief networks is NP-hard
   - paper: doi:10.1016/0004-3702(94)00092-1
     title: "Dan Roth, On the hardness of approximate reasoning, Artificial Intelligence 82(1-2), 1996, pages 273 to 302"
-    locator: exact probabilistic inference is #P-complete, by a reduction from counting satisfying assignments
+    locator: "exact probabilistic inference is #P-complete, by a reduction from counting satisfying assignments"
   - book: isbn:9780262013192
     title: Daphne Koller and Nir Friedman, Probabilistic Graphical Models, Principles and Techniques, MIT Press, 2009
     locator: "Section 9.1, the complexity of exact inference: the 3-SAT network with one node per variable, one per clause, and a chain of AND nodes"

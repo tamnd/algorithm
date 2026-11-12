@@ -26,7 +26,7 @@ sources:
     locator: the whole paper
   - paper: doi:10.1007/BF00383444
     title: Graham Brightwell and Peter Winkler, Counting linear extensions, Order 8(3), 225 to 242 (1991)
-    locator: the proof that counting linear extensions is #P-complete
+    locator: "the proof that counting linear extensions is #P-complete"
   - paper: doi:10.1016/0020-0190(74)90001-5
     title: Donald E. Knuth and Jayme L. Szwarcfiter, A structured program to generate all topological sorting arrangements, Information Processing Letters 2(6), 153 to 157 (1974)
     locator: the whole paper

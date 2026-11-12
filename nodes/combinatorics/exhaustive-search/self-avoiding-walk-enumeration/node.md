@@ -24,7 +24,7 @@ sources:
   - paper: "Jesper L. Jacobsen, Christian R. Scullard and Anthony J. Guttmann, On the growth constant for square-lattice self-avoiding walks, Journal of Physics A 49(49), 2016, 494004"
     locator: the estimate μ = 2.63815853... for the square lattice
   - paper: "Maciej Liśkiewicz, Mitsunori Ogihara and Seinosuke Toda, The complexity of counting self-avoiding walks in subgraphs of two-dimensional grids and hypercubes, Theoretical Computer Science 304, 2003, 129 to 156"
-    locator: the #P-completeness of counting self-avoiding walks in subgraphs of the grid
+    locator: "the #P-completeness of counting self-avoiding walks in subgraphs of the grid"
 ---
 
 A *self-avoiding walk* of $n$ steps on a lattice is a walk that starts at the origin, moves to a neighboring vertex at each step, and never visits a vertex twice. Self-avoiding walk enumeration asks for all such walks, or for their number $c_n$. On the square lattice $c_1, c_2, \ldots = 4, 12, 36, 100, 284, 780, \ldots$, and no formula is known: the numbers come from [backtracking](/generic-backtracking-algorithm/) for small $n$ and from finite-lattice and [transfer-matrix](/transfer-matrix-method/) methods for large $n$. The growth rate $\mu = \lim c_n^{1/n}$, the *connective constant*, is about $2.638$ on the square lattice, and it is known exactly only for the honeycomb lattice, where Duminil-Copin and Smirnov proved $\mu = \sqrt{2 + \sqrt{2}}$.

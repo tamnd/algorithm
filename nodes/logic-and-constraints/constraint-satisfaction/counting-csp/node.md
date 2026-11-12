@@ -15,23 +15,23 @@ see_also: [csp-dichotomy-theorem, boolean-constraint-satisfaction, schaefer-dich
 sources:
   - paper: doi:10.1145/2528400
     title: Andrei A. Bulatov, The complexity of the counting constraint satisfaction problem, Journal of the ACM 60(5), 2013
-    locator: the dichotomy theorem, every #CSP with a finite template is in FP or #P-complete
+    locator: "the dichotomy theorem, every #CSP with a finite template is in FP or #P-complete"
   - paper: doi:10.1137/100811258
     title: Martin Dyer and David Richerby, An effective dichotomy for the counting constraint satisfaction problem, SIAM Journal on Computing 42(3), 2013
     locator: pages 1245 to 1274 (a simpler proof of the dichotomy, the strong balance criterion and its decidability)
   - paper: "Nadia Creignou and Miki Hermann, Complexity of generalized satisfiability counting problems, Information and Computation 125(1), 1996, pages 1 to 12"
-    locator: Boolean #CSP is in FP when every relation is affine and #P-complete otherwise
+    locator: "Boolean #CSP is in FP when every relation is affine and #P-complete otherwise"
   - paper: "Andrei Bulatov and Víctor Dalmau, Towards a dichotomy theorem for the counting constraint satisfaction problem, Information and Computation 205(5), 2007, pages 651 to 678"
-    locator: a Mal'tsev polymorphism is necessary for #CSP in FP, and pp-definable relations can be added without changing the complexity of #CSP
+    locator: "a Mal'tsev polymorphism is necessary for #CSP in FP, and pp-definable relations can be added without changing the complexity of #CSP"
   - paper: "Martin Dyer and Catherine Greenhill, The complexity of counting graph homomorphisms, Random Structures and Algorithms 17(3-4), 2000, pages 260 to 289"
     locator: the dichotomy for counting H-colourings of graphs
   - paper: doi:10.1137/0208032
     title: Leslie G. Valiant, The complexity of enumeration and reliability problems, SIAM Journal on Computing 8(3), 1979
     locator: pages 410 to 421 (#P-completeness of counting for problems whose decision version is easy, including monotone 2-SAT)
   - paper: "Martin Dyer, Leslie Ann Goldberg and Mark Jerrum, An approximation trichotomy for Boolean #CSP, Journal of Computer and System Sciences 76(3-4), 2010, pages 267 to 277"
-    locator: approximate counting for Boolean #CSP, in FP, equivalent to #BIS, or equivalent to #SAT under approximation-preserving reductions
+    locator: "approximate counting for Boolean #CSP, in FP, equivalent to #BIS, or equivalent to #SAT under approximation-preserving reductions"
   - paper: "Jin-Yi Cai and Xi Chen, Complexity of counting CSP with complex weights, Journal of the ACM 64(3), 2017"
-    locator: the dichotomy for weighted #CSP with complex-valued constraint functions
+    locator: "the dichotomy for weighted #CSP with complex-valued constraint functions"
 ---
 
 The counting constraint satisfaction problem, #CSP, asks for the number of solutions of an instance of the [constraint satisfaction problem](/constraint-satisfaction-problem/), not just whether one exists. For a fixed finite constraint language $\Gamma$, #CSP($\Gamma$) is in the class #P. Bulatov (2013) proved that every #CSP($\Gamma$) is either solvable in polynomial time, in FP, or #P-complete, and Dyer and Richerby (2013) gave a simpler proof with a decidable criterion. The easy side is much smaller than for the decision problem: on Boolean domains only the affine languages, systems of XOR equations, are easy to count (Creignou and Hermann 1996), although Horn and 2-SAT are easy to decide.

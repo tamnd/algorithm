@@ -13,7 +13,7 @@ see_also: [marginal-inference, junction-tree-algorithm, belief-propagation, kast
 sources:
   - paper: doi:10.1016/0004-3702(94)00092-1
     title: "Dan Roth, On the hardness of approximate reasoning, Artificial Intelligence 82(1-2), 1996, pages 273 to 302"
-    locator: exact probabilistic inference is #P-complete, by a reduction from counting satisfying assignments
+    locator: "exact probabilistic inference is #P-complete, by a reduction from counting satisfying assignments"
   - paper: doi:10.1016/0031-8914(61)90063-5
     title: "Pieter W. Kasteleyn, The statistics of dimers on a lattice, I. The number of dimer arrangements on a quadratic lattice, Physica 27(12), 1961, pages 1209 to 1225"
     locator: counting the perfect matchings of a planar lattice by a Pfaffian

@@ -15,10 +15,10 @@ see_also: [enumeration-problem, decision-problem, search-problem, permanent-comp
 sources:
   - paper: doi:10.1016/0304-3975(79)90044-6
     title: Leslie G. Valiant, The complexity of computing the permanent, Theoretical Computer Science 8(2), 189 to 201 (1979)
-    locator: the definition of the class #P and the #P-completeness of the permanent of a 0-1 matrix
+    locator: "the definition of the class #P and the #P-completeness of the permanent of a 0-1 matrix"
   - book: isbn:9780521424264
     title: Sanjeev Arora and Boaz Barak, Computational Complexity, A Modern Approach
-    locator: Chapter 17, Complexity of counting (#P, #P-completeness of the permanent, Toda's theorem)
+    locator: "Chapter 17, Complexity of counting (#P, #P-completeness of the permanent, Toda's theorem)"
   - book: isbn:9781107602625
     title: Richard P. Stanley, Enumerative Combinatorics, Volume 1, second edition, Cambridge University Press, 2012
     locator: Chapter 1, Section 1.1, How to count (what it means to count, and the forms an answer can take)

@@ -22,7 +22,7 @@ sources:
     locator: the general cascade model, the decreasing cascade model and the equivalence of the general cascade and general threshold models
   - paper: doi:10.1145/1835804.1835934
     title: Wei Chen, Chi Wang and Yajun Wang, Scalable influence maximization for prevalent viral marketing in large-scale social networks, Proceedings of the 16th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1029 to 1038 (2010)
-    locator: the #P-hardness of computing the spread under the independent cascade model, by a reduction from s-t connectedness in a random graph
+    locator: "the #P-hardness of computing the spread under the independent cascade model, by a reduction from s-t connectedness in a random graph"
   - paper: doi:10.1103/PhysRevE.66.016128
     title: M. E. J. Newman, Spread of epidemic disease on networks, Physical Review E 66(1), 016128 (2002)
     locator: the mapping of the SIR model with transmissibility T to bond percolation, and the outbreak threshold for random graphs with a given degree distribution

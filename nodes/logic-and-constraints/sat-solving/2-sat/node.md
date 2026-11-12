@@ -20,7 +20,7 @@ sources:
     locator: the section on 2-SAT and limited backtracking
   - paper: doi:10.1137/0208032
     title: Leslie G. Valiant, The complexity of enumeration and reliability problems, SIAM Journal on Computing 8(3), 410 to 421 (1979)
-    locator: the #P-completeness of counting the models of monotone 2-CNF formulas
+    locator: "the #P-completeness of counting the models of monotone 2-CNF formulas"
   - paper: "Christos H. Papadimitriou, On selecting a satisfying truth assignment, Proceedings of the 32nd IEEE Symposium on Foundations of Computer Science (FOCS 1991), 163 to 169"
     locator: the random walk algorithm for 2-SAT and its expected number of flips
   - book: isbn:9780201038064

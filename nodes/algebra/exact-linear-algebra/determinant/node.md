@@ -24,7 +24,7 @@ sources:
     locator: Section 2.2.3, Computing determinants
   - paper: doi:10.1016/0304-3975(79)90044-6
     title: Leslie G. Valiant, The complexity of computing the permanent, Theoretical Computer Science 8(2), 1979
-    locator: the #P-completeness of the permanent of a 0-1 matrix
+    locator: "the #P-completeness of the permanent of a 0-1 matrix"
 ---
 
 The determinant of a square matrix $A$ over a field or a commutative ring is the signed sum, over all permutations, of products of one entry from each column and each row. Read as a function of the columns, it is the only function that is linear in each column, is zero when two columns are equal, and is $1$ on the identity matrix. It is nonzero exactly when $A$ is invertible, it is multiplicative, $\det(AB) = \det A \det B$, and it gives the [characteristic polynomial](/characteristic-polynomial/), [Cramer's rule](/cramers-rule/) and the volume of a parallelepiped.

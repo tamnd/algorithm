@@ -7,7 +7,7 @@ aliases:
 - listing all simple s-t paths
 area: graphs/paths-and-cycles
 level: advanced
-summary: List all simple paths between two given vertices. Backtracking with a reachability test gives polynomial delay; counting the paths is #P-complete.
+summary: "List all simple paths between two given vertices. Backtracking with a reachability test gives polynomial delay; counting the paths is #P-complete."
 model: word-ram
 complexity:
   vars: {n: the number of vertices, m: the number of edges, N: the number of s-t paths}
@@ -21,7 +21,7 @@ sources:
     locator: the whole paper (s-t paths of an undirected graph in time linear in the input plus the total length of the output)
   - paper: doi:10.1137/0208032
     title: Leslie G. Valiant, The complexity of enumeration and reliability problems, SIAM Journal on Computing 8(3), 410 to 421 (1979)
-    locator: the whole paper (counting s-t paths is #P-complete)
+    locator: "the whole paper (counting s-t paths is #P-complete)"
   - paper: doi:10.1287/mnsc.17.11.712
     title: Jin Y. Yen, Finding the k shortest loopless paths in a network, Management Science 17(11), 712 to 716 (1971)
     locator: the whole paper (the k shortest simple paths)

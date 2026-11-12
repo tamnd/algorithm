@@ -13,7 +13,7 @@ see_also: [chromatic-polynomial, deletion-contraction, k-coloring, bjorklund-chr
 sources:
   - paper: doi:10.1017/S0305004100068936
     title: F. Jaeger, D. L. Vertigan and D. J. A. Welsh, On the computational complexity of the Jones and Tutte polynomials, Mathematical Proceedings of the Cambridge Philosophical Society 108(1), 35 to 53 (1990)
-    locator: the main theorem (the Tutte polynomial is #P-hard to evaluate except on one hyperbola and at 8 special points; for the chromatic polynomial, every integer k at least 3 is hard)
+    locator: "the main theorem (the Tutte polynomial is #P-hard to evaluate except on one hyperbola and at 8 special points; for the chromatic polynomial, every integer k at least 3 is hard)"
   - paper: doi:10.1137/070683933
     title: Andreas Björklund, Thore Husfeldt and Mikko Koivisto, Set partitioning via inclusion-exclusion, SIAM Journal on Computing 39(2), 546 to 563 (2009)
     locator: the O*(2^n) algorithm for counting k-colorings and computing the chromatic polynomial

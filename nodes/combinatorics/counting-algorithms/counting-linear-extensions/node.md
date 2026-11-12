@@ -15,7 +15,7 @@ see_also: [hook-length-formula, counting-standard-young-tableaux, catalan-number
 sources:
   - paper: doi:10.1007/BF00383444
     title: Graham Brightwell and Peter Winkler, Counting linear extensions, Order 8(3), 225 to 242, 1991
-    locator: the main theorem (counting linear extensions is #P-complete)
+    locator: "the main theorem (counting linear extensions is #P-complete)"
   - paper: doi:10.1016/S0012-365X(98)00333-1
     title: Russ Bubley and Martin Dyer, Faster random generation of linear extensions, Discrete Mathematics 201(1-3), 81 to 88, 1999
     locator: the path coupling analysis of a Markov chain on linear extensions, with mixing time O(n^3 log n)

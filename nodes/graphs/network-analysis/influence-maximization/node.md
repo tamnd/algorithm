@@ -19,10 +19,10 @@ sources:
     locator: Section 2 (the problem under the independent cascade and linear threshold models, its NP-hardness, the submodularity of the spread and the greedy (1 - 1/e)-approximation), and the hardness within n^(1-ε) for general threshold functions
   - paper: doi:10.1145/1835804.1835934
     title: Wei Chen, Chi Wang and Yajun Wang, Scalable influence maximization for prevalent viral marketing in large-scale social networks, Proceedings of the 16th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1029 to 1038 (2010)
-    locator: the #P-hardness of computing the spread under the independent cascade model, and the PMIA heuristic
+    locator: "the #P-hardness of computing the spread under the independent cascade model, and the PMIA heuristic"
   - paper: doi:10.1109/ICDM.2010.118
     title: Wei Chen, Yifei Yuan and Li Zhang, Scalable influence maximization in social networks under the linear threshold model, Proceedings of the 10th IEEE International Conference on Data Mining, 88 to 97 (2010)
-    locator: the #P-hardness of computing the spread under the linear threshold model
+    locator: "the #P-hardness of computing the spread under the linear threshold model"
   - paper: doi:10.1137/1.9781611973402.70
     title: Christian Borgs, Michael Brautbar, Jennifer Chayes and Brendan Lucier, Maximizing social influence in nearly optimal time, Proceedings of the 25th Annual ACM-SIAM Symposium on Discrete Algorithms, 946 to 957 (2014)
     locator: reverse reachable sets, the (1 - 1/e - ε)-approximation in O((m + n) ε^(-3) log n) time, and its optimality up to a logarithmic factor

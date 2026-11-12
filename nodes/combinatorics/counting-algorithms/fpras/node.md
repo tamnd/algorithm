@@ -29,7 +29,7 @@ sources:
     locator: the main theorem (an FPRAS for the permanent of a nonnegative matrix)
   - paper: doi:10.1007/s00453-003-1073-y
     title: Martin Dyer, Leslie Ann Goldberg, Catherine Greenhill and Mark Jerrum, The relative complexity of approximate counting problems, Algorithmica 38(3), 471 to 500, 2004
-    locator: the definition of approximation-preserving reductions and of the class #BIS
+    locator: "the definition of approximation-preserving reductions and of the class #BIS"
   - paper: doi:10.1109/FOCS.2010.34
     title: Allan Sly, Computational transition at the uniqueness threshold, 51st Annual Symposium on Foundations of Computer Science (FOCS 2010), 287 to 296
     locator: the main theorem (no FPRAS for independent sets in graphs of maximum degree 6 unless NP = RP)

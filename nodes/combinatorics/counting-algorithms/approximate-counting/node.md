@@ -25,7 +25,7 @@ sources:
     title: Mark Jerrum and Alistair Sinclair, Polynomial-time approximation algorithms for the Ising model, SIAM Journal on Computing 22(5), 1087 to 1116, 1993
     locator: the main theorem (an FPRAS for the ferromagnetic Ising partition function)
   - paper: doi:10.1137/0214060
-    title: Larry Stockmeyer, On approximation algorithms for #P, SIAM Journal on Computing 14(4), 849 to 861, 1985
+    title: "Larry Stockmeyer, On approximation algorithms for #P, SIAM Journal on Computing 14(4), 849 to 861, 1985"
     locator: the main theorem (approximate counting with an NP oracle)
   - paper: doi:10.1145/1132516.1132538
     title: Dror Weitz, Counting independent sets up to the tree threshold, 38th Annual ACM Symposium on Theory of Computing (STOC 2006), 140 to 149

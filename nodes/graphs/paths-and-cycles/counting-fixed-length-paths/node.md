@@ -7,7 +7,7 @@ aliases:
 - counting walks of length k
 area: graphs/paths-and-cycles
 level: core
-summary: Problem of counting walks with exactly k edges between vertices, solved by the k-th power of the adjacency matrix; counting simple paths of length k is #P-hard.
+summary: "Problem of counting walks with exactly k edges between vertices, solved by the k-th power of the adjacency matrix; counting simple paths of length k is #P-hard."
 model: word-ram
 complexity:
   vars: {n: the number of vertices, m: the number of edges, k: the number of edges of a walk, ω: "the matrix multiplication exponent, counted in arithmetic operations on the walk counts"}
@@ -23,10 +23,10 @@ sources:
     locator: Section 1.5 and its exercises on the adjacency matrix and walks
   - paper: doi:10.1137/0208032
     title: Leslie G. Valiant, The complexity of enumeration and reliability problems, SIAM Journal on Computing 8(3), 410 to 421 (1979)
-    locator: the whole paper (counting s-t paths in a graph is #P-complete)
+    locator: "the whole paper (counting s-t paths in a graph is #P-complete)"
   - paper: doi:10.1137/S0097539703427203
     title: Jörg Flum and Martin Grohe, The parameterized complexity of counting problems, SIAM Journal on Computing 33(4), 892 to 922 (2004)
-    locator: the whole paper (counting paths and cycles of length k is #W[1]-complete)
+    locator: "the whole paper (counting paths and cycles of length k is #W[1]-complete)"
   - paper: doi:10.1007/BF02523189
     title: Noga Alon, Raphael Yuster and Uri Zwick, Finding and counting given length cycles, Algorithmica 17(3), 209 to 223 (1997)
     locator: the whole paper (counting cycles of length at most 7 with matrix products)

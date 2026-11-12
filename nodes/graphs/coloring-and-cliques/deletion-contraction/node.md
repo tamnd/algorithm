@@ -22,7 +22,7 @@ sources:
     locator: the recurrence for acyclic orientations and Corollary 1.3
   - paper: doi:10.1017/S0305004100068936
     title: F. Jaeger, D. L. Vertigan and D. J. A. Welsh, On the computational complexity of the Jones and Tutte polynomials, Mathematical Proceedings of the Cambridge Philosophical Society 108(1), 35 to 53 (1990)
-    locator: the main theorem (evaluating the Tutte polynomial is #P-hard at all but a few points of the plane)
+    locator: "the main theorem (evaluating the Tutte polynomial is #P-hard at all but a few points of the plane)"
   - book: isbn:9780387984889
     title: Béla Bollobás, Modern Graph Theory, Springer, 1998
     locator: Chapter X, The Tutte polynomial (the deletion-contraction recurrence and the universality of the Tutte polynomial)

@@ -19,7 +19,7 @@ sources:
     locator: Section 2 (the linear threshold model with uniform random thresholds, its live-edge equivalence, the submodularity of the spread, and the NP-hardness of influence maximization by a reduction from vertex cover)
   - paper: doi:10.1109/ICDM.2010.118
     title: Wei Chen, Yifei Yuan and Li Zhang, Scalable influence maximization in social networks under the linear threshold model, Proceedings of the 10th IEEE International Conference on Data Mining, 88 to 97 (2010)
-    locator: the #P-hardness of computing the spread under the linear threshold model, and the linear-time computation of the spread in a directed acyclic graph (the LDAG heuristic)
+    locator: "the #P-hardness of computing the spread under the linear threshold model, and the linear-time computation of the spread in a directed acyclic graph (the LDAG heuristic)"
   - paper: doi:10.1073/pnas.082090499
     title: Duncan J. Watts, A simple model of global cascades on random networks, Proceedings of the National Academy of Sciences 99(9), 5766 to 5771 (2002)
     locator: the fractional threshold rule on random graphs and the cascade window in the mean degree

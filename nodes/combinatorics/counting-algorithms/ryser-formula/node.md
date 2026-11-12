@@ -31,7 +31,7 @@ sources:
     locator: the chapter on the permanent of a matrix (Ryser's formula in Gray code order)
   - paper: doi:10.1016/0304-3975(79)90044-6
     title: Leslie G. Valiant, The complexity of computing the permanent, Theoretical Computer Science 8(2), 189 to 201, 1979
-    locator: the introduction (Ryser's method as the fastest known exact algorithm, and the #P-completeness of the permanent)
+    locator: "the introduction (Ryser's method as the fastest known exact algorithm, and the #P-completeness of the permanent)"
 ---
 
 Ryser's formula computes the [permanent](/permanent-computation/) of an $n \times n$ matrix $A$ as
