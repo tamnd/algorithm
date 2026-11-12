@@ -61,7 +61,7 @@ There are two kinds of offices. In one kind, a worker may copy any paper to the 
 **Lower bounds.**
 
 - Attiya, Hendler and Woelfel (2008) proved that every deadlock-free mutual exclusion algorithm for $n$ processes that uses reads, writes and *conditional* primitives has a passage with $\Omega(\log n)$ RMRs, in both the CC and the DSM model. A conditional primitive changes the value of an object only if the value equals a given one; compare-and-swap and load-linked/store-conditional are of this kind. So the algorithm of Yang and Anderson is optimal, and compare-and-swap does not help on its own.
-- Earlier, Anderson and Kim (2002) proved $\Omega(\log n / \log \log n)$ for reads and writes, and Fan and Lynch (2006) proved that $n$ processes that each enter once make $\Omega(n \log n)$ RMRs in all in the CC model.
+- Earlier, Anderson and Kim (2001, journal version 2002) proved $\Omega(\log n / \log \log n)$ for reads and writes, and Fan and Lynch (2006) proved that $n$ processes that each enter once make $\Omega(n \log n)$ RMRs in all in the CC model.
 - The bound does not hold for fetch-and-store or fetch-and-add, which are not conditional: the MCS, CLH and Anderson locks beat it. RMR complexity thus separates primitives in a way that [consensus numbers](/consensus-number/) do not: compare-and-swap has consensus number $\infty$, and swap and fetch-and-add have 2.
 
 **Adaptive and abortable locks.** An *adaptive* lock has an RMR cost that depends on the contention $k$, not on $n$. Kim and Anderson (2007) give a lock with reads and writes and $O(\min(k, \log n))$ RMRs. An *abortable* lock lets a waiter give up; Jayanti (2003) gives one with $O(\min(k, \log n))$ RMRs from LL/SC, and Scott and Scherer (2001) gave queue locks with time-out.

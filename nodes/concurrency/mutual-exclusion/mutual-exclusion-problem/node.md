@@ -128,9 +128,9 @@ The table lists the solutions on this site. Registers are counted for $n$ proces
 | [Kessels](/kessels-algorithm/) | 1982 | 2 | 4 single-writer bits | read, write | FCFS | 1 |
 | [Lamport fast mutex](/lamport-fast-mutex/) | 1987 | $n$ | $n + 2$ | read, write | deadlock free | none |
 | [Fischer](/fischer-algorithm/) | 1987 (Lamport) | $n$ | 1 | read, write, known delay | deadlock free | none |
-| [Szymański](/szymanski-algorithm/) | 1988 | $n$ | $n$ (5 values each) | single-writer registers | starvation free | $n - 1$ |
+| [Szymański](/szymanski-algorithm/) | 1988 | $n$ | $n$ (5 values each) | single-writer registers | starvation free | $O(n)$, measured $2(n - 1)$ for $n \le 3$ |
 | [test-and-set lock](/test-and-set/) | | $n$ | 1 | test-and-set | deadlock free | none |
-| [ticket lock](/ticket-lock/) | | $n$ | 2 | fetch-and-add | FCFS | $n - 1$ |
+| [ticket lock](/ticket-lock/) | | $n$ | 2 | fetch-and-add | FCFS | 0 |
 
 "None" means that the algorithm is not starvation free. The Peterson and Kessels bounds and the measured bounds of the other algorithms are checked on their pages by exhaustive search for 2 and 3 processes. The bounds of Knuth, de Bruijn and Eisenberg and McGuire are the published ones.
 
