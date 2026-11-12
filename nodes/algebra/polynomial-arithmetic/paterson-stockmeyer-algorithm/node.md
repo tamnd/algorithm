@@ -40,7 +40,7 @@ Notation: $R$ is a commutative ring, $f = \sum_{i=0}^{n} a_i x^i \in R[x]$ is a 
 
 ## In plain words
 
-Suppose you must put a square matrix into a polynomial of degree one hundred. Multiplying two matrices is slow, but multiplying a matrix by a number or adding two matrices is fast. Horner's rule does one hundred slow products. Instead, compute the first ten or eleven powers of the matrix once. Cut the polynomial into pieces of ten coefficients. Each piece is a sum of those powers times numbers, which needs no slow product. Then join the pieces with Horner's rule, using the tenth power as the step, which needs about ten more slow products. So about twenty slow products replace one hundred.
+Suppose you must put a square matrix into a polynomial of degree one hundred. Multiplying two matrices is slow, but multiplying a matrix by a number or adding two matrices is fast. Horner's rule does ninety-nine slow products. Instead, compute the first ten or eleven powers of the matrix once. Cut the polynomial into pieces of ten coefficients. Each piece is a sum of those powers times numbers, which needs no slow product. Then join the pieces with Horner's rule, using the tenth power as the step, which needs about ten more slow products. So about twenty slow products replace ninety-nine.
 
 ## The problem
 
@@ -96,7 +96,7 @@ The full proof is in [proofs/correctness.md](proofs/correctness.md). Each index 
 
 All bounds are proved, in the algebraic model, with the nonscalar multiplications counted apart.
 
-- **Nonscalar multiplications.** Line L3 does $\min(k, n) - 1$ products and line L7 does $m - 1$. For $m \ge 2$ the total is $k + m - 2$. With $k = \lceil\sqrt{n+1}\,\rceil$ we have $m \le k$, so the total is at most $2\lceil\sqrt{n+1}\,\rceil - 2$. For $n = 100$ it is $10 + 9 = 19$, against $100$ for Horner's rule.
+- **Nonscalar multiplications.** Line L3 does $\min(k, n) - 1$ products and line L7 does $m - 1$. For $m \ge 2$ the total is $k + m - 2$. With $k = \lceil\sqrt{n+1}\,\rceil$ we have $m \le k$, so the total is at most $2\lceil\sqrt{n+1}\,\rceil - 2$. For $n = 100$ it is $10 + 9 = 19$, against $99$ for Horner's rule.
 - **Scalar multiplications and additions.** Line L4 does one scalar multiplication per coefficient, $n + 1$ in all. Lines L4 and L7 do $n$ additions in all, since each one joins two terms of the final sum.
 - **Other block sizes.** For any $k$, the count is $\min(k, n) - 1 + \lceil (n+1)/k \rceil - 1$. The sum $k + (n+1)/k$ is smallest near $k = \sqrt{n+1}$, so the default is close to the best choice for this scheme.
 - **Space.** $k + 1$ powers and $m$ blocks, so $\Theta(\sqrt{n})$ elements of $A$. The blocks can also be formed one at a time inside the loop, which leaves $k + 2$ elements.
