@@ -5,7 +5,6 @@ slug: pert-chart
 name: PERT chart and critical path method
 aliases:
 - PERT chart
-- critical path method
 - CPM
 area: graphs/shortest-paths
 level: core

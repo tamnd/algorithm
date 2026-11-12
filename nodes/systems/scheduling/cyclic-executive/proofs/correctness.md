@@ -1,0 +1,25 @@
+---
+title: The frame test is exact and the table builder finds a table when one exists
+proves: [correctness]
+status: full
+---
+
+**Setting.** Task $\tau_i$ has an integer period $T_i$, an execution time $C_i > 0$ and an integer relative deadline $D_i$, and all tasks release their first job at time 0. The major cycle is $H = \operatorname{lcm}(T_1, \ldots, T_n)$ (line L1). The jobs of one major cycle are the pairs $(i, k)$ with $0 \le k < H / T_i$, with release $kT_i$ and deadline $kT_i + D_i$ (line L6). A frame size $f$ divides time into frames $[mf, (m+1)f)$. A *table* for $f$ puts each job of $[0, H)$ in one frame $m$ with $0 \le m < H/f$, such that the frame lies inside the window of the job, $kT_i \le mf$ and $(m+1)f \le kT_i + D_i$, and the costs of the jobs of each frame sum to at most $f$. The executive repeats the table every $H$ time units and runs the jobs of each frame one after the other from the start of the frame.
+
+**Lemma 1 (a table gives a correct schedule).** If $f$ divides $H$ and a table for $f$ exists, then the executive runs each job of each major cycle for its full cost inside its window, and the processor never runs two jobs at once.
+
+*Proof.* In frame $m$ the jobs run back to back from $mf$, and their costs sum to at most $f$, so they end by $(m+1)f$ and the next frame starts after them. A job of frame $m$ starts at or after $mf \ge kT_i$ and ends at or before $(m+1)f \le kT_i + D_i$. As $f$ divides $H$, the frames of the next major cycle start at $H + mf$, and its jobs are those of the first cycle shifted by $H$, because each $T_i$ divides $H$. $\square$
+
+**Lemma 2 (the third frame constraint is exact).** Let $f$ divide $H$, and let $g = \gcd(T_i, f)$. Each job of $\tau_i$ in $[0, H)$ has a whole frame inside its window if and only if $2f - g \le D_i$.
+
+*Proof.* The first frame that starts at or after $kT_i$ starts at $kT_i + \delta_k$, where $\delta_k = (-kT_i) \bmod f$. A whole frame fits inside $[kT_i, kT_i + D_i]$ exactly when this frame fits, that is, when $\delta_k + f \le D_i$, because any later frame ends later. The values $kT_i \bmod f$ are multiples of $g$. As $k$ runs over $0, 1, \ldots, f/g - 1$, the values $kT_i/g \bmod f/g$ are distinct, since $T_i/g$ and $f/g$ are coprime, so they are all the residues modulo $f/g$. Hence $\{kT_i \bmod f\}$ is the set of all multiples of $g$ in $[0, f)$, and so is $\{\delta_k\}$. These $k$ are all in range: $\operatorname{lcm}(T_i, f)$ divides $H$, so $H / T_i \ge \operatorname{lcm}(T_i, f) / T_i = f / g$. The largest $\delta_k$ is therefore $f - g$, and every job has a whole frame if and only if $f - g + f \le D_i$. $\square$
+
+**Lemma 3 (the search is exact).** ASSIGN (line L7) returns a table for $f$ if one exists, and returns none otherwise.
+
+*Proof.* Each job $(i, k)$ may only go to the frames $m$ with $\lceil kT_i / f \rceil \le m \le \min(\lfloor (kT_i + D_i)/f \rfloor - 1, H/f - 1)$, which are exactly the frames inside its window and inside $[0, H)$. The search takes the jobs in a fixed order and keeps a stack with the index of the next choice to try for each job placed so far. It places job $q$ in the first allowed frame, at or after the stack position, in which the load stays at most $f$. When no frame is left, it removes job $q$ from the stack and moves job $q - 1$ to its next frame. This is a depth-first walk of the tree of partial assignments in which a branch is cut only when a frame is over its limit. A cut is safe: adding jobs never lowers a load, so no full table extends a partial one with a frame over $f$. The tree is finite, so the walk ends. It returns a full assignment, which is a table, exactly when the tree has a leaf that is never cut, that is, exactly when a table exists. $\square$
+
+**Theorem.** The plan of lines L1 to L9 returns $(f, \text{table})$ if and only if some $f$ passes lines L2 to L5 and has a table, and then $f$ is the smallest such value. The returned table gives a schedule in which every job of every major cycle meets its deadline.
+
+*Proof.* Line L2 tries the divisors of $H$ in increasing order. Lines L3 to L5 keep $f$ if $f \ge \max_i C_i$, some $T_i$ is a multiple of $f$, and $2f - \gcd(T_i, f) \le D_i$ for each $i$. Lines L6 to L8 return the first kept $f$ for which ASSIGN finds a table, and by Lemma 3 this is the first kept $f$ that has a table. Line L9 returns none only when no kept $f$ has one. Lemma 1 gives the last claim. $\blacksquare$
+
+**Remarks.** By Lemma 2, line L5 removes only frame sizes for which some job has no whole frame in its window, and such a job could not be put in any frame. So line L5 never removes a frame size that has a table. Line L3 is implied by the table as well, since a job with $C_i > f$ fits in no frame. Line L4 is a design rule, not a need of the schedule: it makes the frame boundaries line up with the releases of at least one task. The table builder also keeps each job inside $[0, H)$, so a job whose window passes $H$ must end by $H$; this can only make the plan more careful than needed.
