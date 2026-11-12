@@ -7,7 +7,7 @@ aliases:
 - Hopcroft-Tarjan isomorphism of planar graphs
 area: graphs/graph-isomorphism
 level: advanced
-summary: Tests isomorphism of 3-connected planar graphs by partition refinement on the darts of their unique embeddings, in O(n log n) time; Hopcroft and Wong later reached linear time.
+summary: Tests isomorphism of 3-connected planar graphs by partition refinement on the darts of their unique embeddings, in O(n log n) time; the simpler trial loop here takes O(n² log n).
 solves: [planar-graph-isomorphism, graph-isomorphism-problem]
 model: word-ram
 complexity:

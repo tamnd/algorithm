@@ -8,7 +8,7 @@ aliases:
 - Munkres algorithm
 area: graphs/matching
 level: core
-summary: Solves the assignment problem in O(n³) time using vertex potentials and augmenting paths.
+summary: Solves the assignment problem in O(n²m) time, O(n³) for a square matrix, using vertex potentials and augmenting paths.
 solves: [assignment-problem]
 model: word-ram
 complexity:

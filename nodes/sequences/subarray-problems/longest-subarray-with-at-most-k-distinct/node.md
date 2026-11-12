@@ -76,7 +76,7 @@ The two pointers method keeps the counts of the values in the window and the num
 
 **Linear time with hashing.** Each item must be read, so $\Omega(n)$ time is needed. The two pointers method meets it in expectation with a hash table, and in the worst case when the values are small integers.
 
-**Comparisons only.** If the values can only be compared, and not hashed, the problem with $k = n - 1$ answers whether all values are distinct: the answer is $n$ exactly when no value repeats. So it is at least as hard as [element distinctness](/element-distinctness/), which needs $\Omega(n \log n)$ comparisons in the algebraic decision tree model. Sorting for coordinate compression meets this bound.
+**Comparisons only.** If the values can only be compared, and not hashed, the problem with $k = n - 1$ answers whether all values are distinct: the answer is $n$ exactly when some value repeats. So it is at least as hard as [element distinctness](/element-distinctness/), which needs $\Omega(n \log n)$ comparisons in the algebraic decision tree model. Sorting for coordinate compression meets this bound.
 
 ## Reductions
 

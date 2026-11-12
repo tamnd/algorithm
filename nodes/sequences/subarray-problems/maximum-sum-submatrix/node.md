@@ -76,7 +76,7 @@ with sum $29$. For the band of rows $1..3$ the column sums are $C = [-9, 4, 15, 
 |---|---|---|---|
 | all rectangles with 2D prefix sums | $\Theta(m^2 n^2)$ | $\Theta(mn)$ | four lookups per rectangle |
 | [Bentley column sweep](/bentley-column-sweep/) | $\Theta(m^2 n)$ | $\Theta(n)$ | Kadane on the column sums of each band |
-| Tamaki and Tokuyama (1998) | $O(n^3 \sqrt{\log \log n / \log n})$ for $m = n$ | $O(n^2)$ | divide and conquer, crossing case by distance matrix multiplication |
+| Tamaki and Tokuyama (SODA 1998, journal version 2000) | $O(n^3 \sqrt{\log \log n / \log n})$ for $m = n$ | $O(n^2)$ | divide and conquer, crossing case by distance matrix multiplication |
 | Takaoka (2002) | $O(n^3 \sqrt{\log \log n / \log n})$ for $m = n$ | $O(n^2)$ | a simpler divide and conquer with the same product |
 
 **Distance matrix multiplication.** Split the rows in half. The best rectangle lies in the top half, in the bottom half, or crosses the middle. For the crossing case, a rectangle on columns $e..d$ is the best part above the cut plus the best part below it, and both parts are differences of prefix sums. Taking the maximum over the column pairs is a product of two matrices over the $(\max, +)$ semiring, which is the [min-plus matrix multiplication](/min-plus-matrix-multiplication/) with the signs changed. The fastest products of this kind are slightly subcubic, and they give the bounds in the table.

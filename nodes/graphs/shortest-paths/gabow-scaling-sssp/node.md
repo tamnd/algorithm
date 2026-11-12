@@ -7,7 +7,7 @@ aliases:
 - Gabow scaling shortest paths
 area: graphs/shortest-paths
 level: research
-summary: Bit-scaling SSSP for integer weights. Each bit costs one bucket-based Dijkstra pass, so nonnegative weights take O(m log N) time; the negative-weight versions reach O(sqrt(n) m log(nN)).
+summary: Bit-scaling SSSP for integer weights. Each bit costs one bucket-based Dijkstra pass, so nonnegative weights take O((n + m) log N) time; the negative-weight versions reach O(sqrt(n) m log(nN)).
 solves: [single-source-shortest-paths]
 model: word-ram
 complexity:

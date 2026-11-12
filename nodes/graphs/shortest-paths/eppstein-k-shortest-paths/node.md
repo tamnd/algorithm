@@ -7,7 +7,7 @@ aliases:
 - Eppstein's algorithm
 area: graphs/shortest-paths
 level: research
-summary: Enumerates k shortest (not necessarily simple) paths in O(m + n log n + k) time using a path-sidetrack structure.
+summary: Enumerates k shortest (not necessarily simple) paths in O(m + n log n + k log k) time using a path-sidetrack structure, or O(m + n log n + k) with Frederickson's heap selection.
 solves: [k-shortest-paths]
 model: word-ram
 complexity:
