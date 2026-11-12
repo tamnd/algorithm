@@ -22,7 +22,7 @@ $$\operatorname{inv}(A) = \sum_{q=1}^{n} g(q). \tag{1}$$
 
 $$\sum_{v \le r[j]} f_j[v] = |\{p < j : r[p] \le r[j]\}| = |\{p < j : A[p] \le A[j]\}|,$$
 
-where the last equality is Step 1. There are $j - 1$ indices $p < j$, and each has either $A[p] \le A[j]$ or $A[p] > A[j]$, but not both. So $(j - 1) - $ PREFIX$(T, r[j]) = |\{p < j : A[p] > A[j]\}| = g(j)$, and after line L5, $c = \sum_{q \le j} g(q)$. Line L6 calls ADD$(T, m, r[j], 1)$ with $1 \le r[j] \le m$, so by Step 2 the array $T$ then represents $f_j$ with $f_j[r[j]]$ increased by 1, which is $f_{j+1}$. So (S) holds for $j + 1$.
+where the last equality is Step 1. There are $j - 1$ indices $p < j$, and each has either $A[p] \le A[j]$ or $A[p] > A[j]$, but not both. So $(j - 1) - \mathrm{PREFIX}(T, r[j]) = |\{p < j : A[p] > A[j]\}| = g(j)$, and after line L5, $c = \sum_{q \le j} g(q)$. Line L6 calls ADD$(T, m, r[j], 1)$ with $1 \le r[j] \le m$, so by Step 2 the array $T$ then represents $f_j$ with $f_j[r[j]]$ increased by 1, which is $f_{j+1}$. So (S) holds for $j + 1$.
 
 *Termination.* The loop of line L4 runs for $j = 1, \ldots, n$ and each iteration terminates by Step 2. After the last one, (S) holds for $j = n + 1$, so $c = \sum_{q \le n} g(q)$, which by (1) is $\operatorname{inv}(A)$. Line L7 returns it. $\blacksquare$
 

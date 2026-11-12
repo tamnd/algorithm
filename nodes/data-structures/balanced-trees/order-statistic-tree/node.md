@@ -44,13 +44,13 @@ Each node stores the size of its own subtree. When the tree changes, only the no
 
 ## The abstract type
 
-The tree implements an [ordered set](/ordered-set/) with two more operations: SELECT$(i)$ for $0 \le i < n$ returns the key with exactly $i$ smaller keys, and RANK$(k)$ returns the number of keys less than $k$, for any $k$. So SELECT$(\text{RANK}(k)) = k$ for a present $k$. CONTAINS, INSERT and DELETE are as usual. Counting the keys in a range $[a, b)$ is RANK$(b) - $ RANK$(a)$.
+The tree implements an [ordered set](/ordered-set/) with two more operations: SELECT$(i)$ for $0 \le i < n$ returns the key with exactly $i$ smaller keys, and RANK$(k)$ returns the number of keys less than $k$, for any $k$. So SELECT$(\text{RANK}(k)) = k$ for a present $k$. CONTAINS, INSERT and DELETE are as usual. Counting the keys in a range $[a, b)$ is $\mathrm{RANK}(b) - \mathrm{RANK}(a)$.
 
 ## Representation
 
 A node holds a key, a color, two child pointers and an integer $size$. The tree is a left-leaning red-black tree, with its rules: search order, no red right link, no two red links in a row, the same number of black links on every path to nil, and a black root. One more rule is added:
 
-1. (Z) $x.size = 1 + $ SIZE$(x.left) + $ SIZE$(x.right)$, where SIZE(nil) $= 0$.
+1. (Z) $x.size = 1 + \mathrm{SIZE}(x.left) + \mathrm{SIZE}(x.right)$, where $\mathrm{SIZE}(\mathrm{nil}) = 0$.
 
 So $x.size$ is the number of nodes of the subtree of $x$, and the tree size is the size of the root.
 

@@ -44,7 +44,7 @@ When it says "surely not", it is right, and you are done fast. When it says "may
 
 Let $U$ be a universe of $u$ keys, let $n \le u$, and let $0 < \varepsilon < 1$. A *filter* for $S \subseteq U$ with $|S| = n$ is a pair of procedures. BUILD takes $S$ and random bits $\rho$ and makes a string $F$. QUERY takes $F$ and a key $x \in U$ and returns yes or no. It must meet two conditions.
 
-- **No false negatives.** For each $S$, each $\rho$ and each $x \in S$, QUERY$(F, x) = $ yes.
+- **No false negatives.** For each $S$, each $\rho$ and each $x \in S$, $\mathrm{QUERY}(F, x) = \text{yes}$.
 - **Few false positives.** For each $S$ and each fixed $x \in U \setminus S$, $\Pr_\rho[\text{QUERY}(F, x) = \text{yes}] \le \varepsilon$.
 
 The probability is over the random bits of BUILD, which in practice are the choice of the [hash functions](/hash-function/). It is not over the queries. The cost measures are the length of $F$ in bits (the space), and the time of BUILD and QUERY, usually in the [word RAM](/word-ram/) model.

@@ -100,7 +100,7 @@ L18     step ← step / 2
 L19 return pos + 1                         ▷ n + 1 if the total is less than s
 ```
 
-SEARCH is a [binary search](/binary-search/) that uses the tree directly. It keeps $pos$ as the largest index found so far with PREFIX$(pos) < s_0$, where $s_0$ is the first $s$, and it keeps $s = s_0 - $ PREFIX$(pos)$. Because $pos$ is a multiple of $2 \cdot step$ at each test, $R(pos + step) = (pos, pos + step]$, so $T[pos + step]$ is exactly the sum of the next $step$ items. This takes $O(\log n)$ time, against $O(\log^2 n)$ for a binary search that calls PREFIX.
+SEARCH is a [binary search](/binary-search/) that uses the tree directly. It keeps $pos$ as the largest index found so far with PREFIX$(pos) < s_0$, where $s_0$ is the first $s$, and it keeps $s = s_0 - \mathrm{PREFIX}(pos)$. Because $pos$ is a multiple of $2 \cdot step$ at each test, $R(pos + step) = (pos, pos + step]$, so $T[pos + step]$ is exactly the sum of the next $step$ items. This takes $O(\log n)$ time, against $O(\log^2 n)$ for a binary search that calls PREFIX.
 
 ## Example
 
@@ -114,7 +114,7 @@ Take $n = 10$ and $A = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]$. BUILD gives:
 
 - PREFIX$(7)$ visits $7 \to 6 \to 4 \to 0$ and returns $T[7] + T[6] + T[4] = 2 + 14 + 9 = 25$.
 - PREFIX$(10)$ visits $10 \to 8 \to 0$ and returns $8 + 31 = 39$, the total.
-- RANGE$(3, 7) = $ PREFIX$(7) - $ PREFIX$(2) = 25 - 4 = 21 = 4 + 1 + 5 + 9 + 2$.
+- $\mathrm{RANGE}(3, 7) = \mathrm{PREFIX}(7) - \mathrm{PREFIX}(2) = 25 - 4 = 21 = 4 + 1 + 5 + 9 + 2$.
 - ADD$(3, 2)$ visits $3 \to 4 \to 8 \to 16$, so $T[3] = 6$, $T[4] = 11$ and $T[8] = 33$, and the loop stops at $16 > 10$. Now RANGE$(3, 7) = (2 + 14 + 11) - 4 = 23$.
 - SEARCH$(20)$ on the first array: the prefix sums are $3, 4, 8, 9, 14, 23, \ldots$, so the answer is 6. The search tests $T[8] = 31$ (not less than 20), then takes $T[4] = 9$ ($pos = 4$, $s = 11$), rejects $T[6] = 14$, takes $T[5] = 5$ ($pos = 5$, $s = 6$), and returns $6$.
 
@@ -137,7 +137,7 @@ The costs are counts of group operations and word operations in the [word RAM](/
 
 ## Variants
 
-- **Range update, point query.** Store the [difference array](/difference-array/) $D[i] = A[i] - A[i-1]$ in the tree. Adding $\delta$ to $A[l \ldots r]$ is ADD$(l, \delta)$ and ADD$(r + 1, -\delta)$, and $A[i] = $ PREFIX$(i)$. This solves [range update point query](/range-update-point-query/).
+- **Range update, point query.** Store the [difference array](/difference-array/) $D[i] = A[i] - A[i-1]$ in the tree. Adding $\delta$ to $A[l \ldots r]$ is ADD$(l, \delta)$ and ADD$(r + 1, -\delta)$, and $A[i] = \mathrm{PREFIX}(i)$. This solves [range update point query](/range-update-point-query/).
 - **Range update, range query.** Keep two trees $B_1$ and $B_2$. A range add of $\delta$ on $[l, r]$ adds $\delta$ and $-\delta$ to $B_1$ at $l$ and $r + 1$, and $\delta(l - 1)$ and $-\delta r$ to $B_2$ at the same places. Then PREFIX$(i) = i \cdot B_1(i) - B_2(i)$, where $B_k(i)$ is the prefix sum of tree $k$.
 - **Prefix minimum or maximum.** With $\min$ in place of $+$, PREFIX gives prefix minima, and ADD can only lower values. A general range minimum is not a difference of prefixes, because $\min$ has no inverse, see [idempotent operation](/idempotent-operation/) and the [segment tree](/segment-tree/).
 - **More dimensions.** A [two-dimensional Fenwick tree](/two-dimensional-fenwick-tree/) nests the loops and takes $O(\log^2 n)$ per operation on an $n \times n$ grid.

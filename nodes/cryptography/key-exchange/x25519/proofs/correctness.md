@@ -53,7 +53,7 @@ The doubling is correct in every case by Lemma 3(a). For the addition of $R = m'
 
 *Proof.* The loop processes bits 254 down to 0, so at the end $m_0 = k$ (bit 255 is 0 after clamping), and by Lemma 4 the first slot is $(X : Z) = x(kP)$ after line L10. If $Z \ne 0$, line L11 computes $X \cdot Z^{p - 2} = X/Z$ by Fermat's little theorem. If $Z = 0$, then $Z^{p - 2} = 0$ and the output is 0. $\blacksquare$
 
-**Theorem 2 (agreement).** Let $P_0$ be the base point, of prime order $\ell$, and let $a$ and $b$ be the clamped private keys of Alice and Bob. Then X25519$(a, $X25519$(b, 9)) = $ X25519$(b, $X25519$(a, 9))$.
+**Theorem 2 (agreement).** Let $P_0$ be the base point, of prime order $\ell$, and let $a$ and $b$ be the clamped private keys of Alice and Bob. Then $\mathrm{X25519}(a, \mathrm{X25519}(b, 9)) = \mathrm{X25519}(b, \mathrm{X25519}(a, 9))$.
 
 *Proof.* Clamping makes $a = 8a'$ with $2^{251} \le a' < 2^{252}$, so $a' < \ell$ and $\ell \nmid a'$; since $\ell$ is odd, $\ell \nmid a$, and likewise $\ell \nmid b$. By Theorem 1, Bob's public key is $x(bP_0)$ with $bP_0 \ne O$, and $bP_0$ again has order $\ell$. The $u$-coordinate $x(bP_0)$ is shared by $bP_0$ and $-bP_0$, and $x(a(-Q)) = x(-(aQ)) = x(aQ)$, so the choice of sign does not matter. By Theorem 1 again, Alice's output is $x(a(bP_0)) = x((ab)P_0)$, and Bob's is $x(b(aP_0)) = x((ab)P_0)$, since scalar multiplication in a commutative group satisfies $a(bQ) = (ab)Q = b(aQ)$. As $\ell \nmid ab$, this point is not $O$, so both outputs are the same nonzero 32-byte string. $\blacksquare$
 

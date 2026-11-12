@@ -64,7 +64,7 @@ ADD(T, m, i, d)                                          ▷ record d more items
 L11 while i ≤ m do T[i] ← T[i] + d, i ← i + lowbit(i)
 ```
 
-Before step $j$, the tree holds the $j - 1$ items $A[1], \ldots, A[j-1]$. PREFIX$(T, r[j])$ counts those of them that are at most $A[j]$, so $(j - 1) - $ PREFIX$(T, r[j])$ counts those that are strictly larger. These are exactly the inversions $(p, j)$ with right end $j$. Line L6 adds $A[j]$ to the tree for the later steps. When $A$ is already a [permutation](/permutation/) of $[n]$, lines L1 and L2 are not needed: take $r = A$ and $m = n$.
+Before step $j$, the tree holds the $j - 1$ items $A[1], \ldots, A[j-1]$. PREFIX$(T, r[j])$ counts those of them that are at most $A[j]$, so $(j - 1) - \mathrm{PREFIX}(T, r[j])$ counts those that are strictly larger. These are exactly the inversions $(p, j)$ with right end $j$. Line L6 adds $A[j]$ to the tree for the later steps. When $A$ is already a [permutation](/permutation/) of $[n]$, lines L1 and L2 are not needed: take $r = A$ and $m = n$.
 
 **Scanning the other way.** A scan from right to left that adds PREFIX$(T, r[j] - 1)$, the number of later items that are strictly smaller, counts the same pairs from their left end. Its per-item counts are the [Lehmer code](/lehmer-code/) of a permutation.
 
@@ -120,7 +120,7 @@ Use it when the keys are integers in a small range, or a permutation, or when yo
 
 ## Pitfalls
 
-- **Counting earlier items that are smaller.** Line L5 must add $(j - 1) - $ PREFIX$(T, r[j])$, the earlier items that are larger. Adding PREFIX$(T, r[j] - 1)$ in a left-to-right scan counts the earlier smaller items, which are non-inversions.
+- **Counting earlier items that are smaller.** Line L5 must add $(j - 1) - \mathrm{PREFIX}(T, r[j])$, the earlier items that are larger. Adding PREFIX$(T, r[j] - 1)$ in a left-to-right scan counts the earlier smaller items, which are non-inversions.
 - **Ties.** Subtracting PREFIX$(T, r[j] - 1)$ instead of PREFIX$(T, r[j])$ in line L5 counts the earlier equal items as larger.
 - **Rank 0.** A Fenwick tree is 1-based. With rank 0, ADD at index 0 never ends, because $\operatorname{lowbit}(0) = 0$. Line L2 must give ranks from 1 to $m$.
 - **Compression with duplicates.** Ranks from a sort of the items, not of the *distinct* values, give equal keys different ranks, and the tie pitfall returns.

@@ -112,7 +112,7 @@ Then run these operations.
 | step | operation | cells used | result |
 |---|---|---|---|
 | 1 | PREFIX$(3, 4)$ | $i = 3, 2$ and $j = 4$: $F[3][4] + F[2][4] = 12 + 18$ | 30 |
-| 2 | QUERY$(1, 1, 2, 3)$ | PREFIX$(3, 4) - $ PREFIX$(1, 4) - $ PREFIX$(3, 1) + $ PREFIX$(1, 1) = 30 - 10 - 5 + 2$ | 17 |
+| 2 | QUERY$(1, 1, 2, 3)$ | $\mathrm{PREFIX}(3, 4) - \mathrm{PREFIX}(1, 4) - \mathrm{PREFIX}(3, 1) + \mathrm{PREFIX}(1, 1) = 30 - 10 - 5 + 2$ | 17 |
 | 3 | ADD$(2, 1, 3)$ | $i = 3, 4$ and $j = 2, 4$: the cells $(3, 2)$, $(3, 4)$, $(4, 2)$, $(4, 4)$ get $+3$ | rows 3 and 4 become $3, 7, 6, 15$ and $6, 20, 12, 43$ |
 | 4 | QUERY$(1, 1, 2, 3)$ | the same four prefixes, with PREFIX$(3, 4) = 15 + 18 = 33$ | 20 |
 

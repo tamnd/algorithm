@@ -34,7 +34,7 @@ Under (F), the sets $T(r)$ are pairwise disjoint and cover $E$, because each ele
 
 In all cases only $x$ or $y$ stopped being a root, and the representative of each set other than $A$ and $B$ is its old root. $\square$
 
-**Theorem.** Starting from the empty structure, after any sequence of MAKE-SET, FIND and UNION operations with valid arguments, (F) and (R) hold, each operation stops, and the sets $T(r)$ with representatives $r$ are exactly the sets of the [disjoint-set](/disjoint-set/) type after the same sequence. In particular, FIND$(x) = $ FIND$(y)$ if and only if $x$ and $y$ are in the same set, which is law (D3).
+**Theorem.** Starting from the empty structure, after any sequence of MAKE-SET, FIND and UNION operations with valid arguments, (F) and (R) hold, each operation stops, and the sets $T(r)$ with representatives $r$ are exactly the sets of the [disjoint-set](/disjoint-set/) type after the same sequence. In particular, $\mathrm{FIND}(x) = \mathrm{FIND}(y)$ if and only if $x$ and $y$ are in the same set, which is law (D3).
 
 *Proof.* The empty structure has no elements, so (F) and (R) hold. By induction on the number of operations, using Lemma 2 for MAKE-SET, Lemma 1 for FIND and Lemma 3 for UNION, the invariants hold after each operation, and each operation changes the represented sets exactly as the type says. FIND returns the root of the tree of $x$, which is the representative of its set. Two elements have the same root exactly when they are in the same tree, by (F). $\blacksquare$
 

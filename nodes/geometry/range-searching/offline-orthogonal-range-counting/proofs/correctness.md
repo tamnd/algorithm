@@ -4,7 +4,7 @@ proves: [correctness, termination, complexity]
 status: full
 ---
 
-**Setting.** $P$ is a multiset of $n$ points, $Y = (Y_1 < \dots < Y_m)$ its distinct $y$-values, and the rank of a point is the index $r$ with $Y_r = p_y$. For a nonempty box $Q_i = [x_1, x_2] \times [y_1, y_2]$, $r_1 = |\{r : Y_r < y_1\}|$ and $r_2 = |\{r : Y_r \le y_2\}|$. The Fenwick tree $F$ supports ADD$(r, 1)$ and PREFIX$(r) = $ the sum of the counts at positions $1, \dots, r$.
+**Setting.** $P$ is a multiset of $n$ points, $Y = (Y_1 < \dots < Y_m)$ its distinct $y$-values, and the rank of a point is the index $r$ with $Y_r = p_y$. For a nonempty box $Q_i = [x_1, x_2] \times [y_1, y_2]$, $r_1 = |\{r : Y_r < y_1\}|$ and $r_2 = |\{r : Y_r \le y_2\}|$. The Fenwick tree $F$ supports ADD$(r, 1)$ and $\mathrm{PREFIX}(r)$, the sum of the counts at positions $1, \dots, r$.
 
 **Claim.** OFFLINE-RANGE-COUNT returns $ans_i = |P \cap Q_i|$ for every $i$, in $O((n + q) \log (n + q))$ time and $O(n + q)$ space.
 
