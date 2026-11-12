@@ -1,0 +1,31 @@
+---
+title: The Fitch-Margoliash fit is the exact weighted least squares solution, and the method is exact on tree metrics
+proves: [correctness]
+status: full
+---
+
+**Setting.** $D$ is a symmetric $n \times n$ matrix, $n \ge 3$, with $D_{ij} > 0$ for $i \ne j$, and $w_{ij} = D_{ij}^{-p}$ for a fixed power $p$ ($p = 2$ for Fitch and Margoliash). A topology $T$ is an unrooted binary tree with leaf set $\{1, \ldots, n\}$ and edge set $E$, $|E| = 2n - 3$. For a pair $i < j$ let $P_{ij} \subseteq E$ be the edges on the path from $i$ to $j$, and let $A$ be the $\binom{n}{2} \times |E|$ matrix with $A_{(ij), e} = 1$ if $e \in P_{ij}$ and 0 otherwise. For lengths $b \in \mathbb{R}^E$ the tree gives the distances $Ab$, and the score is
+$$Q_T(b) = \sum_{i<j} w_{ij} \Big(D_{ij} - \sum_{e \in P_{ij}} b_e\Big)^2 = (\mathbf{d} - Ab)^\top W (\mathbf{d} - Ab),$$
+where $\mathbf{d}$ is the vector of the $D_{ij}$ and $W$ is the diagonal matrix of the $w_{ij}$. Lengths are real numbers of any sign.
+
+**Lemma 1 (full column rank).** For every binary topology $T$ with $n \ge 3$ leaves, $A$ has full column rank.
+
+*Proof.* We show that every coordinate $b_e$ is a linear function of $Ab$; then $Ab = 0$ forces $b = 0$. Let $e$ be the pendant edge of leaf $i$, let $u$ be its internal end, and choose leaves $j$ and $k$ beyond the two other neighbors of $u$. The paths $P_{ij}$ and $P_{ik}$ both contain $e$, and $P_{ij} \cup P_{ik} \setminus \{e\}$ is $P_{jk}$, with each edge of $P_{jk}$ in exactly one of $P_{ij}, P_{ik}$. So $(Ab)_{ij} + (Ab)_{ik} - (Ab)_{jk} = 2 b_e$. Now let $e = \{u, v\}$ be an internal edge. Choose leaves $i, j$ beyond the two neighbors of $u$ other than $v$, and leaves $k, l$ beyond the two neighbors of $v$ other than $u$. Let $\pi_x$ be the path from leaf $x$ to its end of $e$. Then $P_{ik} = \pi_i \cup \{e\} \cup \pi_k$, $P_{jl} = \pi_j \cup \{e\} \cup \pi_l$, $P_{ij} = \pi_i \cup \pi_j$ and $P_{kl} = \pi_k \cup \pi_l$, all unions disjoint. So $(Ab)_{ik} + (Ab)_{jl} - (Ab)_{ij} - (Ab)_{kl} = 2 b_e$. $\square$
+
+**Lemma 2 (the fit).** For a fixed $T$, $Q_T$ has exactly one minimizer, the solution $\hat b$ of the normal equations $(A^\top W A)\, b = A^\top W \mathbf{d}$. If $D$ is rational, so is $\hat b$, and exact elimination computes it.
+
+*Proof.* $W$ has positive diagonal entries, so $W = R^2$ with $R = W^{1/2}$, and $Q_T(b) = \lVert R\mathbf{d} - RAb \rVert^2$. By Lemma 1, $RA$ has full column rank, so $M = A^\top W A = (RA)^\top (RA)$ is positive definite. For any $b$, write $b = \hat b + h$. Then
+$$Q_T(b) = Q_T(\hat b) - 2 h^\top A^\top W (\mathbf{d} - A \hat b) + h^\top M h = Q_T(\hat b) + h^\top M h,$$
+because the middle term vanishes by the normal equations. Since $M$ is positive definite, $h^\top M h > 0$ for $h \ne 0$. $M$ is nonsingular, so $\hat b$ exists and is unique. With rational entries Gaussian elimination stays in the rationals. Scaling all $w_{ij}$ by one positive constant scales $M$ and $A^\top W \mathbf{d}$ by that constant and does not change $\hat b$; the program uses this to clear denominators. $\square$
+
+Let $Q(T) = Q_T(\hat b)$ be the score of the topology.
+
+**Lemma 3 (only the true topology fits a tree metric).** Let $D$ be the leaf metric of a binary tree $T_0$ with positive edge lengths, and let $T$ be a binary topology on the same leaves. Then $Q(T) = 0$ if and only if $T = T_0$.
+
+*Proof.* If $T = T_0$, the true lengths give $Q = 0$, and $Q \ge 0$ always. Conversely, suppose $Q(T) = 0$, so some real lengths $b$ on $T$ give $D = Ab$. Take four leaves, and let $ij|kl$ be the split of the quartet that $T$ displays. In $T$ the paths $P_{ik}$ and $P_{jl}$ together use the same edges, with the same multiplicities, as $P_{il}$ and $P_{jk}$, so $D_{ik} + D_{jl} = D_{il} + D_{jk}$, whatever the signs of the lengths. In $T_0$, let $xy|zt$ be the displayed split of the quartet, and let $\delta > 0$ be the length of the path between the two points where the paths from $x$ and $y$ meet and where the paths from $z$ and $t$ meet; this path has at least one edge, because $T_0$ is binary. The same path count gives $D_{xz} + D_{yt} = D_{xt} + D_{yz} = D_{xy} + D_{zt} + 2\delta$, so the displayed pair sum is strictly the smallest. If $T_0$ displayed $ik|jl$, then $D_{ik} + D_{jl}$ would be strictly smaller than $D_{il} + D_{jk}$; if it displayed $il|jk$, then $D_{il} + D_{jk}$ would be strictly smaller than $D_{ik} + D_{jl}$. Both contradict the equality, so $T_0$ also displays $ij|kl$. The two binary trees display the same quartets, so they are equal: a binary tree is determined by its quartets, since the split $X_1 | X_2$ of an edge is the one for which every quartet with two leaves on each side is displayed as such. $\square$
+
+**Lemma 4 (the search stops).** The loop of lines L6 to L9 ends after finitely many passes. *Proof.* Each pass that does not stop strictly lowers $Q(T)$. There are $(2n-5)!!$ topologies, so no topology repeats, and the loop ends. $\square$
+
+**Theorem.** (a) For each topology that the method scores, the returned lengths and score are the exact weighted least squares solution of Lemma 2. (b) If $D$ is the leaf metric of a binary tree $T_0$ with positive edge lengths, the method returns $T_0$ with its edge lengths and $Q = 0$.
+
+*Proof.* Part (a) is Lemma 2. For (b), let $S_x = \{1, \ldots, x\}$. The restriction of $D$ to $S_x$ is the leaf metric of $T_0|_{S_x}$, the subtree of $T_0$ spanned by $S_x$ with vertices of degree 2 suppressed, which is binary with positive lengths. We show by induction that after leaf $x$ is added, $T = T_0|_{S_x}$. For $x = 3$ there is one topology. Suppose $T = T_0|_{S_{x-1}}$. The tree $T_0|_{S_x}$ arises from $T$ by attaching $x$ to one edge of $T$, so it is one of the candidates of line L3, and its score is 0. Every other candidate is a different binary topology on $S_x$, so by Lemma 3 its score is positive. Line L5 therefore keeps $T_0|_{S_x}$. After the last leaf $T = T_0$ with $Q(T) = 0$. No topology has a negative score, so line L8 finds no strict improvement and the loop stops at once. By Lemma 2 the returned lengths are the unique minimizer, and the true lengths have score 0, so they are the returned lengths. $\blacksquare$

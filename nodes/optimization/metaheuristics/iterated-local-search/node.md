@@ -4,7 +4,6 @@ kind: algorithm
 slug: iterated-local-search
 name: Iterated local search
 aliases:
-- ILS
 - large-step Markov chain
 - chained local optimization
 area: optimization/metaheuristics
