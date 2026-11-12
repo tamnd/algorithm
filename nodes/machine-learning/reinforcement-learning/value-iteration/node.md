@@ -102,7 +102,7 @@ Since there are finitely many deterministic policies, there is a gap between the
 
 **Number of sweeps for an $\varepsilon$-optimal policy.** Let $|R(s, a)| \le R_{\max}$ and $V_0 = 0$, so $\lVert V^* \rVert \le R_{\max}/(1-\gamma)$. By the triangle inequality, the change of sweep $k$ is at most $\lVert V_k - V^* \rVert + \lVert V_{k-1} - V^* \rVert \le 2\gamma^{k-1} R_{\max}/(1-\gamma)$. So the loop stops after at most
 
-$$k \le 1 + \frac{\ln\big(4\gamma R_{\max} / (\varepsilon (1-\gamma)^2)\big)}{\ln(1/\gamma)} = O\Big(\frac{1}{1-\gamma} \log \frac{R_{\max}}{\varepsilon(1-\gamma)}\Big)$$
+$$k \le 1 + \frac{\ln\big(4 R_{\max} / (\varepsilon (1-\gamma)^2)\big)}{\ln(1/\gamma)} = O\Big(\frac{1}{1-\gamma} \log \frac{R_{\max}}{\varepsilon(1-\gamma)}\Big)$$
 
 sweeps, a worst-case bound, since $\ln(1/\gamma) \ge 1 - \gamma$. The factor $1/(1-\gamma)$ is real: in the example the error falls only by the factor $0.9$ per sweep.
 

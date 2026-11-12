@@ -82,7 +82,7 @@ In Adam the preconditioner is $P = \operatorname{diag}(1/(\sqrt{\hat v_j} + \eps
 
 **The first step of Adam.** Take $\theta = (1, 1)$, the gradient $g = (10, 0.1)$, step size 0.1 and decay coefficient 0.1. The first Adam step after bias correction is about $-\alpha\, g_j/|g_j|$ per weight, so without decay $\theta$ becomes $(0.9, 0.9)$. With the L2 form the gradient is $(10.1, 0.2)$, which has the same signs, so the step is again $(0.9, 0.9)$: the penalty has no effect on this step. With the decoupled form, implemented as $\theta \leftarrow (1 - \alpha\lambda)\theta - \alpha \cdot \text{(Adam step)}$, the result is $(0.89, 0.89)$.
 
-**Shrinkage on a quadratic.** For $H = \operatorname{diag}(100, 1)$, $c = (1, 1)$ and $\lambda' = 0.1$, Claim 2 gives $\theta^\star = (1000/1001, 10/11) \approx (0.999, 0.909)$: the flat direction is shrunk by 9%, the steep one by 0.1%. Plain SGD with the decoupled decay $\lambda = 0.009 \cdot 0.1$ and step size 0.009 converges to this point, and so does Adam with the L2 penalty, since its fixed points are the zeros of the penalized gradient.
+**Shrinkage on a quadratic.** For $H = \operatorname{diag}(100, 1)$, $c = (1, 1)$ and $\lambda' = 0.1$, Claim 2 gives $\theta^\star = (1000/1001, 10/11) \approx (0.999, 0.909)$: the flat direction is shrunk by 9%, the steep one by 0.1%. Plain SGD with the decoupled decay $\lambda = 0.009 \cdot 0.1$ and step size 0.009 converges to this point. Adam with the L2 penalty has this point as its only fixed point, since its fixed points are the zeros of the penalized gradient; so if that run converges, it converges here too. Convergence of Adam itself is not proved on this page.
 
 ## Variations
 

@@ -54,7 +54,7 @@ The term $n/k + k$ is smallest near $k = \sqrt n$, which gives at most $2\lceil 
 CHECKPOINTED-BACKPROP(F_1..F_n, x_0, k)
 L1  for i ← 1 to n do                           ▷ forward pass
 L2      x_i ← F_i(x_{i−1})
-L3      if k divides i and i < n then keep x_i as a checkpoint; else free x_{i−1} unless it is x_0 or a checkpoint
+L3      free x_{i−1} unless it is x_0 or a checkpoint; if k divides i and i < n then keep x_i as a checkpoint
 L4  ḡ ← ∂ℓ/∂x_n
 L5  for each segment [a+1, e] of k layers, from the last segment to the first do
 L6      recompute x_{a+1}, ..., x_{e−1} from the checkpoint x_a and keep them

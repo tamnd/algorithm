@@ -110,7 +110,7 @@ The costs are in the [real RAM](/real-ram/) model.
 - **Mass covering.** Moment matching minimizes $\mathrm{KL}(\hat p \| q)$ locally, which is large if $q$ is small where $\hat p$ has mass. So $q$ spreads over all the mass, unlike the mode-seeking $\mathrm{KL}(q \| p)$ of [variational inference](/variational-inference/).
 - **Not a bound.** The EP estimate of $\log Z$ is neither a lower nor an upper bound in general, unlike the [ELBO](/evidence-lower-bound/).
 - **Often accurate.** In problems with a single-peaked posterior, such as Gaussian process classification, EP means and variances are often very close to the true ones.
-- **Order matters.** The fixed point does not depend on the order of the sites, but the path, and whether it converges, can.
+- **Order matters.** The fixed point conditions do not depend on the order of the sites. But EP can have several fixed points, and the order can change which one it reaches, the path, and whether it converges.
 - **Deterministic.** No random sampling.
 
 ## Variants and improvements
@@ -131,7 +131,7 @@ Use EP for a posterior with many non-Gaussian factors that is roughly single-pea
 - **No convergence on multimodal posteriors.** As in the example, EP can fail when the posterior has several separated bumps.
 - **Tilted moments without a closed form.** They must be computed by quadrature or sampling, and errors there can break convergence.
 - **Reading the $\log Z$ estimate as a bound.** It is not one.
-- **Expecting the variational answer.** EP and variational inference minimize different divergences and give different answers; EP is wider.
+- **Expecting the variational answer.** EP and variational inference minimize different divergences and give different answers. EP tends to cover the mass of the posterior, so its approximation is often wider than the variational one, but not always.
 
 ## Implementations
 

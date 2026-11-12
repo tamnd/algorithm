@@ -91,7 +91,7 @@ In operator form, the expected target is $(T^\pi)^n V$, a $\gamma^n$-contraction
 
 ## Complexity
 
-Lines L3 and L4 cost $O(\min(n, T))$ arithmetic operations, so an episode of $T$ steps costs $O(nT)$ time. The online form stores the last $n + 1$ states and rewards and the table: $O(|S| + n)$ memory. Each update is late by $n - 1$ steps. No sample complexity bound in $n$ alone is known to us; the best $n$ depends on the task. On the 19-state random walk, Sutton and Barto (Section 7.1) observed the lowest error for an intermediate $n$, neither 1 nor the full episode; this is an observation for that task, not a theorem.
+Lines L3 and L4 cost $O(\min(n, T))$ arithmetic operations, so an episode of $T$ steps costs $O(nT)$ time. The online form stores the last $n + 1$ states and rewards and the table: $O(|S| + n)$ memory. Each update is made $n$ steps after the visit, $n - 1$ steps later than in TD(0). No sample complexity bound in $n$ alone is known to us; the best $n$ depends on the task. On the 19-state random walk, Sutton and Barto (Section 7.1) observed the lowest error for an intermediate $n$, neither 1 nor the full episode; this is an observation for that task, not a theorem.
 
 ## Properties
 

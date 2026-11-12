@@ -8,7 +8,7 @@ aliases:
 - CQL(H)
 area: machine-learning/reinforcement-learning
 level: research
-summary: "Offline Q-learning that adds alpha (logsumexp_a Q(s,a) - Q(s,a_data)) to the Bellman loss, pushing down values of actions absent from the data so the learned value is a lower bound."
+summary: "Offline Q-learning that adds alpha (logsumexp_a Q(s,a) - Q(s,a_data)) to the Bellman loss; in policy evaluation with alpha large enough the learned value is a lower bound in expectation."
 solves: [offline-reinforcement-learning]
 model: real-ram
 complexity:
@@ -37,7 +37,7 @@ Conservative Q-learning (CQL; Kumar, Zhou, Tucker and Levine, 2020) is a Q-learn
 
 $$\alpha\, \mathbb{E}_{s \sim D}\Big[\log \sum_a \exp Q(s, a) - \mathbb{E}_{a \sim \hat\pi_\beta(\cdot \mid s)} Q(s, a)\Big] + \tfrac12\, \mathbb{E}_{(s, a, s') \sim D}\Big[\big(Q(s, a) - \hat{\mathcal B} \hat Q^k(s, a)\big)^2\Big],$$
 
-where $\hat\pi_\beta$ is the behavior policy of the data and $\hat{\mathcal B}$ the empirical Bellman operator. The paper proves that, with the right form of the penalty, the learned value is a lower bound on the true value of the learned policy.
+where $\hat\pi_\beta$ is the behavior policy of the data and $\hat{\mathcal B}$ the empirical Bellman operator. The paper proves that, for policy evaluation with the right form of the penalty and $\alpha$ large enough, the learned state value is a lower bound on the true value of the policy; single Q-values need not be, and the max backup of the example below is not covered.
 
 ## In plain words
 

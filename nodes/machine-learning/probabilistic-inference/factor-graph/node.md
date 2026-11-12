@@ -9,7 +9,7 @@ summary: "A bipartite graph of variable nodes and factor nodes for g(x) = produc
 history:
   year: 2001
   people: [Frank R. Kschischang, Brendan J. Frey, Hans-Andrea Loeliger]
-  note: Kschischang, Frey and Loeliger defined factor graphs and the sum-product algorithm on them, and showed decoding, forward-backward, Kalman filtering and belief propagation as special cases.
+  note: Frey, Kschischang, Loeliger and Wiberg introduced factor graphs at the Allerton conference in 1997. In 2001 Kschischang, Frey and Loeliger gave the full account of factor graphs and the sum-product algorithm on them, and showed decoding, forward-backward, Kalman filtering and belief propagation as special cases.
 prereqs: [graphical-model, bipartite-graph, bayesian-network, markov-random-field]
 see_also: [belief-propagation, loopy-belief-propagation, tanner-graph, belief-propagation-decoding, ldpc-code, variable-elimination, hidden-markov-model, viterbi-algorithm]
 sources:
@@ -71,7 +71,7 @@ The marginal of $x_i$ is proportional to $\prod_{a \ni i} \mu_{a \to i}(x_i)$. R
 - **Bayesian networks and Markov random fields.** Both convert to factor graphs with the same joint distribution. The factor graph keeps the exact grouping of the factors, which the MRF graph does not. It drops the directions of a Bayesian network, so independences that d-separation reads from v-structures have to be read from the tables.
 - **Chains.** A [hidden Markov model](/hidden-markov-model/) is a chain-shaped factor graph. Sum-product on it is the forward-backward algorithm, max-product is the [Viterbi algorithm](/viterbi-algorithm/), and with Gaussian factors sum-product is the [Kalman filter](/kalman-filter/) and its smoother (Kschischang, Frey and Loeliger 2001).
 - **Elimination.** [Variable elimination](/variable-elimination/) computes one marginal by summing out variables one at a time; sum-product on a tree is the same computation, organized so that all marginals share the work.
-- **Normal factor graphs.** A variant puts variables on edges and factors on nodes. It is convenient for codes and state space models (Loeliger 2004).
+- **Normal factor graphs.** A variant puts variables on edges and factors on nodes. It is convenient for codes and state space models. Forney introduced it in 2001 as the normal realization of a code; Loeliger (2004) gives an introduction.
 
 ## Known results in the model
 

@@ -9,7 +9,7 @@ aliases:
 - sequential importance resampling filter
 area: machine-learning/probabilistic-inference
 level: advanced
-summary: "Bootstrap filter: N particles are resampled, moved by the dynamics and weighted by the likelihood at each step. Estimates converge at rate 1/sqrt(N)."
+summary: "Bootstrap filter: N particles are resampled, moved by the dynamics and weighted by the likelihood. For bounded test functions the error at step t is at most c_t/sqrt(N); c_t can grow with t."
 solves: [filtering]
 model: real-ram
 complexity:

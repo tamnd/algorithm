@@ -54,7 +54,7 @@ $$
 p(\tilde x \mid D) = \int_\Theta p(\tilde x \mid \theta)\,p(\theta \mid D)\,d\theta = \frac{p(D, \tilde x)}{p(D)}.
 $$
 
-This average is wider than the plug-in prediction $p(\tilde x \mid \hat\theta)$ for one estimate $\hat\theta$, because it carries the uncertainty about $\theta$.
+This average carries the uncertainty about $\theta$. By the law of total variance, its variance is the posterior mean of $\operatorname{Var}(\tilde x \mid \theta)$ plus the posterior variance of $\mathbb{E}[\tilde x \mid \theta]$. So it usually has a larger spread than the plug-in prediction $p(\tilde x \mid \hat\theta)$ for one estimate $\hat\theta$; for a normal mean with known variance it is always wider.
 
 **Sequential updating equals batch updating.** Let $D_k = (x_1, \ldots, x_k)$. Because the $x_i$ are independent given $\theta$,
 
@@ -66,7 +66,7 @@ $$
 
 By induction, updating one observation at a time, with each posterior as the next prior, gives the batch posterior. The likelihood is a product, so the result does not depend on the order of the data. Data whose joint law does not change under a permutation are *exchangeable*. De Finetti's theorem says that an infinite exchangeable sequence of 0/1 variables is a mixture of i.i.d. Bernoulli sequences, that is, conditionally i.i.d. given some $\theta$ with some prior. So for such data the model above is not an extra assumption.
 
-**Decisions from the posterior.** Under squared loss the best point estimate is the posterior mean; under absolute loss it is a posterior median. The posterior mode is the [MAP estimate](/maximum-a-posteriori-estimation/); it is not the Bayes estimate for any fixed loss on a continuous parameter, and it depends on the parameterization.
+**Decisions from the posterior.** Under squared loss the best point estimate is the posterior mean; under absolute loss it is a posterior median. The posterior mode is the [MAP estimate](/maximum-a-posteriori-estimation/); in general it is not the Bayes estimate of a fixed loss on a continuous parameter, but under conditions it is the limit of the Bayes estimates for the 0-1 loss on smaller and smaller balls. It depends on the parameterization.
 
 **Credible and confidence intervals.** A 95% *credible* set $C(D)$ has $\Pr(\theta \in C(D) \mid D) = 0.95$: a probability over $\theta$, for the data at hand. A 95% *confidence* set has $\Pr_\theta(\theta \in C(D)) \ge 0.95$ for every $\theta$: a probability over repeated data, for a fixed $\theta$. The two are different statements, and one can hold without the other (see the example below).
 

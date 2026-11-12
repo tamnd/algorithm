@@ -114,7 +114,7 @@ The [proof page](proofs/correctness.md) proves the first three claims in full, p
 
 ## Variants and improvements
 
-- **Explore-then-commit.** Pull each arm $m$ times, then commit to the best. It is epsilon-greedy with $\varepsilon_t = 1$ for $t \le mK$ and 0 after. With $m$ tuned to the gap it has $O(\log n)$ regret for two arms (Lattimore and Szepesvari, Chapter 6).
+- **Explore-then-commit.** Pull each arm $m$ times, then commit to the best. It looks like epsilon-greedy with $\varepsilon_t = 1$ for $t \le mK$ and 0 after, but it is not the same: random pulls give each arm about $m$ pulls, not exactly $m$. With $m$ tuned to the gap it has $O(\log n)$ regret for two arms (Lattimore and Szepesvari, Chapter 6).
 - **Optimistic initial values.** Set $Q[i]$ to a large value at the start, with $\varepsilon = 0$ (Sutton and Barto, Section 2.6). It explores at the start only.
 - **Softmax or Boltzmann exploration.** Pull arm $i$ with probability proportional to $e^{Q[i]/\tau}$. Bad arms get fewer random pulls than good ones.
 - **Decay by episodes in RL.** In [Q-learning](/q-learning/) and [DQN](/dqn/), $\varepsilon$ falls linearly from 1 to a small floor such as 0.1 or 0.01 over a fixed number of steps. There is no regret guarantee for this rule.

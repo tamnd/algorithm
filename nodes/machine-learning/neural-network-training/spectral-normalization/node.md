@@ -5,7 +5,7 @@ slug: spectral-normalization
 name: Spectral normalization
 area: machine-learning/neural-network-training
 level: research
-summary: "Divide each weight matrix by its largest singular value, estimated with one power iteration step per update, so that each linear layer is 1-Lipschitz in the l2 norm."
+summary: "Divide each weight matrix by its largest singular value, estimated with one power iteration step per update, so that each linear layer is close to 1-Lipschitz in the l2 norm."
 prereqs: [power-iteration, singular-value-decomposition, matrix-norms, backpropagation]
 see_also: [weight-normalization, batch-normalization, lipschitz-condition, rayleigh-quotient, gradient-clipping, adversarial-training, symmetric-eigenproblem]
 sources:
@@ -20,7 +20,7 @@ sources:
     locator: the exact singular values of a multichannel convolution by the Fourier transform
 ---
 
-Spectral normalization (Miyato, Kataoka, Koyama and Yoshida, 2018) replaces each weight matrix $W$ of a network by $W_{\mathrm{SN}} = W/\sigma(W)$, where $\sigma(W)$ is the largest [singular value](/singular-value-decomposition/) of $W$. Since $\sigma(W)$ is the [operator norm](/matrix-norms/) of $W$ for the Euclidean norm, the normalized layer $x \mapsto W_{\mathrm{SN}} x$ is 1-Lipschitz, and a network built from such layers and 1-Lipschitz activations is 1-Lipschitz. Computing $\sigma(W)$ exactly at every step costs a full singular value decomposition, so the method keeps one vector $u$ per layer and does one step of [power iteration](/power-iteration/) per training update. The weights move little between updates, so the estimate from one step stays close to $\sigma(W)$. The method was made for the discriminator of generative adversarial networks, where a Lipschitz bound keeps training stable.
+Spectral normalization (Miyato, Kataoka, Koyama and Yoshida, 2018) replaces each weight matrix $W$ of a network by $W_{\mathrm{SN}} = W/\sigma(W)$, where $\sigma(W)$ is the largest [singular value](/singular-value-decomposition/) of $W$. Since $\sigma(W)$ is the [operator norm](/matrix-norms/) of $W$ for the Euclidean norm, the normalized layer $x \mapsto W_{\mathrm{SN}} x$ is 1-Lipschitz, and a network built from such layers and 1-Lipschitz activations is 1-Lipschitz. Computing $\sigma(W)$ exactly at every step costs a full singular value decomposition, so the method keeps one vector $u$ per layer and does one step of [power iteration](/power-iteration/) per training update. The weights move little between updates, so the estimate from one step stays close to $\sigma(W)$. The estimate is never above $\sigma(W)$, so with it each layer is only close to 1-Lipschitz. The method was made for the discriminator of generative adversarial networks, where a Lipschitz bound keeps training stable.
 
 ## In plain words
 
@@ -60,9 +60,9 @@ With every $W_l$ normalized, the bound is 1. It can be loose: the product bounds
 
 ### The power iteration estimate
 
-**Claim 2.** After lines L1 to L3, $\tilde\sigma = \|W v\| \le \sigma_1$. If $u$ has a nonzero component along $u_1$ and $\sigma_1 > \sigma_2$, repeated calls with a fixed $W$ give $\tilde\sigma \to \sigma_1$, with an error that shrinks by about the factor $(\sigma_2/\sigma_1)^2$ per call.
+**Claim 2.** After lines L1 to L3, $\tilde\sigma = \|W v\| \le \sigma_1$. If $u$ has a nonzero component along $u_1$ and $\sigma_1 > \sigma_2$, repeated calls with a fixed $W$ give $\tilde\sigma \to \sigma_1$, with an error that shrinks by about the factor $(\sigma_2/\sigma_1)^4$ per call.
 
-*Proof.* $u = W v/\|W v\|$ gives $u^\top W v = \|W v\|$, and $\|W v\| \le \sigma_1$ because $\|v\| = 1$. One call maps $u$ to a multiple of $W W^\top u$, which is one step of power iteration for the symmetric matrix $W W^\top$, whose eigenvalues are $\sigma_i^2$. The component of $u$ along $u_i$ is multiplied by $\sigma_i^2$ at each step, so the direction of $u$ converges to $\pm u_1$ at the rate $(\sigma_2/\sigma_1)^2$, and $v$ to $\pm v_1$. Then $\|W v\| \to \sigma_1$. $\blacksquare$
+*Proof.* $u = W v/\|W v\|$ gives $u^\top W v = \|W v\|$, and $\|W v\| \le \sigma_1$ because $\|v\| = 1$. One call maps $u$ to a multiple of $W W^\top u$, which is one step of power iteration for the symmetric matrix $W W^\top$, whose eigenvalues are $\sigma_i^2$. The component of $u$ along $u_i$ is multiplied by $\sigma_i^2$ at each step, so the direction of $u$ converges to $\pm u_1$ at the rate $(\sigma_2/\sigma_1)^2$, and $v$ to $\pm v_1$. Then $\|W v\| \to \sigma_1$. Write $v = \cos\theta\, v_1 + \sin\theta\, w$ with $w \perp v_1$ a unit vector. Since $W v_1$ is orthogonal to $W w$, $\|W v\|^2 = \sigma_1^2 \cos^2\theta + \|W w\|^2 \sin^2\theta \ge \sigma_1^2 - \sigma_1^2 \sin^2\theta$. So $\sigma_1 - \|W v\| \le (\sigma_1^2 - \|W v\|^2)/\sigma_1 \le \sigma_1 \sin^2\theta$: the error is $O(\theta^2)$. The angle shrinks by about $(\sigma_2/\sigma_1)^2$ per call, so the error shrinks by about $(\sigma_2/\sigma_1)^4$. $\blacksquare$
 
 During training $W$ changes by a small step between calls, so the vector $u$ from the last call is already close to the new $u_1$, and one step keeps it close. The estimate lags by about one step of the optimizer and is always from below.
 
@@ -97,7 +97,7 @@ The error of $\tilde\sigma$ falls by a factor of about 81 per call. The angle be
 ## Variations
 
 - **More power steps.** Some implementations do several steps per update, or several at the first update to warm up $u$.
-- **Convolutions.** Miyato et al. reshape the kernel of shape $c_{\mathrm{out}} \times c_{\mathrm{in}} \times h \times w$ to a matrix of size $c_{\mathrm{out}} \times c_{\mathrm{in}} h w$. Running power iteration on the convolution itself, with a convolution and a transposed convolution in place of $W$ and $W^\top$, bounds the true operator norm. Sedghi, Gupta and Long (2019) compute all singular values of a convolution with periodic padding by the Fourier transform.
+- **Convolutions.** Miyato et al. reshape the kernel of shape $c_{\mathrm{out}} \times c_{\mathrm{in}} \times h \times w$ to a matrix of size $c_{\mathrm{out}} \times c_{\mathrm{in}} h w$. Running power iteration on the convolution itself, with a convolution and a transposed convolution in place of $W$ and $W^\top$, gives an estimate of the true operator norm from below, which tends to it. Sedghi, Gupta and Long (2019) compute all singular values of a convolution with periodic padding by the Fourier transform.
 - **A soft bound.** Divide by $\max(1, \tilde\sigma/c)$ instead of $\tilde\sigma$, so that only layers with norm above $c$ are scaled down.
 - **[Weight normalization](/weight-normalization/)** divides each row by its own norm, which is a different bound: the largest row norm is at most $\sigma_1$, and $\sigma_1$ is at most $\sqrt{n}$ times the largest row norm.
 

@@ -59,7 +59,7 @@ A best rule always exists, and you can choose one that does not use coins and do
 
 ## Examples
 
-- **Two states.** In the example of [value iteration](/value-iteration/), with $\gamma = 0.9$, staying in state L gives 1 per step and moving gives 0 now but reaches the state H that pays 2 per step. The optimal policy moves in L and stays in H, with $V^* = (180/11, 20)$. Four deterministic policies exist, and the brute force answer agrees.
+- **Two states.** In the example of [value iteration](/value-iteration/), with $\gamma = 0.9$, staying in state L gives 1 per step and moving gives 0 now and reaches, with probability $1/2$, the state H that pays 2 per step (else it stays in L). The optimal policy moves in L and stays in H, with $V^* = (180/11, 20)$. Four deterministic policies exist, and the brute force answer agrees.
 - **Gridworld.** A robot on a grid with walls, a goal with a reward, and moves that slip with some probability. The optimal policy is a map of arrows.
 - **Inventory control.** The state is the stock level, the action is the order size, demand is random, and the reward is sales income minus order and holding costs.
 

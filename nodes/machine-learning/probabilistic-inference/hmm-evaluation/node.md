@@ -54,7 +54,7 @@ Take the rain and dry model of the HMM page: $\pi = (1/2, 1/2)$, $A = \begin{pma
 | [Forward algorithm](/forward-algorithm/) | $\Theta(T N^2)$ | $\Theta(N)$ | exact; scaled or in log space for long $T$ |
 | Backward pass of [forward-backward](/forward-backward-algorithm/) | $\Theta(T N^2)$ | $\Theta(N)$ | $P(O) = \sum_i \pi_i B_i(o_1) \beta_1(i)$ |
 
-The difference is large. Rabiner's example is $N = 5$ and $T = 100$: the direct sum needs about $10^{72}$ operations, and the forward algorithm about $N^2 T = 2500$.
+The difference is large. Rabiner's example is $N = 5$ and $T = 100$: the direct sum needs about $10^{72}$ operations, and the forward algorithm about 3000 ($N(N + 1)(T - 1) + N = 2975$ multiplications), of the order $N^2 T$.
 
 ## Bounds
 

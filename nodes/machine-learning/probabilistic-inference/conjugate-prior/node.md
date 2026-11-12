@@ -100,7 +100,7 @@ Each row follows by multiplying the prior density by the likelihood and reading 
 - [Exponential family distribution](/exponential-family-distribution/): the models with the general conjugate family above. By the Pitman-Koopman-Darmois theorem, under smoothness conditions they are also the only models with a fixed support that have a sufficient statistic of fixed dimension for every sample size.
 - [Marginal likelihood](/marginal-likelihood/): for a conjugate pair it is a ratio of normalizing constants, for example $B(a+s, b+n-s)/B(a, b)$ for one ordered Bernoulli sequence.
 - [Bayesian inference](/bayesian-inference/): the posterior and the posterior predictive. Under a conjugate prior the predictive is also closed form: beta-binomial, negative binomial for gamma-Poisson, Student t for normal-inverse-gamma, Dirichlet-multinomial.
-- [MAP estimation](/maximum-a-posteriori-estimation/): with a Beta($a, b$) prior and $a, b \ge 1$, the MAP estimate is $(a + s - 1)/(a + b + n - 2)$, the MLE with pseudo-counts.
+- [MAP estimation](/maximum-a-posteriori-estimation/): with a Beta($a, b$) prior, $a, b \ge 1$ and $a + b + n > 2$, the MAP estimate is $(a + s - 1)/(a + b + n - 2)$, the MLE with pseudo-counts.
 - [Latent Dirichlet allocation](/latent-dirichlet-allocation/) and the [Dirichlet process](/dirichlet-process/) are built on Dirichlet-multinomial conjugacy, which makes collapsed [Gibbs sampling](/gibbs-sampling/) possible.
 - [Thompson sampling](/thompson-sampling/) with Bernoulli rewards keeps one beta posterior per arm.
 

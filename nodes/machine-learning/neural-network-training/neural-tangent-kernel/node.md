@@ -47,14 +47,14 @@ $$\frac{d}{dt} f(x; \theta_t) = \nabla_\theta f(x; \theta_t)^\top \dot\theta_t =
 
 where $\Theta_t(x, x') = \nabla_\theta f(x; \theta_t)^\top \nabla_\theta f(x'; \theta_t)$. This is an identity, not an approximation. The kernel $\Theta_t$ is a Gram matrix of gradients, so it is positive semidefinite. In general it depends on $\theta_t$ and changes as the network trains.
 
-**The NTK parameterization.** Each layer computes $\alpha^{(l+1)} = \frac{1}{\sqrt{n_l}} W^{(l)} \sigma(\alpha^{(l)}) + \beta b^{(l)}$, where $n_l$ is the width of layer $l$ and all entries of $W^{(l)}$ and $b^{(l)}$ are drawn i.i.d. $N(0, 1)$. The factor $1/\sqrt{n_l}$ sits in the forward pass rather than in the variance of the initial weights. The function at initialization has the same law as with [He](/he-initialization/) or LeCun scaling, but the gradient with respect to each weight is $1/\sqrt{n_l}$ times smaller, so with a fixed $\eta$ each single weight moves by $O(1/\sqrt{n_l})$.
+**The NTK parameterization.** Each layer computes $\alpha^{(l+1)} = \frac{1}{\sqrt{n_l}} W^{(l)} \sigma(\alpha^{(l)}) + \beta b^{(l)}$, where $n_l$ is the width of layer $l$ and all entries of $W^{(l)}$ and $b^{(l)}$ are drawn i.i.d. $N(0, 1)$. The factor $1/\sqrt{n_l}$ sits in the forward pass rather than in the variance of the initial weights. The function at initialization has the same law as a standard network with LeCun scaling, weight variance $1/n_l$, and biases drawn from $N(0, \beta^2)$. [He](/he-initialization/) scaling would double the weight variance. The gradient with respect to each weight is $1/\sqrt{n_l}$ times smaller, so with a fixed $\eta$ each single weight moves by $O(1/\sqrt{n_l})$.
 
 **Theorem (Jacot, Gabriel and Hongler 2018).** Let $\sigma$ be Lipschitz and twice differentiable with a bounded second derivative. Let the hidden widths $n_1, \ldots, n_{L-1}$ tend to infinity one after the other.
 
 1. At initialization, $\Theta_0$ converges in probability to a deterministic kernel $\Theta_\infty$, given by a recursion over the layers.
 2. For any $T$ such that the training direction stays bounded on $[0, T]$ (for squared loss it does), $\Theta_t$ converges uniformly on $[0, T]$ to the same $\Theta_\infty$.
 
-The ReLU does not meet the smoothness hypothesis. Later work proved the same limits for ReLU networks, with widths that grow together and with explicit rates (for example Arora et al. 2019 and Lee et al. 2019).
+The ReLU does not meet the smoothness hypothesis. Later work proved the same limits with widths that grow together and with explicit rates. Arora et al. (2019) cover ReLU networks; Lee et al. (2019) still assume a smooth activation.
 
 **Training in the limit is kernel regression.** Replace $\Theta_t$ by a fixed $\Theta$ in the identity above. Let $u_t = (f(x_i; \theta_t))_i$, $K = (\Theta(x_i, x_j))_{ij}$, and assume $K$ is positive definite. The training outputs follow the linear system $\dot u_t = -\frac1n K (u_t - y)$, whose solution is
 

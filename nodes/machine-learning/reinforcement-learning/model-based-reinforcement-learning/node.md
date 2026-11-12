@@ -21,6 +21,8 @@ sources:
     locator: the R-max algorithm, its optimistic model of unknown pairs, and the polynomial bound
 ---
 
+Model-based reinforcement learning learns an estimate of the transition probabilities and expected rewards of a [Markov decision process](/markov-decision-process/) from experience, and then plans on that estimate, for example with [value iteration](/value-iteration/). A model can be reused for many planning steps without new trials, so it usually needs far fewer real transitions than model-free methods, but the errors of the model limit the quality of the plan.
+
 ## In plain words
 
 An agent that learns by trial and error can do one of two things with what it sees. It can change its opinion of its actions directly. Or it can first learn how the world works, which actions lead where and what they pay, and then work out good actions by thinking ahead with that learned picture. The second way is model-based learning.

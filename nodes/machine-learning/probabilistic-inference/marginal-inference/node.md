@@ -70,7 +70,7 @@ for all values $x_Q$, defined when the denominator is positive. The denominator 
 
 Wet grass makes rain more likely, from 0.5 to 0.708. Once rain is known, the sprinkler becomes less likely, from 0.430 to 0.194: the rain *explains away* the wet grass. A table of all $2^4 = 16$ joint values gives these numbers; [variable elimination](/variable-elimination/) gives them with smaller tables.
 
-**A formula.** Let $\varphi$ be a formula in conjunctive normal form over $n$ variables. Make each variable a fair coin, and add a node $Y$ that is 1 exactly when $\varphi$ is true, through deterministic nodes for the clauses. Then $P(Y{=}1) \cdot 2^n$ is the number of satisfying assignments. This is the construction behind the hardness results.
+**A formula.** Let $\varphi$ be a formula in conjunctive normal form over $n$ variables. Make each variable a fair coin, and add a node $Y$ that is 1 exactly when $\varphi$ is true, through deterministic nodes for the clauses and a chain of deterministic AND nodes with two parents each, whose last node is $Y$. Then $P(Y{=}1) \cdot 2^n$ is the number of satisfying assignments. This is the construction behind the hardness results.
 
 ## Known algorithms
 

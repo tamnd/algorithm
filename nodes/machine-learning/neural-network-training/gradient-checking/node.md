@@ -76,7 +76,7 @@ The relative error in line L4 is scale free, so one tolerance $\tau$ works for g
 | $10^{-10}$ | $1.5 \times 10^{-6}$ | $3.6 \times 10^{-7}$ |
 | $10^{-12}$ | $7.3 \times 10^{-5}$ | $7.3 \times 10^{-5}$ |
 
-The forward error falls by 10 for each factor 10 in $h$, and the central error by 100, as the Taylor analysis says. The forward values match $\frac{h}{2} |f''(x)| = 1.540 h$ and the central values $\frac{h^2}{6} |f'''(x)| = 0.0810 h^2$. Below the best step, rounding takes over and both errors grow again.
+The forward error falls by 10 for each factor 10 in $h$, and the central error by 100, as the Taylor analysis says. The forward values match $\frac{h}{2} |f''(x)| = 1.540 h$ and the central values $\frac{h^2}{6} |f'''(x)| = 0.0810 h^2$. Below the best step, rounding takes over and both errors grow again. In the rows that rounding dominates, from $h = \varepsilon^{1/3}$ for the central difference and from $h = \sqrt{\varepsilon}$ for the forward one, the digits depend on the platform's floating point library, and another machine can give other values. Only the bound $O(\varepsilon |f| / h)$ on the rounding part carries over.
 
 **A bug found.** For $f(\theta) = \log \sum_i \exp((A\theta)_i)$ with a random $4 \times 4$ matrix $A$, the gradient is $A^\top \mathrm{softmax}(A\theta)$. The correct code gives relative errors below $10^{-7}$ at random points. Code that forgets to normalize the softmax gives errors above $10^{-3}$, and the check fails at every point.
 

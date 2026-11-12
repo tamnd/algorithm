@@ -96,6 +96,6 @@ General results:
 - **No pure strategies in general.** Unlike an MDP, optimal strategies may need to mix, as in $s_1$ above. Also unlike an MDP, the value can be irrational when all data are rational, so an exact algorithm cannot, in general, output it as a fraction.
 - **General-sum** (Fink 1964). Stationary Nash equilibria exist in every finite discounted Markov game.
 - **Complexity of turn-based games** (Condon 1992). For simple stochastic games, deciding whether the value from the start state exceeds 1/2 is in NP $\cap$ coNP. No polynomial algorithm is known.
-- **Learning** (Littman 1994). Minimax-Q learns the value of a zero-sum game from play, with the same kind of step size and exploration conditions as Q-learning.
+- **Learning** (Littman 1994; Littman and Szepesvári 1996). Minimax-Q, proposed by Littman in 1994, learns the value of a zero-sum game from play, with the same kind of step size and exploration conditions as Q-learning; the convergence proof is from Littman and Szepesvári (1996).
 
 ## References

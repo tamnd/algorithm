@@ -52,7 +52,7 @@ For $K = 2$ and $z = (x, 0)$ it is the binary form with $\alpha_t = 1$.
 - *Down-weighting of easy examples.* For $\gamma = 2$, an example with $p_t = 0.9$ has 100 times less loss than under the cross-entropy, since $(1 - 0.9)^2 = 0.01$, and an example with $p_t \approx 0.968$ about 1000 times less, since $0.032^2 = 0.001024$ (Lin et al., Section 3.2).
 - *Monotone.* For fixed $\gamma \ge 0$ the loss decreases in $p_t$: both $(1 - p_t)^\gamma$ and $-\log p_t$ are non-negative and decreasing.
 - *Not a proper scoring rule for $\gamma > 0$.* If the label is $+1$ with probability $q$, the expected loss $-q(1 - p)^\gamma \log p - (1 - q)p^\gamma \log(1 - p)$ is not minimized at $p = q$. For $q = 0.9$ the minimizer is $p \approx 0.774$ for $\gamma = 1$ and $p \approx 0.694$ for $\gamma = 2$, so the predicted probabilities of a model fitted with the focal loss are pulled toward $1/2$ and are not estimates of $q$. The cross-entropy ($\gamma = 0$) has its minimizer at $p = q$.
-- *Prior initialization* (Lin et al., Section 3.3). With $\gamma > 0$ and many easy negatives, training is unstable at the start if every box begins with $p = 1/2$. They set the bias of the last layer to $b = -\log((1 - \pi)/\pi)$ with $\pi = 0.01$, so that every box starts with $p = \pi$. This gives $b \approx -4.595$.
+- *Prior initialization* (Lin et al., Section 3.3). With many easy negatives, training is unstable at the start if every box begins with $p = 1/2$. This holds for the cross-entropy loss ($\gamma = 0$) as well as for $\gamma > 0$. They set the bias of the last layer to $b = -\log((1 - \pi)/\pi)$ with $\pi = 0.01$, so that every box starts with $p = \pi$. This gives $b \approx -4.595$.
 
 ## Examples and non-examples
 

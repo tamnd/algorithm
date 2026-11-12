@@ -87,8 +87,8 @@ The eigenvalues of $A$ are $1 \pm i$, so the ODE $\dot{x} = b - Ax$ spirals into
 | 1 | 0.5 | (3.471, 0.302) | (3, 1) | (2.646, 0.517) | 2.010 |
 | 2 | 0.833 | (2.653, 1.482) | (2.333, 1.667) | (2.228, 1.059) | 1.569 |
 | 10 | 2.020 | (1.151, 1.112) | (0.862, 1.449) | (1.124, 1.354) | 0.573 |
-| 100 | 4.197 | (1.049, 0.991) | (0.971, 0.956) | (0.959, 0.989) | 0.128 |
-| 1000 | 6.487 | (0.988, 1.033) | (1.005, 1.001) | (1.004, 0.998) | 0.041 |
+| 100 | 4.197 | (1.049, 0.991) | (0.970, 0.955) | (0.959, 0.989) | 0.128 |
+| 1000 | 6.486 | (0.988, 1.033) | (1.005, 1.001) | (1.004, 0.998) | 0.041 |
 | 10000 | 8.788 | (1.020, 0.996) | (1.000, 1.000) | (1.000, 1.000) | 0.013 |
 
 The noiseless iteration is the Euler method for the ODE with steps $a_n$. Its first steps are large and it overshoots, but it joins the ODE path as the steps shrink. The noisy run follows the same spiral. The mean distance falls by about $\sqrt{10}$ for each factor of 10 in $n$, which is the $O(n^{-1/2})$ rate that steps $c/n$ give when $c$ times the smallest real part of an eigenvalue of $A$ exceeds $1/2$ (here $c = 1$ and the real part is $1$).

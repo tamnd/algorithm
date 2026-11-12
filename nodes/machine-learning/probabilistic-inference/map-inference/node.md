@@ -99,7 +99,7 @@ Approximate: loopy max-product and max-sum, linear programming relaxations and t
 
 - **From SAT to MPE.** The formula example: $\varphi$ is satisfiable if and only if the MPE given $Y = 1$ has positive probability. With the reduction to 3SAT, each node has at most three parents.
 - **From MPE to energy minimization and back.** Logs turn products into sums.
-- **From marginal inference to marginal MAP.** With $M = \{X\}$ for one binary variable $X$, a marginal MAP oracle returns the more probable value, so it tells whether $P(X{=}1) \ge 1/2$. For the formula network this asks whether at least half of all assignments satisfy $\varphi$, a PP-complete question.
+- **From marginal inference to marginal MAP.** With $M = \{X\}$ for one binary variable $X$, a marginal MAP oracle returns the more probable value, so it tells whether $P(X{=}1) > 1/2$ when there is no tie at exactly $1/2$; at a tie the answer depends on how the oracle breaks it. For the formula network this asks whether more than half of all assignments satisfy $\varphi$, a PP-complete question.
 - **MPE to max-product.** On a factor tree, MPE is exactly what max-product computes; a junction tree reduces general MPE to a tree of cliques.
 
 ## Applications

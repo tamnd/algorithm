@@ -71,7 +71,7 @@ where $\psi$ is the digamma function, from $\mathbb{E} \log \chi^2_m = \psi(m/2)
 | 10 | $3.88 \times 10^{-7}$ | $9.54 \times 10^{-7}$ |
 | 20 | $1.27 \times 10^{-13}$ | $9.09 \times 10^{-13}$ |
 
-The bound is reached only when every unit sits at $\sigma'(0) = 1/4$ and $\lvert w \rvert = 4$: the chain $h_i = \sigma(4 h_{i-1} - 2)$ with $h_0 = \tfrac12$ has every factor exactly 1. Larger weights move units away from 0, into the flat tails of $\sigma$, so the sigmoid cannot escape the decay by large weights.
+The bound is reached only when every unit sits at $\sigma'(0) = 1/4$ and $\lvert w \rvert = 4$: the chain $h_i = \sigma(4 h_{i-1} - 2)$ with $h_0 = \tfrac12$ has every factor exactly 1. Larger weights usually move units away from 0, into the flat tails of $\sigma$, where the factors are small. They do not rule out growth: the chain $h_i = \sigma(8 h_{i-1} - 4)$ with $h_0 = \tfrac12$ has every factor equal to 2. Such chains need finely tuned weights and biases.
 
 **Random products.** Pushing a unit vector back through 2000 random Jacobians with $s = 1$ (`random.Random(m)`), the mean log growth per factor is:
 
@@ -84,7 +84,7 @@ The bound is reached only when every unit sits at $\sigma'(0) = 1/4$ and $\lvert
 
 With $s = 0.5$ and $m = 8$, the predicted rate is $\log 0.5 - 0.0651 = -0.7582$ and the measured rate is $-0.7591$: the norm falls by a factor of about 2.1 per layer.
 
-**A recurrent network.** In the scalar network of the [backpropagation through time](/backpropagation-through-time/) example, with $W = 0.5$ and $\tanh$, the factor $\partial h_3 / \partial h_0 = \prod_{t=1}^{3} 0.5 (1 - h_t^2) = 0.0441$. An input at step 1 affects the gradient for the loss at step 3 by about 4 percent of a direct effect, and after 20 steps by less than $10^{-6}$.
+**A recurrent network.** In the scalar network of the [backpropagation through time](/backpropagation-through-time/) example, with $W = 0.5$ and $\tanh$, the factor $\partial h_3 / \partial h_0 = \prod_{t=1}^{3} 0.5 (1 - h_t^2) = 0.0441$. The factor for the input at step 1 is $\partial h_3 / \partial x_1 = (1 - h_1^2) \prod_{t=2}^{3} 0.5 (1 - h_t^2) = 0.0882$, twice as large, because $x_1$ enters with $U = 1$ and not with $W = 0.5$. After 20 steps the factor for $x_1$ is less than $10^{-6}$.
 
 ## Where it is used
 
@@ -93,7 +93,7 @@ The problem shaped most of the design of modern networks. The remedies:
 - **LSTM** (Hochreiter and Schmidhuber 1997). The cell state is updated additively, $c_t = f_t \odot c_{t-1} + i_t \odot g_t$, so along the direct path $\partial c_t / \partial c_{t-1} = \mathrm{diag}(f_t)$. In the original LSTM this factor was exactly the identity, the constant error carousel; with the forget gate added later, the network learns to keep $f_t$ near 1 where it must remember. GRU cells use the same idea.
 - **Residual connections** (He, Zhang, Ren and Sun 2016). A block computes $a_l = a_{l-1} + F_l(a_{l-1})$, so its Jacobian is $I + \partial F_l / \partial a_{l-1}$. The gradient has an identity path through all layers, and networks with hundreds of layers train.
 - **ReLU and its relatives.** [ReLU](/relu/) has derivative exactly 1 for active units, so it does not shrink the signal there, unlike the sigmoid.
-- **Initialization.** [Xavier initialization](/xavier-initialization/) and [He initialization](/he-initialization/) choose the weight variance so that the mean square of the signal is preserved in both directions; as the random product example shows, this keeps the decay rate near $1/(2m)$ per layer instead of a constant.
+- **Initialization.** [Xavier initialization](/xavier-initialization/) and [He initialization](/he-initialization/) choose the weight variance so that the mean square of the signal is about preserved. Xavier initialization is a compromise between the forward and the backward pass, exact for both only when the fan-in equals the fan-out and the units are near linear; He initialization preserves it in one direction through ReLU units; as the random product example shows, this keeps the decay rate near $1/(2m)$ per layer instead of a constant.
 - **Normalization.** [Batch normalization](/batch-normalization/) and [layer normalization](/layer-normalization/) keep pre-activations away from the saturated regions.
 - **Other remedies.** Layer-wise pretraining (historically), skip connections in time, attention, which links distant steps in one step, and second order methods. [Gradient clipping](/gradient-clipping/) treats the opposite problem, the [exploding gradient problem](/exploding-gradient-problem/), and does nothing for vanishing gradients.
 
