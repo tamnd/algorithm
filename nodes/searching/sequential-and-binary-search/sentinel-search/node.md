@@ -22,7 +22,7 @@ sources:
     locator: Section 10.2, Linked lists (sentinels)
 ---
 
-Sentinel search is the technique of placing a copy of the key, the *sentinel*, just past the end of the data, so that a search loop is sure to find the key and needs no separate test for the end. In [linear search](/linear-search/) it removes one of the two tests of each pass: the loop "while $A[i] \ne x$" stops at the latest at the sentinel, and one test after the loop tells a real match from the sentinel. The number of key tests stays $n$ in the worst case, but the end tests drop from $n + 1$ to one. The same idea, a value that stops a loop by itself, appears in [insertion sort](/insertion-sort/), in merging, in [linked lists](/sentinel-node/) and in [strings](/sentinel-character/).
+Sentinel search is the technique of placing a copy of the key, the *sentinel*, just past the end of the data, so that a search loop is sure to find the key and needs no separate test for the end. In [linear search](/linear-search/) it removes one of the two tests of each pass: the loop "while $A[i] \ne x$" stops at the latest at the sentinel, and one test after the loop tells a real match from the sentinel. The number of key tests grows by one in the worst case, from $n$ to $n + 1$ for an absent key, but the end tests drop from $n + 1$ to one. The same idea, a value that stops a loop by itself, appears in [insertion sort](/insertion-sort/), in merging, in [linked lists](/sentinel-node/) and in [strings](/sentinel-character/).
 
 ## In plain words
 
