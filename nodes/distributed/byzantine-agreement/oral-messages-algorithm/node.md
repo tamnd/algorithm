@@ -118,7 +118,7 @@ The costs are for the synchronous model, in rounds and messages.
 - **Message size.** Each message holds one value and a path of at most $m + 1$ names.
 - **Local space.** Each lieutenant stores one value per path, so $O(n^{m+1})$ values.
 
-The [Dolev-Reischuk lower bound](/dolev-reischuk-lower-bound/) asks for $\Omega(nt)$ messages without signatures, so the exponential count is not needed. The [phase king algorithm](/phase-king-algorithm/) solves the problem with $n > 4t$ and polynomial messages, and Garay and Moses (1998) reach $n > 3t$ and $t + 1$ rounds with polynomial messages.
+The [Dolev-Reischuk lower bound](/dolev-reischuk-lower-bound/) asks for $\Omega(nt)$ messages without signatures, so the exponential count is not needed. The [phase king algorithm](/phase-king-algorithm/) solves the problem with $n > 3t$, $3(t + 1)$ rounds and polynomial messages, and Garay and Moses (1998) reach $n > 3t$ and $t + 1$ rounds with polynomial messages.
 
 ## Properties
 

@@ -122,6 +122,6 @@ Use the idea when a trusted setup is acceptable: today a threshold signature sch
 
 ## History
 
-Michael Rabin presented "Randomized Byzantine generals" at FOCS 1983. In the same year Michael Ben-Or showed that randomization avoids the FLP impossibility with local coins. Rabin's common coin, shared in advance with Shamir's 1979 scheme, gave a constant expected number of rounds. Bracha (1984) reached optimal resilience in the asynchronous model, and Feldman and Micali (1988) removed the dealer in the synchronous model with verifiable secret sharing.
+Michael Rabin presented "Randomized Byzantine generals" at FOCS 1983. In the same year Michael Ben-Or showed that randomization avoids the FLP impossibility with local coins. Rabin's common coin, shared in advance with Shamir's 1979 scheme, gave a constant expected number of rounds. Bracha (PODC 1984, journal version 1987) reached optimal resilience in the asynchronous model, and Feldman and Micali (1988) removed the dealer in the synchronous model with verifiable secret sharing.
 
 ## References

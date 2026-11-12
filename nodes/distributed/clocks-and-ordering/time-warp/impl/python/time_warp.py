@@ -116,11 +116,11 @@ class TimeWarp:
             assert key[0] >= self.last_gvt  # no rollback reaches below GVT
         while lp.processed and (lp.processed[-1][0].ts, lp.processed[-1][0].eid) >= key:
             e, before, child = lp.processed.pop()
-            lp.state = before  # @line L4
+            lp.state = before  # @line L6
             self.insert(lp, e)
             self.stats.undone += 1
             if child is not None:
-                self.send("-", child)  # @line L5
+                self.send("-", child)  # @line L7
                 self.stats.antimessages += 1
 
     def receive(self, sign: str, e: Event) -> None:
@@ -136,10 +136,10 @@ class TimeWarp:
             self.insert(lp, e)
         else:
             if any(p[0] == e for p in lp.processed):
-                self.rollback(e.dst, key)  # @line L6
+                self.rollback(e.dst, key)  # @line L4
             pos = bisect.bisect_left(lp.pending, (e.ts, e.eid, e))
             if pos < len(lp.pending) and lp.pending[pos][2] == e:
-                lp.pending.pop(pos)  # @line L7
+                lp.pending.pop(pos)  # @line L5
             else:
                 lp.early_anti.add(key)
 

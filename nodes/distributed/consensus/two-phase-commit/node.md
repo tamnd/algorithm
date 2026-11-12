@@ -108,6 +108,8 @@ The proof has three parts. *Safety:* every COMMIT decision comes from the coordi
 
 Without failures, 2PC sends $4n$ messages: $n$ PREPARE, $n$ votes, $n$ decisions and $n$ ACKs. The ACKs are not on the critical path, so a participant learns the decision after 3 message delays: PREPARE, vote, decision. There are $n + 1$ forced writes before the decision is known (one PREPARED at each participant and the COMMIT of the coordinator), and $n$ more when the participants force the decision. The coordinator stores $n$ votes and $n$ ACK flags.
 
+Gray and Lamport count the same protocol in another way, on the [Paxos Commit](/paxos-commit/) page: $3N - 1$ messages and 4 delays for $N$ participants. They start the count at the request of the first participant, which sends one BeginCommit message that also carries its vote, so that participant gets no PREPARE and sends no separate vote. The BeginCommit adds one delay, and they do not count the ACKs.
+
 In practice the cost of 2PC is in the forced writes and in the locks held during the uncertain window, more than in the message count.
 
 ## Properties
