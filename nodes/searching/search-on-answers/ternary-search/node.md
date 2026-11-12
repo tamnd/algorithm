@@ -9,7 +9,7 @@ aliases:
 - trinary search
 area: searching/search-on-answers
 level: intro
-summary: Shrink an interval to a third at each step by comparing two interior points of a unimodal function.
+summary: Shrink an interval by a third at each step by comparing two interior points of a unimodal function.
 solves: [unimodal-optimization]
 model: query-model
 complexity:
@@ -30,7 +30,7 @@ sources:
     note: the optimal method that ternary search approximates
 ---
 
-Ternary search finds the maximum of a [unimodal function](/unimodal-function/) on an interval by evaluating it at two inner points, at one third and two thirds of the interval, and discarding the third that cannot hold the maximum. Each step keeps two thirds of the interval, so $\lceil \log_{3/2} n \rceil$ steps reduce $n$ integer candidates to one, and $\log_{3/2}((b - a)/\varepsilon)$ steps reduce a real interval to length $\varepsilon$. It solves [unimodal optimization](/unimodal-optimization/) with no derivative and almost no code. It uses about 2.4 times as many evaluations as [golden-section search](/golden-section-search/), because it throws away both inner values at each step.
+Ternary search finds the maximum of a [unimodal function](/unimodal-function/) on an interval by evaluating it at two inner points, at one third and two thirds of the interval, and discarding the third that cannot hold the maximum. Each step keeps two thirds of the interval, so $\lceil \log_{3/2} n \rceil$ steps reduce $n$ integer candidates to one, and $\log_{3/2}((b - a)/\varepsilon)$ steps reduce a real interval to length $\varepsilon$. It solves [unimodal optimization](/unimodal-optimization/) with no derivative and almost no code. It uses about 2.37 times as many evaluations as [golden-section search](/golden-section-search/), because it throws away both inner values at each step.
 
 ## In plain words
 

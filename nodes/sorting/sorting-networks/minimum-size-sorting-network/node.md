@@ -74,7 +74,7 @@ def min_size(n: int) -> int:
     return k
 ```
 
-This is practical for $n \le 6$. The generate-and-prune method of Codish, Cruz-Filipe, Frank and Schneider-Kamp adds two kinds of pruning: it keeps only one set up to a permutation of the wires, and it drops a set $S$ when $S$ is *subsumed* by another set $T$ of the same level: some permutation $\pi$ of the wires gives $\pi(T) \subseteq S$. With this method they proved $s(9) = 25$ in 2014.
+This is practical for $n \le 6$. The generate-and-prune method of Codish, Cruz-Filipe, Frank and Schneider-Kamp adds two kinds of pruning: it keeps only one set up to a permutation of the wires, and it drops a set $S$ when $S$ is *subsumed* by another set $T$ of the same level: some permutation $\pi$ of the wires gives $\pi(T) \subseteq S$. With this method they proved $s(9) = 25$; they announced the result in 2014, and the journal paper appeared in 2016.
 
 **Dynamic programming with a pruning bound.** Harder generalized Van Voorhis's bound to *partial* sorting networks, which sort only a given set of inputs. This gives a lower bound on the size of each partial network that a search reaches, and a dynamic program that uses it computed $s(11) = 35$. The program writes a certificate, and a checker proved correct in Isabelle/HOL checks the certificate.
 
