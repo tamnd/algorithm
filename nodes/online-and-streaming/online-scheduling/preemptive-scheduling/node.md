@@ -4,7 +4,6 @@ kind: definition
 slug: preemptive-scheduling
 name: Preemptive scheduling
 aliases:
-- preemption
 - pmtn
 area: online-and-streaming/online-scheduling
 level: intro
