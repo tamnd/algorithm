@@ -1,0 +1,23 @@
+---
+title: The center-star method returns an alignment that keeps each optimal alignment with the center
+proves: [correctness]
+status: full
+---
+
+For an alignment $M$ with rows indexed by a set $R$ and two rows $r, s \in R$, the *projection* $\pi_{r,s}(M)$ is the pair of rows $(M[r], M[s])$ with every column removed in which both rows have a gap. A *valid alignment* of sequences $(S_r)_{r \in R}$ is a set of rows of equal length such that row $r$ with its gaps removed equals $S_r$, and no column has gaps only.
+
+We prove: the output of CENTER-STAR is a valid alignment of $S_1, \ldots, S_k$, and for each $i \ne c$ the projection $\pi_{c,i}$ of the output equals the optimal pairwise alignment $(C'_i, T'_i)$ computed for $S_i$ in line L5. Its cost is therefore $D(c, i)$.
+
+**Lemma (one merge).** Let $M$ be a valid alignment of a set of sequences that contains $S_c$ in row $c$, and let $(C', T')$ be a valid alignment of $S_c$ and a new sequence $S_i$. Then MERGE$(M, C', T')$ returns a valid alignment $N$ of the old sequences and $S_i$ such that (a) for any two old rows $r, s$, $\pi_{r,s}(N) = \pi_{r,s}(M)$, and (b) $\pi_{c,i}(N) = (C', T')$.
+
+*Proof.* We use this invariant at the test of line L9: the columns of $N$ written so far, restricted to the old rows, are $M[\cdot][0 \ldots p-1]$ with some columns of gaps only added; restricted to rows $c$ and $i$, they are $(C'[0 \ldots q-1], T'[0 \ldots q-1])$ with some columns of two gaps added; and the number of letters in $M[c][0 \ldots p-1]$ equals the number of letters in $C'[0 \ldots q-1]$.
+
+At the start $p = q = 0$ and $N$ is empty, so the invariant holds. Each pass of the loop takes exactly one of three branches.
+
+- Line L10: $M[c][p]$ and $C'[q]$ are both letters or both gaps. The new column is $M[\cdot][p]$ over $T'[q]$. On the old rows it extends $M[\cdot][0 \ldots p-1]$ by column $p$. On rows $c$ and $i$ it is $(M[c][p], T'[q])$; since $M[c][p]$ is a gap exactly when $C'[q]$ is a gap, and both rows spell $S_c$ with the same number of letters before them, $M[c][p] = C'[q]$. So the restriction extends the pair by column $q$. Both letter counts grow by the same amount.
+- Line L11: $M[c][p]$ is a gap and the branch of line L10 did not apply. The new column is $M[\cdot][p]$ over a gap. On the old rows it extends by column $p$. On rows $c$ and $i$ it is a column of two gaps. The letter counts do not change.
+- Line L12: neither branch applied. Then $q < |C'|$: if $q = |C'|$, the loop test gives $p < |M|$, and since line L11 did not apply, $M[c][p]$ is a letter; but all letters of $S_c$ are used on the side of $C'$, so by the count all are used on the side of $M$, a contradiction. Now either $p = |M|$ or $M[c][p]$ is a letter while $C'[q]$ is not. In the first case, all letters of $S_c$ are already used on the side of $M$, so by the count in the invariant they are used on the side of $C'$ too, and $C'[q]$ is a gap. In both cases $C'[q]$ is a gap. The new column has gaps in all old rows and $T'[q]$ in row $i$. On the old rows it is a column of gaps only. On rows $c$ and $i$ it is $(C'[q], T'[q])$, which extends the pair by column $q$. The letter counts do not change.
+
+Each pass increases $p + q$, so the loop ends after at most $|M| + |C'|$ passes, with $p = |M|$ and $q = |C'|$. By the invariant, the restriction of $N$ to the old rows is $M$ with columns of gaps only added, so each old row spells its sequence and (a) holds, since a projection removes those columns. The restriction to rows $c$ and $i$ is $(C', T')$ with columns of two gaps added, so row $i$ spells $S_i$ and (b) holds. No column of $N$ has gaps only: a column from line L10 or L11 contains column $p$ of $M$, which has a letter; a column from line L12 contains $T'[q]$, which is a letter because $C'[q]$ is a gap and $(C', T')$ has no column of two gaps. $\square$
+
+**The theorem.** Line L3 starts with the one-row alignment $(S_c)$, which is valid. Line L5 gives a valid optimal pairwise alignment of $S_c$ and $S_i$ by the correctness of the [Needleman-Wunsch](/needleman-wunsch/) recurrence. By the lemma, after each pass of the loop of line L4, $M$ is a valid alignment of $S_c$ and the sequences added so far. Take $i \ne c$. Right after its merge, $\pi_{c,i}(M) = (C'_i, T'_i)$ by part (b). Every later merge keeps $\pi_{c,i}$ by part (a), since $c$ and $i$ are then both old rows. Line L7 only reorders rows, which changes no projection. So the output is a valid alignment of all $k$ sequences, and $\pi_{c,i}$ of the output is $(C'_i, T'_i)$, of cost $D(c, i)$, because $\delta(-, -) = 0$ means that columns of two gaps add nothing. $\blacksquare$
