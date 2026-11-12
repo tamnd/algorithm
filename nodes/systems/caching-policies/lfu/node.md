@@ -102,7 +102,7 @@ The invariant has three parts. The frequency nodes are in increasing order of co
 ## Properties
 
 - **Frequency, not recency.** The decision uses the count first and the time only for ties. A page used once is always evicted before a page used twice.
-- **Optimal in a static model.** If the requests are independent draws from a fixed distribution, the [independent reference model](/independent-reference-model/), the best policy keeps the $k$ pages of highest probability (Aho, Denning and Ullman 1971). Perfect LFU estimates these pages from the counts, so it tends to this policy on long traces.
+- **Optimal in a static model.** If the requests are independent draws from a fixed distribution, the [independent reference model](/independent-reference-model/), the best demand policy, A0, keeps the $k - 1$ pages of highest probability for good and uses the last slot for the most recent other page (Aho, Denning and Ullman 1971). Perfect LFU estimates the probabilities from the counts, so it tends to this policy on long traces.
 - **Cache pollution.** Pages with high counts from the past stay after their popularity ends, and new pages, which start at count 1, are evicted first. This is the main fault of LFU on traces whose popularity changes.
 - **Not a marking algorithm.** It can evict a page requested in the current phase, as in the alternating sequence above.
 

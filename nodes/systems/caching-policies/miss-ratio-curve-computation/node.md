@@ -51,7 +51,7 @@ and the problem is the same as computing the histogram $h$. Mattson's stack dist
 
 ## Variants
 
-- **Other stack algorithms.** For a policy with the inclusion property, the [Mattson stack algorithm](/mattson-stack-algorithm/) gives the curve from the depth of each item in a priority stack. LFU and Belady's MIN fit here; the tree methods below are for LRU.
+- **Other stack algorithms.** For a policy with the inclusion property, the [Mattson stack algorithm](/mattson-stack-algorithm/) gives the curve from the depth of each item in a priority stack. An LFU that counts all past requests and Belady's MIN fit here; the tree methods below are for LRU.
 - **Policies without inclusion.** For FIFO, CLOCK, ARC and most modern policies the cache content at one size says nothing about another size. The curve needs one simulation per size, often on a sampled trace.
 - **Byte sizes.** With objects of different sizes, $c$ is in bytes. The LRU stack still works, but the distance is the total size of the distinct objects since the last use, not their number.
 - **Online.** A system computes the curve while it runs, with bounded memory, to resize or partition its caches every few minutes.

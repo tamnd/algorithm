@@ -14,7 +14,7 @@ complexity:
   space: {extra: Θ(c d)}
 properties: {online: true, deterministic: true, recursive: false}
 history:
-  year: 2015
+  year: 2014
   people: [Gil Einziger, Roy Friedman, Ben Manes]
   note: Einziger and Friedman proposed TinyLFU in 2014, and the 2017 journal version with Ben Manes added the Caffeine integration and W-TinyLFU.
 prereqs: [count-min-sketch, bloom-filter, cache-admission-policy, lfu]

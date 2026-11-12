@@ -69,7 +69,7 @@ Lines L11 and L12 wrap the hand from the head back to the tail. Line L13 leaves 
 
 ## Example
 
-Take $c = 3$ and the requests D C A D B E C D. The queue is written from tail to head, a star marks a set bit, and a caret marks the object under the hand. The last two columns run CLOCK, as FIFO with reinsertion, on the same requests.
+Take $c = 3$ and the requests D C A D B E C D. The queue is written from tail to head, a star marks a set bit, and a caret marks the object under the hand. The last two columns run CLOCK, as FIFO with reinsertion and with a clear bit on a load as in the paper, on the same requests. (The [CLOCK](/clock/) page sets the bit on a load; with that form the run differs.)
 
 | $t$ | request | SIEVE | SIEVE evicts | SIEVE queue | CLOCK | CLOCK evicts | CLOCK queue |
 | --- | --- | --- | --- | --- | --- | --- | --- |

@@ -99,7 +99,7 @@ The runs are fewer with leases because a reader that misses while another holds 
 
 - **Memcache at Facebook.** Delete on write, deletes sent from the commit log to the caches, and leases against stale sets and herds, all in the NSDI 2013 paper.
 - **HTTP caches and content delivery networks.** Freshness lifetimes are TTLs, validation asks the origin whether a stored response is still current (RFC 9111, Sections 4.2 and 4.3), and purge requests delete objects at once. Content-hashed asset names are versioned keys.
-- **Hardware caches.** A cache coherence protocol invalidates the copies of a line in the caches of other cores when one core writes it. The same pattern of delete on write appears in [write-through](/write-through/) and [write-around](/write-around/) caches with no-write-allocate.
+- **Hardware caches.** A cache coherence protocol invalidates the copies of a line in the caches of other cores when one core writes it. The same pattern of delete on write appears in [write-around](/write-around/) caches; a [write-through](/write-through/) cache instead updates its copy together with the store.
 - **Distributed file systems.** Leases in the sense of Gray and Cheriton let a client cache a file and be sure that no other client changes it until the lease ends.
 
 ## References

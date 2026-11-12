@@ -46,7 +46,7 @@ $$m(c) = 1 - \frac{1}{n} \sum_{d < c} h(d).$$
 
 The curve is one minus the cumulative histogram of reuse distances. This is why one pass over the trace, the [Mattson stack algorithm](/mattson-stack-algorithm/), gives the curve for all sizes at once. Faster methods and approximate ones are on the [MRC computation](/miss-ratio-curve-computation/) page.
 
-**Monotone curves.** A policy has the [inclusion property](/inclusion-property/) when, on each trace and at each time, the content of the cache of size $c$ is a subset of the content of the cache of size $c + 1$. Then each hit at size $c$ is also a hit at size $c + 1$, so $m(c + 1) \le m(c)$. LRU, LFU and Belady's MIN have this property. FIFO and [CLOCK](/clock/) do not, and their curves can rise at some sizes.
+**Monotone curves.** A policy has the [inclusion property](/inclusion-property/) when, on each trace and at each time, the content of the cache of size $c$ is a subset of the content of the cache of size $c + 1$. Then each hit at size $c$ is also a hit at size $c + 1$, so $m(c + 1) \le m(c)$. LRU, Belady's MIN and an LFU that counts all past requests have this property; an LFU that forgets the counts of evicted items does not (on $a\,a\,b\,c\,b\,c\,d\,a\,d\,a$ it has 6 misses with 2 slots and 7 with 3). FIFO and [CLOCK](/clock/) do not, and their curves can rise at some sizes.
 
 **Cliffs and plateaus.** The curve need not be convex. A loop over $N$ items under LRU has $m(c) = 1$ for each $c < N$ and drops to the cold miss ratio at $c = N$. Real traces mix several working sets, and each set that starts to fit makes a drop. Between drops, extra space gives almost nothing.
 

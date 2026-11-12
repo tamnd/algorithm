@@ -32,7 +32,7 @@ The hit ratio of a cache on a request sequence is the number of hits divided by 
 
 Count the requests that a cache answers by itself, and divide by all requests. That is the hit ratio. The rest of the requests go to the slow store, and their share is the miss ratio.
 
-The number has no meaning alone. The same cache gives a high ratio on a program that reuses a few items, and a low ratio on a program that reads each item once. A bigger cache or a better policy usually raises it. A hit ratio that looks close to perfect can still hide a slow system. If a miss costs a hundred times a hit, then a change from 96 to 98 hits in each hundred requests makes the memory almost twice as fast. So compare the misses, not the hits.
+The number has no meaning alone. The same cache gives a high ratio on a program that reuses a few items, and a low ratio on a program that reads each item once. A bigger cache or a better policy usually raises it. A hit ratio that looks close to perfect can still hide a slow system. If a miss costs a hundred times a hit, then a change from 96 to 98 hits in each hundred requests halves the misses and makes the memory about 1.7 times as fast. So compare the misses, not the hits.
 
 ## The idea
 

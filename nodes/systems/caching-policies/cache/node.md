@@ -74,7 +74,7 @@ The lower bounds are on the number of misses, for a sequence $\sigma$ of $n$ req
 
 - **Compulsory misses.** From an empty cache, each policy misses at least once on each distinct key of $\sigma$.
 - **The offline optimum.** If $\sigma$ is known in advance, [Belady's MIN](/belady-optimal/) has the fewest misses: it evicts the item whose next request is furthest in the future. No policy, online or offline, does better.
-- **Online policies.** A policy that does not see the future can have up to $k$ times as many misses as MIN on some sequences, and LRU and FIFO reach this factor and no more ([LRU competitiveness](/lru-competitiveness/)). Random policies do better against an oblivious adversary, with a factor of order $\ln k$ ([the harmonic bound](/harmonic-paging-bound/)).
+- **Online policies.** A deterministic policy that does not see the future can have up to $k$ times as many misses as MIN on some sequences, and LRU and FIFO reach this factor and no more ([LRU competitiveness](/lru-competitiveness/)). Randomized algorithms such as randomized marking do better against an oblivious adversary, with a factor of order $\ln k$ (the simple RANDOM rule is only $k$-competitive) ([the harmonic bound](/harmonic-paging-bound/)).
 - **Sizes and costs.** With items of different sizes, finding the optimum offline is NP-hard ([variable-size caching](/variable-size-caching/)).
 
 The [paging problem](/paging-problem/) is the same question in the language of online algorithms. This page gives the contract that each cache meets; that page studies the cost of the policies.

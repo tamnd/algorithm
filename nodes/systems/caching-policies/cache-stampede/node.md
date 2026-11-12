@@ -8,7 +8,7 @@ aliases:
 - cache miss storm
 area: systems/caching-policies
 level: advanced
-summary: "When a hot key expires, every request in the recompute window misses and recomputes; locks, leases and probabilistic early expiration (XFetch) cut the herd to about one."
+summary: "When a hot key expires, every request in the recompute window misses and recomputes; locks and leases cut the herd to one, and probabilistic early expiration (XFetch) shrinks it."
 prereqs: [ttl-expiration, cache-aside-pattern]
 see_also: [cache-invalidation, mutex, load-shedding, rate-limiter, exponential-backoff, admission-control, inverse-transform-sampling]
 sources:

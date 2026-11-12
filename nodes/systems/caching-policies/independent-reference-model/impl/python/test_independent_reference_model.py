@@ -13,7 +13,7 @@ SMALL = [F(1, 2), F(1, 3), F(1, 6)]
 
 
 def test_small_example() -> None:
-    assert a0_hit_ratio(SMALL, 2) == F(5, 6)
+    assert a0_hit_ratio(SMALL, 2) == F(7, 9)
     assert lru_hit_ratio(SMALL, 2) == F(133, 180)
     assert lru_hit_ratio_by_chain(SMALL, 2) == F(133, 180)
     assert lru_state_probability(SMALL, (0, 1)) == F(1, 3)
@@ -41,8 +41,10 @@ def test_uniform_and_bounds() -> None:
     for k in range(1, 6):
         assert lru_hit_ratio(p, k) == F(k, 5) == a0_hit_ratio(p, k)
     q = [F(2, 5), F(3, 10), F(1, 5), F(1, 10)]
+    assert lru_hit_ratio(q, 1) == a0_hit_ratio(q, 1) == sum(x * x for x in q)
     for k in range(1, 4):
-        assert lru_hit_ratio(q, k) < a0_hit_ratio(q, k)
+        if k > 1:
+            assert lru_hit_ratio(q, k) < a0_hit_ratio(q, k)
         assert lru_hit_ratio(q, k) < lru_hit_ratio(q, k + 1)
 
 
@@ -76,3 +78,18 @@ def test_simulation_is_close() -> None:
                 cache.popitem(last=False)
             cache[x] = True
     assert abs(hits / len(seq) - 133 / 180) < 0.01
+
+
+def test_a0_simulation_is_close() -> None:
+    rng = random.Random(18)
+    p = [0.5, 1 / 3, 1 / 6]
+    seq = irm_trace(p, 60000, rng)
+    cache, hits = set(), 0
+    for x in seq:
+        if x in cache:
+            hits += 1
+        else:
+            if len(cache) == 2:
+                cache.remove(max(cache))
+            cache.add(x)
+    assert abs(hits / len(seq) - 7 / 9) < 0.01

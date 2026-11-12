@@ -24,7 +24,7 @@ sources:
     locator: the effect of set size and line size on the miss ratio
 ---
 
-The three Cs model sorts the misses of a cache into three kinds by their cause. A *compulsory* miss is the first request for a block, which no cache can avoid. A *capacity* miss is a miss that would happen even in a fully associative cache of the same size, because the program uses more data than the cache holds. A *conflict* miss is a miss that happens only because the cache is set associative or direct mapped, so that too many blocks compete for one set while other sets have room. Mark Hill and Alan Jay Smith gave the model its standard form in 1989. Its point is practical: each kind of miss has a different cure.
+The three Cs model sorts the misses of a cache into three kinds by their cause. A *compulsory* miss is the first request for a block, which no cache can avoid. A *capacity* miss is a miss that would happen even in a fully associative cache of the same size, because the program uses more data than the cache holds. A *conflict* miss is a miss that happens only because the cache is set associative or direct mapped, so that too many blocks compete for one set while other sets have room. Mark Hill introduced the model in his 1987 thesis, and Hill and Alan Jay Smith gave it its standard form in 1989. Its point is practical: each kind of miss has a different cure.
 
 ## In plain words
 

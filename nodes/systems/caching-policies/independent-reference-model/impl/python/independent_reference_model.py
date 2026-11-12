@@ -10,8 +10,14 @@ from typing import Dict, List, Sequence, Tuple
 
 
 def a0_hit_ratio(p: Sequence[Fraction], k: int) -> Fraction:
-    """A0 keeps the k most probable pages, so its long-run hit ratio is the sum of the k largest p_i."""
-    return sum(sorted(p, reverse=True)[:k], Fraction(0))
+    """A0 evicts the least probable resident page on a miss. It ends with the k-1 most probable pages
+    for good, and its last slot holds the last other page requested, so its long-run hit ratio is
+    P_(k-1) + sum over the other pages j of p_j^2 / (1 - P_(k-1)), with P_(k-1) the sum of the k-1 largest p_i."""
+    q = sorted(p, reverse=True)
+    if k >= len(q):
+        return Fraction(1)
+    top = sum(q[:k - 1], Fraction(0))
+    return top + sum((x * x for x in q[k - 1:]), Fraction(0)) / (1 - top)
 
 
 def lru_state_probability(p: Sequence[Fraction], state: Tuple[int, ...]) -> Fraction:
