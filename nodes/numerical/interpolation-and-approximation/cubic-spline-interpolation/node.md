@@ -5,7 +5,6 @@ slug: cubic-spline-interpolation
 name: Cubic spline interpolation
 aliases:
 - Clamped cubic spline
-- Natural cubic spline
 - spline interpolation
 - interpolating cubic spline
 area: numerical/interpolation-and-approximation
