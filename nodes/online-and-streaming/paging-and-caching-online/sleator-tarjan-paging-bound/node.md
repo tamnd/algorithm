@@ -4,7 +4,6 @@ kind: theorem
 slug: sleator-tarjan-paging-bound
 name: Sleator and Tarjan paging bound
 aliases:
-- k-competitiveness of LRU
 - Sleator-Tarjan paging bound
 - (h,k)-paging bound
 - resource augmentation bound for paging
