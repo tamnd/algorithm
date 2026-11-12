@@ -27,7 +27,7 @@ sources:
     locator: Chapter 2 (multi-armed bandits, the k-armed testbed and the action-value methods)
 ---
 
-The multi-armed bandit problem is the simplest model of learning by trial: in each of $n$ rounds a learner pulls one of $K$ arms, receives a reward from that arm only, and wants a total reward close to that of the best arm. The quality of a strategy is its [regret](/regret/), the reward lost against the best arm. It is the setting where the [exploration-exploitation tradeoff](/exploration-exploitation-tradeoff/) appears in its pure form, and it is a [Markov decision process](/markov-decision-process/) with a single state. Robbins posed it in 1952. Good algorithms have regret that grows like $\log n$ when the rewards are random and like $\sqrt{Kn}$ when an adversary picks them.
+The multi-armed bandit problem is the simplest model of learning by trial: in each of $n$ rounds a learner pulls one of $K$ arms, receives a reward from that arm only, and wants a total reward close to that of the best arm. The quality of a strategy is its [regret](/regret/), the reward lost against the best arm. It is the setting where the [exploration-exploitation tradeoff](/exploration-exploitation-tradeoff/) appears in its pure form, and it is a [Markov decision process](/markov-decision-process/) with a single state. Thompson studied the two-armed case in 1933, and Robbins posed the general problem in 1952. Good algorithms have regret that grows like $\log n$ when the rewards are random and like $\sqrt{Kn}$ when an adversary picks them.
 
 ## In plain words
 

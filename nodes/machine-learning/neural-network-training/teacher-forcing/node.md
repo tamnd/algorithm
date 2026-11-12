@@ -101,7 +101,7 @@ For a probabilistic sequence model the picture is less sharp. If the model distr
 - **Leaking the target.** The input at step $t$ must be $y_{t-1}$, shifted by one. Feeding $y_t$ lets the model copy the answer and gives a near-zero loss. In attention models the causal mask must hide all positions $\ge t$.
 - **Gradients through samples.** Sampled tokens are not differentiable. In scheduled sampling the sampled input is used as a constant; a framework that tries to differentiate through argmax or sampling gives zero or undefined gradients.
 - **Changing the schedule too fast.** Scheduled sampling with a fast decay gives early training the noisy free-running inputs that teacher forcing exists to avoid.
-- **Continuous dynamics.** For a model of a dynamical system, teacher forcing can fit the one-step map well and still give unstable rollouts, as in the example. Check multi-step predictions.
+- **Continuous dynamics.** For a model of a dynamical system, teacher forcing can fit the one-step map well and still give rollouts that drift away from the data, as in the example. If the learned map is unstable, the rollouts can also grow without bound. Check multi-step predictions.
 
 ## Exercises
 

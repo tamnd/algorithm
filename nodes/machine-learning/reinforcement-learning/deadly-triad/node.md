@@ -46,11 +46,11 @@ The three ingredients are:
 
 $$w \leftarrow w + \alpha(b - Aw), \qquad A = \Phi^\top D(I - \gamma P)\Phi, \qquad b = \Phi^\top D r, \qquad D = \operatorname{diag}(d).$$
 
-This iteration is stable for small $\alpha$ exactly when every eigenvalue of $A$ has a positive real part. Remove any one ingredient and that holds:
+For small $\alpha$ this iteration converges when every eigenvalue of $A$ has a positive real part, and it diverges from almost every start when some eigenvalue has a negative real part. A zero eigenvalue is a border case: in Baird's example below, $\Phi$ has more columns than rows, so $A$ has one, and the weights that give the true values are not unique. Remove any one ingredient and no eigenvalue has a negative real part:
 
 - **Without function approximation** ($\Phi = I$), the update of $w(s)$ is $\alpha d(s)\bigl((Tw)(s) - w(s)\bigr)$ with the Bellman operator $T$, a $\gamma$-contraction in the max norm. It is asynchronous value iteration with steps $\alpha d(s) \le 1$, and it converges for every positive $d$.
 - **Without bootstrapping**, the target is a fixed number, such as the true value or a Monte Carlo return, and the update is gradient descent on the convex function $\sum_s d(s)(\text{target}(s) - \phi(s)^\top w)^2$. It converges for small $\alpha$ and every $d$.
-- **On-policy**, $d$ is the stationary distribution of $P$. Then $\lVert Pv\rVert_D \le \lVert v\rVert_D$, which gives $x^\top Ax \ge (1 - \gamma)\lVert\Phi x\rVert_D^2 > 0$, so $A$ is positive definite (Tsitsiklis and Van Roy 1997).
+- **On-policy**, $d$ is the stationary distribution of $P$. Then $\lVert Pv\rVert_D \le \lVert v\rVert_D$, which gives $x^\top Ax \ge (1 - \gamma)\lVert\Phi x\rVert_D^2 \ge 0$, so $A$ is positive definite when $\Phi$ has full column rank and $d > 0$ (Tsitsiklis and Van Roy 1997).
 
 With all three, $D$ is not matched to $P$, the inequality $\lVert Pv\rVert_D \le \lVert v\rVert_D$ can fail, and $A$ can have an eigenvalue with negative real part. Then $w$ diverges from almost every start, for every step size.
 

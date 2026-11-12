@@ -121,7 +121,7 @@ The second sum is the same for all trees, and the first depends only on the undi
 
 ## Properties
 
-- **Exact and polynomial.** It finds a global optimum. Over general DAGs, even with at most two parents per node, the same problem is NP-hard (see [structure learning](/bayesian-network-structure-learning/)).
+- **Exact and polynomial.** It finds a global optimum. Over general DAGs the search is hard: even with at most two parents per node, finding the network with the best Bayesian (BDe) score is NP-hard (Chickering 1996; see [structure learning](/bayesian-network-structure-learning/)).
 - **Root free.** All orientations of the tree have the same likelihood and are Markov equivalent: a directed tree has no v-structures.
 - **Always a spanning tree.** Mutual information is never negative, so adding an edge never lowers the likelihood. With a penalty such as BIC, the best structure is a forest.
 - **Consistent.** If the data come from a distribution that is Markov to a tree, and the true mutual informations on the tree edges are strictly larger than the ones that compete with them, the algorithm finds the true tree with probability tending to one as $s$ grows.

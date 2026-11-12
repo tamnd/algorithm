@@ -91,7 +91,7 @@ The architecture has no learning guarantee beyond that of the algorithm that tra
 1. **Mean.** If $V + A(a) - \frac{1}{M}\sum_b A(b) = Q(a)$ for all $a$, then $V = \frac{1}{M}\sum_a Q(a)$, and $A$ is fixed up to an added constant, which does not change $Q$.
 2. **Max.** If $V + A(a) - \max_b A(b) = Q(a)$ for all $a$, then $V = \max_a Q(a)$, and $A$ is fixed up to an added constant.
 3. **Naive sum.** $V + A(a) = Q(a)$ has a solution for every $V$.
-4. **Same class.** For each aggregation, every vector $Q \in \mathbb{R}^M$ is the output for some $V$ and $A$. So the dueling heads can represent exactly what a plain linear output layer of $M$ units can, from the same features.
+4. **Same class.** For each aggregation, every vector $Q \in \mathbb{R}^M$ is the output for some $V$ and $A$. With linear heads and the mean or the sum, the dueling heads represent exactly what a plain linear output layer of $M$ units can, from the same features. With the max, the output is piecewise affine in the features, a different class.
 
 ## Complexity
 
@@ -99,7 +99,7 @@ One forward pass costs the shared body $W$, plus $O(H)$ for the value head and $
 
 ## Properties
 
-- **Same function class, different parameterization.** By fact 4, a dueling network represents exactly the Q-functions that a plain head on the same features can. The change is in the gradient dynamics, not in what can be represented.
+- **Same function class, different parameterization.** By fact 4, with the mean aggregation a dueling network represents exactly the Q-functions that a plain head on the same features can (with the max it is a piecewise affine class). The change is in the gradient dynamics, not in what can be represented.
 - **Shared value learning.** Every sample updates $v$, so the value of a state improves even from samples of actions that are rarely taken.
 - **Robust to small action gaps.** When the gap between the best and second-best action values is small compared with the scale of $Q$, noise in the estimates can swap the greedy action. Learning the gaps in a separate head that does not carry the scale of $V$ helps keep their order right.
 - **Deterministic forward pass.**

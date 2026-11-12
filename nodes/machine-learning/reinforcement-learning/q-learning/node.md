@@ -9,7 +9,7 @@ aliases:
 - tabular Q-learning
 area: machine-learning/reinforcement-learning
 level: intro
-summary: "Off-policy TD control: after each step, move Q(S,A) toward R + gamma max_a Q(S',a). It learns optimal action values while it follows any policy that explores."
+summary: "Off-policy TD control: move Q(S,A) toward R + gamma max_a Q(S',a). Tabular, with gamma < 1 and Robbins-Monro steps, it learns Q* under any policy that tries all pairs infinitely often."
 solves: [rl-control]
 model: real-ram
 complexity:

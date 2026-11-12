@@ -84,7 +84,7 @@ Each answer is within $0.3$ of the exact value, and the last assignment $(1, 1, 
 - **Sampling with evidence has no general guarantee.** [Likelihood weighting](/likelihood-weighting/), [rejection sampling](/rejection-sampling/), [Gibbs sampling](/gibbs-sampling/) and every other polynomial-time method fail to get within $\tfrac12$ on some networks with evidence, unless NP $\subseteq$ RP. In the network above, rejection sampling keeps a sample only when $Y = 1$, which has probability $\#\varphi / 2^n$, so it may need about $2^n$ samples.
 - **No FPRAS in general.** A fully polynomial randomized approximation scheme ([FPRAS](/fpras/)) for $P(e)$ would give each posterior $P(Q_i = 1 \mid Y = 1)$, as the ratio of the estimates of $P(Q_i = 1, Y = 1)$ and $P(Y = 1)$, within absolute error $\tfrac14$ with probability above $\tfrac34$. Part 3 then gives NP $\subseteq$ RP. So no such scheme exists for all networks unless NP $\subseteq$ RP.
 - **What can be done.** Guarantees need extra conditions: bounded treewidth for exact methods, or bounds on how small the conditional probabilities and the evidence probability are for sampling methods. Dagum and Luby (1997) studied such conditions.
-- **Exact versus approximate.** Together with Cooper's theorem, the result shows that the evidence, not the summing itself, makes [marginal inference](/marginal-inference/) hard to approximate.
+- **Exact versus approximate.** Together with Cooper's theorem, the result shows that evidence makes [marginal inference](/marginal-inference/) hard to approximate in the absolute sense, while without evidence simple sampling gives absolute approximations. A relative approximation is hard even with no evidence (part 2).
 
 ## Tightness
 

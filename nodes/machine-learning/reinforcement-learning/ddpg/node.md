@@ -67,7 +67,7 @@ Line L5 is the [Q-learning](/q-learning/) target with the target actor's action 
 
 ## Example
 
-Take the scalar linear quadratic problem $s' = s + a$, $r = -(s^2 + a^2)$, $\gamma = 0.9$, start states uniform in $[-1, 1]$ and episodes of 10 steps. The optimal policy is linear, $a = k^* s$, with $V^*(s) = -P s^2$ where $0.9 P^2 - 0.8 P - 1 = 0$, so $P \approx 1.588$ and $k^* = -0.9 P / (1 + 0.9 P) \approx -0.588$. The optimal action values are $Q^*(s, a) \approx -2.429 s^2 - 2.858 s a - 2.429 a^2$.
+Take the scalar linear quadratic problem $s' = s + a$, $r = -(s^2 + a^2)$, $\gamma = 0.9$, start states uniform in $[-1, 1]$ and episodes of 10 steps. The optimal policy is linear, $a = k^* s$, with $V^*(s) = -P s^2$ where $0.9 P^2 - 0.8 P - 1 = 0$, so $P \approx 1.588$ and $k^* = -0.9 P / (1 + 0.9 P) \approx -0.588$. The optimal action values are $Q^*(s, a) \approx -2.430 s^2 - 2.859 s a - 2.430 a^2$.
 
 Run DDPG with the linear actor $\mu(s) = k s$, the quadratic critic $Q_w(s, a) = w_1 s^2 + w_2 s a + w_3 a^2$, step sizes 0.02, $\tau = 0.05$, minibatches of 32 and Ornstein-Uhlenbeck noise with $\sigma = 0.1$, from $k = -0.2$. After 3000 steps, six seeds give $k$ between $-0.71$ and $-0.48$; after 6000 steps, between $-0.67$ and $-0.60$. With one seed, the critic after 6000 steps is $(-2.94, -2.22, -1.76)$. That is far from $Q^*$, but its greedy action $-w_2 s / (2 w_3) \approx -0.63 s$ agrees with the actor. The actor only follows $\nabla_a Q_w$ at its own actions, so it needs the critic's slope there, not its values.
 

@@ -78,7 +78,7 @@ As $h_0$ crosses 0, $h_{20}$ jumps by almost 2 over a width of about $10^{-9}$. 
 The analysis explains the remedies used in practice:
 
 - **[Gradient clipping](/gradient-clipping/).** Rescale the gradient when its norm exceeds a threshold. On a cliff, this keeps the direction and limits the step, so the parameters do not jump away. It is the standard fix for recurrent networks and is common in transformer training.
-- **Initialization.** Choose $W$ with $\rho(W)$ and $\sigma_{\max}(W)$ near 1, for example orthogonal matrices or the scaled Gaussian of [He initialization](/he-initialization/), so the products neither grow nor shrink fast at the start.
+- **Initialization.** Choose $W$ so that the products neither grow nor shrink fast at the start. An orthogonal matrix has $\rho(W) = \sigma_{\max}(W) = 1$. The scaled Gaussian of [He initialization](/he-initialization/) does not put these numbers near 1: for a large $m \times m$ matrix, $\rho(W)$ is near $\sqrt 2$ and $\sigma_{\max}(W)$ is near $2\sqrt 2$. It keeps the mean square of the signal through a ReLU layer, which sets about half of the units to zero.
 - **Constraining the weights.** [Spectral normalization](/spectral-normalization/) divides $W$ by an estimate of $\sigma_{\max}(W)$ from [power iteration](/power-iteration/), which bounds every factor by $\gamma$.
 - **Shorter paths.** [Truncated BPTT](/backpropagation-through-time/) limits the number of factors; gated cells, normalization layers and residual connections keep the Jacobians near the identity.
 - **Smaller or adaptive learning rates.** Adaptive methods normalize steps by running gradient magnitudes, which damps but does not remove spikes.

@@ -122,7 +122,7 @@ Use Adafactor when the optimizer state of Adam does not fit in memory, for examp
 ## Pitfalls
 
 - **Wrong orientation.** The factorization is per matrix. Factoring a parameter tensor of higher order requires choosing which two dimensions to keep; libraries keep the last two.
-- **No momentum with a fixed $\beta_2$.** Without momentum and with $\hat{\beta}_2$ close to $1$ from the start, the paper reports unstable training; the increasing decay and clipping are needed together.
+- **No momentum with a fixed $\beta_2$.** Without momentum and with $\hat{\beta}_2$ close to $1$ from the start, the paper reports unstable training. In its experiments either the increasing decay or update clipping alone makes training stable, and the default settings use both.
 - **Relative step and warmup.** $\rho_t = \min(10^{-2}, 1/\sqrt{t})$ is constant for the first $10^4$ steps; combining it with an external warmup and decay without turning it off gives an unexpected schedule.
 - **Small weights.** With relative steps, weights initialized at $0$ move only by $\epsilon_2\rho_t$ per step at first.
 

@@ -71,7 +71,7 @@ L9      if t mod C = 0 then θ⁻ ← θ
 L10     s ← s′, or a new start state if done
 ```
 
-Line L6 needs one more forward pass of the online network per sample, on $s'_j$. Both $a^*_j$ and $y_j$ are constants for the gradient of line L8. The paper also tuned two DQN settings for its main results (a longer sync period and a smaller final $\epsilon$); the algorithm is the same.
+Line L6 needs one more forward pass of the online network per sample, on $s'_j$. Both $a^*_j$ and $y_j$ are constants for the gradient of line L8. The paper also tuned three DQN settings for its main results (a longer sync period, a smaller final $\epsilon$ in training and a smaller $\epsilon$ in evaluation) and used one bias shared by all action values in the output layer; the algorithm is the same.
 
 **Comparison with double Q-learning.** Tabular double Q-learning keeps two tables $Q^A$ and $Q^B$, updates one of them at random in each step, and uses the other to evaluate. Double DQN does not train two networks symmetrically: $\theta^-$ is an old copy of $\theta$, not an independent estimate. It is the smallest change to DQN that decouples selection from evaluation.
 

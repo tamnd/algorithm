@@ -88,7 +88,7 @@ A scalar network: $H = D = M = 1$, $W = 0.5$, $U = 1$, $b = 0$, $V = 1$, $c = 0$
 
 So $\partial L / \partial W = 0.030390$, $\partial L / \partial U = 0.100816$ (only $x_1 \ne 0$), $\partial L / \partial b = 0.231652$ and $\partial L / \partial h_0 = 0.050408$. Each value agrees with a central difference of $L$.
 
-Truncated BPTT with $k = 1$ drops the $r$ that line L9 sends back. Its estimate of $\partial L / \partial W$ is $-0.027093$: the wrong sign. The step $t = 3$ contributes $+0.063203$ only through the path back to $h_2$, and truncation removes it. With $k \ge 3$ the result is the exact gradient.
+Truncated BPTT with $k = 1$ drops the $r$ that line L9 sends back. Its estimate of $\partial L / \partial W$ is $-0.027093$: the wrong sign. Truncation keeps the term $\delta_3 h_2 = 0.063203$ of step 3, but it drops the $r = 0.086960$ that step 3 sends back to $h_2$. Without it, the term of step 2 becomes $-0.090295$ instead of $-0.032813$. With $k \ge 3$ the result is the exact gradient.
 
 ## Correctness
 
@@ -120,7 +120,7 @@ Count multiply-adds on a [real RAM](/real-ram/).
 - **Gradient checkpointing.** Store only every $\lceil \sqrt T \rceil$-th hidden state and recompute the others in the backward pass: $\Theta(\sqrt T H)$ memory for one extra forward pass and the exact gradient. See [gradient checkpointing](/gradient-checkpointing/).
 - **Gated cells.** For LSTM and GRU cells, lines L5 to L9 become the backward pass of the cell, and $r$ carries the derivatives with respect to the cell state and the hidden state. The additive cell update of the LSTM keeps $\partial c_t / \partial c_{t-1}$ near the identity, which reduces vanishing gradients.
 - **Clipping.** With long sequences, bound the gradient norm before the update; see [gradient clipping](/gradient-clipping/).
-- **Training a sequence model.** For a network whose next input is its previous output, BPTT is often combined with [teacher forcing](/teacher-forcing/), which feeds the true previous output during training and so makes the steps independent given the data.
+- **Training a sequence model.** For a network whose next input is its previous output, BPTT is often combined with [teacher forcing](/teacher-forcing/), which feeds the true previous output during training. This cuts the gradient path through the outputs. The steps become independent only when the outputs are the only recurrence; with a hidden state $h_t$ the gradient still runs back through it, and BPTT is still needed.
 
 ## When to use it
 

@@ -20,7 +20,7 @@ sources:
     locator: gradient descent iterates as a spectral filter, the number of steps as the regularization parameter
 ---
 
-Early stopping is a [regularization](/regularization/) method for models trained by an iterative method: a part of the data is held out as a validation set, the validation error is measured every few steps, and training stops when it has not improved for a while. The result is the parameters with the lowest validation error seen, not the last ones. The number of steps then plays the role of a regularization parameter, chosen on the fly with one training run. For [gradient descent](/gradient-descent/) on a least squares loss started at zero, this is more than an analogy: after $t$ steps with step size $\eta$ the iterate is a spectral filter of the data, and on every eigendirection it is within a factor of two of [ridge regression](/ridge-regression/) with $\lambda = 1/(\eta t)$ (Yao, Rosasco and Caponnetto, 2007).
+Early stopping is a [regularization](/regularization/) method for models trained by an iterative method: a part of the data is held out as a validation set, the validation error is measured every few steps, and training stops when it has not improved for a while. The result is the parameters with the lowest validation error seen, not the last ones. The number of steps then plays the role of a regularization parameter, chosen on the fly with one training run. For [gradient descent](/gradient-descent/) on a least squares loss started at zero, this is more than an analogy: after $t$ steps with step size $\eta$ the iterate is a spectral filter of the data. When $\eta s_i \le 1$ for every eigenvalue $s_i$ of the data covariance, it is within a factor of two of [ridge regression](/ridge-regression/) with $\lambda = 1/(\eta t)$ on every eigendirection (Claim 3 below). Yao, Rosasco and Caponnetto (2007) use the same filter view to prove rates for early stopping.
 
 ## In plain words
 
@@ -98,7 +98,7 @@ With patience 20 and a check at every step, early stopping stops at step 83 and 
 ## Variations
 
 - **Retraining on all data** (Goodfellow et al., Algorithm 7.2). After early stopping finds $t^*$, train again on the training and validation data together for $t^*$ steps, or for the same number of passes over the data.
-- **Continuing from the stopped model** (Algorithm 7.3). Keep training on all data until the training loss reaches the value it had at the stop.
+- **Continuing from the stopped model** (Algorithm 7.3). Keep training on all data until the loss on the validation set falls below the training loss at the stop.
 - **Stopping on a different metric.** Stop on accuracy, AUC or another target metric instead of the loss, since the two can reach their best at different times.
 - **Early stopping in boosting.** The number of rounds of a boosting method is chosen in the same way.
 

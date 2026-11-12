@@ -41,7 +41,7 @@ sources:
     locator: pp. 85 to 117; the section on the development of backpropagation (history from the 1960s to 1986)
 ---
 
-Backpropagation computes the [gradient](/gradient/) of the loss of a multilayer perceptron with respect to all its weights and biases. It runs the network forward and stores each layer's pre-activation $z_l$ and activation $a_l$. Then it runs one backward sweep that carries the error signal $\delta_l = \partial \ell / \partial z_l$ from the output layer to the first layer, by the recursion $\delta_l = (W_{l+1}^\top \delta_{l+1}) \odot f_l'(z_l)$. It is reverse mode [automatic differentiation](/automatic-differentiation/) on the [computational graph](/computational-graph/) of a layered network, and it costs about two forward passes, whatever the number of weights.
+Backpropagation computes the [gradient](/gradient/) of the loss of a multilayer perceptron with respect to all its weights and biases. It runs the network forward and stores each layer's pre-activation $z_l$ and activation $a_l$. Then it runs one backward sweep that carries the error signal $\delta_l = \partial \ell / \partial z_l$ from the output layer to the first layer, by the recursion $\delta_l = (W_{l+1}^\top \delta_{l+1}) \odot f_l'(z_l)$. It is reverse mode [automatic differentiation](/automatic-differentiation/) on the [computational graph](/computational-graph/) of a layered network, The backward sweep costs about two forward passes, so the whole gradient costs about three, whatever the number of weights.
 
 ## In plain words
 
@@ -91,7 +91,7 @@ $$W_1 = \begin{pmatrix} 0.5 & -1 \\ 1 & 0.5 \end{pmatrix}, \quad b_1 = \begin{pm
 | send back | L8 | $W_2^\top \delta_2 = (-5.5, 11)$, $f_1'(z_1) = (0, 1)$, $\delta_1 = (0, 11)$ |
 | layer 1 gradient | L7 | $G_1 = \delta_1 x^\top = \begin{pmatrix} 0 & 0 \\ 11 & 22 \end{pmatrix}$, $g_1 = (0, 11)$ |
 
-The first hidden unit has $z = -1.5 < 0$, so its slope is 0 and the gradient of its incoming weights is 0 on this example. Each of the 8 gradient entries agrees with a central difference of $\ell$ with step $10^{-6}$.
+The first hidden unit has $z = -1.5 < 0$, so its slope is 0 and the gradient of its incoming weights is 0 on this example. Each of the 9 gradient entries agrees with a central difference of $\ell$ with step $10^{-6}$.
 
 A run of training: the XOR data $\{(0,0) \mapsto 0, (0,1) \mapsto 1, (1,0) \mapsto 1, (1,1) \mapsto 0\}$, a 2-4-1 network with $\tanh$ hidden units and an identity output, weights uniform in $[-2/\sqrt{d_{l-1}}, 2/\sqrt{d_{l-1}}]$ from `random.Random(0)`, biases 0, full batch gradient descent with $\eta = 0.2$ on the mean squared loss. The mean loss is 0.3774 at the start, 0.0545 after 100 steps, 0.0061 after 200 steps, $1.4 \times 10^{-7}$ after 500 steps and below $10^{-10}$ after 1000 steps. This is one observed run, not a guarantee: training a network has no general convergence proof, and other seeds or step sizes can stop at a worse point.
 
@@ -136,7 +136,7 @@ Use backpropagation whenever you train a differentiable network with a gradient 
 - **Forgetting the activation slope.** Line L8 must multiply by $f'_{l-1}(z_{l-1})$. Writing $\delta_{l-1} \leftarrow W_l^\top \delta_l$ gives the gradient of a linear network.
 - **The slope at the wrong point.** $f'$ must be evaluated at $z_{l-1}$, the pre-activation. For $\tanh$ and the sigmoid it is cheaper to write it with the output, $1 - a^2$ and $a(1 - a)$; mixing the two forms, such as $1 - z^2$, is a common bug.
 - **Order of updates.** Line L8 must use $W_l$ before the optimizer changes it. Updating $W_l$ inside the backward loop sends the error back through the new weights.
-- **Shapes of the outer product.** $G_l = \delta_l a_{l-1}^\top$ has the shape of $W_l$; $a_{l-1} \delta_l^\top$ is its transpose and fails only when the layer is square.
+- **Shapes of the outer product.** $G_l = \delta_l a_{l-1}^\top$ has the shape of $W_l$; $a_{l-1} \delta_l^\top$ is its transpose. A shape check catches this mistake, except when the layer is square ($d_l = d_{l-1}$): then the wrong matrix has the right shape and the error is silent.
 - **Summing instead of averaging.** The gradient of the mean loss over a batch divides by $B$. A sum changes the effective learning rate with the batch size.
 - **Numerical overflow at the output.** Compute softmax with cross-entropy as one primitive with the log-sum-exp form and $\delta_L = a_L - y$; separate primitives can overflow or divide by zero.
 

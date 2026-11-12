@@ -118,6 +118,6 @@ Use Expected SARSA instead of SARSA whenever the action set is small enough to s
 
 ## History
 
-van Seijen, van Hasselt, Whiteson and Wiering (2009) gave the method its name, proved its convergence under GLIE exploration, analyzed its variance and showed in experiments, including cliff walking, that it is better than SARSA over a wide range of step sizes. Sutton and Barto (2018, Section 6.6) present it as the method between SARSA and Q-learning, and use it to define the tree backup algorithm.
+George John (1994) introduced the method, and the first edition of Sutton and Barto (1998) gave it as an exercise. van Seijen, van Hasselt, Whiteson and Wiering (2009) proved its convergence under GLIE exploration, analyzed its variance and showed in experiments, including cliff walking, that it is better than SARSA over a wide range of step sizes. Sutton and Barto (2018, Section 6.6) present it as the method between SARSA and Q-learning, and use it to define the tree backup algorithm.
 
 ## References

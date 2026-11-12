@@ -46,7 +46,7 @@ A reward function is *bounded* when $|R_{t+1}| \le R_{\max}$ almost surely. The 
 
 **The reward hypothesis.** Sutton and Barto (Section 3.2) state as a hypothesis that all goals and purposes can be well thought of as the maximization of the expected value of the cumulative sum of a received scalar reward. It is a working assumption of the field, not a theorem, and it has known limits: Abel et al. (2021) give tasks, stated as sets of acceptable policies, that no Markov reward function on the given states can express.
 
-**Transformations.** Let $R'(s, a) = c R(s, a) + b$ with $c > 0$. In a continuing discounted MDP every policy then has $V'^\pi = c V^\pi + b/(1-\gamma)$, so the optimal policies stay the same. This fails in an episodic task, where the shift $b$ is paid only until the episode ends. Shaping rewards of the form $\gamma \Phi(s') - \Phi(s)$ keep the optimal policies in all cases ([potential-based reward shaping](/potential-based-reward-shaping/), Ng, Harada and Russell 1999).
+**Transformations.** Let $R'(s, a) = c R(s, a) + b$ with $c > 0$. In a continuing discounted MDP every policy then has $V'^\pi = c V^\pi + b/(1-\gamma)$, so the optimal policies stay the same. This fails in an episodic task, where the shift $b$ is paid only until the episode ends. Shaping rewards of the form $\gamma \Phi(s') - \Phi(s)$ keep the optimal policies, in episodic tasks too when $\Phi = 0$ at the terminal states ([potential-based reward shaping](/potential-based-reward-shaping/), Ng, Harada and Russell 1999).
 
 ## Examples and non-examples
 

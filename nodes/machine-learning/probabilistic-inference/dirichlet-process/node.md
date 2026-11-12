@@ -7,7 +7,7 @@ aliases:
 - Chinese restaurant process
 area: machine-learning/probabilistic-inference
 level: research
-summary: "A distribution over discrete distributions, used as a nonparametric prior for mixtures. It is built by stick breaking or the Chinese restaurant process; n draws use about α log n clusters."
+summary: "A distribution over discrete distributions, used as a nonparametric prior for mixtures. Built by stick breaking or the Chinese restaurant process; for large n, n draws use about α log n clusters."
 history:
   year: 1973
   people: [Thomas S. Ferguson, David Blackwell, James B. MacQueen, Jayaram Sethuraman]
@@ -50,7 +50,7 @@ sources:
     locator: the posterior of the number of clusters of a DP mixture does not concentrate at the true finite number
 ---
 
-A Dirichlet process $\mathrm{DP}(\alpha, H)$ is a probability distribution whose draws are themselves probability distributions. It has a *base distribution* $H$, which is the mean of the draws, and a *concentration* $\alpha > 0$, which controls how close the draws are to $H$. Ferguson defined it in 1973 as a prior for Bayesian statistics with no fixed number of parameters. Its draws are discrete with probability 1, so samples from a draw repeat earlier values. This makes the DP the standard prior for mixture models with an unknown number of clusters: $n$ data points use about $\alpha \log n$ clusters, and the number grows as data arrive. Two constructions make it computable: the *Chinese restaurant process*, which is the Polya urn of Blackwell and MacQueen (1973), and *stick breaking* (Sethuraman 1994).
+A Dirichlet process $\mathrm{DP}(\alpha, H)$ is a probability distribution whose draws are themselves probability distributions. It has a *base distribution* $H$, which is the mean of the draws, and a *concentration* $\alpha > 0$, which controls how close the draws are to $H$. Ferguson defined it in 1973 as a prior for Bayesian statistics with no fixed number of parameters. Its draws are discrete with probability 1, so samples from a draw repeat earlier values. This makes the DP the standard prior for mixture models with an unknown number of clusters: for large $n$, $n$ data points use about $\alpha \log n$ clusters, and the number grows as data arrive. Two constructions make it computable: the *Chinese restaurant process*, which is the Polya urn of Blackwell and MacQueen (1973), and *stick breaking* (Sethuraman 1994).
 
 ## The machine
 

@@ -81,9 +81,9 @@ Take two weights, $\theta_0 = (1, 1)$, and a data gradient that is $(1, 0)$ at e
 | 2 | 0.978011 | 0.998001 | 0.98 | 0.980003 |
 | 3 | 0.967033 | 0.997003 | 0.970001 | 0.97001 |
 | 5 | 0.94511 | 0.99501 | 0.950004 | 0.950046 |
-| 100 | | 0.904792 | | 0.229 |
+| 100 | | 0.904792 | | 0.224446 |
 
-In the first step, Adam with L2 sees the gradient $(1.1, 0.1)$ and normalizes each coordinate to a step of $\alpha = 0.01$. The penalty adds nothing to the step of the busy weight, and it moves the idle weight ten times faster than the intended $0.001$ per step. AdamW moves the busy weight by $\alpha$ plus the decay $0.001$, and shrinks the idle weight by the factor $0.999$ per step, so $\theta_2 = 0.999^{100} = 0.904792$ after 100 steps. Under L2 the idle weight is at $0.229$ after 100 steps: the steps get smaller only as $\lambda'\theta_2$ falls below the size that $\hat{v}$ remembers.
+In the first step, Adam with L2 sees the gradient $(1.1, 0.1)$ and normalizes each coordinate to a step of $\alpha = 0.01$. The penalty adds nothing to the step of the busy weight, and it moves the idle weight ten times faster than the intended $0.001$ per step. AdamW moves the busy weight by $\alpha$ plus the decay $0.001$, and shrinks the idle weight by the factor $0.999$ per step, so $\theta_2 = 0.999^{100} = 0.904792$ after 100 steps. Under L2 the idle weight is at $0.2244$ after 100 steps: the steps get smaller only as $\lambda'\theta_2$ falls below the size that $\hat{v}$ remembers.
 
 ## Correctness
 

@@ -86,7 +86,7 @@ Chen, Dobriban and Lee (2020) build a theory of augmentation on this group view.
 
 $$H(\tilde y, p) = 0.7\,(-\log p_1) + 0.3\,(-\log p_3),$$
 
-the same mix of the two losses. Zhang et al. draw $\lambda \sim \mathrm{Beta}(\alpha, \alpha)$ with a small $\alpha$, so most $\lambda$ are near 0 or 1.
+the same mix of the two losses. Zhang et al. draw $\lambda \sim \mathrm{Beta}(\alpha, \alpha)$. On ImageNet they use a small $\alpha$, from 0.1 to 0.4, so most $\lambda$ are near 0 or 1. On CIFAR-10 they use $\alpha = 1$, so $\lambda$ is uniform on $[0, 1]$.
 
 **The regularizer on one example.** For cyclic rotations of $x = (1, 0, 0, 2)$, $w = (1, 0, 0, 0)$ and $y = 1$, the four rotations give the predictions $1, 2, 0, 0$ and the squared errors $0, 1, 1, 1$, with mean $3/4$. In Claim 1, $w \cdot \bar x = 3/4$, so the fit term is $1/16$, and the penalty is the variance of $\{1, 2, 0, 0\}$, which is $11/16$.
 
