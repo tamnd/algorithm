@@ -10,7 +10,7 @@ aliases:
 - Decoding a Prüfer code
 area: combinatorics/generating-partitions-and-trees
 level: core
-summary: Reconstructs the unique labeled tree from a Prüfer sequence in O(n log n) or O(n) time.
+summary: Reconstructs the unique labeled tree from a Prüfer sequence in Θ(n) time, or Θ(n log n) with a heap of leaves.
 solves: [labeled-tree-generation]
 model: word-ram
 complexity:

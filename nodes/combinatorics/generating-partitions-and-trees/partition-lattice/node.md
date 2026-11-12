@@ -9,7 +9,7 @@ aliases:
 area: combinatorics/generating-partitions-and-trees
 level: advanced
 summary: The set partitions of [n] ordered by refinement; a graded geometric lattice with B_n elements, rank n minus the number of blocks, and Moebius function (-1)^(n-1) (n-1)! from bottom to top.
-prereqs: [set-partitions, lattice]
+prereqs: [set-partitions]
 see_also: [stirling-numbers, bell-numbers, mobius-function, mobius-inversion, graphic-matroid, disjoint-set, partition-refinement, youngs-lattice]
 sources:
   - book: isbn:9781107602625
@@ -33,7 +33,7 @@ The partition lattice $\Pi_n$ is the set of all [partitions](/set-partitions/) o
 
 **Equivalence relations.** A partition is the same as an equivalence relation on $[n]$: $i \sim_\pi j$ when $i$ and $j$ share a block. Then $\pi \le \sigma$ if and only if ${\sim_\pi} \subseteq {\sim_\sigma}$ as sets of pairs.
 
-**Meet and join.** Any two partitions have a greatest lower bound and a least upper bound, so $\Pi_n$ is a [lattice](/lattice/):
+**Meet and join.** Any two partitions have a greatest lower bound and a least upper bound, so $\Pi_n$ is a lattice:
 
 - $\pi \wedge \sigma$ has as blocks the nonempty sets $B \cap C$ for $B \in \pi$, $C \in \sigma$. Its relation is ${\sim_\pi} \cap {\sim_\sigma}$.
 - $\pi \vee \sigma$ has as blocks the connected components of the graph on $[n]$ whose edges join elements that share a block of $\pi$ or of $\sigma$. Its relation is the transitive closure of ${\sim_\pi} \cup {\sim_\sigma}$.
@@ -97,7 +97,7 @@ For $n = 4$, $\sum_\sigma \mu(\hat 0, \sigma)\, x^{|\sigma|} = x^4 - 6x^3 + 11x^
 ## Related definitions
 
 - [Set partitions](/set-partitions/) and [restricted growth strings](/restricted-growth-string/) are the elements; [Bell numbers](/bell-numbers/) and [Stirling numbers](/stirling-numbers/) count them by rank.
-- A [lattice](/lattice/) is a poset with all meets and joins; a [join-semilattice](/join-semilattice/) has only joins.
+- A lattice is a poset with all meets and joins; a [join-semilattice](/join-semilattice/) has only joins.
 - The [Möbius function](/mobius-function/) and [Möbius inversion](/mobius-inversion/) on $\Pi_n$ turn sums over coarser partitions into sums over exact kernels, as in the proof above. This is the basis of the inclusion-exclusion over set partitions in moment and cumulant formulas.
 - A [matroid](/matroid/) has a geometric lattice of flats, and $\Pi_n$ is the case of the [graphic matroid](/graphic-matroid/) of $K_n$. For a graph $G$ on $[n]$, the flats of its graphic matroid form the bond lattice of $G$: the subposet of $\Pi_n$ of the partitions whose blocks induce connected subgraphs. A proof in the same style, which groups the maps $[n] \to [x]$ by the components of the edges whose two ends get the same value, shows that $\sum_\sigma \mu(\hat 0, \sigma)\, x^{|\sigma|}$ over the bond lattice is the chromatic polynomial of $G$.
 - [Partition refinement](/partition-refinement/) repeatedly replaces a partition $\pi$ by $\pi \wedge \{S, [n] \setminus S\}$, a walk down $\Pi_n$.

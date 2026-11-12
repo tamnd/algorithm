@@ -9,7 +9,7 @@ aliases:
 area: combinatorics/generating-partitions-and-trees
 level: advanced
 summary: All integer partitions ordered by containment of Ferrers diagrams; a distributive lattice graded by size whose chains from the empty partition to lambda are the standard tableaux of shape lambda.
-prereqs: [ferrers-diagram, lattice]
+prereqs: [ferrers-diagram]
 see_also: [young-tableau, standard-young-tableaux, integer-partitions, partition-lattice, hook-length-formula, integer-partition-function, conjugate-partition, mobius-function]
 sources:
   - book: isbn:9781107602625
@@ -32,7 +32,7 @@ Young's lattice $Y$ is the set of all integer partitions, ordered by inclusion o
 
 $$\lambda \le \mu \iff \lambda_i \le \mu_i \text{ for all } i \iff D(\lambda) \subseteq D(\mu).$$
 
-**Meet and join.** $(\lambda \wedge \mu)_i = \min(\lambda_i, \mu_i)$ and $(\lambda \vee \mu)_i = \max(\lambda_i, \mu_i)$. Both sequences are non-increasing, so they are partitions, and their diagrams are $D(\lambda) \cap D(\mu)$ and $D(\lambda) \cup D(\mu)$. Since meet and join are intersection and union of sets, they distribute over each other, and $Y$ is a distributive [lattice](/lattice/). Equivalently, $Y$ is the lattice of finite order ideals of $\mathbb{N}_{\ge 1} \times \mathbb{N}_{\ge 1}$ under the componentwise order: a finite set of cells is a diagram exactly when it is closed under moving up and moving left.
+**Meet and join.** $(\lambda \wedge \mu)_i = \min(\lambda_i, \mu_i)$ and $(\lambda \vee \mu)_i = \max(\lambda_i, \mu_i)$. Both sequences are non-increasing, so they are partitions, and their diagrams are $D(\lambda) \cap D(\mu)$ and $D(\lambda) \cup D(\mu)$. Since meet and join are intersection and union of sets, they distribute over each other, and $Y$ is a distributive lattice. Equivalently, $Y$ is the lattice of finite order ideals of $\mathbb{N}_{\ge 1} \times \mathbb{N}_{\ge 1}$ under the componentwise order: a finite set of cells is a diagram exactly when it is closed under moving up and moving left.
 
 **Rank and covers.** $\mu$ covers $\lambda$ exactly when $D(\mu) = D(\lambda) \cup \{a\}$ for one cell $a \notin D(\lambda)$. So $Y$ has least element $\varnothing$ and is graded by $\mathrm{rank}(\lambda) = |\lambda|$. The number of elements of rank $n$ is the [partition number](/integer-partition-function/) $p(n)$. $Y$ has no greatest element.
 
@@ -77,7 +77,7 @@ Stanley called a graded poset with this property, together with a unique least e
 - [Ferrers diagram](/ferrers-diagram/) and [integer partitions](/integer-partitions/) are the elements; the [conjugate partition](/conjugate-partition/) is an automorphism of $Y$, since transposing diagrams keeps inclusion.
 - [Young tableau](/young-tableau/) and [standard Young tableaux enumeration](/standard-young-tableaux/): saturated chains from $\varnothing$.
 - The [hook length formula](/hook-length-formula/) counts the maximal chains of the interval $[\varnothing, \lambda]$.
-- A distributive [lattice](/lattice/) is a lattice in which meet and join distribute over each other. By Birkhoff's theorem, a finite distributive lattice is the lattice $J(P)$ of order ideals of a poset $P$, and $[\varnothing, \lambda] = J(D(\lambda))$.
+- A distributive lattice is a lattice in which meet and join distribute over each other. By Birkhoff's theorem, a finite distributive lattice is the lattice $J(P)$ of order ideals of a poset $P$, and $[\varnothing, \lambda] = J(D(\lambda))$.
 - An $r$-differential poset satisfies $DU - UD = rI$. The Fibonacci lattice is another $1$-differential poset, and the product of $r$ copies of $Y$ is $r$-differential.
 - The [partition lattice](/partition-lattice/) is the analogous lattice for set partitions.
 

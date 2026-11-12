@@ -17,7 +17,7 @@ complexity:
   space: {extra: Θ(n^2)}
 properties: {deterministic: true, recursive: false}
 prereqs: [dyck-word, lexicographic-order, ranking-unranking]
-see_also: [kth-balanced-bracket-sequence, next-balanced-bracket-sequence, balanced-parentheses-generation, permutation-ranking, combinatorial-number-system, ballot-number, counting-balanced-bracket-sequences, combinatorial-ranking-and-unranking]
+see_also: [kth-balanced-bracket-sequence, next-balanced-bracket-sequence, balanced-parentheses-generation, permutation-ranking, combinatorial-number-system, ballot-theorem, counting-balanced-bracket-sequences, combinatorial-ranking-and-unranking]
 sources:
   - url: https://cp-algorithms.com/combinatorics/bracket_sequences.html
     title: cp-algorithms, Balanced bracket sequences
@@ -30,7 +30,7 @@ sources:
     locator: Chapter 3, the section on Catalan families (ranking and unranking)
 ---
 
-Ranking a balanced bracket sequence computes the 0-based position of a [Dyck word](/dyck-word/) $s$ of length $2n$ in the [lexicographic order](/lexicographic-order/) of all $C_n$ Dyck words of that length, with $\texttt{(} < \texttt{)}$. It reads $s$ once from left to right, and at each closing bracket it adds the number of balanced words that have the same prefix but an opening bracket there. These numbers come from a table of [ballot numbers](/ballot-number/) of size $\Theta(n^2)$, built once. The inverse map is [unranking](/kth-balanced-bracket-sequence/), and the pair is an instance of [ranking and unranking](/ranking-unranking/).
+Ranking a balanced bracket sequence computes the 0-based position of a [Dyck word](/dyck-word/) $s$ of length $2n$ in the [lexicographic order](/lexicographic-order/) of all $C_n$ Dyck words of that length, with $\texttt{(} < \texttt{)}$. It reads $s$ once from left to right, and at each closing bracket it adds the number of balanced words that have the same prefix but an opening bracket there. These numbers come from a table of [ballot numbers](/ballot-theorem/) of size $\Theta(n^2)$, built once. The inverse map is [unranking](/kth-balanced-bracket-sequence/), and the pair is an instance of [ranking and unranking](/ranking-unranking/).
 
 ## In plain words
 

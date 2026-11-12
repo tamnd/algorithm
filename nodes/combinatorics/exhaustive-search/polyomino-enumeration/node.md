@@ -106,7 +106,7 @@ exists. It is called *Klarner's constant*. Its value is not known. Barequet, Rot
 
 - **Polyomino tiling to exact cover.** Each placement of a polyomino on a board is an option, and the cells and the pieces are the items. See the [polyomino tiling problem](/polyomino-tiling-problem/).
 - **Polyominoes as connected subgraphs.** A fixed polyomino with $n$ cells is a connected set of $n$ vertices of the grid graph whose first vertex in row order is a fixed vertex. So methods for connected induced subgraphs apply.
-- **Self-avoiding walks.** A polyomino that is a single path of cells corresponds to a [self-avoiding walk](/self-avoiding-walk-enumeration/), and the two counting problems use the same methods.
+- **Self-avoiding walks.** The cells that a [self-avoiding walk](/self-avoiding-walk-enumeration/) visits form a polyomino, but different walks can give the same polyomino, so the two counts differ. The two counting problems use the same methods.
 
 ## Applications
 

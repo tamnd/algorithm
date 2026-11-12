@@ -21,7 +21,7 @@ history:
   people: [Frank Ruskey, T. C. Hu]
   note: Ruskey and Hu published a lexicographic generation of binary trees in 1977.
 prereqs: [dyck-word, lexicographic-order, lexicographic-successor]
-see_also: [balanced-parentheses-generation, balanced-bracket-sequence-ranking, kth-balanced-bracket-sequence, next-permutation, zaks-tree-generation, constant-amortized-time-generation, ballot-number, binary-tree-generation]
+see_also: [balanced-parentheses-generation, balanced-bracket-sequence-ranking, kth-balanced-bracket-sequence, next-permutation, zaks-tree-generation, constant-amortized-time-generation, ballot-theorem, binary-tree-generation]
 sources:
   - book: isbn:9780201038040
     title: Donald E. Knuth, The Art of Computer Programming, Volume 4A, Combinatorial Algorithms, Part 1
@@ -94,7 +94,7 @@ Let $\mathrm{cost}(s)$ be the number of cells that the call reads, $m - i + 1$ w
 - **Best case $\Theta(1)$.** A word that ends in `())` stops at $i = m - 2$.
 - **Amortized $\Theta(1)$.** Let $s \ne (\texttt{()})^n$ stop at $i$ with $d = h \ge 1$. Every opening bracket after $i$ stands at height 0, so $s$ ends with $\texttt{(}\,\texttt{)}^{h+1}(\texttt{()})^j$ for some $j \ge 0$, and $\mathrm{cost}(s) = h + 2 + 2j$. The next word ends with $\texttt{(}^{j+1}\texttt{)}^{j+h}$, so its final run of closing brackets has length $t = j + h$, and $\mathrm{cost}(s) \le 2t + 2$. The map from a word to the next word is one to one, so $\sum_s \mathrm{cost}(s) \le 2n + \sum_{v \in D_n} (2t(v) + 2)$.
 
-Now count the final runs. A word $v$ has $t(v) \ge k$ when it is a prefix of length $2n - k$ that ends at height $k$, followed by $\texttt{)}^k$. Cut a nonnegative path of length $2n$ that ends at height 2 at its last up step: it is a nonnegative path of length $2n - k$ that ends at height $k$, then one up step, then $k - 1$ down steps, for a unique $k \ge 1$. So $\sum_v t(v) = \sum_{k \ge 1} \#\{v : t(v) \ge k\}$ equals the number of nonnegative paths of length $2n$ that end at height 2. By the [reflection principle](/reflection-principle/) this is the [ballot number](/ballot-number/) $\binom{2n}{n-1} - \binom{2n}{n-2} = \frac{3n}{n+2} C_n$. Hence
+Now count the final runs. A word $v$ has $t(v) \ge k$ when it is a prefix of length $2n - k$ that ends at height $k$, followed by $\texttt{)}^k$. Cut a nonnegative path of length $2n$ that ends at height 2 at its last up step: it is a nonnegative path of length $2n - k$ that ends at height $k$, then one up step, then $k - 1$ down steps, for a unique $k \ge 1$. So $\sum_v t(v) = \sum_{k \ge 1} \#\{v : t(v) \ge k\}$ equals the number of nonnegative paths of length $2n$ that end at height 2. By the [reflection principle](/reflection-principle/) this is the [ballot number](/ballot-theorem/) $\binom{2n}{n-1} - \binom{2n}{n-2} = \frac{3n}{n+2} C_n$. Hence
 
 $$\sum_{s \in D_n} \mathrm{cost}(s) \le \Big(\frac{6n}{n+2} + 2\Big) C_n + 2n < 8 C_n + 2n.$$
 

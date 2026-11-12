@@ -74,7 +74,7 @@ The three expressions are equal, since $\binom{2n}{n+1} = \frac{n}{n+1}\binom{2n
 ## Related definitions
 
 - **Cycle form.** $C_n = \frac{1}{2n+1}\binom{2n+1}{n}$: of the $2n + 1$ rotations of a string with $n + 1$ U and $n$ D, exactly one has every proper prefix with more U than D. This is the [cycle lemma](/cycle-lemma/), and its general form gives the Fuss-Catalan numbers $\frac{1}{(m-1)n+1}\binom{mn}{n}$ for $m$-ary trees.
-- **Ballot numbers.** The paths that stay strictly above the axis after the start, with $a$ up and $b$ down steps, number $\frac{a - b}{a + b}\binom{a + b}{a}$ by the [ballot theorem](/ballot-theorem/); $C_n$ is the case $a = n + 1$, $b = n$. The [ballot numbers](/ballot-number/) $\frac{n - k + 1}{n + 1}\binom{n + k}{k}$ form Catalan's triangle, whose diagonal is $C_n$.
+- **Ballot numbers.** The paths that stay strictly above the axis after the start, with $a$ up and $b$ down steps, number $\frac{a - b}{a + b}\binom{a + b}{a}$ by the [ballot theorem](/ballot-theorem/); $C_n$ is the case $a = n + 1$, $b = n$. The ballot numbers $\frac{n - k + 1}{n + 1}\binom{n + k}{k}$ form Catalan's triangle, whose diagonal is $C_n$.
 - **Narayana numbers.** $N(n, k) = \frac{1}{n}\binom{n}{k}\binom{n}{k-1}$ counts the Dyck words of semilength $n$ with $k$ peaks (a U followed by a D), and $\sum_k N(n, k) = C_n$; for $n = 4$ the values are $1, 6, 6, 1$.
 - **Dyck language.** The set of all Dyck words is the [Dyck language](/dyck-language/), the standard example of a context-free language that is not regular.
 - **Lattice paths.** Dyck paths are the monotone [lattice paths](/counting-lattice-paths/) from $(0, 0)$ to $(n, n)$ that stay on one side of the diagonal, after a rotation by 45 degrees.
