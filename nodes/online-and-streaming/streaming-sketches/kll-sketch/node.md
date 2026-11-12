@@ -8,7 +8,7 @@ aliases:
 - KLL quantile sketch
 area: online-and-streaming/streaming-sketches
 level: advanced
-summary: Randomized mergeable quantile sketch built from a stack of compactors with geometrically shrinking capacities; with the right top levels it reaches the optimal O((1/ε) log log(1/δ)) items.
+summary: Randomized mergeable quantile sketch made of compactors with geometrically shrinking capacities; a GK summary on top gives the optimal O((1/ε) log log(1/δ)) items, but is not mergeable.
 model: word-ram
 complexity:
   vars: {n: the stream length, ε: the rank accuracy, δ: the failure probability, k: the capacity of the top compactor, H: the number of levels}
@@ -36,7 +36,7 @@ sources:
     locator: Chapter 4, Summaries for Ordered Data (the KLL summary)
 ---
 
-The KLL sketch is a randomized summary for the [quantile summary problem](/quantile-summary-problem/). It keeps a stack of compactors: level $h$ holds stream items that each stand for $2^h$ original items. When a level fills up, it is sorted and halved at random, and the surviving half moves up one level with twice the weight. Each halving changes any rank by $0$ or $\pm 2^h$ with equal chance, so the rank estimates are unbiased, and the capacities shrink geometrically down the stack so that the low levels, which make many small errors, take little space. The basic sketch answers a rank query within $\varepsilon n$ with probability $1 - \delta$ using $O((1/\varepsilon)\sqrt{\log(1/\delta)} + \log(\varepsilon n))$ items; with changes at the top it uses $O((1/\varepsilon)\log\log(1/\delta))$ items, which is optimal for randomized comparison-based summaries. On this page $n$ is the stream length, and the stream $\sigma$ is insertion only.
+The KLL sketch is a randomized summary for the [quantile summary problem](/quantile-summary-problem/). It keeps a stack of compactors: level $h$ holds stream items that each stand for $2^h$ original items. When a level fills up, it is sorted and halved at random, and the surviving half moves up one level with twice the weight. Each halving changes any rank by $0$ or $\pm 2^h$ with equal chance, so the rank estimates are unbiased, and the capacities shrink geometrically down the stack so that the low levels, which make many small errors, take little space. The basic sketch answers a rank query within $\varepsilon n$ with probability $1 - \delta$ using $O((1/\varepsilon)\sqrt{\log(1/\delta)} + \log(\varepsilon n))$ items; with changes at the top it uses $O((1/\varepsilon)\log\log(1/\delta))$ items, which is optimal for randomized comparison-based summaries, but that form is not mergeable. On this page $n$ is the stream length, and the stream $\sigma$ is insertion only.
 
 ## In plain words
 

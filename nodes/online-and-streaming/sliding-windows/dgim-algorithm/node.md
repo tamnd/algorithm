@@ -93,7 +93,7 @@ $$\frac{|\hat c - c|}{c} \le \frac{2^r - 1}{2\,(L(2^r - 1) + 1)} < \frac{1}{2L} 
 
 All bounds here are proved on the proof page. The model is the word RAM with words of $\Theta(\log W)$ bits.
 
-- **Number of buckets.** At most $(L + 1)\left(\lfloor \log_2 \frac{W - 1}{L} + 1 \rfloor + 1\right)$, since the oldest bucket of size $2^r$ needs $L(2^r - 1) + 1 \le W$. For $k = 2$ and $W = 10$ this is 8; for $k = 4$ and $W = 4096$ it is 36.
+- **Number of buckets.** At most $(L + 1)\left(\left\lfloor \log_2 \left(\frac{W - 1}{L} + 1\right) \right\rfloor + 1\right)$, since the oldest bucket of size $2^r$ needs $L(2^r - 1) + 1 \le W$. For $k = 2$ and $W = 10$ this is 8; for $k = 4$ and $W = 4096$ it is 36.
 - **Space.** A timestamp is a position in the window, so it can be kept modulo $W$ in $\lceil \log_2 W \rceil$ bits; the size of a bucket is given by its level. With $t \bmod W$, the total and the counts of the levels, the space is $O(k \log^2 W)$ bits, $O(k \log W)$ words. There are no random bits.
 - **Update time.** $O(1)$ amortized: each merge reduces the number of buckets by one, and each 1 creates one bucket, so after $m$ bits there have been fewer merges than 1s. The worst case is $O(\log W)$, a cascade over all the levels.
 - **Query time.** $O(1)$ for $w = W$, from the total and the oldest bucket. For $w < W$, $O(k \log W)$ with a scan of the buckets.

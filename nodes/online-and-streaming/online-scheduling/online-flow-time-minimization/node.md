@@ -17,7 +17,7 @@ sources:
     title: Joseph Y-T. Leung (ed.), Handbook of Scheduling, Algorithms, Models, and Performance Analysis, Chapman and Hall/CRC, 2004
     locator: Chapter 15, Kirk Pruhs, Jiří Sgall and Eric Torng, Online Scheduling (the sections on flow time objectives)
   - paper: "Stefano Leonardi and Danny Raz, Approximating total flow time on parallel machines, Journal of Computer and System Sciences 73(6), 2007 (STOC 1997)"
-    locator: pages 875 to 891 (SRPT on m machines is O(log min(n/m, P))-competitive, and the Omega(log(n/m + P)) lower bound for randomized online algorithms)
+    locator: pages 875 to 891 (SRPT on m machines is O(log min(n/m, P))-competitive, and the Omega(log(n/m)) and Omega(log P) lower bounds for randomized online algorithms)
   - paper: doi:10.1016/j.ipl.2004.02.013
     title: David P. Bunde, SPT is optimally competitive for uniprocessor flow, Information Processing Letters 90(5), 2004
     locator: pages 233 to 238, Theorem 1 (SPT is (Delta + 1)/2-competitive without preemption) and Theorem 12 (no deterministic algorithm does better)
@@ -102,7 +102,7 @@ Highest density first runs the waiting job with the largest $w_j / p_j$. With we
 ## Bounds
 
 - **One machine, preemptive.** The ratio 1 is reached, so the problem has no gap.
-- **$m$ machines, preemptive.** Each online algorithm, deterministic or randomized against an oblivious adversary, has ratio $\Omega(\log(n/m + P))$ on some inputs (Leonardi and Raz 1997). The SRPT upper bound matches this up to a constant factor.
+- **$m$ machines, preemptive.** Each online algorithm, deterministic or randomized against an oblivious adversary, has ratio $\Omega(\log(n/m))$ on some inputs and $\Omega(\log P)$ on others (Leonardi and Raz 1997). The SRPT upper bound matches this up to a constant factor.
 - **One machine, no preemption.** No deterministic online algorithm has a ratio below $(P + 1)/2$, so SPT is optimal (Bunde 2004). As a function of $n$ alone, the deterministic ratio is $\Omega(n)$.
 - **Weighted, one machine.** No deterministic online algorithm is $O(1)$-competitive for $\sum w_j F_j$ (Bansal and Chan 2009).
 - **Offline.** The offline preemptive problem on one machine is solved by SRPT. Without preemption, it has no $O(n^{1/2 - \varepsilon})$ approximation unless P = NP; see [flow time minimization](/flow-time-minimization/).
