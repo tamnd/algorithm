@@ -53,7 +53,7 @@ $$\frac{T_1}{T_p} \le \min\Big(p, \frac{T_1}{T_\infty}\Big).$$
 
 ## Examples and non-examples
 
-**Small DAGs.** A parallel sum of four numbers has $T_1 = 10$ strands and span 5. A greedy schedule on 2 processors takes 6 steps, a speedup of $10/6 \approx 1.67$. A parallel Fibonacci of 5 has $T_1 = 22$ and span 9, so its parallelism is about 2.44. Greedy schedules take 13, 10, 9 and 9 steps on 2, 3, 4 and 8 processors, speedups of about 1.69, 2.2, 2.44 and 2.44. From 4 processors on, the speedup is stuck at the parallelism.
+**Small DAGs.** A parallel sum of four numbers has $T_1 = 10$ strands and span 5. A greedy schedule on 2 processors takes 6 steps, a speedup of $10/6 \approx 1.67$. A parallel Fibonacci of 5, with one strand to split, one to join and one for each leaf, has $T_1 = 22$ and span 9, so its parallelism is about 2.44. Greedy schedules take 13, 10, 9 and 9 steps on 2, 3, 4 and 8 processors, speedups of about 1.69, 2.2, 2.44 and 2.44. From 4 processors on, the speedup is stuck at the parallelism.
 
 **Relative and absolute speedup.** The [Hillis-Steele scan](/hillis-steele-scan/) of $n = 2^{20}$ numbers does 19,922,945 additions in 20 rounds. A serial prefix sum does 1,048,575 additions. On 8 processors, a greedy scheduler gives $T_8 \le 19{,}922{,}945/8 + 20$, so the relative speedup is above 7.99, nearly perfect. But the work law gives $T_8 \ge 2{,}490{,}369$, so the absolute speedup is at most $1{,}048{,}575 / 2{,}490{,}369 \approx 0.42$: the parallel program on 8 processors is slower than the serial one. A report of relative speedup alone hides this. The work-efficient [Blelloch scan](/blelloch-scan/) does not have this problem (see [work efficiency](/work-efficiency/)).
 

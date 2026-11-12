@@ -67,7 +67,7 @@ L9      ready ← the next ready set
 L10 return c
 ```
 
-Two adjacent vertices are never ready in one round: the one of lower priority waits for the other. So the vertices of a round form an independent set, and their colors do not interact. The first ready set is the set of local maxima of $\rho$, as in [Luby's algorithm](/luby-mis/).
+Two adjacent vertices are never ready in one round: the one of lower priority waits for the other. So the vertices of a round form an independent set, and their colors do not interact. The first ready set is the set of local maxima of $\rho$, as in [Luby's algorithm](/luby-mis/), which uses local minima; the two rules are the same up to reversing the order.
 
 ## Example
 

@@ -49,7 +49,7 @@ The first term is the average, and the second holds because one reducer gets all
 - **Key skew.** A few keys have most of the pairs, as above.
 - **Partition skew.** The keys are even, but the partitioner puts too many on one reducer. A hash partitioner has random collisions, and range split points chosen without a sample can be far off. The [partitioner](/partitioner/) page proves the balance bound of a hash partitioner, which needs every key to be small compared with $N/R$.
 - **Work skew.** The input is even, but the work is not. In a [reduce-side join](/reduce-side-join/), the reducer of key $b$ outputs $|R_b| \cdot |S_b|$ tuples, so a key twice as frequent on both sides costs four times as much.
-- **Record size skew.** A few values are much larger than the rest, such as a very long document or a vertex with millions of neighbors.
+- **Record size skew.** A few values are much larger than the rest, such as a very long document or a vertex with millions of neighbours.
 
 **Stragglers are not the same thing.** Dean and Ghemawat start backup copies of the last running tasks, because a slow machine often causes the delay (see [speculative execution](/speculative-execution/)). A reducer that is slow because of its data is just as slow on another machine, so backup tasks do not help against data skew.
 

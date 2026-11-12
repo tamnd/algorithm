@@ -59,7 +59,7 @@ With the [parallel slackness](/parallel-slackness/) $s = T_1/(p T_\infty)$, this
 
 **A small DAG.** The DAG of a parallel sum of four numbers has $T_1 = 10$ and $T_\infty = 5$. A greedy schedule on 2 processors takes 6 steps, so the cost is 12 and $E_2 = 10/12 \approx 0.83$. The two idle processor-steps are in the first step, which can run only the first strand, and in the last step, which can run only the final addition.
 
-**Parallel Fibonacci of 30.** The DAG has $T_1 = 4{,}038{,}805$ and $T_\infty = 59$. The greedy bound gives an efficiency of at least 0.985 on 1,024 processors, at least 0.511 on 65,536 processors, and only about 0.064 on $10^6$ processors, where the slackness is 0.07.
+**Parallel Fibonacci of 30.** With one strand to split, one to join and one for each leaf, the DAG has $T_1 = 4{,}038{,}805$ and $T_\infty = 59$. The greedy bound gives an efficiency of at least 0.985 on 1,024 processors, at least 0.511 on 65,536 processors, and only about 0.064 on $10^6$ processors, where the slackness is 0.07.
 
 **Efficiency against the best serial program.** The [Hillis-Steele scan](/hillis-steele-scan/) of $n = 2^{20}$ numbers has $T_1 = 19{,}922{,}945$ additions, and a serial loop needs $T_{seq} = 1{,}048{,}575$. A greedy run on $p$ processors has a relative efficiency close to 1 for small $p$, but its cost is at least $T_1$, so its absolute efficiency is at most $1{,}048{,}575 / 19{,}922{,}945 \approx 0.053$ for every $p$. The algorithm is not cost-optimal. The [Blelloch scan](/blelloch-scan/) has $T_1 = 2(n - 1)$, so its absolute efficiency can stay near $1/2$.
 

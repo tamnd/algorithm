@@ -101,6 +101,7 @@ The proofs of both closed forms are in the proof file. By [Brent's theorem](/bre
 - **Deterministic.** The result does not depend on the schedule, because the program has no determinacy race.
 - **Work-inefficient against the best serial method.** The work is the same as that of the naive serial recursion, $\Theta(\varphi^n)$, but the best serial methods use $O(\log n)$ arithmetic operations. Compared with them, P-FIB is exponentially wasteful.
 - **Unit-cost arithmetic.** The analysis counts an addition as one step. $F_n$ has about $0.694\,n$ binary digits, so this is right only while $F_n$ fits in a machine word. That holds for all $n \le 93$ with 64-bit unsigned words, and P-FIB is already too slow long before $n$ is large.
+- **Another strand count.** Some pages count two strands for a call with $n \ge 2$, one up to the spawn and one after the sync, as on the [fork-join model](/fork-join-model/). Then $W(n) = 3F_{n+1} - 2$ and $S(n) = 2n - 1$ for $n \ge 1$, so for $n = 30$ the DAG has 4,038,805 strands and span 59. The asymptotic forms do not change.
 - **Two calls of unequal size.** The spawned call P-FIB$(n-1)$ is larger than the called one, so the spawned side is on the critical path.
 
 ## Variants and improvements

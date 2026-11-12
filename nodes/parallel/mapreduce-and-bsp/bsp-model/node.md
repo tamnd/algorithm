@@ -144,7 +144,7 @@ $$
 
 With $N(\sigma_0) = 0$ and $N(\sigma_p) = pm$, both bounds also hold for $j = 0$ and $j = p$. Bucket $j$ has $N(\sigma_j) - N(\sigma_{j-1}) \le jm + (p-1)(m/p - 1) - (j - 1)m = 2m - m/p - p + 1$ keys. $\square$
 
-The bound is tight. For $p = 2$ and the blocks $[0, 1, 2, 6]$ and $[3, 4, 5, 7]$, the samples are $1, 6$ and $4, 7$, the splitter is $4$, and processor $0$ receives the $5 = 2 \cdot 4 - 2 - 2 + 1$ keys $0, 1, 2, 3, 4$.
+The bound is tight. For $p = 2$ and the blocks $[0, 1, 2, 6]$ and $[3, 4, 5, 7]$, the samples are $1, 6$ and $4, 7$, the splitter is $4$, and processor $0$ receives the $5 = 2 \cdot 4 - 2 - 2 + 1$ keys $0, 1, 2, 3, 4$. The [PSRS](/parallel-sorting-by-regular-sampling/) page takes the first key of each stretch as the sample, at the positions $0, m/p, \ldots, m - m/p$, and its tight bound is $2m - p$.
 
 **Cost.** $S = 4$. With $n = pm$ and merges done pairwise,
 

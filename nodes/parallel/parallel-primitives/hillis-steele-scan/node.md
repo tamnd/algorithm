@@ -39,7 +39,7 @@ The Hillis-Steele scan computes all prefix sums of an array in $\lceil \lg n \rc
 
 ## In plain words
 
-A row of people each hold a number, and each wants the total of their own number and all numbers to their left. In the first step, each person adds the number of the neighbor one place to the left. In the second step, each person adds the number now held by the person two places to the left. Then four places, then eight, and so on. Each step doubles the length of the stretch that each person has added up, so after about twenty steps a row of a million people is done.
+A row of people each hold a number, and each wants the total of their own number and all numbers to their left. In the first step, each person adds the number of the neighbour one place to the left. In the second step, each person adds the number now held by the person two places to the left. Then four places, then eight, and so on. Each step doubles the length of the stretch that each person has added up, so after about twenty steps a row of a million people is done.
 
 Everybody works in every step, even though many of the additions repeat work that someone else has done. So the method is fast but does much more work than one person going down the row.
 
