@@ -112,7 +112,7 @@ The cost in the normal case, with one leader, as in the comparison of Gray and L
 | messages | $3N - 1$ | $(N + 1)(F + 3) - 2$ |
 | stable-storage writes | $N + 1$ | $N + F + 1$ |
 
-The message count adds up as $1$ BeginCommit, $N - 1$ Prepare, $N(F + 1)$ messages 2a, $F + 1$ messages 2b and $N$ outcomes. The tests check this sum for $N \le 6$ and $F \le 3$. A recovery costs two more round trips between the leader and the acceptors.
+The [Two-Phase Commit](/two-phase-commit/) page counts $4n$ messages and 3 delays: it starts at the coordinator's PREPARE and counts the ACKs. The message count adds up as $1$ BeginCommit, $N - 1$ Prepare, $N(F + 1)$ messages 2a, $F + 1$ messages 2b and $N$ outcomes. The tests check this sum for $N \le 6$ and $F \le 3$. A recovery costs two more round trips between the leader and the acceptors.
 
 ## Properties
 

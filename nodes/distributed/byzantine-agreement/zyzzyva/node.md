@@ -67,7 +67,7 @@ With fewer than $2f + 1$ matching replies, the client sends its request to all r
 
 **The fast path.** With $n = 4$ and all replicas honest, the client sends 1 request, the primary sends 3 ORDER-REQ messages, and the 4 replicas send 4 SPEC-RESPONSE messages: $2n = 8$ messages in 3 message delays. The tests count exactly this.
 
-**The two-phase path.** If replica 3 is silent, the client gets 3 matching replies, a commit certificate. It sends 3 COMMIT messages and gets 3 LOCAL-COMMIT replies: 12 messages in 5 message delays.
+**The two-phase path.** If replica 3 is silent, the client gets 3 matching replies, a commit certificate. It sends 3 COMMIT messages and gets 3 LOCAL-COMMIT replies. With the request, the 3 ORDER-REQ messages and the 3 SPEC-RESPONSE messages, this is 13 messages in 5 message delays.
 
 **The view-change bug.** With $n = 4$ and $i_1$ Byzantine (Section 2.3 of the 2017 paper):
 

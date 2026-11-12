@@ -67,13 +67,13 @@ RECEIVE(i, m)                                   ▷ a message, positive or an an
 L3      if key(m) < the key of the last processed event then ROLLBACK(i, key(m))
         add m to the pending events
     else
-L6      if the event of m has been processed then ROLLBACK(i, key(m))
-L7      if the event of m is pending then remove it, else keep m until its event comes
+L4      if the event of m has been processed then ROLLBACK(i, key(m))
+L5      if the event of m is pending then remove it, else keep m until its event comes
 
 ROLLBACK(i, k)
     for each processed event e with key ≥ k, the latest first
-L4      restore the state saved before e; put e back into the pending events
-L5      for each message that e sent, send its antimessage
+L6      restore the state saved before e; put e back into the pending events
+L7      for each message that e sent, send its antimessage
 
 FOSSIL-COLLECT(g)                               ▷ g: the GVT, or a lower bound on it
 L8  commit, and forget the saved states of, the processed events with timestamp < g
@@ -90,11 +90,11 @@ Two LPs, $A$ and $B$. The state of an LP is a number, and an event with value $x
 | 1 | runs the event at 5 (L1, L2), saves 0 | 5 |
 | 2 | runs the event at 8, saves 5; the event sends $+[12]$ to $A$ | 13 |
 | 3 | a message from $A$ for time 6 arrives: a straggler (L3) | |
-| 4 | rolls back the event at 8: restores 5 (L4), puts it back, sends $-[12]$ to $A$ (L5) | 5 |
+| 4 | rolls back the event at 8: restores 5 (L6), puts it back, sends $-[12]$ to $A$ (L7) | 5 |
 | 5 | runs the event at 6 | 11 |
 | 6 | runs the event at 8 again, which sends a new $+[12]$ to $A$ | 19 |
 
-The final state $19 = 5 + 6 + 8$ is the result of running the three events in time order. At $A$, the antimessage $-[12]$ either meets $+[12]$ in the pending events and both go (L7), or arrives first and waits for it, or finds that $A$ already ran it, and then $A$ rolls back to 12 (L6). In this example the new message has the same content as the old one; the variant *lazy cancellation* would notice this and send neither the antimessage nor the copy.
+The final state $19 = 5 + 6 + 8$ is the result of running the three events in time order. At $A$, the antimessage $-[12]$ either meets $+[12]$ in the pending events and both go (L5), or arrives first and waits for it, or finds that $A$ already ran it, and then $A$ rolls back to 12 (L4). In this example the new message has the same content as the old one; the variant *lazy cancellation* would notice this and send neither the antimessage nor the copy.
 
 If the GVT is 7 after step 6, $B$ commits the events at 5 and 6 and forgets their saved states (L8). The event at 8 stays undoable.
 
@@ -103,7 +103,7 @@ If the GVT is 7 after step 6, $B$ commits the events at 5 and 6 and forgets thei
 The full proof is in [proofs/correctness.md](proofs/correctness.md).
 
 - **Order.** Every pending key is above every processed key, at all times: line L1 takes the least pending event, and line L3 rolls back before it adds an earlier one. So each LP's processed events are always in key order, each run on the state that its predecessors left.
-- **Cancellation.** An event is cancelled exactly when the run of the event that sent it is undone, since line L5 is the only source of antimessages, and lines L6 and L7 remove the event wherever it is. So when the run ends, the events that are left are the initial ones and those sent by runs that were never undone.
+- **Cancellation.** An event is cancelled exactly when the run of the event that sent it is undone, since line L7 is the only source of antimessages, and lines L4 and L5 remove the event wherever it is. So when the run ends, the events that are left are the initial ones and those sent by runs that were never undone.
 - **Equal to the sequential result.** These two facts give each LP exactly the hypothesis of the theorem on the [PDES page](/parallel-discrete-event-simulation/): it ran exactly the events scheduled for it by the final runs, in key order.
 - **GVT.** Every new event, message or antimessage has a timestamp at least the GVT at the time it is made, so the GVT never decreases, and no rollback ever undoes an event below it. Fossil collection is safe.
 

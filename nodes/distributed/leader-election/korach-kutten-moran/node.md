@@ -137,6 +137,6 @@ Use the general scheme to get an election for a class of networks that already h
 
 ## History
 
-Korach, Moran and Zaks proved in 1984 that election in an asynchronous complete network needs $\Omega(n \log n)$ messages and gave an algorithm that meets this bound. Ephraim Korach, Shay Kutten and Shlomo Moran presented their modular technique at PODC in 1985, and the journal version appeared in ACM TOPLAS in 1990. Its point was to explain the many $O(n \log n)$ election algorithms for rings and complete networks as instances of one scheme, with the traversal as the only part that depends on the network. Afek and Gafni later improved the time for complete networks while keeping the number of messages.
+Korach, Moran and Zaks proved at PODC in 1984, with a journal version in 1989, that election in an asynchronous complete network needs $\Omega(n \log n)$ messages and gave an algorithm that meets this bound. Ephraim Korach, Shay Kutten and Shlomo Moran presented their modular technique at PODC in 1985, and the journal version appeared in ACM TOPLAS in 1990. Its point was to explain the many $O(n \log n)$ election algorithms for rings and complete networks as instances of one scheme, with the traversal as the only part that depends on the network. Afek and Gafni later improved the time for complete networks while keeping the number of messages.
 
 ## References

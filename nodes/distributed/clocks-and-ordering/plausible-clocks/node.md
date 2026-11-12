@@ -10,9 +10,9 @@ level: research
 summary: Logical clocks of fixed size that never miss or reverse a happened-before pair, but may order some concurrent events. REV, KLA and their product Comb are the main examples.
 model: asynchronous-model
 complexity:
-  vars: {n: the number of sites, r: the number of entries of the clock}
-  time: {worst: Θ(r)}
-  space: {extra: Θ(r)}
+  vars: {n: the number of sites, R: the number of entries of a REV clock, K: the number of entries of a KLA clock}
+  time: {worst: Θ(R + K)}
+  space: {extra: Θ(R + K)}
 properties: {persistent: false, concurrent: false, external: false}
 history:
   year: 1996

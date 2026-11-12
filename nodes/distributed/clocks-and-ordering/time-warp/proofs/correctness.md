@@ -12,7 +12,7 @@ We use the model and the pseudocode of the page. Keys are unique and the same in
 
 **Lemma 2 (cancellation).** Let a run $r$ of an event schedule the event $x$. Then $r$ is undone at some time if and only if $x$ is cancelled: deleted from the pending events, deleted with its antimessage, or rolled back and then deleted.
 
-*Proof.* Line L5 sends the antimessage of $x$ exactly when $r$ is undone, and nothing else sends it. Messages are reliable, so the antimessage arrives. If $x$ is pending, line L7 deletes it. If it has been processed, line L6 rolls it back and line L7 then deletes it. If it has not arrived, the antimessage waits, and the two are deleted together when $x$ arrives. If $r$ is never undone, no antimessage of $x$ exists, and $x$ is never deleted. $\square$
+*Proof.* Line L7 sends the antimessage of $x$ exactly when $r$ is undone, and nothing else sends it. Messages are reliable, so the antimessage arrives. If $x$ is pending, line L5 deletes it. If it has been processed, line L4 rolls it back and line L5 then deletes it. If it has not arrived, the antimessage waits, and the two are deleted together when $x$ arrives. If $r$ is never undone, no antimessage of $x$ exists, and $x$ is never deleted. $\square$
 
 **Theorem 1 (the result).** When the run comes to rest, each LP has run, in key order, exactly the events of the sequential simulation for that LP, and its final state is the sequential one.
 
@@ -22,7 +22,7 @@ We use the model and the pseudocode of the page. Keys are unique and the same in
 
 **Lemma 3 (new things are not below GVT).** Every pending event, message or antimessage that exists at a moment $\tau' \ge \tau$ has a timestamp of at least $\mathrm{GVT}(\tau)$.
 
-*Proof.* By induction over the steps after $\tau$. Things that existed at $\tau$ are at least $\mathrm{GVT}(\tau)$ by definition. A delivered message keeps its timestamp. Line L2 runs a pending event, of timestamp at least $\mathrm{GVT}(\tau)$ by induction, and the events it schedules have larger timestamps. A rollback is caused by a message or antimessage of key $k$, whose timestamp is at least $\mathrm{GVT}(\tau)$ by induction; it puts back into the pending events only events with key at least $k$, and the antimessages of line L5 have the timestamps of events scheduled by those events, which are larger still. $\square$
+*Proof.* By induction over the steps after $\tau$. Things that existed at $\tau$ are at least $\mathrm{GVT}(\tau)$ by definition. A delivered message keeps its timestamp. Line L2 runs a pending event, of timestamp at least $\mathrm{GVT}(\tau)$ by induction, and the events it schedules have larger timestamps. A rollback is caused by a message or antimessage of key $k$, whose timestamp is at least $\mathrm{GVT}(\tau)$ by induction; it puts back into the pending events only events with key at least $k$, and the antimessages of line L7 have the timestamps of events scheduled by those events, which are larger still. $\square$
 
 **Lemma 4 (no rollback below GVT).** After the moment $\tau$, no rollback undoes an event with timestamp below $\mathrm{GVT}(\tau)$. So fossil collection with any $g \le \mathrm{GVT}(\tau)$ is safe, and $\mathrm{GVT}$ never decreases.
 
