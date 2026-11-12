@@ -89,7 +89,7 @@ The tests repeat the forgery for 40 random keys of 1 to 69 bytes, with random me
 
 - *Secret suffix*, $H(m \,\|\, k)$. Length extension does not apply, but a collision $H(m) = H(m')$ found offline, with no key, gives $H(m \,\|\, k) = H(m' \,\|\, k)$ when $m$ and $m'$ have the same length and fill whole blocks. So the security drops to collision resistance, which is broken for MD5 and SHA-1.
 - *Envelope*, $H(k \,\|\, m \,\|\, k)$. Better, but with weaker proofs than HMAC and some key recovery attacks on MD5 versions.
-- *HMAC*, $H((k \oplus \mathrm{opad}) \,\|\, H((k \oplus \mathrm{ipad}) \,\|\, m))$. The outer hash hides the inner state, and Bellare, Canetti and Krawczyk prove it is a PRF when the compression function is. This is the standard fix.
+- *HMAC*, $H((k \oplus \mathrm{opad}) \,\|\, H((k \oplus \mathrm{ipad}) \,\|\, m))$. The outer hash hides the inner state. Bellare, Canetti and Krawczyk (1996) prove it unforgeable when the compression function is a secure MAC and the keyed iterated hash is weakly collision resistant, and Bellare (2006) proves it a PRF when the compression function is a PRF. This is the standard fix.
 
 ## Where it is used
 

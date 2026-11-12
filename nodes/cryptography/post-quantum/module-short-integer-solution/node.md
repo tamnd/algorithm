@@ -74,7 +74,7 @@ The Python code with this page generates instances, checks candidate solutions, 
 
 ## Bounds
 
-- **Worst-case hardness.** Langlois and Stehlé (2015) prove that for $q$ a large enough polynomial in $n$ and a large enough $\ell$, solving Module-SIS on average is at least as hard as approximating SIVP to within a polynomial factor in the worst case on module lattices of rank $k$ over $R$.
+- **Worst-case hardness.** Langlois and Stehlé (2015) prove that for $q$ a large enough polynomial in $n$ and a large enough $\ell$, solving Module-SIS on average is at least as hard as approximating SIVP to within a polynomial factor in the worst case on module lattices of rank $k$ over $R$. The reduction is classical, as for SIS; their reduction for Module-LWE is quantum.
 - **Existence.** If $2^\ell > q^k$, two binary inputs collide, so a solution with $\|z\|_\infty \le 1$ exists.
 - **No concrete bound.** As for SIS, the reduction does not set parameters. ML-DSA's parameters come from attack estimates.
 

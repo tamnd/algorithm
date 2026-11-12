@@ -120,7 +120,7 @@ The usual point is $T = M = N^{2/3}$ and $t = m = N^{1/3}$. For DES with $N = 2^
 
 - **[Distinguished points](/distinguished-points/).** Rivest suggested ending each chain at the first point with a fixed pattern, such as $d$ leading zero bits (Denning 1982). Then the online phase needs a table lookup only at distinguished points, about once per chain length, not at every step. Merges of chains are also detected at once, since merged chains end at the same point.
 - **[Rainbow tables](/rainbow-table/).** Oechslin (2003) uses a different reduction at each column of one large table. Two chains merge only if they meet in the same column. One table replaces $t$ Hellman tables, and the online phase needs about half the calls of $f$ and far fewer lookups.
-- **Data tradeoff.** With $D$ targets, of which one inversion suffices, as in stream ciphers, Biryukov and Shamir give $T M^2 D^2 = N^2$ with $D \le T$. See [time-memory tradeoff](/time-memory-tradeoff/).
+- **Data tradeoff.** With $D$ targets, of which one inversion suffices, as in stream ciphers, Biryukov and Shamir give $T M^2 D^2 = N^2$ with $D^2 \le T$. See [time-memory tradeoff](/time-memory-tradeoff/).
 - **Fiat and Naor.** Hellman's analysis assumes $f$ behaves like a random function. Fiat and Naor (1991) give a variant that works for every function, at a cost of $T M^3 = N^3$ up to small factors.
 - **Lower bounds.** Barkan, Biham and Shamir (2006) show that, for a wide class of chain-based schemes, Hellman's tradeoff cannot be improved by more than small factors.
 

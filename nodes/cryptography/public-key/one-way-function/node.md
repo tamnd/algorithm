@@ -29,7 +29,7 @@ sources:
     title: John Rompel, One-way functions are necessary and sufficient for secure signatures, Proceedings of the 22nd ACM Symposium on Theory of Computing, STOC 1990, pages 387 to 394, 1990
     locator: Sections 1 and 4 (universal one way hash functions from any one way function, and signatures from those)
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: the chapter on theoretical constructions (the definition, the hard core predicate, and the chain from one way functions to pseudorandom permutations)
 ---
 

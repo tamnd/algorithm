@@ -29,10 +29,10 @@ sources:
     locator: Section 2.3 (left_encode, right_encode, encode_string, bytepad), Section 3 (cSHAKE), Section 4 (KMAC, with 4.3.1 KMACXOF), Section 6 (ParallelHash), Section 8 (security considerations)
   - url: "https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/KMAC_samples.pdf"
     title: NIST, Cryptographic Standards and Guidelines, Examples with Intermediate Values, KMAC_samples.pdf
-    locator: KMAC Samples #1 to #6 (KMAC128 and KMAC256, key 40 to 5F, outputs called Outval)
+    locator: "KMAC Samples #1 to #6 (KMAC128 and KMAC256, key 40 to 5F, outputs called Outval)"
   - url: "https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/cSHAKE_samples.pdf"
     title: NIST, Cryptographic Standards and Guidelines, Examples with Intermediate Values, cSHAKE_samples.pdf
-    locator: cSHAKE Samples #1 and #2 (cSHAKE128, S = Email Signature)
+    locator: "cSHAKE Samples #1 and #2 (cSHAKE128, S = Email Signature)"
   - url: "https://doi.org/10.6028/NIST.FIPS.202"
     title: NIST FIPS 202, SHA-3 Standard, Permutation-Based Hash and Extendable-Output Functions, August 2015
     locator: Section 3 (Keccak-p and Keccak-f[1600], the step maps theta, rho, pi, chi and iota), Section 4 (the sponge and pad10*1), Section 6 (SHA-3 and SHAKE, and the domain bits)

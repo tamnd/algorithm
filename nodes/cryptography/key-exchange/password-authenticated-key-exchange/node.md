@@ -108,7 +108,7 @@ In 2019 and 2020 the IRTF Crypto Forum Research Group ran a selection process wi
 
 **Public-key techniques are needed.** A PAKE solves [key agreement](/key-agreement-problem/) when the password space has one element, so it cannot be built from one-way functions alone in a black-box way. Halevi and Krawczyk (1998) also showed that password protocols that resist offline guessing need public-key cryptography.
 
-**Cost.** The common protocols cost two or three messages and a small constant number of exponentiations in $G$ for each party: two for SPAKE2 and CPace, about 14 for J-PAKE, because of its zero-knowledge proofs.
+**Cost.** The common protocols cost two or three messages and a small constant number of exponentiations in $G$ for each party: two for CPace, four for SPAKE2 as written in RFC 9382 (three of them with a fixed base), about 14 for J-PAKE, because of its zero-knowledge proofs.
 
 ## Reductions
 
@@ -120,7 +120,7 @@ In 2019 and 2020 the IRTF Crypto Forum Research Group ran a selection process wi
 ## Applications
 
 - TLS with SRP (RFC 5054), and SRP in some password managers and in Apple iCloud Keychain recovery.
-- WPA3 personal Wi-Fi uses Simultaneous Authentication of Equals (SAE), the Dragonfly PAKE; side channel attacks on its first version (Dragonblood, 2019) led to a hash-to-curve fix.
+- WPA3 personal Wi-Fi uses Simultaneous Authentication of Equals (SAE), the Dragonfly PAKE; side channel attacks on its first version (Dragonblood, disclosed in 2019 and published at IEEE S&P 2020) led to a hash-to-curve fix.
 - Thread uses EC-J-PAKE to admit a new device with a commissioning code, and Matter uses SPAKE2+ with the setup code of a device.
 - Magic Wormhole uses SPAKE2 to send files between two computers with a short code.
 - Kerberos has a pre-authentication mechanism based on SPAKE that stops offline guessing of the user password from a captured exchange.

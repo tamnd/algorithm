@@ -34,7 +34,7 @@ sources:
     title: Daniel J. Bernstein, RSA signatures and Rabin-Williams signatures, the state of the art, 2008
     locator: Sections 2 and 6 (the Rabin-Williams tweaks, principal roots, and the tight security proofs)
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: the chapter on number theoretic assumptions (squaring modulo a Blum integer, the equivalence with factoring, and why a one way function is not yet an encryption scheme)
 ---
 
@@ -80,7 +80,7 @@ L11 for each m in roots: if DECODE(m) ≠ FAIL then return DECODE(m)
 L12 return ERROR
 ```
 
-**The walk-through.** Lines 1 and 2 draw the primes with [Miller-Rabin](/miller-rabin/) and keep only the candidates that are $3$ modulo 4; half of the primes are, so nothing is lost. Line 5 is the whole encryption: one modular squaring, about one thousandth of the work of an RSA encryption with $e = 65537$ and far less than an RSA decryption.
+**The walk-through.** Lines 1 and 2 draw the primes with [Miller-Rabin](/miller-rabin/) and keep only the candidates that are $3$ modulo 4; half of the primes are, so nothing is lost. Line 5 is the whole encryption: one modular squaring. An RSA encryption with $e = 65537$ takes 16 squarings and one multiplication, so this is about one seventeenth of its work, and far less than an RSA decryption.
 
 Lines 6 and 7 are where $p \equiv 3 \pmod 4$ pays. For such a prime and a residue $c$, the exponent $(p+1)/4$ is an integer and
 

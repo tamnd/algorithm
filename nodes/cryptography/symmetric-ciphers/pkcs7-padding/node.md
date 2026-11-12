@@ -18,7 +18,7 @@ properties: {deterministic: true}
 history:
   year: 1993
   people: [RSA Laboratories]
-  note: RSA Laboratories published PKCS #5 and PKCS #7 version 1.5 in 1993. The rule was later reissued in RFC 2315 (1998) and RFC 5652 (2009), Section 6.3.
+  note: "RSA Laboratories published PKCS #5 and PKCS #7 version 1.5 in 1993. The rule was later reissued in RFC 2315 (1998) and RFC 5652 (2009), Section 6.3."
 prereqs: [block-padding]
 see_also: [block-padding, cbc-mode, padding-oracle-attack, ecb-mode, timing-attack, authenticated-encryption]
 sources:
@@ -26,10 +26,10 @@ sources:
     title: Russ Housley, RFC 5652, Cryptographic Message Syntax (CMS), 2009
     locator: Section 6.3 (content-encryption process, the padding rule and the remark that it is well defined only for block lengths below 256)
   - url: "https://www.rfc-editor.org/rfc/rfc2315"
-    title: Burt Kaliski, RFC 2315, PKCS #7, Cryptographic Message Syntax Version 1.5, 1998
-    locator: Section 10.3, Note 2 (the same padding rule in PKCS #7 version 1.5)
+    title: "Burt Kaliski, RFC 2315, PKCS #7, Cryptographic Message Syntax Version 1.5, 1998"
+    locator: "Section 10.3, Note 2 (the same padding rule in PKCS #7 version 1.5)"
   - url: "https://www.rfc-editor.org/rfc/rfc8018"
-    title: Kathleen Moriarty, Burt Kaliski and Andreas Rusch, RFC 8018, PKCS #5, Password-Based Cryptography Specification Version 2.1, 2017
+    title: "Kathleen Moriarty, Burt Kaliski and Andreas Rusch, RFC 8018, PKCS #5, Password-Based Cryptography Specification Version 2.1, 2017"
     locator: Section 6.1.1 (PBES1 encryption, step 4, the padding string for 8-octet blocks)
   - paper: "Serge Vaudenay, Security flaws induced by CBC padding, applications to SSL, IPSEC, WTLS, EUROCRYPT 2002, LNCS 2332, pages 534 to 545"
     locator: the padding oracle attack on CBC with this padding

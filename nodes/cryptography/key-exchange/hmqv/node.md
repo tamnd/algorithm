@@ -64,7 +64,7 @@ L6  return K = H(σ)                               ▷ then erase x and s_A
 
 Line L3 is the only change from MQV. Krawczyk explains the design with a "dual" signature. The value $(Y B^e)^{x + d a}$ is a signature of $\hat A$ and $\hat B$ together on the pair of messages $(X, Y)$: only someone who knows $a$ and $x$, or $b$ and $y$, can compute it. He calls it the dual exponential challenge-response (DCR) signature, and proves that it cannot be forged when $\bar H$ is a random oracle and the computational Diffie-Hellman problem is hard. Because $d$ hashes $\hat B$'s name, the value $X A^d$ is only good for a session with $\hat B$.
 
-**About the code.** The Python code of this page uses a 256-bit safe prime with $q$ of 255 bits, so $l = 128$; $\bar H$ is SHA-256 truncated to 128 bits. It is for study only. It is not constant time, and it must not protect real data. Use a vetted library, for example a [Noise](/noise-protocol-framework/) or TLS 1.3 implementation; Few libraries offer HMQV, and there are no official test vectors. The tests check agreement against the direct formula $g^{(x + d a)(y + e b)}$.
+**About the code.** The Python code of this page uses a 256-bit safe prime with $q$ of 255 bits, so $l = 128$; $\bar H$ is SHA-256 truncated to 128 bits. It is for study only. It is not constant time, and it must not protect real data. Use a vetted library, for example a [Noise](/noise-protocol-framework/) or TLS 1.3 implementation; few libraries offer HMQV, and there are no official test vectors. The tests check agreement against the direct formula $g^{(x + d a)(y + e b)}$.
 
 ## Example
 

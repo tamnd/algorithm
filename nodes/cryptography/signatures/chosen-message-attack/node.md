@@ -28,11 +28,11 @@ sources:
   - paper: "Susan Hohenberger and Brent Waters, Short and stateless signatures from the RSA assumption, CRYPTO 2009, LNCS 5677, pages 654 to 670"
     locator: the step from security against a non-adaptive (weak) chosen-message attack to full security with a chameleon hash, credited to Krawczyk and Rabin
   - url: "https://www.rfc-editor.org/rfc/rfc8017"
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1 Version 2.2, November 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1 Version 2.2, November 2016"
     locator: Section 8.2.2 (RSASSA-PKCS1-v1_5 verification, which compares the whole encoded block), Section 9.2 Note 1 (the DigestInfo prefixes)
   - url: "https://mailarchive.ietf.org/arch/msg/openpgp/5rnE9ZRN1AokBVj3VqblGlP63QE/"
     title: Hal Finney, Bleichenbacher's RSA signature forgery based on implementation error, message to the IETF OpenPGP list, August 2006
-    locator: the description of the e = 3 forgery of PKCS #1 v1.5 against verifiers that do not check that the hash ends the block
+    locator: "the description of the e = 3 forgery of PKCS #1 v1.5 against verifiers that do not check that the hash ends the block"
   - book: isbn:9780849385230
     title: Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone, Handbook of Applied Cryptography, CRC Press, 1996
     locator: Section 11.2.4, types of attacks on signature schemes, and Note 11.15 on the adaptive chosen-message attack

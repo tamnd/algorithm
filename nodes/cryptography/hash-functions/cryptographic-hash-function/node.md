@@ -12,7 +12,7 @@ prereqs: [hash-function]
 see_also: [collision-resistance, preimage-resistance, second-preimage-resistance, random-oracle-model, merkle-damgard-construction, sponge-construction, hmac, password-hashing]
 sources:
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: Chapter 6 (hash functions as keyed families, collision resistance, the Merkle-Damgard transform, HMAC, and applications)
   - paper: "Phillip Rogaway and Thomas Shrimpton, Cryptographic hash-function basics: definitions, implications, and separations for preimage resistance, second-preimage resistance, and collision resistance, FSE 2004, LNCS 3017, pages 371 to 388"
     locator: Section 3 (the seven notions) and Figure 1 (the implications and separations among them)

@@ -15,7 +15,7 @@ sources:
     locator: the classification of breaks into total break, universal, selective and existential forgery
   - url: "https://mailarchive.ietf.org/arch/msg/openpgp/5rnE9ZRN1AokBVj3VqblGlP63QE/"
     title: Hal Finney, Bleichenbacher's RSA signature forgery based on implementation error, IETF OpenPGP mailing list, 27 August 2006
-    locator: the e = 3 forgery against PKCS #1 v1.5 verifiers that do not check that the hash ends the block, presented by Bleichenbacher at the CRYPTO 2006 rump session
+    locator: "the e = 3 forgery against PKCS #1 v1.5 verifiers that do not check that the hash ends the block, presented by Bleichenbacher at the CRYPTO 2006 rump session"
   - paper: "Marc Stevens, Alexander Sotirov, Jacob Appelbaum, Arjen Lenstra, David Molnar, Dag Arne Osvik and Benne de Weger, Short chosen-prefix collisions for MD5 and the creation of a rogue CA certificate, CRYPTO 2009, LNCS 5677"
     locator: a certificate authority certificate forged from an MD5 chosen-prefix collision
   - url: "https://learn.microsoft.com/en-us/security-updates/securityadvisories/2012/2718704"

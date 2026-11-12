@@ -42,9 +42,8 @@ def test_the_small_worked_example() -> None:
     key = ToyWeakKey(p=239, q=379, d=5)
     assert key.n == 90581 and key.e == 17993
     assert 379 < 2 * 239  # the ratio hypothesis holds
-    # Here d sits exactly on the bound, 5 = N^(1/4)/3 rounded down, so the
-    # strict inequality of the theorem fails and the attack works anyway.
-    assert key.d == wiener_bound(key.n) and not key.is_in_the_wiener_range()
+    # Here d = 5 is N^(1/4)/3 = 5.78 rounded down, so d < N^(1/4)/3 holds.
+    assert key.d == wiener_bound(key.n) and key.is_in_the_wiener_range()
     p, q, d = wiener_attack(*key.public)
     assert {p, q} == {239, 379} and d == 5
 

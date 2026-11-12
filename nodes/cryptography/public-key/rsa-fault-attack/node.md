@@ -31,7 +31,7 @@ sources:
   - paper: "Arjen K. Lenstra, Memo on RSA signature generation in the presence of faults, 25 September 1996, reprinted in Marc Joye and Michael Tunstall, editors, Fault Analysis in Cryptography, Springer 2012"
     locator: "the one page memo: one faulty signature and the public key give gcd(s'^e - m, N)"
   - url: "https://www.rfc-editor.org/rfc/rfc8017"
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016"
     locator: Section 3.2 (the CRT private key quintuple) and Section 5.2.1 (RSASP1, which is the operation that is attacked)
   - paper: doi:10.1007/s001459900055
     title: Marc Joye, Arjen K. Lenstra and Jean-Jacques Quisquater, Chinese remaindering based cryptosystems in the presence of faults, Journal of Cryptology 12(4), pages 241 to 245, 1999

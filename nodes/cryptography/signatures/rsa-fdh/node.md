@@ -40,7 +40,7 @@ sources:
   - paper: "Craig Gentry, Chris Peikert and Vinod Vaikuntanathan, Trapdoors for hard lattices and new cryptographic constructions, STOC 2008"
     locator: hash-and-sign signatures with preimage sampleable trapdoor functions on lattices
   - url: "https://www.rfc-editor.org/rfc/rfc8017"
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, November 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, November 2016"
     locator: Appendix B.2.1 (MGF1), Section 4 (I2OSP and OS2IP), Section 5.2.1 (RSASP1)
   - book: isbn:9780815354369
     title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, 2020

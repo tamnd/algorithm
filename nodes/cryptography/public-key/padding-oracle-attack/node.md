@@ -7,7 +7,7 @@ aliases:
 - Bleichenbacher attack
 area: cryptography/public-key
 level: advanced
-summary: A receiver that says whether the padding of a ciphertext was correct lets an attacker decrypt it. The class covers CBC mode and RSA PKCS #1 v1.5.
+summary: "A receiver that says whether the padding of a ciphertext was correct lets an attacker decrypt it. The class covers CBC mode and RSA PKCS #1 v1.5."
 history:
   year: 1998
   people: [Daniel Bleichenbacher, Serge Vaudenay]

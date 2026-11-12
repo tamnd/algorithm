@@ -29,7 +29,7 @@ sources:
     title: Michael O. Rabin, Digitalized signatures and public-key functions as intractable as factorization, MIT/LCS/TR-212, MIT Laboratory for Computer Science, January 1979
     locator: Sections 1 and 2 (squaring modulo a Blum integer as a trapdoor permutation of the quadratic residues, with the equivalence to factoring)
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: the chapters on public-key encryption and on theoretical constructions (the definition, and encryption from a trapdoor permutation with a hard core predicate)
 ---
 

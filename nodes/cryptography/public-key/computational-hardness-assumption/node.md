@@ -27,7 +27,7 @@ sources:
     title: Dan Boneh, The decision Diffie-Hellman problem, Algorithmic Number Theory, ANTS 1998, LNCS 1423, pages 48 to 63, 1998
     locator: Sections 2 to 4 (the statement of DDH, its relation to CDH and to the discrete logarithm, and the groups in which each is believed hard)
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: the chapter on number theoretic assumptions (factoring, RSA, the discrete logarithm family, and how a scheme's proof uses an assumption)
 ---
 

@@ -18,7 +18,7 @@ sources:
   - paper: "Ivan B. Damgard, Collision free hash functions and public key signature schemes, EUROCRYPT 1987, LNCS 304, pages 203 to 216"
     locator: the first formal definition of collision-free hash families, with a public key
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: Section 6.1 (hash functions and collision resistance as a keyed family, and the weaker notions)
   - url: "https://toc.cryptobook.us/"
     title: Dan Boneh and Victor Shoup, A Graduate Course in Applied Cryptography

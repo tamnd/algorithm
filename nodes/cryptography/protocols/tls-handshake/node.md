@@ -35,7 +35,7 @@ sources:
     title: Benjamin Dowling, Marc Fischlin, Felix Günther and Douglas Stebila, A cryptographic analysis of the TLS 1.3 handshake protocol, Journal of Cryptology 34(4), article 37, 2021
     locator: the multi-stage key exchange model and the reduction proofs for the full handshake and for the PSK modes
   - paper: doi:10.1007/BFb0055716
-    title: Daniel Bleichenbacher, Chosen ciphertext attacks against protocols based on the RSA encryption standard PKCS #1, Crypto 1998, LNCS 1462, pages 1 to 12
+    title: "Daniel Bleichenbacher, Chosen ciphertext attacks against protocols based on the RSA encryption standard PKCS #1, Crypto 1998, LNCS 1462, pages 1 to 12"
     locator: the padding oracle attack on RSA key transport in SSL 3.0
   - paper: "Hanno Böck, Juraj Somorovsky and Craig Young, Return Of Bleichenbacher's Oracle Threat (ROBOT), USENIX Security Symposium 2018, pages 817 to 849"
     locator: the padding oracle still present in TLS implementations twenty years later

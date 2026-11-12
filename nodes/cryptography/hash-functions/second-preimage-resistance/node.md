@@ -20,7 +20,7 @@ sources:
   - paper: "Mihir Bellare and Phillip Rogaway, Collision-resistant hashing: towards making UOWHFs practical, CRYPTO 1997, LNCS 1294, pages 470 to 484"
     locator: target collision resistance and the domain extension of UOWHFs
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: Section 6.1 (second-preimage resistance between collision resistance and preimage resistance)
   - book: isbn:9780849385230
     title: Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone, Handbook of Applied Cryptography, CRC Press, 1996

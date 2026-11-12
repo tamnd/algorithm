@@ -111,7 +111,7 @@ The final IR 8547 is stricter than its draft. The draft deprecated only the para
 
 - **TLS.** Chrome enabled the hybrid X25519Kyber768 by default on desktop in version 124 (April 2024) and moved to X25519MLKEM768 in version 131. Firefox, Cloudflare and other large servers support the same hybrid. See [hybrid key exchange](/hybrid-key-exchange/).
 - **SSH.** OpenSSH uses the hybrid `sntrup761x25519-sha512` by default since version 9.0 (April 2022), and the hybrid `mlkem768x25519-sha256` by default since version 10.0 (April 2025).
-- **Messaging.** Signal added PQXDH (an ML-KEM based extension of [X3DH](/x3dh/)) in 2023, and Apple added PQ3 to iMessage in 2024. Both are discussed in [harvest now, decrypt later](/harvest-now-decrypt-later/).
+- **Messaging.** Signal added PQXDH (an extension of [X3DH](/x3dh/) with CRYSTALS-Kyber-1024, the draft of ML-KEM) in 2023, and Apple added PQ3 to iMessage in 2024. Both are discussed in [harvest now, decrypt later](/harvest-now-decrypt-later/).
 - **Firmware and long-lived signatures.** The stateful hash-based schemes [XMSS](/xmss/) and [LMS](/leighton-micali-signature/) (NIST SP 800-208) sign firmware where a signing counter can be kept safely.
 - **Policy.** NIST IR 8547 sets the end dates for the old schemes. The [security categories](/nist-security-levels/) define how each new parameter set compares with AES and SHA-2.
 
