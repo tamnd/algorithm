@@ -187,7 +187,7 @@ The costs are in the [word RAM](/word-ram/), where a symbol fits in a word. Let 
 
 ## Variants
 
-- **Radix tree (Patricia).** The [radix tree](/radix-tree/) merges each chain of nodes with one child into one edge labelled by a string, so it has at most $2n - 1$ nodes. PATRICIA, on bits, is the binary version.
+- **Radix tree (Patricia).** The [radix tree](/radix-tree/) merges each chain of nodes with one child into one edge labelled by a string, so it has at most $2n$ nodes, counting the root. PATRICIA, on bits, is the binary version.
 - **Ternary search tree.** A [ternary search tree](/ternary-search-tree/) stores the children of a trie node as a BST, with three links in each node. The [hybrid TST](/hybrid-tst/) uses an $R^2$ table at the root.
 - **Compact array layouts.** The [double-array trie](/double-array-trie/) stores all transitions in two integer arrays, and the [LOUDS trie](/louds-trie/) stores the shape in about two bits for each node.
 - **Cache-conscious tries.** The [burst trie](/burst-trie/), the [HAT-trie](/hat-trie/) and the [adaptive radix tree](/adaptive-radix-tree/) keep small groups of keys in buckets or choose the node layout by the number of children.

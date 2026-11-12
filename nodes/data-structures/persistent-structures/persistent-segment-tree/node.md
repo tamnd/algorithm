@@ -34,7 +34,7 @@ sources:
     locator: Lecture 1, Persistent data structures (path copying)
 ---
 
-A persistent segment tree is a [segment tree](/segment-tree/) in which an update does not change any node but copies the nodes on the path from the root to the changed leaf, and makes a new root for the new version. The path has $\lceil \lg n \rceil + 1$ nodes, so each update takes $\Theta(\log n)$ time and space, and all other nodes are shared with the old version. Every version keeps its own root, so a range query can run on any past version in $\Theta(\log n)$ time, and any version can be updated again, which makes the structure fully persistent. Its best-known use builds one version per prefix of an array and answers [range k-th smallest queries](/range-kth-smallest-query/) by walking two versions at once.
+A persistent segment tree is a [segment tree](/segment-tree/) in which an update does not change any node but copies the nodes on the path from the root to the changed leaf, and makes a new root for the new version. The path has at most $\lceil \lg n \rceil + 1$ nodes, exactly $\lg n + 1$ when $n$ is a power of two, so each update takes $\Theta(\log n)$ time and space, and all other nodes are shared with the old version. Every version keeps its own root, so a range query can run on any past version in $\Theta(\log n)$ time, and any version can be updated again, which makes the structure fully persistent. Its best-known use builds one version per prefix of an array and answers [range k-th smallest queries](/range-kth-smallest-query/) by walking two versions at once.
 
 ## In plain words
 
@@ -118,14 +118,14 @@ Write $\text{val}(t, lo, hi)$ for the array that the tree $t$ stores on $[lo, hi
 | operation | time | new nodes |
 |---|---|---|
 | build | $\Theta(n)$ | $2n - 1$ |
-| update, add | $\Theta(\log n)$ | $\lceil \lg n \rceil + 1$ |
+| update, add | $\Theta(\log n)$ | at most $\lceil \lg n \rceil + 1$ |
 | get | $\Theta(\log n)$ | none |
 | query | $\Theta(\log n)$ | none |
 | kth | $\Theta(\log n)$ | none |
 
 **Time.** UPDATE visits one node per level. QUERY visits at most four nodes per level, as in the ephemeral segment tree. All bounds are worst case and hold on every version, because no operation leaves deferred work.
 
-**Space.** BUILD makes $2n - 1$ nodes, and each update makes one node per level, so after $u$ updates the pool has $2n - 1 + u(\lceil \lg n \rceil + 1)$ nodes. For the range k-th smallest structure on $m$ values in $[0, n)$, that is $\Theta(n + m \log n)$. The pool can start from a single shared all-zero tree with one node per level, built in $\Theta(\log n)$, which lowers the cost of `build` for zero arrays from $\Theta(n)$ to $\Theta(\log n)$; this is a [dynamic segment tree](/dynamic-segment-tree/) made persistent.
+**Space.** BUILD makes $2n - 1$ nodes, and each update makes one node per level of its path, so after $u$ updates the pool has at most $2n - 1 + u(\lceil \lg n \rceil + 1)$ nodes. For the range k-th smallest structure on $m$ values in $[0, n)$, that is $\Theta(n + m \log n)$. The pool can start from a single shared all-zero tree with one node per level, built in $\Theta(\log n)$, which lowers the cost of `build` for zero arrays from $\Theta(n)$ to $\Theta(\log n)$; this is a [dynamic segment tree](/dynamic-segment-tree/) made persistent.
 
 ## Variants
 
@@ -142,7 +142,7 @@ Use a persistent segment tree when range queries must see an old state of an arr
 ## Pitfalls
 
 - **Writing into a shared node.** Each update must make new nodes on its path (L5, L9). Changing $t.sum$ in place changes every version that shares $t$. Lazy tags are the usual source of this error.
-- **Memory.** Each update adds $\lceil \lg n \rceil + 1$ nodes; $10^6$ updates on $n = 10^6$ add about $2 \times 10^7$ nodes. A pool of flat integer arrays uses much less memory than one object per node.
+- **Memory.** Each update adds up to $\lceil \lg n \rceil + 1$ nodes; $10^6$ updates on $n = 10^6$ add about $2 \times 10^7$ nodes. A pool of flat integer arrays uses much less memory than one object per node.
 - **Version numbers.** `update` returns the new version; keep it. Updating the newest version when an older one was meant gives a silent wrong answer.
 - **KTH on unrelated versions.** The difference of two versions is a count array only if one was made from the other by additions. For two versions on different branches of the [version tree](/version-tree/), the differences can be negative and KTH has no meaning.
 - **Range bounds.** The code uses half-open ranges $[l, r)$. Mixing them with closed ranges is the most common off-by-one error.

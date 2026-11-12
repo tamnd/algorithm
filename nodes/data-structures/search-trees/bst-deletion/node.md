@@ -149,6 +149,6 @@ The Python function follows the main block and uses parent pointers. The search 
 
 ## History
 
-Hibbard's paper of 1962 introduced this method of deletion and analysed it in random trees. Knuth gives it as Algorithm D in Section 6.2.2, and discusses there how deletions affect the randomness of the tree. The node-splicing form with TRANSPLANT appears in the third and fourth editions of CLRS.
+Hibbard's paper of 1962 introduced this method of deletion and analysed it in random trees. Knuth gives a close variant as Algorithm D in Section 6.2.2, and discusses there how deletions affect the randomness of the tree. Algorithm D differs from the code on this page when the node has only a right child: it tests only the right link first, so it moves the successor into the place of the node, not the right child. Knuth's statements on random trees are about that form. The node-splicing form with TRANSPLANT appears in the third and fourth editions of CLRS.
 
 ## References

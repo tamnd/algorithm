@@ -82,8 +82,8 @@ class PersistentSegmentTree:
     def update(self, version: int, i: int, x: int) -> int:
         """Make a new version equal to ``version`` with a[i] = x.
 
-        Returns the number of the new version. Cost: Θ(log n) time and
-        ceil(lg n) + 1 new nodes.
+        Returns the number of the new version. Cost: Θ(log n) time and at
+        most ceil(lg n) + 1 new nodes.
         """
         root = self._root(version)
         self._check_index(i)
@@ -93,7 +93,7 @@ class PersistentSegmentTree:
     def add(self, version: int, i: int, delta: int) -> int:
         """Make a new version equal to ``version`` with a[i] += delta.
 
-        Cost: Θ(log n) time and ceil(lg n) + 1 new nodes.
+        Cost: Θ(log n) time and at most ceil(lg n) + 1 new nodes.
         """
         return self.update(version, i, self.get(version, i) + delta)
 

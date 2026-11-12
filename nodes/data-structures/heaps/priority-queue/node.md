@@ -114,7 +114,7 @@ Law (P3) says that the order of the inserts does not matter: a queue is a multis
 | [strict Fibonacci heap](/strict-fibonacci-heap/), [Brodal queue](/brodal-queue/) | $O(1)$ | $O(1)$ | $O(\log n)$ | $O(1)$ | $O(1)$ |
 | [balanced search tree](/balanced-binary-search-tree/) | $O(\log n)$ | $O(1)$ with a pointer | $O(\log n)$ | $O(\log n)$ | $O(n)$ in general |
 | [bucket queue](/bucket-queue/), keys in $\{0, \ldots, C\}$ | $O(1)$ | $O(C)$ | $O(C)$ | $O(1)$ | |
-| [radix heap](/radix-heap/), monotone integer keys up to $C$ | $O(\log C)$ amortized | | $O(\log C)$ amortized | $O(1)$ amortized | |
+| [radix heap](/radix-heap/), monotone integer keys up to $C$ | $O(\log C)$ amortized | | $O(\log C)$ amortized, $O(1)$ with a word of flags | $O(1)$ amortized | |
 
 The costs are worst case unless the table says otherwise; $n$ is the number of items. The bounds for the pairing heap are those of the [pairing heap](/pairing-heap/) page. The bucket queue and the radix heap are not comparison-based, and the radix heap needs the extracted keys to never decrease. A plain binary heap has no meld faster than building a new heap from both arrays in $\Theta(n)$ time.
 
