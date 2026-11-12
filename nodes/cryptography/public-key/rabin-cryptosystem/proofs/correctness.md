@@ -4,7 +4,7 @@ proves: [correctness]
 status: full
 ---
 
-Throughout, $p$ and $q$ are distinct odd primes with $p \equiv q \equiv 3 \pmod 4$, and $N = pq$ is the Blum integer of the public key. Write $\mathbb{Z}_N^*$ for the units modulo $N$ and $\mathrm{QR}_N$ for the squares among them. The scheme is the one of the [node page](../node.md): encryption is $c = m^2 \bmod N$ for an encoded representative $m$, and decryption is lines 6 to 12.
+Throughout, $p$ and $q$ are distinct odd primes with $p \equiv q \equiv 3 \pmod 4$, and $N = pq$ is the Blum integer of the public key. Write $\mathbb{Z}_N^*$ for the units modulo $N$ and $\mathrm{QR}_N$ for the squares among them. The scheme is the one of the [node page](/rabin-cryptosystem/): encryption is $c = m^2 \bmod N$ for an encoded representative $m$, and decryption is lines 6 to 12.
 
 ## Part 1. The four roots
 

@@ -24,7 +24,7 @@ sources:
   - paper: "Shoji Miyaguchi, Kazuo Ohta and Masahiko Iwata, 128-bit hash function (N-Hash), NTT Review 2(6), 1990"
     locator: the scheme with the chaining value fed forward as well, found independently of Preneel
   - paper: "Paulo S. L. M. Barreto and Vincent Rijmen, The Whirlpool hashing function, submission to NESSIE, 2000, revised 2003"
-    locator: the compression function H_i = W[H_(i-1)](m_i) XOR H_(i-1) XOR m_i
+    locator: the compression function `H_i = W[H_(i-1)](m_i) XOR H_(i-1) XOR m_i`
 ---
 
 The Matyas-Meyer-Oseas (MMO) and Miyaguchi-Preneel (MP) constructions make a [compression function](/compression-function/) from a [block cipher](/block-cipher/) $E$ by keying the cipher with the chaining value and encrypting the message block:

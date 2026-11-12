@@ -130,22 +130,22 @@ Take $t = 2$, so each node has 1 to 3 keys. Insert $8, 3, 12, 5, 1, 9, 15, 7, 4,
 | step | the tree after it |
 |---|---|
 | insert 8, 3, 12 | [3 8 12] |
-| insert 5 | the root is full: split it. [8]([3 5] [12]) |
-| insert 1, 9, 15 | [8]([1 3 5] [9 12 15]) |
-| insert 7 | the child [1 3 5] is full: split it. [3 8]([1] [5 7] [9 12 15]) |
-| insert 4 | [3 8]([1] [4 5 7] [9 12 15]) |
-| insert 10 | the child [9 12 15] is full: split it. [3 8 12]([1] [4 5 7] [9 10] [15]) |
+| insert 5 | the root is full: split it. `[8]([3 5] [12])` |
+| insert 1, 9, 15 | `[8]([1 3 5] [9 12 15])` |
+| insert 7 | the child [1 3 5] is full: split it. `[3 8]([1] [5 7] [9 12 15])` |
+| insert 4 | `[3 8]([1] [4 5 7] [9 12 15])` |
+| insert 10 | the child [9 12 15] is full: split it. `[3 8 12]([1] [4 5 7] [9 10] [15])` |
 
 Now delete $12, 3, 8, 9, 4, 7$.
 
 | step | case | the tree after it |
 |---|---|---|
-| delete 12 | 2a: the left child [9 10] has 2 keys, so 12 becomes its predecessor 10 | [3 8 10]([1] [4 5 7] [9] [15]) |
-| delete 3 | 2b: [1] has 1 key and [4 5 7] has 3, so 3 becomes its successor 4 | [4 8 10]([1] [5 7] [9] [15]) |
-| delete 8 | 2a: 8 becomes 7 from [5 7] | [4 7 10]([1] [5] [9] [15]) |
-| delete 9 | 3b: [9] and both its siblings have 1 key, so [9] merges with 10 and [15] | [4 7]([1] [5] [10 15]) |
-| delete 4 | 2c: [1] and [5] have 1 key each, so they merge with 4 into [1 4 5] | [7]([1 5] [10 15]) |
-| delete 7 | 2a: 7 becomes 5 from [1 5] | [5]([1] [10 15]) |
+| delete 12 | 2a: the left child [9 10] has 2 keys, so 12 becomes its predecessor 10 | `[3 8 10]([1] [4 5 7] [9] [15])` |
+| delete 3 | 2b: [1] has 1 key and [4 5 7] has 3, so 3 becomes its successor 4 | `[4 8 10]([1] [5 7] [9] [15])` |
+| delete 8 | 2a: 8 becomes 7 from [5 7] | `[4 7 10]([1] [5] [9] [15])` |
+| delete 9 | 3b: [9] and both its siblings have 1 key, so [9] merges with 10 and [15] | `[4 7]([1] [5] [10 15])` |
+| delete 4 | 2c: [1] and [5] have 1 key each, so they merge with 4 into [1 4 5] | `[7]([1 5] [10 15])` |
+| delete 7 | 2a: 7 becomes 5 from [1 5] | `[5]([1] [10 15])` |
 
 The insertion of 5 shows the only way the height grows. In the deletion of 9, the search goes into [9] but first fixes it, because a leaf with $t - 1 = 1$ key cannot lose a key.
 
