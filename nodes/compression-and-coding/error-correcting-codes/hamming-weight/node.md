@@ -7,7 +7,64 @@ aliases:
 - weight of a word
 area: compression-and-coding/error-correcting-codes
 level: intro
-summary: Number of nonzero coordinates of a word; the distance from the zero word.
+summary: The number of nonzero coordinates of a word, its Hamming distance from the zero word. For a linear code the least nonzero weight is the minimum distance.
+prereqs: [hamming-distance]
+see_also: [minimum-distance, macwilliams-identity, undetected-error-probability, population-count, linear-code, syndrome-decoding-problem, hamming-code, golay-code]
+sources:
+  - book: isbn:9780130426727
+    title: Shu Lin and Daniel J. Costello, Jr., Error Control Coding, second edition, Pearson Prentice Hall, 2004
+    locator: Section 3.3 (the weight of an n-tuple, and the theorem that the minimum distance of a linear code equals the minimum weight of its nonzero codewords) and Section 3.6 (the weight distribution of the (7, 4) Hamming code)
+  - book: isbn:9780521845045
+    title: Ron M. Roth, Introduction to Coding Theory, Cambridge University Press, 2006
+    locator: Chapter 2 (linear codes, the Hamming weight, and the minimum distance of a linear code as its least nonzero weight)
+  - paper: doi:10.1002/j.1538-7305.1963.tb04003.x
+    title: F. Jessie MacWilliams, A theorem on the distribution of weights in a systematic code, Bell System Technical Journal 42(1), 1963
+    locator: The weight distribution of a linear code and of its dual code, and the identity that links them
 ---
 
-Number of nonzero coordinates of a word; the distance from the zero word.
+The Hamming weight of a word is the number of its coordinates that are not zero. It is the [Hamming distance](/hamming-distance/) from the word to the zero word, and the distance of two words over a field is the weight of their difference. For a [linear code](/linear-code/) this turns a question about pairs of codewords into a question about single codewords: the [minimum distance](/minimum-distance/) is the least weight of a nonzero codeword, and the list of weights of all codewords fixes much of the behavior of the code on a noisy channel.
+
+## Definition
+
+Let $\mathbb{F} = \mathrm{GF}(q)$ be a finite field, or more generally any alphabet with a special symbol $0$. The **Hamming weight** of a word $x = (x_1, \ldots, x_n) \in \mathbb{F}^n$ is
+
+$$\mathrm{wt}(x) = \bigl|\{\, i : x_i \ne 0 \,\}\bigr| = d(x, 0).$$
+
+The set $\{i : x_i \ne 0\}$ is the *support* of $x$. For a code $C \subseteq \mathbb{F}^n$, the **weight distribution** is the list $A_0, A_1, \ldots, A_n$, where $A_w$ is the number of codewords of weight $w$, and the **weight enumerator** is the polynomial $W_C(z) = \sum_{w=0}^{n} A_w z^w$.
+
+**Properties.** Let $x, y \in \mathbb{F}^n$.
+
+1. $d(x, y) = \mathrm{wt}(x - y)$. Both count the positions with $x_i - y_i \ne 0$.
+2. $\mathrm{wt}(x + y) \le \mathrm{wt}(x) + \mathrm{wt}(y)$. If $x_i + y_i \ne 0$, then $x_i \ne 0$ or $y_i \ne 0$, so the support of $x + y$ is inside the union of the two supports.
+3. $\mathrm{wt}(a x) = \mathrm{wt}(x)$ for each nonzero scalar $a$, because $a x_i = 0$ if and only if $x_i = 0$ in a field.
+4. **Binary words.** Over $\mathrm{GF}(2)$, $\mathrm{wt}(x + y) = \mathrm{wt}(x) + \mathrm{wt}(y) - 2\,\mathrm{wt}(x \wedge y)$, where $x \wedge y$ is the coordinatewise AND. For bits, $x_i \oplus y_i = x_i + y_i - 2 x_i y_i$ as integers; sum over $i$.
+5. **Minimum distance of a linear code.** If $C$ is linear and has a nonzero codeword, then $\min_{x \ne y \in C} d(x, y) = \min_{c \in C, c \ne 0} \mathrm{wt}(c)$. *Proof.* For distinct codewords $x, y$, the word $x - y$ is a nonzero codeword (linearity), and $d(x, y) = \mathrm{wt}(x - y)$, so the left side is at least the right side. For a nonzero codeword $c$, both $c$ and $0$ are codewords and $\mathrm{wt}(c) = d(c, 0)$, so the right side is at least the left side.
+6. **Even weights in a binary linear code.** In a binary linear code of dimension $k \ge 1$, either every codeword has even weight, or exactly $2^{k-1}$ codewords have even weight. *Proof.* By property 4, $\mathrm{wt}(x + y) \equiv \mathrm{wt}(x) + \mathrm{wt}(y) \pmod 2$, so $c \mapsto \mathrm{wt}(c) \bmod 2$ is a linear map from $C$ to $\mathrm{GF}(2)$. Its kernel, the even codewords, is all of $C$ if the map is zero, and else a subspace of dimension $k - 1$.
+
+Property 5 is the reason why one computes the minimum distance of a linear code from $2^k - 1$ weights (or $q^k - 1$), and not from about $q^{2k}/2$ pairs. It fails for a code that is not linear (see below).
+
+## Examples and non-examples
+
+**Examples.**
+
+- $\mathrm{wt}(1011101) = 5$, and over $\mathrm{GF}(5)$, $\mathrm{wt}(0, 3, 0, 1, 4) = 3$.
+- The [Hamming code](/hamming-code/) $[7, 4, 3]_2$ with generator rows $1000110$, $0100011$, $0010111$, $0001101$ has the weight distribution $A_0 = 1$, $A_3 = 7$, $A_4 = 7$, $A_7 = 1$, so $W(z) = 1 + 7z^3 + 7z^4 + z^7$ and its minimum distance is 3.
+- The binary [Golay code](/golay-code/) $[23, 12, 7]$, generated by $g(x) = x^{11} + x^{10} + x^6 + x^5 + x^4 + x^2 + 1$, has $A_0 = 1$, $A_7 = 253$, $A_8 = 506$, $A_{11} = 1288$, $A_{12} = 1288$, $A_{15} = 506$, $A_{16} = 253$, $A_{23} = 1$, which sum to $2^{12} = 4096$. With an overall parity bit it becomes the $[24, 12, 8]$ code with $A_0 = 1$, $A_8 = 759$, $A_{12} = 2576$, $A_{16} = 759$, $A_{24} = 1$. Here every weight is even, which is the first case of property 6.
+- The [repetition code](/repetition-code/) $[n, 1, n]$ has $W(z) = 1 + z^n$. The even-weight code $[n, n-1, 2]$ (a [parity bit](/parity-bit/) on $n - 1$ bits) has $A_w = \binom{n}{w}$ for even $w$ and $0$ for odd $w$.
+- **Use on a channel.** On a [binary symmetric channel](/binary-symmetric-channel/) with crossover probability $p$, an error pattern $e$ of weight $w$ occurs with probability $p^w (1 - p)^{n - w}$. A linear code misses an error exactly when $e$ is a nonzero codeword, so the probability of an undetected error is $\sum_{w \ge 1} A_w p^w (1 - p)^{n - w}$. The page [undetected error probability](/undetected-error-probability/) works this out, and the [MacWilliams identity](/macwilliams-identity/) gives $W_C$ from the weight enumerator of the dual code.
+
+**Non-examples.**
+
+- **A code that is not linear.** The binary code $\{000, 011, 101, 111\}$ contains $0$, but $011 + 101 = 110$ is not in it. Its least nonzero weight is 2, but its minimum distance is 1, since $d(011, 111) = 1$. Property 5 needs linearity.
+- **Symbols are not bits.** Over $\mathrm{GF}(2^8)$ the one-byte word $(\mathtt{FF})$ has Hamming weight 1, not 8. A [Reed-Solomon code](/reed-solomon-code/) over $\mathrm{GF}(2^8)$ counts byte errors, so eight flipped bits in one byte cost one unit of weight.
+- **Not a norm.** For real vectors, the number of nonzero entries (often written $\|x\|_0$) is not a norm: $\mathrm{wt}(2x) = \mathrm{wt}(x)$, while a norm must double. Over a finite field there is no notion of size of a symbol, and property 3 is the right replacement.
+
+## Related definitions
+
+- [Hamming distance](/hamming-distance/): $d(x, y) = \mathrm{wt}(x - y)$ over a field.
+- [Minimum distance](/minimum-distance/): for a linear code, the least nonzero weight (property 5).
+- [MacWilliams identity](/macwilliams-identity/): the weight enumerator of the dual code determines the weight enumerator of the code.
+- [Population count](/population-count/): the machine operation that computes the weight of a binary word stored in a register; the page on it is about fast ways to compute it, this page is about its role in codes.
+- [Syndrome decoding problem](/syndrome-decoding-problem/): find an error of weight at most $w$ with a given syndrome. It is hard in general, and code-based cryptography uses this.
+
+## References
