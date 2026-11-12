@@ -117,7 +117,7 @@ The proof file gives parts 1 and 2 in full and part 3 as an outline.
 
 **Integrality gap.** The proof gives an integrality gap of $O(\log n / \log\log n)$ for the ATSP LP. Later work shows that the gap is a constant, and the gap is at least 2 (Charikar, Goemans and Karloff 2006).
 
-**Hardness.** ATSP is NP-hard to approximate within $75/74$ (Karlin, Lampis and Schmied 2015). Without the triangle inequality no ratio is possible unless P = NP, as for symmetric TSP; see [general TSP inapproximability](/general-tsp-inapproximability/).
+**Hardness.** ATSP is NP-hard to approximate within $75/74$ (Karpinski, Lampis and Schmied 2015). Without the triangle inequality no ratio is possible unless P = NP, as for symmetric TSP; see [general TSP inapproximability](/general-tsp-inapproximability/).
 
 ## Complexity
 

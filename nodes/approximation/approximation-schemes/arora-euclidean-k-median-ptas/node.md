@@ -9,11 +9,11 @@ aliases:
 - portal-based k-median PTAS
 area: approximation/approximation-schemes
 level: research
-summary: Adapts Arora's portal dissection to clustering, giving a (1+ε)-approximation for k-median in fixed-dimensional Euclidean space.
+summary: Adapts Arora's portal dissection to clustering, giving a (1+ε)-approximation for k-median in the plane in time n^O(1/ε), and a quasi-polynomial scheme in each fixed dimension.
 solves: [euclidean-k-median]
 model: real-ram
 complexity:
-  vars: {n: the number of points, ε: the accuracy parameter}
+  vars: {n: the number of points in the plane, ε: the accuracy parameter}
   time: {worst: n^O(1/ε), average: n^O(1/ε), best: n^O(1/ε)}
   space: {extra: n^O(1/ε)}
 properties: {online: false, deterministic: false, recursive: true}

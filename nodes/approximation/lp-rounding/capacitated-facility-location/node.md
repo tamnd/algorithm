@@ -9,7 +9,7 @@ aliases:
 - hard-capacitated facility location
 area: approximation/lp-rounding
 level: advanced
-summary: Open facilities and assign clients, with at most u_i clients at facility i, to minimize opening plus connection cost; the natural LP has an unbounded gap, and local search gives ratio 5.
+summary: Open facilities and assign clients, with at most u_i clients at facility i, to minimize opening plus connection cost; the natural LP has an unbounded gap, and local search gives ratio 5 + ε.
 model: word-ram
 complexity:
   vars: {m: the number of facilities, n: the number of clients}
@@ -27,7 +27,7 @@ sources:
     locator: an LP with constant integrality gap, and the gap of the natural LP
 ---
 
-Capacitated facility location (CFL) is [facility location](/facility-location-problem/) with a limit on each facility. There are facilities with opening costs $f_i$ and capacities $u_i$, clients, and metric connection costs $c_{ij}$. The task is to open some facilities and assign each client to an open one, so that facility $i$ serves at most $u_i$ clients, at the least total opening and connection cost. Each facility can be opened at most once, which is why the capacities are called *hard*. The natural LP relaxation, which works so well for the uncapacitated problem, has an [integrality gap](/integrality-gap/) that grows with the capacities. For a long time all constant ratios came from [local search](/local-search/): ratio 5 by Bansal, Garg and Gupta (2012) for general capacities, and 3 for equal capacities. An, Singh and Svensson (2014) gave the first LP with a constant gap.
+Capacitated facility location (CFL) is [facility location](/facility-location-problem/) with a limit on each facility. There are facilities with opening costs $f_i$ and capacities $u_i$, clients, and metric connection costs $c_{ij}$. The task is to open some facilities and assign each client to an open one, so that facility $i$ serves at most $u_i$ clients, at the least total opening and connection cost. Each facility can be opened at most once, which is why the capacities are called *hard*. The natural LP relaxation, which works so well for the uncapacitated problem, has an [integrality gap](/integrality-gap/) that grows with the capacities. For a long time all constant ratios came from [local search](/local-search/): ratio $5 + \varepsilon$ by Bansal, Garg and Gupta (2012) for general capacities, and $3 + \varepsilon$ for equal capacities. An, Singh and Svensson (2014, journal version 2017) gave the first LP with a constant gap.
 
 ## In plain words
 

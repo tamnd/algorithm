@@ -109,7 +109,7 @@ $$\frac{\text{ALG}}{\text{OPT}} = \frac{2n - 2}{n} = 2\left(1 - \frac{1}{n}\righ
 
 This meets the theorem with equality, so the ratio $2$ of the double-tree algorithm cannot be improved by a better analysis.
 
-**Hardness.** The ratio 2 is a property of this algorithm, not of the problem. [Christofides' algorithm](/christofides-algorithm/) gets 3/2. On the other side, no polynomial algorithm has a ratio below $123/122$ unless P = NP (Karlin, Lampis and Schmied 2015; see [metric TSP inapproximability](/metric-tsp-inapproximability/)). Without the triangle inequality the shortcut step fails, and no constant ratio is possible unless P = NP ([general TSP inapproximability](/general-tsp-inapproximability/)).
+**Hardness.** The ratio 2 is a property of this algorithm, not of the problem. [Christofides' algorithm](/christofides-algorithm/) gets 3/2. On the other side, no polynomial algorithm has a ratio below $123/122$ unless P = NP (Karpinski, Lampis and Schmied 2015; see [metric TSP inapproximability](/metric-tsp-inapproximability/)). Without the triangle inequality the shortcut step fails, and no constant ratio is possible unless P = NP ([general TSP inapproximability](/general-tsp-inapproximability/)).
 
 ## Complexity
 
