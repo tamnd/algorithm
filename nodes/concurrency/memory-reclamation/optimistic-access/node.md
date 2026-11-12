@@ -70,7 +70,7 @@ The holes are the nodes that a CAS uses, given at L4, and the data structure cod
 
 **Garbage bound.** A recycle keeps at most $n K$ nodes, the ones in hazard pointers, so with $R > n K$ each list holds at most $R$ nodes and at most $n R$ retired nodes are unfreed at any time, whatever the threads do. A stopped thread keeps at most $K$ nodes from being freed.
 
-**Cost.** One extra read per shared read, $K$ writes and one read before a CAS, and for a recycle, $n$ writes and $n K$ reads, done once every $R$ retires. A recycle makes each other thread restart at most once, so there are at most $n$ restarts for every $R$ retires.
+**Cost.** One extra read per shared read, $K$ writes and one read before a CAS, and for a recycle, $n$ writes and $n K$ reads. A recycle can keep up to $n K$ nodes, so the next one can come after only $R - n K$ retires. A recycle makes each other thread restart at most once, so there are at most $n$ restarts for every $R - n K$ retires.
 
 **Example.** A stack $A \to B \to C$ and $R = 1$. Thread $p$ pops, and thread $q$ pops and recycles at once.
 

@@ -155,7 +155,8 @@ Use it as a fast bounded queue between thread pools, for example to pass tasks o
 
 - **Calling it lock-free.** As the example shows, one stalled producer makes all consumers see EMPTY. The code has no locks, but that is not the same as lock-freedom.
 - **Treating EMPTY as "the queue is empty".** It can mean that the next item is not ready yet. Code that stops a worker on EMPTY may stop too early.
-- **A capacity that is not a power of two** in the C++ code, where the index is `pos & mask`. In this page's implementation, `pos mod N` works for any $N$, since the counters do not wrap.
+- **A capacity that is not a power of two** in the C++ code, where the index is `pos & mask`. In this page's implementation, `pos mod N` works for any $N \ge 2$, since the counters do not wrap.
+- **A capacity of 1.** With $N = 1$ the full state $pos + 1$ and the free state $pos + N$ are the same number. A second enq then sees a free cell and overwrites the first item, and the next deq waits forever. The cell protocol needs $N \ge 2$, as the C++ code checks.
 - **Comparing sequence numbers without a signed difference.** With machine words, `seq − pos` must be taken as a signed number, or a cell that is one lap behind looks ready.
 
 ## Implementations
