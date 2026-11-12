@@ -88,7 +88,7 @@ $20$ operations; relative error at most $3u^2$ (Muller and Rideau, 2022, improvi
 
 - the accurate addition had a largest relative error of $1.97u^2$, within $3u^2$;
 - the FMA multiplication had a largest relative error of $3.68u^2$, within the published bounds;
-- the sloppy addition had a relative error of $1.1 \times 10^{19}\,u^2 \approx 1.4 \times 10^{-13}$ for $x = (-$0x1.45445899589ccp+2$, -$0x1.ff9da156eb005p-52$)$ and $y = ($0x1.45445899589cdp+2$, -$0x1.fff91af117dcep-52$)$: the high parts cancel to $2^{-50}$, $\mathrm{fl}(x_\ell + y_\ell)$ is inexact, and its rounding error, about $5 \times 10^{-32}$, is large next to the true sum $3.5665 \times 10^{-19}$. The accurate addition returned the exact sum, which here is a float.
+- the sloppy addition had a relative error of $1.1 \times 10^{19}\,u^2 \approx 1.4 \times 10^{-13}$ for $x = (-\texttt{0x1.45445899589ccp+2}, -\texttt{0x1.ff9da156eb005p-52})$ and $y = (\texttt{0x1.45445899589cdp+2}, -\texttt{0x1.fff91af117dcep-52})$: the high parts cancel to $2^{-50}$, $\mathrm{fl}(x_\ell + y_\ell)$ is inexact, and its rounding error, about $5 \times 10^{-32}$, is large next to the true sum $3.5665 \times 10^{-19}$. The accurate addition returned the exact sum, which here is a float.
 
 **Values.** $\mathrm{dd}(1/10) = (0.1, -5.551115123125783 \times 10^{-18})$ and $\mathrm{dd}(1/3) = (0.3333333333333333, 1.850371707708594 \times 10^{-17})$. Summing $\sum_{k=0}^{30} 1/k!$ in double-double, with division by a float and the accurate addition, gives $e$ as $(2.718281828459045, 1.4456468917292502 \times 10^{-16})$ with relative error $7.8 \times 10^{-34} \approx 0.06u^2$; `math.e` has relative error $5.3 \times 10^{-17}$.
 

@@ -60,7 +60,7 @@ L6  return root
 
 ## Example
 
-For banana with the end marker $ smaller than every letter, $t = $ banana$ and $n = 7$:
+For banana with the end marker \$ smaller than every letter, $t =$ banana\$ and $n = 7$:
 
 | i | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|---|

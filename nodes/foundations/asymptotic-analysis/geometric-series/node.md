@@ -77,7 +77,7 @@ So the partial sums approach 2 from below, and the gap $(n+2)/2^n$ falls fast: i
 
 ### Pitfalls
 
-- **A ratio that depends on $n$.** The constants $\frac{r}{r-1}$ and $\frac{1}{1-r}$ blow up when $r$ tends to 1. A bound such as "the sum is $O(\text{largest term})" is valid only when $r$ stays at a fixed distance from 1. The non-examples above show the failure.
+- **A ratio that depends on $n$.** The constants $\frac{r}{r-1}$ and $\frac{1}{1-r}$ blow up when $r$ tends to 1. A bound such as "the sum is $O(\text{largest term})$" is valid only when $r$ stays at a fixed distance from 1. The non-examples above show the failure.
 - **Off by one in the number of terms.** $\sum_{k=0}^{n} r^k$ has $n + 1$ terms, and its closed form has the exponent $n + 1$. Writing $(r^n - 1)/(r - 1)$ for it loses the last term. The sum $1 + 2 + \dots + 2^m$ is $2^{m+1} - 1$, not $2^m - 1$.
 - **The case $r = 1$.** The closed form divides by zero. The sum is $n + 1$, and it must be handled as a separate case. This is the source of the extra $\log n$ factor in the middle case of the master theorem.
 - **Negative or complex ratios.** The closed form holds, but the sum is not $\Theta$ of its largest term, because terms cancel. Use $|r|$ for an upper bound: $\big|\sum_{k=0}^n r^k\big| \le \sum_{k=0}^n |r|^k$.

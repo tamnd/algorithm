@@ -80,7 +80,7 @@ The Python code for this page searches a toy cipher with a 16-bit key and a 16-b
 
 The toy cipher has 6 rounds on a 16-bit block. Each round XORs a round key, applies the 4-bit S-box of Heys's tutorial to each nibble, and applies the linear map $x \mapsto x \oplus \mathrm{rotl}(x, 5) \oplus \mathrm{rotl}(x, 9)$. A last round key is XORed at the end. Round key $i$ is $\mathrm{rotl}(K, (3i + 1) \bmod 16)$ XOR a round constant.
 
-**One pair can be enough.** For $K$ = 0xBEEF, $E_K$(0x0000) = 0xFE6A. KEY-SEARCH with this one pair returns $C = \{$0xBEEF$\}$.
+**One pair can be enough.** For $K$ = 0xBEEF, $E_K$(0x0000) = 0xFE6A. KEY-SEARCH with this one pair returns $C = \{\texttt{0xBEEF}\}$.
 
 **One pair can be too few.** The keys 0x0004 and 0x88CB both map 0x0000 to 0xB88A. With the pair (0x0000, 0xB88A) alone, $C$ has both. A second pair with plaintext 0xFFFF gives 0xBA52 under 0x0004 and 0xB5DC under 0x88CB, so it keeps only the true key.
 

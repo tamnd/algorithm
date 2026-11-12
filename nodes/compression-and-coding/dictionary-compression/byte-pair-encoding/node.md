@@ -69,7 +69,7 @@ Line L1 finds the free codes. Line L4 counts pairs with a [hash table](/hash-tab
 
 To expand, read the packed block and push each byte on a stack. When the top of the stack has an entry $(c, a, b)$ in the table, replace it by $b$ and then $a$; otherwise write it out. The stack avoids recursion, since codes can be nested up to 255 levels deep.
 
-**The tokenizer.** Start each training word as its characters followed by an end-of-word symbol, written </w>, so that a unit at the end of a word differs from the same letters inside a word. Then repeat $m$ times: count each pair of adjacent units over all words, weighted by the count of the word; take the most frequent pair; merge it in every word; and record it. To split a new word, start from its characters and </w>, and apply the recorded merges in the order they were learned. This follows Algorithm 1 of Sennrich et al.; the pair counts there include overlapping copies, and this implementation does the same.
+**The tokenizer.** Start each training word as its characters followed by an end-of-word symbol, written `</w>`, so that a unit at the end of a word differs from the same letters inside a word. Then repeat $m$ times: count each pair of adjacent units over all words, weighted by the count of the word; take the most frequent pair; merge it in every word; and record it. To split a new word, start from its characters and `</w>`, and apply the recorded merges in the order they were learned. This follows Algorithm 1 of Sennrich et al.; the pair counts there include overlapping copies, and this implementation does the same.
 
 ## Example
 
@@ -90,16 +90,16 @@ In step 1, aa and ab both occur twice (each aaa holds one copy of aa that does n
 |---|---|---|
 | 1 | e + s | 9 |
 | 2 | es + t | 9 |
-| 3 | est + </w> | 9 |
+| 3 | est + `</w>` | 9 |
 | 4 | l + o | 7 |
 | 5 | lo + w | 7 |
 | 6 | e + w | 6 |
-| 7 | ew + est</w> | 6 |
-| 8 | n + ewest</w> | 6 |
-| 9 | low + </w> | 5 |
-| 10 | d + est</w> | 3 |
+| 7 | ew + est`</w>` | 6 |
+| 8 | n + ewest`</w>` | 6 |
+| 9 | low + `</w>` | 5 |
+| 10 | d + est`</w>` | 3 |
 
-The new word lowest, which was not in the training data, splits as low + est</w>. The word newer splits as n + ew + e + r + </w>, because no merge joins e and r.
+The new word lowest, which was not in the training data, splits as low + est`</w>`. The word newer splits as n + ew + e + r + `</w>`, because no merge joins e and r.
 
 ## Correctness
 
@@ -143,7 +143,7 @@ Use the compressor when you need a very small, simple decoder that expands with 
 - **Counting overlapping copies in the compressor.** If line L4 counts zzz as two copies of zz, the loop can choose a pair that line L8 replaces only once, and the table entry costs more than it saves.
 - **No threshold.** If line L6 is left out, the loop spends codes on pairs that occur twice, and each such entry makes the output larger.
 - **Mixing up the two uses.** The tokenizer learns merges on a table of word counts and keeps them in order; the compressor replaces bytes in one block and keeps a table of codes. A tokenizer that applies the merges in another order than they were learned gives different units than the training did.
-- **Forgetting the end-of-word symbol.** Without </w>, the tokenizer cannot tell est at the end of a word from est inside a word.
+- **Forgetting the end-of-word symbol.** Without `</w>`, the tokenizer cannot tell est at the end of a word from est inside a word.
 
 ## Implementations
 
