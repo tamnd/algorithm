@@ -8,7 +8,7 @@ aliases:
 - Howgrave-Graham-Joux subset sum
 area: techniques/meet-in-the-middle
 level: research
-summary: Subset sum in roughly O(2^(0.337n)) time for dense instances, using the representation technique.
+summary: Subset sum in heuristic time about 2^(0.337n) for dense random instances, using the representation technique; the proved worst case is larger.
 solves: [subset-sum-problem]
 model: word-ram
 complexity:
