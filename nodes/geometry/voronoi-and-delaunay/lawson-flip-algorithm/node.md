@@ -97,7 +97,7 @@ The proof uses the [lifting map](/paraboloid-lifting-map/) $p \mapsto (p_x, p_y,
 ## Complexity
 
 - **Worst case.** $O(n \log n)$ for the start, and at most $n(n - 1)/2$ flips, each with $O(1)$ work and at most $4$ pushes, so $O(n^2)$ time in the worst case. Proved in [the complexity proof](proofs/complexity/).
-- **The bound is reached.** For $m$ points on $y = x^2$ and $m$ points on $y = 10^7 - x^2$, with $x = 0, \ldots, m - 1$, the code makes $m(m - 2)$ flips for $m = 50, 100, 200, 400$. This is observed on these inputs, not proved for all $m$.
+- **The bound is reached.** For $m$ points on $y = x^2$ and $m$ points on $y = 10^7 - x^2$, with $x = 0, \ldots, m - 1$, the code makes $m(m - 2)$ flips for $m = 50, 100, 200, 400$. The exact count is observed on these inputs, not proved for all $m$. That some inputs need $\Omega(n^2)$ flips is a known result, as the [construction page](/delaunay-triangulation-construction/) says.
 - **Random points.** On $n$ uniform random integer points the code makes about $2.6n$, $3.5n$, $4.1n$ and $5.0n$ flips for $n = 100, 200, 400, 800$. This is observed only.
 - **Space.** $O(n)$: each edge is on the stack at most once at a time.
 

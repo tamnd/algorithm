@@ -8,7 +8,7 @@ aliases:
 - QuickHull
 area: geometry/convex-hulls
 level: core
-summary: Recursively discards points inside the hull edge found by the farthest point; O(n log n) average.
+summary: Recursively discards points inside the hull edge found by the farthest point; O(nh) time, Θ(n^2) in the worst case, and fast on typical random inputs.
 solves: [convex-hull-problem]
 model: real-ram
 complexity:
@@ -111,7 +111,7 @@ All costs are on the [real RAM](/real-ram/), counting orientation tests.
 - **Upper bound $O(nh)$.** Each call with $X \ne \emptyset$ outputs one hull vertex $c$, and each vertex is output once, so there are at most $h - 2$ such calls. Each has $|X| \le n$. Calls with $X = \emptyset$ cost $O(1)$, and there are at most $h$ of them, since the two call trees have $h - 2$ inner nodes with two children each. With lines L1 to L4, the total is $O(n + nh) = O(nh)$. A sharper count is the sum of $|X|$ over all calls: the sets at one level of the recursion tree are disjoint, so the work is $O(n)$ per level and $O(n \cdot \text{depth})$ in total.
 - **Worst case $\Theta(n^2)$.** Take the points $(2^i, 4^i)$ for $i = 0, \ldots, n - 1$, which lie on the parabola $y = x^2$, so $h = n$. On the lower chain all $n - 2$ inner points are in $R$, and the farthest point from the chord is always the one next to the right end, so each call removes one point. The sum of $|X|$ is $(n - 1)(n - 2)/2$ and the depth is $n - 2$: for $n = 60$ the sets hold 1711 points in total.
 - **Best case $\Theta(n)$.** With $h$ bounded, for example when four points of a square enclose all others, the work is $O(n)$.
-- **Typical input.** The summary's $O(n \log n)$ average refers to random inputs where splits are balanced and $h$ is small. For $n$ points with integer coordinates drawn uniformly from a square, one run gave a total size of the sets $X$ of 124 for $n = 100$, 1434 for $n = 1000$ and 13657 for $n = 10000$, with recursion depth at most 6. These are observations, not a bound.
+- **Typical input.** On random inputs the splits are often balanced and $h$ is small, so the work is near $O(n \log n)$. For $n$ points with integer coordinates drawn uniformly from a square, one run gave a total size of the sets $X$ of 124 for $n = 100$, 1434 for $n = 1000$ and 13657 for $n = 10000$, with recursion depth at most 6. These are observations, not a bound.
 - **Space.** $\Theta(n)$. The sets $X$ waiting on the stack at any time belong to disjoint parts of the hull boundary, so they are disjoint and hold at most $n$ points.
 
 The bound $O(nh)$ is output-sensitive but not optimal. In the [algebraic decision tree](/algebraic-decision-tree/) model the planar hull needs $\Omega(n \log n)$ comparisons in the worst case ([lower bound](/convex-hull-lower-bound/)) and $\Omega(n \log h)$ with $h$ vertices ([output-sensitive lower bound](/convex-hull-output-sensitive-lower-bound/)). The [Kirkpatrick-Seidel algorithm](/kirkpatrick-seidel/) reaches $O(n \log h)$ by splitting at the median $x$ instead of at the farthest point.

@@ -90,7 +90,7 @@ In $d$ dimensions the kd-tree gives $O(n^{1-1/d} + k)$ with linear space ([kd-tr
 
 - **Search term.** In the comparison model, $\Omega(\log n)$ comparisons are needed even in one dimension, since emptiness of a one-point box is a membership test.
 - **Space on the pointer machine.** Chazelle (1990) proved that a pointer machine structure with query time $O(\log^{c} n + k)$, for any constant $c$, needs $\Omega(n (\log n / \log \log n)^{d-1})$ space. In the plane the filtering search structure matches this bound, so on the pointer machine $O(\log n + k)$ time and $O(n \log n / \log \log n)$ space is optimal. See [range searching lower bounds](/range-searching-lower-bound/).
-- **Linear space.** With $O(n)$ space on the pointer machine, the kd-tree query time $O(\sqrt{n} + k)$ is not optimal in the plane; Chazelle's structures reach $O(\log n + k \log^{\varepsilon} n)$ on the word RAM.
+- **Linear space.** On the pointer machine, the bound above rules out a query time of $O(\log^{c} n + k)$ with $O(n)$ space, and the kd-tree gives $O(\sqrt{n} + k)$ in the plane. On the word RAM, Chazelle's compressed range tree reaches $O(\log n + k \log^{\varepsilon} n)$ with $O(n)$ space.
 
 ## Reductions
 

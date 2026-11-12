@@ -96,7 +96,7 @@ See [range searching lower bounds](/range-searching-lower-bound/) for the models
 
 ## Reductions
 
-- **Box counting to dominance counting.** For integer coordinates, with $D(x, y)$ the number of points with $p_x \le x$ and $p_y \le y$,
+- **Box counting to dominance counting.** For integer coordinates, with $D(x, y)$ the number of points with $p_x \le x$ and $p_y \le y$ (the points dominated by $(x, y)$, the opposite orientation of $\mathrm{dom}$),
 
 $$|P \cap [a_1, b_1] \times [a_2, b_2]| = D(b_1, b_2) - D(a_1 - 1, b_2) - D(b_1, a_2 - 1) + D(a_1 - 1, a_2 - 1).$$
 

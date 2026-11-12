@@ -20,7 +20,7 @@ history:
   year: 1957
   people: [Stuart P. Lloyd]
   note: Lloyd described the method in a Bell Labs report of 1957 on the quantization of signals; it was published in 1982.
-prereqs: [voronoi-diagram, voronoi-cell, centroidal-voronoi-tessellation, centroid]
+prereqs: [voronoi-diagram, voronoi-cell, centroidal-voronoi-tessellation]
 see_also: [k-means, k-means-problem, fortunes-algorithm, mesh-generation, fixed-point-iteration, gradient-descent, power-diagram, delaunay-triangulation]
 sources:
   - paper: doi:10.1109/TIT.1982.1056489
@@ -33,7 +33,7 @@ sources:
     locator: the global convergence results and the linear rate in one dimension
 ---
 
-Lloyd's algorithm moves a set of $n$ sites in a region toward a [centroidal Voronoi tessellation](/centroidal-voronoi-tessellation/). In each step it computes the [Voronoi cells](/voronoi-cell/) of the sites inside the region and moves every site to the [centroid](/centroid/) of its cell. Each step never increases the *quantization energy*, the integral of the squared distance from a point of the region to its nearest site, and the fixed points of a step are exactly the centroidal tessellations. With an $O(n \log n)$ Voronoi algorithm a step costs $O(n \log n)$ time. The same iteration on a finite set of data points is the [k-means](/k-means/) algorithm.
+Lloyd's algorithm moves a set of $n$ sites in a region toward a [centroidal Voronoi tessellation](/centroidal-voronoi-tessellation/). In each step it computes the [Voronoi cells](/voronoi-cell/) of the sites inside the region and moves every site to the centroid of its cell. Each step never increases the *quantization energy*, the integral of the squared distance from a point of the region to its nearest site, and the fixed points of a step are exactly the centroidal tessellations. With an $O(n \log n)$ Voronoi algorithm a step costs $O(n \log n)$ time. The same iteration on a finite set of data points is the [k-means](/k-means/) algorithm.
 
 ## In plain words
 

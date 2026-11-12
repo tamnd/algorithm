@@ -74,7 +74,7 @@ The full proofs fill long papers; we give the plan of each, with the step that c
 
 ## Consequences
 
-- **Range trees are nearly optimal.** A [range tree](/range-tree/) for semigroup counting uses $m = O(n \log^{d-1} n)$ and answers with $O(\log^{d} n)$ additions; Theorem 1 with this $m$ gives $\Omega((\log n / \log \log n)^{d-1})$, so the gap is at most about one logarithmic factor.
+- **Range trees are nearly optimal.** A [range tree](/range-tree/) for semigroup counting uses $m = O(n \log^{d-1} n)$ and answers with $O(\log^{d} n)$ additions; Theorem 1 with this $m$ gives $\Omega((\log n / \log \log n)^{d-1})$, so the gap is a factor of $\log n \cdot (\log \log n)^{d-1}$, a little more than one logarithm.
 - **Partition trees are optimal.** With $m = O(n)$, Theorem 2 gives $\Omega(\sqrt{n})$ in the plane, matched by Chan's [partition tree](/partition-tree/); see [simplex range searching](/simplex-range-searching/). Matoušek's trade-off $O((n / m^{1/d}) \log^{O(1)} n)$ is optimal up to polylogarithmic factors for all $n \le m \le n^{d}$.
 - **Subtraction helps.** If weights form a group, counting in boxes is answered with $O(\log^{d-1} n)$ operations and less space, for example by inclusion and exclusion over dominance counts; so Theorem 1 really depends on the semigroup restriction. See [orthogonal range counting](/orthogonal-range-counting/).
 - **Dynamic structures.** By Theorem 3, the $O(\log^{d} n)$ amortized updates and queries of dynamic range trees are optimal in this model; see [dynamic range searching](/dynamic-range-searching/).
