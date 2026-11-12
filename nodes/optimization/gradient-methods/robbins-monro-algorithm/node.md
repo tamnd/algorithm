@@ -4,7 +4,6 @@ kind: algorithm
 slug: robbins-monro-algorithm
 name: Robbins-Monro algorithm
 aliases:
-- stochastic approximation
 - Robbins-Monro procedure
 - Robbins-Monro iteration
 area: optimization/gradient-methods
