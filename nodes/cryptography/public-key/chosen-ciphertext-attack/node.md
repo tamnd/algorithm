@@ -14,7 +14,7 @@ sources:
     title: Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone, Handbook of Applied Cryptography, CRC Press, 1996
     locator: Chapter 8, Section 8.1.1 (indifferent and adaptive chosen-ciphertext attacks), Section 8.2.2 (v) (the attack on RSA), Note 8.13 (ii) (the attack on Rabin)
   - paper: "Daniel Bleichenbacher, Chosen ciphertext attacks against protocols based on the RSA encryption standard PKCS #1, CRYPTO 1998, LNCS 1462, pages 1 to 12"
-    locator: the attack with a padding validity oracle on PKCS #1 v1.5 in SSL 3.0
+    locator: "the attack with a padding validity oracle on PKCS #1 v1.5 in SSL 3.0"
   - paper: "Serge Vaudenay, Security flaws induced by CBC padding, applications to SSL, IPSEC, WTLS, EUROCRYPT 2002, LNCS 2332, pages 534 to 545"
     locator: the padding oracle attack on CBC mode
   - paper: "James Manger, A chosen ciphertext attack on RSA optimal asymmetric encryption padding (OAEP) as standardized in PKCS #1 v2.0, CRYPTO 2001, LNCS 2139, pages 230 to 238"
@@ -22,7 +22,7 @@ sources:
   - paper: "Damian Poddebniak, Christian Dresen, Jens Müller, Fabian Ising, Sebastian Schinzel, Simon Friedberger, Juraj Somorovsky and Jörg Schwenk, Efail, breaking S/MIME and OpenPGP email encryption using exfiltration channels, USENIX Security 2018"
     locator: the CBC and CFB malleability gadgets and the exfiltration channels
   - paper: "Hanno Böck, Juraj Somorovsky and Craig Young, Return of Bleichenbacher's oracle threat (ROBOT), USENIX Security 2018"
-    locator: the scan of TLS servers that still gave a PKCS #1 v1.5 oracle
+    locator: "the scan of TLS servers that still gave a PKCS #1 v1.5 oracle"
   - paper: "Moni Naor and Moti Yung, Public-key cryptosystems provably secure against chosen ciphertext attacks, STOC 1990, pages 427 to 437"
     locator: the lunchtime (non-adaptive) chosen-ciphertext model
   - paper: "Charles Rackoff and Daniel R. Simon, Non-interactive zero-knowledge proof of knowledge and chosen ciphertext attack, CRYPTO 1991, LNCS 576, pages 433 to 444"

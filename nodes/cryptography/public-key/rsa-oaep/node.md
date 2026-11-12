@@ -19,12 +19,12 @@ properties: {deterministic: false, randomized: true}
 history:
   year: 1994
   people: [Mihir Bellare, Phillip Rogaway]
-  note: Published at Eurocrypt 1994 and standardized in PKCS #1 v2.0 in 1998. Shoup found a gap in the 1994 proof in 2001, and Fujisaki, Okamoto, Pointcheval and Stern gave a proof under the RSA assumption in the same year.
+  note: "Published at Eurocrypt 1994 and standardized in PKCS #1 v2.0 in 1998. Shoup found a gap in the 1994 proof in 2001, and Fujisaki, Okamoto, Pointcheval and Stern gave a proof under the RSA assumption in the same year."
 prereqs: [rsa-cryptosystem, cryptographic-hash-function]
 see_also: [rsa-pkcs1-v1-5-encryption, rsa-cryptosystem, ind-cca-security, random-oracle-model, padding-oracle-attack, fujisaki-okamoto-transform, key-encapsulation-mechanism, rsa-problem]
 sources:
   - url: "https://www.rfc-editor.org/rfc/rfc8017"
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016"
     locator: Section 7.1 (RSAES-OAEP), Section 7.1.1 (the encoding), Section 7.1.2 (the decoding and the note on error messages) and Appendix B.2.1 (MGF1)
   - paper: "Mihir Bellare and Phillip Rogaway, Optimal asymmetric encryption, how to encrypt with RSA, EUROCRYPT 1994, LNCS 950, pages 92 to 111"
     locator: Section 4 (the construction with two hash functions G and H, and the plaintext awareness argument)
@@ -37,7 +37,7 @@ sources:
   - paper: "James Manger, A chosen ciphertext attack on RSA optimal asymmetric encryption padding (OAEP) as standardized in PKCS #1 v2.0, CRYPTO 2001, LNCS 2139, pages 230 to 238"
     locator: Sections 2 and 3 (the oracle that separates the integer too large error from the decoding error, and the query count near 1100 for a modulus of 1024 binary digits)
   - url: "https://raw.githubusercontent.com/pyca/cryptography/main/vectors/cryptography_vectors/asymmetric/RSA/pkcs-1v2-1d2-vec/oaep-vect.txt"
-    title: RSA Laboratories, PKCS #1 v2.1 test vectors, file oaep-vect.txt of the archive pkcs-1v2-1-vec.zip, copy in the pyca/cryptography test vectors
+    title: "RSA Laboratories, PKCS #1 v2.1 test vectors, file oaep-vect.txt of the archive pkcs-1v2-1-vec.zip, copy in the pyca/cryptography test vectors"
     locator: Example 1.1 and Example 1.2 (key 1 of 1024 binary digits, SHA-1, MGF1 with SHA-1, empty label)
 ---
 

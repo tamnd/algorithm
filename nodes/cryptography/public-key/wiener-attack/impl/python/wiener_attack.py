@@ -121,7 +121,7 @@ class ToyWeakKey:
     def is_in_the_wiener_range(self) -> bool:
         """The two hypotheses of the theorem: the ratio of the primes and d."""
         small, large = min(self.p, self.q), max(self.p, self.q)
-        return large < 2 * small and self.d < wiener_bound(self.n)
+        return large < 2 * small and self.d <= wiener_bound(self.n)
 
 
 def weak_key(p: int, q: int, rnd, bound: int = 0) -> ToyWeakKey:

@@ -24,7 +24,7 @@ sources:
   - paper: "Guido Bertoni, Joan Daemen, Michaël Peeters and Gilles Van Assche, On the indifferentiability of the sponge construction, Advances in Cryptology, EUROCRYPT 2008, LNCS 4965, Springer, 2008"
     locator: the sponge is indifferentiable from a random oracle with an infinite output
   - paper: doi:10.17487/RFC8017
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, PKCS #1, RSA Cryptography Specifications Version 2.2, RFC 8017, 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, PKCS #1, RSA Cryptography Specifications Version 2.2, RFC 8017, 2016"
     locator: Appendix B.2.1, the mask generation function MGF1
 ---
 

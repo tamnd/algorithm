@@ -14,7 +14,7 @@ sources:
   - paper: "Phillip Rogaway and Thomas Shrimpton, Cryptographic hash-function basics: definitions, implications, and separations for preimage resistance, second-preimage resistance, and collision resistance, FSE 2004, LNCS 3017, pages 371 to 388"
     locator: Section 3 (Pre, ePre and aPre), Proposition 6 (aPre implies Pre), Theorem 7 (Sec, eSec, aSec and Coll imply Pre up to 2^(n-m)), Theorem 15 (the separations)
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: Section 6.1 (preimage resistance as the weakest of the three notions) and Chapter 8 on one-way functions
   - book: isbn:9780849385230
     title: Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone, Handbook of Applied Cryptography, CRC Press, 1996

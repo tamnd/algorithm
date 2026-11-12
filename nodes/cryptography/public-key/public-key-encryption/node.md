@@ -28,7 +28,7 @@ sources:
     title: Oded Goldreich, Foundations of Cryptography, Volume 2, Basic Applications, Cambridge University Press, 2004
     locator: Chapter 5 (the syntax of an encryption scheme, semantic security, indistinguishability, and the equivalence of the two)
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: the public-key encryption chapter (the definitions, the hybrid encryption theorem, and the construction of a CPA secure scheme from a trapdoor permutation)
 ---
 
@@ -111,7 +111,7 @@ The schemes that solve the problem, with the assumption and the best notion each
 | [Rabin](/rabin-cryptosystem/) | factoring | one way only | the reduction is the attack |
 | [ElGamal](/elgamal-encryption/) | [DDH](/decisional-diffie-hellman/) | IND-CPA | multiplicatively homomorphic |
 | [Cramer-Shoup](/cramer-shoup-cryptosystem/) | DDH | IND-CCA2, no ROM | the first practical one |
-| [ECIES](/ecies/) | CDH on a curve | IND-CCA2 in the ROM | a KEM and DEM hybrid |
+| [ECIES](/ecies/) | strong (gap) CDH on a curve | IND-CCA2 in the ROM | a KEM and DEM hybrid |
 | [Goldwasser-Micali](/goldwasser-micali-cryptosystem/) | [QR](/quadratic-residuosity-problem/) | IND-CPA | one digit per ciphertext |
 | [Paillier](/paillier-cryptosystem/) | [DCR](/decisional-composite-residuosity/) | IND-CPA | additively homomorphic |
 | [ML-KEM](/crystals-kyber/) | module LWE | IND-CCA2 | the post-quantum standard |

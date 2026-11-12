@@ -28,7 +28,7 @@ sources:
   - paper: "Malcolm J. Williamson, Non-secret encryption using a finite field, CESG, 21 January 1974, and Thoughts on cheaper non-secret encryption, CESG, 10 August 1976"
     locator: both notes (the key agreement method that matches the later Diffie-Hellman protocol)
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: the part on public-key cryptography (the setting, the key distribution problem it solves, and the hybrid argument for speed)
 ---
 

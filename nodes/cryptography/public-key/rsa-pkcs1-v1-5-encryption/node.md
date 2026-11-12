@@ -18,17 +18,17 @@ properties: {deterministic: false, randomized: true}
 history:
   year: 1993
   people: [RSA Data Security, Burt Kaliski, Daniel Bleichenbacher]
-  note: Published as PKCS #1 v1.5 in November 1993 and written up in RFC 2313 in 1998. Bleichenbacher broke it as used in protocols in 1998, and RFC 8017 keeps it only for old systems.
+  note: "Published as PKCS #1 v1.5 in November 1993 and written up in RFC 2313 in 1998. Bleichenbacher broke it as used in protocols in 1998, and RFC 8017 keeps it only for old systems."
 prereqs: [rsa-cryptosystem]
 see_also: [rsa-oaep, padding-oracle-attack, chosen-ciphertext-attack, ind-cca-security, rsa-cryptosystem, tls-handshake, rsa-signature]
 sources:
   - url: "https://www.rfc-editor.org/rfc/rfc8017"
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016"
     locator: Section 7.2 (RSAES-PKCS1-v1_5), Section 7.2.1 (the encoding), Section 7.2.2 (the decoding and the note on error messages) and Section 7 (OAEP is required for new applications)
   - paper: "Daniel Bleichenbacher, Chosen ciphertext attacks against protocols based on the RSA encryption standard PKCS #1, CRYPTO 1998, LNCS 1462, pages 1 to 12"
     locator: Section 3 (the oracle and the four steps) and Section 4 (the number of queries, about one million for a modulus of 1024 binary digits)
   - url: "https://www.rfc-editor.org/rfc/rfc2313"
-    title: Burt Kaliski, RFC 2313, PKCS #1, RSA Encryption Version 1.5, 1998
+    title: "Burt Kaliski, RFC 2313, PKCS #1, RSA Encryption Version 1.5, 1998"
     locator: Section 8 (the encryption process with block type 02)
   - url: "https://www.rfc-editor.org/rfc/rfc5246"
     title: Tim Dierks and Eric Rescorla, RFC 5246, The Transport Layer Security (TLS) Protocol Version 1.2, 2008

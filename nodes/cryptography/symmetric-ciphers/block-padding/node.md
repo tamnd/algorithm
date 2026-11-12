@@ -6,7 +6,7 @@ name: Block padding
 aliases:
 area: cryptography/symmetric-ciphers
 level: intro
-summary: Extend a message to a whole number of cipher blocks so that the receiver can remove the extension without doubt. PKCS #7 and ISO/IEC 7816-4 are unambiguous; zero padding is not.
+summary: "Extend a message to a whole number of cipher blocks so that the receiver can remove the extension without doubt. PKCS #7 and ISO/IEC 7816-4 are unambiguous; zero padding is not."
 prereqs: [block-cipher]
 see_also: [pkcs7-padding, ecb-mode, cbc-mode, padding-oracle-attack, ctr-mode, xts-mode]
 sources:
@@ -18,7 +18,7 @@ sources:
     locator: the variants CBC-CS1, CBC-CS2 and CBC-CS3
   - url: "https://www.rfc-editor.org/rfc/rfc5652"
     title: Russ Housley, RFC 5652, Cryptographic Message Syntax (CMS), 2009
-    locator: Section 6.3 (content-encryption process, the PKCS #7 padding rule)
+    locator: "Section 6.3 (content-encryption process, the PKCS #7 padding rule)"
   - url: "https://www.rfc-editor.org/rfc/rfc3962"
     title: Ken Raeburn, RFC 3962, Advanced Encryption Standard (AES) Encryption for Kerberos 5, 2005
     locator: Section 5 (CBC with ciphertext stealing) and Appendix B (test vectors for CBC with ciphertext stealing)

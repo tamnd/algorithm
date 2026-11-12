@@ -19,14 +19,14 @@ properties: {deterministic: true, randomized: false}
 history:
   year: 1978
   people: [Ronald L. Rivest, Adi Shamir, Leonard Adleman]
-  note: The RSA paper of 1978 proposed signing with the private exponent. RSA Laboratories published PKCS #1 v1.5 in 1993; it is now RFC 8017 (2016).
+  note: "The RSA paper of 1978 proposed signing with the private exponent. RSA Laboratories published PKCS #1 v1.5 in 1993; it is now RFC 8017 (2016)."
 prereqs: [rsa-cryptosystem, signature-scheme, hash-and-sign-paradigm]
 see_also: [rsa-pss, rsa-fdh, rsa-fault-attack, chosen-message-attack, key-only-attack, rsa-pkcs1-v1-5-encryption, chinese-remainder-theorem, rsa-problem]
 sources:
   - paper: "Ronald L. Rivest, Adi Shamir and Leonard Adleman, A method for obtaining digital signatures and public-key cryptosystems, Communications of the ACM 21(2), pages 120 to 126, 1978"
     locator: the RSA permutation and signing with the private exponent
   - url: "https://www.rfc-editor.org/rfc/rfc8017"
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, November 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, November 2016"
     locator: Section 3.2 (private key in CRT form), Section 5.2.1 (RSASP1), Section 8 (the recommendation of RSASSA-PSS for new applications), Section 8.2 (RSASSA-PKCS1-v1_5), Section 9.2 (EMSA-PKCS1-v1_5 and the DigestInfo prefixes in Note 1)
   - url: "https://csrc.nist.gov/pubs/fips/186-5/final"
     title: NIST FIPS 186-5, Digital Signature Standard (DSS), February 2023
@@ -38,7 +38,7 @@ sources:
     locator: pkcs1v15sign-vectors.txt Example 1 key and Examples 1.17 and 1.18 (SHA-1); SigGen15_186-3.rsp, section mod = 1024, first SHA256 entry
   - book: isbn:9780849385230
     title: Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone, Handbook of Applied Cryptography, CRC Press, 1996
-    locator: Chapter 11, Section 11.3.1 (RSA signature scheme), Section 11.3.2 (attacks), Section 11.3.6 (PKCS #1)
+    locator: "Chapter 11, Section 11.3.1 (RSA signature scheme), Section 11.3.2 (attacks), Section 11.3.6 (PKCS #1)"
   - book: isbn:9780815354369
     title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, 2020
     locator: Chapter 13, plain RSA signatures and their insecurity, and RSA-FDH

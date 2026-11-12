@@ -36,7 +36,7 @@ sources:
     title: Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone, Handbook of Applied Cryptography, CRC Press, 1996
     locator: Chapter 8, Section 8.2.2 (the note on small decryption exponents and why d must be large)
   - url: "https://www.rfc-editor.org/rfc/rfc8017"
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016"
     locator: Section 3.2 (the private key, where d is the full size value that this attack cannot reach)
 ---
 
@@ -98,7 +98,7 @@ The expansion of $e/N = 17993/90581$ starts $[0; 5, 29, 4, 1, 3, \ldots]$, and i
 
 $$\frac{0}{1}, \quad \frac{1}{5}, \quad \frac{29}{146}, \quad \frac{117}{589}, \ldots$$
 
-The first candidate has $k = 0$ and line 3 drops it. The second is $k/d = 1/5$, the true pair. The loop then computes $f = (17993 \cdot 5 - 1)/1 = 89964$, $s = 90581 - 89964 + 1 = 618 = p + q$, $D = 618^2 - 4 \cdot 90581 = 381924 - 362324 = 19600 = 140^2$, and the roots $(618 \pm 140)/2$, that is $379$ and $239$. Their product is $90581 = N$, so line 11 returns. Note that here $d = 5$ is exactly $\lfloor N^{1/4}/3 \rfloor$, so the strict inequality of the theorem does not hold and the attack still works; the bound is sufficient, not necessary.
+The first candidate has $k = 0$ and line 3 drops it. The second is $k/d = 1/5$, the true pair. The loop then computes $f = (17993 \cdot 5 - 1)/1 = 89964$, $s = 90581 - 89964 + 1 = 618 = p + q$, $D = 618^2 - 4 \cdot 90581 = 381924 - 362324 = 19600 = 140^2$, and the roots $(618 \pm 140)/2$, that is $379$ and $239$. Their product is $90581 = N$, so line 11 returns. Here $d = 5$ is below $N^{1/4}/3 \approx 5.78$ and $239 < 379 < 2 \cdot 239$, so the key meets the hypothesis of the theorem.
 
 A toy key of realistic shape, from the test file. The primes have 128 binary digits each,
 

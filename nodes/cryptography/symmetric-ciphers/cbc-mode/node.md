@@ -18,7 +18,7 @@ sources:
     title: Mihir Bellare, Anand Desai, Eron Jokipii and Phillip Rogaway, A concrete security treatment of symmetric encryption, FOCS 1997 (full version on the authors' pages)
     locator: Section 6 of the full version (Proposition 15, Lemma 16 and Theorem 17 on CBC)
   - paper: "Serge Vaudenay, Security flaws induced by CBC padding, applications to SSL, IPSEC, WTLS, EUROCRYPT 2002, LNCS 2332, pages 534 to 545"
-    locator: the padding oracle attack on CBC with PKCS #5 style padding
+    locator: "the padding oracle attack on CBC with PKCS #5 style padding"
   - paper: "Gregory V. Bard, The vulnerability of SSL to chosen plaintext attack, IACR Cryptology ePrint Archive, report 2004/111"
     locator: the chosen-plaintext attack on CBC with a predictable IV (the IV chained from the last record)
   - paper: "Thai Duong and Juliano Rizzo, Here come the XOR ninjas (the BEAST attack), presented at Ekoparty, 2011"

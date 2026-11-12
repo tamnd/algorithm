@@ -26,7 +26,7 @@ sources:
     title: Ronald L. Rivest, Adi Shamir and Leonard Adleman, A method for obtaining digital signatures and public-key cryptosystems, Communications of the ACM 21(2), pages 120 to 126, 1978
     locator: Sections 1 to 3 (the scheme, the encryption and decryption steps, and the key generation)
   - url: "https://www.rfc-editor.org/rfc/rfc8017"
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, 2016"
     locator: Section 3 (key formats), Section 5.1.1 (RSAEP) and Section 5.1.2 (RSADP with the CRT quintuple)
   - book: isbn:9780849385230
     title: Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone, Handbook of Applied Cryptography, CRC Press, 1996
@@ -143,7 +143,7 @@ Use RSA with OAEP when you must interoperate with an old system or a standard th
 
 - **No padding.** Encrypting a raw message with line L8 is not secure. A short message with $e = 3$ and $m^3 < N$ gives $m$ by an exact cube root. The test file shows this on a toy key.
 - **The same message to many keys.** The same unpadded $m$ sent to $e$ keys with the same small $e$ falls to Håstad's broadcast attack (1988): the CRT of the ciphertexts is $m^e$ modulo the product, which is above $m^e$, so an exact $e$-th root gives $m$. The [Coppersmith method](/coppersmith-method/) extends this to padded messages with a known part and to related messages.
-- **A shared modulus.** Two users with the same $N$ and different exponents can each read the other's traffic, and $\gcd$ of the exponents breaks the common modulus setup.
+- **A shared modulus.** Two users with the same $N$ and different exponents can each read the other's traffic, because each private exponent lets its owner factor $N$. An outsider can also attack: if one message $m$ is sent under both exponents and $\gcd(e_1, e_2) = 1$, then $a e_1 + b e_2 = 1$ for some integers $a$ and $b$, and $c_1^a c_2^b \equiv m \pmod N$.
 - **A small private exponent.** See the variants above. Pick $e$ first, never $d$.
 - **No CRT check.** A fault during line L9 or L10 leaks $p$ by one $\gcd$, which is the [RSA fault attack](/rsa-fault-attack/). Verify the result before you output it.
 - **Secret dependent timing.** Line L9 and line L10 with a square and multiply loop leak $d$ through the running time. Use blinding and a constant time ladder, as the [timing attack](/timing-attack/) page shows.

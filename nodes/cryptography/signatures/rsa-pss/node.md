@@ -19,7 +19,7 @@ properties: {deterministic: false, randomized: true}
 history:
   year: 1996
   people: [Mihir Bellare, Phillip Rogaway]
-  note: Introduced with its tight security proof at EUROCRYPT 1996. A changed version entered PKCS #1 v2.1 as RSASSA-PSS, and RFC 8017 (2016) keeps it as the scheme for new applications.
+  note: "Introduced with its tight security proof at EUROCRYPT 1996. A changed version entered PKCS #1 v2.1 as RSASSA-PSS, and RFC 8017 (2016) keeps it as the scheme for new applications."
 prereqs: [rsa-fdh]
 see_also: [rsa-signature, rsa-oaep, random-oracle-model, rsa-problem, strong-unforgeability, rabin-signature, rsa-fault-attack, tls-handshake]
 sources:
@@ -29,18 +29,18 @@ sources:
     locator: a salt of about log2 q_sig binary digits is enough for a tight reduction; FDH and other unique schemes cannot have one
   - url: "https://eprint.iacr.org/2001/053"
     title: Jakob Jonsson, Security proofs for the RSA-PSS signature scheme and its variants, Cryptology ePrint Archive, Report 2001/053
-    locator: the proofs of Bellare, Rogaway and Coron adapted to the PKCS #1 version of PSS
+    locator: "the proofs of Bellare, Rogaway and Coron adapted to the PKCS #1 version of PSS"
   - url: "https://www.rfc-editor.org/rfc/rfc8017"
-    title: Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, November 2016
+    title: "Kathleen Moriarty, Burt Kaliski, Jakob Jonsson and Andreas Rusch, RFC 8017, PKCS #1, RSA Cryptography Specifications Version 2.2, November 2016"
     locator: Section 8 (PSS is required for new applications), Section 8.1 (RSASSA-PSS, fixed salt), Section 9.1 (EMSA-PSS and Notes 1 to 5), Appendix B.2.1 (MGF1)
   - url: "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf"
     title: NIST, FIPS 186-5, Digital Signature Standard (DSS), February 2023
     locator: Section 5.4, RSASSA-PSS with an approved hash, MGF1 and a limit on the salt length
   - url: "https://www.rfc-editor.org/rfc/rfc8446"
     title: Eric Rescorla, RFC 8446, The Transport Layer Security (TLS) Protocol Version 1.3, August 2018
-    locator: Section 4.2.3, the rsa_pss schemes for handshake signatures; PKCS #1 v1.5 only in certificates
+    locator: "Section 4.2.3, the rsa_pss schemes for handshake signatures; PKCS #1 v1.5 only in certificates"
   - url: "https://github.com/pyca/cryptography/blob/main/vectors/cryptography_vectors/asymmetric/RSA/pkcs-1v2-1d2-vec/pss-vect.txt"
-    title: RSA Laboratories, PKCS #1 v2.1 test vectors for RSASSA-PSS (pss-vect.txt)
+    title: "RSA Laboratories, PKCS #1 v2.1 test vectors for RSASSA-PSS (pss-vect.txt)"
     locator: Example 1 (1024-bit key) with PSS Example 1.2, and Example 2 (1025-bit key) with PSS Example 2.1
   - book: isbn:9780815354369
     title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, 2020

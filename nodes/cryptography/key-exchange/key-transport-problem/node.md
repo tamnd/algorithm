@@ -16,8 +16,8 @@ sources:
     title: Elaine Barker, Lily Chen, Allen Roginsky, Apostol Vassilev, Richard Davis and Scott Simon, NIST SP 800-56B Rev. 2, Recommendation for Pair-Wise Key Establishment Using Integer Factorization Cryptography, March 2019
     locator: the definitions of key agreement and key transport, and the KTS-OAEP key-transport scheme
   - paper: doi:10.1007/BFb0055716
-    title: Daniel Bleichenbacher, Chosen ciphertext attacks against protocols based on the RSA encryption standard PKCS #1, CRYPTO 1998, LNCS 1462, pages 1 to 12
-    locator: the attack on the PKCS #1 v1.5 padding in SSL 3.0 key transport
+    title: "Daniel Bleichenbacher, Chosen ciphertext attacks against protocols based on the RSA encryption standard PKCS #1, CRYPTO 1998, LNCS 1462, pages 1 to 12"
+    locator: "the attack on the PKCS #1 v1.5 padding in SSL 3.0 key transport"
   - url: "https://www.rfc-editor.org/rfc/rfc5246"
     title: Tim Dierks and Eric Rescorla, RFC 5246, The Transport Layer Security (TLS) Protocol Version 1.2, August 2008
     locator: Section 7.4.7.1 (RSA-encrypted premaster secret message)

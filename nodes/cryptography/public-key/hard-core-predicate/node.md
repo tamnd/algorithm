@@ -26,7 +26,7 @@ sources:
   - paper: "Andrew C. Yao, Theory and application of trapdoor functions, Proceedings of the 23rd IEEE Symposium on Foundations of Computer Science, FOCS 1982, pages 80 to 91"
     locator: the computational entropy of one way functions and the first use of single hard digits to build a pseudorandom generator
   - book: isbn:9780815354369
-    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2021
+    title: Jonathan Katz and Yehuda Lindell, Introduction to Modern Cryptography, third edition, CRC Press, 2020
     locator: the chapter on theoretical constructions (the Goldreich-Levin theorem and the step from it to a pseudorandom generator)
 ---
 
