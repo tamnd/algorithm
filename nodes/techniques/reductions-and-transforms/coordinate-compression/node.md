@@ -9,7 +9,7 @@ aliases:
 area: techniques/reductions-and-transforms
 level: intro
 summary: Replacing large coordinate or value ranges by their ranks among the values actually present, to shrink the index space.
-prereqs: [sorting-problem, binary-search, rank]
+prereqs: [sorting-problem, binary-search, order-statistic]
 see_also: [fenwick-tree, segment-tree, inversion-count-with-fenwick-tree, counting-inversions, interval-union-length, area-of-union-of-rectangles, hash-table, transform-and-conquer]
 sources:
   - book: isbn:9783030393564
@@ -23,7 +23,7 @@ sources:
     locator: Problem 2-4, Inversions
 ---
 
-Coordinate compression replaces each value of a set $V$ of $m$ distinct values, taken from a large or infinite ordered domain, by its [rank](/rank/) in $V$: an integer from $0$ to $m - 1$ (or $1$ to $m$). The map keeps the order and the equalities of the values, so an algorithm that only compares values gets the same answer on the ranks. Its use is to make arrays indexed by value small enough to store, for example the array of a [Fenwick tree](/fenwick-tree/) or a [segment tree](/segment-tree/) over values up to $10^9$ when only $10^5$ of them occur. The cost is one sort, $O(n \log n)$ for $n$ input values.
+Coordinate compression replaces each value of a set $V$ of $m$ distinct values, taken from a large or infinite ordered domain, by its [rank](/order-statistic/) in $V$: an integer from $0$ to $m - 1$ (or $1$ to $m$). The map keeps the order and the equalities of the values, so an algorithm that only compares values gets the same answer on the ranks. Its use is to make arrays indexed by value small enough to store, for example the array of a [Fenwick tree](/fenwick-tree/) or a [segment tree](/segment-tree/) over values up to $10^9$ when only $10^5$ of them occur. The cost is one sort, $O(n \log n)$ for $n$ input values.
 
 ## In plain words
 

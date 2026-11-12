@@ -74,7 +74,7 @@ The schedule is $c, a, g, f$ with profit $27 + 100 + 35 + 30 = 192$. Over all su
 
 **The latest slot matters.** If each taken job goes into the *earliest* free slot instead, $a$ takes slot 1, $g$ slot 2 and $f$ slot 3, and then $c$, with deadline 2, finds no free slot. The profit is 165. The set $\{a, c, f, g\}$ was independent, but the slot choice blocked it. With the feasibility test $N_t(S) \le t$ instead of a fixed slot, the order of placement does not matter.
 
-**Deadline order fails.** Taking the jobs by deadline and keeping each one that fits gives $d, a, g, f$ with profit 190. It keeps $d$ with profit 25 in slot 1, where the optimum puts $c$ with profit 27.
+**Deadline order fails.** Taking the jobs by deadline, with ties going to the larger profit, and keeping each one that fits gives $d, a, g, f$ with profit 190. It keeps $d$ with profit 25 in slot 1, where the optimum puts $c$ with profit 27.
 
 ## Known algorithms
 

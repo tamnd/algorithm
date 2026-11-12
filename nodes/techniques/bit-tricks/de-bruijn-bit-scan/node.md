@@ -118,7 +118,7 @@ The key fact is that the window for $k$ is the length-$n$ substring of $D$ that 
 - **Word size and sign.** It needs $w$ to be a power of two, $w = 2^n$, and treats $x$ as unsigned. For other widths, use the next power of two and a de Bruijn sequence of that order, or the modulo-37 method of [trailing-zero count](/trailing-zero-count/).
 - **Branch-free.** There is no loop and no branch, so the time does not depend on $x$.
 - **Perfect hash.** The map $2^k \mapsto ((2^k D) \bmod 2^w) \gg (w - n)$ is a minimal [perfect hash function](/perfect-hash-function/) from the $w$ powers of two onto $\{0, \dots, w - 1\}$, of the [multiplicative](/multiplicative-hashing/) kind.
-- **Many constants.** The number of binary de Bruijn sequences of order $n$ is $2^{2^{n-1} - n}$, and each has one rotation that starts with $n$ zeros. For $n = 3$ there are two, $00010111$ and $00011101$, that is `0x17` and `0x1D`; for $n = 6$ there are $2^{26}$.
+- **Many constants.** The number of binary de Bruijn sequences of order $n$ is $2^{2^{n-1} - n}$, and each has one rotation that starts with $n$ zeros. For $n = 3$ there are two, $00010111$ and $00011101$, that is `0x17` and `0x1D`; for $n = 6$ there are $2^{26}$. The rotation one place to the left also works: it starts with $n - 1$ zeros and ends with a zero, and the shift brings zeros in from the right, so the windows stay distinct. These are exactly the other constants that work. For $w = 8$ they are `0x2E` and `0x3A`, so four constants work in all, and for $w = 16$ there are 32.
 - **Zero is not handled.** For $x = 0$, line L1 gives $b = 0$, so $p = 0$ and $i = 0$, and the scan returns $T[0] = 0$, the same answer as for $x = 1$.
 
 ## Variants and improvements
