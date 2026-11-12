@@ -4,8 +4,6 @@ kind: concept
 slug: write-back-policy
 name: Write-back and write-through policies
 aliases:
-- write-back cache
-- write-through cache
 - write policy
 area: online-and-streaming/paging-and-caching-online
 level: intro
