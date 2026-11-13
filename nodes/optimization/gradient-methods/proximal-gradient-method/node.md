@@ -4,9 +4,7 @@ kind: algorithm
 slug: proximal-gradient-method
 name: Proximal gradient method
 aliases:
-- ISTA
 - forward-backward splitting
-- iterative shrinkage-thresholding algorithm
 - proximal gradient descent
 area: optimization/gradient-methods
 level: advanced

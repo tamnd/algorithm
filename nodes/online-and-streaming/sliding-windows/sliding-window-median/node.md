@@ -7,7 +7,6 @@ aliases:
 - running median of windows
 - running median over a window
 - sliding order statistic
-- median filter
 area: online-and-streaming/sliding-windows
 level: advanced
 summary: Report the median of the last W items after each item of a stream; two heaps with lazy deletion or an order-statistic tree take O(log W) per item, and Omega(log W) comparisons are needed.
