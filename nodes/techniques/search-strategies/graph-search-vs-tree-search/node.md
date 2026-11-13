@@ -5,7 +5,6 @@ slug: graph-search-vs-tree-search
 name: Graph search versus tree search
 aliases:
 - closed list
-- duplicate detection
 - explored set
 area: techniques/search-strategies
 level: core

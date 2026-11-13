@@ -104,7 +104,7 @@ It holds for $k = n$, when the sorted part is empty. In the step for $k$, line L
 
 ## Variants and improvements
 
-- **[Burnt pancakes](/burnt-pancake-problem/).** Each pancake has a burnt side that must end facing down. A flip also turns each pancake over. The simple method needs at most 3 flips for each pancake, and Cohen and Blum showed that $2n - 2$ flips are always enough.
+- **[Burnt pancakes](/burnt-pancake-problem/).** Each pancake has a burnt side that must end facing down. A flip also turns each pancake over. The simple method needs at most 3 flips for each pancake, and Cohen and Blum showed that $2n - 2$ flips are always enough when $n \ge 10$.
 - **Better flip sequences.** Gates and Papadimitriou group items that are already next to each other in the final order into blocks, and move blocks instead of single items. This gives $(5n + 5)/3$ flips.
 - **Sorting by reversals.** If any part $A[i \ldots j]$ can be reversed, not only a prefix, the problem is sorting by reversals, which is studied in genome rearrangement.
 - **Fewer comparisons.** The scan of line L2 can use the same tricks as selection sort, but the comparisons stay $\Theta(n^2)$ unless the prefix is kept in a better structure, which no longer fits the model of flips.

@@ -3,8 +3,6 @@ tag: P5NM45
 kind: algorithm
 slug: constant-bandwidth-server
 name: Constant bandwidth server
-aliases:
-- CBS
 area: systems/scheduling
 level: research
 summary: "An EDF server with budget Q and period T that gives its jobs deadlines and moves the deadline when the budget is spent, so an overrun never takes more than Q/T of the processor."

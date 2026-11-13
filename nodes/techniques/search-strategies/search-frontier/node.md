@@ -4,7 +4,6 @@ kind: concept
 slug: search-frontier
 name: Search frontier
 aliases:
-- open list
 - fringe
 - agenda
 area: techniques/search-strategies

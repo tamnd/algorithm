@@ -6,7 +6,6 @@ name: Fitness function
 aliases:
 - objective function
 - cost function
-- evaluation function
 area: optimization/metaheuristics
 level: intro
 summary: The function that scores candidate solutions in a metaheuristic, so that they can be compared and selected. It is the objective, often changed by penalties, scaling or ranks.

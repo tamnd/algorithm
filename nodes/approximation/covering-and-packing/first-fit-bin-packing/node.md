@@ -4,7 +4,6 @@ kind: algorithm
 slug: first-fit-bin-packing
 name: First-fit bin packing
 aliases:
-- FF
 - first fit
 area: approximation/covering-and-packing
 level: intro
