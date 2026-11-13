@@ -83,7 +83,7 @@ Each ray toward $B$ has $|x/z| \le \tfrac1{12}$. It meets the front side $z = 2$
 
 | method | year | kind | idea |
 |---|---|---|---|
-| [Back-face culling](/back-face-culling/) | 1963 | per face, exact for convex solids | one sign test against the face normal |
+| [Back-face culling](/back-face-culling/) | 1963 | per face, exact for convex solids seen from outside | one sign test against the face normal |
 | [Frustum culling](/frustum-culling/) | 1976 | per object, conservative | test the bounding volumes of a hierarchy against the frustum planes |
 | [Potentially visible set](/potentially-visible-set/) | 1990 | from region, precomputed | a stored set for each cell of a subdivision |
 | [Hierarchical z-buffer](/hierarchical-z-buffer/) | 1993 | image precision, conservative | a depth pyramid and an octree of the scene |

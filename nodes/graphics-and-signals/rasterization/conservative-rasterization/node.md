@@ -39,7 +39,7 @@ sources:
     locator: Chapter 23, Graphics Hardware, the part on rasterization (conservative rasterization as a mode of the rasterizer)
 ---
 
-Conservative rasterization is a variant of [triangle rasterization](/triangle-rasterization/) that treats each pixel as its closed square, not as the point at its center. The overestimate outputs each pixel whose square the triangle touches, so no pixel that the triangle meets is missed. The underestimate outputs only the pixels whose squares lie fully inside the triangle. The algorithm is the loop of [Pineda rasterization](/pineda-rasterization/) with one change in the setup: each [edge function](/edge-function/) is moved outward by half a pixel in the direction of its normal (inward for the underestimate), and for the overestimate the pixel box is grown by one pixel on each side. The moved edges and the grown box bound exactly the [Minkowski sum](/minkowski-sum/) of the triangle and a pixel square, so the decisions are exact. It is a fixed mode of the Direct3D 12 rasterizer and a building block of voxelization and of GPU visibility and collision tests.
+Conservative rasterization is a variant of [triangle rasterization](/triangle-rasterization/) that treats each pixel as its closed square, not as the point at its center. The overestimate outputs each pixel whose square the triangle touches, so no pixel that the triangle meets is missed. The underestimate outputs only the pixels whose squares lie fully inside the triangle. The algorithm is the loop of [Pineda rasterization](/pineda-rasterization/) with one change in the setup: each [edge function](/edge-function/) is moved outward by half a pixel in the direction of its normal (inward for the underestimate), and for the overestimate the pixel box is grown by at most one pixel on each side. The moved edges and the grown box bound exactly the [Minkowski sum](/minkowski-sum/) of the triangle and a pixel square, so the decisions are exact. It is a fixed mode of the Direct3D 12 rasterizer and a building block of voxelization and of GPU visibility and collision tests.
 
 ## In plain words
 
@@ -96,7 +96,7 @@ The three sets are:
 
 - **Point samples (top-left rule):** the 10 pixels with $i + j \le 3$.
 - **Overestimate:** the box of line L6 is $0 \le i, j \le 4$, and the shifted test keeps the 19 pixels with $i + j \le 5$. Pixel $(4, 1)$ has $E_0 = -4$ at its center $(4.5, 1.5)$ and $E_0 + r_0 = 0$: its square touches the hypotenuse at the single point $(4, 1)$, and it is kept. Pixel $(2, 2)$ has its center on the hypotenuse, $E_0 = 0$, which the top-left rule gives to the neighbor, but its square overlaps $T$, so it is kept here.
-- **Underestimate:** the 3 pixels $(1, 1)$, $(2, 1)$ and $(1, 2)$. At $(1, 1)$ the shifted values are $E_0 - r_0 = 8$, $E_1 - r_1 = 2$ and $E_2 - r_2 = 2$. Pixel $(0, 0)$ is not inside, because its square reaches $x = 0 < 0.5$.
+- **Underestimate:** the 3 pixels $(1, 1)$, $(2, 1)$ and $(1, 2)$. At $(1, 1)$ the shifted values are $E_0 - r_0 = 4$, $E_1 - r_1 = 2$ and $E_2 - r_2 = 2$. Pixel $(0, 0)$ is not inside, because its square reaches $x = 0 < 0.5$.
 
 Without the box of line L6, the shifted edges would also accept pixels $(5, 0)$ and $(0, 5)$, 21 in all: at the center $(5.5, 0.5)$ of pixel $(5, 0)$ the three shifted values are $0$, $22$ and $2$, but the square $[5, 6] \times [0, 1]$ does not reach the triangle, whose $x$ is at most $4.5$.
 
@@ -110,7 +110,7 @@ A square $p + C$, with $C = [-h, h]^2$, meets $T$ exactly when its center $p$ li
 
 The model is the [word RAM](/word-ram/) with integer subpixel coordinates.
 
-- **Time.** The setup of lines L1 to L7 is $O(1)$. Lines L8 to L12 visit each of the $w \times h$ pixels of the box once, with three compares and three additions. So the time is $\Theta(wh)$ in each case. For the overestimate, the box is one pixel larger on each side than the box of Pineda's loop for the same triangle, so $(w_0 + 2)(h_0 + 2)$ for a Pineda box of $w_0 \times h_0$.
+- **Time.** The setup of lines L1 to L7 is $O(1)$. Lines L8 to L12 visit each of the $w \times h$ pixels of the box once, with three compares and three additions. So the time is $\Theta(wh)$ in each case. For the overestimate, the box is at most one pixel larger on each side than the box of Pineda's loop for the same triangle, so at most $(w_0 + 2)(h_0 + 2)$ for a Pineda box of $w_0 \times h_0$; in the example both boxes are $5 \times 5$.
 - **Space.** $\Theta(1)$ extra words besides the output.
 - **Word size.** The shifted value $E_k(p) + r_k$ is the value of $E_k$ at a corner of the square of $p$, so the shifted values are no larger than the edge function over the corners of the grown box.
 - **Output.** For a triangle of area $a$ and perimeter $\ell$ in pixel units, the overestimate has between $\max(a, \ell/4)$ and $a + \sqrt2\,\ell + 4$ pixels. The squares cover $T$, which gives $a$; a square holds at most length 4 of the convex boundary, which gives $\ell/4$; and the squares have disjoint interiors and lie in $T$ grown by one pixel on each side, whose area is at most $a + \sqrt2\,\ell + 4$. So even a thin triangle outputs $\Theta(\ell)$ pixels, while point sampling can output none.

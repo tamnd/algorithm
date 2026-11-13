@@ -98,7 +98,7 @@ For a convex solid the test is exact: each point of a front-facing face is visib
 
 Each face costs one cross product, one dot product and one comparison, so the time is $\Theta(F)$ in each case. The extra space is $\Theta(1)$, plus the output list. With stored normals the cost per face is one dot product.
 
-The saving is in the later stages. For a closed surface $\sum_k A_k u_k = 0$, where $A_k$ is the area and $u_k$ the unit outward normal of face $k$. So under an orthographic view the front-facing faces and the back-facing faces have the same total projected area, and for a mesh with many small faces about half of the faces are back facing. The test removes them before they are clipped, rasterized and depth tested.
+The saving is in the later stages. For a closed surface $\sum_k A_k u_k = 0$, where $A_k$ is the area and $u_k$ the unit outward normal of face $k$. So under an orthographic view the front-facing faces and the back-facing faces have the same total projected area. This is a statement about area, not about the number of faces: for a mesh with many small faces of similar size, about half of the faces are back facing in a typical orthographic view, and in a perspective view from nearby fewer faces face the eye, as in the example, where 4 of the 12 faces remain. The test removes them before they are clipped, rasterized and depth tested.
 
 ## Properties
 

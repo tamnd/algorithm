@@ -57,7 +57,7 @@ The corners are first rounded to a fine integer grid. Then the numbers are exact
 
 ## The problem
 
-The screen has $W \times H$ pixels. A pixel is a point sample at its center, not a little square: pixel $(i, j)$, with $0 \le i < W$ and $0 \le j < H$, is the point $(i + \tfrac12, j + \tfrac12)$, as in the Direct3D 10 and OpenGL rules, with $y$ down. The vertices $v_0, v_1, v_2$ are integers in units of $1/s$ pixel, for an even number $s$ of subpixel steps per pixel. So the center of pixel $(i, j)$ is the integer point $c_{ij} = (s i + s/2,\ s j + s/2)$. The output is the set of pixels $(i, j)$ whose centers the triangle covers under the top-left rule. A triangle with zero area covers no pixel.
+The screen has $W \times H$ pixels. A pixel is a point sample at its center, not a little square: pixel $(i, j)$, with $0 \le i < W$ and $0 \le j < H$, is the point $(i + \tfrac12, j + \tfrac12)$, as in the Direct3D 10 and OpenGL rules. Here $y$ points down, as in Direct3D; OpenGL window coordinates have $y$ up. The vertices $v_0, v_1, v_2$ are integers in units of $1/s$ pixel, for an even number $s$ of subpixel steps per pixel. So the center of pixel $(i, j)$ is the integer point $c_{ij} = (s i + s/2,\ s j + s/2)$. The output is the set of pixels $(i, j)$ whose centers the triangle covers under the top-left rule. A triangle with zero area covers no pixel.
 
 ## The algorithm
 
@@ -122,7 +122,7 @@ The model is the [word RAM](/word-ram/) with words of at least $2q + 2$ binary d
 
 - **Time.** Lines L1 to L9 take $O(1)$ time. The loops visit each pixel of the clipped box, $w = i_1 - i_0 + 1$ columns and $h = j_1 - j_0 + 1$ rows, with $O(1)$ work each: three sign tests and three additions. So the time is $\Theta(wh)$ in every case, plus the size of the output, which is at most $wh$.
 - **Space.** The setup holds 12 integers and the loops hold 6. The extra space is $\Theta(1)$ besides the output.
-- **Waste.** A triangle has at most half the area of its bounding box, so a well-shaped triangle covers about half the box or more. A thin triangle along the diagonal of a $w \times h$ box covers only $O(w + h)$ pixels, but the loops still visit all $wh$. A triangle with no covered pixel can also cost $\Theta(wh)$. [Tiled rasterization](/tiled-rasterization/) removes most of this waste: it rejects whole tiles outside an edge.
+- **Waste.** A triangle has at most half the area of its bounding box, so even a well-shaped triangle covers only about half the box. A thin triangle along the diagonal of a $w \times h$ box covers only $O(w + h)$ pixels, but the loops still visit all $wh$. A triangle with no covered pixel can also cost $\Theta(wh)$. [Tiled rasterization](/tiled-rasterization/) removes most of this waste: it rejects whole tiles outside an edge.
 
 ## Properties
 

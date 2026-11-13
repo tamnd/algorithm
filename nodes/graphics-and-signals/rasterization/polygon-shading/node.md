@@ -81,7 +81,7 @@ The ideal value at a covered center is $\mathrm{SHADE}(N(p))$, where $N(p)$ is t
 
 ## Bounds
 
-Each method reads each face and writes one value per covered pixel, so the time is $\Omega(F + C)$ for a mesh. Gouraud shading meets this bound with $V$ lighting evaluations, and Phong shading with $C$ of them.
+Each method reads each face and writes one value per covered pixel, so the time is $\Omega(F + C)$ for a mesh. Gouraud shading meets this bound up to the $O(h)$ term per triangle for its rows, as in [triangle rasterization](/triangle-rasterization/), with $V$ lighting evaluations, and Phong shading in the same way with $C$ of them.
 
 The error of Gouraud shading on an edge follows from the error of linear interpolation. If $f(t)$ is the ideal intensity along an edge of length $L$ and $|f''| \le M$ on it, then the linear interpolant $\ell$ of the two end values has
 

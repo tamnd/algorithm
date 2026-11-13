@@ -77,7 +77,7 @@ The white triangle with corners $(3/5, 2/5)$, $(7/2, 1)$ and $(1, 3)$ of the [su
 
 The triangle owns 13 samples in 6 pixels. Supersampling with the same samples calls the shader 13 times and gives the same image. MSAA calls it 6 times, once per touched pixel.
 
-**Depth per sample.** In the single pixel $[0, 1]^2$, a red triangle with corners $(0, 0, 0)$, $(2, 0, 4)$, $(0, 2, 0)$ has depth $z = 2x$, and a blue triangle with the same corners at depth 1 is drawn after it. Both cover all four samples, and each is shaded once. Red is nearer where $2x < 1$, so the samples at $x = 3/8$ and $x = 1/8$ keep red and the samples at $x = 7/8$ and $x = 5/8$ take blue. The resolved pixel is $(1/2, 1/2, 0)$ in (red, green, blue) order. A method that tested depth once per pixel would make the whole pixel red or blue.
+**Depth per sample.** In the single pixel $[0, 1]^2$, a red triangle with corners $(0, 0, 0)$, $(2, 0, 4)$, $(0, 2, 0)$ has depth $z = 2x$, and a blue triangle with the same corners at depth 1 is drawn after it. Both cover all four samples, and each is shaded once. Red is nearer where $2x < 1$, so the samples at $x = 3/8$ and $x = 1/8$ keep red and the samples at $x = 7/8$ and $x = 5/8$ take blue. The resolved pixel is $(1/2, 0, 1/2)$ in (red, green, blue) order. A method that tested depth once per pixel would make the whole pixel red or blue.
 
 ## Correctness
 
@@ -112,7 +112,7 @@ Use MSAA in a forward renderer when geometric edges are the main source of alias
 
 ## Pitfalls
 
-- **Resolving in sRGB or after tone mapping.** The average must be taken on linear values. Resolving HDR values before tone mapping, however, lets a very bright sample dominate the pixel, and many engines tone map each sample first.
+- **Resolving in sRGB, or before tone mapping.** The average must be taken on linear values. Resolving HDR values before tone mapping, however, lets a very bright sample dominate the pixel, and many engines tone map each sample first.
 - **Centroid derivatives.** Centroid sampling moves the shading point, so the screen derivatives that pick a mipmap level become irregular along edges.
 - **Depth at the center.** An implementation that tests depth once at the pixel center loses the intersections of triangles inside a pixel.
 - **Inclusive edge rules.** Without the top-left rule, a sample on a shared edge is written by both triangles, and with blending enabled it is blended twice.

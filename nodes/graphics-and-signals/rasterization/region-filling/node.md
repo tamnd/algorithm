@@ -91,7 +91,7 @@ Each pixel of the region must be written, so every algorithm needs $\Omega(k)$ t
 ## Reductions
 
 - Region filling is single-source reachability in the implicit grid graph of the candidate pixels, so any graph search solves it.
-- A boundary fill reduces to a flood fill: mark all pixels that are not of color $b$ with one temporary color, then flood fill from the seed.
+- A boundary fill reduces to a flood fill on a mask: in a copy of the image, mark all pixels that are not of color $b$ with one temporary color, flood fill the copy from the seed, and give the new color in the image only to the pixels that this fill reached.
 - It differs from [polygon scan conversion](/polygon-scan-conversion/): there the input is a geometric polygon and the result depends on a fill rule at pixel centers, and here the input is a set of pixels and the result depends on adjacency. A polygon drawn by its outline and then filled by region filling can differ from its scan conversion along thin parts and where the outline touches itself.
 - It also differs from [point in polygon](/point-in-polygon/) in geometry, which tests one point against exact edges and knows nothing of pixels.
 

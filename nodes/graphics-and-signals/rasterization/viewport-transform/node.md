@@ -31,7 +31,7 @@ The viewport transform is the affine map that takes a point from normalized devi
 
 A program describes the visible part of a scene in a standard square that goes from minus one to plus one across and up. The screen, or the part of it that shows the picture, is a rectangle measured in pixels. The viewport transform stretches the standard square to the size of that rectangle and moves it to its place.
 
-Each pixel is a small cell, and its sample is taken in the middle of the cell. So the left edge of the square goes to the left edge of the first pixel, and the middle of the first pixel is half a pixel further in. Getting this half pixel right keeps shapes from moving by half a pixel when they are drawn.
+Each pixel sits in a small cell, and its sample is taken in the middle of the cell. So the left edge of the square goes to the left edge of the first pixel, and the middle of the first pixel is half a pixel further in. Getting this half pixel right keeps shapes from moving by half a pixel when they are drawn.
 
 ## The idea
 
@@ -51,7 +51,7 @@ $$x_w = (x_d + 1)\,\frac{w}{2} + x_0, \qquad y_w = (1 - y_d)\,\frac{h}{2} + y_0,
 
 Vulkan uses the form of OpenGL with the origin at the top left, so $y_d = -1$ is the top row there, and $z_d \in [0, 1]$.
 
-**The pixel center rule.** Window coordinates measure in pixel widths from the corner of the buffer. Pixel $(i, j)$ is the cell $[i, i + 1) \times [j, j + 1)$, and its sample point is the center $(i + \tfrac12, j + \tfrac12)$, as in OpenGL, Direct3D 10 and later, and Vulkan. The inverse map gives the normalized device coordinate of the center of column $i$ in a viewport at $x_0 = 0$:
+**The pixel center rule.** Window coordinates measure in pixel widths from the corner of the buffer. Pixel $(i, j)$ is the point sample at the center $(i + \tfrac12, j + \tfrac12)$ of the cell $[i, i + 1) \times [j, j + 1)$, as in OpenGL, Direct3D 10 and later, and Vulkan. The inverse map gives the normalized device coordinate of the center of column $i$ in a viewport at $x_0 = 0$:
 
 $$x_d = \frac{2i + 1}{w} - 1.$$
 

@@ -39,7 +39,7 @@ Two questions need a firm answer. First, when the outline of a shape crosses its
 
 ## Definition
 
-The image has $W$ columns and $H$ rows of pixels. Pixel $(i, j)$ has its center at $c_{ij} = (i + 1/2, j + 1/2)$, with $0 \le i < W$, $0 \le j < H$, and $y$ grows downward, so row 0 is the top row. This is the convention of OpenGL and Direct3D 10. A pixel is a point sample at $c_{ij}$, not a little square: the problem asks about points, not about the area that a pixel square shares with the polygon.
+The image has $W$ columns and $H$ rows of pixels. Pixel $(i, j)$ has its center at $c_{ij} = (i + 1/2, j + 1/2)$, with $0 \le i < W$, $0 \le j < H$, and $y$ grows downward, so row 0 is the top row. The centers are those of OpenGL and Direct3D 10; the downward $y$ axis is that of Direct3D, while OpenGL window coordinates have $y$ up. A pixel is a point sample at $c_{ij}$, not a little square: the problem asks about points, not about the area that a pixel square shares with the polygon.
 
 The input is a polygon $P$ as a list of closed rings of vertices, with integer or rational coordinates, and a fill rule. For a point $x$ off the boundary, let $w(x)$ be the [winding number](/winding-number-algorithm/) of $P$ around $x$. The point is inside under the even-odd rule when $w(x)$ is odd, and inside under the nonzero rule when $w(x) \ne 0$.
 
@@ -47,7 +47,7 @@ A center on an edge needs a tie rule. This page uses the rule of a small shift: 
 
 The output is the set of covered pixels, most often as spans: for each row $j$, a list of column ranges $[i_0, i_1)$.
 
-**Partition property.** If polygons $P_1, \dots, P_k$ cover a region with no overlap, sharing only edges, each pixel center in the region is covered by exactly one of them. The reason is that the shifted center is off every edge, so it lies in the inside of exactly one polygon.
+**Partition property.** If polygons $P_1, \dots, P_k$ cover a region with no overlap, sharing only edges, each pixel center in the interior of the region is covered by exactly one of them. The reason is that the shifted center is off every edge, so it lies in the inside of exactly one polygon. A center on the outer boundary of the region is covered by at most one, and by none if it is on a right or a bottom edge.
 
 **Exact and floating-point arithmetic.** The decisions are signs of expressions in the vertex coordinates, so with integer or rational input they can be exact. Many renderers snap vertices to a fixed grid of subpixel steps, so that the decisions are integer tests. With [IEEE 754](/ieee-754/) floating point, a crossing $x$ that is computed by repeated addition of the slope drifts, as in the [digital differential analyzer](/digital-differential-analyzer/). A center near an edge can then fall on the wrong side, and two polygons that share an edge can both cover a pixel, or both miss it.
 
