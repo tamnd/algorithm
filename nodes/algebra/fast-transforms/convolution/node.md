@@ -4,9 +4,6 @@ kind: problem
 slug: convolution
 name: Convolution
 aliases:
-- linear convolution
-- cyclic convolution
-- circular convolution
 - acyclic convolution
 area: algebra/fast-transforms
 level: core

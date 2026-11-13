@@ -2,7 +2,7 @@
 tag: FP07MM
 kind: concept
 slug: mcmc-autocorrelation
-name: Autocorrelation
+name: Autocorrelation (MCMC)
 aliases:
 - serial correlation
 - MCMC autocorrelation
