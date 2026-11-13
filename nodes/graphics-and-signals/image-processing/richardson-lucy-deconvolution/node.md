@@ -7,7 +7,7 @@ aliases:
 - Lucy-Richardson deconvolution
 area: graphics-and-signals/image-processing
 level: advanced
-summary: Deblur an image with a known PSF by a multiplicative update that is EM for Poisson counts, keeps values nonnegative and keeps the total flux.
+summary: Deblur an image with a known PSF by a multiplicative update that is EM for Poisson counts, keeps values nonnegative and, for a normalized PSF with a periodic border, keeps the total flux.
 solves: [image-deblurring]
 model: real-ram
 complexity:

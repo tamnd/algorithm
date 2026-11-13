@@ -84,7 +84,7 @@ Lines L1 and L2 each do 2 additions per pixel, and lines L3 and L4 each do 1 sub
 - **Exact and integer.** The output has no rounding error.
 - **Linear and separable.** Each mask is a box sum times a central difference.
 - **A least squares fit.** The plane $a u + b v + k$ that fits the 9 values $I(x + u, y + v)$ best has $a = g_x / 6$ and $b = g_y / 6$. This is the reason for the equal weights.
-- **Direction error.** For a plane wave $\cos(\omega_x x + \omega_y y)$, the operator returns $g_x \propto \sin \omega_x (1 + 2 \cos \omega_y)$ and $g_y \propto \sin \omega_y (1 + 2 \cos \omega_x)$. The largest error of the direction over all directions is 0.37 degrees at the frequency radius $\pi/8$, 1.6 degrees at $\pi/4$ and 7.6 degrees at $\pi/2$. These values come from the formula. They are about twice the errors of the [Sobel operator](/sobel-operator/) and close to those of a plain central difference.
+- **Direction error.** For a plane wave $\cos(\omega_x x + \omega_y y)$, the operator returns $g_x \propto \sin \omega_x (1 + 2 \cos \omega_y)$ and $g_y \propto \sin \omega_y (1 + 2 \cos \omega_x)$. The largest error of the direction over all directions is 0.37 degrees at the frequency radius $\pi/8$, 1.6 degrees at $\pi/4$ and 7.6 degrees at $\pi/2$. These values come from the formula. They are 2.0 to 2.4 times the errors of the [Sobel operator](/sobel-operator/) and close to those of a plain central difference.
 - **Response to a step.** A vertical step of height $A$ between two columns gives $g_x = 3A$ on the two columns next to the step, so the response is 2 pixels wide.
 
 ## Variants and improvements

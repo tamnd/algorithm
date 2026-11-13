@@ -83,7 +83,7 @@ Each pixel costs 2 subtractions, so the time is $\Theta(W H)$ in the worst case 
 ## Properties
 
 - **Exact and integer.** The output has no rounding error.
-- **Smallest support.** Each output reads 4 pixels, the least that can give both components of a gradient.
+- **Smallest support.** Each output reads 4 pixels. Three pixels can give both components of a gradient with one-sided differences, but 4 is the least for two differences centered on the same point.
 - **Thin response.** A vertical step between columns $c$ and $c + 1$ gives a nonzero output only at column $c$, one block wide, located at $x = c + \tfrac{1}{2}$, the true position of the step.
 - **Not separable.** The masks are not outer products. The turned pair $g_x = g_2 - g_1$ is the outer product $[1, 1]^T [-1, 1]$.
 - **Direction error.** On a plane wave $\cos(\omega_x x + \omega_y y)$, the estimate has $\tan \hat\theta = \tan(\omega_y / 2) / \tan(\omega_x / 2)$, the same as for the [Sobel operator](/sobel-operator/). The largest error is 0.19 degrees at the frequency radius $\pi/8$ and 3.2 degrees at $\pi/2$.

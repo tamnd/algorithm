@@ -37,7 +37,7 @@ sources:
     locator: the whole paper (repeated box filters as an approximation of the Gaussian)
 ---
 
-The box blur replaces each pixel of an image by the mean of the $(2r+1) \times (2r+1)$ pixels around it. It is the [linear filter](/linear-filtering/) whose kernel has the same weight $1/(2r+1)^2$ at every position. Done directly it costs $(2r+1)^2$ additions per pixel. The box kernel is [separable](/separable-filter/), and along one row the window sum changes by one pixel in and one pixel out when the window moves one step. So a horizontal pass and a vertical pass of running sums give every window sum with about four additions per pixel, whatever the radius, in $\Theta(WH + (W+H)r)$ time. It is the fastest way to [smooth an image](/image-smoothing/), and it is the building block of the [integral image](/integral-image/), the [guided filter](/guided-filter/) and the repeated-box approximation of the [Gaussian filter](/gaussian-filter/).
+The box blur replaces each pixel of an image by the mean of the $(2r+1) \times (2r+1)$ pixels around it. It is the [linear filter](/linear-filtering/) whose kernel has the same weight $1/(2r+1)^2$ at every position. Done directly it costs $(2r+1)^2$ additions per pixel. The box kernel is [separable](/separable-filter/), and along one row the window sum changes by one pixel in and one pixel out when the window moves one step. So a horizontal pass and a vertical pass of running sums give every window sum with about four additions per pixel, whatever the radius, in $\Theta(WH + (W+H)r)$ time. It is one of the cheapest ways to [smooth an image](/image-smoothing/), and it is the building block of the [guided filter](/guided-filter/) and the repeated-box approximation of the [Gaussian filter](/gaussian-filter/). The [integral image](/integral-image/) gives the same window sums another way.
 
 ## In plain words
 
@@ -109,7 +109,7 @@ The horizontal pass keeps the invariant $s = \sum_{u=-r}^{r} f[y][\mathrm{ext}(x
 
 ## Complexity
 
-- **Time.** Line L2 costs $2r+1$ additions per row and line L8 costs $2r+1$ per column, $\Theta((W + H) r)$ in total. Lines L5 and L11 cost two additions per pixel and per pass, $\Theta(WH)$. The total is $\Theta(WH + (W+H)r)$ in the real-RAM model, which is $\Theta(WH)$ when $r \le \max(W, H)$. Direct filtering costs $\Theta(WH r^2)$, and separable filtering with general weights $\Theta(WH r)$.
+- **Time.** Line L2 costs $2r+1$ additions per row and line L8 costs $2r+1$ per column, $\Theta((W + H) r)$ in total. Lines L5 and L11 cost two additions per pixel and per pass, $\Theta(WH)$. The total is $\Theta(WH + (W+H)r)$ in the real-RAM model, which is $\Theta(WH)$ when $r \le \min(W, H)$. Direct filtering costs $\Theta(WH r^2)$, and separable filtering with general weights $\Theta(WH r)$.
 - **Space.** The intermediate image $g$ takes $WH$ values, and the output another $WH$. One row or one column of extra storage suffices if the passes write in place with a small buffer.
 - **Word size.** With pixels in $[0, 2^b)$ the sums are below $(2r+1)^2 2^b$, so an unsigned 32-bit integer holds them for 8-bit pixels and any radius up to 2000.
 

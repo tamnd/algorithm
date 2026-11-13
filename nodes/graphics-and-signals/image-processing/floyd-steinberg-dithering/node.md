@@ -84,7 +84,7 @@ $$
 
 The output is $\begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}$, three ones for an input sum of 3, and the error pushed off the image adds up to exactly 0.
 
-**Larger gray fields.** An $8 \times 8$ field of $1/2$ gives a perfect checkerboard with 32 ones. A $64 \times 64$ field of $1/3$ gives 1359 ones, against $4096/3 = 1365\tfrac{1}{3}$; the difference, $19/3$, is exactly the error pushed off the border, as Claim 1 says.
+**Larger gray fields.** An $8 \times 8$ field of $1/2$ gives a perfect checkerboard with 32 ones. A $64 \times 64$ field of $1/3$ gives 1359 ones in raster order, against $4096/3 = 1365\tfrac{1}{3}$; the difference, $19/3$, is exactly the error pushed off the border, as Claim 1 says. In the serpentine order it gives 1345 ones, and the error pushed off is $61/3$.
 
 ## Correctness
 
