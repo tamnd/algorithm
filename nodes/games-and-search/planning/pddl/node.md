@@ -79,7 +79,7 @@ The `:requirements` section names the features that the domain uses, so a planne
 - `:strips`: conjunctive preconditions and add and delete effects.
 - `:typing`: typed parameters and objects, with a type hierarchy such as `truck package - locatable`.
 - `:equality`: the built-in predicate `=`, mostly used as `(not (= ?x ?y))`.
-- `:negative-preconditions` and `:disjunctive-preconditions`: `not` and `or` in preconditions.
+- `:disjunctive-preconditions`: `not` and `or` in preconditions. PDDL2.1 added `:negative-preconditions` for negated atoms alone.
 - `:existential-preconditions` and `:universal-preconditions`: `exists` and `forall` in preconditions.
 - `:conditional-effects`: `when` and `forall` in effects; see [conditional effects](/conditional-effects/).
 - `:adl`: all of the above, the ADL language of Pednault.

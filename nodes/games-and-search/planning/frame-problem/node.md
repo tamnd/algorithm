@@ -48,7 +48,7 @@ $$\mathit{color}(b, c, s) \to \mathit{color}(b, c, \mathit{do}(\mathit{move}(b',
 
 ### The count
 
-With $|A|$ actions and $|F|$ fluents, frame axioms are needed for most of the $|A| \cdot |F|$ pairs, in both directions (a true fact stays true, a false fact stays false). Take the move [blocks world](/blocks-world/) with 3 blocks: 18 ground actions and 12 facts ($6$ $\mathit{on}$, $3$ $\mathit{ontable}$, $3$ $\mathit{clear}$). The 6 moves from block to block change 4 facts each, and the 12 moves to or from the table change 3 each, so $6 \cdot 8 + 12 \cdot 9 = 156$ pairs of an action and a fact are unchanged, and each needs a frame axiom. The STRIPS lists of the same domain have $6 \cdot 4 + 12 \cdot 3 = 60$ entries in total. The gap grows with the domain: frame axioms grow as $|A| \cdot |F|$, effect lists as the total size of the changes.
+With $|A|$ actions and $|F|$ fluents, frame axioms are needed for most of the $|A| \cdot |F|$ pairs, in both directions (a true fact stays true, a false fact stays false). Take the move [blocks world](/blocks-world/) with 3 blocks: 18 ground actions and 12 facts ($6$ $\mathit{on}$, $3$ $\mathit{ontable}$, $3$ $\mathit{clear}$). The 6 moves from block to block change 4 facts each, and the 12 moves to or from the table change 3 each, so $6 \cdot 8 + 12 \cdot 9 = 156$ pairs of an action and a fact are unchanged, and each needs a frame axiom in each direction, 312 in all. The STRIPS lists of the same domain have $6 \cdot 4 + 12 \cdot 3 = 60$ entries in total. The gap grows with the domain: frame axioms grow as $|A| \cdot |F|$, effect lists as the total size of the changes.
 
 ### Three ways out
 

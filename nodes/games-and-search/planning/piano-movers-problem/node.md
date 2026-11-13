@@ -61,7 +61,7 @@ The question is only yes or no. The answer can turn on small details. A sofa a l
 | classic piano | a rigid polyhedron in space among polyhedra | 6 | polynomial in $n$ for this fixed $d$ |
 | generalized mover | many polyhedra linked by joints, in space | grows with the input | PSPACE-hard (Reif 1979) |
 | warehouseman | many independent rectangles in a rectangular box | $2m$ for $m$ rectangles | PSPACE-hard (Hopcroft, Schwartz and Sharir 1984) |
-| planar linkage | a tree of bars joined at their ends, in the plane | grows with the input | PSPACE-hard (Hopcroft, Joseph and Whitesides 1984) |
+| planar linkage | bars joined at their ends, in the plane | grows with the input | PSPACE-hard (Hopcroft, Joseph and Whitesides 1984) |
 | sliding blocks on a grid | blocks that slide by unit steps | discrete | PSPACE-complete, for example [Rush Hour](/rush-hour-problem/) |
 
 The difference between the rows is whether $d$ is fixed. When $d$ is fixed, the exact methods are polynomial in $n$, with a degree that grows with $d$. When $d$ grows with the input, the problem is PSPACE-hard. The grid versions such as Rush Hour and [Sokoban](/sokoban-problem/) are discrete cousins with the same flavor of hardness, but they have no continuous geometry. Adding velocity and force bounds gives [kinodynamic planning](/kinodynamic-planning/).

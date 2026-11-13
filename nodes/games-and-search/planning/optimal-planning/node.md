@@ -27,7 +27,7 @@ sources:
     title: "Christoph Betz and Malte Helmert, Planning with h+ in theory and practice, KI 2009, LNAI 5803"
     locator: pp. 9 to 16 (the complexity of computing h+ in standard benchmark domains)
   - book: isbn:9780134610993
-    title: Stuart Russell and Peter Norvig, Artificial Intelligence, A Modern Approach, 4th edition, Pearson, 2021
+    title: Stuart Russell and Peter Norvig, Artificial Intelligence, A Modern Approach, 4th edition, Pearson, 2020
     locator: Chapter 11, Sections 11.2 and 11.3 (search and heuristics for classical planning)
 ---
 
@@ -103,7 +103,7 @@ The heuristics relate as follows on every state: $h_{\max} \le h^{\mathrm{LM\tex
 
 - **To shortest paths.** By the state graph view, optimal planning is a single-source shortest path problem to a set of targets, on a graph of up to $2^n$ vertices given implicitly. Every method in the table is a way to avoid building this graph.
 - **To the decision version.** With integer costs at most $C$, a binary search over $K$ in $[0, C (2^n - 1)]$ finds $h^*(I)$ with $O(n + \log C)$ calls to the decision version.
-- **To satisfiability and integer programs.** For a fixed horizon, the plans form the models of a propositional formula, and minimizing cost becomes a [MAX-SAT](/max-sat/) problem or an [integer program](/integer-programming/). The horizon must be large enough to contain an optimal plan, which can need $2^n - 1$ steps.
+- **To satisfiability and integer programs.** For a fixed horizon, the plans form the models of a propositional formula, and minimizing cost becomes a [MAX-SAT](/max-sat/) problem or an [integer program](/mixed-integer-programming/). The horizon must be large enough to contain an optimal plan, which can need $2^n - 1$ steps.
 - **From SAT.** The reduction on the bounded plan existence page turns a CNF formula into a delete-free task whose shortest plan has $2m + r$ actions exactly when the formula is satisfiable, so any algorithm for optimal planning solves SAT.
 - **From set cover.** The example above is an approximation-preserving reduction from set cover to optimal delete-free planning.
 

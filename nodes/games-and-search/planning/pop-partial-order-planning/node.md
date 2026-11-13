@@ -132,7 +132,7 @@ The exponential bound is not an artifact of the analysis. Plan existence for STR
 
 - **Least commitment.** POP orders two steps only when a threat forces it, so one plan stands for many sequences. See the [least commitment principle](/least-commitment-principle/).
 - **Sound and complete.** It returns only valid plans, and it finds one when one exists within the bound.
-- **Not systematic.** Two branches can reach complete plans that share a linearization. On the task of the [SNLP](/snlp/) page, POP finds 4 complete plans with 16 linearizations but only 8 distinct action sequences. SNLP adds threats from steps that add the fact and removes the overlap.
+- **Not systematic.** Two branches can reach complete plans that share a linearization. On the task of the [SNLP](/snlp/) page, POP finds 4 complete plans with 16 linearizations, counted as action sequences plan by plan, but only 8 distinct action sequences. SNLP adds threats from steps that add the fact and removes the overlap.
 - **Goal order does not matter.** The plan is not built in execution order, so the order in which goals are attacked does not limit the plans that can be found, as the Sussman example shows.
 - **Ground actions.** This version has no variables. [TWEAK](/tweak/) and later planners keep variables and add binding constraints.
 
@@ -152,7 +152,7 @@ Use POP to learn plan-space planning and to plan for tasks where the plan should
 ## Pitfalls
 
 - **No bound and depth-first search.** Without a step bound, depth-first search can add steps for ever on a task with no plan or with a long plan. Use iterative deepening, a bound, or a best-first search.
-- **Testing threats against the closure.** "Possibly between" means that neither $k \prec i$ nor $j \prec k$ follows from the orderings by transitivity. Testing only the direct constraints misses threats and gives wrong plans.
+- **Testing threats against the closure.** "Possibly between" means that neither $k \prec i$ nor $j \prec k$ follows from the orderings by transitivity. Testing only the direct constraints never misses a threat, but it reports false ones, so the planner adds useless orderings and may not see that a plan is already complete.
 - **Forgetting that a link orders its ends.** Adding $i \xrightarrow{p} j$ must also add $i \prec j$. Without it, a linearization can run $j$ before $i$.
 - **Checking only one linearization.** A plan with open conditions or threats can still have one valid linearization. The unresolved Sussman plan on the [partial-order plan](/partial-order-plan/) page has 3 linearizations, and only 1 of them is valid.
 - **Reading "complete" as "optimal".** POP is complete. It returns a shortest plan only with iterative deepening on the number of steps, as here.

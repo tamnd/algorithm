@@ -98,7 +98,7 @@ The full theorem needs a careful argument for improper policies, given in the 19
 
 The states are the distances $1, 2, 3$ to a dock, which is the goal $0$. Rowing costs 2 and always moves one step closer. Sailing costs 1: from 2 or 3 it moves one step closer with probability $\tfrac23$ and stalls with probability $\tfrac13$; from 1 the wind is fickle, and it reaches the dock or blows the boat back to 2 with probability $\tfrac12$ each.
 
-All eight stationary policies are proper, and solving the linear system of each with exact fractions gives its cost. Two of them:
+All eight stationary policies are proper, and solving the linear system of each with exact fractions gives its cost. Three of them:
 
 | policy at 1, 2, 3 | $V(1)$ | $V(2)$ | $V(3)$ |
 |---|---|---|---|
