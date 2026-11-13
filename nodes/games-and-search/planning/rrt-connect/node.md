@@ -108,7 +108,7 @@ In iteration 1, CONNECT from the goal walks toward the new start vertex until th
 | $y \in [6, 7]$ | RRT | 115.5 | 118.5 | 87.5 | 14.403 |
 | $y \in [6, 7]$ | RRT-Connect | 28.5 | 76.5 | 47 | 13.295 |
 
-RRT-Connect needs about a quarter of the iterations, 40 to 60 percent of the checks and half of the vertices. Its iterations cost more checks each, because CONNECT makes several steps.
+RRT-Connect needs about a quarter of the iterations, 55 to 65 percent of the checks and half of the vertices. Its iterations cost more checks each, because CONNECT makes several steps.
 
 ## Correctness
 

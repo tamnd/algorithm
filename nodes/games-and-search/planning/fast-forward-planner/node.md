@@ -91,7 +91,7 @@ The full planner adds a goal agenda (Section 6.2.2): it splits the goals into an
 |---|---|---|---|---|
 | 3 blocks into one tower | 4 | 8 | 4 | 4 |
 | 4 blocks into one tower | 6 | 10 | 10 | 6 |
-| 5 blocks into one tower | 8 | 16 | 12 | not computed |
+| 5 blocks into one tower | 8 | 16 | 12 | 8 |
 
 **The fallback.** A route of five actions leads from $r_0$ to the goal $g$. A side action leads from $r_0$ to a state $u$ that looks closer: its relaxed plan has 3 actions, against 4 at the start. But both actions that leave $u$ delete $u$, and $g$ needs both of their effects. EHC moves to $u$, finds only states with $h_{FF} = \infty$ around it, and fails. The best-first search then drops those states and finds the 5-action plan along the route. On 600 random STRIPS tasks with 4 to 8 facts, 334 had a plan. The first phase solved 322 of them, and the fallback solved the other 12.
 

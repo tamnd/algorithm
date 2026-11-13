@@ -93,7 +93,7 @@ Pednault's briefcase task, with the conditional effects of [UCPOP](/ucpop/), ask
 
 ### Redundant and systematic search
 
-Take actions $A$, which adds $p$; $R$, which needs $p$ and adds $r$; and $S$, which needs $p$ and adds $s$, with an empty initial state and the goal $\{p, r, s\}$. Enumerating all complete plans with at most 4 steps gives 4 plans in both POP and SNLP. Under POP's threat rule they have 16 linearizations but only 8 distinct sequences, and one sequence belongs to 3 of the plans. Under SNLP's rule, where a step that adds $p$ also threatens a link for $p$, they have 6 linearizations, all distinct. The table is on the [SNLP](/snlp/) page.
+Take actions $A$, which adds $p$; $R$, which needs $p$ and adds $r$; and $S$, which needs $p$ and adds $s$, with an empty initial state and the goal $\{p, r, s\}$. Enumerating all complete plans with at most 4 steps gives 4 plans in both POP and SNLP. Under POP's threat rule they have 16 linearizations, counted as action sequences plan by plan, but only 8 distinct sequences, and four sequences, AARS, AASR, ARAS and ASAR, each belong to 3 of the plans. Under SNLP's rule, where a step that adds $p$ also threatens a link for $p$, they have 6 linearizations, all distinct. The table is on the [SNLP](/snlp/) page.
 
 ## Variations
 

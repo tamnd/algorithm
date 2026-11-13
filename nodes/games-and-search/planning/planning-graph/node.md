@@ -98,7 +98,7 @@ Take the blocks world with two blocks $A$ and $B$ on the table and the hand empt
 - **Actions 1.** $A_1$ has 7 no-ops and 6 actions: the two pickups, $\mathit{putdown}(A)$, $\mathit{putdown}(B)$, $\mathit{stack}(A, B)$ and $\mathit{stack}(B, A)$. The pair $\mathit{holding}(A)$, $\mathit{clear}(B)$ is not mutex, so $\mathit{stack}(A, B)$ enters. There are 54 action mutexes.
 - **Level 2.** $P_2$ adds $\mathit{on}(A, B)$ and $\mathit{on}(B, A)$, for 9 facts, with 16 fact mutexes, for example $\mathit{on}(A, B)$ with $\mathit{on}(B, A)$ and $\mathit{on}(A, B)$ with $\mathit{ontable}(A)$.
 
-The goal holds at level 2, and 2 is the length of the shortest plan, $\mathit{pickup}(A)$ then $\mathit{stack}(A, B)$. If we expand once more, $P_3 = P_2$ and $FM_3 = FM_2$, so the graph levels off at level 2. This task has 5 reachable states, and the 16 mutexes of level 2 are exactly the 16 pairs of facts that are never true together in any of them. With two blocks the mutexes are complete. The [mutex relation](/mutex-relation/) page shows a task where they are not.
+The goal holds at level 2, and 2 is the length of the shortest plan, $\mathit{pickup}(A)$ then $\mathit{stack}(A, B)$. If we expand once more, $P_3 = P_2$ and $FM_3 = FM_2$, so the graph levels off at level 2, the first level that the next one repeats. Theorem 2 of the proof counts the repeating level instead, $L = 3$. This task has 5 reachable states, and the 16 mutexes of level 2 are exactly the 16 pairs of facts that are never true together in any of them. With two blocks the mutexes are complete. The [mutex relation](/mutex-relation/) page shows a task where they are not.
 
 ## Correctness
 

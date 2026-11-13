@@ -89,7 +89,7 @@ Lines L3 to L6 are the RRT step. Karaman and Frazzoli draw $x_{rand}$ from $\mat
 
 So $x_{new}$ gets the parent $B$ and the cost 3.4142, not the parent $D$ that the RRT would give. In the rewiring, $D$ would cost $3.4142 + 1 = 4.4142 < 6.2361$ through $x_{new}$, so $D$ is rewired to $x_{new}$. $C$ would cost $3.4142 + 1.4142 = 4.8284$, which is more than its cost 4, so it keeps its parent. The step makes 3 calls of the checker, since the test for $D$ is reused.
 
-**Convergence.** A block $[4, 6] \times [3, 7]$ stands in the square $[0, 10]^2$. The start is $(1, 5)$, the goal region is the disk of radius 1 around $(9, 5)$, and $\eta = 1$. The optimum is $c^* = 2\sqrt{13} + 2 = 9.2111$. The threshold of Theorem 38 with $\mu(\mathcal{C}) = 100$ in place of $\mu(\mathcal{C}_{free})$ is $\gamma^* = 9.772$, and the runs use $\gamma = 1.1 \gamma^* = 10.749$. The table gives the best cost after each number of iterations for three seeds.
+**Convergence.** A block $[4, 6] \times [3, 7]$ stands in the square $[0, 10]^2$. The start is $(1, 5)$, the goal is the point $(9, 5)$, which a path reaches by a last free segment from a vertex within distance 1 of it, and $\eta = 1$. The optimum is $c^* = 2\sqrt{13} + 2 = 9.2111$. The threshold of Theorem 38 with $\mu(\mathcal{C}) = 100$ in place of $\mu(\mathcal{C}_{free})$ is $\gamma^* = 9.772$, and the runs use $\gamma = 1.1 \gamma^* = 10.749$. The table gives the best cost after each number of iterations for three seeds.
 
 | iterations | seed 0 | seed 1 | seed 2 |
 |---|---|---|---|
@@ -101,7 +101,7 @@ So $x_{new}$ gets the parent $B$ and the cost 3.4142, not the parent $D$ that th
 | 8000 | 9.2804 | 9.3067 | 9.2873 |
 | 16000 | 9.2654 | 9.2639 | 9.2715 |
 
-At 16000 iterations the best cost is within 0.6 percent of $c^*$. For seed 0, 4000 iterations give 3641 vertices and 14592 calls of the checker, about 3.6 calls per iteration, and 16000 iterations give about 14700 vertices and 58000 calls. The number of calls per iteration stays near 3.6, below the $O(\log n)$ bound, because line L9 tests only the neighbors that would lower the cost and line L12 reuses those tests.
+At 16000 iterations the best cost is within 0.7 percent of $c^*$. For seed 0, 4000 iterations give 3641 vertices and 14592 calls of the checker, about 3.6 calls per iteration, and 16000 iterations give about 14700 vertices and 58000 calls. The number of calls per iteration stays near 3.6, below the $O(\log n)$ bound, because line L9 tests only the neighbors that would lower the cost and line L12 reuses those tests.
 
 **Against RRT.** The same code with radius 0 is the RRT without goal bias. Its best cost stays far from $c^*$.
 

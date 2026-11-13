@@ -78,7 +78,7 @@ The depth bound makes the search finite. Real HTN domains are often recursive, f
 
 ## Example
 
-Take a trip from home to the park. The facts are at-home, at-stop, at-park, have-coin, have-cash, have-ticket, taxi-at-home and owe-driver. The initial state is $\{$at-home, have-cash$\}$. The compound task travel has three methods, tried in this order:
+Take a trip from home to the park. The facts are at-home, at-stop, at-park, park-is-near, have-coin, have-cash, have-ticket, taxi-at-home and owe-driver. The initial state is $\{$at-home, have-cash$\}$. The compound task travel has three methods, tried in this order:
 
 - by-foot, with precondition park-is-near and subtask walk;
 - by-bus, with no precondition and subtasks go-to-stop, buy-ticket, ride-bus;

@@ -97,7 +97,7 @@ The task has $P(|Q| + |\Sigma|) + 1$ facts and at most $P (|\delta| + 1)$ action
 
 - **The restrictions in part 2 are close to the limit.** Bylander (1994) shows that hardness also holds with two positive preconditions and two postconditions in total per action (Corollary 3.2, with a reduction that splits each move into three actions), and with one postcondition per action and any number of preconditions (Theorem 3.3).
 - **Without deletes the problem becomes easy.** If no action has a delete and all preconditions are positive, the reachable facts are found by a fixed point in polynomial time; see [delete relaxation](/delete-relaxation/). With only positive postconditions but negative preconditions allowed, PLANSAT is NP-complete (Bylander, Theorem 3.5), because negative preconditions can force a choice between two facts.
-- **Other polynomial cases.** Bylander gives further restrictions under which PLANSAT is polynomial, among them positive preconditions with one postcondition per action (Theorem 3.7), which covers a blocks world encoding, and actions without preconditions (Theorem 3.9).
+- **Other polynomial cases.** Bylander gives further restrictions under which PLANSAT is polynomial, among them positive preconditions with one postcondition per action (Theorem 3.7), and actions without preconditions (Theorem 3.9).
 - **The space bound.** The $O(n^2)$ space of the midpoint recursion is the quadratic overhead of Savitch's theorem. Whether PLANSAT can be decided in space $O(n)$ is open, since it is the question whether the deterministic and the nondeterministic classes for linear space are equal.
 - **Lemma 1 is tight**, by the binary counter in the proof.
 
