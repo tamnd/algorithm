@@ -50,7 +50,7 @@ Unlike in the unburnt problem, $\rho_1$ is not trivial: it turns the top pancake
 ## Variants
 
 - **Unburnt pancakes.** Without signs this is [pancake sorting](/pancake-sorting/), whose worst case is between $15n/14$ and $18n/11 + O(1)$ and whose decision version is NP-hard; the simple method is [pancake sort](/pancake-sort/).
-- **The stack $-I_n$.** Cohen and Blum conjectured that $-I_n$ is always the hardest stack. Cibulka showed $\lfloor (3n + 3)/2 \rfloor \le d(-I_n) \le \lfloor (3n + 3)/2 \rfloor + 2$, and that the conjecture fails at $n = 15$, where $d(-I_{15}) = 24$ but $g(15) = 25$.
+- **The stack $-I_n$.** Cohen and Blum conjectured that $-I_n$ is always the hardest stack. Cibulka showed $\lfloor (3n + 3)/2 \rfloor \le d(-I_n) \le \lfloor (3n + 3)/2 \rfloor + 2$ for $n \ge 2$, and that the conjecture fails at $n = 15$, where $d(-I_{15}) = 24$ but $g(15) = 25$.
 - **Average case.** Cibulka gives a method that uses about $7n/4$ flips on average and shows that every method needs $n + \Omega(n/\log n)$ flips on average.
 - **Arbitrary reversals.** If any segment, not only a top part, may be reversed with its signs changed, the problem becomes sorting signed permutations by reversals, which [is solvable in polynomial time](/sorting-by-reversals/). Only the prefix version is open.
 - **Easy classes.** Labarre and Cibulka sort the stacks of a class called simple permutations optimally in polynomial time and prove a new lower bound.
@@ -90,7 +90,7 @@ For $n = 3$ the two hardest stacks are $(-1, -2, -3)$ and $(1, -2, -3)$. OEIS A0
 
 - **Lower bound.** $g(n) \ge 3n/2$ for $n \ge 2$ (Cohen and Blum), improving $3n/2 - 1$ of Gates and Papadimitriou. The breakpoint count alone gives only $g(n) \ge n$, since $-I_n$ has $n$ breakpoints.
 - **Upper bound.** $g(n) \le 2n - 2$ for $n \ge 10$ (Cohen and Blum), improving $2n + 3$ of Gates and Papadimitriou. The simple method gives $3n - 2$.
-- **The stack $-I_n$.** $\lfloor (3n + 3)/2 \rfloor \le d(-I_n) \le \lfloor (3n + 3)/2 \rfloor + 2$ (Cibulka), with equality on the left when $n \equiv 3 \pmod 4$ and $n \ne 7, 11$.
+- **The stack $-I_n$.** $\lfloor (3n + 3)/2 \rfloor \le d(-I_n) \le \lfloor (3n + 3)/2 \rfloor + 2$ for $n \ge 2$ (Cibulka), with equality on the left when $n \equiv 3 \pmod 4$ and $n \ne 7, 11$.
 - **Relation to the unburnt problem.** Forgetting the signs maps any burnt solution of a stack with all signs $+$ to an unburnt solution, so the unburnt distance of a permutation is at most its burnt distance, and the unburnt pancake number is at most $g(n)$.
 - **Complexity.** Bulteau, Fertin and Rusu proved the unburnt problem NP-hard in 2015 and noted that the complexity of the burnt problem was still open. A polynomial algorithm is known only for special classes, such as the simple permutations of Labarre and Cibulka.
 
