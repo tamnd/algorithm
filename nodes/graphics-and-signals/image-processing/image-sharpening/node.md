@@ -56,7 +56,7 @@ The aim is visual, so methods are compared by the overshoot and halos they make,
 ## Examples
 
 - The step $(10, 10, 10, 50, 50, 50)$ with unsharp masking, the blur $[1, 2, 1]/4$, $\lambda = 1$ and the clamp rule becomes $(10, 10, 0, 60, 50, 50)$: the dark side of the edge gets darker and the bright side brighter. Clipping to $[0, 50]$ gives $(10, 10, 0, 50, 50, 50)$.
-- The 5-point Laplacian sharpening $g = f - \nabla^2 f$ of the same row, with the clamp rule and the 1D Laplacian $f(x-1) - 2f(x) + f(x+1)$, gives $(10, 10, -30, 90, 50, 50)$: the same shape with a larger overshoot, because this kernel boosts the highest frequencies by a factor of 5.
+- The Laplacian sharpening $g = f - \nabla^2 f$ of the same row, with the clamp rule and the 1D Laplacian $f(x-1) - 2f(x) + f(x+1)$, gives $(10, 10, -30, 90, 50, 50)$: the same shape with a larger overshoot, because this kernel boosts the highest frequencies by a factor of 5.
 - A constant image is unchanged by both, because both kernels sum to 1.
 
 ## Known algorithms

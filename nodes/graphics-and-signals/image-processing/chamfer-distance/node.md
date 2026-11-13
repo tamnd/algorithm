@@ -90,7 +90,7 @@ Every value the algorithm writes is the cost of a real path of steps from a feat
 
 - **The error of the 3-4 transform, proved.** With $c$ the result and $E$ the exact squared Euclidean distance at a pixel, $8E \le c^2 \le 10E$. So $c/3$ is at least $\tfrac{2\sqrt{2}}{3} \approx 0.943$ and at most $\tfrac{\sqrt{10}}{3} \approx 1.054$ times the Euclidean distance: up to about 5.7% too small, on the diagonals, and up to about 5.4% too large, in the direction $(3, 1)$. Both bounds are reached, for example at $(1, 1)$ with $c = 4$ and at $(3, 1)$ with $c = 10$. Along the axes the scaled result is exact.
 - **City block and chessboard as special cases.** $(a, b) = (1, 2)$ gives the city block distance $|\Delta x| + |\Delta y|$, and $(a, b) = (1, 1)$ gives the chessboard distance $\max(|\Delta x|, |\Delta y|)$. Both are exact for their own metric.
-- **A metric.** For $0 < a \le b \le 2a$, $g(\Delta) = a(M - m) + bm$ is a norm on $\mathbb{Z}^2$ (its unit ball is an octagon), so the result is the distance to $S$ in a true metric, and its level sets are octagons rather than circles.
+- **A metric.** For $0 < a \le b \le 2a$, $g(\Delta) = a(M - m) + bm$ is a norm on $\mathbb{Z}^2$ (its unit ball is an octagon when $a < b < 2a$, a square when $a = b$ and a diamond when $b = 2a$), so the result is the distance to $S$ in a true metric, and its level sets are these polygons rather than circles.
 - **Graph distance.** The result is the [Dijkstra](/dijkstra/) distance from all features in the weighted 8-neighbor grid graph, computed without a priority queue because the grid order is enough for these masks.
 - **Integer arithmetic.** Only additions and comparisons of small integers, with no rounding.
 - **The absolute error grows with the distance.** The relative error is bounded, so the absolute error of $c/3$ grows linearly with the distance: at distance 100 it can be more than 5 pixels.
@@ -102,7 +102,7 @@ Every value the algorithm writes is the cost of a real path of steps from a feat
 - **Three dimensions.** The same scheme with $3 \times 3 \times 3$ masks and three weights for face, edge and corner neighbors works on voxel grids; Borgefors (1984) treated arbitrary dimensions.
 - **Exact Euclidean.** When the error is too large, the [Felzenszwalb-Huttenlocher transform](/felzenszwalb-distance-transform/) gives the exact squared Euclidean distance with the same $\Theta(WH)$ time and about the same code length.
 - **Constrained and geodesic distances.** Skipping the pixels of an obstacle mask in both passes does not give the geodesic distance in one go, because a shortest path around an obstacle may need many alternations of direction; repeat the two passes until nothing changes, or use [breadth-first search](/breadth-first-search/) or [Dijkstra](/dijkstra/) on the grid.
-- **Uses.** Thresholding the result gives [erosion](/morphological-erosion/) by an octagon, the local maxima give a [skeleton](/image-skeletonization/) of the shape close to the [medial axis](/medial-axis/), and a distance image of edges is the input of the point set matching methods mentioned above.
+- **Uses.** Thresholding the result gives [erosion](/morphological-erosion/) by the unit ball, an octagon for $a < b < 2a$, the local maxima give a [skeleton](/image-skeletonization/) of the shape close to the [medial axis](/medial-axis/), and a distance image of edges is the input of the point set matching methods mentioned above.
 
 ## When to use it
 

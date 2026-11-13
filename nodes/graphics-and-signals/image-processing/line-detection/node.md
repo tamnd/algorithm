@@ -58,7 +58,7 @@ This page is about straight lines in an edge map. The detection of thin bright o
 
 - A vertical line $x = 12$ in a $40 \times 40$ image, with all 40 of its pixels as edge points, has the parameters $\theta = 0$ and $\rho = 12$. With 40 random noise points added, it is still the line with the largest support.
 - The anti-diagonal $x + y = 30$ has $\theta = 45°$ and $\rho = 30/\sqrt{2} \approx 21.2$. Its 31 pixels are exactly on the line.
-- A line at 60 degrees whose points are rounded to the pixel grid has points up to $\tfrac{1}{2}\sqrt{2}$ pixels off the line, so the tolerance $\delta$ must be at least about $0.71$ to keep its full support.
+- A line at 60 degrees whose points are rounded to the pixel grid has points up to $\tfrac{1}{2}(\cos 60° + \sin 60°) \approx 0.683$ pixels off the line, so the tolerance $\delta$ must be at least about $0.68$ to keep its full support. The bound $\tfrac{1}{2}\sqrt{2} \approx 0.71$ is the worst case, at 45 degrees.
 - A dashed line, with gaps between the dashes, is one line with a support that is not connected.
 - A circle has no line with a large support, but a polygon with 20 sides has 20 short ones. The threshold $\tau$ decides which of them count.
 

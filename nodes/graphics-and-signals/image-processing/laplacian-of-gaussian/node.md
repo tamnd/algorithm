@@ -15,7 +15,7 @@ complexity:
   vars: {W: image width in pixels, H: image height in pixels, r: radius ceil(4 sigma) of the kernel}
   time: {worst: Θ(W H r), best: Θ(W H r)}
   space: {extra: Θ(W H)}
-properties: {deterministic: true, linear: true, separable: false, exact: false, in_place: false}
+properties: {deterministic: true, linear: false, separable: false, exact: false, in_place: false}
 history:
   year: 1980
   people: [David Marr, Ellen Hildreth]
@@ -98,7 +98,7 @@ Lines L2 and L3 each do two 1D correlations with $2r + 1$ taps, so the filter co
 
 ## Properties
 
-- **Linear and rotation invariant.** The continuous operator $\nabla^2 G_\sigma$ is linear and does not depend on the direction of the axes, so it needs no direction for each pixel, unlike [Canny's detector](/canny-edge-detector/).
+- **Linear and rotation invariant.** The continuous operator $\nabla^2 G_\sigma$ is linear, though the zero crossing test that follows it is not, and it does not depend on the direction of the axes, so it needs no direction for each pixel, unlike [Canny's detector](/canny-edge-detector/).
 - **Sum zero.** $\sum K = 0$, so the output is 0 on a flat image and does not change when a constant is added to $I$.
 - **Exact on quadratics.** The discrete kernel gives the exact Laplacian of every quadratic image.
 - **Closed contours.** The zero set of a smooth function is made of closed curves or curves that end at the border, so the marked pixels form closed rings around regions. Canny edges, in contrast, stop at corners.

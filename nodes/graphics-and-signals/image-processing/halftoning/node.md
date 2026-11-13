@@ -67,7 +67,7 @@ where $*$ is the convolution. A weaker but simpler measure asks that the mean of
 
 - **Thresholding** at $1/2$ sets every pixel to 0: no ones at all, and the image is black.
 - **[Ordered dithering](/ordered-dithering/)** with a matrix of side $n$ turns on $\lceil n^2/3 - 1/2 \rceil$ pixels per tile: 1280 ones for $n = 4$, 1344 for $n = 8$ and 1360 for $n = 16$. Each tile is within half a pixel of $n^2/3$, but the error repeats in every tile.
-- **[Floyd-Steinberg dithering](/floyd-steinberg-dithering/)** gives 1359 ones. The difference from $4096/3$ is exactly $19/3$, the error pushed off the border of the image.
+- **[Floyd-Steinberg dithering](/floyd-steinberg-dithering/)** in raster order gives 1359 ones. The difference from $4096/3$ is exactly $19/3$, the error pushed off the border of the image.
 
 **A gray of 1/2.** Both ordered dithering and Floyd-Steinberg dithering give a checkerboard, which is the finest pattern with half the pixels on.
 

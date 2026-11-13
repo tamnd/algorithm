@@ -88,7 +88,7 @@ The full proof is in [proofs/correctness.md](proofs/correctness.md). It shows th
 - **One split.** Lines L5 to L8 cost $\Theta(|b|)$ with a linear-time selection, or $\Theta(|b| \log |b|)$ with a sort, as in the implementation. Line L3 costs $O(|B|)$ if the extents of each box are kept with the box.
 - **All splits.** When the splits are even, each level of the tree of boxes holds all $n$ colors, there are about $\log_2 k$ levels, and the splits cost $\Theta(n \log k)$ in total. Many equal colors can make the splits uneven; in the worst case each split removes few colors from a large box, and $k - 1$ splits cost $O(n k)$.
 - **Mapping.** Line L10 with a search over the whole palette costs $\Theta(n k)$; it runs once per distinct color if the colors are first collected in a histogram. A [k-d tree](/kd-tree/) or a grid of buckets over the palette makes each [nearest-neighbor search](/nearest-neighbor-search/) faster in practice.
-- **Total.** $O(n k)$ time in the [real RAM](/real-ram/), and $\Theta(n)$ when all pixels have one color and the loop stops at once. The boxes are a partition of the colors, so the extra space is $\Theta(n)$.
+- **Total.** $O(n k)$ time in the [real RAM](/real-ram/) with a linear-time selection at line L5, $O(n k \log n)$ with a sort as in the implementation, and $\Theta(n)$ when all pixels have one color and the loop stops at once. The boxes are a partition of the colors, so the extra space is $\Theta(n)$.
 
 Heckbert first reduced each primary to 5 bits, so the boxes hold at most $2^{15} = 32768$ distinct colors with their counts, and the cost depends on that number instead of $n$.
 

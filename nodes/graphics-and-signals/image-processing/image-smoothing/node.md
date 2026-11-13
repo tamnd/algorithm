@@ -26,7 +26,7 @@ sources:
     locator: the comparison of smoothing filters through their method noise
 ---
 
-Image smoothing is the problem of reducing the fine variation of an image, its noise, texture and small detail, while keeping its broad structure. It has no single right answer: each method is defined by its own operator, and methods differ in what they keep. Linear methods, such as the [box blur](/box-blur/) and the [Gaussian filter](/gaussian-filter/), weaken all high frequencies alike and so also blur edges. Edge preserving methods, such as the [bilateral filter](/bilateral-filter/), the [guided filter](/guided-filter/), [anisotropic diffusion](/anisotropic-diffusion/) and [non-local means](/non-local-means/), let the weights depend on the image, so that strong edges stay sharp. Every method must write $WH$ output values, and the box, the Gaussian by repeated boxes or recursive filters, and the guided filter reach this bound of $\Theta(WH)$ for any amount of smoothing.
+Image smoothing is the problem of reducing the fine variation of an image, its noise, texture and small detail, while keeping its broad structure. It has no single right answer: each method is defined by its own operator, and methods differ in what they keep. Linear methods, such as the [box blur](/box-blur/) and the [Gaussian filter](/gaussian-filter/), weaken all high frequencies alike and so also blur edges. Edge preserving methods, such as the [bilateral filter](/bilateral-filter/), the [guided filter](/guided-filter/), [anisotropic diffusion](/anisotropic-diffusion/) and [non-local means](/non-local-means/), let the weights depend on the image, so that strong edges stay sharp. Every method must write $WH$ output values, and the box and the guided filter reach this bound of $\Theta(WH)$ for any amount of smoothing, as do repeated boxes or recursive filters that approximate the Gaussian.
 
 ## In plain words
 
@@ -54,8 +54,8 @@ Smoothing is a means more than an end. When the input is a clean image plus nois
 
 ## Examples
 
-- On the step $(10, 12, 10, 50, 48, 50)$, a Gaussian of $\sigma = 1$ with the clamp rule gives $(10.66, 13.13, 22.40, 37.61, 46.87, 49.34)$: the noise of size 2 is gone, and the step has become a ramp.
-- On the same row, the bilateral filter with $\sigma_s = 1$, $\sigma_r = 10$ and a radius of 1 gives $(10.75, 10.91, 10.75, 49.25, 49.09, 49.25)$: the noise is reduced, and the step stays a step.
+- On the step $(10, 12, 10, 50, 48, 50)$, a Gaussian of $\sigma = 1$ with the clamp rule gives $(10.66, 13.13, 22.40, 37.60, 46.87, 49.34)$: the noise of size 2 is gone, and the step has become a ramp.
+- On the same row, the bilateral filter with $\sigma_s = 1$, $\sigma_r = 10$ and a radius of 1, with the same clamp rule, gives $(10.54, 10.91, 10.75, 49.25, 49.09, 49.46)$: the noise is reduced, and the step stays a step.
 - A box blur of radius 1 of the checkerboard of 0 and 1, with the wrap rule, gives $5/9$ at the pixels of value 1 and $4/9$ at the others: the pattern is weakened, not removed, because the box keeps $1/9$ of the amplitude at this frequency. A Gaussian of $\sigma = 1$, cut at $3\sigma$, keeps only about $0.0002$ of it.
 
 ## Known algorithms
@@ -74,7 +74,7 @@ Smoothing is a means more than an end. When the input is a clean image plus nois
 ## Bounds
 
 - **Lower bound.** Every method that writes all $WH$ output values costs $\Omega(WH)$, and so does reading the input, since each output depends on the pixel itself.
-- **Upper bounds.** The box blur, the integral image, the Gaussian by repeated boxes or by recursive passes, and the guided filter all reach $\Theta(WH)$ for any radius, so the bound is tight for linear smoothing and for guided smoothing.
+- **Upper bounds.** The box blur, the integral image, the approximations of the Gaussian by repeated boxes or by recursive passes, and the guided filter all reach $\Theta(WH)$ for any radius, so the bound is tight for linear smoothing and for guided smoothing.
 - **Direct filtering.** A $k \times k$ kernel costs $\Theta(WHk^2)$ directly, $\Theta(WHk)$ when it is separable, and $\Theta(WH \log(WH))$ by the FFT.
 
 ## Reductions

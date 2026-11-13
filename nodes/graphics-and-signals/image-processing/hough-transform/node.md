@@ -84,7 +84,7 @@ Take a $4 \times 4$ image with the 5 edge points $(0, 3)$, $(1, 2)$, $(2, 1)$, $
 | $(3, 0)$ | 3 | 2.12 | 0 | $-2.12$ |
 | $(0, 0)$ | 0 | 0 | 0 | 0 |
 
-At 45 degrees, the first four points all have $\rho = 3/\sqrt{2} \approx 2.12$, so the cell $(45°, 2)$ gets 4 votes. At 0 degrees, $(0, 3)$ and $(0, 0)$ share the cell $(0°, 0)$ with 2 votes, which is the line $x = 0$. At 90 degrees, $(3, 0)$ and $(0, 0)$ share the cell $(90°, 0)$, which is the line $y = 0$. At 135 degrees, all 5 points vote in different cells. With $\tau = 2$, PEAKS reports $(4, 45°, 2)$, then $(2, 0°, 0)$ and $(2, 90°, 0)$. The best line is $x \cos 45° + y \sin 45° = 2$, the cell nearest to the true line $x + y = 3$, which has $\rho = 2.12$.
+At 45 degrees, the first four points all have $\rho = 3/\sqrt{2} \approx 2.12$, so the cell $(45°, 2)$ gets 4 votes. At 0 degrees, $(0, 3)$ and $(0, 0)$ share the cell $(0°, 0)$ with 2 votes, which is the line $x = 0$. At 90 degrees, $(3, 0)$ and $(0, 0)$ share the cell $(90°, 0)$, which is the line $y = 0$. At 135 degrees, all 5 points vote in different cells. With $\tau = 2$, PEAKS reports $(2, 0°, 0)$, $(4, 45°, 2)$ and $(2, 90°, 0)$ in scan order; the implementation sorts them by votes, so $(4, 45°, 2)$ comes first. The best line is $x \cos 45° + y \sin 45° = 2$, the cell nearest to the true line $x + y = 3$, which has $\rho = 2.12$.
 
 ## Correctness
 

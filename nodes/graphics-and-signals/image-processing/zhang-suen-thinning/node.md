@@ -84,7 +84,7 @@ start                 iteration 1, step 1   iteration 1, step 2   iteration 2, s
 
 The first subiteration deletes 11 pixels: the bottom row and the right column, where $P_6 = 0$ or $P_4 = 0$, and the north-west corner $(1, 1)$, where $P_2 = P_8 = 0$. Of the top row only the two end pixels go: $(1, 1)$ is the north-west corner and $(7, 1)$ has $P_4 = 0$. The pixel $(2, 1)$ has $P_4 = P_6 = P_8 = 1$, so its condition fails. The second subiteration deletes 8 pixels on the top and left and the new south-east corner. The second iteration deletes 6 more, and the third deletes nothing. The result is the 3-pixel line $(3, 2), (4, 2), (5, 2)$, in 3 iterations of which the last only confirms.
 
-The 2 by 2 square shows the known defect. Each of its four pixels has $B = 3$ and $A = 1$, and each has $P_4 = 0$ or $P_6 = 0$, so all four are marked in the first subiteration and the square vanishes. A diagonal line two pixels thick loses almost all of its pixels in the same way; a staircase of 10 pixels from $(0, 0)$ to $(5, 4)$ ends as 2 pixels.
+The 2 by 2 square shows the known defect. Each of its four pixels has $B = 3$ and $A = 1$. The top left pixel is a north-west corner, with $P_2 = P_8 = 0$, and each of the other three has $P_4 = 0$ or $P_6 = 0$, so all four are marked in the first subiteration and the square vanishes. A diagonal line two pixels thick loses almost all of its pixels in the same way; a staircase of 10 pixels from $(0, 0)$ to $(5, 4)$ ends as 2 pixels.
 
 ## Correctness
 

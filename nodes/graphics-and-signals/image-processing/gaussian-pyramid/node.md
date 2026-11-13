@@ -130,7 +130,7 @@ Use a Gaussian pyramid when a method must look at an image at several scales: co
 
 - **Subsampling with no blur.** Dropping every second sample of an unfiltered level aliases fine patterns into false coarse ones (see [aliasing](/aliasing/)).
 - **The grid offset.** Sample $(i, j)$ of level $l$ sits on pixel $(2^l i, 2^l j)$, not on the center of a $2^l \times 2^l$ block. Code that mixes this grid with the block-centered grid of a mipmap or a resize function is off by $(2^l - 1)/2$ pixels at level $l$.
-- **The 4/3 bound.** It is exact only for power-of-two sizes and an upper bound only when sizes round down. With rounding up it is exceeded by a term of order $W + H$; allocate from the exact sum of $W_l H_l$.
+- **The 4/3 bound.** It is an upper bound when sizes round down, and for $W = H = 2^N$, where $S = (4WH - 1)/3$ is just under it. With rounding up it can be exceeded by a term of order $W + H$, even for powers of two that are not square: a $4 \times 1$ image has $S = 7$, and a $1024 \times 512$ image has $S = 699051$ against $699050\tfrac{2}{3}$; allocate from the exact sum of $W_l H_l$.
 - **The border.** Zero padding darkens the edges of every level, and the effect grows with the level. Mirror or clamp the border.
 - **Gamma.** Averaging sRGB values as stored shifts the gray level of fine patterns. Convert to linear values first when the levels must keep the mean light.
 - **Integer levels.** Rounding each level to integers adds a rounding error at each step. Keep extra fraction digits, or use a wider type, when later steps subtract levels.
