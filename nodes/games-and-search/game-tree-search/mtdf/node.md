@@ -108,7 +108,7 @@ Costs are in the [word RAM](/word-ram/), with each move generation, EVALUATE and
 
 - **Exact.** For every guess and every grain it returns the value.
 - **Only null windows.** Every search at the root has a window of width one grain. Null-window searches prune the most.
-- **Needs memory.** Without the table, each pass searches from scratch, and MTD(f) is slower than one full alpha-beta search.
+- **Needs memory.** Without the table, each pass searches from scratch and reads again the leaves of the earlier passes, so with a poor guess MTD(f) is usually slower than one full alpha-beta search.
 - **Best-first in effect.** With enough memory, the sequence of passes expands the tree in a best-first order. MTD with the first guess $+\infty$ visits the same leaves as [SSS*](/sss-star/), and with $-\infty$ the same as DUAL*.
 - **Depends on the guess and on the grain of the evaluation.** A guess far from the value, or an evaluation with a very fine grain, needs many passes.
 
@@ -139,6 +139,6 @@ Use MTD(f) in a program that already has a good [transposition table](/transposi
 
 ## History
 
-Pearl's [SCOUT](/scout-search/) (1980) showed that a yes-or-no search against a bound is cheaper than a search for the value. Stockman's [SSS*](/sss-star/) (1979) visited fewer leaves than alpha-beta but needed a large list of open nodes, and for many years it was seen as a different kind of algorithm. De Bruin, Pijls and Plaat (1994) studied game-tree search in terms of solution trees, and with Schaeffer they showed that SSS* is a sequence of null-window alpha-beta searches with memory, starting at $+\infty$. Plaat, Schaeffer, Pijls and de Bruin (1996) built the MTD framework on this view, with MTD(f) as its most useful member, and tested it in chess, checkers and Othello programs. Schaeffer and Plaat (1996) presented it to practitioners as a replacement for NegaScout.
+Pearl's [SCOUT](/scout-search/) (1980) showed that a yes-or-no search against a bound is cheaper than a search for the value. Stockman's [SSS*](/sss-star/) (1979) never visited more leaves than alpha-beta with the same move order, but needed a large list of open nodes, and for many years it was seen as a different kind of algorithm. De Bruin, Pijls and Plaat (1994) studied game-tree search in terms of solution trees, and with Schaeffer they showed that SSS* is a sequence of null-window alpha-beta searches with memory, starting at $+\infty$. Plaat, Schaeffer, Pijls and de Bruin (1996) built the MTD framework on this view, with MTD(f) as its most useful member, and tested it in chess, checkers and Othello programs. Schaeffer and Plaat (1996) presented it to practitioners as a replacement for NegaScout.
 
 ## References

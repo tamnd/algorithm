@@ -48,7 +48,7 @@ Case 2: the loop ends without a cutoff, and $r = m_k = \max_i u_i < \beta$. For 
 
 *Lines L18 and L19.* If $r \le \alpha$, then $V \le r$ and the UPPER entry is true. If $r \ge \beta$, then $V \ge r$ and the LOWER entry is true. Else $V = r$ and the EXACT entry is true. So (T) holds when the call returns. $\blacksquare$
 
-**The entries made without flags.** If line L18 always sets EXACT, the entry claims $V_d(p) = r$ also after a cutoff, where the proof gives only $V_d(p) \ge r$. A later probe in a wider window returns $r$ as if it were the value, and the root value can change. The page gives an example of 9 positions where the result becomes 4 instead of 3.
+**The entries made without flags.** If line L18 always sets EXACT, the entry claims $V_d(p) = r$ also after a cutoff, where the proof gives only $V_d(p) \ge r$. A later probe in a wider window returns $r$ as if it were the value, and the root value can change. The page gives an example of 10 positions where the result becomes 4 instead of 3.
 
 **Hash collisions.** Without (A1), line L2 can accept the entry of another position with the same key. For keys of $w$ random bits and $n$ positions, the chance that two of them share a key is at most $n(n-1)/2^{w+1}$, by the bound of the [birthday paradox](/birthday-paradox/).
 
