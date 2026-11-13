@@ -522,6 +522,146 @@
       name: Quantum number theory
     - id: quantum-simulation
       name: Quantum simulation
+- id: cad
+  name: CAD
+  summary: Algorithms that design solids and chips, such as solid modeling, toolpaths, logic synthesis, placement and routing.
+  children:
+    - id: solid-modeling
+      name: Solid modeling
+    - id: geometric-constraint-solving
+      name: Geometric constraint solving
+    - id: mesh-processing
+      name: Mesh processing and repair
+    - id: cam-and-additive-manufacturing
+      name: CAM and additive manufacturing
+    - id: logic-synthesis
+      name: Logic synthesis and technology mapping
+    - id: partitioning-floorplanning-and-placement
+      name: Partitioning, floorplanning and placement
+    - id: routing
+      name: Routing
+    - id: timing-and-verification
+      name: Timing, verification and test
+- id: statistics-and-inference
+  name: Statistics and inference
+  summary: The methods that turn data into estimates, tests and intervals, and that say how far to trust them.
+  children:
+    - id: point-estimation
+      name: Point estimation
+    - id: hypothesis-testing
+      name: Hypothesis testing and intervals
+    - id: nonparametric-and-robust-statistics
+      name: Nonparametric, resampling and robust methods
+    - id: regression-and-diagnostics
+      name: Regression and diagnostics
+    - id: bayesian-statistics
+      name: Bayesian statistics
+    - id: time-series-and-sequential-analysis
+      name: Time series and sequential analysis
+    - id: causal-inference-and-experimental-design
+      name: Causal inference and design of experiments
+    - id: survival-analysis
+      name: Survival analysis
+- id: compilers-and-program-analysis
+  name: Compilers and program analysis
+  summary: The representations, analyses and transformations that turn programs into fast code and prove facts about them.
+  children:
+    - id: type-systems-and-inference
+      name: Type systems and inference
+    - id: intermediate-representations
+      name: Intermediate representations
+    - id: dataflow-and-abstract-interpretation
+      name: Dataflow analysis and abstract interpretation
+    - id: optimizations
+      name: Optimizations
+    - id: loop-transformations
+      name: Loop transformations
+    - id: code-generation-and-jit
+      name: Code generation and JIT compilation
+    - id: pointer-and-alias-analysis
+      name: Pointer and alias analysis
+    - id: verification-and-synthesis
+      name: Verification, symbolic execution and synthesis
+- id: information-retrieval-and-ai-reasoning
+  name: Information retrieval and AI reasoning
+  summary: Algorithms that index, rank and recommend documents, and algorithms that represent knowledge and draw conclusions from it.
+  children:
+    - id: indexing-and-query-processing
+      name: Indexing and query processing
+    - id: ranking-models
+      name: Ranking models
+    - id: retrieval-evaluation
+      name: Retrieval evaluation
+    - id: web-search-and-recommender-systems
+      name: Web search and recommender systems
+    - id: knowledge-representation-and-description-logics
+      name: Knowledge representation and description logics
+    - id: rule-based-and-nonmonotonic-reasoning
+      name: Rule-based and nonmonotonic reasoning
+    - id: argumentation-and-belief-revision
+      name: Argumentation and belief revision
+    - id: qualitative-temporal-and-spatial-reasoning
+      name: Qualitative temporal and spatial reasoning
+- id: control
+  name: Control
+  summary: Algorithms that make a dynamical system behave as we want, by feedback from what we measure.
+  children:
+    - id: modeling-and-identification
+      name: Modeling and identification
+    - id: stability
+      name: Stability
+    - id: classical-control
+      name: Classical control
+    - id: state-space-control
+      name: State space control
+    - id: optimal-and-predictive-control
+      name: Optimal and predictive control
+    - id: robust-and-adaptive-control
+      name: Robust and adaptive control
+    - id: nonlinear-control
+      name: Nonlinear control
+    - id: discrete-event-and-hybrid-systems
+      name: Discrete-event and hybrid systems
+- id: robotics
+  name: Robotics
+  summary: Algorithms that model, move and locate robots, from rigid body motion and kinematics to SLAM, grasping, walking and teams of robots.
+  children:
+    - id: rigid-body-motion
+      name: Rigid body motion
+    - id: robot-kinematics
+      name: Robot kinematics
+    - id: robot-dynamics
+      name: Robot dynamics
+    - id: trajectory-generation
+      name: Trajectory generation and optimization
+    - id: localization-and-slam
+      name: Localization and SLAM
+    - id: grasping-and-manipulation
+      name: Grasping and manipulation
+    - id: mobile-and-legged-robots
+      name: Mobile and legged robots
+    - id: multi-robot-systems
+      name: Multi-robot systems
+- id: computer-vision
+  name: Computer vision
+  summary: Algorithms that recover geometry, motion and meaning from images, such as feature matching, camera calibration, multiple view geometry and tracking.
+  children:
+    - id: local-features
+      name: Local features and matching
+    - id: camera-models-and-calibration
+      name: Camera models and calibration
+    - id: multiple-view-geometry
+      name: Projective and multiple view geometry
+    - id: structure-from-motion
+      name: Structure from motion and visual odometry
+    - id: stereo-and-dense-reconstruction
+      name: Stereo and dense reconstruction
+    - id: point-clouds-and-registration
+      name: 3D registration and point clouds
+    - id: segmentation-and-recognition
+      name: Segmentation and recognition
+    - id: visual-tracking
+      name: Tracking
 - id: complexity
   name: Complexity
   summary: What each problem needs, with classes, reductions and lower bounds.
