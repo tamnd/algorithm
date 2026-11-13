@@ -95,7 +95,7 @@ With $Z = 2$, $\tau^* = 2.52236$ and $L_1 = 0.0963670$. The algorithm with $K = 
 
 $$L = \frac{\alpha E}{4\pi} \cdot \frac{\mu_0}{\mu_0 + \mu}\, H(\mu)\, H(\mu_0), \qquad \frac{1}{H(\mu)} = \sqrt{1 - \alpha} + \frac{\alpha}{2}\int_0^1 \frac{\mu' H(\mu')}{\mu + \mu'}\, d\mu'.$$
 
-For $\alpha = 0.9$, $H(0.6) = 1.62588$ and $H(0.8) = 1.74740$, so $L = 0.273960$. Single scattering is only $0.096429$ of this. A slab with $Z = 20$ has $\tau^* = 24.98$ and acts as semi-infinite. The full algorithm gives, with seed 2:
+For $\alpha = 0.9$, $H(0.6) = 1.62588$ and $H(0.8) = 1.74740$, so $L = 0.273960$. Single scattering, $L_1 = 0.096429$ for a semi-infinite medium, is only $0.352$ of this. A slab with $Z = 20$ has $\tau^* = 24.98$ and acts as semi-infinite. The full algorithm gives, with seed 2:
 
 | paths $N$ | estimate | standard error |
 |---|---|---|

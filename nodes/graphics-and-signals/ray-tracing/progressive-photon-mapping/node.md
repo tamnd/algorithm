@@ -69,13 +69,13 @@ L10         τ ← (τ + Φ_M) R′² / R²;  N ← N′;  R ← R′
 L11     the radiance at h after i passes is τ / (π R² N_e), where N_e = i M is the number of emitted photons
 ```
 
-The parameter $\alpha$ is in $(0, 1)$. Hachisuka, Ogaki and Jensen used $\alpha = 0.7$. Lines L8 and L9 keep the density: $(N + \alpha M_h)/R'^2 = (N + M_h)/R^2$. Line L10 scales the flux by the ratio of the areas, so that $\tau/(\pi R^2)$ stays a flux per area. Line L11 is the photon mapping estimate with all the photons of all the passes, each photon with the power $\Phi/N_e$.
+The parameter $\alpha$ is in $(0, 1)$. Hachisuka, Ogaki and Jensen used $\alpha = 0.7$. Lines L8 and L9 keep the density: $(N + \alpha M_h)/R'^2 = (N + M_h)/R^2$. Line L10 scales the flux by the ratio of the areas, so that $\tau/(\pi R^2)$ stays a flux per area. Line L11 is the photon mapping estimate with all the photons of all the passes: $\Delta\Phi_q$ is the photon's power with the full power $\Phi$ of the light at emission, and the division by $N_e$ gives each photon the power $\Phi/N_e$.
 
 Photon paths are traced as in [photon mapping](/photon-mapping/), with [Russian roulette](/russian-roulette/) at each bounce. The photons of a pass are not stored after the pass. The index of line L3 can be a [kd-tree](/kd-tree/) or a [spatial hash](/spatial-hashing/) over the hit points. The order is the reverse of photon mapping: the photon is the query and the hit points are the data.
 
 ## Example
 
-**One update by hand.** A point light of power $\Phi = 1$ is at height $h = 1$ over an absorbing plane. One hit point is at the foot of the light, with $R_0 = 0.5$ and $\alpha = 0.7$. Each pass emits $M = 1000$ photons, so each photon has the power $0.001$ and $N_e = 1000\,i$. Take the counts 50, 40 and 45 in the first three passes.
+**One update by hand.** A point light of power $\Phi = 1$ is at height $h = 1$ over an absorbing plane. One hit point is at the foot of the light, with $R_0 = 0.5$ and $\alpha = 0.7$. Each pass emits $M = 1000$ photons and $N_e = 1000\,i$. Here $\tau$ stores each photon with the power $\Phi/M = 0.001$ instead of $\Phi$, so the estimate of line L11 becomes $\tau/(\pi R^2 i)$. The example leaves out the factor $f_r$ of line L6, so it estimates the irradiance at the point. Take the counts 50, 40 and 45 in the first three passes.
 
 | pass | $M_h$ | $N$ | $R^2$ | $\tau$ | $\tau / (\pi R^2 i)$ |
 |---|---|---|---|---|---|
@@ -95,7 +95,7 @@ In pass 2, $N' = 35 + 0.7 \cdot 40 = 63$ and $R'^2 = 0.175 \cdot 63/75 = 0.147$.
 | 64 | 0.07544 ± 0.00056 | −5.2 % | 0.2331 | 0.06715 ± 0.00030 | −15.6 % |
 | 256 | 0.07720 ± 0.00030 | −3.0 % | 0.1888 | 0.06728 ± 0.00011 | −15.5 % |
 
-The fixed-radius error stays at −15.5 percent. The PPM error falls as the radius falls. A deterministic model of the recursion, with each count equal to its expected value, predicts −15.5, −11.5, −8.0, −5.4 and −3.6 percent, and the measured values agree with it within about two standard errors. The radius follows $R_i^2 \approx R_0^2\, i^{\alpha - 1}/\Gamma(\alpha)$: the formula gives 0.4183, 0.3519, 0.2886, 0.2350 and 0.1910.
+The fixed-radius error stays at −15.5 percent. The PPM error falls as the radius falls. A deterministic model of the recursion, with each count equal to its expected value, predicts −15.5, −11.5, −8.0, −5.4 and −3.6 percent. It follows the trend, but all five measured values lie above it, by 0.3 to 2.5 standard errors, so it is not exact. The radius follows $R_i^2 = R_0^2 \prod_{j=0}^{i-1} (j + \alpha)/(j + 1)$ closely, whose square root gives $R$ = 0.4183, 0.3519, 0.2886, 0.2350 and 0.1910. The asymptotic form $R_i^2 \approx R_0^2\, i^{\alpha - 1}/\Gamma(\alpha)$ gives $R$ = 0.4389, 0.3565, 0.2895, 0.2352 and 0.1910.
 
 ## Correctness
 

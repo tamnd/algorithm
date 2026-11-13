@@ -116,7 +116,7 @@ so the bias is $O(r^2)$. For the point light, $\Delta E(0) = -6E(0)/h^2$, which 
 
 ## Complexity
 
-Pass 1 traces $N$ paths with $l$ stored hits each on average, so it makes $O(Nl)$ ray casts. With Russian roulette at reflectance $\rho$, $l = 1/(1 - \rho)$ for a closed scene. Building the photon map takes $O(Nl \log(Nl))$ expected time. Each estimate in pass 2 is a k-nearest search, which costs $O(k \log k + \log(Nl))$ in practice, with no worst case bound better than linear. The memory holds all $Nl$ photons, and memory is often the limit of the method.
+Pass 1 traces $N$ paths with $l$ stored hits each on average, so it makes $O(Nl)$ ray casts. With Russian roulette at reflectance $\rho$, $l = 1/(1 - \rho)$ for a closed scene. Building the photon map takes $O(Nl \log(Nl))$ expected time. Each estimate in pass 2 is a k-nearest search, which costs $O(k \log k + \log(Nl))$ in practice. In the worst case it visits all $Nl$ photons and keeps the $k$ nearest in a heap, $O(Nl \log k)$, so the $p$ estimates cost $O(pNl \log k)$, the bound in the summary. The memory holds all $Nl$ photons, and memory is often the limit of the method.
 
 The estimate with a fixed radius has the variance $O(1/(N r^2))$, because a photon falls in the disc with probability proportional to $r^2$ and has the weight $1/(N \pi r^2)$. With the bias $O(r^2)$, the mean squared error is
 
