@@ -5,7 +5,6 @@ slug: element-distinctness
 name: Element distinctness
 aliases:
 - Element distinctness problem
-- collision finding
 - distinctness problem
 - element uniqueness
 area: foundations/lower-bounds
