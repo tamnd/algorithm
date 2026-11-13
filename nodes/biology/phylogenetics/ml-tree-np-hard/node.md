@@ -29,7 +29,7 @@ sources:
     locator: maximum likelihood under no common mechanism equals maximum parsimony
 ---
 
-Maximum likelihood is the standard criterion for building trees from sequences, and for a fixed tree the likelihood takes linear time. Chor and Tuller proved in 2005 that the search over trees cannot be made efficient: finding a [maximum likelihood tree](/maximum-likelihood-phylogeny/) is NP-hard under the Jukes-Cantor model and its generalizations. In 2006 Roch gave a three-page proof of a stronger form for the two-state Cavender-Farris-Neyman (CFN) model, the binary version of [JC69](/jukes-cantor-model/): even an approximation of the optimum within a factor $1 + c$, for some constant $c > 0$, is NP-hard. Both proofs go through [maximum parsimony](/maximum-parsimony/). This page states both results and gives Roch's proof.
+Maximum likelihood is the standard criterion for building trees from sequences, and for a fixed tree the likelihood takes linear time. Chor and Tuller proved in 2005 that the search over trees cannot be made efficient: finding a [maximum likelihood tree](/maximum-likelihood-phylogeny/) is NP-hard under the two-state Neyman model, and by the same reduction under the Jukes-Cantor model and its generalizations. In 2006 Roch gave a three-page proof for the two-state Cavender-Farris-Neyman (CFN) model, the binary version of [JC69](/jukes-cantor-model/), which shows that even an approximation of the optimum within a factor $1 + c$, for some constant $c > 0$, is NP-hard. Both proofs go through [maximum parsimony](/maximum-parsimony/). This page states both results and gives Roch's proof.
 
 ## Statement
 
@@ -67,7 +67,7 @@ The full proof is in [the proof page](proofs/main.md). Here is its plan.
 
 **Step 4: combine.** A $(1 + c)$-approximate ML solution $(T, p)$ for the padded instance has score at most $(1 + c)(1 + 2\varepsilon)\, l^* \ln K$, where $l^*$ is the optimal parsimony score. By the short-edge and lower-bound estimates, its tree has $l(X, T) \le \frac{(1 + c)(1 + 2\varepsilon)}{1 - 5\varepsilon} l^*$. For small $c$ and $\varepsilon$, the factor is below $1 + c_0$, which contradicts Step 1 unless P = NP. $\blacksquare$
 
-**About the proof of Chor and Tuller.** Their proof also starts from the hardness of approximating vertex cover and uses the link of Tuffley and Steel between likelihood and parsimony, but it needs a longer chain of constructions, and it covers the four-state Jukes-Cantor model. Roch's paper calls these constructions "rather involved" and gives the shorter route above for the binary model.
+**About the proof of Chor and Tuller.** Their proof also starts from the hardness of approximating vertex cover and uses the link of Tuffley and Steel between likelihood and parsimony, but it needs a longer chain of constructions, and it is stated for the two-state Neyman model and then extended to the four-state Jukes-Cantor model. Roch's paper calls these constructions "rather involved" and gives the shorter route above for the binary model.
 
 ## Consequences
 

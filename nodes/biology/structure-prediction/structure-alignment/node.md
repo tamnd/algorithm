@@ -101,7 +101,7 @@ Pairing by position matches $a_3$ with the bulge and pulls the fit out of line. 
 ## Reductions
 
 - **Fixed alignment to superposition.** Given $M$, the best rigid motion for least RMSD is the [Kabsch algorithm](/kabsch-algorithm/) or the [quaternion method](/quaternion-superposition/) on the matched pairs.
-- **Fixed superposition to sequence alignment.** Given $(R, t)$, set the score of the pair $(i, j)$ to $f(|R a_i + t - b_j|)$ and solve a [global alignment](/global-alignment/) with gaps. Alternating the two steps is the core of TM-align and of the final step of CE; each round cannot lower the score, but the result can be a local optimum.
+- **Fixed superposition to sequence alignment.** Given $(R, t)$, set the score of the pair $(i, j)$ to $f(|R a_i + t - b_j|)$ and solve a [global alignment](/global-alignment/) with gaps. Alternating the two steps is the core of TM-align and of the final step of CE; a round can lower the score, because the gap costs of the dynamic program and a least-RMSD superposition do not optimize the score itself, and the result can be a local optimum.
 - **Fragment pairs to cliques.** Methods that start from pairs of matching fragments or secondary structure elements form a graph whose edges join pairs that fit together, and a good alignment is a large clique of this graph; finding a [maximum clique](/maximum-clique/) is itself NP-hard.
 
 ## Applications

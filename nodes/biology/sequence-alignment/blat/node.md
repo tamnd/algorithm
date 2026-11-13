@@ -138,7 +138,7 @@ For a 500-base query against a genome of 3 billion bases, this is about 140,000 
 - **Near-perfect hits.** One mismatch per tile finds more distant matches at the cost of $K(A-1)+1$ lookups per K-mer.
 - **[BLAST](/blast/).** Indexes the query and scans the database, with words of all positions and extension by [X-drop](/x-drop-extension/). It is more sensitive for distant proteins and slower on a genome.
 - **[Spaced seeds](/spaced-seed/).** PatternHunter and later tools use seeds with "don't care" positions, which are more sensitive than contiguous K-mers of the same weight.
-- **[Minimap2](/minimap2/).** Indexes the database by minimizers instead of fixed tiles, which keeps a guarantee similar to the one above with a smaller index, and chains the hits before alignment.
+- **[Minimap2](/minimap2/).** Indexes the database by minimizers instead of fixed tiles, which keeps the guarantee above for a window of $K$ K-mers but stores more positions, about $2/(K+1)$ per base against $1/K$ for tiles; the query then needs only its own minimizers looked up, and the hits are chained before alignment.
 
 ## When to use it
 

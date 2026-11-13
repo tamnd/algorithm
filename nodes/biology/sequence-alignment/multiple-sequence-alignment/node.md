@@ -89,7 +89,7 @@ Here the optimal multiple alignment induces an optimal pairwise alignment for ev
 
 | method | type | time | guarantee |
 |---|---|---|---|
-| dynamic program over the $k$-dimensional lattice | exact | $O(2^k n^k)$ | optimal SP |
+| dynamic program over the $k$-dimensional lattice | exact | $O(k^2 2^k n^k)$ | optimal SP |
 | Carrillo-Lipman pruning (1988), the MSA program (1989) | exact | exponential in $k$ in the worst case | optimal SP |
 | [center-star method](/center-star-method/) | approximation | $O(k^2 n^2 + k^3 n)$ | $2 - 2/k$ for a metric cost |
 | Bafna, Lawler and Pevzner (1997) | approximation | polynomial for fixed $l$ | $2 - l/k$ for a metric cost |
@@ -98,7 +98,7 @@ Here the optimal multiple alignment induces an optimal pairwise alignment for ev
 | consistency, e.g. [T-Coffee](/t-coffee/), [ProbCons](/probcons/) | heuristic | about $O(k^3 n^2)$ | none |
 | [partial order alignment](/partial-order-alignment/) | heuristic | about $O(k\, n\, E)$ for a graph with $E$ edges | none |
 
-Here $n$ is the length of the longest sequence. The exact program fills one cell for each tuple of prefix lengths, $\prod_i (n_i + 1) \le (n+1)^k$ cells, and each cell takes the best of $2^k - 1$ predecessors, one for each nonempty set of rows that receive a letter in the last column.
+Here $n$ is the length of the longest sequence. The exact program fills one cell for each tuple of prefix lengths, $\prod_i (n_i + 1) \le (n+1)^k$ cells, and each cell takes the best of $2^k - 1$ predecessors, one for each nonempty set of rows that receive a letter in the last column, and the SP score of that column takes $O(k^2)$ time.
 
 ## Bounds
 

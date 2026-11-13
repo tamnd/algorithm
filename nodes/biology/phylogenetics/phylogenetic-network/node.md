@@ -21,7 +21,7 @@ sources:
     title: Daniel H. Huson, Regula Rupp and Celine Scornavacca, Phylogenetic Networks, Concepts, Algorithms and Applications, Cambridge University Press, 2010
     locator: the chapters on clusters and rooted phylogenetic networks, with switchings, displayed trees and the classes of networks
   - paper: doi:10.1109/TCBB.2007.70270
-    title: Gabriel Cardona, Francesc Rossello and Gabriel Valiente, Comparison of tree-child phylogenetic networks, IEEE/ACM Transactions on Computational Biology and Bioinformatics 6(4), 2009, pages 552 to 569
+    title: Gabriel Cardona, Francesc Rosselló and Gabriel Valiente, Comparison of tree-child phylogenetic networks, IEEE/ACM Transactions on Computational Biology and Bioinformatics 6(4), 2009, pages 552 to 569
     locator: the definition of tree-child networks, the tree paths to leaves, and the bounds on their size
   - paper: "Iyad A. Kanj, Luay Nakhleh, Cuong Than and Ge Xia, Seeing the trees and their branches in the network is hard, Theoretical Computer Science 401, 2008"
     title: Iyad A. Kanj, Luay Nakhleh, Cuong Than and Ge Xia, Seeing the trees and their branches in the network is hard
@@ -131,7 +131,7 @@ The invariant is that the graph has no directed cycle. It holds for the empty gr
 | IS-VALID, IS-TREE-CHILD | $O(n + m)$ | one pass over all lists |
 | DISPLAYED-TREES | $O(2^h k (n + m))$ | $2^h$ switchings in the binary case, each with $n$ clusters of up to $k$ labels |
 
-The space is $O(n + m)$ for the lists, plus the output. A network with $k$ leaves can be large in general. A binary tree-child network with $k$ leaves has at most $k - 1$ reticulations (Cardona, Rossello and Valiente 2009), so its size is $O(k)$.
+The space is $O(n + m)$ for the lists, plus the output. A network with $k$ leaves can be large in general. A binary tree-child network with $k$ leaves has at most $k - 1$ reticulations (Cardona, Rosselló and Valiente 2009), so its size is $O(k)$.
 
 Deciding whether a network displays one given tree is NP-complete in general (Kanj, Nakhleh, Than and Xia 2008). So the exponential cost of DISPLAYED-TREES in $h$ cannot be avoided in general, even for one tree. For restricted classes, for example tree-child networks, the question can be answered in polynomial time.
 
@@ -159,6 +159,6 @@ Use a phylogenetic network when the history of the taxa is not a tree: hybrid sp
 
 ## History
 
-Networks for reticulate evolution were drawn long before algorithms for them. Formal models came in the 1990s, with ancestral recombination graphs from population genetics and hybridization networks from phylogenetics. Galled trees were studied for recombination by Gusfield and coauthors and by Wang, Zhang and Zhang. Cardona, Rossello and Valiente introduced tree-child networks in a paper that appeared in 2009. Kanj, Nakhleh, Than and Xia (2008) showed that deciding whether a network displays a tree is NP-complete. The book of Huson, Rupp and Scornavacca (2010) put the rooted and unrooted kinds of networks into one framework.
+Networks for reticulate evolution were drawn long before algorithms for them. Formal models came in the 1990s, with ancestral recombination graphs from population genetics and hybridization networks from phylogenetics. Galled trees were studied for recombination by Gusfield and coauthors and by Wang, Zhang and Zhang. Cardona, Rosselló and Valiente introduced tree-child networks in a paper that appeared in 2009. Kanj, Nakhleh, Than and Xia (2008) showed that deciding whether a network displays a tree is NP-complete. The book of Huson, Rupp and Scornavacca (2010) put the rooted and unrooted kinds of networks into one framework.
 
 ## References

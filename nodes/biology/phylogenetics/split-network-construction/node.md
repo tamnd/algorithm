@@ -13,7 +13,7 @@ sources:
     title: Andreas W. M. Dress and Daniel H. Huson, Constructing splits graphs
     locator: the definition of splits graphs, the convex hull algorithm, and the planar drawing of circular split systems
   - paper: doi:10.1016/1055-7903(92)90021-8
-    title: Hans-Jurgen Bandelt and Andreas W. M. Dress, Split decomposition, a new and useful approach to phylogenetic analysis of distance data, Molecular Phylogenetics and Evolution 1(3), 1992, pages 242 to 252
+    title: Hans-Jürgen Bandelt and Andreas W. M. Dress, Split decomposition, a new and useful approach to phylogenetic analysis of distance data, Molecular Phylogenetics and Evolution 1(3), 1992, pages 242 to 252
     locator: weakly compatible split systems from distances, and their drawing as networks
   - paper: "Peter Buneman, The recovery of trees from measures of dissimilarity, in Mathematics in the Archaeological and Historical Sciences, Edinburgh University Press, 1971"
     title: Peter Buneman, The recovery of trees from measures of dissimilarity

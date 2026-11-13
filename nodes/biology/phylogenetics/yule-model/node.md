@@ -76,7 +76,7 @@ Write $n_v$ for the number of tips below an internal node $v$, and $c(T)$ for th
 
 *Proof.* Let $p_m(t) = P(N(t) = m)$. The forward equations of the chain are $p_m' = \lambda (m-1) p_{m-1} - \lambda m p_m$, with $p_1(0) = 1$. Put $q = e^{-\lambda t}$ and $p_m = q(1-q)^{m-1}$. Since $q' = -\lambda q$, we get $p_m' = -\lambda q (1-q)^{m-1} + \lambda (m-1) q^2 (1-q)^{m-2}$. The right side of the equation is $\lambda (m-1) q (1-q)^{m-2} - \lambda m q (1-q)^{m-1} = \lambda (m-1) q (1-q)^{m-2} \big(1 - (1-q)\big) - \lambda q (1-q)^{m-1}$, which is the same. The initial value is right, and the solution of this linear system is unique. The mean of a geometric law with success probability $q$ is $1/q = e^{\lambda t}$. $\square$
 
-**The waits.** When the run stops at $n$ tips, the time with $k$ lineages is $\text{Exp}(k\lambda)$, so the expected age of the root is $\frac{1}{\lambda} \sum_{k=1}^{n-1} \frac{1}{k}$.
+**The waits.** When the run stops at $n$ tips, the time with $k$ lineages is $\text{Exp}(k\lambda)$, so the expected time back to the start of the run, the origin of the stem lineage, is $\frac{1}{\lambda} \sum_{k=1}^{n-1} \frac{1}{k}$. The root split, the first split, comes after the wait with one lineage, so its expected age is $\frac{1}{\lambda} \sum_{k=2}^{n-1} \frac{1}{k}$.
 
 **Every ranked labeled history has the same probability.** It is $\dfrac{2^{n-1}}{n!\,(n-1)!}$, and there are $\dfrac{n!\,(n-1)!}{2^{n-1}}$ ranked labeled histories.
 

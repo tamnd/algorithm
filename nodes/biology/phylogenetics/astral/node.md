@@ -69,9 +69,9 @@ L6  return the tree and V(X) / 2
 
 The weight $w$ in line L3 comes from the gene trees without listing quartets. Each internal node of a gene tree also has a tripartition $(P_1, P_2, P_3)$. Let $I_{ip} = |A_i \cap P_p|$. Then
 
-$$w(A_1 | A_2 | A_3) = \sum_{\text{gene nodes}} \ \sum_{k=1}^{3} \sum_{r=1}^{3} \binom{I_{kr}}{2} \big( I_{ip} I_{jq} + I_{iq} I_{jp} \big),$$
+$$w(A_1 | A_2 | A_3) = \sum_{\text{gene nodes}} \ \sum_{s=1}^{3} \sum_{r=1}^{3} \binom{I_{sr}}{2} \big( I_{ip} I_{jq} + I_{iq} I_{jp} \big),$$
 
-where $\{i, j\} = \{1, 2, 3\} \setminus \{k\}$ and $\{p, q\} = \{1, 2, 3\} \setminus \{r\}$. The term counts quartets with the pair $c, d$ in species part $k$ and gene part $r$, and with $a$, $b$ in the other two parts on both sides. Equal gene tripartitions in different gene trees are counted once, with a multiplicity.
+where $\{i, j\} = \{1, 2, 3\} \setminus \{s\}$ and $\{p, q\} = \{1, 2, 3\} \setminus \{r\}$. The term counts quartets with the pair $c, d$ in species part $s$ and gene part $r$, and with $a$, $b$ in the other two parts on both sides. Equal gene tripartitions in different gene trees are counted once, with a multiplicity.
 
 ## Example
 

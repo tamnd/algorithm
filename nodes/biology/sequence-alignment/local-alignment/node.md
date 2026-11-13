@@ -49,7 +49,7 @@ $$\operatorname{OPT}_{\mathrm{loc}}(x, y) = \max_{u \text{ substring of } x,\ v 
 
 is attained. The empty substrings give the score 0, so $\operatorname{OPT}_{\mathrm{loc}} \ge 0$.
 
-**The scoring condition.** Let $q_a$ be the background frequency of the letter $a$. The definition makes sense for every $s$ and $d$, but it finds related regions only if the expected score of a random pair is negative, $\sum_{a, b} q_a q_b \, s(a, b) < 0$, and some $s(a, a) > 0$. Durbin et al. state this condition for local alignment. Arratia and Waterman (1994) proved that, for random sequences, the best local score grows linearly with the length for some scoring parameters and logarithmically for others, with a sharp change between the two regimes. Only in the logarithmic regime does a high local score point to a real similarity.
+**The scoring condition.** Let $q_a$ be the background frequency of the letter $a$. The definition makes sense for every $s$ and $d$, but it finds related regions only if the expected score of a random pair is negative, $\sum_{a, b} q_a q_b \, s(a, b) < 0$, and some $s(a, b) > 0$. Durbin et al. state this condition for local alignment. Arratia and Waterman (1994) proved that, for random sequences, the best local score grows linearly with the length for some scoring parameters and logarithmically for others, with a sharp change between the two regimes. Only in the logarithmic regime does a high local score point to a real similarity.
 
 ## Variants
 
@@ -94,7 +94,7 @@ Heuristics for database search, [BLAST](/blast/), the [FASTA algorithm](/fasta-a
 ## Bounds
 
 - **Upper.** $O(mn)$ time with linear or affine gaps, and $O(n^2 / \log n)$ over a constant alphabet with an arbitrary scoring matrix.
-- **Lower, conditional.** With $s(a, a) = 1$, $s(a, b) = 0$ and $d = 0$, no column has a negative score, so extending an alignment to the whole strings never lowers it, and $\operatorname{OPT}_{\mathrm{loc}}$ equals the length of a [longest common subsequence](/longest-common-subsequence/). So local alignment with this fixed scheme is as hard as LCS, and under the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) it has no $O(n^{2 - \varepsilon})$ algorithm (see the [Backurs-Indyk LCS lower bound](/backurs-indyk-lcs-lower-bound/)). This scheme breaks the scoring condition, so the argument says nothing about the schemes used in practice.
+- **Lower, conditional.** With $s(a, a) = 1$, $s(a, b) = 0$ and $d = 0$, no column has a negative score, so extending an alignment to the whole strings never lowers it, and $\operatorname{OPT}_{\mathrm{loc}}$ equals the length of a [longest common subsequence](/longest-common-subsequence/). So local alignment with this fixed scheme is as hard as LCS, and under the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) it has no $O(n^{2 - \varepsilon})$ algorithm (see the [SETH lower bound for LCS](/lcs-seth-lower-bound/)). This scheme breaks the scoring condition, so the argument says nothing about the schemes used in practice.
 - **Lower, trivial.** $\Omega(m + n)$ to read the input.
 
 ## Reductions

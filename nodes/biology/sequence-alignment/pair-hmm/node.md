@@ -59,7 +59,7 @@ Begin has the same transitions as $M$. The model has no transitions between $X$ 
 
 $$P(x, y, \pi) = \Bigl(\prod_{t=1}^{L} a_{\pi_{t-1} \pi_t}\, e_{\pi_t}(\text{column } t)\Bigr)\, \tau,$$
 
-with $\pi_0 = \text{Begin}$, transition probabilities $a$ and emissions $e$. The number of columns $L$ has a geometric distribution with mean $1/\tau$.
+with $\pi_0 = \text{Begin}$, transition probabilities $a$ and emissions $e$. The number of columns $L$ has a geometric distribution with mean $(1 - \tau)/\tau$.
 
 **The random model.** To score, compare with a model $R$ that emits $x$ and then $y$ independently, each residue with probability $q_a$, and each sequence of length $k$ with probability $\eta (1 - \eta)^k$:
 
@@ -83,7 +83,7 @@ These are the recurrences of [Gotoh's algorithm](/gotoh-algorithm/) in the proba
 
 $$s(a, b) = \log \frac{p_{ab}}{q_a q_b} + \log \frac{1 - 2\delta - \tau}{(1 - \eta)^2}, \quad d = -\log \frac{\delta (1 - \varepsilon - \tau)}{(1 - \eta)(1 - 2\delta - \tau)}, \quad e = -\log \frac{\varepsilon}{1 - \eta},$$
 
-the log-odds of every path is the affine score $\sum s - \sum (d + (k-1) e)$ of its alignment, a gap of length $k$ costing $d + (k-1)e$, plus the constant $\log(\tau / \eta^2)$, plus a correction $c = \log \frac{1 - 2\delta - \tau}{1 - \varepsilon - \tau}$ if the alignment ends in a gap (that gap has no match column after it to absorb its factor). Taking the maximum over paths on both sides, the Viterbi path is an optimal alignment for $(s, d, e)$ among alignments with no insert column next to a delete column, and its log-odds is the optimal score plus the constants. Read in reverse, a choice of affine scores is an implicit choice of $\delta$, $\varepsilon$ and $p_{ab}$.
+the log-odds of every path is the affine score $\sum s - \sum (d + (k-1) e)$ of its alignment, a gap of length $k$ costing $d + (k-1)e$, plus the constant $\log(\tau / \eta^2)$, plus a correction $c = \log \frac{1 - 2\delta - \tau}{1 - \varepsilon - \tau}$ if the alignment ends in a gap (that gap has no match column after it to absorb its factor). Taking the maximum over paths on both sides, when $c = 0$ the Viterbi path is an optimal alignment for $(s, d, e)$ among alignments with no insert column next to a delete column (for $c \ne 0$ it is optimal for the affine score plus $c$ on alignments that end in a gap), and its log-odds is the optimal score plus the constants. Read in reverse, a choice of affine scores is an implicit choice of $\delta$, $\varepsilon$ and $p_{ab}$.
 
 For the example model with $\eta = 1/10$, in bits: $s(a, a) = 0.304$, $s(a, b) = -1.281$, $d = 2.170$, $e = 1.170$, $c = 0$ (because $\delta$ and $\varepsilon$ give the same exit probability 1/2 out of $M$ and out of a gap state), and the constant is $\log_2 10 = 3.322$.
 

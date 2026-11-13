@@ -110,7 +110,7 @@ S4  ACGTTG-
 
 with SP score about 9.77.
 
-**Stage 3.** TREE2 has six edges, one above each leaf and one above each pair. Cutting the edge above $S_1$ changes nothing. Cutting the edge above $S_2$ realigns $S_2$ alone against the other three rows, which now prefer the gap in column 4:
+**Stage 3.** TREE2 has six edges, one above each leaf and one above each pair; the two edges at the root give the same split, so there are $2k - 3 = 5$ different cuts. Cutting the edge above $S_1$ changes nothing. Cutting the edge above $S_2$ realigns $S_2$ alone against the other three rows, which now prefer the gap in column 4:
 
 ```
 S1  ACGGTGG
@@ -119,7 +119,7 @@ S3  ATGTTGC
 S4  ACGTTG-
 ```
 
-The SP score rises to about 13.12, and the change is kept. The other edges and a second pass find no improvement, so MUSCLE stops. The exact dynamic program over all alignments gives the same score, 13.12, so here the refinement reaches the optimum. The tie of stage 1 froze a gap in a poor place, and stage 3 moved it.
+The SP score rises to about 13.12, and the change is kept. The other edges and a second pass find no improvement, so MUSCLE stops. The exact dynamic program over all alignments gives the same score, 13.12, so here the refinement reaches the optimum. The draft of stage 1 also scored 13.12: the gap that the tie of stage 1 put in column 3 of $S_2$ became a poor place only after stage 2 realigned $S_3$ and $S_4$ without it, and stage 3 moved it and won back the lost score.
 
 ## Correctness
 

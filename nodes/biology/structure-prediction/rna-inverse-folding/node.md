@@ -73,7 +73,7 @@ All examples use the base pair model of the code: AU, GC and GU pairs, $\theta =
 
 - **A design.** GGAAAACCAA has at most 2 pairs, and the only structure with 2 pairs is $T$, so it is a design.
 - **Not a design: ties.** GGGAAACCAA can form $T$, but it has 3 optimal structures: ((....)).., (.(...)).. and .((...)).., because the third G can take the place of either of the first two. The cost of the code is 2, the number of other optima.
-- **Not a design: a wobble pair.** GGAAAAUCAA also has 3 optima, because the U at position 7 pairs with either G.
+- **Not a design: a wobble pair.** GGAAAAUCAA also has 3 optima: ((....)).., (.(...)).. and .((...)).., because the U at position 7 can pair with the A at position 3 as well as with the second G, and then either G pairs with the C at position 8.
 - **A search.** The adaptive walk of the code, with random seed 1, finds the design CUAGAUAGAU, with the CG pair $(1, 8)$ and the UA pair $(2, 7)$.
 - **All small targets are designable here.** A full search over all $4^n$ sequences shows that every secondary structure with $n \le 10$ has a design in this model. The tests check this for $n \le 8$. In other base pair models and for larger $n$, Haleš and others (2017) give targets that have no design.
 

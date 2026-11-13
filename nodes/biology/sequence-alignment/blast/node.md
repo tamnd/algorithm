@@ -138,7 +138,7 @@ The 1990 paper reports that with $w = 4$ and $T = 17$ for proteins, BLAST missed
 - **Translated searches.** BLASTX, TBLASTN and TBLASTX compare through the six reading frames of DNA.
 - **Megablast.** Long exact words (28 by default) and a greedy gapped extension, for near-identical DNA.
 - **Discontiguous megablast.** A [spaced seed](/spaced-seed/) instead of a contiguous word, for more sensitivity on cross-species DNA.
-- **Defaults today.** The NCBI BLAST+ programs use $w = 3$ for BLASTP and $w = 11$ for BLASTN. These are later defaults; the 1990 paper used $w = 4$ for proteins and $w = 12$ for DNA.
+- **Defaults today.** The NCBI BLAST+ programs use $w = 3$ for BLASTP and $w = 11$ for the blastn task of BLASTN; the default task of BLASTN is megablast, with $w = 28$. These are later defaults; the 1990 paper used $w = 4$ for proteins and $w = 12$ for DNA.
 
 ## When to use it
 
@@ -151,7 +151,7 @@ Use BLAST to search one or a few queries against a large protein or DNA database
 - **E-values across databases.** The E-value grows with the database size, so a hit has different E-values in different databases. Compare [bit scores](/bit-score/) instead.
 - **Overlapping hits.** Without line L6 each hit on a long match starts its own extension, the work grows and the output has copies.
 - **Mixing up parameter sets.** λ and K belong to one matrix, one set of gap costs and one composition. Using the ungapped values for gapped scores makes E-values too small.
-- **Word size and the 1990 values.** Quotes of "w = 3 and w = 11" are the modern defaults, not the values of the 1990 paper.
+- **Word size and the 1990 values.** Quotes of "w = 3 and w = 11" are the modern defaults of BLASTP and of the blastn task, not the values of the 1990 paper.
 
 ## Implementations
 

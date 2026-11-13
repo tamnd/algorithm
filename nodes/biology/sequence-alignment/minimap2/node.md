@@ -9,8 +9,8 @@ summary: A heuristic mapper for long and short DNA reads. It looks up minimizer 
 solves: [read-mapping]
 model: word-ram
 complexity:
-  vars: {n: the length of the reference, m: the length of the query, a: the number of anchors, h: the number of predecessors tried per anchor, w: the minimizer window}
-  time: {average: O(m + a log a + h a)}
+  vars: {n: the length of the reference, m: the length of the query, a: the number of anchors, h: the number of predecessors tried per anchor, w: the minimizer window, b: the band width of the base-level alignment}
+  time: {average: O(m + a log a + h a + m b)}
   space: {extra: O(n/w + a)}
 properties: {deterministic: true, exact: false, online: false, recursive: false}
 history:

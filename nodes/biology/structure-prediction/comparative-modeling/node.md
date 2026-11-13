@@ -81,9 +81,9 @@ Some values of this curve:
 |---|---|---|---|---|---|---|
 | core $\Delta$ (Å) | 0.40 | 0.58 | 1.02 | 1.48 | 1.79 | 2.60 |
 
-The curve doubles each time $H$ grows by $\ln 2 / 1.87 \approx 0.37$. At 50% identity ($H = 0.5$) the cores differ by about 1 Å, and at 20% to 30% identity by about 1.5 to 1.8 Å. These numbers hold for the core only, after superposition; the loops and the regions outside the common core differ more. They give a rough scale for the core error of a model built from one template with a correct alignment, because a model that copies the template core also copies its difference from the target.
+The curve doubles each time $H$ grows by $\ln 2 / 1.87 \approx 0.37$. At 50% identity in the core ($H = 0.5$) the cores differ by about 1 Å, and at 20% to 30% core identity by about 1.5 to 1.8 Å. These numbers hold for the core only, after superposition; the loops and the regions outside the common core differ more. They give a rough scale for the core error of a model built from one template with a correct alignment, because a model that copies the template core also copies its difference from the target.
 
-**A non-example.** A target with 15% identity to its best hit, over a short alignment, is in the twilight zone that Rost (1999) described: at that level identity alone does not tell a homolog from an unrelated protein. Then the problem is [fold recognition](/protein-fold-recognition/), and the alignment, not the model building, limits the accuracy.
+**A non-example.** A target with 15% identity to its best hit, over a short alignment, is below even the twilight zone of about 20% to 35% identity that Rost (1999) described: at that level identity alone does not tell a homolog from an unrelated protein. Then the problem is [fold recognition](/protein-fold-recognition/), and the alignment, not the model building, limits the accuracy.
 
 ## Known algorithms
 

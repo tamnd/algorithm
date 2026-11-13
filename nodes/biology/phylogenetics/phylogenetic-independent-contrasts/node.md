@@ -99,7 +99,7 @@ The root estimate has variance $1.75 \cdot 2.5 / 4.25 = 35/34 \approx 1.029$ (pe
 - **Branch length transforms.** When the standardized contrasts still depend on their standard deviations, transforms of the branch lengths (for example a logarithm or a power) can make the Brownian model fit better (Garland, Harvey and Ives 1992).
 - **Several traits.** Each trait gets its own contrasts on the same tree. Correlations and multiple regressions through the origin then use the contrasts as the data.
 - **Fast likelihood.** The same pass computes the likelihood of the tips under Brownian motion, since it is a product of normal densities of the contrasts and of the root term. Related linear-time algorithms evaluate likelihoods for other Gaussian models on trees.
-- **Generalized least squares.** Phylogenetic generalized least squares uses $C$, or a model covariance, directly. It gives the same estimates as contrasts under Brownian motion and extends to other models and to designs with an intercept.
+- **Generalized least squares.** Phylogenetic generalized least squares uses $C$, or a model covariance, directly. Under Brownian motion, its slopes in a model with an intercept are the same as the slopes of the contrasts through the origin, and it extends to other models.
 
 ## Pitfalls
 

@@ -25,7 +25,7 @@ sources:
     locator: the ratio 2 - l/k for any fixed l < k
 ---
 
-The center-star approximation bound states that the [center-star method](/center-star-method/) is a $(2 - 2/k)$-approximation for [multiple sequence alignment](/multiple-sequence-alignment/) under the [sum-of-pairs cost](/sum-of-pairs-score/), when the cost of two symbols is a metric. The proof uses only two facts: each sequence keeps its optimal alignment with the center, and the [triangle inequality](/triangle-inequality/) holds column by column. Dan Gusfield proved it in 1993. Because minimizing the sum-of-pairs cost is [NP-hard](/msa-np-hardness/), a bound of this kind is the best that a polynomial-time method can give unless P = NP.
+The center-star approximation bound states that the [center-star method](/center-star-method/) is a $(2 - 2/k)$-approximation for [multiple sequence alignment](/multiple-sequence-alignment/) under the [sum-of-pairs cost](/sum-of-pairs-score/), when the cost of two symbols is a metric. The proof uses only two facts: each sequence keeps its optimal alignment with the center, and the [triangle inequality](/triangle-inequality/) holds column by column. Dan Gusfield proved it in 1993. Because minimizing the sum-of-pairs cost is [NP-hard](/msa-np-hardness/), a polynomial-time method cannot be exact unless P = NP, so an approximation bound of this kind is what one can hope for.
 
 ## Statement
 

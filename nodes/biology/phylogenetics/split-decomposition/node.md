@@ -15,16 +15,16 @@ complexity:
 properties: {deterministic: true, exact: true, online: true, recursive: false}
 history:
   year: 1992
-  people: [Hans-Jurgen Bandelt, Andreas W. M. Dress]
+  people: [Hans-Jürgen Bandelt, Andreas W. M. Dress]
   note: Bandelt and Dress defined the isolation index and the canonical split decomposition of a metric in 1992. Huson made it practical in SplitsTree, which draws the result as a splits graph.
 prereqs: [split-system, tree-metric, four-point-condition]
 see_also: [neighbor-net, split-network-construction, phylogenetic-network, neighbor-joining, splits-of-a-tree, least-squares-phylogeny, metric-space, phylogenetic-tree]
 sources:
   - paper: doi:10.1016/1055-7903(92)90021-8
-    title: Hans-Jurgen Bandelt and Andreas W. M. Dress, Split decomposition, a new and useful approach to phylogenetic analysis of distance data, Molecular Phylogenetics and Evolution 1(3), 1992, pages 242 to 252
+    title: Hans-Jürgen Bandelt and Andreas W. M. Dress, Split decomposition, a new and useful approach to phylogenetic analysis of distance data, Molecular Phylogenetics and Evolution 1(3), 1992, pages 242 to 252
     locator: the isolation index, d-splits, and the method for distance data in phylogenetics
-  - paper: "Hans-Jurgen Bandelt and Andreas W. M. Dress, A canonical decomposition theory for metrics on a finite set, Advances in Mathematics 92(1), 1992"
-    title: Hans-Jurgen Bandelt and Andreas W. M. Dress, A canonical decomposition theory for metrics on a finite set
+  - paper: "Hans-Jürgen Bandelt and Andreas W. M. Dress, A canonical decomposition theory for metrics on a finite set, Advances in Mathematics 92(1), 1992"
+    title: Hans-Jürgen Bandelt and Andreas W. M. Dress, A canonical decomposition theory for metrics on a finite set
     locator: the theorems that d-splits are weakly compatible, number at most n(n-1)/2, and leave a split-prime residue, and the incremental computation
   - paper: "Daniel H. Huson, SplitsTree, analyzing and visualizing evolutionary data, Bioinformatics 14(1), 1998"
     title: Daniel H. Huson, SplitsTree, analyzing and visualizing evolutionary data

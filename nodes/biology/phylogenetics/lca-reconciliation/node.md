@@ -97,7 +97,7 @@ Every LCA image is at or above the images of the children, so the LCA map is val
 
 ## Complexity
 
-Line L1 takes $O(m)$ time with a linear-time LCA structure, or $O(m \log m)$ with a sparse table over the Euler tour, which is what the implementation uses. The loop does $O(1)$ work per gene node, so the total is $O(n + m)$ time and $O(n + m)$ space. With a walk up the species tree for each LCA instead, the time is $O(nh)$ for a species tree of height $h$.
+Line L1 takes $O(m)$ time with a linear-time LCA structure, or $O(m \log m)$ with a sparse table over the Euler tour, which is what the implementation uses. The loop does $O(1)$ work per gene node, so the total is $O(n + m)$ time and $O(n + m)$ space with the linear-time structure, and $O(n + m \log m)$ time and space with the sparse table. With a walk up the species tree for each LCA instead, the time is $O(nh)$ for a species tree of height $h$.
 
 ## Properties
 

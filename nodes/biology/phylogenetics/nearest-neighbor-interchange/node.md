@@ -106,7 +106,7 @@ So the NNI neighbors of $T$ are exactly the trees at [Robinson-Foulds distance](
 
 Each step keeps one cherry and replaces the other: AD becomes CD, then BE becomes AB, then CD becomes DE. The last tree is the unique most parsimonious tree, and on this data it is the only tree that no NNI improves, so the climb finds it from every start.
 
-**Maximum likelihood.** PhyML (Guindon and Gascuel 2003) starts from a distance tree and applies NNIs under a [likelihood](/phylogenetic-likelihood/) score. For each internal edge it optimizes only the five branches around the edge for each of the two neighbors, and it applies many improving NNIs in one round. The score is the [Felsenstein pruning](/felsenstein-pruning/) likelihood under a [substitution model](/substitution-model/).
+**Maximum likelihood.** PhyML (Guindon and Gascuel 2003) starts from a distance tree and applies NNIs under a [likelihood](/phylogenetic-likelihood/) score. For each internal edge it scores the two neighbors with only a local optimization of branch lengths at that edge, and it applies many improving NNIs in one round. The score is the [Felsenstein pruning](/felsenstein-pruning/) likelihood under a [substitution model](/substitution-model/).
 
 **Minimum evolution.** FastME (Desper and Gascuel 2002) improves a start tree by NNIs under the balanced minimum evolution length. It gets the change of the length for each candidate NNI from a table of average distances between subtrees, without a new pass over the whole tree. See [minimum evolution](/minimum-evolution/).
 

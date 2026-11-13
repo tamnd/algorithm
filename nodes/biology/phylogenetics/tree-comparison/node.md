@@ -74,7 +74,7 @@ For the quartet and triplet distances, a set of taxa counts as a difference when
 | RF | 2 | $AB \mid CDEF$ is only in $T_1$, $AC \mid BDEF$ only in $T_2$ |
 | quartet | 3 of 15 | the sets $ABCD$, $ABCE$, $ABCF$; for example $AB \mid CD$ against $AC \mid BD$ |
 | MAST distance | 1 | removing $C$ leaves the same tree $((A,B),(D,(E,F)))$ on five taxa |
-| NNI, SPR, TBR | 1 | one interchange across the edge of $ABC \mid DEF$ |
+| NNI, SPR, TBR | 1 | one interchange across the edge of $AB \mid CDEF$ |
 
 **One leaf moved.** Let $T_1$ be the caterpillar $(A,(B,(C,(D,(E,F)))))$ and $T_2$ the caterpillar $(B,(C,(D,(E,(F,A)))))$: the leaf $A$ moved from one end to the other.
 

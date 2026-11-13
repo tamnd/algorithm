@@ -97,10 +97,10 @@ So $(s_1, \ldots, s_k, m)$ is a yes-instance if and only if at least one of the 
 
 ## Consequences
 
-- **No polynomial exact algorithm in $k$ unless P = NP.** The exact dynamic program over the $k$-dimensional lattice takes $O(2^k n^k)$ time for $k$ sequences of length $n$, which is polynomial for each fixed $k$ but exponential in $k$. The Carrillo-Lipman (1988) bounds prune this lattice and make exact alignment of a few sequences possible in practice, but not in the worst case.
+- **No polynomial exact algorithm in $k$ unless P = NP.** The exact dynamic program over the $k$-dimensional lattice takes $O(k^2 2^k n^k)$ time for $k$ sequences of length $n$, which is polynomial for each fixed $k$ but exponential in $k$. The Carrillo-Lipman (1988) bounds prune this lattice and make exact alignment of a few sequences possible in practice, but not in the worst case.
 - **Approximation is the best guarantee.** For metric costs the [center-star method](/center-star-method/) is a $(2 - 2/k)$-approximation ([bound](/center-star-approximation-bound/)), improved to $2 - l/k$ for fixed $l$ by Bafna, Lawler and Pevzner.
 - **Heuristics in practice.** [Progressive](/progressive-alignment/) and [iterative](/iterative-refinement-alignment/) methods such as [Clustal](/clustal/), [MUSCLE](/muscle/) and [MAFFT](/mafft/) give no guarantee on the SP cost.
-- **Related objectives.** In the same paper Wang and Jiang proved that tree alignment, where the sequences are leaves of a given tree, is MAX SNP-hard, so it has no polynomial-time approximation scheme unless P = NP. Elias (2006) proved that SP, star and tree alignment are NP-hard for every metric on a binary or larger alphabet.
+- **Related objectives.** In the same paper Wang and Jiang proved that tree alignment, where the sequences are the leaves of a tree that is not given and must be found as well, is MAX SNP-hard, so it has no polynomial-time approximation scheme unless P = NP. With a given tree, tree alignment is NP-hard but has such a scheme. Elias (2006) proved that SP, star and tree alignment are NP-hard for every metric on a binary or larger alphabet.
 
 ## Tightness
 

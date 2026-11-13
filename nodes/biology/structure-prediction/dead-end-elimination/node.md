@@ -13,7 +13,7 @@ solves: [side-chain-packing]
 model: real-ram
 complexity:
   vars: {n: the number of residues, p: the largest number of rotamers of one residue}
-  time: {worst: "O(n^3 p^4)"}
+  time: {worst: "O(n^3 p^4 + n^2 p^n)"}
   space: {extra: "O(n p)"}
 properties: {deterministic: true, exact: true, online: false, recursive: false}
 history:
