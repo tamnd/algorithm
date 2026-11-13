@@ -1,0 +1,37 @@
+---
+title: HNS-SEARCH leaves the leaf register in the basis state of f(x)
+proves: [correctness]
+status: full
+---
+
+We use the pseudocode of the page and the block pebbling of the implementation. The proof of the paper, for its own tree, has the same structure; only the computation of the last step uses the block shape. The input is a monotone string $x \in \{0,1\}^N$ with $x_{N-1} = 1$, and $f(x) = \min\{i : x_i = 1\}$. For odd $N$ we add a leaf $N$ with $x_N = 1$; this does not change $f(x)$.
+
+**Claim.** For every $N \ge 1$ and every such $x$, HNS-SEARCH ends with the leaf register in the state $|f(x)\rangle$, with every color register and ancilla back in $|0\rangle$. It makes $F(N)$ queries, where $F(1) = 0$ and $F(N) = 1 + \max_c F(|V_c|)$.
+
+*Proof.* By induction on $N$. For $N = 1$ the answer is $0$ and line L1 makes no query. Let $N \ge 2$ and assume the claim for all smaller sizes.
+
+**Step 1: the pebbling.** The leaves are cut into consecutive blocks. A block $B$ of height $h$ is a complete binary tree with $2^h$ leaves, and $1 \le h \le s + 1$. Let $p = 2^{s+1-h}$. The colors of $B$ are split into sets $C_0, \ldots, C_{h-1}$ with $|C_0| = |C_1| = p$ and $|C_j| = 2^{j-1}p$ for $j \ge 2$; every vertex at depth $j$ of $B$ carries the colors $C_j$, one pebble each. Since $p + p + 2p + \cdots + 2^{h-2}p = 2^{h-1}p = 2^s$, the sets $C_j$ partition the $2^s$ colors. So a path from the root of $B$ to a leaf meets each color exactly once: this is (A). A vertex at depth $j \ge 1$ carries $2^{j-1}p = p + p + \cdots + 2^{j-2}p$ pebbles, exactly the number on its ancestors in $B$, and the vertices above the blocks carry none: this is the tight form of (B).
+
+**Step 2: each color gives a smaller ordered search.** Fix a color $c$. By (A), each leaf has exactly one ancestor in $V_c$. So the leaf sets of the vertices of $V_c$ are disjoint intervals that cover all leaves. List $V_c$ from left to right as $u_0, \ldots, u_{m-1}$ with $m = |V_c|$, and let $r(u)$ be the rightmost leaf below $u$. Set $y_k = x_{r(u_k)}$. Since $r(u_0) < r(u_1) < \cdots$ and $x$ is monotone, $y$ is monotone, and $y_{m-1} = x_{N-1} = 1$ (or the padding leaf). Further $y_k = 1$ if and only if $r(u_k) \ge f(x)$. The first such $k$ is the interval that contains $f(x)$. So the answer of the subproblem is the vertex $v_c \in V_c$ above $f(x)$. A query of $y_k$ is a query of $x$ at the index $r(u_k)$, which a reversible circuit computes from $k$ and $c$.
+
+Each vertex at depth $j$ of a block of height $h$ has $2^{h-j} \ge 2$ leaves, so $m \le N/2 < N$ after padding. By the induction hypothesis, line L5 maps $|0\rangle|c\rangle$ to $|v_c\rangle|c\rangle$ in each branch, with clean ancillas, in at most $\max_c F(|V_c|)$ queries. The branches share each oracle call: the index register holds the index of branch $c$. A branch that has finished puts its target in $(|0\rangle + |1\rangle)/\sqrt{2}$, an eigenvector of the bit flip with eigenvalue 1, so the shared call does not change it. By linearity, line L6 holds the state $2^{-s/2}\sum_c |v_c\rangle|c\rangle$.
+
+**Step 3: removing the colors.** Let $A$ be the set of pebbled ancestors of $f(x)$, and let $C(v)$ be the colors on $v$, with $|C(v)| = p_v$. By (A), each color $c$ has $v_c \in A$, and $c \in C(v_c)$; conversely each pair $(v, c)$ with $v \in A$ and $c \in C(v)$ has $v = v_c$. So
+
+$$2^{-s/2}\sum_c |v_c\rangle|c\rangle = 2^{-s/2}\sum_{v \in A} |v\rangle \sum_{c \in C(v)} |c\rangle = 2^{-s/2}\sum_{v \in A} \sqrt{p_v}\; U_1|v\rangle|0\rangle.$$
+
+$U_1$ maps orthonormal vectors $|v\rangle|0\rangle$ to orthonormal vectors, so it extends to a unitary, and $U_1^\dagger$ maps this state to $2^{-s/2}\sum_{v \in A}\sqrt{p_v}\,|v\rangle|0\rangle$. This is line L7.
+
+**Step 4: the amplitudes on the path.** The set $A$ lies in the block $B$ that contains $f(x)$; let $B$ have height $h$, and let $a_j$ be the ancestor of $f(x)$ at depth $j$ of $B$, for $0 \le j \le h-1$. Then $p_{a_0} = p = 2^{s+1-h}$ and $p_{a_j} = 2^{j-1}p$ for $j \ge 1$. So the amplitude of $a_0$ is $\sqrt{2^{1-h}}$ and that of $a_j$ is $\sqrt{2^{j-h}}$ for $j \ge 1$.
+
+**Step 5: the last query and $U_2$.** The parent of $a_0$ carries no pebble, so $O'_x$ writes $x_{i(a_0)}$ into the ancilla and $U_2$ maps $|a_0, x_{i(a_0)}\rangle$ to $\Phi_w$, where $w$ is the child of $a_0$ that contains $f(x)$: indeed $x_{i(a_0)} = 1$ exactly when $f(x)$ is in the left subtree. The child $w$ is the root of a complete tree of height $h-1$, so $\Phi_w$ has the entry $2^{-(h-1)/2}$ on each of its leaves. The contribution of $a_0$ to a leaf $\ell$ is therefore $2^{(1-h)/2} \cdot 2^{-(h-1)/2} = 2^{1-h}$ if $\ell$ is below $w$, and $0$ otherwise.
+
+For $j \ge 1$ the parent of $a_j$ carries pebbles, so $O'_x$ multiplies by $(-1)^{x_{i(a_j)}}$ and $U_2$ gives $(\Phi_{\mathrm{right}} - \Phi_{\mathrm{left}})/\sqrt{2}$. The subtree of $a_j$ has height $g = h - j$, so this vector has entries $\pm 2^{-(g-1)/2}/\sqrt{2} = \pm 2^{-g/2}$, with $+$ on the right half and $-$ on the left half. The sign $(-1)^{x_{i(a_j)}}$ is $+1$ when $f(x)$ is in the right half and $-1$ when it is in the left half. So, after the sign, the entry is $+2^{-g/2}$ on the half that contains $f(x)$ and $-2^{-g/2}$ on the other half. With the amplitude $2^{-g/2}$, the contribution of $a_j$ to a leaf $\ell$ below $a_j$ is $+2^{j-h}$ if $\ell$ is on the side of $f(x)$ and $-2^{j-h}$ if not.
+
+Now take a leaf $\ell$ of $B$. If $\ell = f(x)$, every term is positive, and its amplitude is $2^{1-h} + \sum_{j=1}^{h-1} 2^{j-h} = 2^{1-h} + (1 - 2^{1-h}) = 1$. If $\ell \ne f(x)$, let $a_d$ be the deepest common ancestor of $\ell$ and $f(x)$. If $d = 0$, then $\ell$ is not below $w$, and no $a_j$ with $j \ge 1$ is above $\ell$, so the amplitude is $0$. If $d \ge 1$, the terms are $2^{1-h}$ from $a_0$, $+2^{j-h}$ from $a_j$ for $1 \le j < d$, and $-2^{d-h}$ from $a_d$; the vertices $a_j$ with $j > d$ are not above $\ell$. The sum is $2^{1-h} + (2^{d-h} - 2^{1-h}) - 2^{d-h} = 0$. Leaves outside $B$ get no contribution. So after line L9 the leaf register holds $|f(x)\rangle$, and the ancilla is absorbed into the leaf register by $U_2$.
+
+**Step 6: $U_2$ is unitary.** On a block of height $h$, $U_2$ maps $2 + (2^h - 2) = 2^h$ basis vectors to the vectors $\Phi_{\mathrm{left}(\mathrm{root})}$, $\Phi_{\mathrm{right}(\mathrm{root})}$ and $(\Phi_{\mathrm{right}(v)} - \Phi_{\mathrm{left}(v)})/\sqrt{2}$ for the $2^h - 2$ internal vertices $v$ below the root. These are the Haar wavelet vectors. Each has norm 1. Two of them either have disjoint supports, or one is constant on the support of the other, whose entries sum to $0$. So they are orthonormal, and $2^h$ orthonormal vectors in a space of dimension $2^h$ form a basis. So $U_2$ is unitary on each block, and also on the whole space, since different blocks act on disjoint sets of leaves. $O'_x$ is one oracle call with a fixed circuit around it, so it is unitary too.
+
+**Step 7: the count.** Line L5 uses at most $\max_c F(|V_c|)$ queries, and line L8 uses one. Lines L2, L3, L7 and L9 make none. So the total is $F(N) = 1 + \max_c F(|V_c|)$. This completes the induction. $\blacksquare$
+
+With $s = 0$ the pebbling puts one pebble on every vertex at depth 0 of blocks of height 1, so $|V_0| = \lceil N/2 \rceil$ and $F(N) \le 1 + F(\lceil N/2 \rceil)$, which gives $F(N) \le \lceil \lg N \rceil$. The bound $\log_3 N + O(1)$ needs the fair covering of Lemma 11 of the paper, where every color has $\lfloor N/3 + \lg N \rfloor$ pebbles.
