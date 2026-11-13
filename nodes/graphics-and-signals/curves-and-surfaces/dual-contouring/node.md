@@ -12,7 +12,7 @@ solves: [isosurface-extraction]
 model: real-ram
 complexity:
   vars: {n: the number of cells of the grid, k: the number of bisection steps per edge}
-  time: {worst: Θ(n k), average: Θ(n k), best: Θ(n)}
+  time: {worst: Θ(n k), best: Θ(n)}
   space: {extra: Θ(n)}
 properties: {online: false, deterministic: true, recursive: false}
 history:

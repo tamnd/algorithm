@@ -42,7 +42,7 @@ Chaikin corner cutting makes a polygon smooth by cutting off its corners. Each r
 
 Take a polygon and cut every corner off with a straight cut. Each cut goes from a point one quarter along one edge to a point one quarter along the next edge, measured from the corner. The polygon now has twice as many corners, and each of them is less sharp. Do it again, and again.
 
-After a few rounds the polygon looks like a smooth curve, and it stops changing in a visible way. That curve is a well known smooth curve, and it does not depend on how many rounds you do. The curve does not pass through the original corners. It stays inside the polygon and passes through the middle of each edge.
+After a few rounds the polygon looks like a smooth curve, and it stops changing in a visible way. That curve is a well known smooth curve, and it does not depend on how many rounds you do. The curve does not pass through the original corners. It stays inside the convex hull of the polygon and passes through the middle of each edge.
 
 ## The problem
 
@@ -98,7 +98,7 @@ Round $r$ processes $m 2^{r-1}$ edges and writes $m 2^r$ points, with 4 multipli
 ## Variants and improvements
 
 - **Keep the end points.** For open polylines, output $P_0$, then only the inner cut point of the first edge, the two cut points of the inner edges, the inner cut point of the last edge and $P_{n-1}$. The ends stay fixed, and the first and the last edge keep their direction.
-- **Higher degree.** The [Lane-Riesenfeld algorithm](/lane-riesenfeld-algorithm/) doubles the points and averages $d$ times, which gives the uniform B-spline of degree $d$. Chaikin's rule is the case $d = 2$, and $d = 3$ gives a $C^2$ cubic curve.
+- **Higher degree.** The [Lane-Riesenfeld algorithm](/lane-riesenfeld-algorithm/) doubles the points and averages $p$ times, which gives the uniform B-spline of degree $p$. Chaikin's rule is the case $p = 2$, and $p = 3$ gives a $C^2$ cubic curve.
 - **Interpolating schemes.** The [four-point scheme](/four-point-scheme/) keeps the old points and inserts new ones, so the limit passes through the input.
 - **Surfaces.** On a grid of quads, Chaikin's rule in both directions gives the biquadratic B-spline surface. [Doo-Sabin subdivision](/doo-sabin-subdivision/) extends it to meshes of any topology.
 - **Other ratios.** Cutting at other fractions than $\tfrac14$ also gives a limit curve, but in general it is not a quadratic B-spline. The ratio $\tfrac14$ is the one that comes from the refinement relation.

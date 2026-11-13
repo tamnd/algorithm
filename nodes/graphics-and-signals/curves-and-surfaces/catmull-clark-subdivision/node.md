@@ -33,7 +33,7 @@ sources:
     title: Jos Stam, Exact evaluation of Catmull-Clark subdivision surfaces at arbitrary parameter values, Proceedings of SIGGRAPH 98 (1998)
     locator: the eigen decomposition of the subdivision matrix that evaluates the limit surface near an extraordinary vertex without repeated subdivision
   - paper: "Jörg Peters and Ulrich Reif, Analysis of algorithms generalizing B-spline subdivision, SIAM Journal on Numerical Analysis 35(2), 728-748 (1998)"
-    locator: the proof that the Catmull-Clark and Doo-Sabin limit surfaces are C1 at extraordinary points (check)
+    locator: the proof that the Catmull-Clark and Doo-Sabin limit surfaces are C1 at extraordinary points
   - book: isbn:9781558604469
     title: Joe Warren and Henrik Weimer, Subdivision Methods for Geometric Design, A Constructive Approach, Morgan Kaufmann, 2002
     locator: Chapter 2 for the subdivision of uniform B-splines, and the chapters on polyhedral meshes for the quad schemes
@@ -95,7 +95,7 @@ The new mesh has $V' = 8 + 12 + 6 = 26$ vertices, $F' = 6 \cdot 4 = 24$ quads an
 
 The proof file shows four facts. First, the quads of line L5 form a closed oriented 2-manifold: each new directed edge is in one quad, and its reverse is in one other quad. Second, $V' = V + E + F$, $E' = 4E$ and $F' = 2E$, so $V' - E' + F' = V - E + F$, and the [Euler characteristic](/euler-formula/) is kept. Third, the stencils above follow from lines L1 to L4. Fourth, on a regular quad grid the weights are the tensor product of the cubic B-spline rules $\frac{1}{8}(1, 6, 1)$ and $\frac{1}{2}(1, 1)$, so a step is [knot refinement](/knot-refinement/) of a bicubic uniform B-spline surface. The surface does not change under this refinement, so the limit on the regular part is that surface, and it is $C^2$.
 
-At an extraordinary vertex the limit is $C^1$. The proof uses the eigenvalues of the subdivision matrix and the characteristic map. Doo and Sabin began this analysis in 1978, and Peters and Reif gave a complete proof in 1998 (check). The proof file does not repeat it.
+At an extraordinary vertex the limit is $C^1$. The proof uses the eigenvalues of the subdivision matrix and the characteristic map. Doo and Sabin began this analysis in 1978, and Peters and Reif gave a complete proof in 1998. The proof file does not repeat it.
 
 ## Complexity
 

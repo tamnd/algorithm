@@ -30,7 +30,7 @@ sources:
     title: E. Catmull and J. Clark, Recursively generated B-spline surfaces on arbitrary topological meshes, Computer-Aided Design 10(6), 350-355 (1978)
     locator: the companion paper, which also describes the biquadratic case
   - paper: "Jörg Peters and Ulrich Reif, Analysis of algorithms generalizing B-spline subdivision, SIAM Journal on Numerical Analysis 35(2), 728-748 (1998)"
-    locator: the proof that the Doo-Sabin and Catmull-Clark limit surfaces are C1 at extraordinary points (check)
+    locator: the proof that the Doo-Sabin and Catmull-Clark limit surfaces are C1 at extraordinary points
   - book: isbn:9781558604469
     title: Joe Warren and Henrik Weimer, Subdivision Methods for Geometric Design, A Constructive Approach, Morgan Kaufmann, 2002
     locator: Chapter 2 for the subdivision of uniform B-splines, and the chapters on polyhedral meshes for the dual quad schemes
@@ -82,13 +82,13 @@ The new mesh has $V' = 2 \cdot 12 = 24$ vertices, $E' = 48$ edges and $F' = 6 + 
 
 The proof file shows four facts. First, the F-faces, E-faces and V-faces form a closed oriented 2-manifold, and each new vertex is in exactly four faces. Second, $V' = 2E$, $E' = 4E$ and $F' = F + E + V$, so the [Euler characteristic](/euler-formula/) is kept. Third, the weights of each face sum to 1, and for quads they are the simple average rule. Fourth, on a regular quad grid each new point is the tensor product of the [Chaikin](/chaikin-corner-cutting/) weights $(\frac34, \frac14)$, and the new faces are the cells of the fine grid, so a step is [knot refinement](/knot-refinement/) of a biquadratic uniform B-spline surface. The limit on the regular part is that surface, which is $C^1$.
 
-The limit is also $C^1$ at the center of an extraordinary face. Doo and Sabin studied the [eigenvalues](/eigenvalue/) of the subdivision matrix there in 1978, and Peters and Reif gave a full proof in 1998 (check). The proof file does not repeat it.
+The limit is also $C^1$ at the center of an extraordinary face. Doo and Sabin studied the [eigenvalues](/eigenvalue/) of the subdivision matrix there in 1978, and Peters and Reif gave a full proof in 1998. The proof file does not repeat it.
 
 ## Complexity
 
-- **One step, $O(E k)$ time.** Line L1 costs $(\deg f)^2$ for each face, and $\sum_f (\deg f)^2 \le k \sum_f \deg f = 2Ek$, where $k$ is the largest face size. Lines L2 to L4 cost $O(E)$, with a hash map from directed edges to faces for the walk. For bounded face sizes this is $\Theta(V + E + F)$.
+- **One step, $O(E k)$ time.** Line L1 costs $(\deg f)^2$ for each face, and $\sum_f (\deg f)^2 \le k \sum_f \deg f = 2Ek$, where $k$ is the largest face size. Lines L2 to L4 cost expected $O(E)$ with a hash map from directed edges to faces for the walk, and $O(V + E)$ in the worst case with a radix sort of the directed edges by their pairs of vertex indices. For bounded face sizes this is $\Theta(V + E + F)$.
 - **Space, $\Theta(E)$.** The output has $2E$ points and $F + E + V$ faces with $8E$ corners in total.
-- **$k$ steps.** After the first step every vertex has valence 4, so $E$ doubles with each later step, and the number of faces grows by a factor of about 4.
+- **$k$ steps.** After the first step every vertex has valence 4, so $E = 2V$, and $V' = 2E = 4V$ and $E' = 4E$: $V$ and $E$ grow by a factor of 4 with each later step, and the number of faces grows by a factor of about 4.
 
 ## Properties
 

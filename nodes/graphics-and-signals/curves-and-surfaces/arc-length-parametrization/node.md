@@ -78,7 +78,7 @@ The length has a closed form, but the inverse $t(s)$ does not, so even here the 
 | 8-point rule | 1 | $5.2 \times 10^{-8}$ |
 | adaptive, $\varepsilon = 10^{-4}$ | 2 | $4.4 \times 10^{-8}$ |
 | adaptive, $\varepsilon = 10^{-6}$ | 4 | $2.4 \times 10^{-11}$ |
-| adaptive, $\varepsilon = 10^{-8}$ | 8 | $1.1 \times 10^{-14}$ |
+| adaptive, $\varepsilon = 10^{-8}$ | 8 | $7.7 \times 10^{-16}$ |
 
 The actual error is far below the tolerance here, because the test compares a 5-point rule with two 5-point rules, and the finer result is much better than the estimate suggests.
 

@@ -87,7 +87,7 @@ L13 t ← (c − f_u) / (f_v − f_u)
 L14 return p_u + t (p_v − p_u)
 ```
 
-Line L5 reads the sign pattern. Lines L6 to L8 are the asymptotic decider. The bilinear interpolant $b$ has one critical point, a saddle, and $s$ is its value there. In a saddle case the saddle point is inside the cell, and the two inside corners are joined in $\{b < c\}$ exactly when $s < c$. Line L13 is only reached on an edge with one corner inside and one outside, so $f_v \ne f_u$ and $0 < t \le 1$. The implementation computes the test $s < c$ of line L8 as $f_0 f_2 - f_1 f_3 < c\,d$ for $d = f_0 + f_2 - f_1 - f_3 > 0$, with the inequality reversed for $d < 0$, so it needs no division. With integer or rational samples and a rational $c$, all endpoints are exact rationals.
+Line L5 reads the sign pattern. Lines L6 to L8 are the asymptotic decider. The bilinear interpolant $b$ has one critical point, a saddle, and $s$ is its value there. In a saddle case the saddle point is inside the cell, and the two inside corners are joined in $\{b < c\}$ exactly when $s < c$. Line L13 is only reached on an edge with one corner inside and one outside, so $f_v \ne f_u$ and $0 \le t \le 1$, with $t = 0$ when $f_u = c$. The implementation computes the test $s < c$ of line L8 as $f_0 f_2 - f_1 f_3 < c\,d$ for $d = f_0 + f_2 - f_1 - f_3 > 0$, with the inequality reversed for $d < 0$, so it needs no division. With integer or rational samples and a rational $c$, all endpoints are exact rationals.
 
 The output is a list of oriented segments, each once. A crossing point on an edge inside the grid is the end of one segment of one cell and the start of one segment of the other cell. To get polylines, join each segment to the one that starts at its end point, with a [hash table](/hash-table/) keyed by the point, in $O(|S|)$ expected time.
 
@@ -155,7 +155,7 @@ Use marching squares to draw contour lines of gridded data, such as heights, tem
 
 ## Pitfalls
 
-- **Ties at a sample.** If a sample equals $c$ and the code tests $f_k \le c$ in one place and $f_k < c$ in another, neighboring cells disagree and the curve has gaps. Use one rule, such as inside if and only if $f_k < c$ in line L5, everywhere. Even with one rule, a sample equal to $c$ gives $t = 1$ in line L13, so crossings from different edges can meet at that sample and give segments of length zero.
+- **Ties at a sample.** If a sample equals $c$ and the code tests $f_k \le c$ in one place and $f_k < c$ in another, neighboring cells disagree and the curve has gaps. Use one rule, such as inside if and only if $f_k < c$ in line L5, everywhere. Even with one rule, a sample equal to $c$ gives $t = 0$ or $t = 1$ in line L13, so crossings from different edges can meet at that sample and give segments of length zero.
 - **Crossing from the wrong corner.** Line L13 must measure $t$ from the corner $p_u$ whose value is $f_u$, as in $t = (c - f_u)/(f_v - f_u)$. Computing $t$ from $p_u$ with $f_v$ in place of $f_u$, or the midpoint $t = 1/2$ in every case, still gives a closed curve but in the wrong place.
 - **Saddle decided per cell from local guesses.** A rule that reads values outside the cell, or a random choice, can still give closed curves, but they change when the grid is cut into blocks. Decide from the four samples of the cell only, as in lines L7 and L8.
 - **Division in the decider.** Computing $s$ by floating point division and comparing it with $c$ can flip the answer near $s = c$. Compare $f_0 f_2 - f_1 f_3$ with $c\,d$ and flip the test when $d < 0$, as the implementation does.

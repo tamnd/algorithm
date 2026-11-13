@@ -107,7 +107,7 @@ So $b_0^n = \sum_j P_j B_j^n(t) = B(t)$. The left edge gives the curve on $[0, t
 
 ## Complexity
 
-Round $r$ computes $n + 1 - r$ points, so there are $\sum_{r=1}^n (n + 1 - r) = n(n + 1)/2$ interpolations. Each costs $2d$ multiplications and $d$ additions, and $1 - t$ is computed once. So one point costs $\Theta(n^2 d)$ operations in the worst and in the best case. For the plane, $d = 2$, a cubic needs 6 interpolations, which is 12 multiplications and 6 additions. The point alone needs $\Theta(n d)$ extra space for one array. The two split polygons need $2(n + 1)$ more points, which is also $\Theta(n d)$.
+Round $r$ computes $n + 1 - r$ points, so there are $\sum_{r=1}^n (n + 1 - r) = n(n + 1)/2$ interpolations. Each costs $2d$ multiplications and $d$ additions, and $1 - t$ is computed once. So one point costs $\Theta(n^2 d)$ operations in the worst and in the best case. For the plane, $d = 2$, a cubic needs 6 interpolations, which is 24 multiplications and 12 additions. The point alone needs $\Theta(n d)$ extra space for one array. The two split polygons need $2(n + 1)$ more points, which is also $\Theta(n d)$.
 
 A [Horner scheme](/horner-rule/) on the Bernstein form, or on the power form, takes $\Theta(n d)$ operations per point, and $n$ multiplications are needed in general (see [Horner's rule optimality](/horners-rule-optimality/)). The de Casteljau algorithm pays the extra factor $n$ for stability and for the subdivision, which Horner does not give.
 

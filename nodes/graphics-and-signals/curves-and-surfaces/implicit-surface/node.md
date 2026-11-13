@@ -36,7 +36,7 @@ Replacing $f$ by $f - c$ gives $c = 0$, so the rest of this page uses the zero s
 $$n(x) = \frac{\nabla f(x)}{\lVert \nabla f(x) \rVert}.$$
 With $H_f$ the Hessian matrix of second derivatives, the mean curvature and the Gaussian curvature are, for a twice differentiable $f$,
 $$\kappa_H = \tfrac12 \operatorname{div}\!\left(\frac{\nabla f}{\lVert \nabla f \rVert}\right), \qquad \kappa_G = -\frac{1}{\lVert \nabla f \rVert^4} \det \begin{pmatrix} H_f & \nabla f \\ \nabla f^{\mathsf T} & 0 \end{pmatrix}.$$
-These are the formulas collected by Goldman; with this sign of $n$ a sphere has $\kappa_H = 1/r > 0$. [Surface curvature](/surface-curvature/) gives the same values from a parametrization.
+These are the formulas collected by Goldman; with this sign of $n$ a sphere has $\kappa_H = 1/r > 0$. [Surface curvature](/surface-curvature/) gets $K = \kappa_G$ from a parametrization, but its mean curvature has the opposite sign: with $L = S_{uu} \cdot n$ and the outward normal it gives $H = -1/r$ for the sphere, so $\kappa_H = -H$.
 
 **Scaling.** The set $S$ does not change if $f$ is multiplied by a positive function, so many functions describe the same surface. The values of $f$ away from $S$ have no meaning unless more is asked, such as $\lVert \nabla f \rVert = 1$ for a signed distance function. Near a regular point, the distance to $S$ is about $|f(x)| / \lVert \nabla f(x) \rVert$, a first order estimate that many algorithms use.
 

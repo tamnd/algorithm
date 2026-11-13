@@ -56,7 +56,7 @@ For a fixed $v$ the surface curve $u \mapsto S(u, v)$ is a curve in the $u$ basi
 
 $$(m + 1)\,\frac{n(n + 1)}{2} + \frac{m(m + 1)}{2}$$
 
-interpolations of points. The other order costs the same with $m$ and $n$ swapped. The difference of the two is $(n - m)\left[(m + 1)(n + 1) + m + n + 1\right] / 2$, so the order that starts along the lower degree is cheaper, and the two are equal when $m = n$. These are exact operation counts per point, the same for every input. For B-splines the same scheme runs the [de Boor algorithm](/de-boor-algorithm/) in each direction.
+interpolations of points. The other order costs the same with $m$ and $n$ swapped. The difference of the two is $m n (n - m) / 2$, so the order that starts along the lower degree is cheaper, and the two are equal when $m = n$ or when one of the degrees is 0. These are exact operation counts per point, the same for every input. For B-splines the same scheme runs the [de Boor algorithm](/de-boor-algorithm/) in each direction.
 
 ## Examples
 

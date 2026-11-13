@@ -85,7 +85,7 @@ The limit on a regular mesh is $C^1$ for $w = \frac{1}{16}$. At an extraordinary
 
 ## Complexity
 
-- **One step, $\Theta(V + E + F)$ time.** Each edge point costs 8 additions, and the old vertices are copied. The lookup of the triangle at a directed edge uses a hash map, which is expected $O(1)$ per edge.
+- **One step, $\Theta(V + E + F)$ time.** Each edge point costs 8 additions, and the old vertices are copied. The lookup of the triangle at a directed edge uses a hash map, which is expected $O(1)$ per edge; a radix sort of the directed edges by their pairs of vertex indices finds the same triangles in $O(V + F)$ in the worst case.
 - **Modified rule.** An edge with an end of valence $n \ne 6$ costs $O(n)$, and the sum over all edges is $O(\sum_v n_v^2)$, which is $O(E)$ when the valences are bounded.
 - **Space, $\Theta(V + E + F)$.** The output has $V + E$ points and $4F$ triangles.
 - **$k$ steps.** Each step multiplies the number of triangles by 4, so $k$ steps make $4^k F$ triangles.
@@ -105,7 +105,7 @@ The limit on a regular mesh is $C^1$ for $w = \frac{1}{16}$. At an extraordinary
 - **The ten point stencil.** Zorin, Schröder and Sweldens also give a stencil with two more points and a second tension. The rule above is the case where the second tension is 0.
 - **Tension.** A smaller $w$ makes a flatter surface, and $w = 0$ gives the flat mesh. Dyn, Levin and Gregory studied the range of $w$ for a smooth limit (check).
 - **Boundaries.** On a boundary edge, the [four-point scheme](/four-point-scheme/) $\frac{9}{16}(a + b) - \frac{1}{16}(a^- + b^+)$ along the boundary is the usual rule.
-- **Other schemes.** [Loop](/loop-subdivision/) uses the same split with positive weights and gives $C^2$ but does not interpolate. The [$\sqrt{3}$ scheme](/sqrt3-subdivision/) has an interpolating variant too. [Catmull-Clark](/catmull-clark-subdivision/) is the usual scheme for quads.
+- **Other schemes.** [Loop](/loop-subdivision/) uses the same split with positive weights and gives $C^2$ on the regular part, but does not interpolate. The [$\sqrt{3}$ scheme](/sqrt3-subdivision/) has an interpolating variant too. [Catmull-Clark](/catmull-clark-subdivision/) is the usual scheme for quads.
 
 ## When to use it
 
