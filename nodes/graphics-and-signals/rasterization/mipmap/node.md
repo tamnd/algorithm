@@ -37,11 +37,11 @@ sources:
     locator: the chapter on texture filtering (prefiltering by pyramids)
 ---
 
-A mipmap stores a texture together with a chain of smaller copies of it, each copy half the width and half the height of the one before, down to a single texel. Each texel of a smaller copy is the box average of a $2 \times 2$ block of the copy above, so the texel of level $k$ is the average of a $2^k \times 2^k$ block of the original. A [texture](/texture-mapping/) lookup for a pixel that covers about $\rho$ texels then reads a few texels from the level near $\log_2 \rho$ in place of averaging $\rho^2$ texels, in constant time. For a square texture the whole chain takes $(4WH - 1)/3$ texels, less than $4/3$ of the original.
+A mipmap stores a texture together with a chain of smaller copies of it, each copy half the width and half the height of the one before, down to a single texel. Each texel of a smaller copy is the box average of a $2 \times 2$ block of the copy above, so the texel of level $k$ is the average of a $2^k \times 2^k$ block of the original. A [texture](/texture-mapping/) lookup for a pixel whose footprint is about $\rho$ texels across then reads a few texels from the level near $\log_2 \rho$ in place of averaging $\rho^2$ texels, in constant time. For a square texture the whole chain takes $(4WH - 1)/3$ texels, less than $4/3$ of the original.
 
 ## In plain words
 
-When a textured wall is far from the camera, one pixel of the screen covers many texels of its texture. If the pixel reads only the texel at its center, the picture flickers and shows false patterns, because nearby pixels jump to unrelated texels. The right color is the average of all texels under the pixel, but computing that average for every pixel is too slow. A mipmap computes the averages once, before rendering. It makes a copy of the texture at half size, where each texel is the average of four texels, then a copy of that copy at half size again, and so on, down to one texel. At render time, a pixel that covers a large area reads from a small copy, where one texel already holds the average of that area. All the copies together take only one third more memory than the texture.
+When a textured wall is far from the camera, one pixel of the screen covers many texels of its texture. If the pixel reads only the texel at its center, the picture flickers and shows false patterns, because nearby pixels jump to unrelated texels. The right color is the average of all texels under the pixel, but computing that average for every pixel is too slow. A mipmap computes the averages once, before rendering. It makes a copy of the texture at half size, where each texel is the average of four texels, then a copy of that copy at half size again, and so on, down to one texel. At render time, a pixel that covers a large area reads from a small copy, where one texel already holds the average of that area. For a square texture, all the copies together take less than one third more memory than the texture.
 
 ## The abstract type
 
@@ -100,7 +100,7 @@ Take this $4 \times 4$ texture, one channel, row $t$ by column $s$:
 
 Level 1 is $2 \times 2$: the four block means are $2$ and $10$ in its row 0 and $18$ and $2$ in its row 1. Level 2 is the single texel $(2 + 10 + 18 + 2)/4 = 8$, the mean of all 16 texels. The three levels hold $16 + 4 + 1 = 21 = (4 \cdot 16 - 1)/3$ texels.
 
-Look up the point $(u, v) = (3/8, 5/8)$. On level 0 it is $(1, 2)$ in texel units after the half-texel shift, a texel center, so BILINEAR returns $T_{1,2} = 20$. On level 1 it is $(1/4, 3/4)$, which gives the weights $3/16$, $1/16$, $9/16$ and $3/16$ on the texels $2$, $10$, $18$ and $2$, so the value is $23/2$. On level 2 it is $8$. If the pixel covers about $\rho = 2^{3/2} \approx 2.83$ texels, then $\lambda = 3/2$, $d = 1$, $f = 1/2$, and the trilinear result is $(23/2 + 8)/2 = 39/4$. For $\rho = 2^{1/2}$ the result is $(20 + 23/2)/2 = 63/4$. The single texel 20 is a point value; the prefiltered values move toward the local mean as the footprint grows.
+Look up the point $(u, v) = (3/8, 5/8)$. On level 0 it is $(1, 2)$ in texel units after the half-texel shift, a texel center, so BILINEAR returns $T_{1,2} = 20$. On level 1 it is $(1/4, 3/4)$, which gives the weights $3/16$, $1/16$, $9/16$ and $3/16$ on the texels $2$, $10$, $18$ and $2$, so the value is $23/2$. On level 2 it is $8$. If the footprint of the pixel is about $\rho = 2^{3/2} \approx 2.83$ texels across, then $\lambda = 3/2$, $d = 1$, $f = 1/2$, and the trilinear result is $(23/2 + 8)/2 = 39/4$. For $\rho = 2^{1/2}$ the result is $(20 + 23/2)/2 = 63/4$. The single texel 20 is a point value; the prefiltered values move toward the local mean as the footprint grows.
 
 A checkerboard of 0 and 1 texels shows the point. Seen at $\rho = 4$, a point lookup on level 0 returns 0 or 1 depending on where the sample falls, and the image shows false stripes. Level 2 holds $1/2$ in every texel, the correct average, and the stripes are gone.
 
@@ -127,7 +127,7 @@ The proof is by induction on the level. A texel of level $k+1$ is the mean of 1,
 
 ## When to use it
 
-Use a mipmap for every texture that can appear smaller than its own resolution on screen, which is almost every texture in a 3D scene. It costs a third more memory and a build pass, and it removes most texture aliasing under minification at a constant lookup cost. Use it with anisotropic filtering for surfaces seen at a grazing angle. A texture drawn only at exactly one texel per pixel, such as a user interface element, does not need it.
+Use a mipmap for every texture that can appear smaller than its own resolution on screen, which is almost every texture in a 3D scene. It costs up to a third more memory for a square texture and a build pass, and it removes most texture aliasing under minification at a constant lookup cost. Use it with anisotropic filtering for surfaces seen at a grazing angle. A texture drawn only at exactly one texel per pixel, such as a user interface element, does not need it.
 
 ## Pitfalls
 

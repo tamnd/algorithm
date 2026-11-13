@@ -56,7 +56,7 @@ The model is the [word RAM](/word-ram/) with integers of $O(\log n)$ bits more t
 ## Variants
 
 - **The diamond exit rule.** OpenGL and Direct3D rasterize aliased lines by a rule that gives the pixels whose small diamond around the center the segment leaves. For segments with integer endpoints, most pixels are the nearest pixels, but the rule decides the ends and the ties in its own way, so that two segments that join at a point do not both draw it.
-- **Supercover.** The output is every pixel whose unit square the segment touches. It is 4-connected, and it is the answer for line of sight on a grid map and for the cells that a ray crosses. [Amanatides-Woo traversal](/amanatides-woo-traversal/) gives these cells in order.
+- **Supercover.** The output is every pixel whose unit square the segment touches. It is 4-connected, and it is the answer for line of sight on a grid map and for the cells that a ray crosses. [Amanatides-Woo traversal](/amanatides-woo-traversal/) gives these cells in order, except that at an exact pass through a grid corner it visits only one of the two side cells, so the supercover must add the other.
 - **Real endpoints.** The endpoints are real numbers, for example after the [viewport transform](/viewport-transform/) and [line clipping](/line-clipping/). The answer is still the nearest pixel in each column, now for the columns whose centers are between the endpoints.
 - **Antialiased lines.** The output gives each pixel an intensity, for example from a filter of the distance to the segment, so that the line looks smooth. [Wu's line algorithm](/wu-line-algorithm/) is one answer with two pixels per column.
 - **Thick lines and polylines.** A line of width $w$ is the region within $w/2$ of the segment, with caps at the ends and joins between the segments of a polyline. It is a polygon fill problem; see [polygon scan conversion](/polygon-scan-conversion/).
@@ -79,7 +79,7 @@ In the third row the exact heights in the columns 0 to 8 are $0, 0.375, 0.75, 1.
 - The [digital differential analyzer](/digital-differential-analyzer/) adds the slope to a floating-point height at each step and rounds it. It is simple, but the rounding error grows along the line, and it can choose the wrong pixel at a tie or on a long line.
 - [Bresenham's line algorithm](/bresenham-line-algorithm/) (1965) uses only integer additions and a sign test per step, and it gives exactly the nearest pixel in each column, with a fixed tie rule.
 - [Wu's line algorithm](/wu-line-algorithm/) (1991) gives antialiased lines with two pixels per column, with an integer accumulator.
-- [Amanatides-Woo traversal](/amanatides-woo-traversal/) (1987) gives the supercover of a segment or a ray, cell by cell.
+- [Amanatides-Woo traversal](/amanatides-woo-traversal/) (1987) gives the supercover of a segment or a ray, cell by cell, up to one side cell at each exact pass through a grid corner.
 - Run-length methods compute the length of each horizontal run in one step from the run pattern, and methods with two or more pixels per step take the next few pixels from a small table of patterns. They give the same pixels with fewer decisions.
 
 ## Bounds

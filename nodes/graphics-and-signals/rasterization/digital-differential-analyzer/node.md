@@ -11,7 +11,7 @@ summary: Draw a line segment by adding a fixed floating-point increment to each 
 solves: [line-rasterization]
 model: floating-point-model
 complexity:
-  vars: {n: "the number of pixels drawn, max(|x1 - x0|, |y1 - y0|) + 1"}
+  vars: {n: "the change on the major axis, max(|x1 - x0|, |y1 - y0|)"}
   time: {worst: Θ(n), best: Θ(n)}
   space: {extra: Θ(1)}
 properties: {deterministic: true, exact: false, integer_only: false, incremental: true}

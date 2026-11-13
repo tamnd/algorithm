@@ -39,7 +39,7 @@ To change what the screen shows, a program writes new colors into this list. Man
 
 ## The abstract type
 
-The value is a map $A$ from the pixels $(i, j)$, with $0 \le i < W$ and $0 \le j < H$, to colors. A color is a tuple of $C$ channels, here one byte each, for example red, green, blue and alpha for $C = 4$. Pixel $(i, j)$ is the sample at the point $(i + \tfrac12, j + \tfrac12)$ of the window coordinates that the [viewport transform](/viewport-transform/) produces, and row 0 is the top row, the first that the display scans. The operations are:
+The value is a map $A$ from the pixels $(i, j)$, with $0 \le i < W$ and $0 \le j < H$, to colors. A color is a tuple of $C$ channels, here one byte each, for example red, green, blue and alpha for $C = 4$. Pixel $(i, j)$ is the sample at the point $(i + \tfrac12, j + \tfrac12)$ of the window coordinates that the [viewport transform](/viewport-transform/) produces, in the Direct3D form with $y$ down, and row 0 is the top row, the first that the display scans. The operations are:
 
 - **WRITE-PIXEL(i, j, c)** sets $A(i, j) = c$ if $(i, j)$ is in the buffer, and does nothing otherwise.
 - **READ-PIXEL(i, j)** returns $A(i, j)$.

@@ -104,7 +104,7 @@ The integer $\lceil v - \tfrac12 \rceil$ is the integer nearest to $v$, with a t
 
 ## Complexity
 
-The loop of line L5 runs $m + 1$ times, and each pass does a constant number of additions, one comparison and one PLOT. So the time is $\Theta(n)$ for $n = m + 1$ pixels, in the best and in the worst case. Each algorithm for this problem writes $n$ pixels, so no algorithm is faster by more than a constant factor. The extra space is $\Theta(1)$: the six integers $m$, $n$, $e$, $x$, $y$ and $i$.
+The loop of line L5 runs $m + 1$ times, and each pass does a constant number of additions, one comparison and one PLOT. So the time is $\Theta(m + 1)$ for the $m + 1$ pixels, in the best and in the worst case. Each algorithm for this problem writes $m + 1$ pixels, so no algorithm is faster by more than a constant factor. The extra space is $\Theta(1)$: the six integers $m$, $n$, $e$, $x$, $y$ and $i$.
 
 The error term stays in $-2m < e \le 2m$. So with $w$-bit signed integers the algorithm is exact for each line with $2m < 2^{w-1}$, for example $m < 2^{14} = 16384$ with 16-bit integers. The coordinates need the same range. No multiplication is necessary: $2n$ and $2m$ are shifts, computed one time.
 
@@ -125,7 +125,7 @@ The error term stays in $-2m < e \le 2m$. So with $w$-bit signed integers the al
 - **Subpixel endpoints.** With endpoints on a grid of $2^s$ subpixel steps per pixel, multiply the line function by $2^s$. The error term then starts at a value that depends on the fractional parts of the endpoints, and it stays an integer.
 - **Multi-step and run-slice versions.** Decide two pixels per test, or use the run property to draw a whole run of $\lfloor m/n \rfloor$ or $\lceil m/n \rceil$ pixels per test.
 - **Antialiased lines.** [Wu's line algorithm](/wu-line-algorithm/) draws two pixels per column with intensities from the same kind of integer error term.
-- **All cells that the segment crosses.** A 4-connected walk that visits each grid cell the segment meets is a different output. The [Amanatides and Woo traversal](/amanatides-woo-traversal/) computes it for rays in a voxel grid.
+- **All cells that the segment crosses.** A 4-connected walk that visits each grid cell the segment meets is a different output. The [Amanatides and Woo traversal](/amanatides-woo-traversal/) computes it for rays in a voxel grid, except that at an exact pass through a grid corner it visits only one of the two side cells.
 
 ## When to use it
 

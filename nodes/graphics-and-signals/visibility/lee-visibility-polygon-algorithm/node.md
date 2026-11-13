@@ -23,6 +23,9 @@ sources:
   - paper: doi:10.1016/0734-189X(83)90065-8
     title: D. T. Lee, Visibility of a simple polygon, Computer Vision, Graphics, and Image Processing 22(2), 1983, pages 207 to 221
     locator: the one-stack linear scan of the boundary
+  - paper: doi:10.1007/BF01840436
+    title: Takao Asano, Tetsuo Asano, Leonidas Guibas, John Hershberger and Hiroshi Imai, Visibility of disjoint polygons, Algorithmica 1, 1986, pages 49 to 63
+    locator: the visibility polygon of a point among disjoint polygons, by an angular sweep
   - paper: doi:10.1007/BF01937271
     title: Barry Joe and R. B. Simpson, Corrections to Lee's visibility polygon algorithm, BIT 27(4), 1987, pages 458 to 473
     locator: the polygons that wind around the viewpoint, on which the algorithms of Lee and of ElGindy and Avis fail, and the corrected algorithm
@@ -156,7 +159,7 @@ With exact rational arithmetic, each intersection point is a ratio of $2 \times 
 
 - **Viewpoint on the boundary or at a vertex.** The same scan works if $v_0$ is chosen next to $z$. CGAL's implementation handles a query point on an edge or at a vertex.
 - **Viewpoint outside the polygon.** O'Rourke notes that the same scan computes the part of the boundary seen from an exterior point.
-- **Polygons with holes.** A rotational sweep around $z$ with a balanced tree of the edges that the ray crosses takes $O(n \log n)$ time (Asano 1985), and this is optimal for polygons with holes. This is the source of the bound "$O(n \log n)$ by angular sorting"; it is not the bound for a simple polygon.
+- **Polygons with holes.** A rotational sweep around $z$ with a balanced tree of the edges that the ray crosses takes $O(n \log n)$ time (Asano and others 1986), and this is optimal for polygons with holes. This is the source of the bound "$O(n \log n)$ by angular sorting"; it is not the bound for a simple polygon.
 - **Many queries.** Triangular expansion (Bungiu, Hemmer, Hershberger, Huang and Kröller 2014) walks a triangulation of $P$ from the triangle that holds $z$. It is fast on typical input but has a quadratic worst case. With polynomial preprocessing, a query can take $O(\log n + k)$ time for an output of $k$ vertices (Bose, Lubiw and Munro 2002).
 - **Weak visibility.** The set seen from some point of an edge is the [weak visibility polygon](/weak-visibility-polygon/), computed by other methods.
 

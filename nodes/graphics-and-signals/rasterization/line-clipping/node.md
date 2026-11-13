@@ -17,7 +17,7 @@ see_also: [cohen-sutherland-line-clipping, liang-barsky-line-clipping, polygon-w
 sources:
   - book: isbn:9780201121100
     title: James D. Foley, Andries van Dam, Steven K. Feiner and John F. Hughes, Computer Graphics, Principles and Practice, second edition, Addison-Wesley, 1990
-    locator: Section 3.11, Clipping in a Raster World, and Section 3.12, Clipping Lines
+    locator: Section 3.2.3, Additional Issues (starting at the edge of a clip rectangle), Section 3.11, Clipping in a Raster World, and Section 3.12, Clipping Lines
   - paper: doi:10.1145/357332.357333
     title: You-Dong Liang and Brian A. Barsky, A new concept and method for line clipping, ACM Transactions on Graphics 3(1), 1 to 22 (1984)
     locator: the statement of the problem in parameter form, and the comparison with earlier methods
@@ -46,7 +46,7 @@ This page uses a closed window: a point on a side of $W$ is inside. With an open
 
 The model is the [real RAM](/real-ram/) with exact rational numbers. With rational input, each end point of the output is rational and needs one division. With [IEEE 754](/ieee-754/) floating point, a computed crossing point can fall a little outside the window, or a little inside it, after rounding. A robust program sets the coordinate of the clipped side to the exact boundary value, so that the point is on the side, and it computes only the other coordinate by division. Tests in exact rational or integer arithmetic, or with [interval arithmetic](/interval-arithmetic/), remove the problem.
 
-The window is in continuous coordinates. When the segment is then drawn on a pixel grid, the pixels are point samples at the centers $(i + 1/2, j + 1/2)$, not little squares, as in the OpenGL and Direct3D 10 rules. A clipped segment must start from its exact crossing point. If a program rounds the crossing point to a pixel first and then draws a new line from there, the pixels it draws can differ from the pixels of the full line in the window. Foley and his coauthors discuss this in Section 3.11.
+The window is in continuous coordinates. When the segment is then drawn on a pixel grid, the pixels are point samples at the centers $(i + 1/2, j + 1/2)$, not little squares, as in the OpenGL and Direct3D 10 rules. A clipped segment must start from its exact crossing point. If a program rounds the crossing point to a pixel first and then draws a new line from there, the pixels it draws can differ from the pixels of the full line in the window. Foley and his coauthors discuss this in Section 3.2.3.
 
 ## Variants
 

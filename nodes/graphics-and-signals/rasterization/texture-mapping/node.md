@@ -90,7 +90,7 @@ The costs are per pixel and count texel reads.
 | summed-area table | 4 per channel | the exact box average over an axis-aligned rectangle |
 | direct average | $\Theta(A)$ | the exact average over a footprint of $A$ texels |
 
-A mipmap uses at most $4/3$ times the memory of the texture, and a summed-area table needs wider integers or floats than the texels, because its entries grow with the image size. No method with a fixed number of reads per pixel computes the exact filtered value of every footprint; the prefiltered methods trade this for a fixed cost.
+A mipmap of a square texture uses less than $4/3$ times the memory of the texture, and of any power-of-two texture less than twice, and a summed-area table needs wider integers or floats than the texels, because its entries grow with the image size. No method with a fixed number of reads per pixel computes the exact filtered value of every footprint; the prefiltered methods trade this for a fixed cost.
 
 ## Reductions
 
