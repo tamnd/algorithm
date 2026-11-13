@@ -124,7 +124,7 @@ The width sets a fixed cost per layer. This is why beam search is used when the 
 
 ## Variants and improvements
 
-- **Threshold beams.** Instead of a fixed count, keep each candidate whose score is within a margin of the best score of the layer. Speech recognizers often use this form or both forms. The thesis of Lowerre is the usual reference for this kind of pruning in Harpy, but we did not confirm its exact rule.
+- **Threshold beams.** Instead of a fixed count, keep each candidate whose score is within a margin of the best score of the layer. Speech recognizers often use this form or both forms. The thesis of Lowerre is the usual reference for this kind of pruning in Harpy. The exact rule that Harpy used is not given here.
 - **Local beam search.** In [local search](/local-search/), keep $k$ states, generate all their successors, and keep the best $k$, with no paths and no SEEN. Russell and Norvig describe it next to hill climbing, and a stochastic form picks the $k$ states at random with a bias toward good ones.
 - **Beam search in decoding.** For a [hidden Markov model](/hidden-markov-model/) or a neural sequence model, each layer is one more output symbol and the score is the log probability so far. A beam prunes the [Viterbi algorithm](/viterbi-algorithm/) or replaces it when the state space is too large.
 - **Complete forms.** [Beam-stack search](/beam-stack-search/) remembers what each layer dropped and comes back to it, so it finds an optimal path. Restarting with a doubled width also makes beam search complete on a finite graph, at the cost of repeated work.

@@ -112,7 +112,7 @@ These are worst case bounds. The speed of greedy best-first search in practice c
 
 ## Properties
 
-- **Not optimal**, for any heuristic other than the perfect one with suitable ties.
+- **Not optimal**, even with the perfect heuristic $h = h^*$, since the order ignores $g$. With the edges S→A 100, A→G 1, S→B 1 and B→G 50 and $h = h^*$, it expands A before B and returns S-A-G of cost 101, against $C^* = 51$.
 - **Complete** as a graph search on finite graphs. Incomplete as a tree search on graphs with cycles, and incomplete on infinite graphs.
 - **Not in place.** The graph search stores all reached states.
 - **Deterministic**, with the tie rule of line L4.

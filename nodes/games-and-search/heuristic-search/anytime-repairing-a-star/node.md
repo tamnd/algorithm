@@ -134,7 +134,7 @@ Costs are in the [word RAM](/word-ram/), with each call of SUCCESSORS and $h$ co
 
 ## Variants and improvements
 
-- **Weights chosen at run time.** The schedule need not be fixed in advance. A program can lower $\varepsilon$ by a larger step when a call was cheap, or set the next weight just below the last bound $\varepsilon'$, since a weight above $\varepsilon'$ cannot improve the bound.
+- **Weights chosen at run time.** The schedule need not be fixed in advance. A program can lower $\varepsilon$ by a larger step when a call was cheap, or set the next weight just below the last bound $\varepsilon'$, since a weight above $\varepsilon'$ cannot itself lower the bound. Such a call can still lower it through the ratio of $g[s_g]$ to the least $g + h$ over OPEN and INCONS: with the edges s→x 30, x→t 6 and s→t 45 and $h$ = 36, 6, 0, the call with weight $5/2$ reports $\varepsilon' = 5/4$, and the next one with weight 2 expands x and proves $\varepsilon' = 1$.
 - **Anytime weighted A*.** Hansen and Zhou (2007) keep the weight fixed, go on with the same search after the first path, and prune states whose $g + h$ is not below the cost of the best path. It also ends with an optimal path.
 - **Anytime dynamic A*.** Likhachev and others combined ARA* with [D* Lite](/d-star-lite/), so that the search also repairs itself when action costs change, as for a robot that sees new obstacles.
 - **[Beam-stack search](/beam-stack-search/).** Another anytime method that ends with an optimal path, with memory bounded by a beam width instead of the size of the graph.
