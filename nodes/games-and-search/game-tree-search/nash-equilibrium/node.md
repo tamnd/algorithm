@@ -93,7 +93,7 @@ The equilibria are (D, C), (C, D) and the mixed profile where each player dares 
 
 **An $\varepsilon$-equilibrium far from every equilibrium.** Let the row player choose T with payoff 1 or B with payoff $1 + \varepsilon$, and let the column player have one strategy. Playing T is an $\varepsilon$-equilibrium, but the only equilibrium plays B. So a small deviation gain does not mean that the profile is near an equilibrium.
 
-**A non-example: a maximin profile in a general-sum game.** In the battle of the sexes, the row player can guarantee $2/3$ by playing O with probability $1/3$, and the column player can guarantee $2/3$ by playing O with probability $2/3$. If both play these safe strategies, they meet at the opera with probability $2/9$ and at football with probability $2/9$, so the row player gets $2/9 \cdot 2 + 2/9 \cdot 1 = 2/3$. Against the column player's mix, the row player could get $2 \cdot 2/3 = 4/3$ by playing O for sure. Safe strategies are equilibria only in zero-sum games.
+**A non-example: a maximin profile in a general-sum game.** In the battle of the sexes, the row player can guarantee $2/3$ by playing O with probability $1/3$, and the column player can guarantee $2/3$ by playing O with probability $2/3$. If both play these safe strategies, they meet at the opera with probability $2/9$ and at football with probability $2/9$, so the row player gets $2/9 \cdot 2 + 2/9 \cdot 1 = 2/3$. Against the column player's mix, the row player could get $2 \cdot 2/3 = 4/3$ by playing O for sure. In general-sum games, safe strategies need not form an equilibrium.
 
 ## Related definitions
 

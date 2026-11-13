@@ -26,7 +26,7 @@ sources:
     locator: the whole report (the hash of a position by XOR of random numbers, which books use as their key)
 ---
 
-An opening book is a table, made before play, that gives a game program its moves in the first part of the game. It maps a position to a short list of *book moves*, each with a weight and a record of the games in which it was played. While the current position is in the book, the program plays a book move, chosen at random in proportion to the weights, and does not search. When the position is not in the book, the program is *out of book* and starts to search. The key of a position is its [Zobrist hash](/zobrist-hashing/), so two move orders that reach the same position share one entry: the book is a directed acyclic graph of positions, not a tree of move sequences. Books are built from game records, from analysis, or from the program's own searches, and *book learning* changes the weights after the program's own games, as in Hyatt (1999) for chess and Buro (1999) for Othello.
+An opening book is a table, made before play, that gives a game program its moves in the first part of the game. It maps a position to a short list of *book moves*, each with a weight and a record of the games in which it was played. While the current position is in the book, the program plays a book move, chosen at random in proportion to the weights, and does not search. When the position is not in the book, the program is *out of book* and starts to search. The key of a position is its [Zobrist hash](/zobrist-hashing/), so two move orders that reach the same position share one entry: the book is a graph of positions, not a tree of move sequences. Books are built from game records, from analysis, or from the program's own searches, and *book learning* changes the weights after the program's own games, as in Hyatt (1999) for chess and Buro (1999) for Othello.
 
 ## In plain words
 
@@ -46,11 +46,11 @@ An opening book $B$ holds a set of positions, and for each position $p$ a set of
 - BOOK-LEARN$(B, \text{line}, s, r)$: change the weights of the book moves that the side $s$ played in a game with result $r$.
 - BOOK-BACKUP$(B, \text{leaf})$: the negamax value of each book position when both sides play book moves, with the positions just after the book scored by leaf.
 
-The positions and the book moves form a graph. It is a DAG in every game in which a move cannot undo itself, as in tic-tac-toe, Othello or the opening of chess. Positions with two parents are *transpositions*.
+The positions and the book moves form a graph. It is a DAG in every game in which a position cannot come back, as in tic-tac-toe or Othello, where each move adds a piece. In chess a position can come back, as after 1. Nf3 Nf6 2. Ng1 Ng8, so a chess book can have cycles. Positions with two parents are *transpositions*.
 
 ## Representation
 
-A [hash table](/hash-table/) maps the key $Z(p)$ of each position to a small table from moves to entries (weight, games, points). The key is the XOR of one random 64-bit word per piece on the board, plus a word for the side to move when the board alone does not tell it. The key of the next position is the old key XOR the word of the new piece, so a line is followed with one XOR per move. Real books often store the entries sorted by key in a file and probe it by [binary search](/binary-search/), since the book is read often and written rarely.
+A [hash table](/hash-table/) maps the key $Z(p)$ of each position to a small table from moves to entries (weight, games, points). The key is the XOR of one random 64-bit word per piece on the board, plus a word for the side to move when the board alone does not tell it. When a move only adds a piece, as in tic-tac-toe, the key of the next position is the old key XOR the word of the new piece, so a line is followed with one XOR per move. In chess a move must also XOR out the word of the piece on its old square and the word of any captured piece, and XOR the word for the side to move. Real books often store the entries sorted by key in a file and probe it by [binary search](/binary-search/), since the book is read often and written rarely.
 
 The implementation here is a toy for tic-tac-toe. A position is a board of 9 cells; X moves first, so the side to move follows from the pieces. It keeps the board of each key beside the entry so that the tests can check that no two positions share a key; a real book stores only the key.
 

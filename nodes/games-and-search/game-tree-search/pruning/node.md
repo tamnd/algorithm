@@ -72,7 +72,7 @@ At a node that averages over chance outcomes, one bad outcome does not settle th
 
 ## Examples
 
-**A shallow cutoff.** MAX moves at the root to one of three MIN nodes, whose leaves are 3, 12, 8; then 2, 4, 6; then 14, 5, 2. Alpha-beta reads 3, 12 and 8, so the first MIN node is worth 3 and $\alpha = 3$. Under the second MIN node it reads 2. That node is now worth at most 2, below 3, so the leaves 4 and 6 are skipped. Under the third MIN node it reads 14, 5 and 2 and gets 2. The root value is 3, after 7 of the 9 leaves. If the MIN node with the leaves 3, 12, 8 comes last, no cutoff happens and alpha-beta reads all 9 leaves; the value is still 3. These counts were checked by a short script.
+**A shallow cutoff.** MAX moves at the root to one of three MIN nodes, whose leaves are 3, 12, 8; then 2, 4, 6; then 14, 5, 2. Alpha-beta reads 3, 12 and 8, so the first MIN node is worth 3 and $\alpha = 3$. Under the second MIN node it reads 2. That node is now worth at most 2, below 3, so the leaves 4 and 6 are skipped. Under the third MIN node it reads 14, 5 and 2 and gets 2. The root value is 3, after 7 of the 9 leaves. If the MIN node with the leaves 2, 4, 6 comes first, no cutoff happens and alpha-beta reads all 9 leaves; the value is still 3. These counts were checked by a short script.
 
 **Forward pruning gives a wrong move.** MAX has two moves, A and B. A static score rates A at 5 and B at 3. After A, MIN chooses between leaves 1 and 9; after B, between 4 and 6. The minimax values are 1 for A and 4 for B, so B is the best move. A beam of width 1 at the root keeps only A, by the static score, and plays it, for a value of 1 instead of 4. Sound pruning cannot make this mistake.
 
