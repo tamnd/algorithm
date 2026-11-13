@@ -88,6 +88,6 @@ But $S$ was assumed to win against every strategy of player 1, $T$ included. Thi
 
 ## History
 
-Gale introduced Chomp in 1974 and proved by this argument that the first player wins. In 1979 he published a proof that a full Hex board always has a winner, gave the strategy-stealing proof that the first player wins Hex, and told the history of the game, invented by Piet Hein in 1942 and again by John Nash in the late 1940s. Beck's 2008 book treats strategy stealing as a basic tool for strong positional games such as tic-tac-toe, where it gives the first player at least a draw.
+Gale introduced Chomp in 1974 and proved by this argument that the first player wins. In 1979 he published a proof that a full Hex board always has a winner, presented the strategy-stealing proof that the first player wins Hex, which is due to Nash, and told the history of the game, invented by Piet Hein in 1942 and again by John Nash in the late 1940s. Beck's 2008 book treats strategy stealing as a basic tool for strong positional games such as tic-tac-toe, where it gives the first player at least a draw.
 
 ## References

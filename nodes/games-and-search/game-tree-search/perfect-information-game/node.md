@@ -58,7 +58,7 @@ Two points are often confused.
 - [Imperfect-information game](/imperfect-information-game/): some information set has more than one node. The values then need mixed or behavior strategies, and the methods are different, for example [counterfactual regret minimization](/counterfactual-regret-minimization/).
 - [Zero-sum game](/zero-sum-game/): the other condition for the [minimax](/minimax/) value to be the value of the game for two players.
 - [Zermelo's theorem](/zermelo-theorem/): a finite two-player game with perfect information and no chance, with outcomes win, loss and draw, is determined.
-- **Kuhn's theorem.** Every finite extensive game with perfect information has an equilibrium in pure strategies, which backward induction finds. Kuhn (1953) proved the existence. The equilibrium that backward induction gives is also *subgame perfect*, a term that Selten introduced later, in 1965. See [Nash equilibrium](/nash-equilibrium/) for the general notion.
+- **Kuhn's theorem.** Every finite extensive game with perfect information has an equilibrium in pure strategies, which backward induction finds. Kuhn (1953) proved the existence. The equilibrium that backward induction gives is also *subgame perfect*, a notion that Selten introduced later, in 1965; the name *subgame perfect* is from his paper of 1975. See [Nash equilibrium](/nash-equilibrium/) for the general notion.
 - [Stochastic game](/stochastic-game/): a game tree with chance nodes. With perfect information it is solved by [expectiminimax](/expectiminimax/).
 
 ## References

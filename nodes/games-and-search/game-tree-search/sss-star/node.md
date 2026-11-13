@@ -13,8 +13,8 @@ solves: [game-tree-evaluation]
 model: word-ram
 complexity:
   vars: {b: the branching factor, d: the depth in plies}
-  time: {worst: O(d b^d log b), best: O(d b^(d/2) log b)}
-  space: {extra: O(b^(d/2))}
+  time: {worst: O(d b^d log b), best: O(d b^⌈d/2⌉ log b)}
+  space: {extra: O(b^⌈d/2⌉)}
 properties: {deterministic: true, recursive: false}
 prereqs: [priority-queue, alpha-beta-pruning]
 see_also: [mtdf, knuth-moore-theorem, scout-search, principal-variation-search, best-first-search, a-star-search, proof-number-search, move-ordering]
@@ -39,7 +39,7 @@ sources:
     locator: pp. 255 to 293 (SSS* as a sequence of null-window alpha-beta searches with memory, MT-SSS*, and experiments)
 ---
 
-SSS* is a best-first search for the [minimax](/minimax/) value of a game tree, from George Stockman (1979). It keeps a list OPEN of states, one for each node at the frontier of the search, with a merit $h$ that is an upper bound on the value the node can still give to the root. At each step it takes the state with the highest merit and works on it. So it looks first where the value of the root can still be the highest. Stockman proved that SSS* never evaluates a leaf that [alpha-beta](/alpha-beta-pruning/), with the same order of the moves, skips, and on many trees it evaluates fewer. The price is memory: OPEN can hold $b^{\lceil d/2 \rceil}$ states, and each step needs operations on a [priority queue](/priority-queue/). Plaat, Schaeffer, Pijls and de Bruin later showed that SSS* is the same as a sequence of null-window alpha-beta searches with a [transposition table](/transposition-table/), [MTD(f)](/mtdf/) with a first guess above every value.
+SSS* is a best-first search for the [minimax](/minimax/) value of a game tree, from George Stockman (1979). It keeps a list OPEN of states, one for each node at the frontier of the search, with a merit $h$ that is an upper bound on the value the node can still give to the root. At each step it takes the state with the highest merit and works on it. So it looks first where the value of the root can still be the highest. Stockman proved that SSS* never evaluates a leaf that [alpha-beta](/alpha-beta-pruning/), with the same order of the moves, skips, and on many trees it evaluates fewer. The price is memory: OPEN can hold $b^{\lceil d/2 \rceil}$ states, and each step needs operations on a [priority queue](/priority-queue/). Plaat, Schaeffer, Pijls and de Bruin later showed that SSS* is the same as a sequence of null-window alpha-beta searches with a [transposition table](/transposition-table/) large enough to keep every node it stores, [MTD(f)](/mtdf/) with a first guess above every value.
 
 ## In plain words
 
@@ -115,7 +115,7 @@ Costs are in the [word RAM](/word-ram/), with each move generation and evaluatio
 
 **Leaves.** SSS* evaluates at most the leaves that alpha-beta evaluates in the same order: all $b^d$ in the worst case, and the minimal tree of the [Knuth-Moore theorem](/knuth-moore-theorem/), $b^{\lceil d/2 \rceil} + b^{\lfloor d/2 \rfloor} - 1$ leaves, with the best order. On random trees, Roizen and Pearl showed that the saving over alpha-beta does not grow exponentially: both have the same asymptotic branching factor.
 
-**Time.** Each node gets at most two states, so there are $O(b^d)$ steps. Each step is a heap operation on OPEN, $O(\log b^d) = O(d \log b)$, so the worst case is $O(d\, b^d \log b)$. The removals of line L10 are lazy in the code: a removed state stays in the heap, and a step skips it after an $O(d)$ check of the path. With the best order, SSS* evaluates the leaves of the minimal tree, which gives the best case $O(d\, b^{d/2} \log b)$. On best-ordered random trees, it took 3 to 5 steps per leaf.
+**Time.** Each node gets at most two states, so there are $O(b^d)$ steps. Each step is a heap operation on OPEN, $O(\log b^d) = O(d \log b)$, so the worst case is $O(d\, b^d \log b)$. The removals of line L10 are lazy in the code: a removed state stays in the heap, and a step skips it after an $O(d)$ check of the path. Every state taken from OPEN is at a node on the path to an evaluated leaf: a LIVE state taken has the highest merit and is the leftmost with it, so a state that it inserts below it is taken next, and so on down to a leaf, and a node is solved only after a leaf below it. Each step inserts one state, or $b$ at line L8. With the best order, SSS* evaluates only leaves of the minimal tree, which has $O(b^{\lceil d/2 \rceil})$ nodes, so $O(b^{\lceil d/2 \rceil})$ states are taken and, counting the $b$ children of each MAX node at line L8, also $O(b^{\lceil d/2 \rceil})$ are inserted. This gives the best case $O(d\, b^{\lceil d/2 \rceil} \log b)$. On best-ordered random trees, it took 3 to 5 steps per leaf.
 
 **Space.** OPEN never holds more than $b^{\lceil d/2 \rceil}$ states, the number of leaves of a subtree that takes all children at MAX nodes and one at MIN nodes. The proof shows this. Alpha-beta needs only $O(d)$ space. The code keeps the removed states in the heap and a map from paths to positions, so it uses more memory than OPEN itself.
 
@@ -125,7 +125,7 @@ Costs are in the [word RAM](/word-ram/), with each move generation and evaluatio
 - **Dominates alpha-beta in leaves.** With the same order of the moves and ties to the left, every leaf it evaluates is one that alpha-beta evaluates.
 - **Best-first.** The order of the work does not follow the tree from left to right: it jumps to the frontier state with the highest upper bound.
 - **Not recursive.** The whole search state is in OPEN, not on a call stack.
-- **Large memory.** OPEN grows as $b^{d/2}$, and each step needs a priority queue and a removal of whole subtrees.
+- **Large memory.** OPEN can grow to $b^{\lceil d/2 \rceil}$ states, and each step needs a priority queue and a removal of whole subtrees.
 
 ## Variants and improvements
 

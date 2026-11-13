@@ -83,7 +83,7 @@ The proof in [proofs/correctness.md](proofs/correctness.md) shows, by induction 
 
 **Space.** A depth-first search keeps one frame per level, $O(d)$ frames of $O(1)$ each when children are generated one at a time.
 
-**Lower bound.** Without bounds on the leaf values, every leaf below a chance outcome of positive probability can change the value, so every correct algorithm must read all leaves under such outcomes. Cutoffs below chance nodes need known bounds $L \le \text{leaf} \le U$ (Ballard's Star1 and Star2), and they save less than alpha-beta pruning saves in trees without chance.
+**Lower bound.** Without bounds on the leaf values, an unread outcome of positive probability can move the value of a chance node by any amount, so until all its outcomes are read the outcomes read so far give no bound on its value, and no cutoff can be made at it. Cutoffs at MAX and MIN nodes below a chance node are still possible (in the example, if the first leaf under $b$, outcome 2, were 6 instead of 9, then after it the value of $b$ is at most $\tfrac12 \cdot 1 + \tfrac12 \cdot 6 = 7/2 < 11/3$, and the leaf 7 need not be read). Cutoffs at chance nodes need known bounds $L \le \text{leaf} \le U$ (Ballard's Star1 and Star2), and they save less than alpha-beta pruning saves in trees without chance.
 
 ## Properties
 

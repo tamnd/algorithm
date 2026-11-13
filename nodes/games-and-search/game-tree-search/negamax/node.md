@@ -124,6 +124,6 @@ Use negamax as the default way to write any minimax search of a two-player zero-
 
 ## History
 
-The minimax rule goes back to von Neumann and to Shannon (1950), who proposed it for chess. Knuth and Moore (1975) gave the value of a position as the maximum of the negated values of its successors, and wrote their alpha-beta procedures F1 and F2 in that form. Their paper made the negamax form the standard for the analysis of alpha-beta and for game programs. Later searches such as NegaScout and MTD(f) are given in this form.
+The minimax rule goes back to von Neumann and to Shannon (1950), who proposed it for chess. Knuth and Moore (1975) gave the value of a position as the maximum of the negated values of its successors, and wrote their search procedures F1, a branch-and-bound search with only shallow cutoffs, and F2, full alpha-beta, in that form. Their paper made the negamax form the standard for the analysis of alpha-beta and for game programs. Later searches such as NegaScout and MTD(f) are given in this form.
 
 ## References

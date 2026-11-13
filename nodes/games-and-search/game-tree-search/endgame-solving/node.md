@@ -34,13 +34,13 @@ Some endgames are small enough to solve every position once and store the answer
 
 ## Definition
 
-**Input.** The rules of a finite game with [perfect information](/perfect-information-game/) and two players who move in turn; a finite set $S$ of positions, the *endgame*, that contains the position $p$ to solve; and the value of each move that leaves $S$, for example a capture into a smaller endgame. A game in which the side to move is mated has lost.
+**Input.** The rules of a finite game with [perfect information](/perfect-information-game/) and two players who move in turn; a finite set $S$ of positions, the *endgame*, that contains the position $p$ to solve; and the value of each move that leaves $S$, with its distance when it is a win or a loss, for example a capture into a smaller endgame. A game in which the side to move is mated has lost.
 
 **Output.** The value $\text{val}(p) \in \{\text{WIN}, \text{DRAW}, \text{LOSS}\}$ for the side to move, and, when $p$ is won or lost, its distance $d(p)$ and an optimal move.
 
-Let $L_0$ be the positions of $S$ in which the side to move has lost. For $n \ge 1$, let $W_n$ be the positions with a move into $L_{n-1}$, and $L_n$ the positions that have moves, all of which stay in $S$ and lead into $W_{n-1}$, together with $L_{n-1}$; let $W_n$ also contain $W_{n-1}$. Then:
+Let $L_0$ be the positions of $S$ in which the side to move has lost. For $n \ge 1$, let $W_n$ be the positions with a move into $L_{n-1}$, and $L_n$ the positions that have moves, all of which lead into $W_{n-1}$, together with $L_{n-1}$; let $W_n$ also contain $W_{n-1}$. Then:
 
-- $\text{val}(p) = \text{WIN}$ when $p \in W_n$ for some $n$, LOSS when $p \in L_n$ for some $n$, and DRAW otherwise. Moves out of $S$ count with their given values.
+- $\text{val}(p) = \text{WIN}$ when $p \in W_n$ for some $n$, LOSS when $p \in L_n$ for some $n$, and DRAW otherwise. Here a move out of $S$ counts as a move into $W_m$ or $L_m$ when its given value is a win or a loss in $m$ plies for the side to move after it, and as a move to a draw when its given value is a draw.
 - $d(p)$ is the least such $n$. This is the *distance to mate* (DTM): the winner ends the game as fast as possible, and the loser delays the end as long as possible.
 - An optimal move of a won $p$ leads to a lost position $q$ with $d(q) = d(p) - 1$. An optimal move of a lost $p$ leads to a won $q$ with $d(q) = d(p) - 1$. An optimal move of a drawn $p$ leads to a drawn position.
 
@@ -74,7 +74,7 @@ Following optimal moves from $p$ gives a *main line*, a move sequence that ends 
 
 ## Bounds
 
-- **Generalized chess.** Deciding the winner of a position of chess generalized to an $n$ by $n$ board, with a number of pieces that grows with $n$, is complete for [EXPTIME](/exptime/) (Fraenkel and Lichtenstein, 1981). So it needs time exponential in $n$ in the worst case, because EXPTIME is not in P by the time hierarchy theorem.
+- **Generalized chess.** Deciding the winner of a position of chess generalized to an $n$ by $n$ board, with a number of pieces that grows with $n$, is complete for [EXPTIME](/exptime/) (Fraenkel and Lichtenstein, 1981). So it is not in P, since EXPTIME is not in P by the time hierarchy theorem, and in the worst case it needs time $2^{n^\varepsilon}$ for some $\varepsilon > 0$ and infinitely many $n$.
 - **A fixed number of pieces.** With $k$ pieces fixed, an endgame on an $n$ by $n$ board has at most $2 \cdot n^{2k}$ positions, and each chess piece has $O(n)$ moves. So retrograde analysis solves all positions in time $O(k \cdot n^{2k+1})$, which is polynomial in $n$ for each fixed $k$. The exponent grows with $k$, which is why tablebases stop at a few pieces.
 - **A move limit.** If the game must end within a number of plies polynomial in the size of the position, a depth-first search of the game tree uses polynomial space, and the problem is in [PSPACE](/pspace/).
 - **All positions.** An algorithm that outputs the value of every position of $S$ writes $v$ answers, so it needs $\Omega(v)$ time.

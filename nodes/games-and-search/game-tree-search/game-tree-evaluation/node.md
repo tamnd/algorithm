@@ -8,7 +8,7 @@ aliases:
 - game value
 area: games-and-search/game-tree-search
 level: intro
-summary: Given a finite game tree with values at its leaves, compute the minimax value of the root. The cost is the number of leaves read; deterministic methods need all n, randomized ones about n^0.7537.
+summary: Given a finite game tree with values at its leaves, compute the minimax value of the root. Deterministic methods need all n leaves, randomized ones about n^0.7537 on uniform binary NAND trees.
 prereqs: [game-tree, zero-sum-game]
 see_also: [minimax, negamax, alpha-beta-pruning, knuth-moore-theorem, best-move-selection, yao-minimax-principle, proof-number-search, randomized-query-complexity]
 sources:
@@ -98,7 +98,7 @@ $$ \log_2 \frac{1 + \sqrt{33}}{4} \approx 0.753725. $$
 
 **Randomized lower bound: the same exponent.** Saks and Wigderson (1986) proved that no randomized method that is always right reads fewer leaves on uniform binary NAND trees, up to a constant factor, so the bound is $\Theta(n^{0.7537})$. The proof gives a hard distribution of inputs and bounds every deterministic method on it, by [Yao's minimax principle](/yao-minimax-principle/). The query model behind these bounds is the one of [decision tree complexity](/decision-tree-complexity/) and [randomized query complexity](/randomized-query-complexity/).
 
-**With good order.** Upper bounds below $n$ for deterministic methods need luck in the input or a good guess at the order: alpha-beta reaches about $2\sqrt{n}$ leaves on a uniform tree when the best move is first everywhere, and $n$ when it is last.
+**With good order.** Upper bounds below $n$ for deterministic methods need luck in the input or a good guess at the order: alpha-beta reads $b^{\lceil d/2 \rceil} + b^{\lfloor d/2 \rfloor} - 1$ leaves on a uniform tree of branching factor $b$ and depth $d$, with $n = b^d$, when the best move is first everywhere (this is $2\sqrt{n} - 1$ when $d$ is even), and $n$ when it is last.
 
 ## Reductions
 
