@@ -64,7 +64,7 @@ which is $1/2$ when $N(s) = k$, the number of playouts at which both estimates g
 
 $$\beta(s, a) = \frac{\tilde N}{N + \tilde N + 4 N \tilde N \tilde b^2}, \qquad N = N(s, a),\ \tilde N = \tilde N(s, a).$$
 
-Both go to 0 as the counts grow. So in the limit $Q^*$ is the Monte Carlo value, and with a UCT bonus the asymptotic behavior is that of [UCT](/uct/).
+The first goes to 0 as $N(s)$ grows, and the second as $N(s, a)$ grows when $\tilde b \ne 0$. So in the limit $Q^*$ is the Monte Carlo value, and with a UCT bonus one expects the asymptotic behavior of [UCT](/uct/), though this is not proved here.
 
 ## Classic examples
 

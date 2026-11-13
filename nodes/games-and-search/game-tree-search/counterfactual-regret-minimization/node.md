@@ -38,7 +38,7 @@ sources:
     locator: pp. 97 to 103 (the three-card game, its equilibria and the value -1/18 to the first player)
 ---
 
-Counterfactual regret minimization (CFR) computes an approximate Nash equilibrium of a two-player zero-sum game with hidden information, such as poker. It plays the game against itself many times. At every information set it keeps a regret for each action, which measures how much better that action would have done in the past, weighted by the probability that the other player and chance lead to that information set. The next strategy at the set plays the actions in proportion to their positive regrets. The average of the strategies over all iterations converges to an equilibrium, and its exploitability falls like $1/\sqrt{T}$ after $T$ iterations.
+Counterfactual regret minimization (CFR) computes an approximate Nash equilibrium of a two-player zero-sum game with hidden information, such as poker. It plays the game against itself many times. At every information set it keeps a regret for each action, which measures how much better that action would have done in the past, weighted by the probability that the other player and chance lead to that information set. The next strategy at the set plays the actions in proportion to their positive regrets. The average of the strategies over all iterations converges to an equilibrium, and its exploitability after $T$ iterations is at most a constant times $1/\sqrt{T}$.
 
 ## In plain words
 

@@ -139,7 +139,7 @@ Use bitboards when the board has at most a few words of squares and the rules ar
 
 - **Wrap-around at the edges.** In chess, $b << 1$ moves a piece on the h-file to the a-file of the next rank. Mask the result, or keep guard bits as in Connect Four.
 - **Shifts by the word size or more.** In C, a shift by 64 or more of a 64-bit value is undefined. Python ints grow without limit, so mask the result with $2^{64} - 1$ after a left shift where a C program would lose the high bits.
-- **Signed right shift.** In Java and C a right shift of a signed value copies the sign bit. Use unsigned types, or `>>>` in Java.
+- **Signed right shift.** In Java a right shift `>>` of a signed value copies the sign bit, and in C the result for a negative value is implementation-defined (most compilers copy the sign bit). Use unsigned types, or `>>>` in Java.
 - **Square numbering.** Programs differ in where square 0 is and whether the bits go by rank or by file. The masks, the shifts and the tables must all use the same order.
 - **Counting by loop.** A loop over all $n$ bits to count them throws away the gain. Use the popcount instruction or a [bit-parallel](/bit-parallelism/) count.
 

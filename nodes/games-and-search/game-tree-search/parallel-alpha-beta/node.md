@@ -3,8 +3,6 @@ tag: 8BYDFQ
 kind: algorithm
 slug: parallel-alpha-beta
 name: Parallel alpha-beta search
-aliases:
-- lazy SMP
 area: games-and-search/game-tree-search
 level: research
 summary: Alpha-beta parallelized across processors by searching eldest children first, then the rest in parallel.
@@ -103,7 +101,7 @@ The tests check the root value against sequential alpha-beta on 500 random trees
 
 ## Complexity
 
-**Work.** The search visits $N_P$ nodes in all, at least the $N_1$ nodes of the sequential search with the same move order when the order is good, and at most the $b^d$ leaves and inner nodes of the full tree.
+**Work.** The search visits $N_P$ nodes in all, at most the $b^d$ leaves and inner nodes of the full tree. It is usually more than the $N_1$ nodes of the sequential search with the same move order, but not always: when the order is bad, a brother that is searched early can give a better bound than the sequential search has at that point, and then $N_P$ can be less than $N_1$.
 
 **Time.** In each time step a processor visits at most one node, so $T_P \ge N_P / P$, and the speedup is at most $P \cdot N_1 / N_P$. On a tree of depth $d$, the chain of eldest brothers from the root to a leaf is searched in order, which adds about $d$ steps at each level that cannot be shared. Finkel and Fishburn (1982) analyse their tree-splitting algorithm on best-case and worst-case trees.
 

@@ -100,7 +100,7 @@ The root A is an OR node with three AND children, B, C and D. B has a proved ter
 
 The search stops after five expansions with A proved through C. D is never expanded: once C is proved, nothing in D can change the answer. Steps 2 and 3 show the best-first character: B looked as good as C, its weak point X was found and disproved at once, and the search moved to C without finishing anything else in B.
 
-On tic-tac-toe with X as the prover, PNS proves "X does not lose" from the empty board with 474 expansions, and disproves "X wins" with 3,323 expansions; the full game tree has 549,946 nodes ([minimax](/minimax/)). In [Nim](/nim/) with heaps $1, 2, 3$, it disproves "the player to move wins" with 39 expansions, as [Bouton's theorem](/boutons-theorem/) predicts from $1 \oplus 2 \oplus 3 = 0$.
+On tic-tac-toe with X as the prover, PNS proves "X does not lose" from the empty board with 474 expansions, and disproves "X wins" with 3,323 expansions; the full game tree has 549,946 nodes ([minimax](/minimax/)). In [Nim](/nim/) with heaps $1, 2, 3$, with a position written as the sorted heap sizes and the moves to the same position merged into one child, it disproves "the player to move wins" with 39 expansions (90 when every move is a child of its own), as [Bouton's theorem](/boutons-theorem/) predicts from $1 \oplus 2 \oplus 3 = 0$.
 
 ## Correctness
 
@@ -134,7 +134,7 @@ The costs are in the [word RAM](/word-ram/), with each call of the move generato
 
 The survey of Kishimoto, Winands, Müller and Saito describes these and more.
 
-- **[Df-pn](/df-pn/).** A depth-first version with thresholds on the two numbers and a [transposition table](/transposition-table/), which expands the same most-proving nodes as PNS on trees but needs only bounded memory.
+- **[Df-pn](/df-pn/).** A depth-first version with thresholds on the two numbers and a [transposition table](/transposition-table/), which, with a table that keeps every entry, expands the same most-proving nodes as PNS on trees; with a table of fixed size and a replacement rule it runs in bounded memory, at the cost of re-searching subtrees whose entries were lost.
 - **PN².** A second, smaller PNS at each frontier node to compute better initial numbers, with the second-level trees thrown away; it trades time for memory.
 - **Initial numbers from knowledge.** Set $\mathrm{pn}$ and $\mathrm{dn}$ of a frontier node from the number of legal moves or from an evaluation, in place of $1$ and $1$.
 - **Transpositions and cycles.** Store positions in a table and handle shared subtrees and repetition, at the cost of more careful number updates.

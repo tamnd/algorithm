@@ -38,7 +38,7 @@ sources:
     locator: the section on UCT, the choice of the constant, and the variants of the tree policy
 ---
 
-UCT, short for upper confidence bounds applied to trees, is the rule that most [Monte Carlo tree search](/monte-carlo-tree-search/) programs use to walk down their tree. At each node it treats the choice of a child as a multi-armed bandit and picks the child with the largest mean reward plus a bonus that grows when the child has been tried rarely, as in [UCB1](/ucb1/). Kocsis and Szepesvári (2006) proposed it for planning in Markov decision processes and games and proved that the probability of choosing a wrong action at the root goes to zero. The name UCT is also the slug of this page.
+UCT, short for upper confidence bounds applied to trees, is the rule that most [Monte Carlo tree search](/monte-carlo-tree-search/) programs use to walk down their tree. At each node it treats the choice of a child as a multi-armed bandit and picks the child with the largest mean reward plus a bonus that grows when the child has been tried rarely, as in [UCB1](/ucb1/). Kocsis and Szepesvári (2006) proposed it for planning in Markov decision processes and games and gave a proof that the probability of choosing a wrong action at the root goes to zero, an analysis that Shah, Xie and Xu (2019) later questioned (see Correctness). The name UCT is also the slug of this page.
 
 ## In plain words
 

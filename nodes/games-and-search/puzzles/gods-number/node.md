@@ -107,6 +107,6 @@ The table lists the HTM bounds on cube20.org.
 | August 2008 | 20 | 22 | Rokicki and Welborn |
 | July 2010 | 20 | 20 | Rokicki, Kociemba, Davidson and Dethridge |
 
-Thistlethwaite's 52 came from a four-stage method through a chain of subgroups. In 1995 Reid showed that Kociemba's 1992 algorithm needs at most 29 moves, and he found that the superflip needs 20. The bounds from 2008 on used the coset method above. In QTM, cube20.org lists a counting bound of 19 by 1980, 21 by Hoey in January 1981, 22 by Reid in 1995, 26 by Reid in August 1998, and the matching upper bound of 26 by Rokicki and Davidson in August 2014.
+Thistlethwaite's 52 came from a four-stage method through a chain of subgroups. In 1995 Reid showed that every position can be solved in at most 29 moves, and he found that the superflip needs 20. The bounds from 2008 on used the coset method above. In QTM, cube20.org lists a counting bound of 19 by 1980, 21 by Hoey in January 1981, 22 by Reid in 1995, 26 by Reid in August 1998, and the matching upper bound of 26 by Rokicki and Davidson in August 2014.
 
 ## References
