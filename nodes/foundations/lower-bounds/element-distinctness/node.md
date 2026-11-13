@@ -7,7 +7,6 @@ aliases:
 - Element distinctness problem
 - collision finding
 - distinctness problem
-- duplicate detection
 - element uniqueness
 area: foundations/lower-bounds
 level: core

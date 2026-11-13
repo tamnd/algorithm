@@ -5,7 +5,6 @@ slug: search-space
 name: Search space
 aliases:
 - solution space
-- state space
 - candidate space
 area: combinatorics/exhaustive-search
 level: intro

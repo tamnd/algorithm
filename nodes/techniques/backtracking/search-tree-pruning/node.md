@@ -7,7 +7,6 @@ aliases:
 - Pruning of the search tree
 - cutting dead branches
 - feasibility pruning
-- pruning
 - search-tree pruning
 area: techniques/backtracking
 level: intro
