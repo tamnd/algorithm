@@ -18,7 +18,7 @@ properties: {deterministic: true, recursive: true, anytime: true}
 history:
   year: 1992
   people: [Herbert Kociemba]
-  note: Kociemba published the algorithm in Cubism For Fun in 1992, joining the four phases of Thistlethwaite's 1981 method into two; Reid showed in 1995 that it needs at most 29 moves.
+  note: Kociemba published the algorithm in Cubism For Fun in 1992, joining the four phases of Thistlethwaite's 1981 method into two; Reid showed in 1995 that every position can be solved in at most 29 moves.
 prereqs: [rubiks-cube-problem, iterative-deepening-a-star, subgroup]
 see_also: [gods-number, pattern-database, admissible-heuristic, iterative-deepening-a-star, breadth-first-search, permutation-rank-unrank, macro-operators, bidirectional-search]
 sources:
@@ -160,6 +160,6 @@ Use it to solve the 3 by 3 by 3 cube fast with a short solution: the first mode 
 
 ## History
 
-Thistlethwaite gave a four-phase method with at most 52 moves in 1981. Herbert Kociemba joined its phases into two and published the result in Cubism For Fun in 1992, with IDA* as the search in each phase. Reid showed that the two phases need at most 12 and 18 moves, and in January 1995 that the algorithm needs at most 29. Kociemba's Windows program Cube Explorer implements the algorithm. Rokicki (2008) turned phase 2 into a solver for whole cosets, and Rokicki, Kociemba, Davidson and Dethridge used it in 2010 to prove that every position can be solved in 20 moves.
+Thistlethwaite gave a four-phase method with at most 52 moves in 1981. Herbert Kociemba joined its phases into two and published the result in Cubism For Fun in 1992, with IDA* as the search in each phase. Reid showed that the two phases need at most 12 and 18 moves, and in January 1995 that every position can be solved in at most 29. Kociemba's Windows program Cube Explorer implements the algorithm. Rokicki (2008) turned phase 2 into a solver for whole cosets, and Rokicki, Kociemba, Davidson and Dethridge used it in 2010 to prove that every position can be solved in 20 moves.
 
 ## References

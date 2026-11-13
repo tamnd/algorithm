@@ -93,7 +93,7 @@ L8      remove v from path i
 
 - **Non-covering variant.** NP-complete (Lynch 1975), for grid graphs with an unbounded number of pairs.
 - **Covering variant.** NP-complete (Adcock et al. 2015).
-- **Fixed $k$.** Polynomial for each fixed number of pairs, by Robertson and Seymour.
+- **Fixed $k$.** Polynomial for each fixed number of pairs in the non-covering variant, by Robertson and Seymour.
 - **Brute force.** Enumerate the simple paths of pair 1, then those of pair 2 on the cells left, and so on. The number of simple paths in a grid grows exponentially in its size.
 
 ## Reductions

@@ -96,7 +96,7 @@ At distance 2 in HTM, $18 \cdot 15 = 270$ sequences avoid two turns of the same 
 - **Layer by layer.** Human methods fix the pieces of the top layer, then the middle and then the bottom, with memorized sequences that move a few pieces and keep all others in place. Such sequences are [macro-operators](/macro-operators/): each one is found once, by search or by hand, and reused. The solutions are easy to find and much longer than the shortest ones.
 - **Group membership.** Viewing $G$ as a permutation group on the stickers, the Schreier-Sims algorithm computes a chain of stabilizer subgroups and writes any position as a product of the generators. It runs in time polynomial in the number of stickers, but the words it produces are long.
 - **Thistlethwaite's algorithm (1981).** Four phases through the chain $G \supset \langle U, D, R, L, F2, B2 \rangle \supset \langle U, D, R2, L2, F2, B2 \rangle \supset \langle U2, D2, R2, L2, F2, B2 \rangle \supset \{e\}$, each solved by table lookup. At most 52 moves.
-- **[Kociemba's two-phase algorithm](/kociemba-algorithm/) (1992).** Two phases through $\langle U, D, R2, L2, F2, B2 \rangle$, each by [IDA\*](/iterative-deepening-a-star/) with exact tables for parts of the position. The first solution has at most 30 moves; Reid showed in 1995 that 29 suffice. Run to the end it gives a shortest solution.
+- **[Kociemba's two-phase algorithm](/kociemba-algorithm/) (1992).** Two phases through $\langle U, D, R2, L2, F2, B2 \rangle$, each by [IDA\*](/iterative-deepening-a-star/) with exact tables for parts of the position. The first solution has at most 30 moves; Reid showed in 1995 that every position can be solved in at most 29. Run to the end it gives a shortest solution.
 - **Korf's optimal solver (1997).** IDA* with [pattern databases](/pattern-database/): exact distances for the corners alone and for two halves of the edges, combined by taking the maximum. It found shortest solutions of random positions, with median length 18.
 - **Exhaustive search over cosets.** To find the largest distance, Rokicki, Kociemba, Davidson and Dethridge solved all cosets of $\langle U, D, R2, L2, F2, B2 \rangle$ at once; see [God's number](/gods-number/).
 - **Large cubes.** Demaine et al. (2011) solve the $n \times n \times n$ cube in $O(n^2 / \log n)$ moves by moving many pieces at the same time with one sequence, which matches the lower bound.
@@ -105,7 +105,7 @@ At distance 2 in HTM, $18 \cdot 15 = 270$ sequences avoid two turns of the same 
 
 - **Exact diameter.** 20 in HTM (2010) and 26 in QTM (2014).
 - **Lower bound by counting.** There are fewer than $|G|$ sequences of at most 17 moves that avoid useless pairs, so some position needs 18 moves in HTM, without any search.
-- **First solutions.** Kociemba's algorithm gives at most 29 moves in the worst case. In the Python implementation of its page, the first solutions of random positions had 21 to 25 moves.
+- **First solutions.** The first solution of Kociemba's algorithm has at most 30 moves, 12 + 18 in HTM. In the Python implementation of its page, the first solutions of random positions had 21 to 25 moves.
 - **Complexity.** For the $n \times n \times n$ cube, deciding whether a position can be solved in $k$ moves is [NP-complete](/np-complete/) (Demaine, Eisenstat and Rudoy 2018), while a solution of $O(n^2 / \log n)$ moves, within a constant factor of the worst case, can be found in polynomial time (Demaine et al. 2011).
 
 ## Reductions
