@@ -5,8 +5,6 @@ slug: two-dimensional-prefix-sums
 name: Two-dimensional prefix sums
 aliases:
 - 2D prefix sums
-- summed-area table
-- integral image
 - grid prefix sums
 area: sequences/prefix-sums-and-differences
 level: intro
