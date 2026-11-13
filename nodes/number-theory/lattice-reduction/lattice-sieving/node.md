@@ -97,7 +97,7 @@ The final list is $(1, 0, -2), (0, 1, 0), (1, 0, 1)$ with three collisions, and 
 
 - **Tuple sieving.** Combine three or more vectors at a time, $u \pm w \pm z$. The list can be smaller, about $2^{0.1887 n}$ for triples, at the cost of more time; useful when memory is the limit.
 - **Sieving for CVP.** Sieve the vectors $t - v$ for a target $t$ against a list of short lattice vectors, or preprocess the list once and answer many targets.
-- **Quantum sieving.** Grover search over the list for a partner gives heuristic time about $2^{0.265 n}$ with locality-sensitive filters (Laarhoven, Mosca and van de Pol).
+- **Quantum sieving.** Grover search over the list for a partner gives heuristic time about $2^{0.265 n}$ with locality-sensitive filters. This figure is from Laarhoven's PhD thesis. Laarhoven, Mosca and van de Pol gave the first quantum sieves, with larger exponents.
 - **Progressive sieving.** Sieve first in a projected sublattice of small rank, then lift and extend the list one dimension at a time; this saves a constant factor in practice.
 
 ## Pitfalls
