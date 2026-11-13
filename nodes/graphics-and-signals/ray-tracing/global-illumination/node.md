@@ -80,11 +80,11 @@ Unbiased Monte Carlo methods:
 - **[Metropolis light transport](/metropolis-light-transport/).** A Markov chain over paths that stays near paths that carry much light. Good for hard visibility; its error is correlated.
 - **[Volumetric path tracing](/volumetric-path-tracing/)** with [delta tracking](/delta-tracking/) for participating media.
 
-Consistent and biased methods:
+Biased methods, some of them consistent:
 
 - **[Photon mapping](/photon-mapping/)** and **[progressive photon mapping](/progressive-photon-mapping/).** Store photons from the lights and estimate the density near each camera path vertex. Biased; the progressive version is consistent. [Vertex connection and merging](/vertex-connection-and-merging/) combines it with bidirectional path tracing.
-- **[Radiosity](/radiosity/).** A finite element solution for diffuse scenes.
-- **[Instant radiosity](/instant-radiosity/), [irradiance caching](/irradiance-caching/) and [final gathering](/final-gathering/).** Reuse a small set of lights or of cached values over many pixels.
+- **[Radiosity](/radiosity/).** A finite element solution for diffuse scenes. Deterministic; its mesh error does not go away with more iterations.
+- **[Instant radiosity](/instant-radiosity/), [irradiance caching](/irradiance-caching/) and [final gathering](/final-gathering/).** Reuse a small set of lights or of cached values over many pixels. Biased: by the clamp, by the interpolation, and by the error of the coarse solution that is gathered.
 - **Learned and reused sampling.** [Path guiding](/path-guiding/) learns where light comes from, and [ReSTIR](/restir/) reuses light samples between pixels and frames; both can be unbiased or biased, by choice.
 
 Approximations that do not solve the problem but are used in its place: [ambient occlusion](/ambient-occlusion/), constant ambient terms, and [Whitted ray tracing](/whitted-ray-tracing/), which follows only specular paths and direct light.

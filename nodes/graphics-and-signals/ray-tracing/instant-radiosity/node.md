@@ -56,7 +56,7 @@ L1  V ← an empty list of VPLs
 L2  for j ← 1 to N do                                  ▷ the light pass
 L3      sample a point y on a light; β ← Φ_lights / N; f ← the emission factor
 L4      loop: append the VPL (y, n_y, β, f) to V
-L5          if y is not on a light then survive with probability ρ(y); if not, break
+L5          if y is not the light vertex of L3 then survive with probability ρ(y); if not, break
 L6          sample ω about n_y with the density cos θ/π; let y′ be the nearest hit; if none, break
 L7          y ← y′; f ← ρ(y′)/π                         ▷ β stays the same
 L8  for each camera point x and each VPL v ∈ V that x sees do     ▷ the gather pass

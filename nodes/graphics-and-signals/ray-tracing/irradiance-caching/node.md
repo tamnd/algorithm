@@ -89,7 +89,7 @@ The floor is shaded at the centers of a 40 by 40 grid of points, 1600 points in 
 | 0.1 | 692 | 0.0519 | 0.1822 |
 | 0.05 | 1316 | 0.0165 | 0.0853 |
 
-Halving $a$ roughly halves the error and doubles the number of records. The largest errors are near the edge of the bright region below the emitter, where the irradiance changes fastest. With records from 256 sampled rays instead, the record counts are the same, but the rms error is 0.308, 0.259, 0.212 and 0.207. The noise of one record, 0.208 rms for 256 rays in this scene with a small emitter, sets a floor that a smaller $a$ cannot remove. This is why irradiance caching is used for smooth indirect light, and why its records need many rays.
+Halving $a$ roughly halves the error and multiplies the number of records by 2.5, 2.2 and 1.9. This is less than the factor 4 of the $1/a^2$ growth of the complexity section, because the grid of 1600 points is not fine at these radii: for $a = 0.05$ there are records at 1316 of the 1600 points. The largest errors are near the edge of the bright region below the emitter, where the irradiance changes fastest. With records from 256 sampled rays instead, the record counts are the same, but the rms error is 0.308, 0.259, 0.212 and 0.207. The noise of one record, 0.208 rms for 256 rays in this scene with a small emitter, sets a floor that a smaller $a$ cannot remove. This is why irradiance caching is used for smooth indirect light, and why its records need many rays.
 
 ## Correctness
 

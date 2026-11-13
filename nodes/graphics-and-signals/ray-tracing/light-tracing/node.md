@@ -72,20 +72,20 @@ L10 for each pixel j: Ij ← (sum of the values added to pixel j) / N
 
 The pixel of a point $x$ is the pixel that the camera ray toward $x$ falls in; for a pinhole camera it is found by projecting $x$. $W(x \to c)$ is the importance of that pixel. A pixel that no connection reaches gets $0$ from this path, and the division by $N$ at line L10 counts every path, also those that added nothing to the pixel.
 
-With a Lambertian emitter of radiance $E$, light sampling by power ($p_A = E / \Phi$ with $\Phi = \sum E_i A_i$) and cosine sampling, the weight is $\beta = \Phi$ at line L3, and $\pi \Phi$ after line L4. With $f = \rho / \pi$ at a vertex, the contribution of line L6 at the vertex $x_m$ is $\Phi\, \rho_1 \cdots \rho_m\, W \cos\theta_x / |x - c|^2$, divided by the survival probabilities $q_1 \cdots q_{m-1}$: the power of the lights times the albedos along the path.
+With a Lambertian emitter of radiance $E$, light sampling by power ($p_A = E / \Phi$ with $\Phi = \sum E_i A_i$) and cosine sampling, the weight is $\beta = \Phi$ at line L3, and $\pi \Phi$ after line L4. With $f = \rho / \pi$ at a vertex, the contribution of line L6 at the vertex $x_m$ is $\Phi\, \rho_1 \cdots \rho_m\, W \cos\theta_x / |x - c|^2$, divided by the survival probabilities $q_1 \cdots q_{m-1}$: the power of the lights over $\pi$ times the albedos along the path. The power itself is $\pi \Phi$.
 
 ## Example
 
 The scene is a sphere of radius $2$ with albedo $\tfrac45$ and no emission, around an emitting sphere of radius $\tfrac35$ with radiance $1$ and albedo $\tfrac12$, both centered at the origin. The pinhole is at $c = (0, 0, -1)$. Pixel 1 holds the directions with $z \ge \tfrac45$, the cone in which the inner sphere fills the view, and pixel 0 the rest; each has $W = 1 / \Omega_j$ with $\Omega_0 = 2\pi \cdot \tfrac95$ and $\Omega_1 = 2\pi \cdot \tfrac15$, so each pixel is the mean radiance over its directions.
 
-By symmetry the radiance is constant on each sphere. A cosine sampled ray from the outer wall hits the inner sphere with the probability $(\tfrac{r}{R})^2 = \tfrac{9}{100}$, and every ray from the inner sphere hits the outer wall. So $L_o = \tfrac45 (\tfrac{91}{100} L_o + \tfrac{9}{100} L_i)$ and $L_i = 1 + \tfrac12 L_o$, which give $L_o = \tfrac{18}{59} \approx 0.3051$ and $L_i = \tfrac{68}{59} \approx 1.1525$. The total power is $\Phi = 4\pi (\tfrac35)^2 \approx 4.5239$.
+By symmetry the radiance is constant on each sphere. A cosine sampled ray from the outer wall hits the inner sphere with the probability $(\tfrac{r}{R})^2 = \tfrac{9}{100}$, and every ray from the inner sphere hits the outer wall. So $L_o = \tfrac45 (\tfrac{91}{100} L_o + \tfrac{9}{100} L_i)$ and $L_i = 1 + \tfrac12 L_o$, which give $L_o = \tfrac{18}{59} \approx 0.3051$ and $L_i = \tfrac{68}{59} \approx 1.1525$. With $E = 1$, $\Phi = 4\pi (\tfrac35)^2 \approx 4.5239$ is the area of the light, and the total power is $\pi \Phi \approx 14.2122$.
 
 One light path (seed 3):
 
 | vertex | point | albedo | $\beta$ before L6 | connection | added to pixel 0 |
 |---|---|---|---|---|---|
 | $y$ on the light | $(-0.409, 0.436, 0.053)$ | | $\Phi$ | faces away from $c$ | |
-| $x_1$ on the outer wall | $(-1.966, 0.316, 0.184)$ | $0.8$ | $4.5239$ | $W \cos\theta / d^2 = 0.014871$ | $4.5239 \cdot 0.8 \cdot 0.014871 = 0.05382$ |
+| $x_1$ on the outer wall | $(-1.966, 0.316, 0.184)$ | $0.8$ | $\pi \Phi \approx 14.2122$ | $W \cos\theta / d^2 = 0.014871$ | $4.5239 \cdot 0.8 \cdot 0.014871 = 0.05382$ |
 
 At $x_1$ roulette draws $u = 0.837 \ge q = 0.8$ and the path stops. Over $N$ paths (seed 1):
 

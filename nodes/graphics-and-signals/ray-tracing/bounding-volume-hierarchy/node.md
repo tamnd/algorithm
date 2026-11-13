@@ -147,7 +147,7 @@ CLOSEST-HIT returns a primitive with the least $t$. A subtree is skipped at line
 
 The model is the [real RAM](/real-ram/). A box test and a primitive test cost $O(1)$ each.
 
-- **Build.** The version above sorts each range, which costs $O(m \log m)$ at a node with $m$ primitives. The median split halves the ranges, so the height is $h = \lceil \lg n \rceil$ for $L = 1$, the ranges at one depth are disjoint, and the total is $O(n \log^2 n)$. With a linear-time median ([quickselect](/quickselect/) or a deterministic selection) it is $O(n \log n)$. The binned SAH build is $O(n \log n)$.
+- **Build.** The version above sorts each range, which costs $O(m \log m)$ at a node with $m$ primitives. The median split halves the ranges, so the height is $h = \lceil \lg n \rceil$ for $L = 1$, the ranges at one depth are disjoint, and the total is $O(n \log^2 n)$. With a deterministic linear-time selection for the median it is $O(n \log n)$, and with [quickselect](/quickselect/) it is $O(n \log n)$ in expectation. The binned SAH build is $O(n \log n)$ when its tree has depth $O(\log n)$, but its depth can grow linearly, and its worst case is $\Theta(n^2)$ ([BVH construction](/bvh-construction/)).
 - **Closest hit and any hit.** In the worst case a query visits all $2n - 1$ nodes and tests all $n$ primitives, so it is $O(n)$. Take $n$ triangles in parallel planes, each with corners $(0, 0, z)$, $(10, 0, z)$ and $(10, 10, z)$. The ray along the z axis through $(1, 9)$ is inside every box and meets no triangle, so no subtree is skipped. On typical scenes with a good build the number of visits grows slowly with $n$, close to logarithmic, but that is an observation, not a bound.
 - **Refit.** One pass over the nodes: $\Theta(n)$.
 - **Space.** At most $2n - 1$ nodes and $n$ entries of $refs$: $\Theta(n)$. The memory size is known before the build, unlike for a kd-tree.
@@ -155,7 +155,8 @@ The model is the [real RAM](/real-ram/). A box test and a primitive test cost $O
 | operation | time | case |
 |---|---|---|
 | build | $O(n \log^2 n)$ | worst, median split with a sort per node |
-| build | $O(n \log n)$ | worst, with linear-time median or binned SAH |
+| build | $O(n \log n)$ | worst, with a deterministic linear-time median; expected with quickselect |
+| build | $O(n^2)$ | worst, binned SAH; $O(n \log n)$ when the depth is $O(\log n)$ |
 | closest_hit, any_hit | $O(n)$ | worst; close to logarithmic visits observed on typical scenes |
 | refit | $\Theta(n)$ | worst |
 | space | $\Theta(n)$ | total, at most $2n - 1$ nodes |

@@ -71,7 +71,7 @@ Here $L_i(x, \omega)$ is the radiance that the path found after leaving $x$ in t
 | 5 | 16000 | 9 | 0.237 | 0.64 | 1.13 |
 | 6 | 32000 | 23 | 0.248 | 0.56 | 1.03 |
 
-Iteration 0 is worse than cosine sampling, because half of its samples are uniform on the sphere and half of those go into the floor. At the end, the floor pixel has about a quarter of the variance of cosine sampling. From one floor point, the trained guide sends more than four times as many samples to the cap as cosine sampling does; the tests check this. The wide band covers most of the sphere, its records are spread over many cells, and its gain is small.
+The exact value of both pixels is $\tfrac14$. The floor means of iterations 4 and 5 lie 2.8 and 2.6 standard errors below it, so they do not agree with it at the usual level; runs of the implementation with other seeds show no such shift. Iteration 0 is worse than cosine sampling, because half of its samples are uniform on the sphere and half of those go into the floor. At the end, the floor pixel has about a quarter of the variance of cosine sampling. From one floor point, the trained guide sends more than four times as many samples to the cap as cosine sampling does; the tests check this. The wide band covers most of the sphere, its records are spread over many cells, and its gain is small.
 
 **Two bounces.** With the albedo $\tfrac34$ below $z = 0$, $\tfrac12$ above it, and paths cut after two reflections, the exact values are $1.2$ on the floor and $0.988$ on the wide band. Cosine sampling gives $3.74$ and $3.18$ per sample; the same training with $4000$ records per cell reaches $2.85$ and $2.89$ in iteration 6. These numbers are measurements on one seed, not bounds.
 
