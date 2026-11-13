@@ -63,7 +63,7 @@ At equilibrium the probability of the level $E$ is proportional to $e^{-F(E)/k_B
 | folds $g(E)$ | 2323 | 1448 | 256 | 34 | 6 |
 | local minima | 65 | 314 | 144 | 24 | 6 |
 
-Only the 6 folds at $-4$ are global minima, so 547 folds are local minima that trap a descent. Steepest descent, which moves to the lowest neighbour until no neighbour is lower, reaches $E = -4$ from only 617 of the 4067 folds, that is 15.2 percent. This toy landscape is rugged under pivot moves, so a search needs uphill moves or restarts.
+Only the 6 folds at $-4$ are global minima, so 547 folds are local minima that trap a descent. Steepest descent, which moves to the lowest neighbour until no neighbour is lower, taking the first word in alphabetical order when several neighbours tie, reaches $E = -4$ from only 617 of the 4067 folds, that is 15.2 percent. This toy landscape is rugged under pivot moves, so a search needs uphill moves or restarts.
 
 **Energy against entropy.** With $k_B = 1$ and the contact energy as the unit, the free energies and the probabilities of the levels are:
 

@@ -70,7 +70,7 @@ The model is the one of discrete characters: $n$ taxa, $m$ characters, at most $
 - **Fixed number of characters.** McMorris, Warnow and Wimer showed in 1994 that the problem is polynomial when $m$ is fixed.
 - **Directed multistate characters.** A character may come with a character state tree that fixes the allowed order of changes. This is the cladistic setting of Estabrook and McMorris.
 - **Missing entries.** Some entries are unknown, and the question is whether they can be filled so that a perfect phylogeny exists. The pairwise test no longer works, even for binary data, as the [four-gamete condition](/four-gamete-condition/) page shows.
-- **Haplotypes.** In perfect phylogeny haplotyping, each input row is a genotype with entries 0, 1 and 2, where 2 means that the two copies differ. The question is whether the genotypes can be split into pairs of haplotypes that have a binary perfect phylogeny. Gusfield introduced the problem in 2002, and it is solvable in linear time.
+- **Haplotypes.** In perfect phylogeny haplotyping, each input row is a genotype with entries 0, 1 and 2, where 2 means that the two copies differ. The question is whether the genotypes can be split into pairs of haplotypes that have a binary perfect phylogeny. Gusfield introduced the problem in 2002 and solved it in almost linear time; later algorithms take linear time.
 - **Optimization versions.** When no perfect phylogeny exists, one can keep the largest set of characters that fits, which is [character compatibility](/character-compatibility/), or remove the fewest taxa, or allow a few extra changes. A model with recombination replaces the tree by an [ancestral recombination graph](/ancestral-recombination-graph/).
 
 ## Examples

@@ -87,7 +87,7 @@ $$Q = \{ab|cd,\ ab|ce,\ ab|de,\ cd|ef,\ ac|df,\ bf|cd\}.$$
 | ac\|df | a | 2 | 1 | goes to the side cdef as yc\|df |
 | bf\|cd | b | 2 | 1 | goes to the side cdef as yf\|cd |
 
-Here $y$ is the new taxon on the side cdef, which stands for $\{a, b\}$. The cut $cde \mid abf$ has a larger $G$, but it cuts three bad edges, and it would violate two of the quartets.
+Here $y$ is the new taxon on the side cdef, which stands for $\{a, b\}$. The cut $cde \mid abf$ has a larger $G$, but it cuts three bad edges: it would violate $ac|df$ and leave $cd|ef$ open.
 
 **The two sides.** The side $\{a, b, x\}$ has three taxa, so it is a star. The side $\{c, d, e, f, y\}$ has the quartets $cd|ef$, $yc|df$ and $yf|cd$. With $\alpha = 0$, the best cut is $cd \mid efy$ with $G = 10$ and $B = 2$, and with $\alpha = 5$ no cut has a positive value. This cut satisfies $cd|ef$ and $yf|cd$, and it violates $yc|df$. Both of its sides then have no quartets, so they are stars.
 

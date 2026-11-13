@@ -89,7 +89,7 @@ Under the [multispecies coalescent](/multispecies-coalescent/), the same gene tr
 
 - Reading the input takes $\Omega(n + m)$ time, and the LCA mapping meets this bound for D and DL.
 - Undated DTL is in $O(mn)$ time.
-- DTL with time consistency is NP-hard (Ovadia et al. 2011). So the undated dynamic program can return a set of transfers that no ordering of the species tree in time allows, and a check or repair step is needed.
+- DTL with time consistency is NP-hard (Ovadia et al. 2011). The undated dynamic program does not enforce it, so it can return a set of transfers that no ordering of the species tree in time allows, and a check or repair step is needed.
 
 ## Reductions
 

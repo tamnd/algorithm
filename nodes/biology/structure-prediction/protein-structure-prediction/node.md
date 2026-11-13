@@ -96,7 +96,7 @@ CASP has run every two years since 1994. The deep learning methods of CASP13 and
 
 - **To optimization.** By the thermodynamic hypothesis, prediction reduces to the [global minimization](/global-optimization/) of a free energy over the conformations. The task then splits into two parts: an accurate energy function and a search that can find its minimum. Each part can fail on its own.
 - **From HP folding.** Each exact algorithm for the energy version, with an energy function that contains the HP energy as a special case, solves HP folding. This is how the lattice results give hardness for the general problem.
-- **To side-chain packing.** With a fixed backbone and a discrete set of [rotamers](/rotamer/), the rest of the problem is a minimization over rotamer choices with pair energies. This minimization is NP-hard in general, and [dead-end elimination](/dead-end-elimination/) is an exact method that is often fast on proteins.
+- **To side-chain packing.** With a fixed backbone and a discrete set of [rotamers](/rotamer/), the rest of the problem is a minimization over rotamer choices with pair energies. This minimization is NP-hard in general, and [dead-end elimination](/dead-end-elimination/) followed by an exact search over the rotamers that it keeps is often fast on proteins.
 
 ## Applications
 

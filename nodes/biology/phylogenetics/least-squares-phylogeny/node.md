@@ -84,7 +84,7 @@ and fit OLS lengths on all 105 topologies.
 | 6 | `((A,F),C,(B,(D,E)));` | 1739/72 | 0 |
 | 7 | `((A,F),(B,C),(D,E));` | 105/4 | 0 |
 
-The tree with the smallest $Q$ needs two negative edges, which have no meaning as amounts of evolution. The best topology whose fitted lengths are all positive ranks sixth; it is also the [neighbor-joining](/neighbor-joining/) tree, with lengths A $9/2$, F $5/2$, C $31/6$, B $41/12$, D $33/8$, E $23/8$ and internal edges $29/6$, $47/36$ and $25/12$. The seventh tree is the [minimum evolution](/minimum-evolution/) tree, with total length $123/4$.
+The tree with the smallest $Q$ needs two negative edges, which have no meaning as amounts of evolution. The best topology whose fitted lengths are all positive ranks sixth; it is also the topology of the [neighbor-joining](/neighbor-joining/) tree, and its least-squares lengths are A $9/2$, F $5/2$, C $31/6$, B $41/12$, D $33/8$, E $23/8$ and internal edges $29/6$, $47/36$ and $25/12$. The seventh tree is the [minimum evolution](/minimum-evolution/) tree, with total length $123/4$.
 
 ## Known algorithms
 

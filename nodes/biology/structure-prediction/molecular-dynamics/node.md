@@ -54,7 +54,7 @@ sources:
     locator: the chapters on molecular dynamics and on periodic boundary conditions
 ---
 
-Molecular dynamics simulates the motion of the atoms of a molecule, often with the water around it, by integrating Newton's equations of motion $m_i \ddot{x}_i = -\nabla_i U(x)$, where $U$ is a force field, a physical [energy function](/energy-function/). The standard integrator is the velocity form of [Verlet integration](/verlet-integration/): each time step does a half kick of the velocities, a drift of the positions, one evaluation of the forces and a second half kick. The method is time-reversible and symplectic, so the total energy has no drift over long runs, and the total momentum is conserved. For proteins, the time step is about 1 to 2 fs, and the force evaluation dominates the cost. Molecular dynamics is the physics-based approach to [ab initio protein folding](/ab-initio-protein-folding/), and it is a main tool for studying how proteins move.
+Molecular dynamics simulates the motion of the atoms of a molecule, often with the water around it, by integrating Newton's equations of motion $m_i \ddot{x}_i = -\nabla_i U(x)$, where $U$ is a force field, a physical [energy function](/energy-function/). The standard integrator is the velocity form of [Verlet integration](/verlet-integration/): each time step does a half kick of the velocities, a drift of the positions, one evaluation of the forces and a second half kick. The method is time-reversible and symplectic, so for a small enough time step the error in the total energy stays bounded over long runs instead of drifting, and the total momentum is conserved. For proteins, the time step is about 1 to 2 fs, and the force evaluation dominates the cost. Molecular dynamics is the physics-based approach to [ab initio protein folding](/ab-initio-protein-folding/), and it is a main tool for studying how proteins move.
 
 ## In plain words
 
@@ -116,7 +116,7 @@ Halving $h$ divides both errors by 4, which shows order 2. The energy error does
 
 The energy error falls by a factor of 3.85 and then 3.98 when $h$ is halved, so it is $O(h^2)$. The momentum is zero up to rounding, because the pair forces cancel.
 
-**The time step of a protein.** The fastest motion in a protein is the stretch of a bond to a hydrogen atom, with a period of about 11 fs for a C-H bond. For a harmonic motion of angular frequency $\omega$, Verlet is stable only for $h \omega < 2$, that is, for $h < T / \pi \approx 3.5$ fs with the period $T$. For accuracy, simulations use $h = 1$ fs, or 2 fs when the lengths of the bonds to hydrogen are held fixed by constraints. One microsecond then takes $5 \times 10^8$ steps.
+**The time step of a protein.** The fastest motion in a protein is the stretch of a bond to a hydrogen atom, with a period of about 11 fs for a C-H bond. For a harmonic motion of angular frequency $\omega$, Verlet is stable only for $h \omega < 2$, that is, for $h < T / \pi \approx 3.5$ fs with the period $T$. For accuracy, simulations use $h = 1$ fs, or 2 fs when the lengths of the bonds to hydrogen are held fixed by constraints. One microsecond then takes $10^9$ steps at 1 fs, or $5 \times 10^8$ steps at 2 fs.
 
 ## Correctness
 

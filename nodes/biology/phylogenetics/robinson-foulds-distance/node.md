@@ -57,7 +57,7 @@ $$d_{RF}(T_1, T_2) = (c_1 - s) + (c_2 - s).$$
 | $ABC \mid DEF$ | $ABC \mid DEF$ |
 | $ABCD \mid EF$ | $ABCD \mid EF$ |
 
-Two splits are shared and one split of each tree is not, so $d_{RF} = 1 + 1 = 2$, the half distance is 1, and the normalized distance is $2/6 = 1/3$. The trees are one NNI apart (swap $B$ and $C$ across the edge of $ABC \mid DEF$), and the bound $d_{RF} \le 2\, d_{NNI}$ holds with equality.
+Two splits are shared and one split of each tree is not, so $d_{RF} = 1 + 1 = 2$, the half distance is 1, and the normalized distance is $2/6 = 1/3$. The trees are one NNI apart (swap $B$ and $C$ across the edge of $AB \mid CDEF$), and the bound $d_{RF} \le 2\, d_{NNI}$ holds with equality.
 
 **The maximum, from one leaf.** Let $T_1$ be the caterpillar $(A,(B,(C,(D,(E,F)))))$ and $T_2$ the caterpillar $(B,(C,(D,(E,(F,A)))))$. Their nontrivial splits are $AB \mid CDEF$, $ABC \mid DEF$, $ABCD \mid EF$ and $BC \mid DEFA$, $BCD \mid EFA$, $BCDE \mid FA$. None is shared, so $d_{RF} = 6 = 2(6 - 3)$, the largest value for six taxa. Yet $T_2$ is $T_1$ with only the leaf $A$ moved from one end to the other: one SPR move, and the two trees agree on the five taxa $B, \ldots, F$. RF reads this one move as a complete disagreement.
 

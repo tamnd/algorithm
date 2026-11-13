@@ -21,6 +21,9 @@ sources:
   - paper: doi:10.1016/S0196-8858(82)80004-3
     title: L. R. Foulds and R. L. Graham, The Steiner problem in phylogeny is NP-complete, Advances in Applied Mathematics 3(1), 1982, pages 43 to 49
     locator: NP-completeness of maximum parsimony
+  - paper: doi:10.1145/1183907.1183909
+    title: Benny Chor and Tamir Tuller, Finding a maximum likelihood tree is hard, Journal of the ACM 53(5), 2006, pages 722 to 744
+    locator: NP-hardness of the maximum likelihood tree (conference version at RECOMB 2005)
   - paper: doi:10.1109/TCBB.2006.4
     title: Sebastien Roch, A short proof that phylogenetic tree reconstruction by maximum likelihood is hard, IEEE/ACM Transactions on Computational Biology and Bioinformatics 3(1), 2006
     locator: NP-hardness of the maximum likelihood tree
@@ -103,9 +106,9 @@ The three unrooted trees are AB|CD, AC|BD and AD|BC. Parsimony with the [Fitch a
 | [UPGMA](/upgma/) | distances with a clock | $O(n^3)$ | exact on ultrametrics |
 | [Fitch-Margoliash](/fitch-margoliash/) | weighted least squares | heuristic search | fits lengths on each candidate tree |
 | [Four-point method](/four-point-method/) | tree metric | $O(n^2)$ | exact reconstruction from additive distances |
-| [Maximum parsimony](/maximum-parsimony/) | fewest changes | NP-hard; one tree in $O(nm)$ by the [Fitch algorithm](/fitch-algorithm/) | search with [branch and bound](/branch-and-bound/) or local moves |
+| [Maximum parsimony](/maximum-parsimony/) | fewest changes | NP-hard; one tree in $O(nm)$ by the [Fitch algorithm](/fitch-algorithm/) | search with [branch and bound](/depth-first-branch-and-bound/) or local moves |
 | [Maximum likelihood](/maximum-likelihood-phylogeny/) | substitution model | NP-hard; one tree in $O(nm s^2)$ by [Felsenstein pruning](/felsenstein-pruning/) for $s$ states | search with local moves |
-| [Bayesian inference](/bayesian-phylogenetic-inference/) | model and prior | [Markov chain Monte Carlo](/markov-chain-monte-carlo/) | samples trees from the posterior |
+| [Bayesian inference](/bayesian-phylogenetic-inference/) | model and prior | [Markov chain Monte Carlo](/metropolis-hastings/) | samples trees from the posterior |
 | [Stepwise addition](/stepwise-addition/) | any score | $n$ insertions, each over all edges | builds a starting tree |
 | [NNI](/nearest-neighbor-interchange/), [SPR](/subtree-prune-and-regraft/), [TBR](/tree-bisection-and-reconnection/) | any score | per move, $O(n)$, $O(n^2)$ and $O(n^3)$ neighbors | improve a tree by local search |
 
@@ -115,7 +118,7 @@ Support for the edges of the result is usually measured with the [phylogenetic b
 
 - **Search space.** $(2n-5)!!$ unrooted binary trees, so exhaustive search is practical only up to about 10 to 12 taxa.
 - **Maximum parsimony** is NP-complete in its decision form (Foulds and Graham 1982); see [maximum parsimony is NP-hard](/maximum-parsimony-np-hard/).
-- **Maximum likelihood** is NP-hard (Roch 2006); see [ML tree NP-hardness](/ml-tree-np-hard/).
+- **Maximum likelihood** is NP-hard (Chor and Tuller 2005, with a short proof by Roch 2006); see [ML tree NP-hardness](/ml-tree-np-hard/).
 - **Least squares** fits by a tree metric are NP-hard in $L_1$ and $L_2$ (Day 1987).
 - **Balanced minimum evolution** is NP-hard (Fiorini and Joret 2012).
 - **Exact data.** When the distances form a tree metric, the tree is unique and found in $O(n^2)$ time.

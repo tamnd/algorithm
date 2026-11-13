@@ -63,7 +63,7 @@ A brute force over all 15 unrooted binary trees on five taxa finds that the best
 | tree | splits | displayed quartets |
 |---|---|---|
 | `((a,b),c,(d,e));` | $ab \mid cde$, $abc \mid de$ | $ab|cd$, $bc|de$, $ab|de$ |
-| `((a,e),b,(c,d));` | $ae \mid bcd$, $abe \mid cd$ | $ab|cd$, $ac|be$, $ae|cd$ |
+| `((b,e),a,(c,d));` | $be \mid acd$, $abe \mid cd$ | $ab|cd$, $ac|be$, $ae|cd$ |
 
 No tree displays four, so $Q$ is not compatible. One conflict is direct: the set $\{a, c, d, e\}$ carries two different quartets, $ad|ce$ and $ae|cd$, and a tree displays at most one of them. The other conflicts involve several sets of four taxa at once, and only the brute force shows that three quartets must be lost.
 

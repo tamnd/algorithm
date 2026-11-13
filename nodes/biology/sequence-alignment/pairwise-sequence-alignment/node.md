@@ -70,7 +70,7 @@ All examples use the toy DNA scheme: $s(a, a) = +2$, $s(a, b) = -1$ for $a \ne b
 | TTCAGTAC | AGTACGGA | $-2$ | 10: `AGTAC` over `AGTAC` | overlap, 10: `TTCAGTAC---` over `---AGTACGGA` |
 | CAGGTACT | TAGTAC | 5 | 8: `GTAC` over `GTAC` | fitting of $y$ in $x$, 7: `CAGGTACT` over `TA-GTAC-` |
 
-The rows show how the forms differ. In the second row, the flanks TC and T of the two sequences pull the global score down, and local alignment drops them. In the third row, the sequences share only an overlap of five letters, and the overlap form scores it without a penalty for the ten unaligned end letters. In the last row, the fitting form must keep the first letter T of $y$, at a cost, so it scores less than the local form, which may drop that letter.
+The rows show how the forms differ. In the second row, the flanks TC and T of the two sequences pull the global score down, and local alignment drops them. In the third row, the sequences share only an overlap of five letters, and the overlap form scores it without a penalty for the six unaligned end letters. In the last row, the fitting form must keep the first letter T of $y$, at a cost, so it scores less than the local form, which may drop that letter.
 
 Even two strings of length 5 have 1683 alignments, and two of length 10 have 8097453; the [alignment graph](/alignment-graph/) page counts them.
 
@@ -90,7 +90,7 @@ For unit costs, the [Myers bit-parallel algorithm](/myers-bit-parallel-algorithm
 ## Bounds
 
 - **Upper bound.** $O(mn)$ time for each form with linear or affine gaps. For a constant alphabet and an arbitrary scoring matrix, Crochemore, Landau and Ziv-Ukelson (2003) gave $O(n^2 / \log n)$ time for two sequences of length $n$, for global and local alignment. The [Four Russians method](/four-russians-method/) gives the same bound for edit distance with bounded integer costs.
-- **Conditional lower bound.** The Levenshtein distance and the longest common subsequence are special cases of global alignment with a fixed scoring scheme. So, unless the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) fails, no algorithm solves global alignment in $O(n^{2 - \varepsilon})$ time for a constant $\varepsilon > 0$. See [edit distance hardness](/edit-distance-hardness/) and the [Backurs-Indyk LCS lower bound](/backurs-indyk-lcs-lower-bound/).
+- **Conditional lower bound.** The Levenshtein distance and the longest common subsequence are special cases of global alignment with a fixed scoring scheme. So, unless the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) fails, no algorithm solves global alignment in $O(n^{2 - \varepsilon})$ time for a constant $\varepsilon > 0$. See [edit distance hardness](/edit-distance-hardness/) and the [SETH lower bound for LCS](/lcs-seth-lower-bound/).
 - **Comparison lower bound.** In a model where the letters can only be tested for equality, Aho, Hirschberg and Ullman (1976) proved a lower bound of order $mn$ comparisons for the longest common subsequence, so for global alignment in that model.
 - **Space.** The score needs $O(\min(m, n))$ words beside the input, and so does the alignment, with [Hirschberg's algorithm](/hirschberg-algorithm/), beside the output.
 

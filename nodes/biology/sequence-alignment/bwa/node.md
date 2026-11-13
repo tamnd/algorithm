@@ -131,7 +131,7 @@ Each state that leads to a report is the end of a path of at most $m + z \le 2m$
 
 ## Variants and improvements
 
-- **Seeding in BWA-backtrack.** The first bases of the read, 32 by default, form a seed with at most 2 differences; the rest of the read gets a larger bound. The maximum number of differences depends on the read length.
+- **Seeding in BWA-backtrack.** When seeding is turned on (it is off by default), the first bases of the read, for example 32, form a seed with at most 2 differences; the rest of the read gets a larger bound. The maximum number of differences depends on the read length.
 - **BWA-SW (2010).** For long reads with gaps, it runs [Smith-Waterman](/smith-waterman/)-style dynamic programming between a prefix trie of the reference, represented by the FM-index, and a directed acyclic word graph of the query, with heuristics that prune the trie.
 - **BWA-MEM (2013).** SMEM seeds, re-seeding, chaining and banded extension. It handles reads from 70 bases to a few megabases, local alignments and chimeric reads, and is the variant in common use.
 - **[Bowtie](/bowtie/).** Published the same year, also on an FM-index, but with mismatches only and double indexing instead of the bound $D$.

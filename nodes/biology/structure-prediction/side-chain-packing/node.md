@@ -9,7 +9,7 @@ aliases:
 - Side-chain positioning
 area: biology/structure-prediction
 level: advanced
-summary: Choose a rotamer for each side chain on a fixed backbone so that a sum of self and pair energies is least. NP-hard in general; exact on sparse graphs by tree decomposition.
+summary: Choose a rotamer for each side chain on a fixed backbone so that a sum of self and pair energies is least. NP-hard in general; polynomial on graphs of bounded treewidth by tree decomposition.
 prereqs: [rotamer, np-hard]
 see_also: [dead-end-elimination, protein-design, comparative-modeling, variable-elimination, tree-decomposition, map-inference, three-coloring, binary-integer-programming]
 sources:

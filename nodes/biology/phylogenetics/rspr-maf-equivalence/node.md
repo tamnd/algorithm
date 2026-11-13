@@ -92,7 +92,7 @@ Both parts are constructive. Part 1 turns any agreement forest with $m$ blocks i
 - **Hardness.** The rSPR distance and the rooted agreement forest problem have the same complexity. Bordewich and Semple proved NP-hardness and a [kernel](/kernelization/) with $O(k)$ leaves through the forest form.
 - **Approximation.** An algorithm that finds a forest within a factor $c$ of the least number of cuts gives the rSPR distance within the same factor $c$.
 - **Agreement subtrees.** A maximum agreement subtree on $S$ gives a forest with block $S \cup \{\rho\}$ and singletons, so $d_{\mathrm{rSPR}} \le n - |S|$.
-- **Unrooted bound.** Removing $\rho$ and forgetting the roots turns a rooted agreement forest into an unrooted one of the same size. So the TBR distance of the unrooted trees is at most $d_{\mathrm{rSPR}}$.
+- **Unrooted bound.** Removing $\rho$ and forgetting the roots turns a rooted agreement forest into an unrooted one of at most the same size (one less if $\{\rho\}$ is a block by itself). So the TBR distance of the unrooted trees is at most $d_{\mathrm{rSPR}}$.
 - **Networks.** The hybridization number of two trees is the least size of an *acyclic* agreement forest minus one, where acyclic is an extra condition on the order of the blocks in the two trees. Every acyclic forest is a forest, so $d_{\mathrm{rSPR}}$ is a lower bound for the hybridization number.
 
 ## Tightness

@@ -93,7 +93,7 @@ For two strings of length $n$ over a constant alphabet, Crochemore, Landau and Z
 
 - **Upper.** $O(mn)$ time for linear and affine gaps, and $O(n^2 / \log n)$ over a constant alphabet with an arbitrary scoring matrix.
 - **Lower, trivial.** $\Omega(m + n)$: the algorithm must read every letter.
-- **Lower, conditional.** LCS and Levenshtein distance are special cases, so under the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) no algorithm runs in $O(n^{2 - \varepsilon})$ time for strings of length $n$ (see [edit distance hardness](/edit-distance-hardness/) and the [Backurs-Indyk LCS lower bound](/backurs-indyk-lcs-lower-bound/)).
+- **Lower, conditional.** LCS and Levenshtein distance are special cases, so under the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) no algorithm runs in $O(n^{2 - \varepsilon})$ time for strings of length $n$ (see [edit distance hardness](/edit-distance-hardness/) and the [SETH lower bound for LCS](/lcs-seth-lower-bound/)).
 
 ## Reductions
 

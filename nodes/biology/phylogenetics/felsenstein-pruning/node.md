@@ -37,7 +37,7 @@ sources:
     locator: Chapter 8, Probabilistic approaches to phylogeny (Felsenstein's algorithm for the likelihood)
 ---
 
-Felsenstein's pruning algorithm computes the [phylogenetic likelihood](/phylogenetic-likelihood/) of a tree. The definition of the likelihood of one site sums over all states of the $n - 1$ internal nodes of a rooted binary tree, which is $k^{n-1}$ terms for $k$ states. The pruning algorithm visits the nodes in [postorder](/postorder-traversal/) and gives each node $v$ a vector $L_v$ of $k$ *partial likelihoods*: $L_v(a)$ is the probability of the leaf states below $v$, given state $a$ at $v$. A node's vector is a product over its children of one matrix-vector product per child, so one site costs $\Theta(n k^2)$ time. It is [dynamic programming on a tree](/tree-dynamic-programming/), and it has the same shape as the [Sankoff algorithm](/sankoff-algorithm/) with (min, +) replaced by (+, ×). Every likelihood and Bayesian phylogenetics program runs it at its core.
+Felsenstein's pruning algorithm computes the [phylogenetic likelihood](/phylogenetic-likelihood/) of a tree. The definition of the likelihood of one site sums over all states of the $(n - 1)/2$ internal nodes of a rooted binary tree with $n$ nodes, which is $k^{(n-1)/2}$ terms for $k$ states. The pruning algorithm visits the nodes in [postorder](/postorder-traversal/) and gives each node $v$ a vector $L_v$ of $k$ *partial likelihoods*: $L_v(a)$ is the probability of the leaf states below $v$, given state $a$ at $v$. A node's vector is a product over its children of one matrix-vector product per child, so one site costs $\Theta(n k^2)$ time. It is [dynamic programming on a tree](/tree-dynamic-programming/), and it has the same shape as the [Sankoff algorithm](/sankoff-algorithm/) with (min, +) replaced by (+, ×). Every likelihood and Bayesian phylogenetics program runs it at its core.
 
 ## In plain words
 
@@ -103,7 +103,7 @@ Fix a node $v$ and a state $a$, and let $S_v(a)$ be the sum, over all assignment
 
 ## Complexity
 
-- **Time.** Line L5 does, for each child $w$ of $v$, $k$ dot products of length $k$. Each non-root node is the child of exactly one node, so one site costs $\Theta((n - 1) k^2) = \Theta(n k^2)$ in every case, against $k^{n-1}$ terms for the direct sum on a binary tree. An alignment with $m$ distinct site patterns costs $\Theta(m n k^2)$, plus the time to find the patterns. For DNA $k = 4$, for amino acids $k = 20$, and for codons $k = 61$, where the $k^2$ factor dominates.
+- **Time.** Line L5 does, for each child $w$ of $v$, $k$ dot products of length $k$. Each non-root node is the child of exactly one node, so one site costs $\Theta((n - 1) k^2) = \Theta(n k^2)$ in every case, against $k^{(n-1)/2}$ terms for the direct sum on a binary tree. An alignment with $m$ distinct site patterns costs $\Theta(m n k^2)$, plus the time to find the patterns. For DNA $k = 4$, for amino acids $k = 20$, and for codons $k = 61$, where the $k^2$ factor dominates.
 - **Matrices.** The matrices $P_w = e^{Q t_w}$ are shared by all sites. Computing them costs $O(k^3)$ per branch from an eigen decomposition of $Q$, done one time per $Q$, which is small next to the site work when $m$ is large.
 - **Space.** One site needs $\Theta(n k)$ numbers. Programs keep all $\Theta(m n k)$ partial likelihoods, so that a change of one branch length needs only the vectors on the path to the root.
 - **Special models.** For [F81](/felsenstein-81-model/) and JC69, $P_w v = e^{-\mu t} v + (1 - e^{-\mu t}) (\pi \cdot v) \mathbf 1$, so each message costs $O(k)$ and a site costs $O(n k)$.
@@ -142,6 +142,6 @@ Use it whenever the likelihood of a fixed tree under a Markov model of character
 
 ## History
 
-Felsenstein described the computation of the likelihood of a tree, summing over the states of the internal nodes from the tips down, for discrete characters in 1973, and he gave it for DNA sequences under a substitution model in his 1981 paper in the Journal of Molecular Evolution, where he called it pruning. The same idea appeared earlier in human genetics as the peeling method of Elston and Stewart (1971) for the likelihood of a pedigree, and it was later recognized as a case of the sum-product algorithm on graphical models. Today the pruning algorithm runs inside PhyML, RAxML, IQ-TREE, MrBayes, BEAST and the BEAGLE library, which ports it to graphics processors.
+Felsenstein described the computation of the likelihood of a tree, summing over the states of the internal nodes from the tips up, for discrete characters in 1973, and he gave it for DNA sequences under a substitution model in his 1981 paper in the Journal of Molecular Evolution, where he called it pruning. The same idea appeared earlier in human genetics as the peeling method of Elston and Stewart (1971) for the likelihood of a pedigree, and it was later recognized as a case of the sum-product algorithm on graphical models. Today the pruning algorithm runs inside PhyML, RAxML, IQ-TREE, MrBayes, BEAST and the BEAGLE library, which ports it to graphics processors.
 
 ## References

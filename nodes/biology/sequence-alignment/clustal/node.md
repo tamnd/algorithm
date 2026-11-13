@@ -98,7 +98,7 @@ Line L1 gives these optimal pairwise alignments and distances:
 | $S_2, S_4$ | `ACGTGCA` / `ACTTG-A` | 1/6 |
 | $S_3, S_4$ | `AGGTTGCA` / `A-CTTG-A` | 1/6 |
 
-Gaps do not count in the identity, so $S_1$ and $S_4$ have distance 0 although $S_4$ is two letters shorter. Neighbor joining joins $S_1$ with $S_4$, then that pair with $S_2$, and midpoint rooting puts $S_3$ alone on one side of the root. The weights of line L4 are about 0.023 for $S_1$, 0.041 for $S_2$, 0.099 for $S_3$ and 0.075 for $S_4$.
+Gaps do not count in the identity, so $S_1$ and $S_4$ have distance 0 although $S_4$ is two letters shorter. Neighbor joining joins $S_1$ with $S_4$, with a negative branch length $-5/96$ for $S_1$ that is set to 0, then that pair with $S_2$, and midpoint rooting puts $S_3$ alone on one side of the root. The weights of line L4 are about 0.023 for $S_1$, 0.041 for $S_2$, 0.099 for $S_3$ and 0.075 for $S_4$.
 
 The merges, in postorder:
 

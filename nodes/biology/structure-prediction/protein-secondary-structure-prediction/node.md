@@ -65,7 +65,7 @@ true       C H H H H H H H C C C E E E E E C C
 predicted  C C H H H H H H H H C C E E C C C C
 ```
 
-The labels agree at 12 of 18 positions, so $Q_3 = 66.7$. Of the 7 true helix residues, 6 get H, so $Q_H = 85.7$. Of the 5 true strand residues, 2 get E, so $Q_E = 40.0$. Of the 6 true coil residues, 4 get C, so $Q_C = 66.7$. The helix is found with its ends shifted by one residue, which costs two residues. The strand is found but too short, which costs three. A segment score sees one correct helix and one correct but short strand, and so ranks this prediction higher than Q3 does.
+The labels agree at 12 of 18 positions, so $Q_3 = 66.7$. Of the 7 true helix residues, 6 get H, so $Q_H = 85.7$. Of the 5 true strand residues, 2 get E, so $Q_E = 40.0$. Of the 6 true coil residues, 4 get C, so $Q_C = 66.7$. The helix is found with its start one residue late and its end two residues late, which costs three residues. The strand is found but too short, which costs three. A segment score sees one correct helix and one correct but short strand, and so ranks this prediction higher than Q3 does.
 
 A trivial method sets the floor. If it predicts the most common state of the true string at every position, here H, it gets $Q_3 = 7/18 = 38.9$. Predicting C everywhere gets $6/18 = 33.3$. On real data sets coil is the most common state, and the floor is the coil fraction of the set.
 
@@ -83,7 +83,7 @@ The methods are usually grouped in generations. Each is a learned or statistical
 
 The jump between the second and third rows came from evolutionary information. A family alignment shows which positions keep their chemistry, and the period of hydrophobic positions (about every 3 or 4 residues in a helix, every 2 in a strand) shows up across the family even where one sequence does not show it. Yang and coworkers give 82 to 84 percent as the range of current methods without templates, on test sets of chains that are not similar to the training chains, with the common 8 to 3 cut.
 
-All of these methods run in $O(n)$ time for a sequence of length $n$, for a fixed window and a fixed model, plus the cost of building the profile. The profile search (PSI-BLAST against a large database) dominates the running time in practice.
+All of these methods can run in $O(n)$ time for a sequence of length $n$, for a fixed window and a fixed model, plus the cost of building the profile. The direct form of the Chou-Fasman rules takes $\Theta(n^2)$ time in the worst case, and a precomputation brings it down to $\Theta(n)$. The profile search (PSI-BLAST against a large database) dominates the running time in practice.
 
 ## Bounds
 

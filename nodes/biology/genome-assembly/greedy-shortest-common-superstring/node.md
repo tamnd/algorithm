@@ -40,7 +40,7 @@ sources:
     locator: abstract, the claimed lower bound tending to 2.4 and upper bound 3 (not peer reviewed)
 ---
 
-Greedy shortest common superstring assembly builds a genome from sequencing reads by merging, again and again, the two current strings with the largest [overlap](/overlap-graph/), until one string is left or no overlap reaches a threshold. It is the oldest assembly heuristic and a constant-factor approximation of the NP-hard [shortest common superstring](/shortest-common-superstring/): the result is at most 3.5 times the optimum in the worst case. For assembly the length bound matters less than a second fact: when every pair of adjacent reads overlaps by more than the longest [repeat](/genome-repeat/) of the genome, greedy returns the genome exactly. This page takes the assembly view; the graph form and the approximation proofs are on [greedy superstring merging](/greedy-superstring-merge/).
+Greedy shortest common superstring assembly builds a genome from sequencing reads by merging, again and again, the two current strings with the largest [overlap](/overlap-graph/), until one string is left or no overlap reaches a threshold. It is the oldest assembly heuristic and a constant-factor approximation of the NP-hard [shortest common superstring](/shortest-common-superstring/): the result is at most about 3.425 times the optimum in the worst case. For assembly the length bound matters less than a second fact: when every pair of adjacent reads overlaps by more than the longest [repeat](/genome-repeat/) of the genome, greedy returns the genome exactly. This page takes the assembly view; the graph form and the approximation proofs are on [greedy superstring merging](/greedy-superstring-merge/).
 
 ## In plain words
 
@@ -120,7 +120,7 @@ For $G = 5 \cdot 10^6$, $L = 1000$ and $R = 300$, coverage $c = 15$ ($N = 75\,00
 
 ## Properties
 
-- **Length guarantee.** With $\tau = 0$, the output has length at most $3.5 \cdot \mathrm{OPT}$ in the worst case, where $\mathrm{OPT}$ is the length of a shortest common superstring (Blum et al. proved 4, Kaplan and Shafrir 3.5, Englert, Matsakis and Veselý about 3.425). On the repeat example above, the ratio is $18/15 = 1.2$.
+- **Length guarantee.** With $\tau = 0$, the output has length at most about $3.425 \cdot \mathrm{OPT}$ in the worst case, where $\mathrm{OPT}$ is the length of a shortest common superstring (Blum et al. proved 4, Kaplan and Shafrir 3.5, Englert, Matsakis and Veselý about 3.425). On the repeat example above, the ratio is $18/15 = 1.2$.
 - **Shortest is not right.** Even an exact shortest superstring can be the wrong genome, because it collapses repeats. The reconstruction theorem is the guarantee that matters for assembly, and it needs the repeat condition.
 - **Deterministic.** With the fixed tie rule, the output depends only on the list of reads and its order.
 - **Not online.** All overlaps must be known before the first merge.

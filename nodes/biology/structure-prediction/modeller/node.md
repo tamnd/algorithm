@@ -91,7 +91,7 @@ Line L5 copies residues 1, 2, 4, 5 from the template, which satisfies all their 
 MODELLER is a heuristic optimizer, so its correctness is about what it optimizes and what it can guarantee.
 
 - **The objective is the right one.** $F$ is the negative logarithm of the product of the restraint densities, plus a constant. A minimum of $F$ is a maximum of the molecular probability density, the most probable structure under the independence assumption.
-- **The template is a global minimum when it fits.** If every target residue is aligned and the restraints come from the template, then $F \ge 0$ and $F = 0$ exactly at the template, at each rigid motion of it, and at each mirror image. Any structure with $F = 0$ reproduces all restrained template distances.
+- **The template is a global minimum when it fits.** If every target residue is aligned and the restraints come from the template, then $F \ge 0$, and $F = 0$ at the template, at each rigid motion of it, and at each mirror image; these are the only zeros when the restrained distances fix the shape. Any structure with $F = 0$ reproduces all restrained template distances.
 - **Each minimization step decreases $F$.** The line search accepts a step only if $F$ drops by at least a fixed fraction of the predicted decrease. Since $F \ge 0$, the values of $F$ in conjugate gradients converge.
 - **No global guarantee.** $F$ is not convex, so conjugate gradients can stop at a local minimum. The annealing stage is there to escape such minima, but it gives no certificate. The proof file below gives the full arguments for the first three points.
 

@@ -96,7 +96,7 @@ A cell is *live* when its value is finite. A cell left of the first live column 
 
 ## Pitfalls
 
-- **Missing a better alignment.** A drop deeper than $X$ inside a true region cuts it, as in the ungapped example: two mismatches under $+1/-3$ scoring cost 6 and lose the remaining 8 matches. The procedure gives no sign that it stopped early. Increase $X$, or check the result with the full [Smith-Waterman](/smith-waterman/) algorithm when the answer matters.
+- **Missing a better alignment.** A drop deeper than $X$ inside a true region cuts it, as in the ungapped example: two mismatches under $+1/-3$ scoring cost 6 and lose the 10 matches after them, so the result is 4 below the best. The procedure gives no sign that it stopped early. Increase $X$, or check the result with the full [Smith-Waterman](/smith-waterman/) algorithm when the answer matters.
 - **Strict or weak comparison.** Line L5 tests $t < best - X$. Some programs stop when $t \le best - X$. The two differ exactly at a drop of $X$, as in the example with $X = 6$, so results of two programs can differ by one setting.
 - **Returning the stop point.** The extension ends at the best point $\ell$, not at the point $k$ where the loop stopped. Returning $k$ adds a tail with a negative score.
 - **Stale entries.** In the gapped version, an entry from an earlier row that was not recomputed must read $-\infty$. Reusing a row array without clearing the cells that the current row does not compute lets old values come back as live cells.

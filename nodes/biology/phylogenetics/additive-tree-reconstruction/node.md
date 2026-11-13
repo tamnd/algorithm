@@ -92,7 +92,7 @@ To test whether a matrix is a tree metric, build a tree with the four-point meth
 ## Bounds
 
 - **Exact version.** $O(n^2)$ time, which is linear in the $n(n-1)/2$ entries of the input.
-- **$L_1$ and $L_2$.** Finding the best tree metric is NP-hard (Day 1987); with a fixed topology, the $L_2$ fit is a linear [least squares problem](/least-squares-problem/) and the $L_1$ and $L_\infty$ fits are [linear programs](/linear-programming/).
+- **$L_1$ and $L_2$.** Finding the best tree metric is NP-hard (Day 1987); with a fixed topology, the $L_2$ fit is a linear [least squares problem](/least-squares-problem/) and the $L_1$ and $L_\infty$ fits are [linear programs](/linear-programming-problem/).
 - **$L_\infty$.** NP-hard to approximate within a factor $9/8$, and approximable within 3 (Agarwala et al. 1999).
 - **Number of topologies.** An exhaustive search over unrooted binary topologies checks $(2n-5)!!$ trees, which is 2,027,025 for $n = 10$.
 
