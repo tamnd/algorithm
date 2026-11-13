@@ -6,7 +6,6 @@ name: Minkowski sum
 aliases:
 - Minkowski addition
 - Minkowski sum of polygons
-- dilation
 - convolution of polygons
 area: geometry/polygons
 level: core

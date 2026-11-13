@@ -4,7 +4,6 @@ kind: problem
 slug: connected-components
 name: Connected components
 aliases:
-- Connected component labeling
 - Weakly connected components (directed)
 area: graphs/connectivity
 level: intro

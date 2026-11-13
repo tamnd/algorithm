@@ -7,7 +7,6 @@ aliases:
 - t-spanner
 - Euclidean spanner
 - stretch factor
-- dilation
 area: geometry/proximity
 level: research
 summary: Sparse graph on points whose shortest-path distances approximate Euclidean distances within a factor t.
