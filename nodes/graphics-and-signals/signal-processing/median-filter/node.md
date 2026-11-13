@@ -10,7 +10,7 @@ area: graphics-and-signals/signal-processing
 level: intro
 summary: Replace each sample or pixel by the median of its window. It removes impulse noise and keeps step edges, and it is not a linear filter.
 solves: [signal-denoising]
-model: comparison-model
+model: word-ram
 complexity:
   vars: {N: the number of samples or pixels, m: the window radius (width 2m + 1), L: the number of gray levels}
   time: {worst: O(N (m + L)), average: O(N m), best: O(N m)}
@@ -34,6 +34,9 @@ sources:
   - paper: doi:10.1109/TASSP.1981.1163708
     title: Neal C. Gallagher Jr. and Gary L. Wise, A Theoretical Analysis of the Properties of Median Filters, IEEE Transactions on Acoustics, Speech, and Signal Processing 29(6), 1981
     locator: pp. 1136 to 1141 (root signals are locally monotone, and repeated filtering of a finite signal reaches a root)
+  - paper: doi:10.1109/TIP.2007.902329
+    title: Simon Perreault and Patrick Hébert, Median Filtering in Constant Time, IEEE Transactions on Image Processing 16(9), 2007
+    locator: pp. 2389 to 2394 (one histogram per column, and the block histogram updated by adding and removing whole columns)
 ---
 
 A median filter replaces each sample $x[n]$ by the [median](/median/) of the $2m + 1$ samples $x[n-m], \ldots, x[n+m]$ around it. In two dimensions it replaces each pixel by the median of the $k \times k$ block around it, $k = 2m + 1$. It removes impulse noise, such as single wrong samples or salt and pepper pixels, and unlike a linear smoothing filter it keeps a step edge sharp. It is not a linear filter, so it has no frequency response. A direct method sorts each window. The 1D method below keeps the window sorted and costs $O(m)$ per sample. The 2D method of Huang, Yang and Tang keeps a histogram of the block and costs $O(m)$ per pixel plus a short walk of the median. This is the one page of the encyclopedia for the median filter in one and two dimensions; [image smoothing](/image-smoothing/) links here for the image case.
@@ -111,7 +114,7 @@ The cost model is the number of comparisons and count updates per output sample.
 - **Direct method.** Sort each window: $O(m \log m)$ per sample in 1D, $O(k^2 \log k)$ per pixel in 2D. Use [quickselect](/quickselect/) instead of sorting for $O(m)$ and $O(k^2)$ expected time.
 - **Sorted window, 1D.** $O(\log m)$ comparisons and $O(m)$ moves per sample, so $O(Nm)$ in total and $O(m)$ space. With a balanced structure, such as two heaps or an [order statistic tree](/order-statistic-tree/), the cost is $O(\log m)$ per sample; see the [sliding window median](/sliding-window-median/) for that method and its lower bound.
 - **Huang histogram, 2D.** $2k$ count updates per pixel, plus the walk of the median. The walk is at most $L$ steps, and on smooth images a few steps. The total is $O(N(m + L))$ in the worst case. Space is $O(L)$.
-- **Constant time per pixel.** Perreault and Hébert (2007) keep one histogram per column and add and remove whole columns, so each pixel costs $O(L)$ updates independent of $m$. It pays off for large windows.
+- **Cost independent of the window, 2D.** Perreault and Hébert (2007) keep one histogram per column and add and remove whole columns, so each pixel costs $O(L)$ updates independent of $m$. It pays off for large windows.
 
 ## Properties
 

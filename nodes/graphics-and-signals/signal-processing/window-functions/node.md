@@ -47,7 +47,7 @@ and the side lobes of the three kernels largely cancel. The same identity says t
 **How each window is built.**
 
 - *Hann* goes to zero with zero slope at both ends; its periodic extension is continuous with a continuous first derivative, so its side lobes fall like $1/\omega^3$, or $18$ dB per octave.
-- *Hamming* picks $0.54/0.46$ so that the first side lobe nearly cancels. It does not reach zero at the ends, so its far side lobes fall only like $1/\omega$, as for the rectangular window, but its highest side lobe is the lowest of the two-term windows.
+- *Hamming* picks $0.54/0.46$ so that the first side lobe nearly cancels. It does not reach zero at the ends, so its far side lobes fall only like $1/\omega$, as for the rectangular window, but its highest side lobe is nearly the lowest of the two-term windows: $a_0 = 0.53836$ gives $-42.94$ dB against $-42.45$ dB at $N = 64$.
 - *Blackman* adds a third cosine and gets both low and fast-falling side lobes, with a main lobe $3$ bins wide on each side.
 - *Kaiser* is $w[n] = I_0\!\left(\beta\sqrt{1 - r_n^2}\right)/I_0(\beta)$ with $r_n = 2n/(N-1) - 1$ and $I_0$ the modified Bessel function. The single parameter $\beta$ moves continuously along the trade-off: $\beta = 0$ is rectangular, and larger $\beta$ means lower side lobes and a wider main lobe. The half-width of its main lobe is about $\sqrt{1 + (\beta/\pi)^2}$ bins.
 

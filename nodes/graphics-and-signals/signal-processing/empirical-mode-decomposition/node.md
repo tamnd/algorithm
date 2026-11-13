@@ -87,7 +87,7 @@ all integers. With $K = 8$, $S = 50$ and $\varepsilon = 1/100$, the implementati
 | 7 | 28 | 2 | 1 |
 | 8 | 32 | 2 | 1 |
 
-The first IMF has two extrema for each period of 10 samples, so it is the fast tone. Its root mean square difference from $100 \sin(2\pi i/10)$ is 11.67 over all samples, but 1.13 on samples 20 to 179: the splines are poor near the ends, where they have no extrema to lean on. The second IMF should be the tone of period 47, but its root mean square difference from it is 50.6, and 40.2 on the interior: the slow tone and the trend share the modes 2 to 8, which is mode mixing. The sum $c_1 + \cdots + c_8 + r$ equals $x$ exactly in rational arithmetic, as it must.
+The first IMF has two extrema for each period of 10 samples, so it is the fast tone. Its root mean square difference from $100 \sin(2\pi i/10)$ is 11.67 over all samples, but 1.14 on samples 20 to 179: the splines are poor near the ends, where they have no extrema to lean on. The second IMF should be the tone of period 47, but its root mean square difference from it is 50.6, and 40.2 on the interior: the slow tone and the trend share the modes 2 to 8, which is mode mixing. The sum $c_1 + \cdots + c_8 + r$ equals $x$ exactly in rational arithmetic, as it must.
 
 ## Correctness
 

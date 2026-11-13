@@ -52,7 +52,7 @@ with the series converging uniformly on $\mathbb{R}$. In particular, two such si
 
 A rule that is safe for every signal with spectrum in $(-B, B)$, including sums of sinusoids, is therefore the strict one, $f_s > 2B$, and this is the form most texts give.
 
-**Signals made of tones.** Let $x(t) = \sum_{k=1}^{K} a_k e^{2\pi i f_k t}$ with distinct frequencies in $(-f_s/2, f_s/2)$. Then the samples $x(nT)$, $n = 0, \ldots, K-1$, determine every $a_k$. A real tone at $|f| < f_s/2$ is a pair of such terms, so a sum of real sinusoids below $f_s/2$ is fixed by its samples.
+**Signals made of tones.** Let $x(t) = \sum_{k=1}^{K} a_k e^{2\pi i f_k t}$ with distinct frequencies in $(-f_s/2, f_s/2)$ that are known. Then the samples $x(nT)$, $n = 0, \ldots, K-1$, determine every $a_k$. A real tone at $|f| < f_s/2$ is a pair of such terms, so a sum of real sinusoids below $f_s/2$ is fixed by its samples.
 
 ## In plain words
 
@@ -80,7 +80,7 @@ The right side does not depend on $t$ and tends to $0$, so the series converges 
 
 **Step 4: uniqueness.** If two such signals have the same samples, their difference has all $c_n = 0$. The exponentials $e^{-2\pi i n f T}$ are complete in $L^2(I)$, so the spectrum of the difference is $0$, and by Plancherel the difference is $0$.
 
-**Step 5: tones.** For $x(t) = \sum_k a_k e^{2\pi i f_k t}$ the samples are $x(nT) = \sum_k a_k z_k^n$ with $z_k = e^{2\pi i f_k T}$. The map $f \mapsto e^{2\pi i f T}$ is one to one on $[-f_s/2, f_s/2)$, so distinct $f_k$ in the open band give distinct $z_k$. The $K \times K$ matrix $(z_k^n)$ for $n = 0, \ldots, K - 1$ is a Vandermonde matrix with determinant $\prod_{j < k}(z_k - z_j) \ne 0$, so the first $K$ samples fix the $a_k$. At $f_s = 2B$ the frequencies $\pm B$ both map to $z = -1$, the determinant is $0$, and the two terms $e^{\pm 2\pi i B t}$ cannot be separated; that is the failure of $\sin(2\pi B t) = (e^{2\pi i Bt} - e^{-2\pi i Bt})/(2i)$. $\blacksquare$
+**Step 5: tones.** For $x(t) = \sum_k a_k e^{2\pi i f_k t}$ the samples are $x(nT) = \sum_k a_k z_k^n$ with $z_k = e^{2\pi i f_k T}$. The map $f \mapsto e^{2\pi i f T}$ is one to one on $[-f_s/2, f_s/2)$, so distinct $f_k$ in the open band give distinct $z_k$. The $K \times K$ matrix $(z_k^n)$ for $n = 0, \ldots, K - 1$ is a Vandermonde matrix with determinant $\prod_{j < k}(z_k - z_j) \ne 0$, so for known $f_k$ the first $K$ samples fix the $a_k$. At $f_s = 2B$ the frequencies $\pm B$ both map to $z = -1$, the determinant is $0$, and the two terms $e^{\pm 2\pi i B t}$ cannot be separated; that is the failure of $\sin(2\pi B t) = (e^{2\pi i Bt} - e^{-2\pi i Bt})/(2i)$. $\blacksquare$
 
 ## Consequences
 

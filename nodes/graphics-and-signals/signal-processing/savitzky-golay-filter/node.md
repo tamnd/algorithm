@@ -12,7 +12,7 @@ solves: [signal-denoising]
 model: real-ram
 complexity:
   vars: {N: the number of samples, m: the window radius (width 2m + 1), p: the degree of the fit}
-  time: {worst: O(N m), average: O(N m), best: O(N m), per_sample: O(m), setup: O(m p^3)}
+  time: {worst: O(N m), average: O(N m), best: O(N m), per_sample: O(m), setup: O(m^2 p^3)}
   space: {extra: O(m p)}
 properties: {linear: true, causal: false, stable: true, linear_phase: "true, zero phase when centered", deterministic: true, online: true, in_place: false}
 history:
@@ -93,7 +93,7 @@ These are the classic weights of the 1964 paper. The first derivative at the cen
 
 For $k = 3$: $(-3 \cdot 3 + 12 \cdot 8 + 17 \cdot 5 + 12 \cdot 4 - 3 \cdot 6)/35 = 202/35 \approx 5.77$.
 
-**A peak.** Take $x = [0, 0, 0, 4, 8, 4, 0, 0, 0]$. At the top, the Savitzky-Golay filter with $m = 2$, $p = 2$ gives $(12 \cdot 4 + 17 \cdot 8 + 12 \cdot 4)/35 = 232/35 \approx 6.63$. A moving average of 5 gives $16/5 = 3.2$. The fit also gives small negative values, $-16/35$, at two samples from the peak, where the input is 0.
+**A peak.** Take $x = [0, 0, 0, 4, 8, 4, 0, 0, 0]$. At the top, the Savitzky-Golay filter with $m = 2$, $p = 2$ gives $(12 \cdot 4 + 17 \cdot 8 + 12 \cdot 4)/35 = 232/35 \approx 6.63$. A moving average of 5 gives $16/5 = 3.2$. The fit also gives small negative values, $-16/35$, at three samples from the peak, where the input is 0.
 
 ## Correctness
 
@@ -104,7 +104,7 @@ The weights are correct because the least squares fit is the orthogonal projecti
 The cost model is real arithmetic operations.
 
 - **Filtering.** $2m + 1$ multiplies and $2m$ additions per output sample. The center weights are symmetric, $c_{-i} = c_i$, so adding $x[k-i] + x[k+i]$ first needs only $m + 1$ multiplies. The total is $O(Nm)$.
-- **Weights.** Gram-Schmidt on $p + 1$ polynomials over $2m + 1$ points costs $O(m p^3)$ as written, or $O(m p)$ with the three-term recurrence of the Gram polynomials. This is done once for each $(m, p, d)$, plus once for each of the $2m$ end positions.
+- **Weights.** Gram-Schmidt on $p + 1$ polynomials over $2m + 1$ points costs $O(m p^3)$ as written, or $O(m p)$ with the three-term recurrence of the Gram polynomials. This is done once for each $(m, p, d)$, plus once for each of the $2m$ end positions, so all the weights cost $O(m^2 p^3)$, or $O(m^2 p)$.
 - **Space.** The weights and the polynomials take $O(mp)$ space. A streaming version keeps the last $2m + 1$ inputs.
 
 Direct fitting with the [normal equations](/normal-equations/) in every window would cost $O(m p^2 + p^3)$ per sample.
