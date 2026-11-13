@@ -91,7 +91,7 @@ Line L8 keeps the first part because of the Sherman-Morrison formula, and the sa
 
 ## Complexity
 
-Line L4 costs $M^2$ multiplications, line L5 costs $M$ multiplications and $M$ divisions, lines L6 and L7 cost $2M$, and line L8 costs $M^2$ multiplications and $M^2$ divisions by $\lambda$, which become multiplications by $1/\lambda$. So each sample costs about $2M^2 + O(M)$ multiplications, or $1.5 M^2$ if line L8 uses the symmetry of $P$, and $N$ samples cost $O(N M^2)$ in the [real RAM](/real-ram/). This is far less than solving the normal equations again on each sample, $O(M^3)$ per sample. The extra space is $O(M^2)$ for $P$. For a tapped delay line, the shift structure of $u$ allows fast RLS algorithms with $O(M)$ operations per sample.
+Line L4 costs $M^2$ multiplications, line L5 costs $M$ multiplications and $M$ divisions, lines L6 and L7 cost $2M$, and line L8 costs $M^2$ multiplications and $M^2$ divisions by $\lambda$, which become multiplications by $1/\lambda$. So each sample costs about $3M^2 + O(M)$ multiplications for $\lambda < 1$ and $2M^2 + O(M)$ for $\lambda = 1$, where line L8 has no division, or $2M^2$ and $1.5 M^2$ if line L8 uses the symmetry of $P$, and $N$ samples cost $O(N M^2)$ in the [real RAM](/real-ram/). This is far less than solving the normal equations again on each sample, $O(M^3)$ per sample. The extra space is $O(M^2)$ for $P$. For a tapped delay line, the shift structure of $u$ allows fast RLS algorithms with $O(M)$ operations per sample.
 
 ## Properties
 

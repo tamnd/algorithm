@@ -45,7 +45,7 @@ and its Fourier transform $S_{xy}(\omega) = \sum_k r_{xy}[k] e^{-i\omega k}$ is 
 1. *Swap.* $r_{xy}[-k] = \overline{r_{yx}[k]}$. Swapping the two signals mirrors the lag axis and conjugates.
 2. *Convolution form.* $r_{xy}[k] = (x * \tilde y)[k]$ with $\tilde y[n] = \overline{y[-n]}$, the time-reversed conjugate of $y$. So a correlator is an [FIR filter](/fir-filter/) whose impulse response is $\tilde y$ delayed to be causal, and every fast [convolution](/discrete-convolution/) method applies.
 3. *Spectrum.* In the DTFT, $r_{xy}$ has the transform $X(e^{i\omega})\,\overline{Y(e^{i\omega})}$, by the [convolution theorem](/convolution-theorem/).
-4. *Cauchy-Schwarz bound.* $|r_{xy}[k]|^2 \le r_{xx}[0]\, r_{yy}[0]$ for every $k$, where $r_{xx}[0] = \sum |x[n]|^2$ is the energy of $x$. Equality at a lag $k$ holds exactly when the overlapping parts are proportional, which is why the peak of a correlation detects a scaled copy.
+4. *Cauchy-Schwarz bound.* $|r_{xy}[k]|^2 \le r_{xx}[0]\, r_{yy}[0]$ for every $k$, where $r_{xx}[0] = \sum |x[n]|^2$ is the energy of $x$. Equality at a lag $k$ holds exactly when the overlapping parts are proportional and all the energy of both signals lies in the overlap, that is, when $x$ is a scaled copy of $y$ shifted by $k$ (or one of them is zero), which is why the peak of a correlation detects a scaled copy.
 
 **The correlation coefficient.** Dividing by the bound gives $\rho_{xy}[k] = r_{xy}[k] / \sqrt{r_{xx}[0]\,r_{yy}[0]}$, with $|\rho_{xy}[k]| \le 1$. This uses one normalization for the whole signals. Template matching needs a different normalization for every window of the image and the removal of the local mean, which is the subject of the [normalized cross-correlation](/normalized-cross-correlation/) page.
 

@@ -60,7 +60,7 @@ The spectrum of the sampled signal is the sum of copies of $X$ shifted by every 
 
 ## Examples
 
-**Three tones, one set of samples.** With $f_s = 10$ Hz, the cosines at $3$, $7$, $13$, $17$ and $23$ Hz all give the samples $\cos(2\pi \cdot 3n/10)$. The sine at $13$ Hz gives the same samples as the sine at $3$ Hz, and the sines at $7$ and $17$ Hz give their negatives, because they fold from the falling side of the zigzag. If the frequencies are kept as exact fractions and the phase $fn/f_s$ is reduced modulo one cycle before the cosine is taken, the samples at $f$ and at $f + kf_s$ are equal as floating-point numbers, bit for bit, for random rational $f$, $f_s$, $k$ and phases.
+**Five tones, one set of samples.** With $f_s = 10$ Hz, the cosines at $3$, $7$, $13$, $17$ and $23$ Hz all give the samples $\cos(2\pi \cdot 3n/10)$. The sine at $13$ Hz gives the same samples as the sine at $3$ Hz, and the sines at $7$ and $17$ Hz give their negatives, because they fold from the falling side of the zigzag. If the frequencies are kept as exact fractions and the phase $fn/f_s$ is reduced modulo one cycle before the cosine is taken, the samples at $f$ and at $f + kf_s$ are equal as floating-point numbers, bit for bit, for random rational $f$, $f_s$, $k$ and phases.
 
 **Audio.** At the compact disc rate $f_s = 44.1$ kHz, a $30$ kHz tone that reaches the converter appears at $44.1 - 30 = 14.1$ kHz, a clearly audible pitch that was not in the sound. Converters therefore have a steep analog low-pass filter, or they sample much faster and decimate with a digital filter.
 

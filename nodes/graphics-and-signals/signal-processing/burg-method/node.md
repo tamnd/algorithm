@@ -69,9 +69,9 @@ Take $x[n] = 2\cos(\pi n/3)$ for $n = 0, \dots, 7$, that is $x = (2, 1, -1, -2, 
 
 | stage $m$ | $C$ | $G$ | $k_m$ | $a_m$ | $E_m$ |
 |---|---|---|---|---|---|
-| 0 | | | | $(1)$ | $17/8 = 2.125$ |
+| 0 | none | none | none | $(1)$ | $17/8 = 2.125$ |
 | 1 | 8 | 29 | $-16/29 \approx -0.5517$ | $(1, -16/29)$ | $9945/6728 \approx 1.478$ |
-| 2 | | | $419/422 \approx 0.9929$ | $(1, -232/211, 419/422)$ | $29835/1424672 \approx 0.0209$ |
+| 2 | $-7542/841 \approx -8.968$ | $15192/841 \approx 18.06$ | $419/422 \approx 0.9929$ | $(1, -232/211, 419/422)$ | $29835/1424672 \approx 0.0209$ |
 
 At stage 1 the sums run over $t = 1, \dots, 7$: $C = \sum x[t]x[t-1] = 2 - 1 + 2 + 2 - 1 + 2 + 2 = 8$ and $G = 13 + 16 = 29$ (the energy of $x[1..7]$ plus that of $x[0..6]$), so $k_1 = -16/29$. At stage 2, $k_2$ is close to $1$, as it must be for a model of a pure tone, and the error power drops by a factor of about 70. The zeros of $A_2$ are $0.5498 \pm 0.8311i$, with modulus $0.9964$ and angle $\pm 0.9864$ rad. The true frequency is $\pi/3 \approx 1.0472$. The error of $0.061$ rad is the frequency bias of the Burg estimate of a sinusoid, which depends on the phase of the tone in the record and shrinks as $N$ grows.
 

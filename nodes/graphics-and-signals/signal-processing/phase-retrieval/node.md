@@ -20,6 +20,9 @@ sources:
   - paper: doi:10.1109/TASSP.1980.1163463
     title: Monson H. Hayes, Jae S. Lim and Alan V. Oppenheim, Signal reconstruction from phase or magnitude, IEEE Transactions on Acoustics, Speech, and Signal Processing 28(6), 1980, 672 to 680
     locator: the conditions under which the Fourier magnitude determines a finite sequence (general locator; section not confirmed)
+  - paper: doi:10.1109/TASSP.1982.1163863
+    title: Monson H. Hayes, The reconstruction of a multidimensional sequence from the phase or magnitude of its Fourier transform, IEEE Transactions on Acoustics, Speech, and Signal Processing 30(2), 1982, 140 to 154
+    locator: uniqueness from the Fourier magnitude for multidimensional sequences with irreducible z-transforms (general locator; section not confirmed)
   - paper: doi:10.1109/MSP.2014.2352673
     title: Yoav Shechtman, Yonina C. Eldar, Oren Cohen, Henry N. Chapman, Jianwei Miao and Mordechai Segev, Phase retrieval with application to optical imaging, a contemporary overview, IEEE Signal Processing Magazine 32(3), 2015, 87 to 109
     locator: the ambiguities in one dimension, uniqueness in higher dimensions, and the survey of algorithms (alternating projections, semidefinite relaxation, gradient methods)

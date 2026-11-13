@@ -74,14 +74,14 @@ L7      in each run of neighbours of C with the same sign of E, keep only the on
 L8      while |C| > L + 2 do remove the end point of C with the smaller |E|
 L9      if C = R or max_F |E| − |δ| ≤ ε · max_F |E| then stop
 L10     R ← C
-L11 h ← the N taps of A, from the inverse DFT of the N samples A(2πj/N)
+L11 h ← the N taps of A, from the inverse DFT of the N samples A(2πj/N), shifted circularly by L to be causal
 ```
 
 Line L3 solves the $L + 2$ linear equations $A(\omega_k) + (-1)^k \delta / W(\omega_k) = D(\omega_k)$ for the unknown $\delta$ without solving for $a_0, \ldots, a_L$. It uses the fact that the divided difference of order $L + 1$ of a polynomial of degree $L$ is zero. Line L4 passes a polynomial of degree $L$ through $L + 1$ of the values; it is evaluated in barycentric form, and it also takes the right value at the last point. Lines L6 to L8 pick the new reference set: at most one point per ripple, alternating signs, and $L + 2$ points that keep the largest errors. Line L9 stops when the set does not change or the largest error on the grid is the levelled error $|\delta|$.
 
 ## Example
 
-Take $N = 13$ ($L = 6$), $\omega_p = 0.4\pi$, $\omega_s = 0.6\pi$, $K = 1$, and a grid of $16(L + 1) = 112$ points. The reference set has $L + 2 = 8$ points. The levelled error and the reference set after each exchange are
+Take $N = 13$ ($L = 6$), $\omega_p = 0.4\pi$, $\omega_s = 0.6\pi$, $K = 1$, and a grid of $16(L + 1) = 112$ points. The reference set has $L + 2 = 8$ points. Line L1 starts from the grid points with evenly spaced indices, $0, 0.116, 0.233, 0.349, 0.651, 0.767, 0.884, 1$ times $\pi$. The levelled error and the reference set after each exchange are
 
 | iteration | $\lvert\delta\rvert$ | new reference set $/\pi$ |
 |---|---|---|
@@ -96,7 +96,7 @@ $$h \approx (0,\ 0.0537,\ 0,\ -0.0915,\ 0,\ 0.3132,\ 0.5,\ 0.3132,\ 0,\ -0.0915,
 
 Its error is $\pm 0.05086$ at all eight reference points, with alternating signs: four in the pass band, including $\omega = 0$ and the edge $0.4\pi$, and four in the stop band, including the edge $0.6\pi$ and $\pi$. On a grid of 20001 points the largest error is 0.050906, within 0.1 percent of $|\delta|$. The stop band is about $-25.9$ dB. Because the bands are symmetric about $\pi/2$ and $K = 1$, the filter is a half-band filter: $A(\pi/2) = 1/2$, and every second tap except the center is zero. The two outer taps are zero, so 11 taps give the same filter.
 
-**Three taps.** For $N = 3$ ($L = 1$), $A(\omega) = a_0 + a_1\cos\omega$. With $\omega_p = 0.3\pi$, $\omega_s = 0.7\pi$ and $c = \cos(0.3\pi)$, the optimum is $a_0 = 1/2$, $a_1 = 1/(1 + c)$ and $\delta^* = (1 - c)/(2(1 + c)) \approx 0.12981$. The three extremal frequencies are $0.3\pi$, $0.7\pi$ and $\pi$. The algorithm finds the same value.
+**Three taps.** For $N = 3$ ($L = 1$), $A(\omega) = a_0 + a_1\cos\omega$. With $\omega_p = 0.3\pi$, $\omega_s = 0.7\pi$ and $c = \cos(0.3\pi)$, the optimum is $a_0 = 1/2$, $a_1 = 1/(1 + c)$ and $\delta^* = (1 - c)/(2(1 + c)) \approx 0.12981$. The error is $\pm\delta^*$ with alternating signs at four frequencies, $0$, $0.3\pi$, $0.7\pi$ and $\pi$, one more than the $L + 2 = 3$ that are needed, so this is an extraripple filter. The algorithm finds the same value, with the reference set $0.3\pi$, $0.7\pi$, $\pi$.
 
 ## Correctness
 

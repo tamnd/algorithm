@@ -15,7 +15,7 @@ complexity:
   vars: {P: the filter order (the larger degree of B and A), N: the number of input samples}
   time: {worst: Θ(N P), average: Θ(N P), best: Θ(N P), per_sample: Θ(P)}
   space: {extra: Θ(P)}
-properties: {causal: true, stable: "if and only if all poles are inside the unit circle", linear_phase: false, online: true, deterministic: true, recursive: true, in_place: false}
+properties: {causal: true, stable: "if and only if all poles are inside the unit circle", linear_phase: false, online: true, deterministic: true, recursive: false, in_place: false}
 history:
   year: 1967
   people: [Charles M. Rader, Bernard Gold]

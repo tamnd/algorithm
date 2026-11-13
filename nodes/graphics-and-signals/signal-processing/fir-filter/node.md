@@ -107,7 +107,7 @@ The proof uses one [loop invariant](/loop-invariant/). At the start of the step 
 - **Per output sample:** $M + 1$ multiplies and $M$ additions. This is the cost model of the area: a direct FIR filter costs $\Theta(M)$ per sample.
 - **For $N$ samples:** $\Theta(NM)$ time.
 - **Space:** the $M + 1$ cells of the delay line and the $M + 1$ taps, $\Theta(M)$.
-- **Latency:** one sample. The output $y[n]$ is ready as soon as $x[n]$ is in.
+- **Latency:** none. The output $y[n]$ is ready as soon as $x[n]$ is in.
 
 For long filters, block convolution with the FFT, by the [overlap-add method](/overlap-add-method/) or the [overlap-save method](/overlap-save-method/), costs $\Theta(\log M)$ multiplies per sample, at the price of a delay of about one block. For short filters the direct form is faster.
 
@@ -116,7 +116,7 @@ For long filters, block convolution with the FFT, by the [overlap-add method](/o
 - **Causal.** The output $y[n]$ uses only $x[n], \ldots, x[n-M]$.
 - **Always stable.** If $|x[n]| \le X$ for all $n$, then $|y[n]| \le X \sum_k |h[k]|$. A finite sum is finite, so the filter is [BIBO stable](/bibo-stability/) for every choice of taps. The bound is reached by the input $x[n-k] = X \operatorname{sign}(h[k])$.
 - **Linear phase when the taps are symmetric or antisymmetric**, as in the table above. An IIR filter cannot have exactly linear phase and be causal and stable at the same time; an FIR filter can.
-- **Finite memory.** An input sample affects exactly $M + 1$ outputs. Errors and start-up effects are gone after $M$ samples.
+- **Finite memory.** An input sample affects at most $M + 1$ outputs. Errors and start-up effects are gone after $M$ samples.
 - **No limit cycles.** With rounded arithmetic, an FIR filter with zero input reaches zero output after $M$ samples. A recursive filter can keep a small oscillation forever.
 
 ## Variants and improvements

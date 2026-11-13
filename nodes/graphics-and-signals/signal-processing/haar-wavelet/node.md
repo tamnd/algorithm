@@ -22,7 +22,7 @@ sources:
     locator: Chapter 7 (orthogonal wavelet bases, with the Haar wavelet as the first example)
 ---
 
-The Haar wavelet is the function $\psi$ on $\mathbb R$ that is $1$ on $[0, \tfrac12)$, $-1$ on $[\tfrac12, 1)$ and $0$ elsewhere. Its scaled and shifted copies $\psi_{j,k}(t) = 2^{j/2} \psi(2^j t - k)$ form an orthonormal basis of $L^2(\mathbb R)$, and together with the box function they give the Haar basis of $L^2[0,1]$, which Haar defined in 1910. It is the simplest wavelet, and the only real, compactly supported orthonormal wavelet with an axis of symmetry. This page is about the function and the basis on the real line; the transform of a finite vector by pairwise averages and differences is the [Haar wavelet transform](/haar-wavelet-transform/).
+The Haar wavelet is the function $\psi$ on $\mathbb R$ that is $1$ on $[0, \tfrac12)$, $-1$ on $[\tfrac12, 1)$ and $0$ elsewhere. Its scaled and shifted copies $\psi_{j,k}(t) = 2^{j/2} \psi(2^j t - k)$ form an orthonormal basis of $L^2(\mathbb R)$, and together with the box function they give the Haar basis of $L^2[0,1]$, which Haar defined in 1910. It is the simplest wavelet, and the only real, compactly supported orthonormal wavelet that is symmetric or antisymmetric; $\psi$ is antisymmetric about $t = \tfrac12$. This page is about the function and the basis on the real line; the transform of a finite vector by pairwise averages and differences is the [Haar wavelet transform](/haar-wavelet-transform/).
 
 ## Definition
 

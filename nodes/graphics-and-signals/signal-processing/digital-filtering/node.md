@@ -80,7 +80,7 @@ Offline, every input sample can change the output, so $\Omega(N + M)$ operations
 ## Reductions
 
 - **FIR filtering is discrete convolution.** A block FIR filter is exactly the [discrete convolution](/discrete-convolution/) of the signal with $h$, so every convolution algorithm applies.
-- **IIR filtering is a triangular Toeplitz solve.** For $N$ samples at initial rest, the difference equation reads $T_A\, y = T_B\, x$, with $T_A$ and $T_B$ lower triangular banded Toeplitz matrices of the coefficients. Forward substitution in $O(pN)$ is the recursion; see [Toeplitz system solving](/toeplitz-system-solving/).
+- **IIR filtering is a triangular Toeplitz solve.** For $N$ samples at initial rest, the difference equation reads $T_A\, y = T_B\, x$, with $T_A$ and $T_B$ lower triangular banded Toeplitz matrices of the coefficients. The product $T_B\, x$ in $O(qN)$ followed by forward substitution in $O(pN)$ is the recursion; see [Toeplitz system solving](/toeplitz-system-solving/).
 - **IIR to FIR.** A stable IIR filter is approximated to any accuracy by truncating its impulse response at the point where $\sum_{n > M} |h[n]|$ is small enough, and then filtering by FFT. This pays off only when $p + q$ is not small.
 - **Zero-phase to causal.** Two causal passes and two reversals, at twice the cost.
 - **Two dimensions to one.** A separable 2D filter is a 1D filter along the rows, then along the columns.
