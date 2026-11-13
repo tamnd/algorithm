@@ -86,9 +86,9 @@ $$P_0 = (0, 0),\ P_1 = (2, 1),\ P_2 = (4, 0),\ P_3 = (6, 3),\ P_4 = (8, 1),\ P_5
 | 6 | $(4, 5)$ | none | | | finished |
 | 7 | $(5, 7)$ | 6 | $36/17$ | 1.455 | finished |
 
-The output is $P_0, P_3, P_4, P_5, P_7$, which is 5 of the 8 points. In pop 1 the other distances are $0$ for $P_1$ and $P_3$, $16/5$ for $P_2$ and $4/5$ for $P_5$ and $P_6$. With $\varepsilon = 1$ the output keeps 7 points and drops only $P_1$, and with $\varepsilon = 3$ it is the single segment $P_0 P_7$.
+The output is $P_0, P_3, P_4, P_5, P_7$, which is 5 of the 8 points. In pop 1 the other squared distances are $0$ for $P_1$ and $P_3$, $16/5$ for $P_2$ and $4/5$ for $P_5$ and $P_6$. With $\varepsilon = 1$ the output keeps 7 points and drops only $P_1$, and with $\varepsilon = 3$ it is the single segment $P_0 P_7$.
 
-The output is not the smallest. For $\varepsilon = 2$, the 3 points $P_0, P_2, P_7$ also meet the tolerance: $P_1$ is on the segment $P_0 P_2$, and $P_3, \dots, P_6$ are within 2 of the segment $P_2 P_7$. RDP cannot find this answer, because its first step keeps $P_4$, and it never removes a kept point. The shortcut graph method on the [polygon simplification](/polygon-simplification/) page finds the minimum.
+The output is not the smallest. For $\varepsilon = 2$, the 3 points $P_0, P_2, P_7$ also meet the tolerance: $P_1$ is at distance 1 from the segment $P_0 P_2$, and $P_3, \dots, P_6$ are within 2 of the segment $P_2 P_7$. RDP cannot find this answer, because its first step keeps $P_4$, and it never removes a kept point. The shortcut graph method on the [polygon simplification](/polygon-simplification/) page finds the minimum.
 
 ## Correctness
 

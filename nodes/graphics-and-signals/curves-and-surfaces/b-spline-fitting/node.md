@@ -12,7 +12,7 @@ solves: [curve-fitting]
 model: real-ram
 complexity:
   vars: {m: "the number of data points, minus one", n: "the number of control points, minus one", p: the degree, d: the dimension of the points}
-  time: {worst: "O((m + n) p^2 + (m + n) p d)"}
+  time: {worst: "O((m + n) p^2 + (m + n) p d + m log n)"}
   space: {extra: "O(n p + n d)"}
 properties: {deterministic: true, recursive: false, local: false, interpolating: false}
 history:
@@ -33,7 +33,7 @@ sources:
     locator: Chapter 6, Direct methods for sparse problems (banded least squares problems)
 ---
 
-B-spline least-squares fitting finds the control points of a [B-spline](/b-spline/) curve that pass closest to a set of data points, in the sense of the sum of squared distances. The degree $p$, the [knot vector](/knot-vector/) and a parameter value for each data point are fixed in advance. Then the curve is linear in its control points, and the fit is a linear [least squares problem](/least-squares-problem/). Each data point touches only $p + 1$ basis functions, so the [normal equations](/normal-equations/) have a band matrix of half bandwidth $p$. A band $LDL^T$ factorization solves them in $O((m + n) p^2)$ time for $m + 1$ data points and $n + 1$ control points, plus $O((m + n)pd)$ for the $d$ coordinates. The solution exists and is unique exactly when some increasing choice of $n + 1$ sites satisfies the Schoenberg-Whitney condition.
+B-spline least-squares fitting finds the control points of a [B-spline](/b-spline/) curve that pass closest to a set of data points, in the sense of the sum of squared distances. The degree $p$, the [knot vector](/knot-vector/) and a parameter value for each data point are fixed in advance. Then the curve is linear in its control points, and the fit is a linear [least squares problem](/least-squares-problem/). Each data point touches only $p + 1$ basis functions, so the [normal equations](/normal-equations/) have a band matrix of half bandwidth $p$. A band $LDL^T$ factorization solves them in $O((m + n) p^2)$ time for $m + 1$ data points and $n + 1$ control points, plus $O((m + n)pd)$ for the $d$ coordinates. A least-squares solution always exists, and it is unique exactly when some increasing choice of $n + 1$ sites satisfies the Schoenberg-Whitney condition.
 
 ## In plain words
 

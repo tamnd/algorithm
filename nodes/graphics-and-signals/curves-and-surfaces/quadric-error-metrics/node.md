@@ -13,7 +13,7 @@ solves: [mesh-simplification]
 model: real-ram
 complexity:
   vars: {n: the number of triangles, d: the largest number of triangles at a vertex}
-  time: {worst: O(n d^2 (d + log n)), average: O(n log n)}
+  time: {worst: O(n d^2 (d + log n))}
   space: {extra: O(n d)}
 properties: {online: false, deterministic: true, recursive: false}
 history:

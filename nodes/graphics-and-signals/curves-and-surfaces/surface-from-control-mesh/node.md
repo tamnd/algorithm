@@ -60,7 +60,7 @@ The cost model is the real RAM. Inputs have bounded valence, and the cost counts
 
 $$\sum_{v} (4 - \operatorname{val}(v)) = 4V - 2E = 4(V - E + F) = 4\chi.$$
 
-For triangles, $3F = 2E$ gives $\sum_v (6 - \operatorname{val}(v)) = 6\chi$ in the same way. A closed mesh of the sphere has $\chi = 2$, so it must have extraordinary vertices, and only the torus, with $\chi = 0$, can be covered by a regular grid. So the spline surface of a grid alone cannot solve the problem, and every method needs a rule for extraordinary vertices.
+For triangles, $3F = 2E$ gives $\sum_v (6 - \operatorname{val}(v)) = 6\chi$ in the same way. A closed mesh of the sphere has $\chi = 2$, so it must have extraordinary vertices, and only the surfaces with $\chi = 0$, the torus and the Klein bottle (the torus if the mesh is oriented), can be covered by a regular grid. So the spline surface of a grid alone cannot solve the problem, and every method needs a rule for extraordinary vertices.
 
 ## Variants
 

@@ -12,7 +12,7 @@ prereqs: [b-spline, determinant, curry-schoenberg-theorem]
 see_also: [cubic-spline-interpolation, interpolation-problem, curve-interpolation, b-spline-fitting, collocation-method, banded-matrix, gaussian-elimination, knot-vector]
 sources:
   - paper: doi:10.1090/S0002-9947-1953-0053177-X
-    title: I. J. Schoenberg and Anne Whitney, On Pólya frequence functions III, the positivity of translation determinants with an application to the interpolation problem by spline curves, Transactions of the American Mathematical Society 74 (1953), 246 to 259
+    title: I. J. Schoenberg and Anne Whitney, On Pólya frequency functions III, the positivity of translation determinants with an application to the interpolation problem by spline curves, Transactions of the American Mathematical Society 74 (1953), 246 to 259
     locator: the application to interpolation by spline curves
   - book: isbn:9780387953663
     title: Carl de Boor, A Practical Guide to Splines, revised edition, Springer, 2001
@@ -79,7 +79,7 @@ In the third row four sites lie in $[0, 1)$, where only the three B-splines $N_0
 
 - **Distinct sites.** The statement needs $\tau_0 < \cdots < \tau_n$. Two equal sites give two equal rows. Repeated sites belong to Hermite interpolation, where a repeated site carries a derivative condition, and the matrix has rows of derivatives.
 - **The pairing is fixed.** The condition pairs the $i$-th smallest site with $N_i$. It is not enough that every site lies in some support, or that every support contains some site: in the third row of the table every site lies in the support of $N_0$, $N_1$ or $N_2$.
-- **Solvable is not well conditioned.** The condition is open, and the determinant goes to $0$ at its boundary. For the knots of the example and the sites $0, 1/4, 1/2, 1 + \varepsilon, 3$, the determinant is $\varepsilon^2/64$: $1/256$ for $\varepsilon = 1/2$ and $1/64000000$ for $\varepsilon = 1/1000$. A site that is almost at the end of its support gives an almost singular system.
+- **Solvable is not well conditioned.** The condition is open, and the determinant goes to $0$ at its boundary. For the knots of the example and the sites $0, 1/4, 1/2, 1 + \varepsilon, 3$ with $0 < \varepsilon \le 1$, the determinant is $\varepsilon^2/64$: $1/256$ for $\varepsilon = 1/2$ and $1/64000000$ for $\varepsilon = 1/1000$. A site that is almost at the end of its support gives an almost singular system.
 - **The left end of a support.** A site exactly at $t_i$ is allowed only when $t_i = t_{i+p}$. For a simple knot the B-spline is continuous and $0$ there, so the site sees nothing of it.
 
 ## History

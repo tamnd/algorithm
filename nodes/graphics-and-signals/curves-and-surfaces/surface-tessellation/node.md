@@ -42,7 +42,7 @@ Proof: let $p$ be a domain point in a triangle with vertices $p_0, p_1, p_2$, an
 
 For a Bézier patch the bounds come from the net with no search: $S_{uu}$ is a Bézier patch whose control points are $m(m - 1)$ times the second differences of the net in $i$, so by the convex hull property $M_{uu}$ is at most $m(m - 1)$ times the largest of their norms, and the same holds for $M_{uv}$ with $mn$ and the mixed differences, and for $M_{vv}$ with $n(n - 1)$. The bound is sharp: for the bilinear patch $z = uv$ in one cell, $M_{uu} = M_{vv} = 0$, $M_{uv} = 1$, the bound is $1/4$, and at the cell center the patch has height $1/4$ while the diagonal from $(0, 0, 0)$ to $(1, 1, 1)$ has height $1/2$. Bounds of this type go back to Filip, Magedson and Markot (1986).
 
-To choose the steps, use $2 M_{uv} h_u h_v \le M_{uv} (h_u^2 + h_v^2)$: the bound is at most the tolerance $\epsilon$ when $(M_{uu} + M_{uv}) h_u^2 \le 4\epsilon$ and $(M_{vv} + M_{uv}) h_v^2 \le 4\epsilon$, so $s_u = \lceil ((M_{uu} + M_{uv}) / (4\epsilon))^{1/2} \rceil$ and $s_v$ in the same way. The step count grows as $\epsilon^{-1/2}$, so halving the error costs about twice the steps in each direction and four times the triangles.
+To choose the steps, use $2 M_{uv} h_u h_v \le M_{uv} (h_u^2 + h_v^2)$: the bound is at most the tolerance $\epsilon$ when $(M_{uu} + M_{uv}) h_u^2 \le 4\epsilon$ and $(M_{vv} + M_{uv}) h_v^2 \le 4\epsilon$, so $s_u = \lceil ((M_{uu} + M_{uv}) / (4\epsilon))^{1/2} \rceil$ and $s_v$ in the same way. The step count grows as $\epsilon^{-1/2}$, so halving the error costs about $\sqrt{2}$ times the steps in each direction and twice the triangles.
 
 ### No cracks
 

@@ -12,7 +12,7 @@ solves: [surface-reconstruction]
 model: real-ram
 complexity:
   vars: {n: the number of points, d: the largest number of points within distance 2ρ of a point}
-  time: {worst: O(n d^3), average: O(n), best: Θ(n)}
+  time: {worst: O(n d^3), best: Θ(n)}
   space: {extra: O(n)}
 properties: {online: false, deterministic: true, recursive: false}
 history:

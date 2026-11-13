@@ -82,7 +82,7 @@ At an extraordinary vertex the limit is $C^1$. Loop chose $\beta_n$ so that the 
 
 ## Complexity
 
-- **One step, $\Theta(V + E + F)$ time.** Each edge point costs 4 additions, and each vertex point costs $n_v + 1$. The sums are $E$ and $\sum_v n_v = 2E$. The lookup of the triangles at an edge uses a hash map from directed edges to triangles, which is expected $O(1)$ per edge.
+- **One step, $\Theta(V + E + F)$ time.** Each edge point costs 4 additions, and each vertex point costs $n_v + 1$. The sums are $E$ and $\sum_v n_v = 2E$. The lookup of the triangles at an edge uses a hash map from directed edges to triangles, which is expected $O(1)$ per edge; a radix sort of the directed edges by their pairs of vertex indices finds the same triangles in $O(V + F)$ in the worst case.
 - **Space, $\Theta(V + E + F)$.** The output has $V + E$ points and $4F$ triangles.
 - **$k$ steps.** Each step multiplies the number of triangles by 4, so $k$ steps make $4^k F$ triangles, and the time and memory grow by a factor of 4 per step.
 

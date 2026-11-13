@@ -69,7 +69,7 @@ Line L4 is the [Galerkin method](/galerkin-method/) for the Poisson equation: $\
 
 ## Example
 
-Take 800 points on the unit sphere (a Fibonacci spiral), with their radial normals, and $D = 4$, so $m = 17$ and $h = 0.187$ on a cube of side 3. Conjugate gradients reach a relative residual of $10^{-10}$ in 34 steps. The values of $\chi$ at the samples lie between 0.176 and 0.206, and their mean is $\gamma = 0.189$. Along the positive $x$ axis:
+Take 800 points on the unit sphere (a Fibonacci spiral), with their radial normals, and $D = 4$, so $m = 17$ and $h = 0.1875$ on a cube of side 3. Conjugate gradients reach a relative residual of $10^{-10}$ in 34 steps. The values of $\chi$ at the samples lie between 0.176 and 0.206, and their mean is $\gamma = 0.189$. Along the positive $x$ axis:
 
 | $x$ | 0 | 0.5 | 0.8 | 0.9 | 1.0 | 1.1 | 1.2 | 1.4 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |

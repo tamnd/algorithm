@@ -83,7 +83,7 @@ The limit is $C^2$ on the regular part, and Kobbelt chose $\alpha_n$ so that the
 
 ## Complexity
 
-- **One step, $\Theta(V + E + F)$ time.** Each centroid costs 3 additions, each vertex point $n_v + 1$, and each edge flip $O(1)$. The sum $\sum_v n_v$ is $2E$. The lookup of the triangle at a directed edge uses a hash map, which is expected $O(1)$ per edge.
+- **One step, $\Theta(V + E + F)$ time.** Each centroid costs 3 additions, each vertex point $n_v + 1$, and each edge flip $O(1)$. The sum $\sum_v n_v$ is $2E$. The lookup of the triangle at a directed edge uses a hash map, which is expected $O(1)$ per edge; a radix sort of the directed edges by their pairs of vertex indices finds the same triangles in $O(V + F)$ in the worst case.
 - **Space, $\Theta(V + E + F)$.** The output has $V + F$ points and $3F$ triangles.
 - **$k$ steps.** Each step multiplies the number of triangles by 3, so $k$ steps make $3^k F$ triangles. To reach a given size, sqrt(3) subdivision takes about $\log_3$ steps where Loop takes $\log_4$, and it has more sizes to stop at.
 

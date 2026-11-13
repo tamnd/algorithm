@@ -68,8 +68,8 @@ L2  for r ← 1 to p
 L3      M[0..r] ← 0
 L4      for s ← 0 to r − 1                       ▷ N[s] = N_{μ−r+1+s, r−1}(u)
 L5          a ← (u − t[μ−r+1+s]) / (t[μ+1+s] − t[μ−r+1+s])
-L6          M[s] ← M[s] + (1 − a) · N[s]           ▷ right part, to N_{μ−r+s, r}
-L7          M[s+1] ← M[s+1] + a · N[s]             ▷ left part, to N_{μ−r+1+s, r}
+L6          M[s] ← M[s] + (1 − a) · N[s]           ▷ left part, to N_{μ−r+s, r}
+L7          M[s+1] ← M[s+1] + a · N[s]             ▷ right part, to N_{μ−r+1+s, r}
 L8      N ← M
 L9  return N                                   ▷ N[s] = N_{μ−p+s, p}(u), s = 0..p
 ```
@@ -99,7 +99,7 @@ The proof is an invariant of the loop of line L2: after pass $r$, $N[s] = N_{\mu
 
 ## Complexity
 
-Pass $r$ runs the inner loop $r$ times, so there are $\sum_{r=1}^{p} r = p(p + 1)/2$ steps, each with one division, two products and two sums (the product $a \cdot N[s]$ gives both parts). The time is $\Theta(p^2)$ in each case, and the extra space is two arrays of $p + 1$ numbers, $\Theta(p)$. The span search adds $O(\log n)$ comparisons. The recursion run as written, with one call for each term, makes $2^{p+1} - 1$ calls for one value when all knots are distinct $N_{i,p}(u)$, which is exponential in $p$; the triangle shares the values of each degree between neighbors.
+Pass $r$ runs the inner loop $r$ times, so there are $\sum_{r=1}^{p} r = p(p + 1)/2$ steps, each with one division, two products and two sums (the product $a \cdot N[s]$ gives both parts). The time is $\Theta(p^2)$ in each case, and the extra space is two arrays of $p + 1$ numbers, $\Theta(p)$. The span search adds $O(\log n)$ comparisons. The recursion run as written, with one call for each term, makes $2^{p+1} - 1$ calls for one value $N_{i,p}(u)$ when all knots are distinct, which is exponential in $p$; the triangle shares the values of each degree between neighbors.
 
 ## Properties
 
