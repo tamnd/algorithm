@@ -125,7 +125,7 @@ Factor $N = 15$ with $a = 7$. Here $n = 4$, $t = 8$ and $Q = 256$. The powers of
 
 So one run gives $r = 4$ with probability exactly $1/2$. Then $m = 4 = 2^2 \cdot 1$, and line L8 sets $y = 7$. Line L10 squares once: $7^2 = 4$ and $4^2 = 1 \pmod{15}$, so the loop stops at $y = 4$. As $4 \ne 14$, line L11 returns $\gcd(3, 15) = 3$, and $\gcd(5, 15) = 5$ is the other factor. The base $a = 14$ fails: its order is 2 and $14 = -1 \pmod{15}$.
 
-For $N = 21$ and $a = 2$, the order is $r = 6$, which does not divide $Q = 512$. The peaks then spread over neighbors: $c = 85$ has probability 0.114 and gives the convergent 1/6, while $c = 171$ gives 1/3 and fails. The exact probability that one run returns 6 is 0.328, against the lower bound 0.127 of the analysis below. These numbers come from a state-vector simulation of the full 14-qubit circuit (exact probabilities, no sampling), not from hardware.
+For $N = 21$ and $a = 2$, the order is $r = 6$, which does not divide $Q = 512$. The peaks then spread over neighbors: $c = 85$ has probability 0.114 and gives the convergent 1/6, while $c = 171$ gives 1/3 and fails. The exact probability that one run returns 6 is 0.328, against the lower bound 0.130 of the analysis below. These numbers come from a state-vector simulation of the full 14-qubit circuit (exact probabilities, no sampling), not from hardware.
 
 ## Correctness
 

@@ -140,7 +140,7 @@ Use it as the method for Pell's equation, the regulator and the principal ideal 
 - **Norm $-1$.** If $\varepsilon$ has norm $-1$, as for $D = 2$ with $1 + \sqrt 2$, then $\varepsilon$ solves $x^2 - Dy^2 = -1$. Line L13 squares it.
 - **The order and the field.** This page uses the order $\mathbb{Z}[\sqrt D]$. For $D \equiv 1 \pmod 4$ the ring of integers is larger and can have a smaller fundamental unit, such as $(1 + \sqrt 5)/2$ for $D = 5$. Pell's equation needs the unit of $\mathbb{Z}[\sqrt D]$, which is a power of that one.
 - **The size of the output.** Asking for $x_1$ and $y_1$ in full defeats the speedup when $R$ is large. Keep $\varepsilon$ in compact form.
-- **The simulation walks the cycle.** The implementation evaluates $f_N$ by walking the continued fraction cycle, which is fine for small $D$. It also picks $N$ so that $NR = 8.5$ to fit the 4-qubit target register. A real circuit uses ideal multiplication and reduction instead and does not know $R$.
+- **The simulation walks the cycle.** The implementation evaluates $f_N$ by walking the continued fraction cycle, which is fine for small $D$. It also picks $N$ so that $NR$ is about 8.5 ($N = 3$ and $NR = 8.306$ in the Example) to fit the 4-qubit target register. A real circuit uses ideal multiplication and reduction instead and does not know $R$.
 
 ## Implementations
 

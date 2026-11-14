@@ -100,7 +100,7 @@ The algorithms are on their own pages. Their costs, each in its access model:
 | [multi-product formulas](/multi-product-formulas/) | Pauli list | product formulas combined with an LCU |
 | [truncated Taylor series simulation](/truncated-taylor-series-simulation/) | Pauli list or sparse | $O(\lambda t \log(\lambda t/\epsilon)/\log\log(\lambda t/\epsilon))$ queries |
 | [qubitization](/qubitization/) and [quantum signal processing](/quantum-signal-processing/) | block encoding | $O(\alpha t + \log(1/\epsilon))$ queries |
-| [optimal Hamiltonian simulation](/optimal-hamiltonian-simulation/) | sparse oracle | $O(t d \|H\|_{\max} + \log(1/\epsilon)/\log\log(1/\epsilon))$ queries |
+| [optimal Hamiltonian simulation](/optimal-hamiltonian-simulation/) | sparse oracle | $O(t d \|H\|_{\max} + \log(1/\epsilon)/\log(e + \log(1/\epsilon)/(t d \|H\|_{\max})))$ queries |
 | [interaction picture simulation](/interaction-picture-simulation/) | $H = A + B$ with a large, easy $A$ | cost driven by the norm of $B$ |
 
 The first algorithm with a proof is Lloyd's (1996), with product formulas on local terms; it is the [universal quantum simulator](/universal-quantum-simulator/) theorem.

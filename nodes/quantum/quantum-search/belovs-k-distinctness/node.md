@@ -17,7 +17,7 @@ properties: {deterministic: false, exact: false, oracle: bit}
 history:
   year: 2012
   people: [Aleksandrs Belovs]
-  note: First posted as arXiv:1205.1534 in May 2012 and presented at FOCS 2012. A matching lower bound followed in a 2026 preprint by the same author.
+  note: First posted as arXiv:1205.1534 in May 2012 and presented at FOCS 2012. A matching lower bound, for alphabets of size Omega(N^2), followed in a 2026 preprint by the same author.
 prereqs: [k-distinctness, ambainis-element-distinctness, quantum-adversary-method, quantum-query-complexity]
 see_also: [quantum-query-model, semidefinite-programming, polynomial-method, quantum-walk-search, element-distinctness, triangle-finding, brassard-hoyer-tapp-collision, quantum-random-access-memory]
 sources:
@@ -152,6 +152,6 @@ Use it as the query bound for $k$-distinctness with $k \ge 3$, and as a model fo
 
 ## History
 
-Ambainis's quantum walk of 2003 gave $O(N^{k/(k+1)})$ queries, and for almost ten years nothing better was known for $k \ge 3$. In 2011 Reichardt, and Lee, Mittal, Reichardt, Špalek and Szegedy, proved that the dual adversary bound is the quantum query complexity up to a constant factor. Belovs then introduced learning graphs as a way to build dual solutions (STOC 2012) and improved triangle finding. In May 2012 he posted the $k$-distinctness algorithm, with covered elements, value-dependent weights and fault tolerance, and presented it at FOCS 2012. The question of a time-efficient version, asked at the end of the paper, was answered for $k = 3$ in 2013 and for every constant $k$ by Jeffery and Zur in 2023. In 2026 Belovs proved that the exponent is optimal.
+Ambainis's quantum walk of 2003 gave $O(N^{k/(k+1)})$ queries, and for almost ten years nothing better was known for $k \ge 3$. In 2011 Reichardt, and Lee, Mittal, Reichardt, Špalek and Szegedy, proved that the dual adversary bound is the quantum query complexity up to a constant factor. Belovs then introduced learning graphs as a way to build dual solutions (STOC 2012) and improved triangle finding. In May 2012 he posted the $k$-distinctness algorithm, with covered elements, value-dependent weights and fault tolerance, and presented it at FOCS 2012. The question of a time-efficient version, asked at the end of the paper, was answered for $k = 3$ in 2013 and for every constant $k$ by Jeffery and Zur in 2023. In a 2026 preprint Belovs proved that the exponent is optimal for alphabets of size $\Omega(N^2)$.
 
 ## References

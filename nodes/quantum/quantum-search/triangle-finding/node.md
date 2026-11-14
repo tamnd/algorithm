@@ -76,7 +76,7 @@ A query bound is not a time bound. The query algorithms keep large data, such as
 | Buhrman et al. (2001, SICOMP 2005) | $O(n + \sqrt{nm})$ | better than $n^{3/2}$ only for sparse graphs |
 | Magniez, Santha and Szegedy, combinatorial | $\tilde O(n^{10/7})$ | Grover search only, $O(\log n)$ qubits in the quantum parts |
 | [Magniez, Santha and Szegedy](/magniez-santha-szegedy-triangle/) (2003, SODA 2005) | $\tilde O(n^{13/10})$ | nested quantum walk |
-| Belovs (STOC 2012) | $O(n^{35/27})$ | learning graph, about $n^{1.296}$ |
+| Belovs (2011, STOC 2012) | $O(n^{35/27})$ | learning graph, about $n^{1.296}$ |
 | Lee, Magniez and Santha (SODA 2013) | $O(n^{9/7})$ | learning graph, about $n^{1.286}$ |
 | Jeffery, Kothari and Magniez (SODA 2013) | $\tilde O(n^{9/7})$ | nested walks with quantum data structures |
 | Le Gall (FOCS 2014) | $\tilde O(n^{5/4})$ | quantum walks with combinatorial arguments |
