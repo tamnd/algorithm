@@ -1,0 +1,43 @@
+---
+title: Every pencil of two quadrics holds a member that is a plane, two planes, a hyperbolic or parabolic cylinder, a hyperbolic paraboloid or empty, and its rulings reduce the intersection to quadratic equations
+proves: [correctness]
+status: full
+---
+
+A quadric is a nonzero real symmetric $4 \times 4$ matrix $Q$, with $Q(x) = X^T Q X$ for $X = (x, 1)$, $x \in \mathbb{R}^3$. Write $Q_u$ for its upper left $3 \times 3$ block, the *quadratic part*, $q = (Q_{14}, Q_{24}, Q_{34})$ for its linear part and $q_0 = Q_{44}$, so that $Q(x) = x^T Q_u x + 2 q \cdot x + q_0$. The input is two quadrics $S$ and $T$ that are not proportional, and the *pencil* is the set of members $R = \alpha S + \beta T$ with $(\alpha, \beta) \ne (0, 0)$. Every member is a nonzero matrix. Call a symmetric $3 \times 3$ matrix *semidefinite of rank 2* if it has exactly one eigenvalue $0$ and the other two have the same sign.
+
+**Claim 1 (a member with a good quadratic part).** Put $M(\theta) = \cos\theta \, S_u + \sin\theta \, T_u$ with eigenvalues $\lambda_1(\theta) \le \lambda_2(\theta) \le \lambda_3(\theta)$. There is a $\theta^* \in [0, \pi]$ with $\lambda_2(\theta^*) = 0$. The quadratic part $M(\theta^*)$ of the member $R^* = \cos\theta^* S + \sin\theta^* T$ is singular and is not semidefinite of rank 2.
+
+*Proof.* By [Weyl's inequality](/weyls-inequality/), $|\lambda_k(A) - \lambda_k(B)| \le \|A - B\|_2$ for symmetric $A$ and $B$, so each $\lambda_k(\theta)$ is a continuous function of $\theta$. Since $M(\theta + \pi) = -M(\theta)$, the eigenvalues at $\theta + \pi$ are $-\lambda_3(\theta) \le -\lambda_2(\theta) \le -\lambda_1(\theta)$, so $\lambda_2(\pi) = -\lambda_2(0)$. Either $\lambda_2(0) = 0$, or $\lambda_2$ changes sign on $[0, \pi]$ and vanishes at some $\theta^*$ by the intermediate value theorem. At $\theta^*$ the eigenvalues are $\lambda_1 \le 0 = \lambda_2 \le \lambda_3$, so $M(\theta^*)$ is singular. If $\lambda_1 = 0$ or $\lambda_3 = 0$, it has rank at most $1$. Otherwise $\lambda_1 < 0 < \lambda_3$ and it is indefinite. In neither case is it semidefinite of rank 2. $\square$
+
+**Consequence for lines L1 to L3.** Let $f(\alpha, \beta) = \det(\alpha S_u + \beta T_u)$, a binary form of degree $3$. If $f$ is not the zero form, the point $(\cos\theta^*, \sin\theta^*)$ is one of its real projective roots, since $M(\theta^*)$ is singular. Line L2 lists all real projective roots: it finds the roots of $f(1, \lambda)$ for $|\lambda| \le 1$ and of $f(\mu, 1)$ for $|\mu| \le 1$, which together cover every direction $(\alpha, \beta)$. So the loop of line L3 meets a member that passes the test of line L5. If $f$ is the zero form, line L2 finds $\theta^*$ itself, by bisection on the sign of $\lambda_2$, which keeps an interval at whose ends $\lambda_2$ has opposite signs, and so converges to a zero of the continuous function $\lambda_2$.
+
+**Claim 2 (the zero set and its sheets).** Let $R$ be a member whose quadratic part $A = R_u$ is singular and not semidefinite of rank 2, with linear part $r$ and constant $c$. Then the zero set $Z(R) = \{x : R(x) = 0\}$ is a hyperbolic paraboloid, a hyperbolic cylinder, two intersecting planes, a parabolic cylinder, two parallel planes, one plane, or empty. Each nonempty case is the union of the sheets of line L5, each sheet is a map $(u, v) \mapsto p(u) + v \, d(u)$ with $d(u) \ne 0$, every point of the sheet satisfies $R = 0$, and every point $x$ of $Z(R)$ lies on a sheet at the parameter $u$ that the sheet assigns to $x$.
+
+*Proof.* By the [spectral theorem](/spectral-theorem/), $A = \sum_i \mu_i e_i e_i^T$ with an orthonormal basis $e_1, e_2, e_3$. Write $\rho_i = r \cdot e_i$.
+
+*Rank 2.* Let $\mu_a > 0 > \mu_b$ be the nonzero eigenvalues, which have opposite signs by the hypothesis, and $e_3$ the null vector. Put $s_a = \sqrt{\mu_a}$, $s_b = \sqrt{-\mu_b}$, the center $m = -(\rho_a / \mu_a) e_a - (\rho_b / \mu_b) e_b$, and $c' = c - \rho_a^2 / \mu_a - \rho_b^2 / \mu_b$. The map $x = m + (P / s_a) e_a + (Q / s_b) e_b + w e_3$ is an affine bijection between $x$ and $(P, Q, w)$, and completing the squares gives
+
+$$R(x) = P^2 - Q^2 + 2 \rho_3 w + c'.$$
+
+If $\rho_3 \ne 0$, put $u = P - Q$ and $v = P + Q$. Then $P^2 - Q^2 = u v$, and $R = 0$ exactly when $w = -(u v + c') / (2 \rho_3)$. So $Z(R)$ is a hyperbolic paraboloid, and it is the image of $p(u) + v \, d(u)$ with $p(u)$ the point with $(P, Q, w) = (u/2, -u/2, -c' / (2\rho_3))$ and $d(u) = \tfrac{1}{2 s_a} e_a + \tfrac{1}{2 s_b} e_b - \tfrac{u}{2 \rho_3} e_3$: moving $v$ along $d(u)$ adds $v/2$ to $P$ and to $Q$, and $-u v / (2 \rho_3)$ to $w$. A point $x$ of $Z(R)$ lies on the line of $u = P - Q$, which is affine in $x$, at $v = P + Q$.
+
+If $\rho_3 = 0$ and $c' \ne 0$, then $R$ does not depend on $w$, and $R = 0$ means $(P - Q)(P + Q) = k$ with $k = -c' \ne 0$. So $t = P - Q \ne 0$ and $P + Q = k / t$, that is $P = (t + k/t) / 2$ and $Q = (k/t - t) / 2$, and $w$ is free. $Z(R)$ is a hyperbolic cylinder, the image of $p(t) + v e_3$ for $t \ne 0$, and a point $x$ lies on the line of $t = P - Q$.
+
+If $\rho_3 = 0$ and $c' = 0$, then $R = (P - Q)(P + Q)$, and $Z(R)$ is the two planes $P = Q$ and $P = -Q$ through $m$, with normals $s_a e_a - s_b e_b$ and $s_a e_a + s_b e_b$.
+
+*Rank 1.* Let $\mu_1 \ne 0$ with unit vector $e_1$, put $m = -(\rho_1 / \mu_1) e_1$, $c' = c - \rho_1^2 / \mu_1$, $r_n = r - \rho_1 e_1$, which is orthogonal to $e_1$, and $s = (x - m) \cdot e_1$. Then $R(x) = \mu_1 s^2 + 2 r_n \cdot x + c'$, and $r_n \cdot m = 0$. If $r_n \ne 0$, put $n = |r_n|$, $g = r_n / n$ and $h = e_1 \times g$, so that $e_1, g, h$ is orthonormal and $x = m + s e_1 + z g + y h$ with $r_n \cdot x = n z$. Then $R = 0$ exactly when $z = -(\mu_1 s^2 + c') / (2n)$, so $Z(R)$ is a parabolic cylinder, the image of $p(u) + v h$ with $p(u) = m + u e_1 - \tfrac{\mu_1 u^2 + c'}{2n} g$, and a point $x$ lies on the line of $u = (x - m) \cdot e_1$. If $r_n = 0$, then $R = \mu_1 s^2 + c'$, and $Z(R)$ is the two planes $s = \pm\sqrt{-c'/\mu_1}$ when $-c'/\mu_1 > 0$, the one plane $s = 0$ when $c' = 0$, and empty otherwise.
+
+*Rank 0.* Then $R(x) = 2 r \cdot x + c$. If $r \ne 0$, $Z(R)$ is the plane through $-c r / (2 |r|^2)$ with normal $r$. If $r = 0$, then $c \ne 0$ because $R \ne 0$, and $Z(R)$ is empty.
+
+A plane through $x_0$ with unit normal $\nu$ is one sheet: line L5 picks a unit vector $d$ in the plane and puts $e = \nu \times d$, so $e, d$ is an orthonormal basis of the plane, $p(u) = x_0 + u e$, and a point $x$ of the plane lies on the line of $u = (x - x_0) \cdot e$ at $v = (x - x_0) \cdot d$. $\square$
+
+The member found in Claim 1 is nonzero, so Claim 2 applies to it. This is the theorem of Levin, in the form given by Dupont, Lazard, Lazard and Petitjean (Theorem 3.1): the pencil of two distinct quadrics contains a simple ruled quadric or the empty set. If $Z(R)$ is empty, then $S$ and $T$ have no common real point, since every common zero of $S$ and $T$ is a zero of every member; so line L5 returns no sheets and the output is correctly empty.
+
+**Claim 3 (the quadratic on a ruling).** Let line L4 choose $G = S$ if $|\beta| \ge |\alpha|$ and $G = T$ otherwise. Then $Z(S) \cap Z(T) = Z(G) \cap Z(R)$, and for every line $p + v d$, $G(p + v d) = a v^2 + b v + c$ with $a = d^T G_u d$, $b = 2 d \cdot (G_u p + g)$ and $c = G(p)$, where $g$ is the linear part of $G$.
+
+*Proof.* If $|\beta| \ge |\alpha|$, then $\beta \ne 0$ and $T = (R - \alpha S) / \beta$, so $S(x) = T(x) = 0$ exactly when $S(x) = R(x) = 0$. The other case is the same with the roles of $S$ and $T$ exchanged. The formula follows from expanding $(p + v d)^T G_u (p + v d) + 2 g \cdot (p + v d) + g_0$ and using the symmetry of $G_u$. $\square$
+
+**Conclusion.** By Claims 2 and 3, for a sample $u$ of a sheet, the points of $Z(S) \cap Z(T)$ on the line $p(u) + v \, d(u)$ are exactly the points at the real roots $v$ of $a v^2 + b v + c$, or the whole line when $a = b = c = 0$. Lines L7 and L8 return these. Every point $x$ of $Z(S) \cap Z(T)$ is on some sheet at the parameter $u$ that the sheet assigns to it, so it is returned whenever that $u$ is a sample. With exact arithmetic the output is therefore exactly the intersection restricted to the sampled lines.
+
+What is not proved is the effect of rounding: the roots of $f$ are found in floating point, the rank and signs of the eigenvalues are decided with a relative tolerance of $10^{-9}$, and a double root $v$ is found only to about the square root of the rounding error. The tests measure the residuals of the output points in both quadrics, and check, for points of the intersection found independently by Newton steps, that each lies on a sheet and that its value of $v$ is a root of the quadratic of its line. $\blacksquare$
