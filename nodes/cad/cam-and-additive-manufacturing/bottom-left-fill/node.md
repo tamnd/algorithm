@@ -25,9 +25,6 @@ sources:
   - paper: doi:10.1137/0209064
     title: Brenda S. Baker, Edward G. Coffman Jr. and Ronald L. Rivest, Orthogonal packings in two dimensions, SIAM Journal on Computing 9(4), 1980, 846 to 855
     locator: the bottom-left rule, the bound of 3 times the optimum for decreasing widths, and the orders for which the rule is arbitrarily bad
-  - paper: doi:10.1016/0020-0190(80)90031-9
-    title: Donna J. Brown, An improved BL lower bound, Information Processing Letters 11(1), 1980, 37 to 39
-    locator: eight rectangles for which no order lets the bottom-left rule come within a factor 5/4 of the optimum
   - paper: doi:10.1109/TC.1983.1676307
     title: Bernard Chazelle, The bottomn-left bin-packing heuristic, an efficient implementation, IEEE Transactions on Computers C-32(8), 1983, 697 to 707
     locator: the O(n^2) time and linear space implementation for rectangles (the title has this spelling in print)
@@ -146,6 +143,6 @@ Use BLF when parts arrive in a fixed order, or as the inner step of a search ove
 
 ## History
 
-Baker, Coffman and Rivest defined the bottom-left rule for rectangles in a strip in 1980, as part of the first worst-case analysis of two-dimensional packing heuristics, and proved the bound 3 for decreasing widths. Chazelle gave an $O(n^2)$ implementation in 1983. In the 1990s the rule moved to irregular shapes in operations research. Jakobs (1996) used the sliding rule inside a genetic algorithm, and Liu and Teng (1999) improved the sliding moves. Hopper and Turton (2001) compared the sliding rule with the hole-filling rule. Dowsland, Vaid and Dowsland (2002) computed the bottom-left position of polygons, holes included, with no-fit polygons, and Burke, Hellier, Kendall and Whitwell (2006) gave a hole-filling rule for parts with lines and arcs. Hougardy and Zondervan found the first order of the rectangles with a better ratio than 3, in a preprint of 2025 that appeared at STACS 2026.
+Baker, Coffman and Rivest defined the bottom-left rule for rectangles in a strip in 1980, as part of the first worst-case analysis of two-dimensional packing heuristics, and proved the bound 3 for decreasing widths. Chazelle gave an $O(n^2)$ implementation in 1983. In the 1990s the rule moved to irregular shapes in operations research. Jakobs (1996) used the sliding rule inside a genetic algorithm, and Liu and Teng (1999) improved the sliding moves. Hopper and Turton (2001) compared the sliding rule with the hole-filling rule. Dowsland, Vaid and Dowsland (2002) computed the bottom-left position of polygons, holes included, with no-fit polygons, and Burke, Hellier, Kendall and Whitwell (2006) gave a hole-filling rule for parts with lines and arcs. In 2025 Hougardy and Zondervan found the first order of the rectangles with a better ratio than 3.
 
 ## References
