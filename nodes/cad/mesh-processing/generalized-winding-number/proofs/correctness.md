@@ -1,0 +1,35 @@
+---
+title: The generalized winding number of a closed mesh is an integer equal to the signed ray crossing count, 0 or 1 for an embedded closed surface, and it jumps by 1 across a face of any mesh
+proves: [correctness, termination]
+status: full
+---
+
+**Setting.** A mesh is a finite list of triangles $T = (A, B, C)$ in $\mathbb{R}^3$, oriented so that the outward normal $n_T = (B - A) \times (C - A)$ follows the right-hand rule. Triangles may intersect, repeat or have any orientation; the list is a 2-chain. Its *boundary* is the 1-chain $\sum_T (AB + BC + CA)$, where an edge $XY$ cancels against $YX$. The mesh is *closed* if the boundary is 0. For a point $p$ not on the mesh, $\Omega_T(p)$ is the signed area of the radial projection of $T$ onto the unit sphere around $p$, positive when $p$ is behind $T$ (on the side opposite to $n_T$), and
+
+$$w(p) = \frac{1}{4\pi} \sum_T \Omega_T(p).$$
+
+**Claim.**
+
+1. The formula of Van Oosterom and Strackee, $\Omega_T = 2\,\mathrm{atan2}(\det[a\,b\,c],\ |a||b||c| + (a \cdot b)|c| + (a \cdot c)|b| + (b \cdot c)|a|)$ with $a = A - p$, $b = B - p$, $c = C - p$, gives $\Omega_T(p)$.
+2. If the mesh is closed, then for every direction $d$ whose ray from $p$ misses all edges and vertices and is not in the plane of any triangle, $w(p) = \sum_T \pm [\text{the ray hits } T]$, with $+$ when $d \cdot n_T > 0$. In particular $w(p)$ is an integer, and the exact ray count of the code computes it.
+3. If the mesh is a closed oriented 2-manifold without self-intersections and its normals point out of the solid it bounds, then $w = 1$ inside and $w = 0$ outside.
+4. For any mesh, $w$ is continuous off the mesh, and across a point in the interior of exactly one triangle, $w$ just behind the triangle minus $w$ just in front of it is $1$.
+5. For a set $Q$ of triangles whose bounding box does not contain $p$, $\sum_{T \in Q} \Omega_T(p) = \sum_{T \in \mathrm{cap}(Q)} \Omega_T(p)$, where $\mathrm{cap}(Q)$ is the fan $(o, X, Y)$ over the boundary edges $XY$ of $Q$ from one boundary vertex $o$. So the tree version computes the same $w$.
+
+**Step 1 (part 1).** This is the result of Van Oosterom and Strackee (1983). We check the sign. $\det[a\,b\,c] = a \cdot (b \times c)$, and $b \times c$ has the direction of $n_T$ when the triangle is seen counterclockwise from the side where $n_T$ points, so $\det[a\,b\,c] = -\big((B - A) \times (C - A)\big) \cdot (p - A)$, which is positive exactly when $p$ is behind $T$. The denominator is positive for small triangles far from $p$, so $\Omega_T$ is then small with the sign of the determinant, and both sides of the formula are continuous in $p$ off the plane of $T$ and off the triangle. The formula is the half-angle form of the spherical excess of the projected triangle; $\mathrm{atan2}$ picks the angle in $(-\pi, \pi)$ for $\Omega_T / 2$, which is right because $|\Omega_T| < 2\pi$.
+
+**Step 2 (part 2).** For a direction $d$, let $N(d) = \sum_T \pm [\text{the ray from } p \text{ in direction } d \text{ hits } T]$, with the sign of $d \cdot n_T$. The radial projection of $T$ covers the directions $d$ whose ray hits $T$, once, and its signed area is $\Omega_T(p)$. If $p$ is behind $T$, every ray from $p$ that hits $T$ has $d \cdot n_T > 0$ and $\Omega_T > 0$; if $p$ is in front, both signs are negative. So $\Omega_T(p) = \int_{S^2} \pm [\text{hit}]\, d\sigma$, and $\sum_T \Omega_T(p) = \int_{S^2} N(d)\, d\sigma(d)$.
+
+Let $G$ be the set of directions of the claim. Its complement is the union of the projections of the edges, finitely many arcs of great circles, so $G$ is the sphere minus a set of measure 0. Take a path between two directions of $G$ that crosses the arcs transversally, at points interior to one arc each (possible because the arcs meet in finitely many points). When the path crosses the projection of an edge $XY$, the ray stops or starts hitting each triangle that has $X$ and $Y$ as corners; a triangle with the directed edge $XY$ changes $N$ by $\pm 1$, and one with $YX$ changes it by $\mp 1$, so the total change is $\pm$ the coefficient of $XY$ in the boundary chain, which is 0 for a closed mesh. So $N$ is the same constant $k$ on all of $G$, $\sum_T \Omega_T(p) = 4\pi k$, and $w(p) = k$.
+
+The code of the page computes $N(d)$ for a random rational $d$ in exact rational arithmetic and tries another $d$ when the ray touches an edge, a vertex or a plane of a triangle, so it returns $w(p)$ exactly. It stops with probability 1, because the bad directions are a set of measure 0 (in practice the first direction works).
+
+**Step 3 (part 4).** Each $\Omega_T$ is continuous in $p$ off $T$, so $w$ is continuous off the mesh. Let $q$ be in the interior of exactly one triangle $T$. Every other triangle has $\Omega$ continuous near $q$. As $p$ moves from just in front of $T$ to just behind it, through $q$, the projection of $T$ becomes a hemisphere seen from the front and a hemisphere seen from behind, so $\Omega_T$ goes from close to $-2\pi$ to close to $+2\pi$. The jump of $w$ is $4\pi / 4\pi = 1$.
+
+**Step 4 (part 3).** By part 2, $w$ is an integer off a closed mesh, and by part 4 it is continuous there, so it is constant on each connected component of the complement. When $|p| \to \infty$, every $\Omega_T(p) \to 0$, so $w = 0$ on the unbounded component. A closed embedded 2-manifold divides space into two components, the inside and the outside (the Jordan-Brouwer separation theorem for polyhedral surfaces). Crossing a face from the outside, where the normal points, to the inside changes $w$ by $+1$ by part 4. So $w = 1$ inside.
+
+**Step 5 (part 5).** The chain $Q - \mathrm{cap}(Q)$ is closed: the boundary of $\mathrm{cap}(Q)$ is the sum of $oX + XY + Yo$ over the boundary edges $XY$ of $Q$; the edges $oX$ and $Yo$ cancel because each vertex has as many boundary edges going in as going out (the boundary of a chain is a cycle), and the rest is the boundary of $Q$. Triangles of the fan with $o \in \{X, Y\}$ are degenerate, have $\Omega = 0$ and are left out. All triangles of $Q - \mathrm{cap}(Q)$ lie in the convex hull of the vertices of $Q$, which is inside the bounding box. If $p$ is outside the box, a ray from $p$ away from the box misses all of them, so by part 2 the winding number of the closed chain is 0, that is $\sum_Q \Omega_T(p) - \sum_{\mathrm{cap}} \Omega_T(p) = 0$. A patch inside the box is split or summed directly, so the tree gives the same sum as the direct formula.
+
+**Termination.** The direct sum visits each triangle once. The tree visits each node at most once, and each node is either summed, closed by its fan, or split into its two children, so it stops after at most $O(F)$ nodes for $F$ triangles. $\blacksquare$
+
+**What floating point does.** The proof is about the exact values. The code computes $\Omega_T$ in floating point, and next to an edge the denominator of part 1 is a difference of nearly equal numbers. The tests show a point $10^{-20}$ above the middle of a face diagonal of the unit cube where the float sum gives $0.50006$ instead of 1.
