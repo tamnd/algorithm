@@ -66,7 +66,7 @@ The proof of the second part uses ear decompositions of the rigidity matroid and
 
 ## Consequences
 
-- **A polynomial test.** 3-connectivity takes linear time, and redundant rigidity can be tested with the [pebble game](/pebble-game-rigidity/): $G$ is redundantly rigid if and only if it is rigid and every edge lies in a circuit, which is the same as: for each edge $e$, the game on $G - e$ reaches rank $2n - 3$. This gives an $O(n^2 m)$ test, and faster ones are known.
+- **A polynomial test.** 3-connectivity takes linear time, and redundant rigidity can be tested with the [pebble game](/pebble-game-rigidity/): $G$ is redundantly rigid if and only if it is rigid and every edge lies in a circuit, which is the same as: for each edge $e$, the game on $G - e$ reaches rank $2n - 3$. With the $O(nm)$ game of that page this gives an $O(n m^2)$ test, and faster ones are known.
 - **Generic global rigidity is a property of the graph.** In the plane it follows from the theorem: the answer does not depend on which generic placement is taken. Gortler, Healy and Thurston proved this in every dimension.
 - **6-connected graphs.** Jackson and Jordán derived that every 6-connected graph is generically globally rigid in the plane.
 - **Minimal globally rigid graphs.** A redundantly rigid graph has at least $2n - 2$ edges, and a 3-connected circuit of the rigidity matroid, such as a wheel, reaches this bound.

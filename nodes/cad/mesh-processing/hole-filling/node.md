@@ -84,7 +84,7 @@ The diagonal $\{0, 2\}$ gives the smaller area. Each area is half the length of 
 |---|---|---|
 | exhaustive search over all triangulations of the loop | optimal for any weight in the combinatorial form | $\Theta(C_{n-2})$, about $4^n$ |
 | dynamic program over the loop ([polygon triangulation DP](/polygon-triangulation-dp/)), Barequet and Sharir | optimal in the combinatorial form for a weight that is a sum over triangles; embedding not guaranteed | $O(n^3)$ time, $O(n^2)$ space |
-| [Liepa hole filling](/liepa-hole-filling/): the dynamic program with the largest dihedral angle and the area, then refinement and fairing | the triangulation step is optimal for its weight; the refinement and the fairing are heuristics, judged by measurement | $O(n^3)$ for the triangulation, and the cost of a sparse solve for the fairing |
+| [Liepa hole filling](/liepa-hole-filling/): the dynamic program with the largest dihedral angle and the area, then refinement and fairing | the triangulation step is a heuristic for its weight, which is not monotone; the refinement and the fairing are heuristics, judged by measurement | $O(n^3)$ for the triangulation, and the cost of a sparse solve for the fairing |
 | advancing front: add triangles at the sharpest angle of the loop until it closes | none; measured | about linear in the size of the patch |
 | [volumetric mesh repair](/volumetric-mesh-repair/): rebuild the surface from a grid of inside and outside signs | a closed surface; the shape in the hole is a guess | linear in the number of grid cells |
 | [surface reconstruction](/surface-reconstruction/) from the vertices, for example [Poisson surface reconstruction](/poisson-surface-reconstruction/) | a watertight surface; the whole model moves a little | a sparse solve on an octree |
@@ -94,7 +94,7 @@ All methods in the table choose a patch for a weight or a rule that they fix. No
 ## Bounds
 
 - **Count.** The combinatorial form has exactly $C_{n-2} = \frac{1}{n-1}\binom{2n-4}{n-2}$ patches, so exhaustive search is exponential.
-- **Optimal triangulation.** For a weight that is a sum over the triangles, or a lexicographic pair of a maximum and a sum, the best triangulation of the loop takes $O(n^3)$ time and $O(n^2)$ space. This is proved, by the same argument as for polygons in the plane.
+- **Optimal triangulation.** For a weight that is a sum or a maximum over the triangles, the best triangulation of the loop takes $O(n^3)$ time and $O(n^2)$ space. This is proved, by the same argument as for polygons in the plane. For a lexicographic pair of a maximum and a sum, one pass of the program with the pair can miss the optimum; a first pass finds the least maximum $w^*$, and a second pass minimizes the sum over the triangles whose first part is at most $w^*$, within the same bounds.
 - **Embedding is hard.** Barequet, Dickerson and Eppstein proved that deciding whether a polygon in space has a triangulation, with its own vertices, that does not intersect itself is NP-complete. So the dynamic program cannot also promise an embedded patch in polynomial time, unless P = NP, and the optimal embedded patch is at least as hard.
 - **Topology.** A loop bounds an embedded disk in space, if the rest of the mesh is ignored, if and only if it is not knotted. With an island or a knotted loop, no disk patch exists.
 
