@@ -105,7 +105,7 @@ What is measured: papers on the heuristics report the best length or utilization
 - If the triples exist, put triple $k$ side by side in the row $[0, B] \times [k - 1, k]$.
 - Conversely, take a feasible placement. The rectangles have total area $mB$, which is the area of the strip, so they cover the strip up to a set of measure zero. Choose $c \in (0, 1)$ that differs from the fractional part of every $y_i$, and look at the $m$ lines $y = c + k$, $k = 0, \dots, m - 1$. Each rectangle spans an open height interval of length $1$, so it crosses exactly one of these lines. On almost every choice of $c$, each line is covered up to measure zero, so the widths of the rectangles on it add up to at least $B$. They add up to at most $B$ since the rectangles do not overlap, so each line carries a set of widths of sum exactly $B$, and by $B/4 < a_i < B/2$ each such set is a triple.
 
-The map takes polynomial time, and the numbers in the new instance are bounded by a polynomial in the size and the largest number of the 3-PARTITION instance. Since 3-PARTITION is NP-complete in the strong sense, the nesting problem is NP-hard in the [strong sense](/strong-np-hardness/). The same map with $m$ sheets of size $B \times 1$ shows the hardness of the sheet variant.
+The numbers in the instance are bounded by a polynomial in its size, so this is a pseudo-polynomial reduction, and the nesting problem is NP-hard in the [strong sense](/strong-np-hardness/). The same map with $m$ sheets of size $B \times 1$ shows the hardness of the sheet variant.
 
 **To mixed-integer programming.** The Fischetti and Luzzi model above is a reduction of the problem with fixed angles to a MIP whose size is the total size of the pairwise no-fit polygons.
 
