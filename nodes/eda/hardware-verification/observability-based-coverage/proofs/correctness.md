@@ -1,0 +1,31 @@
+---
+title: Observability tags are sound, exact on fanout-free circuits, and not complete in general
+proves: [correctness]
+status: full
+---
+
+**Setting.** $C$ is a combinational circuit whose lines are its primary inputs and the outputs of its gates, listed in topological order. Each gate has a type in AND, OR, NAND, NOR, XOR, XNOR, NOT and BUF. The *controlling value* of AND and NAND is 0, of OR and NOR it is 1, and XOR, XNOR, NOT and BUF have none; a value is *non-controlling* for a gate when it is not the controlling value. Fix an input vector $v$, and let $\mathrm{val}(\ell)$ be the value of line $\ell$. For a site $t$, the *flipped circuit* $C^t$ is $C$ with the value of line $t$ replaced by its complement, seen by every gate that reads $t$; its values are $\mathrm{val}^t(\ell)$. Site $t$ is *observable* for $v$ when $\mathrm{val}^t(o) \ne \mathrm{val}(o)$ for some primary output $o$. $\mathrm{Fin}(\ell)$ is the set computed at line L1: $\ell$ and every line on which $\ell$ depends. $\mathrm{Tag}(\ell)$ is the set computed at lines L5 to L10 for $v$.
+
+**Fact (gates with one changed input).** Let a gate have inputs $i_1, \ldots, i_k$, and suppose that only $i_j$ changes its value. If every other input is non-controlling for the gate, the output changes. If some other input has the controlling value, the output does not change.
+
+*Proof.* For AND with every other input at 1, the output equals $i_j$, so it changes; with some other input at 0, the output is 0 before and after. NAND is the complement of AND. OR and NOR are the duals with 0 and 1 exchanged. For XOR the output is $i_j$ XOR the parity of the other inputs, which do not change, so the output changes; XNOR is its complement. NOT and BUF have one input. $\square$
+
+**Lemma 1 (cones).** If $t \notin \mathrm{Fin}(\ell)$, then $\mathrm{val}^t(\ell) = \mathrm{val}(\ell)$.
+
+*Proof.* Induction over the lines in topological order. A primary input $\ell \ne t$ has the same value in $C$ and $C^t$. A gate output $\ell \ne t$ with $t \notin \mathrm{Fin}(\ell)$ has $t \notin \mathrm{Fin}(i)$ for each of its inputs $i$, because $\mathrm{Fin}(\ell) \supseteq \mathrm{Fin}(i)$. By the induction hypothesis its inputs have the same values in both circuits, and $\ell$ is computed by the same gate, so $\ell$ has the same value. $\square$
+
+**Lemma 2 (soundness).** If $t \in \mathrm{Tag}(\ell)$, then $\mathrm{val}^t(\ell) \ne \mathrm{val}(\ell)$.
+
+*Proof.* Induction over the lines in topological order. If $t = \ell$, the value of $\ell$ is complemented in $C^t$ by definition; this covers line L5 and line L7. Otherwise $\ell$ is the output of a gate with inputs $i_1, \ldots, i_k$, and $t$ was added at line L10 for some $j$. Then $t \in \mathrm{Tag}(i_j)$, $t \notin \mathrm{Fin}(i_m)$ for every $m \ne j$, and every $i_m$ with $m \ne j$ has a non-controlling value (line L9). By the induction hypothesis $i_j$ changes in $C^t$. By Lemma 1 no other input changes. The value of $\ell$ is not complemented by the flip, since $\ell \ne t$. By the Fact, $\ell$ changes. $\square$
+
+**Theorem 1 (tags reaching an output are observable).** Every site in $\bigcup_o \mathrm{Tag}(o)$, the set added to Covered at line L11 for $v$, is observable for $v$. Hence the coverage returned at line L12 is at most the exact observability coverage of the same vector set.
+
+*Proof.* Apply Lemma 2 to the primary output $o$ with $t \in \mathrm{Tag}(o)$. The second sentence follows because Covered is a union over the vectors of sets that are each contained in the exact set of that vector. $\blacksquare$
+
+**Theorem 2 (exact on fanout-free circuits).** If every line of $C$ feeds at most one gate input, then for every line $\ell$, $t \in \mathrm{Tag}(\ell)$ if and only if $\mathrm{val}^t(\ell) \ne \mathrm{val}(\ell)$.
+
+*Proof.* One direction is Lemma 2. For the other, use induction over the lines in topological order, and suppose that $\ell$ changes in $C^t$. If $\ell = t$, then $t \in \mathrm{Tag}(\ell)$ by line L5 or line L7. If $\ell$ is a primary input other than $t$, it cannot change. Otherwise $\ell \ne t$ is the output of a gate with inputs $i_1, \ldots, i_k$. Since $\ell$ changes and the gate is the same in both circuits, some input changes, and by Lemma 1 that input $i_j$ has $t \in \mathrm{Fin}(i_j)$. In a circuit in which each line feeds at most one gate input, the sets $\mathrm{Fin}(i_1), \ldots, \mathrm{Fin}(i_k)$ are pairwise disjoint: a line in two of them would reach the gate along two paths that enter it at different pins, and the line where the two paths first part would feed two gate inputs. So $t \notin \mathrm{Fin}(i_m)$ for $m \ne j$, and by Lemma 1 only $i_j$ changes. By the Fact, every $i_m$ with $m \ne j$ is non-controlling, since otherwise $\ell$ would not change. By the induction hypothesis $t \in \mathrm{Tag}(i_j)$. So the test of line L9 passes for $j$, and line L10 adds $t$ to $\mathrm{Tag}(\ell)$. $\blacksquare$
+
+**The converse of Theorem 1 fails.** Take the inputs $x, b, c, d$, the gates $p = \mathrm{AND}(x, b)$, $q = \mathrm{AND}(x, c)$, $y = \mathrm{OR}(p, q)$, $z = \mathrm{AND}(q, d)$, the outputs $y$ and $z$, and $v = (x, b, c, d) = (0, 1, 1, 0)$. Then $p = q = y = z = 0$. In $C^x$, $p = q = 1$ and $y = 1$, so $x$ is observable. The algorithm puts $x$ in $\mathrm{Tag}(p)$ and $\mathrm{Tag}(q)$. At $y$, for the input $p$ the other input $q$ has $x \in \mathrm{Fin}(q)$, and for the input $q$ the other input $p$ has $x \in \mathrm{Fin}(p)$, so line L10 adds $x$ for neither. At $z$, the input $d = 0$ is controlling for the input $q$. So $x \notin \mathrm{Tag}(y) \cup \mathrm{Tag}(z)$, although $x$ is observable. The loss comes from reconvergent fanout, which Theorem 2 excludes.
+
+**Relation to the Boolean difference.** Cut the circuit at line $t$, so that $t$ becomes a free variable $\tau$ and each output $o$ becomes a function $o(\tau, v)$. Site $t$ is observable for $v$ exactly when the Boolean difference $\partial o / \partial \tau$ is 1 at $v$ for some output $o$. Theorem 1 says that the tag rule computes an under-approximation of this set, and Theorem 2 that it computes the set exactly for fanout-free circuits. Flipping line $t$ under $v$ is also the single stuck-at fault "$t$ stuck at the complement of $\mathrm{val}(t)$", so $t$ is observable for $v$ exactly when $v$ detects that fault.
