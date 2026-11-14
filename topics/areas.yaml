@@ -524,16 +524,28 @@
       name: Quantum simulation
 - id: cad
   name: CAD
-  summary: Algorithms that design and make mechanical parts, such as solid modeling, constraint solving, mesh repair, toolpaths and additive manufacturing.
+  summary: Algorithms that design, analyze and make mechanical parts, such as solid modeling, surface intersection, meshing for analysis, mechanism design, toolpaths and 3D printing.
   children:
     - id: solid-modeling
       name: Solid modeling
+    - id: surface-interrogation-and-design
+      name: Surface interrogation and design
     - id: geometric-constraint-solving
       name: Geometric constraint solving
+    - id: mechanism-and-assembly-design
+      name: Mechanism and assembly design
     - id: mesh-processing
       name: Mesh processing and repair
+    - id: mesh-generation-for-analysis
+      name: Mesh generation for analysis
+    - id: cad-cae-integration
+      name: Isogeometric analysis and CAD-CAE integration
     - id: cam-and-additive-manufacturing
       name: CAM and additive manufacturing
+    - id: manufacturing-process-planning
+      name: Manufacturing process planning
+    - id: reverse-engineering-and-inspection
+      name: Reverse engineering, inspection and tolerancing
 - id: eda
   name: Electronic design automation
   summary: Algorithms that turn a chip description into a verified, testable layout, such as synthesis, simulation, verification, placement, routing, timing, power and test.
