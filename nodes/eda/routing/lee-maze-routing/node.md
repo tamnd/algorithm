@@ -111,7 +111,7 @@ The [proof](proofs/correctness.md) shows the following.
 ## Complexity
 
 - **Time.** Each free cell enters the queue at most once, and each cell has at most 4 neighbors. So the expansion takes $O(MN)$ time, and the backtrace takes $O(L) = O(MN)$. In the worst case, for example when $t$ is the last free cell of a long spiral, the wave visits every cell, so the bound is $\Theta(MN)$.
-- **Space.** A label for every cell takes $\Theta(MN)$ memory. Lee stored the distance in each cell. With Akers' coding the label takes two bits, plus the free or blocked state.
+- **Space.** A label for every cell takes $\Theta(MN)$ memory. Lee stored the distance in each cell. With Akers' coding the label takes one bit, and with the free and blocked states a cell needs two bits.
 - **Wasted work.** The wave grows in all directions, also away from the target. In an open grid it labels about $2L^2$ cells to find a path of length $L$. [Hadlock's algorithm](/hadlock-algorithm/) and [A* search](/a-star-search/) aim the search at the target.
 
 ## Properties
