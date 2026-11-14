@@ -1,0 +1,35 @@
+---
+title: The contour packing of a B*-tree is the naive packing, has no overlap, is compact downward and takes linear time
+proves: [correctness, complexity]
+status: full
+---
+
+We use the pseudocode of the page. A B*-tree is an ordered binary tree on the $n$ blocks. The rules are: the root has $x = 0$; if $c$ is the left child of $b$ then $x_c = x_b + w_b$; if $c$ is the right child of $b$ then $x_c = x_b$. The blocks are placed in preorder, and each block gets
+$$y_b = \max\bigl(\{0\} \cup \{\, y_a + h_a : a \text{ placed before } b,\ x_a < x_b + w_b,\ x_b < x_a + w_a \,\}\bigr),$$
+the height of the highest earlier block whose $x$-range meets the $x$-range of $b$ in an interval of positive length. This is the naive packing of the tests. The proof shows that lines L1 to L10 compute it.
+
+**Lemma 1 (the x values are defined).** In preorder, the parent of a block comes before the block, so $x_b$ is known when $b$ is placed. Every block of the left subtree of $p$ has $x \ge x_p + w_p$, and every block of the subtree of $p$ has $x \ge x_p$.
+
+*Proof.* The first claim is the definition of preorder. For the second, induct on the depth below $p$: the left child of $p$ has $x = x_p + w_p$, and any child $c$ of a block $d$ has $x_c \ge x_d$ because widths are positive. $\square$
+
+**Lemma 2 (the contour).** Call a list of segments $[x_0, x_1)$ with a height $\mathit{top}$ a *contour* if the segments are in increasing order, the first starts at 0, each starts where the one before it ends, the last ends at $\infty$, and for each point $t \ge 0$ the height of the segment that contains $t$ is $\max(\{0\} \cup \{y_a + h_a : a \text{ placed}, x_a \le t < x_a + w_a\})$. Before each pop of line L3 the list from the head is a contour.
+
+*Proof.* Line L1 makes one segment $[0, \infty)$ at height 0, which is a contour of no blocks. Assume the list is a contour, and that a block $b$ is popped with a segment $s$ in the list with $s.x_0 = x_b$ (Lemma 3). The walk visits $s$ and the segments after it while they start before $e = x_b + w_b$. These are exactly the segments that meet $[x_b, e)$. Line L6 sets $s$ to $[x_b, e)$ at height $y_b + h_b$, keeps the part $[e, \cdot)$ of the last segment visited if that segment goes past $e$, and links $s$ to the first segment that starts at $e$ or later. The heights outside $[x_b, e)$ do not change, and inside it the new height is $y_b + h_b$. This is at least the old height there, because $y_b$ is the largest old height on $[x_b, e)$ (Lemma 4). So the new list is the contour of the placed blocks with $b$. $\square$
+
+**Lemma 3 (the start segment).** When a block $b$ is popped with a segment $s$, the segment $s$ is in the list and $s.x_0 = x_b$.
+
+*Proof.* For the root, $s$ is the head with $x_0 = 0$. Let $b$ be the left child of $p$. It was pushed last, right after $p$ was placed, so it is popped next. At that time $s$ is the segment after the segment of $p$, and it starts at the end $x_p + w_p = x_b$ of the segment of $p$. Let $b$ be the right child of $p$, pushed with the segment $s_p$ of $p$, with $s_p.x_0 = x_p = x_b$. Between the placement of $p$ and the pop of $b$, only the blocks of the left subtree of $p$ are placed, since the stack is a preorder stack. The placement of a block $c$ changes the fields only of its own start segment, whose $x_0 = x_c$, and it unlinks only segments that start strictly between $x_c$ and $x_c + w_c$. By Lemma 1, $x_c \ge x_p + w_p > x_p$. So $s_p$ starts before $x_c$: it is not the start segment of $c$ and it is not unlinked. It is not changed and it stays in the list. $\square$
+
+**Lemma 4 (the y value).** Line L5 and the walk set $y_b$ to the value of the naive packing.
+
+*Proof.* By Lemma 3 the walk starts at the segment that contains $x_b$, and it visits the segments that meet $[x_b, x_b + w_b)$. By Lemma 2 the largest height among them is the largest $y_a + h_a$ over the placed blocks $a$ whose $x$-range meets $[x_b, x_b + w_b)$, or 0. Two half-open intervals meet if and only if $x_a < x_b + w_b$ and $x_b < x_a + w_a$. This is the formula of the naive packing. $\square$
+
+**Theorem 1 (no overlap and down-compaction).** In the packing, no two blocks overlap. Each block lies on the floor ($y_b = 0$) or touches from above a block whose $x$-range meets its own in an interval of positive length, so no block can move down. The returned $W$ and $H$ are the width and the height of the bounding box.
+
+*Proof.* Let $a$ be placed before $b$. If their $x$-ranges do not meet, the two blocks are separated by a vertical line. If they meet, then $y_b \ge y_a + h_a$ by Lemma 4, and the blocks are separated by a horizontal line. If $y_b > 0$, then $y_b$ is the top $y_a + h_a$ of a block $a$ with a meeting $x$-range, and $b$ rests on it. Line L7 and the next line keep the largest right side and the largest top. $\square$
+
+**Not claimed.** The packing need not be compact to the left. Take three unit squares, the root $A$, its left child $B$ and the right child $C$ of $B$. Then $A = (0, 0)$, $B = (1, 0)$ and $C = (1, 1)$, and $C$ can move left to $(0, 1)$. The map from trees to packings is not one to one: the tree with root $A$, right child $D$ of $A$ and left child $E$ of $D$ gives $A = (0, 0)$, $D = (0, 1)$, $E = (1, 0)$, and so does the tree with root $A$, left child $E$ and right child $D$. The tests check both examples.
+
+**Cited theorem (every admissible placement has a B*-tree).** Call a placement *admissible* if no block can move left or down. Chang, Chang, Wu and Wu (DAC 2000, the section on the B*-tree representation) show that for each admissible placement there is a unique B*-tree, built by a depth-first search from the block at the lower-left corner: the left child of $b$ is the lowest block that touches the right side of $b$ with $x = x_b + w_b$, and the right child is the lowest block above $b$ with the same $x$. Any placement without overlap becomes admissible when the blocks are moved left and down in turn, and these moves do not make the bounding box larger, so some B*-tree gives a packing of least area. The tests check this consequence for $n \le 4$: the least area over all $n! \cdot C_n$ trees equals the least area found by a search over all positions.
+
+**Complexity.** Each pop of line L3 does $O(1)$ work plus one step for each segment that the walk visits. Every visited segment other than the start segment is unlinked, or is the last segment, which is replaced by the new segment $[e, \cdot)$. Each placement makes at most one new segment, so at most $n + 1$ segments are ever made and at most $n + 1$ are ever unlinked or replaced. The total number of steps of all walks is at most $n + (n + 1)$, and PACK takes $O(n)$ time and $O(n)$ space. The naive packing compares each block with all the blocks before it, $\Theta(n^2)$ time. SWAP renames two nodes, and DELETE and INSERT change $O(1)$ links once the node and its parent are known; DELETE of a node with two children first swaps it down a path, $O(h)$ steps for a tree of height $h$. $\blacksquare$
