@@ -35,7 +35,7 @@ A *quantum gate* is a [unitary](/unitary-operator/) operation on a small number 
 
 $$|x\rangle \mapsto \sum_{y} G_{\,y,\,x|_q}\, |x \text{ with the bits } q_0, \dots, q_{k-1} \text{ replaced by } y\rangle,$$
 
-where $x|_q = \sum_i x_{q_i} 2^i$ is the $k$-bit string that $x$ has on the gate qubits. For one qubit $j$ this is the matrix $I^{\otimes(n-1-j)} \otimes G \otimes I^{\otimes j}$ of the [tensor product](/tensor-product/) page. For adjacent qubits in decreasing order, $G$ on $(j, j+1, \dots, j+k-1)$ is $I^{\otimes(n-j-k)} \otimes G \otimes I^{\otimes j}$. For other qubit lists it is that matrix conjugated by a permutation of the qubits.
+where $x|_q = \sum_i x_{q_i} 2^i$ is the $k$-bit string that $x$ has on the gate qubits. For one qubit $j$ this is the matrix $I^{\otimes(n-1-j)} \otimes G \otimes I^{\otimes j}$ of the [tensor product](/tensor-product/) page. For adjacent qubits in increasing order, $G$ on $(j, j+1, \dots, j+k-1)$ is $I^{\otimes(n-j-k)} \otimes G \otimes I^{\otimes j}$. For other qubit lists it is that matrix conjugated by a permutation of the qubits.
 
 **Circuit.** A *circuit* on $n$ qubits is a finite sequence of gates $G_1, \dots, G_m$, each with its list of qubits. It maps the state $|\psi\rangle$ to $U_m \cdots U_2 U_1 |\psi\rangle$, where $U_t$ is the $2^n \times 2^n$ matrix of the gate $G_t$ on its qubits. So the gate that acts first is the rightmost factor of the product. A circuit diagram is read from left to right in time, but the matrix product is written from right to left. The *size* of the circuit is $m$. Its *depth* is the number of layers when each gate goes in the first layer after the last earlier gate that shares a qubit with it.
 

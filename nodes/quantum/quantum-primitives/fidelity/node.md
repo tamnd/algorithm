@@ -94,7 +94,7 @@ For pure states the right inequality is an equality. In the squared convention $
 
 **Non-examples.**
 
-- $\operatorname{Tr}(\rho\sigma)$ is not the fidelity of mixed states. For $\rho = \sigma = I/2$ it is $1/2$, but $F = 1$. It equals $F^2$ only when one of the states is pure. This quantity is what the [swap test](/swap-test/) estimates.
+- $\operatorname{Tr}(\rho\sigma)$ is not the fidelity of mixed states. For $\rho = \sigma = I/2$ it is $1/2$, but $F = 1$. It equals $F^2$ when one of the states is pure, and in general $\operatorname{Tr}(\rho\sigma) \le F^2$. This quantity is what the [swap test](/swap-test/) estimates.
 - $\operatorname{Tr}(\sqrt\rho\sqrt\sigma)$, the affinity, is not the fidelity. It is the trace of $M = \sqrt\rho\sqrt\sigma$, while $F$ is the trace norm of $M$, so it is at most $F$, with equality when $\rho$ and $\sigma$ commute.
 
 ### Common errors
