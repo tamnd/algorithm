@@ -1,0 +1,49 @@
+---
+title: FAN returns a test exactly when the fault is detectable
+proves: [correctness]
+status: full
+---
+
+Let $C$ be a combinational circuit with $n$ primary inputs and lines in topological order, and let $(\ell, s)$ be the fault "line $\ell$ stuck at $s$". The proof follows the proof for [PODEM](/podem/) and adds what is new in FAN: the decisions are on head lines, and the required values $R$ of unique sensitization also prune the search. The words effect, X, completion and detects are used as there. A line has an *effect* when its good and faulty values are both known and differ, and it *has an X* when one of the two values is X.
+
+**Bound lines and head lines.** Line L1 marks a line as bound when it is a fanout branch, the line $\ell$ itself, or a line with a bound input. So the set of bound lines is closed under fanout. A line that is not bound is free. $H$ holds the free lines with a bound fanout, and $\ell$ if $\ell$ is a primary input. For $h \in H$ with $h \ne \ell$, let $F(h)$ be the set of lines from which a path of free lines leads to $h$.
+
+**Lemma 1 (the cones).** (a) A free line has no fanout branch among its fanouts unless it is in $H$, so every free line outside $H$ has exactly one fanout or none. (b) The sets $F(h)$ are disjoint trees, and each one contains a primary input. (c) $|H| \le n$. (d) Every input of a bound line is bound or in $H$.
+
+*Proof.* (a) If a line has two or more sinks, all of its fanouts are branches, which are bound, so a free line with two or more sinks has a bound fanout and is in $H$. (d) An input of a bound line is bound or free, and a free input with a bound fanout is in $H$. (b) A line of $H$ has no free fanout: with one sink, that sink is the bound fanout, and with more, all fanouts are branches. Take $u \in F(h)$ with $u \ne h$. It is free and not in $H$, since its path of free lines starts with a free fanout. By (a) it has exactly one fanout, and it is free. Following single fanouts from $u$ gives the only path of free lines out of $u$, and the path stops at the first line of $H$. So $u$ lies in exactly one set $F(h)$, and inside $F(h)$ every line except $h$ has one fanout, which makes $F(h)$ a tree with root $h$. Walking back along inputs from $h$ inside free lines ends at a primary input, because a free line is never a branch. (c) The sets $F(h)$ are disjoint and each holds a primary input. If $\ell$ is a primary input, it is bound, so it lies in no $F(h)$. So $|H| \le n$. $\square$
+
+**Lemma 2 (head lines cut the circuit).** Let $\tau$ be a two-valued input vector and let $A_\tau$ give each line of $H$ its good value under $\tau$. Then line L4 run on $A_\tau$ gives every bound line the same good and faulty values as the simulation of $\tau$. If $A$ is any partial assignment on $H$ that $A_\tau$ extends, every bound line that is known under $A$ has the same value under $\tau$.
+
+*Proof.* Induction over the bound lines in topological order. A line of $H$ gets its value from $A_\tau$, and its faulty value equals its good value unless it is $\ell$: a free line is not reached from $\ell$, so the fault does not change it, and for $\ell$ the faulty value is $s$ in both computations. A bound line that is not in $H$ is not a primary input, since the only bound primary input can be $\ell$, which is in $H$. So it is a gate or a branch, and by Lemma 1(d) its inputs are bound or in $H$, where the induction gives the values of $\tau$. The gate rule is the same in both computations, and for $\ell$ the faulty value is $s$ in both. For the second claim, three-valued simulation is monotone: a value known under $A$ stays the same under every assignment that extends $A$ (the Fact of the PODEM proof), and $A_\tau$ extends $A$. $\square$
+
+So the faulty and the good values of every bound line depend only on the values of the head lines. A primary output that is free is not reached from $\ell$ and never has an effect, so detection is decided on the bound outputs.
+
+**Lemma 3 (justification).** For every $h \in H$ with $h \ne \ell$ and every value $v$, the procedure of line L29 sets primary inputs of $F(h)$ only, and three-valued simulation then gives $h$ the value $v$, whatever the other inputs are.
+
+*Proof.* Induction on the tree $F(h)$ from the leaves. A primary input is set to $v$. For NOT and BUF, the input gets the needed value. For a gate with a controlling value $c$, when the inputs need the value $c$, the first input gets $c$, which forces the output. Otherwise every input gets the non-controlling value. For XOR and XNOR, every input gets a value with the right parity. The subtrees of the inputs are disjoint, by Lemma 1(b), so the settings do not overwrite each other, and the trees of two head lines are disjoint too. $\square$
+
+**Lemma 4 (soundness of line L5).** If line L5 returns a vector, every completion of it detects the fault.
+
+*Proof.* By Lemma 3, simulation of the returned vector gives each line of $H$ its value in the current assignment $A$, and $\ell$, if it is a primary input in $H$, gets its value directly. By Lemma 2 applied to the bound lines, simulation then gives the bound lines at least the values that line L4 gave under $A$, so some primary output has an effect. The Fact of the PODEM proof extends this to every completion. $\square$
+
+**Lemma 5 (the required values are necessary).** Suppose that line L5 did not return under $A$, that $\ell$ is not X, and that the D-frontier gates with an X-path are one gate $G$. Let $\tau$ be a vector that detects the fault and with $A_\tau$ extending $A$. Then every pair $(j, v)$ in $R$ has value $v$ on line $j$ under $\tau$.
+
+*Proof.* Take a path $\ell = p_0, \ldots, p_r = o$ of lines that differ under $\tau$ (Lemma 1 of the PODEM proof). As in Lemma 3 of the PODEM proof, let $p_i$ be the last line of the path with an effect under $A$. Then $i < r$, and $p_{i+1}$ is a D-frontier gate and $p_{i+1}, \ldots, p_r$ is an X-path. So $p_{i+1} = G$, and the rest of the path goes from $G$ to an output. Every gate $d$ of line L18 lies on all such paths, so the path enters $d$ through an input whose values differ under $\tau$, and the output of $d$ also differs. Let $j$ be an input of $d$ outside the fanout cone of $\ell$. The fault does not reach $j$, so $j$ has the same value in both circuits. If that value were the controlling value $c$ of $d$, the output of $d$ would be fixed by $j$ in both circuits and would not differ. So $j$ has the value $\lnot c$ under $\tau$. $\square$
+
+**Lemma 6 (safe pruning).** If the test of line L7 fails for $A$, then no vector $\tau$ with $A_\tau$ extending $A$ detects the fault.
+
+*Proof.* There are three cases. If $\ell$ has the good value $s$, the good and the faulty circuit agree everywhere under any such $\tau$, by Lemma 2 and the monotone simulation. If $\ell$ has the value $\lnot s$ and no D-frontier gate has an X-path, the argument of Lemma 3 of the PODEM proof applies to the bound lines, whose values under $A$ agree with $\tau$ by Lemma 2. If some pair $(j, v)$ of $R$ has $j$ at $\lnot v$ under $A$, then $j$ has the value $\lnot v$ under every such $\tau$ by Lemma 2, and Lemma 5 says that no such $\tau$ detects the fault. ($j$ is bound or in $H$, since it is an input of a bound gate.) $\square$
+
+**Lemma 7 (the backtrace ends on an open head line).** When the test of line L7 holds, line L10 returns a line of $H$ whose value is X.
+
+*Proof.* Lines L8 and L9 give a nonempty set $O$ of lines with an X: the site $\ell$, inputs of bound gates, or an input of the D-frontier gate $G$, which exists by the test of line L7 as in Lemma 4 of the PODEM proof. All these lines are bound or in $H$. Lines L21 to L27 pass counts only to inputs with an X, in reverse topological order, so a line is handled after all the lines it feeds have added their counts. A bound line with an X that is not in $H$ has an input with an X: a gate whose inputs are all known is known in each circuit, except the faulty value of $\ell$, which is $s$, and then the X of $\ell$ is in its good value, which comes from its inputs. Line L23 keeps the larger count, so a count that reaches a line is passed on. By Lemma 1(d) the counts stay on bound lines and lines of $H$, and the lines are finite, so some line of $H$ with an X receives a count, and line L28 returns one. $\square$
+
+**Lemma 8 (the search tree).** The stack holds distinct lines of $H$, and the loop of line L3 runs at most $2^{|H| + 1} - 1 \le 2^{n+1} - 1$ times.
+
+*Proof.* Line L11 assigns an open line of $H$, by Lemma 7, and lines L13 and L15 pop and flip as in PODEM. The choice at lines L8 to L10 depends only on $A$. So the passes are a depth-first walk of a binary tree of depth at most $|H|$, in which each node is entered once, and $|H| \le n$ by Lemma 1(c). $\square$
+
+**Theorem.** FAN stops. It returns a vector exactly when the fault is detectable, and then every completion of the vector detects the fault. It returns "untestable" exactly when the fault is redundant.
+
+*Proof.* It stops by Lemma 8, and a returned vector is a test by Lemma 4. Suppose that $\tau$ detects the fault. Follow the nodes of the tree whose assignments $A$ are extended by $A_\tau$, starting at the root, where all of $H$ is X. At such a node, line L5 returns, or the test of line L7 holds by Lemma 6. In the second case line L11 assigns one more line of $H$, and one of the two children agrees with $A_\tau$. The search enters both children before it leaves the node. At depth $|H|$ the assignment is $A_\tau$, and by Lemma 2 the bound outputs have the values of $\tau$, so line L5 returns there. So FAN returns a vector before the stack can become empty at line L14. $\square$
+
+The proof uses no property of the choices at lines L23, L26 and L28, so any tie rule and any guidance by testability measures keeps the result. The choices change only the number of passes.
