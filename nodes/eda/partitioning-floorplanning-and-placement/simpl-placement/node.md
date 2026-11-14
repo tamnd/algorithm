@@ -89,7 +89,7 @@ All six lie in a $1.2 \times 0.6$ box near the center. Lookahead legalization fi
 | 1 | | $b$ | $d$ | $e$ |
 | 0 | | $a$ | $c$ | $f$ |
 
-Each cell moved less than 1.5 in $x$, and the cells kept their relative order in each cut. The tests check this result.
+Each cell moved at most 1.5 in $x$, and the cells kept their relative order in each cut. The tests check this result.
 
 **The B2B weights.** A net of weight 1 on three pins at $x = 0, 3, 5$ gets the edges $(0, 5)$ with weight $\frac{2}{2 \cdot 5} = \frac15$, $(3, 0)$ with $\frac13$ and $(3, 5)$ with $\frac12$. The quadratic cost is $\frac15 \cdot 25 + \frac13 \cdot 9 + \frac12 \cdot 4 = 10$, twice the span 5.
 

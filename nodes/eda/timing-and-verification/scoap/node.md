@@ -88,7 +88,7 @@ The rule for a gate with a controlling value reads the same way each time. One i
 | $h$ | 3 | 2 | 3 | the same as $g$ |
 | $z$ | 5 | 4 | 0 | $CC0(z) = CC1(g) + CC1(h) + 1$, $CC1(z) = \min(CC0(g), CC0(h)) + 1$ |
 
-The fault costs follow. The fault $z$/0 costs $CC1(z) + CO(z) = 4$, and it has 3 tests of the 8 vectors: 011, 110 and 111. The faults $g$/0 and $h$/0 cost 5, and each has 5 tests. Every input and branch fault costs 6. Most of them have 1 or 2 tests, so the ranking is right in the large, but $b$/0 also costs 6 and has 3 tests, as many as $z$/0. In [PODEM](/podem/), the objective $h = 1$ for the fault $h$/0 needs one input of $h$ at 0, so the backtrace takes the input with the smaller $CC0$. Here both inputs cost 1, and the tie is broken by order.
+The fault costs follow. The fault $z$/0 costs $CC1(z) + CO(z) = 4$, and it has 3 tests of the 8 vectors: 011, 110 and 111. The faults $g$/0 and $h$/0 cost 5, and each has 5 tests. Every input and branch fault costs 6. Most of them have 1 or 2 tests, so the ranking is right in the large, but $b$/0 and $b$/1 also cost 6 and have 3 tests each, as many as $z$/0. In [PODEM](/podem/), the objective $h = 1$ for the fault $h$/0 needs one input of $h$ at 0, so the backtrace takes the input with the smaller $CC0$. Here both inputs cost 1, and the tie is broken by order.
 
 On the c17 benchmark circuit, the same computation gives controllabilities of at most 5, and the largest observability, 7, is on the input 6 and on the branch of the input 3 into gate 11. These two lines are the hardest to observe, since their value must pass three NAND gates, each with a side input to set.
 
