@@ -94,13 +94,13 @@ This is the [Walsh-Hadamard transform](/walsh-hadamard-transform/) of the $\pm 1
 | model | queries | tight |
 |---|---|---|
 | classical, deterministic (exact) | $2^{n-1} + 1$ | yes |
-| classical, zero error | $2^{n-1} + 1$ on each constant input | yes |
+| classical, zero error | $2^{n-1} + 1$ on each constant input, in each run that answers | yes |
 | classical, bounded error $1/3$ | $2$ for $n \ge 2$ | yes |
 | quantum, exact | $1$ | yes |
 
 **Deterministic lower bound.** An adversary answers $0$ to each of the first $2^{n-1}$ queries to different strings. After these answers, the constant function $0$ and the balanced function that is $1$ on all strings not yet asked both agree with what the algorithm saw. A deterministic algorithm that stops now gives the same answer on both, so it is wrong on one of them. So it needs at least $2^{n-1} + 1$ queries. The algorithm above shows that this is enough, because $2^{n-1} + 1$ equal values are more than a balanced function has.
 
-**Zero-error lower bound.** Take any zero-error randomized algorithm and run it on the constant function $0$. When it answers "constant", it must have seen more than $2^{n-1}$ different strings, or the same adversary argument gives a balanced function that it also answers "constant" on with positive probability. So on each constant input it makes at least $2^{n-1} + 1$ queries on every run, not only on average. Randomness helps only if errors are allowed.
+**Zero-error lower bound.** Take any zero-error randomized algorithm and run it on the constant function $0$. When it answers "constant", it must have seen more than $2^{n-1}$ different strings, or the same adversary argument gives a balanced function that it also answers "constant" on with positive probability. So on each constant input it makes at least $2^{n-1} + 1$ queries on every run that gives an answer, not only on average. Randomness helps only if errors are allowed.
 
 **Bounded error with two queries.** Let the algorithm ask two different uniform random strings. On a constant input the values agree, and the error is the probability $1 - p$ of the answer "balanced". On a balanced input the values agree with probability
 $$e = \frac{2 \binom{N/2}{2}}{\binom{N}{2}} = \frac{N/2 - 1}{N - 1} < \frac{1}{2},$$

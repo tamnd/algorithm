@@ -121,7 +121,7 @@ Use the swap test when the two states are available only as copies, for example 
 
 - **Overlap, not amplitude.** The test estimates $|\langle\psi|\phi\rangle|^2$. To get the fidelity $|\langle\psi|\phi\rangle|$, take the square root, and note that the error grows near 0.
 - **The factor 2.** An error $\varepsilon/2$ in the frequency of 0 is an error $\varepsilon$ in the overlap. A count of runs from a bound for the frequency alone is too small by a factor of 4.
-- **Reused copies.** After a run the registers are projected onto the symmetric or antisymmetric subspace. A second run on the same registers does not give a fresh sample, and it biases the estimate towards 0.
+- **Reused copies.** After a run the registers are projected onto the symmetric or antisymmetric subspace. A second run on the same registers does not give a fresh sample: it repeats the first outcome, so the error of the estimate does not shrink.
 - **Pairing of qubits.** Line L3 must swap qubit $j$ of $A$ with qubit $j$ of $B$ for each $j$. Any other pairing compares $|\psi\rangle$ with a permuted $|\phi\rangle$.
 - **Mixed states.** For mixed states the result is $\operatorname{Tr}(\rho\sigma)$, which is not the fidelity. Two copies of $I/2$ give $\frac12$, the same as two pure states at overlap $\frac12$.
 

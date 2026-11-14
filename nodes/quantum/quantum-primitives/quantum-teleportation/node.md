@@ -132,7 +132,7 @@ Use teleportation to move a qubit between two places that share entanglement but
 
 ## Pitfalls
 
-- **The correction order.** Bob holds $X^{m_x} Z^{m_z}|\psi\rangle$, so he must apply $X^{m_x}$ first and $Z^{m_z}$ second. The other order gives $-|\psi\rangle$ for the outcome $(1, 1)$, a global phase that is harmless for one qubit but a sign error if the code also tracks a reference system.
+- **The correction order.** Bob holds $X^{m_x} Z^{m_z}|\psi\rangle$, so he must apply $X^{m_x}$ first and $Z^{m_z}$ second. The other order gives $-|\psi\rangle$ for the outcome $(1, 1)$, a global phase that is harmless even if the code also tracks a reference system, but a relative phase in a coherent version where the corrections are controlled gates whose control branches later interfere.
 - **The qubit order.** Which measured bit controls $X$ and which controls $Z$ depends on the qubit roles. Here $m_x$ comes from Alice's half of the pair (qubit $1$) and $m_z$ from the input qubit (qubit $2$). A swap of the two bits gives a wrong state in half of the cases.
 - **A different shared pair.** With $|\Psi^-\rangle$ or another Bell state as the resource, the four corrections are permuted. Bob's correction must match the shared pair.
 - **Missing classical bits.** If the bits are lost, Bob's qubit is $I/2$, with fidelity $\tfrac{1}{2}$ on average with the input. Teleportation is only as reliable as its classical channel.
