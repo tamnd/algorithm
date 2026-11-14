@@ -77,7 +77,7 @@ The [Jordan-Wigner transformation](/jordan-wigner-transformation/) gives 15 Paul
 | $N = 1$ | $h_{gg}$ and $h_{uu}$ | $-1.252477$, $-0.475934$ | |
 | $N = 3$ and $N = 4$ | | $-1.160738$, $-0.361291$; $0.206382$ | |
 
-The singlet ground state mixes $g^2$ with $u^2$ only, through $(gu|ug)$. The $2 \times 2$ matrix is $\begin{pmatrix} -1.830461 & 0.181287 \\ 0.181287 & -0.254471\end{pmatrix}$ with $-0.254471 = 2h_{uu} + (uu|uu)$, and its lowest eigenvalue is $-1.851046$. The correlation energy is $-0.020585$ hartree, about 13 kcal/mol, eight times chemical accuracy.
+The singlet ground state mixes $g^2$ with $u^2$ only, through $(gu|ug)$. The $2 \times 2$ matrix is $\begin{pmatrix} -1.830461 & 0.181287 \\ 0.181287 & -0.254471\end{pmatrix}$ with $-0.254471 = 2h_{uu} + (uu|uu)$, and its lowest eigenvalue is $-1.851046$. The correlation energy is $-0.020585$ hartree, about 13 kcal/mol, 13 times chemical accuracy.
 
 **FeMoco.** Reiher, Wiebe, Svore, Wecker and Troyer (2017) estimated the cost of the ground energy of an active space of the iron-molybdenum cofactor of nitrogenase, with 54 electrons in 54 spatial orbitals (108 qubits for the state). For one structure, phase estimation on a Trotter evolution needed about $1.1 \times 10^{15}$ T gates and 111 logical qubits in the serial version. These are estimates, not runs, and later work with other algorithms lowered them.
 

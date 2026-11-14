@@ -7,7 +7,7 @@ aliases:
 - quantum k-distinctness
 area: quantum/quantum-search
 level: research
-summary: Decide whether k of N values given by an oracle are equal. For constant k, quantum algorithms need O(N^(3/4 - 1/(4(2^k - 1)))) queries, tight by a 2026 preprint; classical ones need Θ(N).
+summary: Decide whether k of N oracle values are equal. For constant k, quantum algorithms need O(N^(3/4 - 1/(4(2^k - 1)))) queries, tight for large alphabets by a 2026 preprint; classical ones need Θ(N).
 prereqs: [element-distinctness, quantum-query-model, quantum-oracle]
 see_also: [ambainis-element-distinctness, belovs-k-distinctness, quantum-query-complexity, quantum-adversary-method, polynomial-method, collision-finding, brassard-hoyer-tapp-collision, quantum-walk-search]
 sources:
@@ -37,7 +37,7 @@ sources:
     locator: the application to k-distinctness (time close to Belovs's query bound for every constant k)
 ---
 
-The $k$-distinctness problem asks whether a list of $N$ values, read through a [quantum oracle](/quantum-oracle/), contains $k$ equal values. For $k = 2$ it is [element distinctness](/element-distinctness/). In the [quantum query model](/quantum-query-model/) with bounded error and constant $k$, the query complexity is $\Theta(N^{3/4 - 1/(4(2^k - 1))})$: Belovs gave the algorithm in 2012 and proved the matching lower bound in a 2026 preprint. For $k = 2$ this is $\Theta(N^{2/3})$, for $k = 3$ it is $\Theta(N^{5/7})$, and as $k$ grows it tends to $N^{3/4}$. A classical algorithm needs $\Theta(N)$ queries for every $k \ge 2$. This page is the problem and its bounds; the algorithms are on [Ambainis element distinctness](/ambainis-element-distinctness/) and [Belovs's k-distinctness algorithm](/belovs-k-distinctness/).
+The $k$-distinctness problem asks whether a list of $N$ values, read through a [quantum oracle](/quantum-oracle/), contains $k$ equal values. For $k = 2$ it is [element distinctness](/element-distinctness/). In the [quantum query model](/quantum-query-model/) with bounded error and constant $k$, Belovs's algorithm of 2012 needs $O(N^{3/4 - 1/(4(2^k - 1))})$ queries, and a 2026 preprint of his proves a matching lower bound for alphabets of size $\Omega(N^2)$. For $k = 2$ this is $\Theta(N^{2/3})$, for $k = 3$ it is $N^{5/7}$, and as $k$ grows it tends to $N^{3/4}$. A classical algorithm needs $\Theta(N)$ queries for every $k \ge 2$. This page is the problem and its bounds; the algorithms are on [Ambainis element distinctness](/ambainis-element-distinctness/) and [Belovs's k-distinctness algorithm](/belovs-k-distinctness/).
 
 ## In plain words
 

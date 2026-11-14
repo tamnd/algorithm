@@ -119,7 +119,7 @@ The full proof is in the proof file.
 - **The combinatorial algorithm** of the same paper needs $\tilde O(n^{10/7})$ queries and only $O(\log n)$ qubits in its quantum parts. It uses only Grover search and the neighborhoods of random vertices.
 - **Fixed subgraphs.** The same method finds a copy of a fixed graph $H$ on $k > 3$ vertices in $\tilde O(n^{2 - 2/k})$ queries (Theorem 5 of the paper), and the same bound holds for monotone graph properties with 1-certificates of at most $k$ vertices.
 - **Sparse graphs.** Buhrman et al. gave $O(n + \sqrt{nm})$ queries for a graph with $m$ edges, the first quantum triangle bound.
-- **Later query bounds.** Belovs's learning graphs gave $O(n^{35/27})$ (STOC 2012), Lee, Magniez and Santha gave $O(n^{9/7})$ (SODA 2013), and Le Gall gave $\tilde O(n^{5/4})$ (FOCS 2014). Jeffery, Kothari and Magniez reproduced the first two with nested quantum walks and quantum data structures.
+- **Later query bounds.** Belovs's learning graphs gave $O(n^{35/27})$ (posted 2011, STOC 2012), Lee, Magniez and Santha gave $O(n^{9/7})$ (SODA 2013), and Le Gall gave $\tilde O(n^{5/4})$ (FOCS 2014). Jeffery, Kothari and Magniez reproduced the first two with nested quantum walks and quantum data structures.
 
 ## When to use it
 
@@ -137,6 +137,6 @@ Use it as the model of a nested quantum walk: an outer walk on sets of vertices 
 
 ## History
 
-Buhrman, Dürr, Heiligman, Høyer, Magniez, Santha and de Wolf asked for the quantum query complexity of triangle finding and gave $O(n + \sqrt{nm})$, which is $O(n^{3/2})$ on dense graphs. Magniez, Santha and Szegedy posted their paper in October 2003, shortly before Ambainis posted his element distinctness walk; they worked from a preliminary version of it. It gave $\tilde O(n^{10/7})$ by combinatorics and $\tilde O(n^{13/10})$ by the nested walk, appeared at SODA 2005, and was published in the SIAM Journal on Computing in 2007. The bound stood until Belovs's learning graphs in 2011.
+Buhrman, Dürr, Heiligman, Høyer, Magniez, Santha and de Wolf asked for the quantum query complexity of triangle finding and gave $O(n + \sqrt{nm})$, which is $O(n^{3/2})$ on dense graphs. Magniez, Santha and Szegedy posted their paper in October 2003, shortly before Ambainis posted his element distinctness walk; they worked from a preliminary version of it. It gave $\tilde O(n^{10/7})$ by combinatorics and $\tilde O(n^{13/10})$ by the nested walk, appeared at SODA 2005, and was published in the SIAM Journal on Computing in 2007. The bound stood until Belovs's learning graphs, posted in 2011 and published at STOC 2012.
 
 ## References
