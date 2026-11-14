@@ -95,7 +95,7 @@ With a half-edge structure, or the edge and face maps of the code, each local op
 ## Properties
 
 - **Local and simple.** Four operators and two thresholds.
-- **The thresholds fit together.** $\frac{4}{3}L$ and $\frac{4}{5}L$ are chosen so that splitting an edge just above $\frac{4}{3}L$ gives halves above $\frac{2}{3}L$, and the guard of line L3 keeps a collapse from making an edge longer than the split threshold, so no collapse is undone by a split. The converse does not hold: the halves of an edge shorter than $\frac{8}{5}L$ are shorter than $\frac{4}{5}L$, so a collapse can still undo a split.
+- **The thresholds fit together.** $\frac{4}{3}L$ and $\frac{4}{5}L$ are chosen so that splitting an edge just above $\frac{4}{3}L$ gives halves above $\frac{2}{3}L$, and collapsing the shortest edges does not make edges longer than the split threshold, so the steps do not undo each other.
 - **Uniform, not adaptive.** All edges aim at one length. Fine details smaller than $L$ are lost, and flat regions get as many triangles as curved ones.
 - **Topology is kept.** The Euler characteristic, the number of border loops and the orientation stay.
 - **Not exact.** The midpoints, normals and projections use floating point.
