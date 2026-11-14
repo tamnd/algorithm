@@ -1,0 +1,45 @@
+---
+title: Point classification against extrusions and full revolutions of a simple polygon is exact
+proves: [correctness, termination]
+status: full
+---
+
+We use the pseudocode of the page. $X$ is a closed region bounded by a simple polygon with rational vertices, and CLASSIFY-PROFILE($X$, $q$) returns IN for $q \in \operatorname{int} X$, ON for $q \in \partial X$ and OUT otherwise. This is the correctness of the crossing rule with an exact on-edge test, proved on the point in polygon page; the only new point is that the first coordinate may be $\sqrt{s}$, which Lemma 4 handles. Interior and boundary are taken in $\mathbb{R}^2$ for $X$ and in $\mathbb{R}^3$ for the solid.
+
+**Lemma 1 (membership is a union over the parameter).** For any set $X$, any family of bijections $M(t)$ of space and any parameter set $I$, $p \in \bigcup_{t \in I} M(t) X$ exactly when $M(t)^{-1} p \in X$ for some $t \in I$.
+
+*Proof.* $p \in M(t) X$ means $p = M(t) x$ for some $x \in X$, that is $x = M(t)^{-1} p \in X$. A point is in a union exactly when it is in one of the sets. $\square$
+
+**Lemma 2 (extrusion).** Let $d_z \neq 0$ and $E = \bigcup_{t \in [0,1]} (X \times \{0\} + t d)$. Then $p \in E$ exactly when $t^* = p_z / d_z \in [0, 1]$ and $q = (p_x - t^* d_x, p_y - t^* d_y) \in X$. Further, $p \in \operatorname{int} E$ exactly when $0 < t^* < 1$ and $q \in \operatorname{int} X$.
+
+*Proof.* By Lemma 1, $p \in E$ exactly when $p - t d \in X \times \{0\}$ for some $t \in [0, 1]$. The third coordinate of $p - t d$ is $p_z - t d_z$, which is $0$ only for $t = t^*$, and then the first two coordinates are $q$. For the interior, let $A(x, y, t) = (x + t d_x, y + t d_y, t d_z)$. It is linear with determinant $d_z \neq 0$, so it is a homeomorphism of $\mathbb{R}^3$, and $E = A(X \times [0, 1])$. A homeomorphism of the whole space maps the interior of a set onto the interior of its image, so $\operatorname{int} E = A(\operatorname{int}(X \times [0,1])) = A(\operatorname{int} X \times (0, 1))$. Since $A^{-1} p = (q, t^*)$, the claim follows. $\square$
+
+**Lemma 3 (revolution).** Let $X \subset \{(r, z) : r \ge 0\}$ and let $V$ be the set of points $(x, y, z)$ with $(\sqrt{x^2 + y^2}, z) \in X$. This is the union over $\theta \in [0, 2\pi]$ of the turns of $\{(r, 0, z) : (r, z) \in X\}$ about the $z$ axis. Let $s = p_x^2 + p_y^2$.
+
+1. $p \in V$ exactly when $(\sqrt{s}, p_z) \in X$.
+2. If $s > 0$, then $p \in \operatorname{int} V$ exactly when $(\sqrt{s}, p_z) \in \operatorname{int} X$.
+3. If $s = 0$, then $p \in \operatorname{int} V$ exactly when there is $\varepsilon > 0$ such that the half-disk $\{(r, z) : r \ge 0, r^2 + (z - p_z)^2 < \varepsilon^2\}$ is in $X$.
+
+*Proof.* The turn by $\theta$ maps $(r, 0, z)$ to $(r \cos \theta, r \sin \theta, z)$, whose distance to the axis is $r \ge 0$. So the union is $V$ by Lemma 1, and part 1 is the definition of $V$. For part 2, the map $P(r, \theta, z) = (r \cos\theta, r\sin\theta, z)$ is a local diffeomorphism on $r > 0$, and near $p$ the function $\rho(x, y, z) = (\sqrt{x^2 + y^2}, z)$ is continuous, open as a map onto a neighbourhood of $(\sqrt s, p_z)$ in the open half-plane $r > 0$, and $V = \rho^{-1}(X)$. If $(\sqrt s, p_z)$ has a neighbourhood $U \subseteq X$, then $\rho^{-1}(U)$ is an open neighbourhood of $p$ inside $V$. If $p$ has a neighbourhood $W \subseteq V$, then $\rho(W)$ is a neighbourhood of $(\sqrt s, p_z)$ inside $X$, since $\rho$ is open there. For part 3, a ball $B$ of radius $\varepsilon$ around a point $p$ on the axis maps under $\rho$ onto exactly the half-disk of radius $\varepsilon$ around $(0, p_z)$, so $B \subseteq V$ exactly when that half-disk is in $X$. $\square$
+
+**Lemma 4 (exact comparisons with $\sqrt{s}$).** For rational $s \ge 0$ and rational $q$, $\operatorname{sign}(\sqrt{s} - q)$ is $+1$ if $q < 0$, and $\operatorname{sign}(s - q^2)$ if $q \ge 0$.
+
+*Proof.* If $q < 0$ then $\sqrt{s} \ge 0 > q$. If $q \ge 0$, both $\sqrt s$ and $q$ are in $[0, \infty)$, where $x \mapsto x^2$ is strictly increasing, so $\sqrt s$ and $q$ compare as $s$ and $q^2$ do. $\square$
+
+The crossing rule and the on-edge test use the first coordinate $u$ of the query point only in comparisons $u < q$, $u = q$, $u \le q$ with rational $q$: the crossing $r_c$ of an edge with the line $z = p_z$ is rational, since the edge has rational ends and $p_z$ is rational, and the ends of a horizontal edge are rational. By Lemma 4 every such comparison is exact for $u = \sqrt s$, so line L8 computes CLASSIFY-PROFILE($X$, $(\sqrt s, p_z)$) exactly.
+
+**Lemma 5 (the axis test).** Let $X$ be bounded by a simple polygon in $r \ge 0$ and let $(0, z_0) \in \partial X$. The half-disk condition of Lemma 3, part 3, holds exactly when the edges of $X$ on the line $r = 0$ cover a segment $\{0\} \times [z_0 - \delta, z_0 + \delta]$ for some $\delta > 0$.
+
+*Proof.* Suppose the half-disk of radius $\varepsilon$ is in $X$. Then the points $(0, z)$ with $|z - z_0| < \varepsilon$ are in $X$, and they are on $\partial X$, since points with $r < 0$ are arbitrarily close and not in $X$. The boundary of $X$ is the polygon, so these points lie on edges; a segment of the line $r = 0$ covered by finitely many edges is covered by edges that lie on the line, except for finitely many points where an edge crosses it, and closedness of the edges then covers those points too. So the edges on the axis cover the segment, with $\delta = \varepsilon / 2$.
+
+Conversely, suppose edges on $r = 0$ cover $\{0\} \times [z_0 - \delta, z_0 + \delta]$. Take $\varepsilon \le \delta$ smaller than the distance from $(0, z_0)$ to every edge of the polygon that is not on the axis and does not contain $(0, z_0)$. Any edge that contains $(0, z_0)$ and is not on the axis would leave the axis at $(0, z_0)$; but then three edges, two on the axis above and below and this one, would meet at $(0, z_0)$, or one of the axis edges would cross it in its relative interior, which a simple polygon does not allow, since the axis edges already cover both sides of $(0, z_0)$ and a vertex of a simple polygon has exactly two edges. So inside the disk of radius $\varepsilon$, the polygon boundary is only the axis segment. The open half-disk with $r > 0$ is then connected and misses $\partial X$, so it is wholly in $\operatorname{int} X$ or wholly outside $X$. It is not outside: the axis points are in $\partial X$, so each has points of $\operatorname{int} X$ arbitrarily close, and those cannot have $r < 0$. So the half-disk, with its axis diameter, is in $X$. $\square$
+
+**Theorem.** CLASSIFY-EXTRUSION and CLASSIFY-REVOLUTION return IN for points of the interior of the solid, ON for points of its boundary and OUT for points outside it, when the representation is valid. Both stop after $O(n)$ exact operations.
+
+*Proof.* Extrusion: line L1 computes $t^*$ of Lemma 2, line L2 returns OUT when $t^* \notin [0, 1]$, and lines L3 and L4 classify $q$. If $c$ = OUT then $p \notin E$ by Lemma 2. Otherwise $p \in E$, and by Lemma 2 it is interior exactly when $0 < t^* < 1$ and $c$ = IN. Line L5 returns ON when $t^* \in \{0, 1\}$, and line L6 returns $c$, which is IN or ON as required. Since $E$ is closed, a point of $E$ that is not interior is on its boundary.
+
+Revolution: by the remark after Lemma 4, line L8 gives the class of $(\sqrt s, p_z)$ against $X$. If it is OUT, $p \notin V$ by Lemma 3, part 1. If $s > 0$, Lemma 3, part 2, says $p$ is interior exactly when $c$ = IN, so line L9 returns the right answer. If $s = 0$ and $c \neq$ OUT, then $c$ = ON, since $(0, p_z)$ has points with $r < 0$ arbitrarily close. Then by Lemma 3, part 3, and Lemma 5, $p$ is interior exactly when the axis edges cover a neighbourhood of $(0, p_z)$ on the axis, which is the test of line L10: an edge on the axis that contains $(0, p_z)$ and has an end above $p_z$ covers a segment above it, and likewise below. Otherwise $p \in V \setminus \operatorname{int} V = \partial V$, line L11.
+
+Each line does a constant number of operations, except L4, L8 and L10, which loop once over the $n$ edges. So both procedures stop after $O(n)$ exact operations on numbers formed from the input coordinates. $\square$
+
+**Volumes.** For an extrusion, every slice $z = c$ with $c$ between $0$ and $d_z$ is a translate of $X$, so by Cavalieri's principle the volume is $\operatorname{area}(X) \cdot |d_z|$, line V1. For a revolution, the volume in cylindrical coordinates is $\iint_X \int_0^{2\pi} r \, d\theta \, dA = 2\pi \iint_X r \, dA$. By Green's theorem with the field $(0, r^2 / 2)$, $\iint_X r \, dA = \oint_{\partial X} \tfrac{1}{2} r^2 \, dz$ for a counterclockwise boundary, and on the straight edge from $(r_i, z_i)$ to $(r_{i+1}, z_{i+1})$ the integral is $\tfrac{1}{6}(z_{i+1} - z_i)(r_i^2 + r_i r_{i+1} + r_{i+1}^2)$. Summing over the edges and rearranging gives $\tfrac{1}{6} \sum_i (r_i + r_{i+1})(r_i z_{i+1} - r_{i+1} z_i)$, the same telescoping identity as in the shoelace formula for the area. Taking the absolute value makes the result independent of the orientation, line V2. $\square$
