@@ -1,0 +1,43 @@
+---
+title: The orthogonal distances to the sphere, cylinder, cone and torus, the Jacobians of the local parameterization, the monotone descent of the Levenberg steps, exact recovery of a sphere from noise-free data, and the faithful sphere distance
+proves: [correctness, termination]
+status: full
+---
+
+**Setup.** The data are points $x_1, \dots, x_m$ in $\mathbb{R}^3$ (or $\mathbb{R}^2$ for circles). A surface $S(\theta)$ has parameters $\theta$, and $r_i(\theta)$ is the signed orthogonal distance from $x_i$ to $S(\theta)$. The cost is $F(\theta) = \sum_i r_i(\theta)^2$. For a point $x$, a unit axis $u$ and a point $p$ (on the axis, or the center or the apex), write $w = x - p$, $h = w \cdot u$, and $\rho = \lvert w - h u \rvert$, the distance from $x$ to the axis.
+
+**Lemma 1 (orthogonal distances).** The distance from $x$ to the surface is:
+(a) sphere with center $c$ and radius $r$: $\lvert \lvert x - c \rvert - r \rvert$;
+(b) cylinder with axis $(p, u)$ and radius $r$: $\lvert \rho - r \rvert$;
+(c) cone with apex $p$, axis $u$ and half angle $\alpha \in (0, \pi/2)$, for a point whose nearest point is not the apex, that is $\rho \sin \alpha + h \cos \alpha \ge 0$: $\lvert \rho \cos \alpha - h \sin \alpha \rvert$;
+(d) torus with center $p$, axis $u$, major radius $R$ and minor radius $r < R$, for $\rho > 0$: $\bigl| \sqrt{(\rho - R)^2 + h^2} - r \bigr|$.
+
+*Proof.* (a) For $y$ on the sphere, $\lvert x - y \rvert \ge \bigl| \lvert x - c \rvert - \lvert y - c \rvert \bigr|$ by the triangle inequality, with equality for $y = c + r (x - c)/\lvert x - c \rvert$ (any $y$ if $x = c$). For (b), (c) and (d), each surface is a surface of revolution about the axis, so a nearest point of $S$ to $x$ lies in the half plane through the axis and $x$ (rotating any point of $S$ about the axis into that half plane does not increase its distance to $x$, since only the angle between the two points about the axis changes, and the distance is smallest when the angle is $0$). In that half plane, with coordinates $(\rho, h)$, the profile is: (b) the line $\rho = r$, at distance $\lvert \rho - r \rvert$; (c) the ray from the origin in the direction $(\sin \alpha, \cos \alpha)$, whose line has unit normal $(\cos \alpha, -\sin \alpha)$, so the distance to the line is $\lvert \rho \cos \alpha - h \sin \alpha \rvert$, and the foot of the perpendicular is on the ray exactly when the component along the ray, $\rho \sin \alpha + h \cos \alpha$, is $\ge 0$; (d) the circle of center $(R, 0)$ and radius $r$, at distance $\bigl| \lvert (\rho - R, h) \rvert - r \bigr|$ by (a). The half plane on the other side of the axis gives the profile at $(-\rho, h)$, which is not closer: for (d), $\lvert (-\rho - R, h) \rvert \ge \lvert (\rho - R, h) \rvert$. $\square$
+
+The code uses the signed versions $r_i = \lvert x_i - c \rvert - r$ and $r_i = \rho_i - r$.
+
+**Lemma 2 (Jacobians).** For the sphere with $\theta = (c, r)$, $\partial r_i / \partial c = -(x_i - c)^{\mathsf T} / \lvert x_i - c \rvert$ and $\partial r_i / \partial r = -1$. For the cylinder, let $(u, e_1, e_2)$ be orthonormal, and let the local step $\Delta = (\alpha, \beta, \gamma, \delta, \varepsilon)$ move the axis point to $p + \alpha e_1 + \beta e_2$, the direction to $(u + \gamma e_1 + \delta e_2)/\lvert u + \gamma e_1 + \delta e_2 \rvert$, and the radius to $r + \varepsilon$. With $w_1 = w \cdot e_1$, $w_2 = w \cdot e_2$ and $\rho = \sqrt{w_1^2 + w_2^2} > 0$, the derivative of $r_i$ at $\Delta = 0$ is $(-w_1/\rho, -w_2/\rho, -h w_1/\rho, -h w_2/\rho, -1)$.
+
+*Proof.* The sphere case is the gradient of $\lvert x - c \rvert$. For the cylinder, $\rho^2 = \lvert w \rvert^2 - (w \cdot u)^2 / \lvert u \rvert^2$ for any nonzero direction $u$. After the step, $w' = w - \alpha e_1 - \beta e_2$ and $u' = u + \gamma e_1 + \delta e_2$ (the normalization does not change $\rho$). To first order in $\Delta$: $\lvert w' \rvert^2 = \lvert w \rvert^2 - 2 \alpha w_1 - 2 \beta w_2$, $w' \cdot u' = h + \gamma w_1 + \delta w_2$ (as $e_1 \cdot u = e_2 \cdot u = 0$), and $\lvert u' \rvert^2 = 1 + O(\lvert \Delta \rvert^2)$. So $\rho'^2 = \rho^2 - 2 \alpha w_1 - 2 \beta w_2 - 2 h (\gamma w_1 + \delta w_2) + O(\lvert \Delta \rvert^2)$, and $\rho' = \rho + (\rho'^2 - \rho^2)/(2 \rho) + O(\lvert \Delta \rvert^2)$ gives the row. Moving the axis point along $u$ afterwards, as the code does, does not change any distance. $\square$
+
+**Lemma 3 (the Levenberg step descends).** Let $g = J^{\mathsf T} r$ (half the gradient of $F$ in local coordinates), $\mu > 0$, and $\Delta = -(J^{\mathsf T} J + \mu I)^{-1} g$. Then the matrix is positive definite, so line L5 has a unique solution, and if $g \ne 0$ there is $\mu_0$ such that every $\mu \ge \mu_0$ gives $F(\theta \oplus \Delta) < F(\theta)$, where $\theta \oplus \Delta$ is the retraction of line L6, a smooth map with $\theta \oplus 0 = \theta$ whose derivative in $\Delta$ at $0$ is the one used for $J$.
+
+*Proof.* $v^{\mathsf T} (J^{\mathsf T} J + \mu I) v = \lvert J v \rvert^2 + \mu \lvert v \rvert^2 > 0$ for $v \ne 0$. Let $\Lambda$ be the largest eigenvalue of $J^{\mathsf T} J$. Then $\lvert \Delta \rvert \le \lvert g \rvert / \mu$ and $g^{\mathsf T} \Delta = -g^{\mathsf T} (J^{\mathsf T} J + \mu I)^{-1} g \le -\lvert g \rvert^2 / (\Lambda + \mu)$. By Taylor's theorem on the smooth function $\Delta \mapsto F(\theta \oplus \Delta)$, whose gradient at $0$ is $2 g$, there is $K$ with $F(\theta \oplus \Delta) \le F(\theta) + 2 g^{\mathsf T} \Delta + K \lvert \Delta \rvert^2$ for $\lvert \Delta \rvert \le 1$. So $F(\theta \oplus \Delta) - F(\theta) \le -2 \lvert g \rvert^2 / (\Lambda + \mu) + K \lvert g \rvert^2 / \mu^2$, and the bound on $\lvert \Delta \rvert$ makes $\lvert \Delta \rvert \le 1$ for $\mu \ge \lvert g \rvert$. The right side is negative exactly when $K (\Lambda + \mu) < 2 \mu^2$, and for $\mu > \max(\Lambda, K)$ we have $K (\Lambda + \mu) < K \cdot 2 \mu < 2 \mu^2$. So $\mu_0 = \max(\lvert g \rvert, \Lambda, K) + 1$ works. $\square$
+
+**Theorem 1 (monotone, terminating).** The accepted costs form a strictly decreasing sequence bounded below by $0$, so they converge. The loop stops: after at most the fixed number of iterations, or when an accepted step gains less than the relative tolerance, or when $\mu$ passes its bound, which by Lemma 3 can happen at a point with $g \ne 0$ only if the bound is below $\mu_0$, and otherwise means the point is stationary.
+
+*Proof.* Line L7 accepts a step only if it lowers $F$; line L8 raises $\mu$ by a factor of $10$, so by Lemma 3 a point with $g \ne 0$ sees an accepted step after finitely many rejections, unless the bound on $\mu$ is reached first. The other stopping rules are counted. $\square$
+
+**Theorem 2 (a noise-free sphere is recovered exactly).** If $m \ge 4$ points lie on a sphere $(c^*, r^*)$ and are not coplanar, the algebraic start of line L1 is $(c^*, r^*)$, and the loop returns it.
+
+*Proof.* The algebraic fit solves the linear least squares problem for $(b, e)$ in $\lvert x \rvert^2 + b \cdot x + e = 0$. Its design matrix has the rows $(x_i^{\mathsf T}, 1)$, which have full column rank $4$ exactly when the points are not coplanar, so the solution is unique. The values $b = -2 c^*$, $e = \lvert c^* \rvert^2 - r^{*2}$ give zero residuals, so they are that solution, and $c = -b/2 = c^*$, $r = \sqrt{\lvert c \rvert^2 - e} = r^*$. At this start $r_i = 0$ for all $i$, so $g = 0$ and $\Delta = 0$; no step lowers $F = 0$, the loop only raises $\mu$, and it returns the start. In floating point the same holds up to rounding. $\square$
+
+For the cylinder, cone and torus there is no such statement: the cost has local minima, and recovery depends on the start. The page measures it; it is not proved.
+
+**Lemma 4 (the faithful sphere distance).** Write a sphere through its point $\rho n$ nearest the origin, with unit normal $n$ there pointing to the center, and its curvature $\kappa = 1/r$, so that $c = (\rho + 1/\kappa) n$. Then for every $x$, with $d = \lvert x - c \rvert - r$,
+$$ \frac{\kappa}{2} \bigl( \lvert x - c \rvert^2 - r^2 \bigr) = \frac{\kappa}{2} \lvert x - \rho n \rvert^2 - (x - \rho n) \cdot n = d + \frac{\kappa}{2} d^2 , $$
+and as $\kappa \to 0$ with $\rho$ and $n$ fixed the middle expression tends to $\rho - x \cdot n$, the signed distance to the plane $x \cdot n = \rho$.
+
+*Proof.* With $c = \rho n + r n$, $\lvert x - c \rvert^2 - r^2 = \lvert x - \rho n \rvert^2 - 2 r (x - \rho n) \cdot n$; multiply by $\kappa / 2 = 1/(2r)$. Also $\lvert x - c \rvert^2 - r^2 = d (d + 2r)$, and $\frac{\kappa}{2} d (d + 2 r) = d + \frac{\kappa}{2} d^2$. The limit is read off the middle expression. $\square$
+
+$\blacksquare$
