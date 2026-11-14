@@ -524,7 +524,7 @@
       name: Quantum simulation
 - id: cad
   name: CAD
-  summary: Algorithms that design solids and chips, such as solid modeling, toolpaths, logic synthesis, placement and routing.
+  summary: Algorithms that design and make mechanical parts, such as solid modeling, constraint solving, mesh repair, toolpaths and additive manufacturing.
   children:
     - id: solid-modeling
       name: Solid modeling
@@ -534,14 +534,30 @@
       name: Mesh processing and repair
     - id: cam-and-additive-manufacturing
       name: CAM and additive manufacturing
+- id: eda
+  name: Electronic design automation
+  summary: Algorithms that turn a chip description into a verified, testable layout, such as synthesis, simulation, verification, placement, routing, timing, power and test.
+  children:
+    - id: high-level-synthesis-and-scheduling
+      name: High-level synthesis and scheduling
     - id: logic-synthesis
       name: Logic synthesis and technology mapping
+    - id: logic-and-circuit-simulation
+      name: Logic and circuit simulation
+    - id: hardware-verification
+      name: Hardware verification
     - id: partitioning-floorplanning-and-placement
       name: Partitioning, floorplanning and placement
     - id: routing
       name: Routing
     - id: timing-and-verification
       name: Timing, verification and test
+    - id: power-reliability-and-manufacturability
+      name: Power, reliability and manufacturability
+    - id: test-and-diagnosis
+      name: Test and diagnosis
+    - id: fpga-analog-and-emerging-technologies
+      name: FPGA, analog and emerging technologies
 - id: statistics-and-inference
   name: Statistics and inference
   summary: The methods that turn data into estimates, tests and intervals, and that say how far to trust them.
