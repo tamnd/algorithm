@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  ALGO_VERSION: v0.1.13
+  ALGO_VERSION: v0.1.14
   GO_VERSION: "1.27.x"
 
 jobs:
