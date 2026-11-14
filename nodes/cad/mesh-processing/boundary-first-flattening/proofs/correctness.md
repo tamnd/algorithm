@@ -1,0 +1,43 @@
+---
+title: BFF turns boundary scale factors into turning angles and back, meets the asked angles exactly, and changes the asked lengths by the least amount that closes the boundary
+proves: [correctness, termination]
+status: full
+---
+
+**Setting.** $M$ is a connected triangle mesh with the topology of a disk, with $V_I$ inner vertices, $V_B = m$ boundary vertices in one loop $b_1, \dots, b_m$, $E$ edges and $F$ triangles, all of positive area. $\Omega_i = 2\pi - \sum\theta$ at an inner vertex and $k_b = \pi - \sum\theta$ at a boundary vertex, where $\sum \theta$ is the sum of the corner angles at the vertex. $A$ is the cotangent Laplacian, $A_{ij} = -\frac12(\cot\alpha_{ij} + \cot\beta_{ij})$ for an edge $ij$ with opposite angles $\alpha_{ij}$ and $\beta_{ij}$ (one of them absent on the boundary), $A_{ij} = 0$ for non-adjacent $i \ne j$, and $A_{ii} = -\sum_{j \ne i} A_{ij}$. The algorithm and its lines L1 to L12 are as on the page.
+
+**Claim.**
+
+1. For every $u_B$, the angles $\tilde k_B$ of line L4 satisfy $\sum_B \tilde k_b = 2\pi$.
+2. $A_{II}$ is positive definite. The system $A u = r$ of line L6 has a solution if and only if $\sum_B \tilde k_b = 2\pi$; the solution is unique up to adding a constant, and fixing $u$ at one vertex makes it unique. Lines L3 to L4 and line L6 are inverse to each other, up to the constant.
+3. The polygon of line L10 is closed, its turning angle at $b_t$ is $\tilde k_t$ when all $l^*_t > 0$ and $\tilde k_t \in (-\pi, \pi)$, and $l^*$ is the unique minimizer of $\sum_t (l_t - \tilde l_t)^2 / \tilde l_t$ over all $l$ with $\sum_t l_t T_t = 0$, provided the directions $T_t$ are not all parallel. If $\sum_t \tilde l_t T_t = 0$ then $l^* = \tilde l$.
+4. If $M$ lies in the plane, its triangles are counterclockwise and it is embedded, then with $u_B = 0$ the output is the image of the input under a rotation and a translation.
+5. (Termination.) The algorithm does a fixed, finite number of operations: one pass over the triangles, at most three linear solves, one $2 \times 2$ solve and two passes over the boundary.
+
+**Step 1 (discrete Gauss-Bonnet for a disk).** Every triangle has angle sum $\pi$, so the sum of all corner angles is $\pi F$. Each triangle has three edges, inner edges lie in two triangles and the $m$ boundary edges in one, so $3F = 2E - m$. Then
+
+$$\sum_I \Omega_i + \sum_B k_b = 2\pi V_I + \pi m - \pi F = 2\pi\Big(V_I + m - \frac{3F + m}{2} + F\Big) = 2\pi (V - E + F) = 2\pi\chi = 2\pi,$$
+
+since a disk has Euler characteristic $\chi = 1$.
+
+**Step 2 (part 1).** $A$ is symmetric and its rows add up to 0, so its columns add up to 0, and $\sum_{v} (A u)_v = 0$ for every $u$. Line L3 says $(A u)_I = A_{II} u_I + A_{IB} u_B = -\Omega_I$. So
+
+$$\sum_B \tilde k_b = \sum_B k_b + \sum_B (A u)_b = \sum_B k_b - \sum_I (A u)_i = \sum_B k_b + \sum_I \Omega_i = 2\pi.$$
+
+**Step 3 (the Dirichlet energy).** For a function $x$ on the vertices, extend it linearly over each triangle $t$, of area $A_t$. The same computation as in Steps 1 and 2 of the proof of the [ARAP parameterization](/arap-parameterization/) page, done for a scalar function, gives $A_t \lVert \nabla x \rVert^2 = \frac12 \sum \cot\theta_m (x_k - x_l)^2$ over the three edges $\{k, l\}$ of $t$, with $\theta_m$ the angle opposite. Adding over the triangles, $x^\top A x = \sum_t A_t \lVert \nabla x \rVert^2 \ge 0$. If $x^\top A x = 0$, then $\nabla x = 0$ on each triangle, so $x$ is constant on each triangle, and since $M$ is connected, $x$ is one constant. So $A$ is positive semidefinite with kernel the constants. Differentiating $x^\top A x$ in $x_i$ also gives $(A x)_i = \sum_{t \ni i} A_t \nabla\varphi_i \cdot \nabla x$, where $\varphi_i$ is the hat function of vertex $i$.
+
+**Step 4 (part 2).** For $y \ne 0$ on the inner vertices, extend it by 0 on the boundary to $x$. Then $y^\top A_{II} y = x^\top A x > 0$, because $x$ is not constant (it is 0 on the boundary and not 0 somewhere). So $A_{II}$ is positive definite and line L3 has one solution. For line L6, $A$ is symmetric with kernel the constants, so its range is the set of vectors orthogonal to the constants: $A u = r$ has a solution if and only if $\sum_v r_v = 0$. Here $\sum_v r_v = -\sum_I \Omega_i + \sum_B (\tilde k_b - k_b) = \sum_B \tilde k_b - 2\pi$ by Step 1. Two solutions differ by an element of the kernel, a constant. With $u_f = 0$ fixed at one vertex $f$, the matrix $A$ without row and column $f$ is positive definite by the argument above with $\{f\}$ in place of the boundary, so the reduced system has one solution. That solution also satisfies row $f$: all rows of $A u - r$ add up to $\sum_v (A u)_v - \sum_v r_v = 0 - 0$, and all rows but row $f$ are 0.
+
+For the inverse property, let $u$ and $\tilde k_B$ come from lines L3 and L4. Then $(A u)_I = -\Omega_I$ and $(A u)_B = \tilde k_B - k_B$, so $u$ solves the system of line L6 with these $\tilde k_B$, and line L6 returns $u - u_f$. Conversely, if $u$ comes from line L6, then $u_I$ solves line L3 with its own $u_B$, by the inner rows of the system, and line L3 has only one solution; line L4 then gives back $\tilde k_B$ by the boundary rows.
+
+**Step 5 (part 3).** By line L9, $\sum_t l^*_t T_t = \sum_t \tilde l_t T_t - \big(\sum_t \tilde l_t T_t T_t^\top\big) \lambda = 0$, by the choice of $\lambda$. The matrix $G = \sum_t \tilde l_t T_t T_t^\top$ is positive semidefinite, and $\mu^\top G \mu = \sum_t \tilde l_t (T_t \cdot \mu)^2 = 0$ only if $\mu$ is orthogonal to every $T_t$, which for $\mu \ne 0$ means that all $T_t$ are parallel. So $G$ is invertible when they are not. The problem $\min \sum_t (l_t - \tilde l_t)^2 / \tilde l_t$ subject to $\sum_t l_t T_t = 0$ has a strictly convex objective, since every $\tilde l_t > 0$, and linear constraints. Its Lagrange condition is $2 (l_t - \tilde l_t) / \tilde l_t + \mu \cdot T_t = 0$ for all $t$, that is, $l_t = \tilde l_t - \tilde l_t (\lambda \cdot T_t)$ with $\lambda = \mu / 2$. For a convex objective with linear constraints this condition is sufficient for a minimum, and strict convexity makes the minimizer unique. $l^*$ meets the condition and the constraint, so it is the minimizer. If $\sum_t \tilde l_t T_t = 0$ then $\lambda = 0$ and $l^* = \tilde l$.
+
+By line L10, the edge $t$ goes from $\gamma(b_t)$ in the direction $T_t$, at the angle $\varphi_t$, when $l^*_t > 0$. The turning angle at $b_t$ is the angle from $T_{t-1}$ to $T_t$, which is $\varphi_t - \varphi_{t-1} = \tilde k_t$ for $t \ge 2$, and for $t = 1$ it is $\varphi_1 - \varphi_m = \tilde k_1 - 2\pi$ by part 1, the same direction change. Since $\tilde k_t \in (-\pi, \pi)$, this is the signed turning angle. After the last edge the polygon is back at $\gamma(b_1)$ because $\sum_t l^*_t T_t = 0$.
+
+**Step 6 (part 4).** An embedded planar mesh with counterclockwise triangles has angle sum $2\pi$ at each inner vertex, so $\Omega_I = 0$, and at each boundary vertex $k_b$ is the turning angle of the input boundary polygon. With $u_B = 0$, line L3 is $A_{II} u_I = 0$, so $u = 0$, line L4 gives $\tilde k_B = k_B$, and line L7 gives $\tilde l = \ell$, the input lengths. The input boundary is a closed polygon with these lengths and turning angles, so $\sum_t \tilde l_t T'_t = 0$ for its own edge directions $T'_t$, which are the $T_t$ turned by one fixed angle. Hence $\sum_t \tilde l_t T_t = 0$ too, and by part 3, $l^* = \tilde l$. A polygon is fixed up to a rotation and a translation by its edge lengths and its turning angles, so $\gamma = \rho(x)$ on the boundary for a rotation and translation $\rho$.
+
+For line L11, let $f$ be an affine function of the plane, such as a coordinate of $\rho$. At an inner vertex $i$, by Step 3, $(A f)_i = \nabla f \cdot \sum_{t \ni i} A_t \nabla \varphi_i = \nabla f \cdot \int_S \nabla\varphi_i \, dA$, where $S$ is the star of $i$, because $\nabla f$ is constant. By the divergence theorem, $\int_S \nabla \varphi_i \, dA = \oint_{\partial S} \varphi_i\, n \, ds = 0$, because $\varphi_i = 0$ on the boundary of the star. So the coordinates of $\rho(x)$ solve line L11, and by part 2 they are its only solution. So the output is $\rho$ applied to the input.
+
+**Step 7 (part 5).** The steps are the ones listed in part 5. Each solve is with a positive definite matrix by part 2, or with $G$ of Step 5, so the elimination finishes without a zero pivot in exact arithmetic. There is no loop whose length depends on the data except the passes over the vertices, triangles and boundary.
+
+**What is not claimed.** The proof does not show that the interior map of line L11 has every triangle counterclockwise, that the output boundary is a simple curve when some $l^*_t \le 0$, or that the result is close to conformal by any stated bound. $\blacksquare$
