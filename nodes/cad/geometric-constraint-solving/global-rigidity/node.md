@@ -26,6 +26,8 @@ sources:
   - paper: doi:10.1109/TMC.2006.174
     title: J. Aspnes, T. Eren, D. K. Goldenberg, A. S. Morse, W. Whiteley, Y. R. Yang, B. D. O. Anderson and P. N. Belhumeur, A theory of network localization, IEEE Transactions on Mobile Computing 5(12), 1663 to 1678, 2006
     locator: unique localization of a sensor network and its relation to global rigidity
+  - paper: "James B. Saxe, Embeddability of weighted graphs in k-space is strongly NP-hard, Proceedings of the 17th Allerton Conference on Communication, Control and Computing, 480 to 489, 1979"
+    locator: strong NP-hardness of realizability in every fixed dimension, and the hardness of deciding whether a realization is unique, already on the line
 ---
 
 A [framework](/bar-and-joint-framework/) is globally rigid when its bar lengths determine all distances between its joints: every framework in the same space with the same bar lengths is congruent to it. Rigidity asks this only for frameworks near the given one, so a rigid framework can still have a second, distant realization, and a constraint solver that finds a solution of a rigid system may find the wrong one. Global rigidity is what a sensor network needs for unique positions and what a CAD sketch would need to have exactly one solution. In the plane its generic form has a combinatorial test, the [Jackson-Jordán theorem](/jackson-jordan-theorem/).

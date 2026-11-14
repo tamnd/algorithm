@@ -76,11 +76,11 @@ The input is three sides of the square $[1, 4] \times [1, 4]$, with $h = 1$: the
 1. **Grid.** Line L1 makes the grid $[0, 5] \times [0, 5]$ with 25 cells. The grid point $(i, j)$ sits at $(i + \varepsilon, j + \varepsilon^2)$.
 2. **Scan conversion.** The bottom side crosses the vertical edges at $x = 1 + \varepsilon$, $2 + \varepsilon$ and $3 + \varepsilon$ just below $y = 1 + \varepsilon^2$, the right side crosses three horizontal edges at $x = 4$, and the left side three at $x = 1$. So 9 edges are marked.
 3. **Odd cells.** Each cell is even except the two cells at the free ends: the cell $(0, 3)$, with the corner $(1, 4)$, and the cell $(3, 3)$, with the corner $(4, 4)$. Each has one marked edge.
-4. **Patching.** The shortest path of cells from $(0, 3)$ to $(3, 3)$ runs along the row $y \in [3, 4]$. Line L5 toggles its three vertical edges at $x = 3, 2, 1$, which closes the gap one cell below the missing side. Now 12 edges are marked, and every cell is even.
+4. **Patching.** The shortest path of cells from $(0, 3)$ to $(3, 3)$ runs along the row $y \in [3, 4]$. Line L5 toggles its three vertical edges at $x = 3, 2, 1$, which are exactly the edges that the missing side would cross. Now 12 edges are marked, and every cell is even.
 5. **Signs.** The search from the corner $(0, 0)$ gives the inside to the 9 grid points $(i, j)$ with $1 \le i, j \le 3$.
 6. **Contour.** Marching squares gives 12 segments through the midpoints of the 12 marked edges, for example from $(0.5, 1)$ to $(1, 0.5)$ in the corner cell, with the inside point $(1, 1)$ on its left, which make one closed polygon around the 9 inside points.
 
-The result is a closed curve, but the closing is not where the missing side was: it follows the grid one cell lower, because the grid point $(i, 4)$ is outside of the three given sides. With a smaller $h$, the closing moves closer to the line $y = 4$.
+The result is a closed curve, and it is the same curve that the closed square gives, since the marked edges are the same. So the closing lies where the missing side was, within the grid resolution. With a smaller $h$, the closing moves closer to the line $y = 4$.
 
 ## Correctness
 
