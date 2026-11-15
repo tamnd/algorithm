@@ -69,7 +69,7 @@ L5  L ← (x² / n) / ((n + z²) · U)      ▷ product of the roots over U
 L6  return [L, U]
 ```
 
-Line L1 uses `statistics.NormalDist().inv_cdf`. Line L5 uses Vieta's formula: the two roots of $(n + z^2) p^2 - (2x + z^2) p + x^2/n$ have the product $(x^2/n)/(n + z^2)$. The direct form $c - h$ subtracts two close numbers when $x$ is small. The loss is only a few digits at the usual levels, but at $x = 0$ the direct form gave a nonzero lower end, about $10^{-19}$, for 545 of the values $n = 1, \ldots, 1999$ at $\alpha = 0.05$, and a negative one for some $n$ at $\alpha = 0.32$. Line L5 gives $L = 0$ exactly at $x = 0$.
+Line L1 uses `statistics.NormalDist().inv_cdf`. Line L5 uses Vieta's formula: the two roots of $(n + z^2) p^2 - (2x + z^2) p + x^2/n$ have the product $(x^2/n)/(n + z^2)$. The direct form $c - h$ subtracts two close numbers when $x$ is small. The loss is only a few digits at the usual levels, but at $x = 0$ the direct form gave a nonzero lower end, up to about $5.6 \times 10^{-17}$ in size, for 545 of the values $n = 1, \ldots, 1999$ at $\alpha = 0.05$, 144 of them negative, and a nonzero one for 587 values at $\alpha = 0.32$, 503 of them negative. Line L5 gives $L = 0$ exactly at $x = 0$.
 
 ## Example
 

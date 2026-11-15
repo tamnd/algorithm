@@ -8,7 +8,7 @@ aliases:
 - adaptive FDR estimation
 area: statistics-and-inference/hypothesis-testing
 level: advanced
-summary: Estimate the share of true nulls as #{p > lambda} / (m (1 - lambda)) and run BH at q / pi0. The q-value of a test is the smallest estimated FDR at which it is rejected.
+summary: "Estimate the share of true nulls as #{p > lambda} / (m (1 - lambda)) and run BH at q / pi0. The q-value of a test is the smallest estimated FDR at which it is rejected."
 model: real-ram
 complexity:
   vars: {m: the number of hypotheses}
