@@ -32,7 +32,7 @@ sources:
     title: Ricardo Telichevesky, Kenneth S. Kundert and Jacob K. White, Efficient steady-state analysis based on matrix-free Krylov-subspace methods, Proceedings of the 32nd Design Automation Conference, 480 to 484, 1995
     locator: the solution of the shooting Newton equations with GMRES and matrix-vector products from the stored step matrices
   - book: doi:10.1007/978-1-4757-2081-5
-    title: Kenneth S. Kundert, Jacob K. White and Alberto Sangiovanni-Vincentelli, Steady-State Methods for Simulating Analog and Microwave Circuits, Springer, 1990
+    title: Kenneth S. Kundert, Jacob K. White and Alberto Sangiovanni-Vincentelli, Steady-State Methods for Simulating Analog and Microwave Circuits, Kluwer, 1990
     locator: the chapter Time-Domain Methods, pages 55 to 79, on shooting methods for circuits
 ---
 

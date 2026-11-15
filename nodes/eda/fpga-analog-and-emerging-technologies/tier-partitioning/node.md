@@ -85,7 +85,7 @@ A simple lower bound on the cost is the size of a minimum cut between any two ce
 
 ## Reductions
 
-**From minimum bisection.** Minimum Cut into Bounded Sets ([ND17] in Garey and Johnson) asks for a split of a graph into two sets with sizes at most a bound $B$ and at most $k$ cut edges, and it stays NP-complete with $B = |V|/2$, the minimum bisection problem. Given a graph $G = (V, E)$ with $|V|$ even, make a cell of unit area for each vertex and a two-pin net for each edge, and set $L = 2$, $\varepsilon = 0$. A tier assignment is then a bisection of $G$, and its cost is the number of cut edges. So the decision version of tier partitioning is NP-complete, and the optimization version is [NP-hard](/np-hard/).
+**From minimum bisection.** Minimum Cut into Bounded Sets ([ND17] in Garey and Johnson) asks for a split of a graph into two sets with sizes at most a bound $B$ and at most $k$ cut edges, and it stays NP-complete with $B = |V|/2$, the minimum bisection problem. Given a graph $G = (V, E)$ with $|V|$ even, make a cell of unit area for each vertex and a two-pin net for each edge, and set $L = 2$, $\varepsilon = 0$. A tier assignment is then a bisection of $G$, and its cost is the number of cut edges. So the decision version of tier partitioning is NP-complete, and the optimization version is NP-hard.
 
 **To hypergraph partitioning.** With $L = 2$ and the cut as the only cost, tier partitioning is exactly balanced [hypergraph partitioning](/hypergraph-partitioning/), so any partitioner for that problem solves it. With $L > 2$, the span cost is the cost of partitioning into $L$ ordered parts, which a $k$-way partitioner handles only if it knows the order of the parts.
 

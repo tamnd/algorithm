@@ -26,7 +26,7 @@ sources:
     title: Kenneth S. Kundert and Alberto Sangiovanni-Vincentelli, Simulation of nonlinear circuits in the frequency domain, IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems 5(4), 521 to 535, 1986
     locator: the harmonic balance equations, the evaluation of nonlinear devices in the time domain with the DFT, and the Newton iteration with its Jacobian
   - book: doi:10.1007/978-1-4757-2081-5
-    title: Kenneth S. Kundert, Jacob K. White and Alberto Sangiovanni-Vincentelli, Steady-State Methods for Simulating Analog and Microwave Circuits, Springer, 1990
+    title: Kenneth S. Kundert, Jacob K. White and Alberto Sangiovanni-Vincentelli, Steady-State Methods for Simulating Analog and Microwave Circuits, Kluwer, 1990
     locator: the chapters on harmonic balance and on the solution of its Newton equations; the chapter numbers were not checked
   - paper: doi:10.1109/TCS.1976.1084181
     title: Michel S. Nakhla and Jiri Vlach, A piecewise harmonic balance technique for determination of periodic response of nonlinear systems, IEEE Transactions on Circuits and Systems 23(2), 85 to 91, 1976

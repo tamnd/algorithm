@@ -59,14 +59,14 @@ L1  out ← f; inv ← f⁻¹
 L2  for i ← 0 to 2^n − 1:
 L3      if out[i] = i: continue
 L4      if bidirectional and d(i, inv[i]) < d(i, out[i]): a ← inv (gates at the inputs) else a ← out (gates at the outputs); v ← a[i]
-L5      for each line t with i_t = 1 and v_t = 0: add the gate T(ones(v); t)
+L5      for each line t with i_t = 1 and v_t = 0: add the gate T(ones(v); t), with v as read on L4
 L6      for each line t with i_t = 0 and v_t = 1: add the gate T(ones(i); t)
 L7      apply each new gate G to every entry of a, a[x] ← G(a[x]), and recompute the other table as the inverse of a
 L8      record the new gates on the chosen side
 L9  return the input-side gates in the order found, then the output-side gates in reverse order
 ```
 
-**Why the controls are safe.** At row $i$, rows $0, \dots, i - 1$ are done, and the tables are bijections, so $v = a[i] \ge i$. A gate of line L5 has the controls $\mathrm{ones}(v)$. It fires on a value $x$ only if $x$ has all bits of $v$, so $x \ge v \ge i$, and the done rows hold values below $i$. The values it meets in row $i$ only gain bits, so they keep all bits of $v$, and it fires there. A gate of line L6 has the controls $\mathrm{ones}(i)$. It fires on $x$ only if $x \ge i$, and after L5 the value of row $i$ has every bit of $i$. In both cases the target is not a control.
+**Why the controls are safe.** At row $i$, rows $0, \dots, i - 1$ are done, and the tables are bijections, so $v = a[i] \ge i$. A gate of line L5 has the controls $\mathrm{ones}(v)$. It fires on a value $x$ only if $x$ has all bits of $v$, so $x \ge v \ge i$, and the done rows hold values below $i$. The values it meets in row $i$ only gain bits, so they keep all bits of $v$, and it fires there. A gate of line L6 has the controls $\mathrm{ones}(i)$. It fires on $x$ only if $x \ge i$, and after L5 the value of row $i$ has every bit of $i$. In both cases the target is not a control. All gates of line L5 take the controls $\mathrm{ones}(v)$ of the value read on line L4, not of the value after the previous gate; both choices are correct, but the counts under *What is measured* are for this one.
 
 **The order of the output gates.** Gates found at the outputs act on the table from outside, so the first one found is the last one the circuit applies. The gates found at the inputs act from inside, so the first one found is the first one applied. Line L9 puts them in this order.
 
