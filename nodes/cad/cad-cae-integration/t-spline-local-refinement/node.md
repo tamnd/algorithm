@@ -47,7 +47,7 @@ At the end, each old bump is an exact sum of new bumps, so the shape does not ch
 
 ## The problem
 
-The input is an analysis-suitable bicubic T-mesh $T_1$ in index space, with the four outer lines on each side complete, and a request $R$: a list of horizontal and vertical segments on index lines. The output is a T-mesh $T_2 \supseteq T_1 \cup R$ and a matrix $M$ such that
+The input is an analysis-suitable bicubic T-mesh $T_1$ in index space, with the two outer lines on each side complete, and a request $R$: a list of horizontal and vertical segments on index lines. The output is a T-mesh $T_2 \supseteq T_1 \cup R$ and a matrix $M$ such that
 
 1. $T_2$ is analysis-suitable,
 2. every blending function $N_A$ of $T_1$ satisfies $N_A = \sum_B M_{AB} N_B$ over the blending functions $N_B$ of $T_2$,
@@ -82,7 +82,7 @@ L10     M_AB ← c
 L11 return the new control points Q_B ← Σ_A M_AB Q_A
 ```
 
-Finding the set of insertion edges that makes $W$ zero with the fewest edges is NP-hard, as Scott and coauthors note, so line L5 is greedy. Lines L7 to L10 use the fact that the coefficient of a fine B-spline in a coarse one depends only on the coarse knots and on the knots of the fine B-spline: it is a discrete B-spline of the [Oslo algorithm](/oslo-algorithm/). So each pair $(A, B)$ can be treated alone, by [Boehm's rule](/boehm-knot-insertion/) on two short knot vectors.
+Line L5 is greedy: it does not search for the set of insertion edges with the fewest edges that makes $W$ zero. Lines L7 to L10 use the fact that the coefficient of a fine B-spline in a coarse one depends only on the coarse knots and on the knots of the fine B-spline: it is a discrete B-spline of the [Oslo algorithm](/oslo-algorithm/). So each pair $(A, B)$ can be treated alone, by [Boehm's rule](/boehm-knot-insertion/) on two short knot vectors.
 
 ## Example
 
@@ -127,7 +127,7 @@ Use this algorithm in adaptive [isogeometric analysis](/isogeometric-analysis/) 
 
 - **Analysis-suitable is not nested.** A T-mesh $T_2 \supseteq T_1$ can be analysis-suitable while an old function is not a combination of the new ones. The loop edges of the coupled graph catch this case.
 - **Closed segments.** Two extensions that touch at one point count as meeting. With open segments the example above would look analysis-suitable, and it is not.
-- **Superfluous edges.** The greedy rule can add more edges than the minimum, because the exact minimum is NP-hard to find.
+- **Superfluous edges.** The greedy rule can add more edges than the minimum, because it does not search for the smallest set.
 - **The pair formula needs nesting.** Lines L7 to L10 give the right $M$ only when $N_A$ is in the new space. Called on a pair of meshes that is not nested, they return numbers whose sum is not $N_A$.
 - **Knot values instead of indices.** As for every T-spline code, repeated knot values need index space, or the extensions end at the wrong lines.
 

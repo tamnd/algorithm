@@ -41,7 +41,7 @@ Put a big square around the points. Cut a square into four whenever it holds two
 
 ## The problem
 
-The input is a set $X$ of $n \ge 2$ distinct points in the plane. The output is a triangulation of a square $R$ that contains $X$, in which every point of $X$ is a vertex. The quality measure of the paper is the aspect ratio $A(abc)$ of a triangle: its longest side divided by the altitude onto that side. It is the measure of [mesh quality](/mesh-quality-measures/) that the size proofs use, and it controls the smallest angle $\theta$ through
+The input is a set $X$ of $n \ge 2$ distinct points in the plane. The output is a triangulation of a square $R$ that contains $X$, in which every point of $X$ is a vertex. The quality measure of the paper is the aspect ratio $A(abc)$ of a triangle: its longest side divided by the altitude onto that side. It is the measure of [mesh quality](/mesh-quality-measures/) that the size proofs use, in the normalization of Bern, Eppstein and Gilbert, $A(abc) = \ell_{\max}^2 / (2\,\mathrm{area})$, without the factor $\sqrt{3}/2$ that the aspect ratio of that page has, and it controls the smallest angle $\theta$ through
 $$\frac{1}{\sin \theta} \le A(abc) \le \frac{2}{\sin\theta}.$$
 The goal has two parts. Every triangle must have $A \le 4$. The number of triangles must be at most a constant times the size of any triangulation of $X$ with the same aspect ratio bound. This page builds triangles in the root square only, so the points must be the only constraints. Polygons and segments need the variant of Section 5 of the paper.
 

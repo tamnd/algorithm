@@ -48,7 +48,7 @@ The metric and the curvature of the midsurface, the strains and the energy are t
 
 ## What it counts
 
-The model counts the strain energy of the shell: the membrane energy of the change of the first fundamental form and the bending energy of the change of the second fundamental form, see [fundamental forms](/fundamental-forms/). The unknowns are the three displacement components of each control vertex, so $3 V$ unknowns for $V$ vertices, against five per node for a shell element with rotations. The element matrices are integrated with a Gauss rule on each triangle, and each entry couples two vertices whose 2-rings overlap, so the stiffness matrix is sparse with about 19 non-zero $3 \times 3$ blocks per row in a regular mesh (the vertices at most two edges away, $1 + 6 + 12$). The equations are a [Galerkin method](/galerkin-method/) for the shell.
+The model counts the strain energy of the shell: the membrane energy of the change of the first fundamental form and the bending energy of the change of the second fundamental form, see [fundamental forms](/fundamental-forms/). The unknowns are the three displacement components of each control vertex, so $3 V$ unknowns for $V$ vertices, against five per node for a shell element with rotations. The element matrices are integrated with a Gauss rule on each triangle, and each entry couples two vertices whose supports share a triangle, so the stiffness matrix is sparse with about 37 non-zero $3 \times 3$ blocks per row in a regular mesh (the vertices at most three edges away, $1 + 6 + 12 + 18$). The equations are a [Galerkin method](/galerkin-method/) for the shell.
 
 ## Relation to other models
 

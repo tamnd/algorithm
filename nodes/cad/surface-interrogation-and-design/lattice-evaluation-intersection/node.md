@@ -74,7 +74,7 @@ Take the bicubic bump with control points $P_{ij} = (i, j, z_{ij})$, where $z_{i
 | $v = \tfrac14$ and $v = \tfrac34$ | $u = 0.270939$, $0.729061$ |
 | $v = \tfrac12$ | $u = 0.180858$, $0.819142$ |
 
-That is $12$ points. The $12$ cells of the lattice around the center each have $2$ points on their boundary, the $4$ center cells and the $4$ corner cells have none, and line L8 chains the $12$ links into one closed polygon,
+That is $12$ points. The $4$ corner cells of the lattice have no point on their boundary, the other $12$ cells, the $4$ center cells among them, each have $2$, and line L8 chains the $12$ links into one closed polygon,
 
 $$(0.25, 0.270939), (0.180858, 0.5), (0.25, 0.729061), (0.270939, 0.75), (0.5, 0.819142), \dots, (0.270939, 0.25),$$
 

@@ -30,7 +30,7 @@ sources:
 
 Fill a solid with hexahedra that meet face to face and match its boundary, preferred for analysis but much harder to automate than tetrahedral meshing.
 
-A hexahedral mesh, or hex mesh, divides a solid into cells that are each a deformed cube: eight corners, twelve edges and six quadrilateral faces. Two hexes meet in a whole face, a whole edge, a corner, or not at all. Many analysts prefer hexes to tetrahedra for finite element analysis, because a hex mesh often needs fewer elements for the same accuracy and the elements can follow the main directions of the solid. But while every solid can be filled with good tetrahedra by robust automatic methods, no known method fills every solid with good hexes. The survey of Pietroni and others (2022) calls the problem open, and Blacker (2000) called it the holy grail of mesh generation.
+A hexahedral mesh, or hex mesh, divides a solid into cells that are each a deformed cube: eight corners, twelve edges and six quadrilateral faces. Two hexes meet in a whole face, a whole edge, a corner, or not at all. Many analysts prefer hexes to tetrahedra for finite element analysis, because a hex mesh often needs fewer elements for the same accuracy and the elements can follow the main directions of the solid. But while robust automatic methods fill every solid with tetrahedra, with proved bounds on their shape for wide classes of inputs, no known method fills every solid with good hexes. The survey of Pietroni and others (2022) calls the problem open, and Blacker (2000) called it the holy grail of mesh generation.
 
 ## In plain words
 
@@ -68,7 +68,7 @@ With tetrahedra this is easy, because a tetrahedron can be fitted almost anywher
 
 **An odd boundary.** Take the six quads of a cube and split one face $ABCD$ into the quads $ABCX$ and $AXCD$, with a new point $X$ inside it. This boundary has 7 quads. By the parity count below, no hex mesh has this boundary.
 
-**A small hard boundary.** Schneiders' pyramid is a square pyramid whose base is split into 4 quads and each triangle into 3, so 16 quads in all. Schneiders and Bünten posed it in 1995. Hex meshes of it with 118, 88, 36 and 44 hexes were found later, in 2002, 2010, 2018 and 2019. So even a 16 quad boundary can be very hard to fill.
+**A small hard boundary.** Schneiders' pyramid is a square pyramid whose base is split into 4 quads and each triangle into 3, so 16 quads in all. Schneiders and Bünten posed it in 1995. Hex meshes of it with 118 and 88 hexes were found later, in 2002 and 2010, and in 2018 two separate searches found meshes with 44 and 36 hexes, the first by simplifying the mesh of 88 (it was published in 2019). So even a 16 quad boundary can be very hard to fill.
 
 **Two meshes for one boundary.** The six quads of a cube bound both the single cube and the 7 hex pillowed cube above. So the boundary does not fix the mesh, not even its number of hexes.
 

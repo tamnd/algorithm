@@ -74,7 +74,7 @@ The table gives each measure for five shapes. Ideal values are in the first row.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | equilateral | $60°$ | $60°$ | $0.577$ | $1$ | $1$ | $1$ | $1$ | $1$ |
 | right isosceles | $45°$ | $90°$ | $0.707$ | $1.414$ | $1.732$ | $0.828$ | $0.866$ | $0.816$ |
-| needle $(0,0), (1,0), (0,0.1)$ | $5.71°$ | $90°$ | $5.02$ | $10.05$ | $8.75$ | $0.189$ | $0.172$ | $0.115$ |
+| needle $(0,0), (1,0), (0,0.1)$ | $5.71°$ | $90°$ | $5.02$ | $10.05$ | $8.75$ | $0.189$ | $0.171$ | $0.115$ |
 | flat $(-1,0), (1,0), (0,0.1)$ | $5.71°$ | $168.58°$ | $5.02$ | $1.99$ | $17.3$ | $0.020$ | $0.115$ | $0.115$ |
 
 The needle and the flat triangle have the same smallest angle, so the minimum angle, the radius-edge ratio and the scaled Jacobian rank them equally. Only the flat one has a large angle, which is the one that spoils the gradient. The radius ratio and the aspect ratio rank the flat triangle much worse, the edge ratio ranks it better.

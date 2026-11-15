@@ -30,7 +30,7 @@ sources:
     title: Pierre Alliez, David Cohen-Steiner, Mariette Yvinec and Mathieu Desbrun, Variational tetrahedral meshing, ACM Transactions on Graphics 24(3), 2005, 617 to 625
     locator: the ODT energy in 3D, the alternation of vertex moves and Delaunay retriangulation, and the treatment of boundary vertices (general locator)
   - book: isbn:978-1-58488-730-0
-    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan R. Shewchuk, Delaunay Mesh Generation, CRC Press, 2012
+    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan R. Shewchuk, Delaunay Mesh Generation, CRC Press, 2013
     locator: chapter 2 (the Delaunay lemma, the lifting map and Lawson's flip algorithm)
 ---
 

@@ -18,7 +18,7 @@ sources:
     title: Jim Ruppert, A Delaunay refinement algorithm for quality 2-dimensional mesh generation, Journal of Algorithms 18(3), 548 to 585 (1995)
     locator: the definition of local feature size, its Lipschitz property, and the size optimality of the output with respect to it
   - book: isbn:9781584887300
-    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan Richard Shewchuk, Delaunay Mesh Generation, CRC Press, 2012
+    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan Richard Shewchuk, Delaunay Mesh Generation, CRC Press, 2013
     locator: Chapter 6, Delaunay refinement in the plane (local feature size and the proof of size optimality and optimal grading)
   - paper: doi:10.1002/fld.1650081003
     title: Rainald Löhner and Paresh Parikh, Generation of three-dimensional unstructured grids by the advancing-front method, International Journal for Numerical Methods in Fluids 8(10), 1988, 1135 to 1149

@@ -80,7 +80,7 @@ Neither proof gives good elements. The surfaces are chosen only up to topology, 
 
 **The ball hypothesis is needed.** For solids with holes or handles, an even number of quads is not enough in general. Mitchell's paper and Erickson's 2014 paper give extra conditions on cycles of the boundary mesh for such domains (general locator).
 
-**Existence is not quality.** Even for small balls, a good mesh can be hard to find. Schneiders' pyramid is a square pyramid whose base is split into 4 quads and whose four triangles are each split into 3 quads, so it has $16$ quads. It was given in 1995 as a boundary for which no hex mesh was known. Meshes with $118$ hexes (2002), $88$ (2010), $36$ (2018) and $44$ (2019) were found later, by long searches, and the theorem gives no help in finding a small or well-shaped one. Whether every even quad mesh of a convex polyhedron with planar convex quads has a mesh of convex hexes with planar faces is, as far as the survey of Pietroni and others reports, still open.
+**Existence is not quality.** Even for small balls, a good mesh can be hard to find. Schneiders' pyramid is a square pyramid whose base is split into 4 quads and whose four triangles are each split into 3 quads, so it has $16$ quads. It was given in 1995 as a boundary for which no hex mesh was known. Meshes with $118$ hexes (2002) and $88$ (2010) were found later. In 2018 two separate searches gave meshes with $44$ hexes, by simplifying the mesh of $88$ (published in 2019), and with $36$. The theorem gives no help in finding a small or well-shaped one. Whether every even quad mesh of a convex polyhedron with planar convex quads has a mesh of convex hexes with planar faces is, as far as the survey of Pietroni and others reports, still open.
 
 ## History
 
