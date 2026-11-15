@@ -104,9 +104,9 @@ The same argument gives a **discrete maximum principle**: at a node with no load
 
 ## Reductions
 
-- **Same as symmetric diagonally dominant M-matrix systems.** Any symmetric matrix with entries $\le 0$ off the diagonal and row sums $\ge 0$ is the $G$ of a grid: put a wire of conductance $-A_{jk}$ for each nonzero $A_{jk}$, and a pad of conductance equal to the row sum. So power grid analysis is exactly the problem of solving such systems.
+- **Same as symmetric diagonally dominant M-matrix systems.** Any symmetric matrix with entries $\le 0$ off the diagonal, row sums $\ge 0$ and a positive row sum in each connected part is the $G$ of a grid: put a wire of conductance $-A_{jk}$ for each nonzero $A_{jk}$, and a pad of conductance equal to the row sum. So power grid analysis is exactly the problem of solving such systems.
 - **[Electrical flow](/electrical-flow/).** The wire currents of the solution are the flow that carries the loads from the supply with the least energy $\sum g_{jk}^{-1} I_{jk}^2$, by Thomson's principle.
-- **Random walks.** By the discrete harmonic property, $x_k$ is the expected reward of a random walk that moves along wires with probabilities $g_{mj} / D_m$, as on the [random walk](/random-walk-power-grid-analysis/) page, and $G^{-1}$ counts its expected visits.
+- **Random walks.** By the discrete harmonic property, $x_k$ is the expected reward of a random walk that moves along wires with probabilities $g_{mj} / D_m$, as on the [random walk](/random-walk-power-grid-analysis/) page, and $(G^{-1})_{kj} D_j$ is its expected number of visits to node $j$ from node $k$.
 - **Worst case to linear programming.** With bounds on the currents instead of fixed values, the worst drop at a node is a [linear program](/linear-programming-problem/), since $x_k$ is linear in $i$ with nonnegative coefficients.
 
 ## Applications

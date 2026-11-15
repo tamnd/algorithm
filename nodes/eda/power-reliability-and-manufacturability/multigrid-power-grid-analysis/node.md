@@ -96,7 +96,7 @@ The worst drop is $33/4000$ V $= 8.25$ mV at the center, and the one-pass answer
 
 The [proof file](proofs/correctness.md) proves four facts. First, $A_c = P^T A P$ is symmetric and positive definite, because $P$ has full column rank: each kept node maps to itself. So line L4 is well defined at every level. Second, the one-pass answer $\hat{x} = P x_c$ satisfies the Galerkin condition $P^T A (x - \hat{x}) = 0$, so it is the vector of the form $P y$ closest to the exact $x$ in the energy norm, and with several levels the same holds for the product of the interpolations. Third, since the error is $A$-orthogonal to $\hat{x}$, the energies add up, $x^T A x = \hat{x}^T A \hat{x} + \|x - \hat{x}\|_A^2$, so the load-weighted drop $b^T \hat{x}$ is never above the exact $b^T x$. Fourth, the rows of $P$ sum to 1, so $P^T$ keeps the total load, and the pad currents of the coarse answer add up to the total load, as in the example.
 
-The proofs say nothing about the error at a single node. In the example the one-pass answer is too low at most nodes and too high at the corners. The small errors that Kozhaya, Nassif and Najm report on their grids are measured, not proved.
+The proofs say nothing about the error at a single node. In the example the one-pass answer is too low at every node but two, and too high only at the corners 4 and 20. The small errors that Kozhaya, Nassif and Najm report on their grids are measured, not proved.
 
 For the variant, each Gauss-Seidel sweep and each coarse correction never increases the energy norm of the error, and Gauss-Seidel converges for a symmetric positive definite matrix, so the variant converges to the exact drop. Its rate on a given grid is measured, not proved here.
 

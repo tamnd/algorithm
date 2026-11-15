@@ -66,7 +66,7 @@ It counts time to failure of a wire under *steady* stress: constant $J$ and cons
 
 $$ \mathrm{AF} = \frac{t_{50}(J_u, T_u)}{t_{50}(J_s, T_s)} = \Big(\frac{J_s}{J_u}\Big)^{n} \exp\!\Big(\frac{E_a}{k}\Big(\frac{1}{T_u} - \frac{1}{T_s}\Big)\Big). $$
 
-**Example.** Stress at 300 °C and 2 MA/cm². Use at 105 °C and 0.5 MA/cm². With $k = 8.617 \times 10^{-5}$ eV/K, $T_s = 573.15$ K and $T_u = 378.15$ K. The temperature part alone for $E_a = 0.9$ eV is $1.20 \times 10^4$, and the current part is $4^n$.
+**Example.** Stress at 300 °C and 2 MA/cm². Use at 105 °C and 0.5 MA/cm². With $k = 8.617 \times 10^{-5}$ eV/K, $T_s = 573.15$ K and $T_u = 378.15$ K. The temperature part alone for $E_a = 0.9$ eV is $1.21 \times 10^4$, and the current part is $4^n$.
 
 | $E_a$ (eV) | AF for $n = 1$ | AF for $n = 2$ |
 |---|---|---|

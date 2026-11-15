@@ -67,7 +67,7 @@ All numbers below use $n = 1.5$, $\eta = 0.1$, $V_T = 0.3$ V, $V_{DD} = 1$ V and
 
 So the same gate leaks about 7 times more in one workload than in another. Setting the inputs of idle blocks to a low-leakage state is a known technique for this reason.
 
-**Non-example: dynamic power.** The energy to charge a node is spent only when it switches; leakage is drawn when nothing switches. A circuit with the clock stopped by [clock gating](/clock-gating/) has no dynamic power in the gated part but keeps its leakage. Only cutting the supply, by [power gating](/power-gating/), removes the leakage.
+**Non-example: dynamic power.** The energy to charge a node is spent only when it switches; leakage is drawn when nothing switches. A circuit with the clock stopped by [clock gating](/clock-gating/) has no dynamic power in the gated part but keeps its leakage. Only cutting the supply, by [power gating](/power-gating/), removes most of the leakage: what is left is the leakage of the sleep switches.
 
 **Non-example: short-circuit current.** The current that flows while both networks of a gate conduct during an input transition is part of the switching power. It needs a transition and is zero at rest.
 

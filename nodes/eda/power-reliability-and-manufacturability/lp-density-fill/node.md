@@ -90,7 +90,7 @@ There are four windows. Name them by their top-left tile: $W_{00}$, $W_{01}$, $W
 
 The solver returns $M / w^2 = \frac{19}{40} = 0.475$. One optimal fill, row by row, is $(0, 0.1, 0.3)$, $(0, 0.3, 0.6)$, $(0, 0.4, 0.2)$, which gives window densities $0.5$, $0.475$, $0.5$ and $0.475$.
 
-Why not $0.5$? Window $W_{11}$ has feature area $0.4$ and needs fill $4M - 0.4$ from tiles $(1,1)$, $(1,2)$, $(2,1)$ and $(2,2)$. Tiles $(1,2)$ and $(2,2)$ give at most $0.6 + 0.2$, so $p_{11} + p_{21} \ge 4M - 1.2$. But tiles $(1,1)$ and $(2,1)$ also lie in $W_{10}$, which has room for only $2 - 1.3 = 0.7$ more, so $p_{11} + p_{21} \le 0.7$. Hence $4M \le 1.9$ and $M / w^2 \le 0.475$. This chain of inequalities is a dual solution of the linear program, and it is what the dual certificate in the tests checks in general.
+Why not $0.5$? Window $W_{11}$ has feature area $0.4$ and needs fill $M - 0.4$ from tiles $(1,1)$, $(1,2)$, $(2,1)$ and $(2,2)$. Tiles $(1,2)$ and $(2,2)$ give at most $0.6 + 0.2$, so $p_{11} + p_{21} \ge M - 1.2$. But tiles $(1,1)$ and $(2,1)$ also lie in $W_{10}$, which has room for only $2 - 1.3 = 0.7$ more, so $p_{11} + p_{21} \le 0.7$. Hence $M \le 1.9$ and $M / w^2 \le 0.475$. This chain of inequalities is a dual solution of the linear program, and it is what the dual certificate in the tests checks in general.
 
 With $U = 0.3$ line L1 reports infeasible, since $W_{00}$ already has density $0.4$.
 

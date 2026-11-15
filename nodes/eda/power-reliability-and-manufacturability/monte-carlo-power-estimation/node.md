@@ -68,7 +68,7 @@ Line L5 is [Welford's update](/welford-algorithm/), which keeps the mean and the
 
 ## Example
 
-Take a two-bit ripple-carry adder built from two full adders (10 gates: per bit two XOR, two AND and one OR), with unit load on each gate output, $V_{DD} = 1$, and energies in units of $C V_{DD}^2$ per cycle. Each of the five inputs is a two-state Markov chain from cycle to cycle with its own switching probabilities. Enumerating all $4^5$ pairs of consecutive vectors in exact arithmetic gives the true mean: $233/120 \approx 1.942$ per cycle with zero delay, and $5519/2160 \approx 2.555$ per cycle with unit transport delay, where the extra 24 percent is glitches.
+Take a two-bit ripple-carry adder built from two full adders (10 gates: per bit two XOR, two AND and one OR), with unit load on each gate output, $V_{DD} = 1$, and energies in units of $C V_{DD}^2$ per cycle. Each of the five inputs is a two-state Markov chain from cycle to cycle with its own switching probabilities. Enumerating all $4^5$ pairs of consecutive vectors in exact arithmetic gives the true mean: $233/120 \approx 1.942$ per cycle with zero delay, and $5519/2160 \approx 2.555$ per cycle with unit transport delay, where glitches are 24 percent of the total, 32 percent more than with zero delay.
 
 One run with $T = 4$, $\varepsilon = 0.1$ and $\alpha = 0.05$ ($z = 1.96$):
 

@@ -90,7 +90,7 @@ One factorization of $G$ costs $F$, and each node then needs two triangular solv
 
 - **Exact under the bounds, proved.** $z_k$ is the largest drop at $k$ over all currents that meet the bounds, and it is attained.
 - **Safe, if the bounds are right.** No current pattern that meets the bounds gives a larger drop, so no pattern is missed, unlike a check by simulation of chosen patterns.
-- **Monotone, proved.** Since $G^{-1} \ge 0$, raising any bound never lowers any $z_k$.
+- **Monotone, proved.** Raising any bound only enlarges the feasible set $\mathcal{F}$, so it never lowers any $z_k$.
 - **One program per node.** Each node has its own worst current vector, so the programs cannot be merged into one.
 - **Measured cost.** The run times that Kouroussis and Najm report are measurements on their grids. This page does not repeat them.
 

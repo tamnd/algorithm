@@ -77,7 +77,7 @@ The density variation $\max_Q d_P(Q) - \min_Q d_P(Q)$ is then at most $U - \min_
 ## Bounds
 
 - **Feasibility.** Fill only adds area, so a fill with all densities at most $U$ exists if and only if every window has feature density at most $U$ (the empty fill then works). And every fill satisfies $\min_Q d_P(Q) \le \min_Q \operatorname{area}((F \cup S) \cap Q)/w^2$, the density with all slack filled.
-- **Fixed against floating windows.** If every window of $\mathcal{W}_r$ has density in $[L, U]$, then every floating window has density in $[L - \frac{1}{r} + \frac{1}{4r^2},\ U + \frac{1}{r} - \frac{1}{4r^2}]$, and the bounds are tight (Kahng et al. 1998, Theorem 8). For $r = 1$ the excess is $\frac{3}{4}$, which the first example attains: $\frac{1}{4} + \frac{3}{4} = 1$. For $r = 4$ it is $0.234$ and for $r = 16$ it is $0.061$. The proof is on the [LP fill](/lp-density-fill/) page.
+- **Fixed against floating windows.** If every window of $\mathcal{W}_r$ has density in $[L, U]$, then every floating window has density in $[L - \frac{1}{r} + \frac{1}{4r^2},\ U + \frac{1}{r} - \frac{1}{4r^2}]$, and the bounds are attained for some values of $U$ and $L$, such as $U = 1 - \frac{1}{r} + \frac{1}{4r^2}$ (Kahng et al. 1998, Theorem 8). For $r = 1$ the excess is $\frac{3}{4}$, which the first example attains: $\frac{1}{4} + \frac{3}{4} = 1$. For $r = 4$ it is $0.234$ and for $r = 16$ it is $0.061$. The proof is on the [LP fill](/lp-density-fill/) page.
 - **Size of the fixed problem.** With $m = r n / w$ tiles on a side, the fixed problem has $m^2$ tile variables and $(m - r + 1)^2$ windows, so its size grows with the square of $r$.
 
 ## Reductions

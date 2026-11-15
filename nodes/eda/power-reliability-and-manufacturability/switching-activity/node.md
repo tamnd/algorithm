@@ -63,7 +63,7 @@ So the activity depends on the signal probability $p$ and also on how the signal
 
 **A clock.** A clock rises and falls once per cycle, so $\alpha = 2$ and $\alpha_{0 \to 1} = 1$. It is the most active net of a design, and clock power is often a large part of the total.
 
-**A glitch.** For $y = \mathrm{AND}(a, \bar a)$ with a delay on the inverter, $y$ is always 0 under zero delay, so its zero-delay activity is 0. With the delay, each rising edge of $a$ makes a short pulse on $y$, two transitions, so the true activity is that of the rising edges of $a$. Glitches are part of the activity and of the power; see [glitch power](/glitch-power/).
+**A glitch.** For $y = \mathrm{AND}(a, \bar a)$ with a delay on the inverter, $y$ is always 0 under zero delay, so its zero-delay activity is 0. With the delay, each rising edge of $a$ makes a short pulse on $y$, two transitions, so the true activity is $\alpha(y) = 2 \alpha_{0 \to 1}(a) = \alpha(a)$, and $\alpha_{0 \to 1}(y) = \alpha_{0 \to 1}(a)$. Glitches are part of the activity and of the power; see [glitch power](/glitch-power/).
 
 **Non-example: signal probability.** $P(y = 1)$ alone does not fix the activity. A node with $P(y = 1) = 1/2$ can switch every cycle ($\rho = -1$, $\alpha = 1$) or almost never ($\rho$ near 1).
 

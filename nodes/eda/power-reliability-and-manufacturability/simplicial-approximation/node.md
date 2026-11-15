@@ -85,7 +85,7 @@ The region is the triangle $x \ge 0$, $y \ge 0$, $x + y \le 6$. Its largest insc
 | 1 | (0, 1.875) | (0.937, 3.612) | 0.937 | longest tangent edge (1, 0) to (2, 4), midpoint (1.5, 2), new point (4.833, 1.167) | 0.337 |
 | 2 | (4.833, 1.167) | (1.798, 1.926) | 1.610 | the longest tangent edge lies on $x + y = 6$, so the search returns its midpoint and the edge is marked; the next, (1, 0) to (4.833, 1.167), gives (3.094, 0) | 0.730 |
 | 3 | (3.094, 0) | (1.995, 1.659) | 1.659 | the longest unmarked tangent edge, (0, 1.875) to (1, 0), gives (0, 0.671) | 0.798 |
-| 4 | (0, 0.671) | (1.757, 1.757) | 1.757 | the four tangent edges lie on the sides of the triangle: stop | 0.832 |
+| 4 | (0, 0.671) | (1.757, 1.757) | 1.757 | the four tangent edges, two of them on $x = 0$, lie on the three sides of the triangle: stop | 0.832 |
 
 The method stops with the exact inscribed disc after eight line searches that found a point and four that did not. The hull covers only 83 percent of the triangle at the stop. The method needs the boundary only where the ball touches it.
 
