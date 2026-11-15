@@ -61,9 +61,9 @@ which lies strictly between 2 and $1 + 1/\ln 2 \approx 2.443$ for $0 < x < 1$. B
 | 9 | 1 | 0.1 | 2.375 | $-0.520$ |
 | 3 | 1 | 0.25 | 2.288 | $-0.660$ |
 | 1 | 1 | 0.5 | 2.170 | $-1$ |
-| 1 | 3 | 0.75 | 2.077 | delay 0 for any $k \le -1/3$ |
+| 1 | 3 | 0.75 | 2.077 | delay 0, so $k = -1/3$ |
 
-For the same direction, $v(0^+) = xV$ and the delay is $\tau \ln(2(1 - x))$ when $x < 1/2$, which gives $k = 1 + \ln(1 - x)/(x \ln 2)$. When $x \ge 1/2$ the coupling alone lifts the victim to 50 percent at $0^+$, the delay is 0, and any $k \le -C_g / C_c$ reproduces it.
+For the same direction, $v(0^+) = xV$ and the delay is $\tau \ln(2(1 - x))$ when $x < 1/2$, which gives $k = 1 + \ln(1 - x)/(x \ln 2)$. When $x \ge 1/2$ the coupling alone lifts the victim to 50 percent at $0^+$, the delay is 0, and only $k = -C_g / C_c$ reproduces it: a smaller $k$ makes $C_g + k C_c$, and so the delay of the grounded model, negative.
 
 **Charge-based factor, aligned ramps.** With equal ramps that start together and $\theta = 1/2$: quiet aggressor, $\Delta a = 0$, $k = 1$; same direction, $\Delta a = V/2$, $k = 0$; opposite, $\Delta a = -V/2$, $k = 2$.
 

@@ -106,7 +106,7 @@ The least-squares line, by [ordinary least squares](/ordinary-least-squares/) ov
 1. Prove that the least-squares line with an intercept, fitted to pairs $(x_j, P_j)$, has the same mean as the data: $\frac{1}{m} \sum_j (c_0 + c_1 x_j) = \frac{1}{m} \sum_j P_j$.
 2. Prove fact 1: for any function $g$, $E[(P - g(x))^2] \ge E[(P - E[P \mid x])^2]$.
 3. In the 4-bit adder, explain why flipping bit 1 of an operand costs more on average than flipping bit 3. What is the longest chain of gates that one flip of bit 1 can make switch?
-4. A table model $M(x)$ is concave in $x$. Show that $M(E[x]) \ge E[M(x)]$, and find an input distribution for the adder where the two differ by more than 2 transitions per cycle.
+4. A table model $M(x)$ is concave in $x$. Show that $M(E[x]) \ge E[M(x)]$. The adder table is concave only on the distances 0 to 7, since 7.91, 7.80 and 7.75 have a positive second difference. Find an input distribution for the adder, with distances in 0 to 7, where the two differ by more than 2 transitions per cycle.
 5. Take 16-bit two's complement words from a Gaussian source with a small variance, so that most high bits are sign bits. Explain why a model fitted on uniform random words overestimates the power of an adder on this source, and how the dual bit type method corrects it.
 
 ## References

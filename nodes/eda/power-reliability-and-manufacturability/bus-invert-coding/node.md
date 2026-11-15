@@ -92,7 +92,7 @@ Decoding is right because line L7 undoes the complement of line L4 and leaves th
 
 ## Complexity
 
-Each word takes one XOR, one population count and one compare on $n$ bits, so $O(\lceil n/w \rceil)$ time on a word RAM with $w$-bit words and a constant-time population count, and $O(T \lceil n/w \rceil)$ for the stream. The state is one word of $n$ bits and one bit. The code is online: it needs only the current state and the next word. In hardware, the cost is the majority voter, whose depth grows as $O(\log n)$, plus one extra line and $2n$ XOR gates on the two sides.
+Each word takes one XOR, one population count and one compare on $n$ bits, so $O(\lceil n/w \rceil)$ time on a word RAM with $w$-bit words and a constant-time population count, and $O(T \lceil n/w \rceil)$ for the stream. The state is one word of $n$ bits and one bit. The code is online: it needs only the current state and the next word. In hardware, the cost is the majority voter, whose depth grows as $O(\log n)$, plus one extra line and $3n + 1$ XOR gates on the two sides.
 
 ## Properties
 
@@ -100,7 +100,7 @@ Each word takes one XOR, one population count and one compare on $n$ bits, so $O
 - **Mean for random data, computed exactly.** If the words are independent and uniform, then $|b \oplus D|$ is binomial with parameters $n$ and $1/2$ whatever the state is, and the mean cost is $E[\min(B, n + 1 - B)]$ with $B \sim \mathrm{Bin}(n, 1/2)$. This gives 3.27 toggles for $n = 8$ (4 without the code, 18.3% less), 6.83 for $n = 16$ (8, 14.6% less), and 14.19 for $n = 32$ (16, 11.3% less). Stan and Burleson report the same trend. The gain falls as $n$ grows, because the binomial gets narrow around $n/2$.
 - **Optimal among its codewords.** No other choice of INV bits for the same words toggles fewer lines in total.
 - **Online and deterministic.** Each output depends only on the state and the next word.
-- **Not a gain for every stream.** On data with few toggles, such as a counter on the address bus, $h$ is small, the code never inverts, and it only adds a line.
+- **Not a gain for every stream.** On data with few toggles, such as a counter on the address bus, the code saves little for its extra line. The carries of a counter often make $h > n/2$, so it inverts often, but an 8-bit counter over 1024 transfers toggles 1.82 lines per transfer with the code against 1.99 without it, about 9% less.
 
 ## Variants and improvements
 
