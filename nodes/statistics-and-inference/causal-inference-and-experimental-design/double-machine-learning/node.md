@@ -96,11 +96,11 @@ The coarse outcome learner alone is biased by 0.28; the orthogonal score removes
 The proofs establish:
 
 - the folds partition the units, with sizes that differ by at most 1, and with learners that ignore their training data DML is exactly the AIPW estimate;
-- with cross-fitting, conditionally on the other folds, the mean of each unit's score differs from $\tau$ by the exact AIPW bias formula, which is bounded by $\frac1c\|e - \hat e\|(\|\mu_1 - \hat m_1\| + \|\mu_0 - \hat m_0\|)$: a product of the two nuisance errors;
+- with cross-fitting, conditionally on the other folds, the mean of each unit's score differs from $\tau$ by the exact AIPW bias formula, which, when the fitted propensity stays in $[c, 1 - c]$, is bounded by $\frac1c\|e - \hat e\|(\|\mu_1 - \hat m_1\| + \|\mu_0 - \hat m_0\|)$: a product of the two nuisance errors;
 - the ATE score and the partially linear score are Neyman orthogonal: the derivative of their mean in any direction of the nuisances is 0 at the truth;
 - without cross-fitting and with linear learners on the same features, the partially linear estimate is the OLS coefficient (Frisch-Waugh-Lovell).
 
-The asymptotic normality of $\sqrt n(\hat\tau - \tau)$ under the rate condition $\|e - \hat e\|\cdot\|\mu_t - \hat m_t\| = o_P(n^{-1/2})$, and the validity of the interval, are cited from Chernozhukov et al. (2018), not proved.
+The asymptotic normality of $\sqrt n(\hat\tau - \tau)$ under overlap (the true and fitted propensities stay in $[c, 1 - c]$), consistency of each nuisance learner, and the rate condition $\|e - \hat e\|\cdot\|\mu_t - \hat m_t\| = o_P(n^{-1/2})$, and the validity of the interval, are cited from Chernozhukov et al. (2018), not proved.
 
 ## Complexity
 
@@ -108,7 +108,7 @@ Each of the $k$ folds fits three learners (one for the propensity and one per ar
 
 ## Properties
 
-- **Product rate.** The bias is a product of the two nuisance errors. If each error is of order $n^{-1/4}$ or smaller, which lasso, forests and boosting can reach under sparsity or smoothness conditions, the product is $o(n^{-1/2})$, and the bias is negligible next to the standard error.
+- **Product rate.** The bias is a product of the two nuisance errors. If each error is $o(n^{-1/4})$, which lasso, forests and boosting can reach under sparsity or smoothness conditions, the product is $o(n^{-1/2})$, and the bias is negligible next to the standard error.
 - **Efficient.** With the AIPW score, the limiting variance is $\mathbb{E}[(\psi(W; \eta_0) - \tau)^2]$, Hahn's (1998) efficiency bound.
 - **Doubly robust.** The ATE score inherits the double robustness of AIPW: the conditional bias is 0 if either the propensity or the outcome learner is exactly right.
 - **No Donsker condition.** Cross-fitting replaces the empirical-process conditions that a learner fitted on the same data would need. That is why the learners can be as complex as forests or neural networks.

@@ -81,7 +81,7 @@ Let $\theta_0 = 0$, $\sigma = \tau = 1$ and $\alpha = 0.05$, so the threshold is
 
 The mSPRT does not reject: its largest value is 5.485, far below 20. The two-sided [z-test](/z-test/) p-value $2\bar\Phi(|S_n|/\sqrt n)$ falls below 0.05 at $n = 6$, so an analyst who reruns the fixed-sample test after every observation would stop at $n = 6$ and claim an effect. That p-value is valid only if $n = 6$ was fixed in advance.
 
-The difference matters under the null. In 2000 simulated streams of $N(0, 1)$ data with a horizon of 500 observations, the mSPRT with $\tau = 1$ rejected in 2.55% of the streams, while the z-test at level 0.05 repeated after every observation rejected at some time in 49.35% of them.
+The difference matters under the null. In 2000 simulated streams of $N(0, 1)$ data with a horizon of 500 observations (seed 5, as in the tests), the mSPRT with $\tau = 1$ rejected in 2.55% of the streams, while the z-test at level 0.05 repeated after every observation rejected at some time in 49.35% of them.
 
 ## Correctness
 

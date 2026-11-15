@@ -127,7 +127,7 @@ Measured size and power, two-sided at $\alpha = 0.05$. Event times are exponenti
 | crossing | 30 + 30 | 15 | 0.056 | 0.170 | 0.234 |
 | crossing | 100 + 100 | 16 | 0.050 | 0.423 | 0.617 |
 
-In the hazard ratio 2 row the expected number of events is 51.6, for which Schoenfeld's formula predicts power 0.70. In the crossing rows the early excess and the late deficit of events in group 1 cancel in $U$, and the log-rank test has no power at all, whatever the sample size.
+In the hazard ratio 2 row the expected number of events is 51.6, for which Schoenfeld's formula predicts power 0.70. In the crossing rows the early excess and the late deficit of events in group 1 nearly cancel in $U$. The cancellation is not exact: the mean of $U$ is about $-0.0026$ per subject, against a variance of about 0.19 per subject, so the power stays near the size at practical sample sizes (about 0.054 at $n = 1000$ and 0.14 at $n = 20\,000$) and tends to 1 only very slowly.
 
 ## Variants and improvements
 
@@ -143,7 +143,7 @@ Use the log-rank test as the primary comparison of survival between randomized g
 
 ## Pitfalls
 
-- **Crossing hazards.** As measured above, opposite differences at early and late times cancel. A non-significant log-rank test does not show that the curves are equal.
+- **Crossing hazards.** As measured above, opposite differences at early and late times nearly cancel. A non-significant log-rank test does not show that the curves are equal.
 - **Choosing the weight after the fact.** Trying several weights and reporting the smallest p-value inflates the size.
 - **Ties and censoring at the same time.** Count censorings at $t_j$ as at risk at $t_j$, and use the hypergeometric variance with the $(n_j - d_j)/(n_j - 1)$ factor when events are tied.
 - **Permutation with unequal censoring.** Group labels are exchangeable only if the censoring is the same in both groups.
