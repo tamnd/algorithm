@@ -87,7 +87,7 @@ Each row checks by hand: for example at $\theta_2 = 180°$, $|B - A| = |(1.5, 2)
 
 **Non-example: the path of $A$ or $B$.** The pins $A$ and $B$ are coupler points too, but their paths are circles, arcs of the input and output circles. The degree 6 claim needs $P$ off the two pins.
 
-**Non-example: a slider-crank.** In the [slider-crank mechanism](/slider-crank-mechanism/), the curve of a point on the rod is of degree 4 in general, not 6, because one of the two circles is replaced by a line. The two circular points are double, not triple, points of it.
+**Non-example: a slider-crank.** In the [slider-crank mechanism](/slider-crank-mechanism/), the curve of a point on the rod is of degree 4 in general, not 6, because one of the two circles is replaced by a line. It passes through each of the two circular points once, so they are simple points of it, not triple points.
 
 **Non-example: the whole plane.** No four-bar coupler curve fills a region or is an arbitrary curve. Every bounded part of a plane algebraic curve can be traced by some linkage with more links, by the [Kempe universality theorem](/kempe-universality-theorem/), but a four-bar has only nine parameters and its curves are a 9-parameter family of sextics.
 
@@ -106,6 +106,6 @@ A four-bar coupler curve depends on the two ground pivots (4 numbers), the lengt
 
 ### History
 
-Coupler curves were studied in the 19th century as three-bar curves, since the ground was not counted as a bar. Samuel Roberts showed in 1875 that one such curve is traced by three different linkages, and he and Cayley, in a long paper of 1876, studied the degree and the singular points of these curves. Atlases of coupler curves, such as that of Hrones and Nelson (1951), were long used by designers to pick a linkage by the shape of its curve.
+Coupler curves were studied in the 19th century as three-bar curves, since the ground was not counted as a bar. Samuel Roberts showed in 1875 that one such curve is traced by three different linkages, and Cayley, in a long paper of 1876, studied the degree and the singular points of these curves. Atlases of coupler curves, such as that of Hrones and Nelson (1951), were long used by designers to pick a linkage by the shape of its curve.
 
 ## References

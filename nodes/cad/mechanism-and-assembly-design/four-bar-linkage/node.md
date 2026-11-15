@@ -53,7 +53,7 @@ A mechanism model counts no cost. This section gives the parameters, the configu
 
 ### Parameters and configuration space
 
-The shape of the linkage is fixed by the four lengths, and since a scaled linkage moves in the same way, by three ratios such as $K_1 = d/a$, $K_2 = d/c$ and $K_3 = (a^2 - b^2 + c^2 + d^2)/(2ac)$ of the [Freudenstein equation](/freudenstein-equation/). A coupler point adds $p$ and $\delta$. So a function generator has 3 shape parameters, a path generator 5 (plus the place and the angle of the ground in the plane, 3 more), and a motion generator the same.
+The shape of the linkage is fixed by the four lengths, and since a scaled linkage moves in the same way, by three ratios such as $K_1 = d/a$, $K_2 = d/c$ and $K_3 = (a^2 - b^2 + c^2 + d^2)/(2ac)$ of the [Freudenstein equation](/freudenstein-equation/). A coupler point adds $p$ and $\delta$. So a function generator has 3 shape parameters, a path generator 5 (plus the size of the linkage and the place and the angle of the ground in the plane, 4 more, so 9 in all), and a motion generator the same.
 
 The linkage can be assembled at all only when the longest link is at most the sum of the other three, $2l \le a + b + c + d$. The configuration space is the set
 

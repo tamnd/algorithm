@@ -24,6 +24,9 @@ sources:
   - paper: doi:10.1016/0004-3702(94)90048-5
     title: Randall H. Wilson and Jean-Claude Latombe, Geometric reasoning about mechanical assembly, Artificial Intelligence 71(2), 371 to 396 (1994)
     locator: removable subassemblies from blocking graphs, the step of a disassembly
+  - paper: doi:10.1016/0020-0190(93)90085-N
+    title: Lydia E. Kavraki, Jean-Claude Latombe and Randall H. Wilson, On the complexity of assembly partitioning, Information Processing Letters 48(5), 229 to 235 (1993)
+    locator: Section 4, the remark that the construction can be modified to allow complete disassembly
 ---
 
 Disassembly sequence planning asks how to take a product apart: which parts or subassemblies come out first, along which motion, and in what order. The goal can be to take out every part, for recycling or a full overhaul, or to reach one part, for a repair, while removing as few other parts as possible. Each step must be possible: the piece that moves must leave without a collision. Under a motion model whose motions can be run backwards, disassembly is assembly in reverse: a feasible disassembly plan read backwards is a feasible assembly plan, and so most assembly planners work by disassembly. The two problems still differ in their goals and in joints that cannot be undone. This page states the problem, and the [assembly sequence planning](/assembly-sequence-planning/) page states the forward one.
@@ -80,7 +83,7 @@ If every step of taking apart can be done backwards, then the same steps in the 
 
 - **Search space.** There are $n!$ removal orders and $2^n$ sets of removed parts.
 - **Polynomial cases.** One translation and no connection rule: a full plan is found in polynomial time by repeated partitioning, by the argument in the list above. For axis-aligned boxes and the axis directions, one part can always leave along any axis direction, so a full linear plan always exists without a connection rule.
-- **Hardness.** Since a full two-handed disassembly starts with one split, the hardness results of [assembly partitioning](/assembly-partitioning/) apply: NP-completeness for planar assemblies when the motion is more than one translation (Kavraki, Latombe and Wilson 1993) and when both sides must be connected (Kavraki and Kolountzakis 1995). No hardness result for the fewest removals before one target is cited on this page.
+- **Hardness.** A full two-handed disassembly starts with one split, but a product that can be split once may have no full plan, so the hardness results of [assembly partitioning](/assembly-partitioning/) (NP-completeness for planar assemblies when the motion is more than one translation, Kavraki, Latombe and Wilson 1993, and when both sides must be connected, Kavraki and Kolountzakis 1995) do not carry over by this alone. Kavraki, Latombe and Wilson remark, without the details, that their construction can be modified to allow a complete disassembly, which shows that sequencing itself is NP-complete. No hardness result for the fewest removals before one target is cited on this page.
 
 The counts in the examples are computed and checked against all orders. The quality of wave propagation and of metaheuristics on real products is measured, not proved.
 

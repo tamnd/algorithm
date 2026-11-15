@@ -49,7 +49,7 @@ in the position where $P = P_0$. A four-bar is *nondegenerate* if its coupler mo
 2. *Number of solutions.* The nondegenerate four-bars whose coupler curve passes through all nine points trace exactly 1442 distinct coupler curves. By the [Roberts-Chebyshev theorem](/roberts-chebyshev-theorem/) each curve is traced by three cognate four-bars, which gives 4326 four-bars. Each four-bar appears twice among the solutions of the polynomial system below, once for each labeling of its left and right sides, which gives 8652 solutions.
 3. *Real points.* For real points, the number of real solutions depends on the points. In the four examples of Wampler, Morgan and Sommese it was 21, 45, 64 and 120 cognate triples.
 
-Status of part 2: the value 1442 was found numerically in 1992 and has been reproduced many times. Lower bounds were certified for single instances, by Hauenstein and Sottile in floating-point arithmetic (what they call a soft certificate) and again by Brysiewicz. The matching upper bound is proved in the 2026 preprint of Brysiewicz, which, as far as I can tell, has not yet been refereed.
+Status of part 2: the value 1442 was found numerically in 1992 and has been reproduced many times. Lower bounds were certified for single instances, by Hauenstein and Sottile in floating-point arithmetic (what they call a soft certificate) and again by Brysiewicz. The matching upper bound is proved in the 2026 preprint of Brysiewicz, which is a preprint, not a refereed publication.
 
 ## In plain words
 
@@ -117,7 +117,7 @@ The eight degree-7 equations of Step 2 have residuals at most $9 \times 10^{-8}$
 
 **The Bezout counts are far from tight.** The total degree $7^8 = 5{,}764{,}801$ and the two-homogeneous count 286,720 both exceed 8652 by large factors, because most of their solutions are degenerate. The mixed volume 5538 of Brysiewicz's system exceeds 1442 by exactly the 4096 solutions he shows escape the torus.
 
-**The real count is not fixed.** It was 21, 45, 64 and 120 cognate triples out of 1442 in the four examples. In their fourth example the nine points lie on an ellipse, which also produced singular solutions, Cardan (elliptic) mechanisms with sliders. Hauenstein and Sottile certified, for the nine points of Problem 3, that 64 of the 1442 curves are real. The largest possible number of real solutions is not known to me.
+**The real count is not fixed.** It was 21, 45, 64 and 120 cognate triples out of 1442 in the four examples. In their fourth example the nine points lie on an ellipse, which also produced singular solutions, Cardan (elliptic) mechanisms with sliders. Hauenstein and Sottile certified, for the nine points of Problem 3, that 64 of the 1442 curves are real. No result on the largest possible number of real solutions is cited on this page.
 
 ## History
 

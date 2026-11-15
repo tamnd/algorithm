@@ -58,7 +58,7 @@ The branch $\sigma = +1$ has the slider to the right of the crank pin, $\cos\the
 
 **Full rotation.** The crank turns fully exactly when $b \ge a + |e|$. *Proof.* The linkage can be assembled at $\theta_2$ exactly when $|e - a\sin\theta_2| \le b$. As $\theta_2$ runs over a full turn, $e - a\sin\theta_2$ takes all values in $[e - a, e + a]$, and the largest absolute value is $a + |e|$. So every $\theta_2$ is feasible iff $a + |e| \le b$. $\blacksquare$
 
-When $b > a + |e|$ the root is never zero, the branches never meet, and the configuration space is two circles, one for each side. When $b = a + |e|$ the two circles touch at one configuration with the rod perpendicular to the guide, the analogue of a change point. When $b < a + |e|$ the crank rocks.
+When $b > a + |e|$ the root is never zero, the branches never meet, and the configuration space is two circles, one for each side. When $b = a + |e|$ the two circles touch at one configuration with the rod perpendicular to the guide (at two, $\theta_2 = 90°$ and $\theta_2 = 270°$, when $e = 0$), the analogue of a change point. When $b < a + |e|$ the crank rocks.
 
 **Stroke.** Assume $b > a + |e|$ and the branch $\sigma = +1$. The time derivative of the loop gives $\omega_3 = -a\omega_2\cos\theta_2/(b\cos\theta_3)$ and
 
