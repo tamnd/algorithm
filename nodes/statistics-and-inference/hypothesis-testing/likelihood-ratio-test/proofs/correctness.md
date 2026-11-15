@@ -20,7 +20,7 @@ Line L4 does not change the value when the maximizers are exact. It only sets to
 
 *Proof.* $b\,h(a/b) = a\log(a/b) - a + b$ by expanding. $h(1) = 0$, $h'(t) = \log t$, and $h''(t) = 1/t > 0$, so $h$ is strictly convex with its minimum 0 at $t = 1$; $h(0) = 1$ by continuity. For the series, $h(1 + d) = (1 + d)\log(1 + d) - d$. With $\log(1 + d) = \sum_{j \ge 1} (-1)^{j+1}d^j/j$ for $|d| < 1$, the coefficient of $d^j$ in $(1 + d)\log(1 + d)$ is $(-1)^{j+1}/j + (-1)^j/(j - 1)$ for $j \ge 2$, which equals $(-1)^j/(j(j - 1))$, and the coefficient of $d$ is 1, which cancels with $-d$. $\square$
 
-When $|d| < 0.1$, the terms of the series decrease in size by a factor of at least $0.1$ and alternate in sign after the first, so stopping when a term is below $10^{-17}$ of the sum leaves a relative error below that bound, plus rounding. No subtraction of nearly equal numbers occurs, because every term is computed from $d$ directly.
+When $|d| < 0.1$, the terms of the series decrease in size by a factor of at least $0.1$. They alternate in sign when $d > 0$ and are all positive when $d < 0$; in both cases the terms after a given one add up to at most $1/9$ of its size, so stopping when a term is below $10^{-17}$ of the sum leaves a relative error below that bound, plus rounding. No subtraction of nearly equal numbers occurs, because every term is computed from $d$ directly.
 
 **Lemma 4 (closed forms).** The table of the algorithm section is correct:
 
@@ -56,7 +56,7 @@ Case 2 holds under the conditions of [Wilks' theorem](/wilks-theorem/). The rout
 
 This is the sufficiency part of the [Neyman-Pearson lemma](/neyman-pearson-lemma/), applied to the vector the routine builds. The tests compare it with the best of all vertex tests of the linear program, in exact rational arithmetic.
 
-**Termination.** The general routine calls each maximizer once and does a constant number of further operations, so it stops if the maximizers stop. Each closed form makes one pass over the data or the cells. The deviance series stops because its terms decrease geometrically when $|d| < 0.1$ and the sum is bounded below by its first term $d^2/2 > 0$ (the case $d = 0$ returns 0 after one term). MOST-POWERFUL-TEST loops at most $m$ times over the distinct ratio values.
+**Termination.** The general routine calls each maximizer once and does a constant number of further operations, so it stops if the maximizers stop. Each closed form makes one pass over the data or the cells. The deviance series stops because its terms decrease geometrically when $|d| < 0.1$ and the partial sums are bounded below by $d^2/2 - |d|^3/6 > 0$, the sum of the first two terms when $d > 0$ and less than the first term when $d < 0$ (the case $d = 0$ returns 0 after one term). MOST-POWERFUL-TEST loops at most $m$ times over the distinct ratio values.
 
 **Theorem.** LIKELIHOOD-RATIO-TEST returns $\Lambda = 2(\ell(\hat\theta) - \ell(\hat\theta_0)) \ge 0$ and $p = P(\chi^2_r \ge \Lambda)$. The statistic is invariant under reparametrization, the closed forms agree with the general definition, and rejecting when $p \le \alpha$ has size tending to $\alpha$ whenever $\Lambda \to \chi^2_r$ under $H_0$, and size exactly $\alpha$ for the normal mean with known $\sigma$. MOST-POWERFUL-TEST returns a most powerful test of size $\alpha$.
 

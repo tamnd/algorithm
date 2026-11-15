@@ -110,7 +110,7 @@ The statistic takes $\Theta(k)$ arithmetic operations, and the expected counts t
   | 30 | $(1/3, 1/3, 1/3)$ | 10 | 0.0478 | 0.0597 |
   | 20 | $(1/4, 1/4, 1/4, 1/4)$ | 5 | 0.0415 | 0.0528 |
   | 20 | $(0.7, 0.1, 0.1, 0.1)$ | 2 | 0.0491 | 0.0624 |
-  | 50 | $(0.7, 0.1, 0.1, 0.1)$ | 5 | 0.0513 | 0.0566 |
+  | 50 | $(0.7, 0.1, 0.1, 0.1)$ | 5 | 0.0513 | 0.0567 |
 
   The Pearson statistic stays close to 0.05 even with expected counts of 2. The $G$ statistic is more liberal in these cases.
 - **Fitted parameters lower the degrees of freedom.** Each parameter fitted by maximum likelihood from the grouped counts removes one degree of freedom.

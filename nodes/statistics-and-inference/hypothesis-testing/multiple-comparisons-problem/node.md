@@ -80,8 +80,8 @@ Bonferroni compares each p-value with $0.05/15 = 0.00333$, so 0.0019 passes and 
 | method | type | rate and assumption | cost |
 |---|---|---|---|
 | [Bonferroni correction](/bonferroni-correction/) | single-step | FWER, any dependence | $\Theta(m)$ |
-| [Holm-Bonferroni method](/holm-bonferroni-method/) | step-down | FWER, any dependence | $\Theta(m\log m)$ |
-| [Hochberg procedure](/hochberg-procedure/) | step-up | FWER, independence or PRDS | $\Theta(m\log m)$ |
+| [Holm-Bonferroni method](/holm-bonferroni-method/) | step-down | FWER, any dependence | $\Theta(m)$ with buckets |
+| [Hochberg procedure](/hochberg-procedure/) | step-up | FWER, independence or PRDS | $\Theta(m)$ with buckets |
 | [Closed testing principle](/closed-testing-principle/) | general | FWER from any local level-$\alpha$ tests | $2^m - 1$ tests, less with shortcuts |
 | [Westfall-Young procedure](/westfall-young-procedure/) | step-down, resampling | FWER, permutation invariance of the true nulls | $\Theta(Bmn + m\log m)$ for $B$ permutations |
 | [Benjamini-Hochberg procedure](/benjamini-hochberg-procedure/) | step-up | FDR $= (m_0/m)q$, independence; $\le (m_0/m)q$ under PRDS | $\Theta(m)$ with buckets |
@@ -97,7 +97,7 @@ Bonferroni compares each p-value with $0.05/15 = 0.00333$, so 0.0019 passes and 
 - **BH is exact.** For independent continuous p-values the FDR of BH equals $(m_0/m)q$, whatever the false nulls are; so its level is $q$ only when $m_0 = m$, and adaptive methods such as Storey's recover the factor $m/m_0$.
 - **FDR is at most FWER**, with equality when all nulls are true. So any FDR method gives weak FWER control, and any strong FWER method controls the FDR.
 - **Discreteness.** With permutation or exact discrete tests, a p-value cannot go below the smallest attainable value, which limits what any method can reject.
-- **Computation.** Every method above reads all $m$ p-values, so $\Omega(m)$ time is needed. Step-wise methods that depend on the order use a sort, $\Theta(m\log m)$, though BH needs only the count of rejections and runs in $\Theta(m)$. Closed testing without a shortcut takes $2^m - 1$ local tests.
+- **Computation.** Every method above reads all $m$ p-values, so $\Omega(m)$ time is needed. Step-wise methods that depend on the order are usually written with a sort, $\Theta(m\log m)$, but Holm, Hochberg and BH need only the number of p-values below each threshold, so their rejections take $\Theta(m)$ with buckets; the adjusted p-values use the sort. Closed testing without a shortcut takes $2^m - 1$ local tests.
 
 ## Reductions
 

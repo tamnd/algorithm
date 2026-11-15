@@ -33,7 +33,7 @@ Let $X$ have a distribution $P_\theta$ with $\theta \in \Theta$, let $H_0: \thet
 
 - The **type I error probability** at $\theta \in \Theta_0$ is $\pi(\theta)$.
 - The **size** of the test is $\sup_{\theta \in \Theta_0}\pi(\theta)$, the largest type I error probability. The test has **level** $\alpha$ when its size is at most $\alpha$.
-- The **type II error probability** at $\theta \in \Theta_1$ is $\beta(\theta) = 1 - \pi(\theta)$. It is a function of the alternative, not one number: it is close to $1 - \alpha$ for alternatives near $\Theta_0$ and goes to 0 for alternatives far from it.
+- The **type II error probability** at $\theta \in \Theta_1$ is $\beta(\theta) = 1 - \pi(\theta)$. It is a function of the alternative, not one number: it is close to one minus the size, which is at least $1 - \alpha$, for alternatives near $\Theta_0$ and goes to 0 for alternatives far from it.
 
 The probabilities are frequentist: they are over repeated data with $\theta$ held fixed. For a randomized test $\phi(X) \in [0, 1]$, the rejection probability is $\pi(\theta) = E_\theta[\phi(X)]$ and the same definitions apply.
 

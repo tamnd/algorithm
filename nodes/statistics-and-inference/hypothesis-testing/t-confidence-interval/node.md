@@ -82,7 +82,7 @@ The paired sleep data of Cushny and Peebles, used by Student in 1908: the extra 
 | L5: $q = t_{(9, 0.975)}$ | $2.262157$ |
 | L6: $1.58 \mp 2.262157 \times 0.388959$ | $[0.7001, 2.4599]$ |
 
-The interval excludes 0, matching the t-test p-value of 0.0028. The 99% interval, with $t_{(9, 0.995)} = 3.249836$, is $[0.3159, 2.8441]$, and the 95% lower bound, with $t_{(9, 0.95)} = 1.833113$, is $0.8670$. Using 1.96 in place of 2.262157 would give $[0.8177, 2.3423]$, which is too short.
+The interval excludes 0, matching the t-test p-value of 0.0028. The 99% interval, with $t_{(9, 0.995)} = 3.249836$, is $[0.3159, 2.8441]$, and the 95% lower bound, with $t_{(9, 0.95)} = 1.833113$, is $0.8670$. Using 1.96 in place of 2.262157 would give $[0.8176, 2.3424]$, which is too short.
 
 **Coverage.** Monte Carlo with $r = 20000$ replications of nominal 95% intervals (standard error of an estimated coverage near 0.95: 0.0015):
 

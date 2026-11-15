@@ -51,7 +51,7 @@ You have many tests and expect some real effects among them. Instead of asking t
 
 - Independent null p-values, independent of the non-null p-values: $\text{FDR} \le (m_0/m)q$ in finite samples, with equality when each null p-value is exactly uniform. This is proved below.
 - Positive regression dependence on the subset of true nulls (PRDS), as for one-sided tests on normal vectors with nonnegative correlations: $\text{FDR} \le (m_0/m)q$ (Benjamini and Yekutieli 2001). This is cited, not proved here.
-- Arbitrary dependence: $\text{FDR} \le (m_0/m)q\sum_{i=1}^m 1/i$, and this bound can be attained. The [Benjamini-Yekutieli procedure](/benjamini-yekutieli-procedure/) runs BH at $q/\sum_{i=1}^m 1/i$ for this case.
+- Arbitrary dependence: $\text{FDR} \le (m_0/m)q\sum_{i=1}^m 1/i$, and this bound can be attained when $m_0 = m$ and $q\sum_{i=1}^m 1/i \le 1$. The [Benjamini-Yekutieli procedure](/benjamini-yekutieli-procedure/) runs BH at $q/\sum_{i=1}^m 1/i$ for this case.
 
 **FWER.** Under the global null BH is the Simes test, so it controls the FWER weakly at $q$ for independent p-values. It does not control the FWER strongly.
 

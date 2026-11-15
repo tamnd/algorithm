@@ -87,7 +87,7 @@ Lines L2 and L3 move down from the largest p-value. The first $k$ that passes is
 
 Line L2 checks $k = 4$ first: $0.045 \le 0.05$ holds, so Hochberg rejects all four. Holm passes $k = 1$, fails at $k = 2$ and rejects one. The two columns of adjusted p-values come from the same products: Hochberg takes running minima from the bottom of the table, Holm running maxima from the top.
 
-**Fifteen p-values.** On the 15 p-values of Benjamini and Hochberg (1995), line L2 checks $1.000 > 0.05$, $0.7590 > 0.025$, and so on down to $0.0095 > 0.05/12 = 0.004167$, and stops at $0.0019 \le 0.05/13 = 0.003846$. So $k = 3$ and Hochberg rejects the same 3 as Holm. The adjusted p-values are 0.0015, 0.0056, 0.0247, 0.114, 0.2211, 0.2682, 0.2682, 0.2752, 0.3213, and 1 for the last six. They are at most Holm's, which are 0.278 instead of 0.2682 for the sixth and seventh.
+**Fifteen p-values.** On the 15 p-values of Benjamini and Hochberg (1995), line L2 checks $1.000 > 0.05$, $0.7590 > 0.025$, and so on down to $0.0095 > 0.05/12 = 0.004167$, and stops at $0.0019 \le 0.05/13 = 0.003846$. So $k = 3$ and Hochberg rejects the same 3 as Holm. The adjusted p-values are 0.0015, 0.0056, 0.0247, 0.114, 0.2211, 0.2682, 0.2682, 0.2752, 0.3213, and 1 for the last six. They are at most Holm's, which are 0.278 instead of 0.2682 for the sixth and seventh and instead of 0.2752 for the eighth.
 
 ## Correctness
 

@@ -52,7 +52,7 @@ The examples use the five values $x = (4.1, 5.3, 4.8, 6.0, 5.2)$, with $\bar x =
 
 **Exponential rate.** For iid exponential data with rate $\lambda$, $2\lambda \sum X_i$ has the chi-square law with $2n$ degrees of freedom. For the data $(0.8, 2.1, 0.3, 1.5, 0.9)$ with sum $5.6$, and $\chi^2_{(10, 0.025)} = 3.24697$, $\chi^2_{(10, 0.975)} = 20.48318$, the 95% interval for $\lambda$ is $[3.24697/11.2,\; 20.48318/11.2] = [0.2899, 1.8289]$.
 
-**Uniform scale.** For iid Uniform$(0, \theta)$ data with maximum $M$, $P_\theta(M/\theta \le u) = u^n$ on $[0, 1]$ for every $\theta$, so $M/\theta$ is a pivot. From $\alpha \le (M/\theta)^n \le 1$ the interval is $[M, M \alpha^{-1/n}]$. For $n = 5$, $M = 4.1$ and $\alpha = 0.05$ it is $[4.1, 7.464]$. This interval is one-sided in shape, because the pivot has its mass near 1.
+**Uniform scale.** For iid Uniform$(0, \theta)$ data with maximum $M$, $P_\theta(M/\theta \le u) = u^n$ on $[0, 1]$ for every $\theta$, so $M/\theta$ is a pivot. From $\alpha \le (M/\theta)^n \le 1$ the interval is $[M, M \alpha^{-1/n}]$. For $n = 5$, $M = 6.0$ and $\alpha = 0.05$ it is $[6.0, 10.923]$. This interval is one-sided in shape, because the pivot has its mass near 1.
 
 **A future observation.** $(X_{n+1} - \bar X)/(S\sqrt{1 + 1/n})$ has the t law with $n - 1$ degrees of freedom for normal data. It contains no parameter at all but involves a future value, and it gives the [prediction interval](/prediction-interval/).
 

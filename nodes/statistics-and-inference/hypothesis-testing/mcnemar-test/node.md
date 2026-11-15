@@ -24,8 +24,8 @@ sources:
   - paper: doi:10.1007/BF02295996
     title: Quinn McNemar, Note on the sampling error of the difference between correlated proportions or percentages, Psychometrika 12(2), 1947
     locator: pp. 153 to 157 (the statistic for the change between two correlated proportions)
-  - paper: "Allen L. Edwards, Note on the correction for continuity in testing the significance of the difference between correlated proportions, Psychometrika 13, 1948"
-    title: Edwards 1948
+  - paper: doi:10.1007/BF02289261
+    title: Allen L. Edwards, Note on the correction for continuity in testing the significance of the difference between correlated proportions, Psychometrika 13(3), 1948
     locator: the corrected statistic (|b - c| - 1)^2/(b + c)
   - book: isbn:9780470463635
     title: Alan Agresti, Categorical Data Analysis, third edition, Wiley, 2013

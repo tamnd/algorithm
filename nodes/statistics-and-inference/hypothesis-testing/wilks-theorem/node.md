@@ -96,7 +96,7 @@ For a normal mean with unknown variance, $\Lambda_n = n\log(1 + T^2/(n - 1))$, w
 | $n$ | 3 | 5 | 10 | 20 | 50 | 200 |
 |---|---|---|---|---|---|---|
 | exact size | 0.1502 | 0.0979 | 0.0703 | 0.0593 | 0.0536 | 0.0509 |
-| $E_0\Lambda_n$ | 1.8409 | 1.4019 | 1.1725 | 1.0803 | 1.0308 | 1.0076 |
+| $E_0\Lambda_n$ | 1.8411 | 1.4019 | 1.1725 | 1.0803 | 1.0308 | 1.0076 |
 | size of $\Lambda_n / E_0\Lambda_n$ | 0.0485 | 0.0497 | 0.0499 | 0.0500 | 0.0500 | 0.0500 |
 
 The last row is the Bartlett correction (Bartlett, 1937): divide $\Lambda_n$ by its null mean, which has the form $r(1 + b/n + O(n^{-2}))$. Here $T^2/(n - 1)$ is a ratio $A/B$ of independent $\chi^2_1$ and $\chi^2_{n-1}$ variables, so $E_0\Lambda_n = n\left(\psi(n/2) - \psi((n - 1)/2)\right) = 1 + \tfrac{3}{2n} + O(n^{-2})$, with $\psi$ the digamma function. Under regularity, the corrected statistic has a $\chi^2_r$ law with error $O(n^{-2})$ instead of $O(n^{-1})$. The corrected sizes in the table are computed for each $n$; the $O(n^{-2})$ rate is the general theorem.
