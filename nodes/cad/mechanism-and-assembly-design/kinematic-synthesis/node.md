@@ -87,7 +87,7 @@ The counts of chains are those quoted on the [Watt and Stephenson](/watt-and-ste
 | 2 | $53.13°$ | $(9, 12)$ | $(14, 12)$ | $67.38°$ | $0°$ | $(11.5, 12)$ |
 | 3 | $90°$ | $(0, 15)$ | $(4, 12)$ | $112.62°$ | $-36.87°$ | $(2, 13.5)$ |
 
-The three synthesis problems read this table from the other side. Function generation gives the pairs $(\theta_2, \theta_4)$ and asks for the linkage. Path generation gives the points $P$, perhaps with the matching $\theta_2$. Motion generation gives $P$ together with $\theta_3$. Each problem has many solutions, and this linkage is one of them. The [transmission angle](/transmission-angle/) at the three positions is $36.9°$, $67.4°$ and $149.5°$, so position 1 is near the edge of the usual design range of $40°$ to $140°$. An analysis step of this kind is always part of a synthesis.
+The three synthesis problems read this table from the other side. Function generation gives the pairs $(\theta_2, \theta_4)$ and asks for the linkage. Path generation gives the points $P$, perhaps with the matching $\theta_2$. Motion generation gives $P$ together with $\theta_3$. Each problem has many solutions, and this linkage is one of them. The [transmission angle](/transmission-angle/) at the three positions is $36.9°$, $67.4°$ and $149.5°$, so positions 1 and 3 lie outside the usual design range of $40°$ to $140°$. An analysis step of this kind is always part of a synthesis.
 
 **Free choices of a dyad.** The [standard form dyad](/standard-form-dyad-synthesis/) for motion generation has two complex unknowns (four reals) and one unknown rotation per position after the first, against two real equations per position after the first. With $n$ positions there are $4 + (n - 1) - 2(n - 1) = 5 - n$ free real choices.
 

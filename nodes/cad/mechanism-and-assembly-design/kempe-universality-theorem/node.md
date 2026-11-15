@@ -16,7 +16,7 @@ sources:
     locator: whole paper, the original construction with the reversor, multiplicator, additor and translator
   - paper: doi:10.1016/S0040-9383(01)00034-9
     title: Michael Kapovich and John J. Millson, Universality theorems for configuration spaces of planar linkages, Topology 41(6), 1051 to 1107, 2002
-    locator: the first complete proof; Theorem E (the pen vertex gives a covering of a bounded open part of the curve) and Corollary C (every smooth compact manifold is a union of copies of a configuration space)
+    locator: a complete proof; Theorem E (the pen vertex gives a covering of a bounded open part of the curve) and Corollary C (every smooth compact manifold is a union of copies of a configuration space)
   - paper: arxiv:math/9807023
     title: Henry C. King, Planar linkages and algebraic sets, Turkish Journal of Mathematics 23(1), 33 to 56, 1999
     locator: the configuration spaces of linkages and cabled linkages up to analytic isomorphism, with a history of the theorem and Thurston's phrase that a linkage can sign your name
@@ -93,11 +93,11 @@ for a fixed starting point $(a, b)$. Its $x$ coordinate is $a + f(x, y)$.
 
 *Claim.* The braced linkage has every parallelogram and degenerate configuration of $ABCD$ and no nondegenerate contraparallelogram.
 
-*Proof.* In a parallelogram, $\overrightarrow{MN} = \overrightarrow{BC}$, so the extra bar fits. The degenerate configurations are limits of parallelograms, so it fits there too. In a nondegenerate contraparallelogram, $|MN| = \tfrac12(|AC| + |BD|)$. Let $X$ be the crossing point of $AD$ and $BC$. By the triangle inequality, strict because the configuration is not degenerate,
+*Proof.* In a parallelogram, $\overrightarrow{MN} = \overrightarrow{BC}$, so the extra bar fits. The degenerate configurations are limits of parallelograms, so it fits there too. In a nondegenerate contraparallelogram, the two longer opposite sides cross. If these are $AD$ and $BC$, then $|MN| = \tfrac12(|AC| + |BD|)$. Let $X$ be the crossing point of $AD$ and $BC$. By the triangle inequality, strict because the configuration is not degenerate,
 
 $$2|MN| = |AC| + |BD| < (|AX| + |XC|) + (|BX| + |XD|) = (|AX| + |XD|) + (|BX| + |XC|) = |AD| + |BC| = 2|BC|.$$
 
-So $|MN| < |BC|$, and the bar $MN$ cannot be placed. $\blacksquare$
+So $|MN| < |BC|$. If instead $AB$ and $CD$ cross, use $\overrightarrow{MN} = \tfrac12(\overrightarrow{BC} + \overrightarrow{AD})$: both vectors have length $|BC|$ and they are not equal, since $\overrightarrow{AD} = \overrightarrow{BC}$ would make $ABCD$ a parallelogram, so again $|MN| < |BC|$. In both cases the bar $MN$ cannot be placed. $\blacksquare$
 
 For contraparallelograms Abbott adds a new bracing (his Proposition 3.3). A vertex $X$ is joined by bars of length $R_1$ to the midpoints of $AB$ and $CD$, and by bars of length $R_2$ to the midpoints of $BC$ and $DA$, with $R_1, R_2$ large and $R_2^2 - R_1^2 = \tfrac14(|AB|^2 - |AD|^2)$. For the Peaucellier cell he braces its rhombus as a parallelogram. With all these braces, Abbott proves in Chapter 4 that the construction draws exactly $B \cap \{f = 0\}$ and that the stronger covering form also holds. Kapovich and Millson reach the same theorem with a different argument based on complex algebra instead of trigonometry.
 
@@ -129,6 +129,6 @@ For contraparallelograms Abbott adds a new bracing (his Proposition 3.3). A vert
 
 Peaucellier found his exact straight-line linkage in 1864 and published it in 1873; Lipkin found it independently in 1871. Hart gave a version with fewer bars in 1875. Kempe presented his general method to the London Mathematical Society in June 1876 and published it in its Proceedings, with gadgets he named the reversor, multiplicator, additor and translator. A year later his lecture *How to Draw a Straight Line* brought Peaucellier's cell and related linkages to a wider audience.
 
-For more than a century the 1876 proof was taken as complete. Thurston discussed the theorem in lectures in the 1970s, gave it the phrase about signing one's name, and stated the stronger claim about manifolds, without publishing proofs. Kapovich and Millson gave the first rigorous proof, which circulated as a preprint and was published in Topology in 2002; it also showed that Kempe's gadgets have degenerate configurations. King published a rigorous proof in 1999 as a corollary of his work on linkages with cables, and in later preprints extended the theorem to higher dimensions and to a characterization of drawable sets. Abbott, with Barton and Demaine, gave in 2008 an elementary proof that stays close to Kempe's own construction, with new braces for the contraparallelogram, together with the bar-count bounds and the coNP-hardness of rigidity.
+For more than a century the 1876 proof was taken as complete. Thurston discussed the theorem in lectures in the 1970s, gave it the phrase about signing one's name, and stated the stronger claim about manifolds, without publishing proofs. Kapovich and Millson gave a rigorous proof, which circulated as a preprint and was published in Topology in 2002; it also showed that Kempe's gadgets have degenerate configurations. King published a rigorous proof in 1999 as a corollary of his work on linkages with cables, and in later preprints extended the theorem to higher dimensions and to a characterization of drawable sets. Abbott, with Barton and Demaine, gave in 2008 an elementary proof that stays close to Kempe's own construction, with new braces for the contraparallelogram, together with the bar-count bounds and the coNP-hardness of rigidity.
 
 ## References

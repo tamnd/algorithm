@@ -68,10 +68,10 @@ The path generation problem gives these three points and asks for a linkage. The
 | linkage | ground pivots | grounded links | coupler | $P$ on the coupler | pins at position 1 | pins at position 3 |
 | --- | --- | --- | --- | --- | --- | --- |
 | original | $(0, 0)$, $(9, 0)$ | 15, 13 | 5 | midpoint of $AB$ | $(12, 9)$, $(16.8, 10.4)$ | $(0, 15)$, $(4, 12)$ |
-| cognate 1 | $(0, 0)$, $(4.5, 0)$ | 2.5, 6.5 | 7.5 | 15 from the first pin, on the coupler line | $(2.4, 0.7)$, $(8.4, 5.2)$ | $(2, -1.5)$, $(2, 6)$ |
-| cognate 2 | $(9, 0)$, $(4.5, 0)$ | 2.5, 7.5 | 6.5 | 13 from the first pin, on the coupler line | $(6.6, -0.7)$, $(10.5, 4.5)$ | $(7, 1.5)$, $(4.5, 7.5)$ |
+| cognate 2 | $(0, 0)$, $(4.5, 0)$ | 2.5, 6.5 | 7.5 | 15 from the first pin, on the coupler line | $(2.4, 0.7)$, $(8.4, 5.2)$ | $(2, -1.5)$, $(2, 6)$ |
+| cognate 3 | $(9, 0)$, $(4.5, 0)$ | 2.5, 7.5 | 6.5 | 13 from the first pin, on the coupler line | $(6.6, -0.7)$, $(10.5, 4.5)$ | $(7, 1.5)$, $(4.5, 7.5)$ |
 
-All three pass through $P_1$, $P_2$, $P_3$. In cognate 2 the link from $O_C$ to the pin $(10.5, 4.5)$ is at $36.87°$, $53.13°$ and $90°$ at the three positions, the same angles as the input of the original. So cognate 2 is also an answer with prescribed timing when it is driven from $O_C$. In cognate 1 the grounded link at $O_2$ turns with the coupler of the original, through $16.26°$, $0°$ and $-36.87°$, so with the original timing it is not an answer.
+All three pass through $P_1$, $P_2$, $P_3$. In cognate 3 the link from $O_C$ to the pin $(10.5, 4.5)$ is at $36.87°$, $53.13°$ and $90°$ at the three positions, the same angles as the input of the original. So cognate 3 is also an answer with prescribed timing when it is driven from $O_C$. In cognate 2 the grounded link at $O_2$ turns with the coupler of the original, through $16.26°$, $0°$ and $-36.87°$, so with the original timing it is not an answer.
 
 **Free choices with prescribed timing.** Write each side of the four-bar as a dyad that carries the coupler point (the [standard form](/standard-form-dyad-synthesis/)). For the input side, the rotations $\beta_j$ are given and the coupler rotations $\alpha_j$ are unknown. Each position after the first gives two real equations, so for $n$ points the input dyad has $4 + (n - 1) - 2(n - 1) = 5 - n$ free choices, the same count as for motion generation. Once the $\alpha_j$ are fixed by the input dyad, the output dyad has its own unknown rotations, and the same count holds for it. So timing allows at most five exact points.
 

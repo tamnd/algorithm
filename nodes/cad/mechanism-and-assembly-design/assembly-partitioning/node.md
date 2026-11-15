@@ -19,6 +19,9 @@ sources:
   - paper: doi:10.1016/0004-3702(94)90048-5
     title: Randall H. Wilson and Jean-Claude Latombe, Geometric reasoning about mechanical assembly, Artificial Intelligence 71(2), 371 to 396 (1994)
     locator: the polynomial-time partitioning for one translation by the non-directional blocking graph
+  - paper: doi:10.1177/027836499501400403
+    title: Randall H. Wilson, Lydia E. Kavraki, Jean-Claude Latombe and Tomás Lozano-Pérez, Two-handed assembly sequencing, International Journal of Robotics Research 14(4) (1995)
+    locator: polynomial-time partitioning when the motions are single translations to infinity
   - paper: doi:10.1007/s004539910025
     title: Dan Halperin, Jean-Claude Latombe and Randall H. Wilson, A general framework for assembly planning, the motion space approach, Algorithmica 26(3-4), 577 to 601 (2000)
     locator: partitioning for several families of motions by cells of constant blocking graph
@@ -32,7 +35,7 @@ The assembly partitioning problem asks whether an assembly can be split in two b
 
 You hold a finished product. Can you pull some of its parts out together, as one piece, without bending anything and without hitting the parts that stay? The piece you pull can be one part or many parts at the same time.
 
-For one straight pull, there is a fast method. Draw an arrow from each part to every part in its way, and look for a group with no arrow out. For pulls that can turn or change direction, no fast method is known, and the problem is as hard as the hardest puzzles of its class. If both the piece you pull and the piece you keep must each hang together, the problem is hard even for straight pulls.
+For one straight pull, there is a fast method. Draw an arrow from each part to every part in its way, and look for a group with no arrow out. For pulls that can turn or change direction, no fast method is known, and the problem is as hard as the hardest puzzles of its class. If both the piece you pull and the piece you keep must each hang together, the problem is still hard for pulls that can turn or change direction.
 
 ## Definition
 
@@ -80,8 +83,8 @@ The [motion space approach](/motion-space-assembly-planning/) page lists these s
 ## Bounds
 
 - **Candidates.** There are $2^{n-1} - 1$ splits of $n$ parts. For a fixed direction, the sets that can leave can be all of them, so listing them can take exponential time, while finding one takes polynomial time.
-- **Polynomial cases.** One translation, either small or to infinity, with no connection rule: polynomial time by blocking graphs (Wilson and Latombe 1994). For boxes and the six axis directions, the blocking graph along an axis has no cycle, so a single part can always leave along each axis direction, and an assembly of boxes is never locked under this model.
-- **Hardness.** Kavraki, Latombe and Wilson (1993) proved that deciding whether a planar assembly of polygons can be partitioned is [NP-complete](/np-complete/) when the moving set is not limited to one translation. Kavraki and Kolountzakis (1995) proved that partitioning a planar assembly into two connected parts is NP-complete. Natarajan (1988) showed that planning an assembly with general motions is [PSPACE](/pspace/)-hard.
+- **Polynomial cases.** One translation, either small or to infinity, with no connection rule: polynomial time by blocking graphs (Wilson and Latombe 1994 for small translations, Wilson, Kavraki, Latombe and Lozano-Pérez 1995 for translations to infinity). For boxes and the six axis directions, the blocking graph along an axis has no cycle, so a single part can always leave along each axis direction, and an assembly of boxes is never locked under this model.
+- **Hardness.** Kavraki, Latombe and Wilson (1993) proved that deciding whether a planar assembly of polygons can be partitioned is [NP-complete](/np-complete/) when the moving set is not limited to one translation. Kavraki and Kolountzakis (1995) proved that partitioning a planar assembly into two connected parts is NP-complete, again for general rigid motions. Natarajan (1988) showed that planning an assembly with general motions is [PSPACE](/pspace/)-hard.
 
 The polynomial bounds and the hardness results are proved. The speed of partitioning planners on real products is measured, and it depends on the products tested.
 

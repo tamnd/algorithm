@@ -135,7 +135,7 @@ At $\theta_2 = 90°$, $\Delta = 37.44$ and the roots are $t = 0.936$ (open) and 
 
 - **Vector components instead of complex numbers.** The same equations follow from $\sum r_k(\cos\theta_k, \sin\theta_k) = 0$. The complex form makes the derivatives short, since $\frac{d}{dt}e^{i\theta} = i\omega e^{i\theta}$.
 - **Other unknowns.** The unknowns can be any two of the angles and slide lengths of a loop. An inverted slider-crank has a slide of variable length along a link that turns, and the loop is solved for that length and an angle in the same way.
-- **Numerical solution.** For many loops, or for spatial loops, write the loop as the product of $4 \times 4$ link transforms equal to the identity and solve with Newton's method from the last position, as Norton (Section 4.14) and Raven (1958) do. This gives only the branch near the start point. All branches need [homotopy continuation](/homotopy-continuation/) or elimination with a [resultant](/resultant/).
+- **Numerical solution.** For many loops, or for spatial loops, solve the loop equations with Newton's method from the last position, as Norton (Section 4.14) does for planar loops. A spatial loop is written as the product of $4 \times 4$ link transforms equal to the identity. This gives only the branch near the start point. All branches need [homotopy continuation](/homotopy-continuation/) or elimination with a [resultant](/resultant/).
 - **Points on a link.** After the angles are known, a coupler point is $a e^{i\theta_2} + p e^{i(\theta_3 + \delta)}$ for its distance $p$ and angle $\delta$ from $A$. The set of these points is the [coupler curve](/coupler-curve/).
 
 ## Pitfalls

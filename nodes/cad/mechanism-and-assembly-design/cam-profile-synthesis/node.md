@@ -13,7 +13,7 @@ model: real-ram
 complexity:
   vars: {N: the number of cam angles sampled, m: the number of segments of the cam program}
   time: {worst: Θ(m + N log m), average: Θ(m + N log m), best: Θ(m + N log m)}
-  space: {extra: Θ(N)}
+  space: {extra: Θ(m + N)}
 properties: {deterministic: true, recursive: false}
 prereqs: [cam-follower-motion-laws, offset-curve]
 see_also: [cam-pressure-angle, curve-offsetting, offset-trimming, swept-volume, curvature-comb, transmission-angle, finite-differences, minkowski-sum]
@@ -105,7 +105,7 @@ These facts show that each output point is on the envelope. The proof also shows
 
 ## Complexity
 
-Line L1 takes $\Theta(m)$ time. Line L4 finds the segment by binary search on the start angles in $O(\log m)$ time, and lines L5 to L11 take $O(1)$ time, with one square root, one arc tangent and a few products. So the time is $\Theta(m + N\log m)$. The samples come in increasing order of $\theta$, so a pointer that moves forward through the segments replaces the search, and the time drops to $\Theta(m + N)$. The output has $\Theta(N)$ points, and the extra space beyond it is $O(1)$.
+Line L1 takes $\Theta(m)$ time. Line L4 finds the segment by binary search on the start angles in $O(\log m)$ time, and lines L5 to L11 take $O(1)$ time, with one square root, one arc tangent and a few products. So the time is $\Theta(m + N\log m)$. The samples come in increasing order of $\theta$, so a pointer that moves forward through the segments replaces the search, and the time drops to $\Theta(m + N)$. The output has $\Theta(N)$ points, and the start angles and heights of line L1 take $\Theta(m)$ more space, so the extra space is $\Theta(m + N)$.
 
 The number $N$ follows from the machining tolerance. Between two samples the profile is replaced by a chord, and a chord of length $\ell$ on an arc of radius $r$ is at most $\ell^2/(8r)$ from the arc. For the example, the cam has a perimeter of $320.2$ mm and a smallest radius of $29.42$ mm. With $N = 3600$ the longest chord is $0.1047$ mm, so the bound is $0.1047^2/(8 \cdot 29.42) = 4.7 \times 10^{-5}$ mm, and the largest distance from a chord to the true profile is $3.5 \times 10^{-5}$ mm.
 
