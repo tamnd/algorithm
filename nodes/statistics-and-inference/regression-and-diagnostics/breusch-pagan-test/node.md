@@ -119,7 +119,7 @@ The two Householder factorizations cost $\Theta(np^2)$ and $\Theta(nq^2)$, and t
 - **No variance function needed.** The score test is the same for every link $h$, so the test detects $\sigma_i^2 = \sigma^2\exp(\gamma z_i)$ and $\sigma_i^2 = \sigma^2(1 + \gamma z_i)^2$ equally.
 - **Score test.** It needs only the fit under $H_0$. The likelihood ratio and Wald tests for a specified $h$ need the fit under $H_1$ and agree with it to first order.
 - **Non-normal errors.** $\mathrm{LM}_{\mathrm K}$ keeps its asymptotic level under any error law with a finite fourth moment; $\mathrm{LM}_{\mathrm{BP}}$ does not.
-- **Uses only $e^2$.** The test does not look at the sign of the residuals, so it has no power against a wrong mean model that leaves the variance constant. It can, however, react to a wrong mean model, since a missing term changes the size of the residuals in a way that may follow $z_i$.
+- **Uses only $e^2$.** The test does not look at the sign of the residuals, so it is not built to detect a wrong mean model. A wrong mean model can still make it reject, since a missing term enters the squared residuals in a way that may follow $z_i$.
 
 ## Variants and improvements
 

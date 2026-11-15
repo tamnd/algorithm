@@ -7,7 +7,7 @@ aliases:
 - truncated mean
 area: statistics-and-inference/nonparametric-and-robust-statistics
 level: intro
-summary: The mean of the sample after removing a fixed fraction of the smallest and of the largest values. Its breakdown point is that fraction.
+summary: The mean of the sample after removing a fixed fraction of the smallest and of the largest values. Its breakdown point tends to that fraction as the sample grows.
 model: real-ram
 complexity:
   vars: {n: the sample size, g: the number of values cut from each end}

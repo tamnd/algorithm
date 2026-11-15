@@ -149,6 +149,6 @@ Use it when you estimate many similar means with known or well estimated noise l
 
 ## History
 
-Stein (1956) showed that for the mean of a $p$-dimensional normal distribution under total squared error, $X$ is admissible when $p = 1$ or $2$ and inadmissible when $p \ge 3$. James and Stein (1961) gave the explicit estimator $(1 - (p-2)/\lVert X \rVert^2)X$, computed its risk, and treated an unknown variance. Baranchik (1964) studied the positive-part rule. Efron and Morris (1973) explained the estimator as empirical Bayes and made it popular with data examples, such as predicting baseball batting averages.
+Stein (1956) showed that for the mean of a $p$-dimensional normal distribution under total squared error, $X$ is admissible when $p = 1$ or $2$ and inadmissible when $p \ge 3$. James and Stein (1961) gave the explicit estimator $(1 - (p-2)/\lVert X \rVert^2)X$, computed its risk, and treated an unknown variance. Baranchik (1964) studied the positive-part rule. Efron and Morris (1973) explained the estimator as empirical Bayes, and their later papers made it popular with data examples, such as predicting baseball batting averages.
 
 ## References

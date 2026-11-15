@@ -78,7 +78,7 @@ The exact formula of Part 1 agrees with a numerical integration of $m_1$ to a re
 
 ## Consequences
 
-Take $\tau = \sigma = 1$. The table gives $B_{01}$ from Part 1 at the two-sided 5%, 1% and 0.1% critical values of $z$.
+Take $\tau = \sigma = 1$. The table gives $B_{01}$ from Part 1 at the two-sided 5%, 1% and 0.1% critical values of $z$. The labels are rounded; the entries use the exact quantiles 1.95996, 2.57583 and 3.29053.
 
 | $z$ (two-sided p) | $n = 1$ | 10 | 100 | 1000 | $10^4$ | $10^5$ | $10^6$ | $B_{01} = 1$ at $n \approx$ |
 |---|---|---|---|---|---|---|---|---|

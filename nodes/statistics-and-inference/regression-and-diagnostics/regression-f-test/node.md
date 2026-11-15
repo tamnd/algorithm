@@ -150,7 +150,7 @@ Use the F-test to test several coefficients at once (a group of dummy variables 
 ## Pitfalls
 
 - **Non-nested models.** $\mathrm{RSS}_0 - \mathrm{RSS}_1$ can be negative, and the F law does not hold.
-- **Heteroscedasticity.** The test is not valid even asymptotically; the table shows a size of 0.124 instead of 0.05.
+- **Heteroscedasticity.** The $F$ law of the statistic is not justified, even asymptotically, when the error variance depends on the predictors. In the table the size is 0.124 instead of 0.05 at $n = 12$, and 0.0583 at $n = 60$; a finite table does not show the limit.
 - **Reading a small F as support for $H_0$.** A non-significant F says that the data cannot tell the models apart, not that the dropped coefficients are 0.
 - **Testing after selection.** Choosing the variables with the data and then testing them with the same data gives p-values that are too small.
 - **Wrong degrees of freedom.** The denominator uses $n - p$ of the full model, with $p$ counting the intercept. Software that reports "$k$ predictors" means $p = k + 1$.

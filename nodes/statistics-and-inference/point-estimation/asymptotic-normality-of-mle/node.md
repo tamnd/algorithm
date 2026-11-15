@@ -129,7 +129,7 @@ Each condition can fail, and the conclusion fails with it.
 
 **A model that is not identifiable (conditions 2 and 7).** In the mixture $p\,N(\mu, 1) + (1 - p)\,N(0, 1)$, every $(p, \mu)$ with $p = 0$ or $\mu = 0$ gives the same law $N(0, 1)$. At such a point the information matrix is singular and the limit law of the MLE is not normal.
 
-**A model with infinite information.** If condition 7 fails because $I(\theta_0) = \infty$, the rate can be faster than $\sqrt n$, as in the uniform example.
+**A model with infinite information.** If condition 7 fails because $I(\theta_0) = \infty$, the rate can be faster than $\sqrt n$. The uniform example is not of this kind: there condition 4 fails, and the formal information $\mathrm E[(\partial_\theta \log f(X; \theta))^2] = 1/\theta^2$ is finite.
 
 ## History
 

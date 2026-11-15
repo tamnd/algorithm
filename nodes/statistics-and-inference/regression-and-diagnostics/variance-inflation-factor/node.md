@@ -57,7 +57,7 @@ where $C$ is the $(p-1) \times (p-1)$ correlation matrix of the predictors. The 
 4. If the eigenvalues of $C$ are $\lambda_1 \ge \dots \ge \lambda_{p-1} > 0$, then $\max_j \mathrm{VIF}_j \le 1/\lambda_{p-1}$ and $\sum_j \mathrm{VIF}_j = \sum_k 1/\lambda_k$. A small eigenvalue of $C$ means a near linear dependence, and the VIFs show which columns take part in it.
 5. The VIF of the intercept is not defined in this way, because the intercept column has $S_{jj} = 0$.
 
-**Thresholds are conventions.** Values above 10 (or 5) are often called a sign of serious collinearity. The value 10 is usually attributed to Marquardt (1970); we did not confirm the exact wording there. No threshold has a theoretical basis: the variance of $\hat b_j$ also depends on $\sigma^2$ and $S_{jj}$, which grows with $n$. A coefficient with $\mathrm{VIF} = 20$ from a large, well spread sample can be more precise than one with $\mathrm{VIF} = 1$ from a small sample (O'Brien 2007).
+**Thresholds are conventions.** Values above 10 (or 5) are often called a sign of serious collinearity. No threshold has a theoretical basis: the variance of $\hat b_j$ also depends on $\sigma^2$ and $S_{jj}$, which grows with $n$. A coefficient with $\mathrm{VIF} = 20$ from a large, well spread sample can be more precise than one with $\mathrm{VIF} = 1$ from a small sample (O'Brien 2007).
 
 ## Examples and non-examples
 

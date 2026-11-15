@@ -73,7 +73,7 @@ So $B_{10} = 65536/20349 \approx 3.221$, and $B_{01} = 20349/65536 \approx 0.310
 
 | $a$ | 0.01 | 0.1 | 0.5 | 1 | 2 | 5 | 10 | 100 | 1000 |
 |---|---|---|---|---|---|---|---|---|---|
-| $B_{10}$ | 0.089 | 0.768 | 2.405 | 3.221 | 3.666 | 3.298 | 2.569 | 1.198 | 1.020 |
+| $B_{10}$ | 0.089 | 0.767 | 2.404 | 3.221 | 3.666 | 3.298 | 2.569 | 1.198 | 1.020 |
 
 A very diffuse prior ($a \to 0$ puts the mass near $0$ and $1$) wastes prior mass on values that the data rule out, and $B_{10}$ goes to $0$: the data then favour $M_0$. A very concentrated prior ($a \to \infty$) makes $M_1$ the same as $M_0$, and $B_{10} \to 1$. Unlike the posterior of $\theta$, the Bayes factor does not forget the prior as $n$ grows. The limit of this effect is the [Lindley paradox](/lindley-paradox/).
 
