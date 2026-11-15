@@ -1,0 +1,38 @@
+---
+title: Reads through hidden classes and load caches equal a dictionary lookup
+proves: [correctness]
+status: full
+---
+
+We use lines L1 to L16 from the page. The *reference model* keeps, for each object $o$, a dictionary $\mathit{own}(o)$ of its own properties, changed by SET and DELETE in the obvious way, and answers $\mathrm{GET}^*(o, x) = \mathit{own}(o)[x]$ if $x \in \mathit{own}(o)$, and $\mathrm{LOOKUP}(\mathit{class}(o), x)$ otherwise. LOOKUP walks the chain of parent classes as on the page of the [polymorphic inline cache](/polymorphic-inline-cache/). Let $\mathit{order}(o)$ be the list of the names in $\mathit{own}(o)$ in the order in which they were first added. For a shape $S$, let $\mathit{names}(S)$ be the list of keys on the path from the root to $S$, from the top down, with $\mathit{names}(S) = ()$ for a root.
+
+**Lemma 1 (shapes).** Every shape $S$, once created, never changes its class, parent, key or offsets. Its offsets satisfy: the keys of $\mathit{offsets}(S)$ are the elements of $\mathit{names}(S)$, these are distinct, and the $j$-th name, counting from 0, has offset $j$. Also $\mathit{class}(S) = \mathit{class}(\mathit{parent}(S))$ for a shape that is not a root.
+
+*Proof.* No line writes the class, parent, key or offsets of an existing shape; line L2 only adds an entry to $\mathit{transitions}$. The statement on offsets is by induction on the order of creation. A root has empty offsets and no names. A shape $S'$ created at line L2 from $S$ with key $x$ gets $\mathit{offsets}(S)$ plus $x \mapsto |\mathit{offsets}(S)|$, the class of $S$, and $\mathit{names}(S') = \mathit{names}(S)$ followed by $x$. TRANSITION is called only from line L6, when $x$ is not in $\mathit{offsets}(\mathit{shape}(o))$, and $S = \mathit{shape}(o)$ there. So $x$ is new, the names stay distinct, and $x$ is the name at position $|\mathit{names}(S)|$ with that offset. $\square$
+
+**Lemma 2 (object invariant).** At every point of a run, for every object $o$:
+
+1. if $o$ is in dictionary mode, then $o.\mathit{dict} = \mathit{own}(o)$;
+2. otherwise $\mathit{class}(\mathit{shape}(o)) = \mathit{class}(o)$, $\mathit{names}(\mathit{shape}(o)) = \mathit{order}(o)$, $|\mathit{slots}(o)| = |\mathit{own}(o)|$, and $\mathit{slots}(o)[\mathit{offsets}(\mathit{shape}(o))[y]] = \mathit{own}(o)[y]$ for each $y$ in $\mathit{own}(o)$.
+
+*Proof.* By induction on the steps. Line L1 gives the root shape of $C$, no slots, and an empty dictionary in the model, which satisfies part 2. Steps on other objects do not touch $o$, and shapes do not change by Lemma 1. Consider SET($o$, $x$, $v$). In dictionary mode, line L4 makes the same change as the model. Otherwise, if $x$ is already in the offsets, then by part 2 and Lemma 1 $x$ is in $\mathit{own}(o)$, the model only changes its value, and line L5 writes the slot of $x$, so part 2 holds again. If $x$ is not in the offsets, then $x$ is not in $\mathit{own}(o)$; the model adds $x$ at the end of $\mathit{order}(o)$, and line L6 moves $o$ to a shape $S'$ with $\mathit{names}(S') = \mathit{order}(o)$, the same class, and the new offset $|\mathit{slots}(o)|$ for $x$, at which line L6 appends $v$. Consider DELETE($o$, $x$). If $o$ is not in dictionary mode and $x$ is not an own property, nothing changes in either model. If $o$ is not in dictionary mode and $x$ is own, line L8 builds $o.\mathit{dict}$ from the pairs $(y, \mathit{slots}(o)[\mathit{offsets}(\mathit{shape}(o))[y]])$, which is $\mathit{own}(o)$ by part 2, and line L9 then removes $x$ from both. In dictionary mode, line L9 removes $x$ from both. $\square$
+
+**Theorem 1 (GET).** GET($o$, $x$) $= \mathrm{GET}^*(o, x)$ at every point of a run.
+
+*Proof.* In dictionary mode, line L10 returns $o.\mathit{dict}[x] = \mathit{own}(o)[x]$ when $x$ is own, by part 1 of Lemma 2, and otherwise line L12 returns LOOKUP, as the model does. Not in dictionary mode, $x$ is in the offsets exactly when $x \in \mathit{own}(o)$, by Lemma 1 and part 2. Then line L11 returns $\mathit{own}(o)[x]$. Otherwise line L12 returns $\mathrm{LOOKUP}(\mathit{class}(o), x)$. $\square$
+
+**Theorem 2 (sharing).** Let $o_1$ and $o_2$ be objects that are not in dictionary mode. Then $\mathit{shape}(o_1) = \mathit{shape}(o_2)$ if and only if $\mathit{class}(o_1) = \mathit{class}(o_2)$ and $\mathit{order}(o_1) = \mathit{order}(o_2)$.
+
+*Proof.* For a class $C$ and a list of distinct names $w = (w_1, \dots, w_t)$, write $\tau(C, w)$ for the shape reached from the root of $C$ by following the transitions labelled $w_1, \dots, w_t$, if they exist. Each shape has at most one child per name, and transitions are never removed or replaced, so $\tau(C, w)$ is a single shape once it exists and stays the same forever. By induction on the steps, $\mathit{shape}(o) = \tau(\mathit{class}(o), \mathit{order}(o))$ for every object not in dictionary mode: it holds after line L1, line L5 changes neither side, and line L6 extends $\mathit{order}(o)$ by $x$ and moves $o$ along the transition labelled $x$. So equal class and order give equal shapes. Conversely, a shape determines its class and its names, and by Lemma 2 these are the class and order of every object that has it. So equal shapes give equal class and order. $\square$
+
+**Load caches.** A load cache at a site with name $x$ has entries $(S, \text{field}, i)$ and $(S, \text{class}, a)$ with distinct shapes, at most $k$ of them, and a megamorphic flag. When a method table or a parent of a class $D$ changes, the runtime first removes every class entry whose $\mathit{class}(S)$ has $D$ in its chain. Let $J$ be the invariant: for each field entry, $\mathit{offsets}(S)[x] = i$; for each class entry, $x$ is not in $\mathit{offsets}(S)$ and $a = \mathrm{LOOKUP}(\mathit{class}(S), x)$ under the current classes.
+
+**Lemma 3.** $J$ holds at every point of a run.
+
+*Proof.* It holds for an empty cache. Line L16 adds an entry for $S = \mathit{shape}(o)$ as computed at lines L11 and L12: a field entry with $i = \mathit{offsets}(S)[x]$, or, when $x$ is not in the offsets, a class entry with $a = \mathrm{LOOKUP}(\mathit{class}(o), x)$, and $\mathit{class}(o) = \mathit{class}(S)$ by Lemma 2. A field entry depends only on $\mathit{offsets}(S)$, which never changes by Lemma 1. A class entry also depends on the class chain. If a class $D$ changes, the entries whose class has $D$ in its chain are removed first, and for the others the chain does not hold $D$, so the lookup result is unchanged by the locality lemma (Lemma 1 of the proof for the polymorphic inline cache). Changes of objects do not touch entries. $\square$
+
+**Theorem 3 (LOAD).** LOAD(site, $o$) $= \mathrm{GET}^*(o, x)$ at every point of a run.
+
+*Proof.* If the site is megamorphic or $o$ is in dictionary mode, line L13 returns GET($o$, $x$), which is right by Theorem 1. Otherwise, on a hit at line L14 the entry has $S = \mathit{shape}(o)$. For a field entry, $\mathit{offsets}(\mathit{shape}(o))[x] = i$ by $J$, so line L15 returns $\mathit{slots}(o)[i]$, which is $\mathit{own}(o)[x]$ by Lemma 2. For a class entry, $x$ is not in the offsets of $\mathit{shape}(o)$, so $x \notin \mathit{own}(o)$ by Lemma 2, and $a = \mathrm{LOOKUP}(\mathit{class}(S), x) = \mathrm{LOOKUP}(\mathit{class}(o), x)$ by $J$ and Lemma 2. On a miss, line L16 returns the answer of lines L11 and L12, which is right by Theorem 1. $\square$
+
+The state machine of the load cache, uninitialized, monomorphic, polymorphic up to the bound and megamorphic, is the one proved for the polymorphic inline cache, with shapes in place of classes, since lines L13 to L16 add and remove entries by the same rules.
