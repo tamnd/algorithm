@@ -81,7 +81,7 @@ L9  return P
 
 ## Example
 
-**A quarter circle.** The $21$ points $(\cos \varphi_k, \sin \varphi_k)$ with $\varphi_k = \tfrac{\pi}{2} (k/20)^2$ are fitted by a cubic B-spline with the knots $(0, 0, 0, 0, \tfrac12, 1, 1, 1, 1)$ and $\mu = 0$, starting from the least-squares fit with chord-length parameters. The table gives the true squared distance error after each iteration; the parameter correction column uses the same start with all parameters corrected.
+**A quarter circle.** The $21$ points $(\cos \varphi_k, \sin \varphi_k)$ with $\varphi_k = \tfrac{\pi}{2} (k/20)^2$ are fitted by a cubic B-spline with the knots $(0, 0, 0, 0, \tfrac12, 1, 1, 1, 1)$ and $\mu = 0$, starting from the least-squares fit with chord-length parameters. The table gives the true squared distance error after each iteration; the parameter correction column uses the same start with all parameters corrected, the two end parameters included. The [parameter correction](/parameter-correction/) page keeps the end parameters fixed, so its numbers for the same start are different.
 
 | iteration | SDM | parameter correction |
 | --- | --- | --- |

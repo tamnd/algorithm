@@ -137,11 +137,11 @@ The bits per triangle are $(2t - 1)/t$, as proved. The last column is the order-
 ## Variants and improvements
 
 - **Entropy coding.** The symbols are far from equally likely, so a [Huffman code](/huffman-coding/) of symbol pairs or an arithmetic code does better than the fixed 1 and 3 bit code. Rossignac reports less than 1.5 bits per triangle in this way on large meshes. This is measured on his meshes, not a bound.
-- **A better worst case.** King and Rossignac (1999) gave a code with at most $3.67$ bits per vertex, about $1.83$ bits per triangle (check). By Tutte's count of planar triangulations, about $\log_2 (256/27) \approx 3.245$ bits per vertex are needed in the worst case (check).
-- **Linear time decoders.** The Wrap and Zip decoder of Rossignac and Szymczak (1999) puts the S tips in place afterwards by zipping the loops, and the Spirale Reversi decoder of Isenburg and Snoeyink (2000) reads the symbols backwards; both take $O(t)$ time (check).
-- **Edgebreaker on a corner table.** Rossignac, Safonova and Szymczak (2001) wrote both coders in a few lines on the arrays of a corner table (check).
-- **Holes and handles.** Rossignac's paper also handles meshes with boundaries, by one extra vertex in each hole, and meshes of higher genus, where an S can hit a loop that is still on the stack and needs extra information (check). The code of this page rejects these meshes.
-- **Valence coding.** Touma and Gotsman (1998) code the degree of each vertex instead of one symbol per triangle; on regular meshes this takes much less than 1 bit per triangle (check).
+- **A better worst case.** King and Rossignac (1999) gave a code with at most $3.67$ bits per vertex, about $1.83$ bits per triangle. By Tutte's count of planar triangulations, about $\log_2 (256/27) \approx 3.245$ bits per vertex are needed in the worst case.
+- **Linear time decoders.** The Wrap and Zip decoder of Rossignac and Szymczak (1999) puts the S tips in place afterwards by zipping the loops, and the Spirale Reversi decoder of Isenburg and Snoeyink (2000) reads the symbols backwards; both take $O(t)$ time.
+- **Edgebreaker on a corner table.** Rossignac, Safonova and Szymczak (2001) wrote both coders in a few lines on the arrays of a corner table.
+- **Holes and handles.** Rossignac's paper also handles meshes with boundaries and meshes of higher genus, with extra bits for each hole and each handle: at a handle an S can hit a loop that is still on the stack and needs extra information. Another way to treat a hole, used by Touma and Gotsman, is to fill it with one extra vertex. The code of this page rejects these meshes.
+- **Valence coding.** Touma and Gotsman (1998) code the degree of each vertex instead of one symbol per triangle; on regular meshes this takes much less than 1 bit per triangle.
 - **Progressive coding.** A [progressive mesh](/progressive-mesh/) sends a coarse mesh first and then vertex splits, which Edgebreaker cannot do: its order is fixed by the traversal.
 
 ## When to use it
@@ -161,6 +161,6 @@ Use Edgebreaker to store or send the connectivity of a large triangle mesh in ab
 
 ## History
 
-Jarek Rossignac introduced Edgebreaker in 1999, in IEEE Transactions on Visualization and Computer Graphics, one year after the valence-based coder of Touma and Gotsman (check). His paper gave the five CLERS symbols, the stack for S and the bound of 2 bits per triangle for meshes with the topology of a sphere. Later papers made the decoder run in linear time, lowered the guaranteed bound, and gave a short implementation on a corner table. Edgebreaker and its variants became a standard part of the compression of 3D triangle meshes.
+Jarek Rossignac introduced Edgebreaker in 1999, in IEEE Transactions on Visualization and Computer Graphics, one year after the valence-based coder of Touma and Gotsman. His paper gave the five CLERS symbols, the stack for S and the bound of 2 bits per triangle for meshes with the topology of a sphere. Later papers made the decoder run in linear time, lowered the guaranteed bound, and gave a short implementation on a corner table. Edgebreaker and its variants became a standard part of the compression of 3D triangle meshes.
 
 ## References

@@ -69,7 +69,7 @@ L8  return the planes, A, the vertices, the edges and the loops
 
 ## Example
 
-The box $[0, 2] \times [0, 1] \times [0, 0.5]$ is sampled at the centers of square cells of side $s = 0.1$ on each face: $100$ points on each of the two faces $x = 0$ and $x = 2$, $200$ on $y = 0$ and $y = 1$, and $50$ on $z = 0$ and $z = 0.5$, $700$ points in all. The points nearest to an edge are at distance $s/2$ from it on both faces, so the gap across an edge is $s / \sqrt 2 \approx 0.0707$; opposite faces are at least $0.5$ apart. So any $\delta$ in $[0.0707, 0.5)$ gives the true adjacency, and the run uses $\delta = \eta = 0.15$.
+The box $[0, 2] \times [0, 1] \times [0, 0.5]$ is sampled at the centers of square cells of side $s = 0.1$ on each face: $50$ points on each of the two faces $x = 0$ and $x = 2$, $100$ on $y = 0$ and $y = 1$, and $200$ on $z = 0$ and $z = 0.5$, $700$ points in all. The points nearest to an edge are at distance $s/2$ from it on both faces, so the gap across an edge is $s / \sqrt 2 \approx 0.0707$; opposite faces are at least $0.5$ apart. So any $\delta$ in $[0.0707, 0.5)$ gives the true adjacency, and the run uses $\delta = \eta = 0.15$.
 
 | step | result |
 | --- | --- |

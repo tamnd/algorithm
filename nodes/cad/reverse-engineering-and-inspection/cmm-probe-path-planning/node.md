@@ -56,7 +56,7 @@ For a point $p_i$ the set $A_i \subseteq \Omega$ of orientations from which the 
 
 ## Examples
 
-**A short tour on a line.** The probe starts at $x = 0$ and must touch points at $x = 1, -2, 4$ on one edge of a part, then return. The [nearest neighbor heuristic](/nearest-neighbor-heuristic/) goes to $1$, then to $-2$, then to $4$, then home: $1 + 3 + 6 + 4 = 14$. The best tour goes to the left end and the right end once each, for example $0, -2, 1, 4, 0$: $2 + 3 + 3 + 4 = 12$. With clearance-plane moves at height $h$, both tours add $8h$, so the comparison is the same.
+**A short tour on a line.** The probe starts at $x = 0$ and must touch points at $x = 1, -2, 4$ on one edge of a part, then return. The [nearest neighbor heuristic](/nearest-neighbor-heuristic/) goes to $1$. From there $-2$ and $4$ are both at distance $3$; if it breaks the tie toward $-2$, it goes on to $4$, then home: $1 + 3 + 6 + 4 = 14$. (The other tie-break gives $1 + 3 + 6 + 2 = 12$.) The best tour goes to the left end and the right end once each, for example $0, -2, 1, 4, 0$: $2 + 3 + 3 + 4 = 12$. With clearance-plane moves at height $h$, both tours add $8h$, so the comparison is the same.
 
 **Orientations.** A block with a vertical bore and a side hole: the top face and the bore are accessible from the vertical orientation, the side hole only from a horizontal one, and the side face from both. Two orientations cover all points, and the plan measures the top face, the bore and the side face first, changes the orientation once, then measures the side hole. A plan that switched for the side face would pay a second change.
 

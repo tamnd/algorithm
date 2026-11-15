@@ -146,8 +146,8 @@ Lines L1 to L4 take $O(V)$ time. With a dense factorization, as in the code, lin
 
 ## Variants and improvements
 
-- **Alignment to given directions.** Knöppel et al. also fit the field to a given field $q$, such as the principal curvature directions from [curvature tensor estimation](/curvature-tensor-estimation/), by solving one linear system of the form $(A - \lambda M) u = M q$ with a parameter $\lambda$ below $\lambda_1$ (check the exact form in the paper).
-- **Smoothness measures.** The paper describes a family of energies that weigh the Dirichlet energy against a holomorphic or antiholomorphic part, which changes the kind of singularity the field prefers (check).
+- **Alignment to given directions.** Knöppel et al. also fit the field to a given field $q$, such as the principal curvature directions from [curvature tensor estimation](/curvature-tensor-estimation/), by solving one linear system of the form $(A - \lambda M) u = M q$ with a parameter $\lambda$ below $\lambda_1$.
+- **Smoothness measures.** The paper describes a family of energies that weigh the holomorphic and antiholomorphic parts of the Dirichlet energy, from one alone to the other, which trades fewer singularities against straighter field lines.
 - **Face based fields.** The same idea works with one value per face and transport across edges, with dual weights. The [cross field](/cross-field/) page gives the index in that form.
 - **Other eigensolvers.** The [Lanczos algorithm](/lanczos-algorithm/) or a shift closer to $\lambda_1$ converges faster than plain inverse iteration when the two smallest eigenvalues are close. [Power iteration](/power-iteration/) on $A$ itself would find the largest eigenvalue instead, the roughest field.
 - **Quad meshing.** The cross field with $n = 4$ is the input of [mixed-integer quadrangulation](/mixed-integer-quadrangulation/), which cuts the surface along a [cut graph](/cut-graph/) through the singularities.

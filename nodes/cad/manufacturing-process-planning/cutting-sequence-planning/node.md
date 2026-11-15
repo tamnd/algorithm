@@ -75,7 +75,7 @@ and the goal is to minimize it. This is a GTSP with the home point as a cluster 
 
 The precedence is $a \prec A$ and $b \prec B$. The head does not return home.
 
-- *A careless plan.* Order $a, A, b, B$, with the first listed pierce point of each contour: $(30, 20), (10, 10), (70, 20), (50, 10)$. The travel is $36.06 + 22.36 + 60.83 + 22.36 = 141.61$ mm.
+- *A careless plan.* Order $a, A, b, B$, with the first listed pierce point of each contour: $(30, 20), (10, 10), (70, 20), (50, 10)$. The travel is $36.06 + 22.36 + 60.83 + 22.36 = 141.60$ mm.
 - *Optimum.* The same order with the pierce points $(25, 15), (40, 10), (60, 20), (50, 10)$. The travel is $29.15 + 15.81 + 22.36 + 14.14 = 81.47$ mm.
 
 There are 6 orders that respect the precedence and $4^4 = 256$ choices of pierce points, so 1536 plans. A check of all of them finds 81.47 mm as the minimum, 42 percent less travel than the careless plan. The good plan pierces each contour on the side that faces the next one.
