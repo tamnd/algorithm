@@ -43,7 +43,7 @@ and the arc length that it really covers differs from $L$ by $O(L^3)$, a relativ
 
 A machine controller wakes up many times a second, and each time it must say where the tool should be next. On a straight line this is easy. On a smooth curve the curve is drawn by a number $u$ that runs from start to end, but equal steps of $u$ do not give equal steps along the curve. The tool would speed up and slow down.
 
-The interpolator asks how fast the curve moves when $u$ changes, and divides the wanted distance by that speed. This first guess is a little off where the curve speeds up or slows down, so a second term corrects for that change. With the correction, the error of each step is tiny, and halving the step makes the error eight times smaller.
+The interpolator asks how fast the curve moves when $u$ changes, and divides the wanted distance by that speed. This first guess is a little off where the curve speeds up or slows down, so a second term corrects for that change. With the correction, the error of each step is tiny, and halving the step makes it eight times smaller, so the error relative to the step length becomes four times smaller.
 
 ## The problem
 

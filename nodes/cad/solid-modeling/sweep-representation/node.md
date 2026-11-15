@@ -64,7 +64,7 @@ The representation is *valid*, that is the solid is an r-set, under these condit
 - For an extrusion, $d_z \neq 0$. If $d_z = 0$, the profile slides in its own plane and the result is flat, with no volume.
 - For a revolution, every vertex has $r \ge 0$. A profile that crosses the axis sweeps some points twice, and the part on the far side is not a mirror image of the near side, so the stored data do not describe the solid that the user drew.
 
-The representation is *unambiguous*: a pair $(X, d)$ or a profile $X$ gives one solid. It is not *unique*: a cylinder is the extrusion of a disk and also the revolution of a rectangle, and the same prism is the extrusion of its bottom face along $d$ or of its top face along $-d$.
+The representation is *unambiguous*: a pair $(X, d)$ or a profile $X$ gives one solid. It is not *unique*: the same prism is the extrusion of its bottom face along $d$ or of its top face along $-d$, and the same polygon has many vertex lists. In a scheme that also allows curved profiles, a cylinder is the extrusion of a disk and also the revolution of a rectangle.
 
 ## Operations
 

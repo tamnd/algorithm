@@ -78,6 +78,6 @@ The examples use exact rational arithmetic at random integer placements.
 
 ## History
 
-Connelly introduced the stress matrix and the stress energy in his 1982 study of tensegrity frameworks, where a positive semidefinite stress matrix proves that a framework of cables and struts is rigid. In a 1991 note he used stresses to show that $K_{5,5}$ is a counterexample to Hendrickson's conjecture in three dimensions. The general sufficient condition for generic frameworks, without a sign condition, appeared in his 2005 paper, after a long circulation as a preprint. Jackson and Jordán used it in the same year to settle the plane. Gortler, Healy and Thurston proved the converse in 2010, which turned Connelly's condition into an exact test.
+Connelly introduced the stress matrix and the stress energy in his 1982 study of tensegrity frameworks, where a positive semidefinite stress matrix proves that a framework of cables and struts is rigid. In a 1991 note he used stresses to show that $K_{5,5}$ is a counterexample to Hendrickson's conjecture in three dimensions, which Hendrickson had stated in his thesis before his journal paper of 1992. The general sufficient condition for generic frameworks, without a sign condition, appeared in his 2005 paper, after a long circulation as a preprint. Jackson and Jordán used it in the same year to settle the plane. Gortler, Healy and Thurston proved the converse in 2010, which turned Connelly's condition into an exact test.
 
 ## References

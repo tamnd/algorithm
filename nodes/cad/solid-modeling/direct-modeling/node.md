@@ -110,6 +110,6 @@ The final result at $t = 1$ is $[0, 2] \times [0, 6]$. Two other answers are geo
 1. In the worked case, give the area of the section as a function of $t$ for all $t \in [0, 1]$, and check that it is continuous and decreasing.
 2. A cube $[0, 1]^3$ has its top face tilted: the plane $z = 1$ becomes $z = 1 + s x$. Using the formula $x(t) = x(0) + t\,A^{-1} e_k$ and its analogue for a rotation, find the new vertices. For which $s$ does the top face stay valid?
 3. Give a planar polygon and a translation of one of its edges such that the first topology change point is an edge of length zero, not a new contact. Describe the topology just after it.
-4. Show that if the faces of $S$ move outward and line L9 uses a union, the result contains $M$ and its area changes by at most $a\,\lvert t' - t\rvert$ for a face of area $a$.
+4. Show that if the faces of $S$ move outward and line L9 uses a union, the result contains $M$ and its volume changes by at most $a\,\lvert t' - t\rvert$ for a face of area $a$.
 
 ## References

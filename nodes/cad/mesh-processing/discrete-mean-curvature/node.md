@@ -64,7 +64,7 @@ Meyer et al. use the mixed Voronoi area, which the [cotangent Laplacian](/cotang
 
 $$k_{1,2} = H_i \pm \sqrt{\max(H_i^2 - K^G_i,\ 0)} .$$
 
-The two estimates come from different formulas, so $H_i^2 - K^G_i$ can be slightly negative, and the clamp at 0 is necessary. The principal directions need more than these two numbers: see [curvature tensor estimation](/curvature-tensor-estimation/).
+The two estimates come from different formulas, so $H_i^2 - K^G_i$ can be negative, and the clamp at 0 is necessary. At a sharp vertex of a coarse mesh it is clearly negative: at the apex $(0, 0, 0)$ of the pyramid with the base corners $(\pm 1, 0, -1)$ and $(0, \pm 1, -1)$, whose four faces are equilateral, $H_i = 1$ and $K^G_i = \pi/\sqrt 3$, so $H_i^2 - K^G_i \approx -0.814$. The principal directions need more than these two numbers: see [curvature tensor estimation](/curvature-tensor-estimation/).
 
 **Properties.**
 
