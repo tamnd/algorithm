@@ -97,7 +97,7 @@ The tests check both results in exact fractions on random data with ties.
 
 **Large samples.** Under the model and independent censoring, $\hat\beta$ is consistent and asymptotically normal. Its variance is not the inverse of the weighted information, because $\hat G$ is estimated and the weighted terms are not martingale increments. Fine and Gray (1999) give a sandwich variance with an extra term for $\hat G$. We cite these results and do not prove them. The reference code reports only the inverse information, which is labeled naive. Use the Fine-Gray variance, or the bootstrap, for inference.
 
-**A simulation.** The tests use the design of Fine and Gray: a binary $x$, $F_1(t \mid x) = 1 - (1 - p(1 - e^{-t}))^{\exp(\beta_1 x)}$ with $p = 0.6$ and $\beta_1 = 0.5$, cause 2 given that cause 1 does not happen exponential with rate $e^{\beta_2 x}$, $\beta_2 = -0.5$, and censoring uniform on $(0, 3)$. The numbers are measured, for the stated seeds.
+**A simulation.** The tests use the design of Fine and Gray: a binary $x$, $F_1(t \mid x) = 1 - (1 - p(1 - e^{-t}))^{\exp(\beta_1 x)}$ with $p = 0.6$ and $\beta_1 = 0.5$, cause 2 given that cause 1 does not happen exponential with rate $e^{\beta_2 x}$, $\beta_2 = -0.5$, and censoring uniform on $(0, 3)$. The numbers are measured.
 
 | fit (one data set, $n = 2000$: 950 cause 1, 386 cause 2, 664 censored) | coefficient of $x$ |
 |---|---|
@@ -106,7 +106,7 @@ The tests check both results in exact fractions on random data with ties.
 | Cox on the cause-specific hazard of cause 2 | -0.746 |
 | Fine-Gray, cause 2 (not a true model in this design) | -0.871 |
 
-Over 40 data sets of 200 subjects the Fine-Gray estimates had mean 0.480 and standard deviation 0.209, so the mean is within one standard error ($0.209/\sqrt{40} = 0.033$) of 0.5. The cause-specific coefficient of cause 1 is a different quantity: in this design the cause-specific hazards are not proportional, and its value is not an estimate of $\beta_1$. The predicted $F_1(1 \mid x = 1)$ from a fit to 2000 subjects is within 0.04 of the truth.
+Over 40 data sets of 200 subjects (seed 6, as in the tests) the Fine-Gray estimates had mean 0.480 and standard deviation 0.209, so the mean is within one standard error ($0.209/\sqrt{40} = 0.033$) of 0.5. The cause-specific coefficient of cause 1 is a different quantity: in this design the cause-specific hazards are not proportional, and its value is not an estimate of $\beta_1$. The predicted $F_1(1 \mid x = 1)$ from a fit to 2000 subjects is within 0.04 of the truth.
 
 **Checks in code.** The tests compare the weighted risk sums with a direct $O(n^2)$ sum, the fit without censoring with a direct Cox fit with the competing times set to infinity, the score and information with numerical derivatives, the censoring identity and the Aalen-Johansen identity in exact fractions, and the simulation above.
 

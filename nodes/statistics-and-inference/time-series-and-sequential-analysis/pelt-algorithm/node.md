@@ -97,7 +97,7 @@ For the residual sum of squares the condition holds with $K = 0$, because cuttin
 
 ## Complexity
 
-Each step $t$ costs $O(\lvert R \rvert)$ segment costs. In the worst case nothing is pruned, $\lvert R \rvert = t$, and the total is $\Theta(n^2)$, the same as optimal partitioning. Series without changes come close to this case. Killick, Fearnhead and Eckley (2012) proved that the expected cost is $O(n)$ when the number of changes grows linearly with $n$ and some further conditions hold; this is cited, not proved here. Measured average and largest sizes of $R$ per step, with $\beta = 2\log n$, Gaussian noise of variance 1, and a seeded random generator:
+Each step $t$ costs $O(\lvert R \rvert)$ segment costs. In the worst case nothing is pruned, $\lvert R \rvert = t$, and the total is $\Theta(n^2)$, the same as optimal partitioning. Series without changes come close to this case. Killick, Fearnhead and Eckley (2012) proved that the expected cost is $O(n)$ when the number of changes grows linearly with $n$ and some further conditions hold; this is cited, not proved here. Measured average and largest sizes of $R$ per step, with $\beta = 2\log n$, Gaussian noise of variance 1, and one random generator with seed 3 (as in the tests), used for the rows in order, the series with changes before the series without:
 
 | $n$ | changes every 100 points: mean $\lvert R \rvert$ | largest $\lvert R \rvert$ | total cost evaluations | no change: mean $\lvert R \rvert$ | largest $\lvert R \rvert$ | total cost evaluations |
 |---|---|---|---|---|---|---|

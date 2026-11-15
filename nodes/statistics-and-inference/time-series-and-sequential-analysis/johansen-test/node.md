@@ -123,7 +123,7 @@ The denominator $110751 = 551 \cdot 201$ is $\det(TS_{11})\det(TS_{00})$. The fa
 
 The trace sequence stops at $\hat r = 1$, and the first vector, scaled, is $\hat\beta_1 = (1, -0.981, 1.015)$, close to the true $(1, -1, 1)$. The maximum eigenvalue test of $r = 1$ against $r = 2$ rejects narrowly (11.57 against 11.22), so the two rules disagree here. The Engle-Granger regression of $y$ on $x_1$ and $x_2$ gives slopes $0.993$ and $-1.055$ and $\tau = -7.92$, which also finds the relation.
 
-**Size.** With two independent Gaussian random walks of length 200 and 2000 samples, the trace test of $r = 0$ at the 95% point 12.3212 rejected in 5.7% of samples, and the simulated 95% quantile was 12.74. With three walks it rejected in 6.2% at 24.2761. These rates are measured, not derived. With case "c" applied to walks without drift, it rejected in 11.8% at 15.4943. This shows the cost of a wrong deterministic case. With a drift of 0.3 per step, the case "c" rate fell to 6.5% in 1000 samples.
+**Size.** With two independent Gaussian random walks of length 200 and 2000 samples (each 2000-sample design here starts a new generator with seed 11, as in the tests), the trace test of $r = 0$ at the 95% point 12.3212 rejected in 5.7% of samples, and the simulated 95% quantile was 12.74. With three walks it rejected in 6.2% at 24.2761. These rates are measured, not derived. With case "c" applied to walks without drift, it rejected in 11.8% at 15.4943. This shows the cost of a wrong deterministic case. With a drift of 0.3 per step, the case "c" rate fell to 6.5% in 1000 samples.
 
 ## Correctness
 

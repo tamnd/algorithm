@@ -7,7 +7,7 @@ aliases:
 - GES
 area: statistics-and-inference/causal-inference-and-experimental-design
 level: research
-summary: Chickering's score-based causal discovery that adds and then deletes edges over Markov equivalence classes. With a consistent score it finds the true class in the limit.
+summary: Chickering's score-based causal discovery that adds and then deletes edges over Markov equivalence classes. It finds the true class in the limit under faithfulness and no hidden confounders.
 model: real-ram
 complexity:
   vars: {n: the number of variables}
@@ -32,7 +32,7 @@ sources:
     locator: The whole paper (the orientation rules that turn a DAG pattern into its CPDAG)
 ---
 
-Greedy equivalence search (GES) learns the Markov equivalence class of a causal [directed acyclic graph](/directed-acyclic-graph/) by maximizing a score, such as the [Bayesian information criterion](/bayesian-information-criterion/). It does not search over DAGs but over equivalence classes, drawn as CPDAGs, because data cannot tell apart DAGs with the same [d-separations](/d-separation/). It starts from the empty graph. In the forward phase it adds one edge at a time, always the addition that raises the score most, until no addition helps. In the backward phase it removes one edge at a time in the same way. Chickering (2002) proved that with a consistent score and enough data this simple two-phase search finds the true class. It is the standard score-based method of [Bayesian network structure learning](/bayesian-network-structure-learning/), next to the test-based [PC algorithm](/pc-algorithm/).
+Greedy equivalence search (GES) learns the Markov equivalence class of a causal [directed acyclic graph](/directed-acyclic-graph/) by maximizing a score, such as the [Bayesian information criterion](/bayesian-information-criterion/). It does not search over DAGs but over equivalence classes, drawn as CPDAGs, because data cannot tell apart DAGs with the same [d-separations](/d-separation/). It starts from the empty graph. In the forward phase it adds one edge at a time, always the addition that raises the score most, until no addition helps. In the backward phase it removes one edge at a time in the same way. Chickering (2002) proved that with a consistent score, a distribution faithful to a DAG over the observed variables (no hidden common causes) and enough data, this simple two-phase search finds the true class. It is the standard score-based method of [Bayesian network structure learning](/bayesian-network-structure-learning/), next to the test-based [PC algorithm](/pc-algorithm/).
 
 ## In plain words
 
@@ -107,7 +107,7 @@ The cost is counted in evaluations of the score change of an operator. Each step
 
 ## Properties
 
-- **Consistent, not exact.** With a consistent score, GES returns the true class with probability tending to 1. For a fixed sample it is a greedy search and can stop at a class that is not the best; see Pitfalls.
+- **Consistent, not exact.** With a consistent score, and a distribution faithful to a DAG over the observed variables (so no hidden common causes), GES returns the true class with probability tending to 1. For a fixed sample it is a greedy search and can stop at a class that is not the best; see Pitfalls.
 - **Works on classes.** Each state is a whole equivalence class, so the search does not waste steps among equivalent DAGs, and the result does not depend on how the variables are numbered except through ties.
 - **Deterministic.** Ties between operators are broken by the order of the variables.
 - **Gives a score.** Unlike PC, GES returns the score of its answer, which can be compared with other classes.
