@@ -15,7 +15,7 @@ sources:
     title: Siu-Wing Cheng, Tamal K. Dey, Herbert Edelsbrunner, Michael A. Facello and Shang-Hua Teng, Sliver exudation, Journal of the ACM 47(5), 2000, 883 to 904
     locator: the definition of a sliver by a bounded radius-edge ratio and a small volume relative to the shortest edge, and the weighted Delaunay construction that has no slivers (general locator)
   - book: isbn:9781584887300
-    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan Richard Shewchuk, Delaunay Mesh Generation, CRC Press, 2012
+    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan Richard Shewchuk, Delaunay Mesh Generation, CRC Press, 2013
     locator: Chapter 8, Tetrahedral meshing of PLCs (refining slivers away), Chapter 10, Sliver exudation, and Chapter 11, Refinement for sliver exudation
   - paper: "Jonathan Richard Shewchuk, What is a good linear element? Interpolation, conditioning, and quality measures, Proceedings of the 11th International Meshing Roundtable, Sandia National Laboratories, 2002, 115 to 126"
     locator: the effect of large and small dihedral angles on interpolation error and on the conditioning of the stiffness matrix (general locator)

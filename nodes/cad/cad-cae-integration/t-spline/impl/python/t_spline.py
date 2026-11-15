@@ -11,7 +11,7 @@ gives a zero knot interval. The mesh is a set of unit edges:
 - (i, j) in h means the horizontal edge from (i, j) to (i + 1, j);
 - (i, j) in v means the vertical edge from (i, j) to (i, j + 1).
 
-The four outer lines on each side (0, 1, m - 1, m and 0, 1, n - 1, n) must be
+The two outer lines on each side (0, 1, m - 1, m and 0, 1, n - 1, n) must be
 complete, so that every ray finds two knots. The anchors (control points) of
 a bicubic T-spline are the vertices (i, j) with 2 <= i <= m - 2 and
 2 <= j <= n - 2. Use Fraction for exact results.
@@ -40,7 +40,7 @@ class TMesh:
 
     @classmethod
     def frame(cls, sv, tv):
-        """The four outer lines on each side, complete, and nothing inside."""
+        """The two outer lines on each side, complete, and nothing inside."""
         mesh = cls(sv, tv)
         m, n = mesh.m, mesh.n
         for j in (0, 1, n - 1, n):

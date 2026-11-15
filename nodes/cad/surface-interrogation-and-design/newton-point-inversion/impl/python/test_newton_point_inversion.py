@@ -76,8 +76,15 @@ class TestNewtonPointInversion(unittest.TestCase):
     def test_stationary_start_is_a_pitfall(self):
         p = (1.5, 1.5, 1.0)
         self.assertEqual(newton_point_inversion(BUMP, p, n_grid=2), (0.5, 0.5))
+        # An odd grid starts on the diagonal u = v and ends at a saddle of the distance.
         u, v = newton_point_inversion(BUMP, p, n_grid=3)
+        self.assertAlmostEqual(u, v, places=8)
         self.assertAlmostEqual(norm(sub(patch_point(BUMP, u, v), p)), 0.6872365853, places=8)
+        # The true minimum is sqrt(17) / 6 at (4/9, 1/2) and its mirror images.
+        u, v = newton_point_inversion(BUMP, p, n_grid=14)
+        self.assertAlmostEqual(u, 4 / 9, places=8)
+        self.assertAlmostEqual(v, 0.5, places=8)
+        self.assertAlmostEqual(norm(sub(patch_point(BUMP, u, v), p)), 17 ** 0.5 / 6, places=10)
 
     def test_against_dense_sampling(self):
         rng = random.Random(7)

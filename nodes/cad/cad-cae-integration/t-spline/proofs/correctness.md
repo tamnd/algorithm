@@ -4,7 +4,7 @@ proves: [correctness]
 status: full
 ---
 
-We use the representation and the pseudocode of the page: a T-mesh in index space with lines $0..m$ and $0..n$, knot values $sv$ and $tv$, the four outer lines on each side complete, and the anchors $(i, j)$ with $2 \le i \le m - 2$ and $2 \le j \le n - 2$. $N[x_0, \ldots, x_4]$ is the cubic B-spline on the knots $x_0 \le \cdots \le x_4$, and $B_a = N[sv_a, \ldots, sv_{a+4}]$ and $B_b = N[tv_b, \ldots, tv_{b+4}]$ are the global B-splines.
+We use the representation and the pseudocode of the page: a T-mesh in index space with lines $0..m$ and $0..n$, knot values $sv$ and $tv$, the two outer lines on each side complete, and the anchors $(i, j)$ with $2 \le i \le m - 2$ and $2 \le j \le n - 2$. $N[x_0, \ldots, x_4]$ is the cubic B-spline on the knots $x_0 \le \cdots \le x_4$, and $B_a = N[sv_a, \ldots, sv_{a+4}]$ and $B_b = N[tv_b, \ldots, tv_{b+4}]$ are the global B-splines.
 
 **Lemma 1 (the rays are defined).** For each anchor, lines L2 to L4 find two lines in each direction.
 

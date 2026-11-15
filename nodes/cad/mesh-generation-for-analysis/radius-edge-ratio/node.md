@@ -21,7 +21,7 @@ sources:
     title: Siu-Wing Cheng, Tamal K. Dey, Herbert Edelsbrunner, Michael A. Facello and Shang-Hua Teng, Sliver exudation, Journal of the ACM 47(5), 2000, 883 to 904
     locator: the classification of bad tetrahedra and the definition of slivers as tetrahedra with a bounded radius-edge ratio and a small volume (general locator)
   - book: isbn:9781584887300
-    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan Richard Shewchuk, Delaunay Mesh Generation, CRC Press, 2012
+    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan Richard Shewchuk, Delaunay Mesh Generation, CRC Press, 2013
     locator: Chapter 1, Introduction (quality measures), Chapter 6, Delaunay refinement in the plane, and Chapter 8, Tetrahedral meshing of PLCs
   - paper: "Jonathan Richard Shewchuk, What is a good linear element? Interpolation, conditioning, and quality measures, Proceedings of the 11th International Meshing Roundtable, Sandia National Laboratories, 2002, 115 to 126"
     locator: the comparison of the radius-edge ratio with measures that also detect slivers

@@ -65,7 +65,7 @@ $$S(s, t) = \frac{\sum_A w_A P_A\, T_A(s, t)}{\sum_A w_A\, T_A(s, t)}.$$
 
 The T-mesh lives in *index space*. The vertical lines have the indices $0, \ldots, m$ and carry the knot values $sv_0 \le \cdots \le sv_m$; the horizontal lines have the indices $0, \ldots, n$ and carry $tv_0 \le \cdots \le tv_n$. A repeated value is a zero knot interval: an open knot vector at the boundary is four lines with the same value. The mesh is a set of unit edges: $(i, j)$ in the horizontal set means the edge from $(i, j)$ to $(i + 1, j)$, and in the vertical set the edge from $(i, j)$ to $(i, j + 1)$. A line can be present on some unit edges and absent on others, and that is how a T-junction appears.
 
-A *vertex* is a point that lies on a horizontal edge and on a vertical edge. For a bicubic T-spline the anchors are the vertices $(i, j)$ with $2 \le i \le m - 2$ and $2 \le j \le n - 2$. The four outer lines on each side are complete, so every ray of the knot rule finds two lines. Working in index space avoids two problems with knot values alone: zero knot intervals do not collapse the mesh, and the topology is kept apart from the values.
+A *vertex* is a point that lies on a horizontal edge and on a vertical edge. For a bicubic T-spline the anchors are the vertices $(i, j)$ with $2 \le i \le m - 2$ and $2 \le j \le n - 2$. The two outer lines on each side are complete, so every ray of the knot rule finds two lines. Working in index space avoids two problems with knot values alone: zero knot intervals do not collapse the mesh, and the topology is kept apart from the values.
 
 ## Operations
 

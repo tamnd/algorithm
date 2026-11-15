@@ -30,7 +30,7 @@ sources:
     title: Barry Joe, Construction of three-dimensional improved-quality triangulations using local transformations, SIAM Journal on Scientific Computing 16(6), 1995, 1292 to 1307
     locator: the local transformations of tetrahedral meshes, including the 2-3 and 3-2 flips, applied to raise a quality measure (general locator)
   - book: isbn:978-1-58488-730-0
-    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan R. Shewchuk, Delaunay Mesh Generation, CRC Press, 2012
+    title: Siu-Wing Cheng, Tamal K. Dey and Jonathan R. Shewchuk, Delaunay Mesh Generation, CRC Press, 2013
     locator: chapter 4 (bistellar flips of tetrahedra and their validity conditions)
 ---
 
