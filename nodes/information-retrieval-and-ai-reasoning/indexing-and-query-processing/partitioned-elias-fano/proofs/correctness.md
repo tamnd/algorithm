@@ -1,0 +1,23 @@
+---
+title: The partition is optimal, and every chunk and query gives back the stored values
+proves: [correctness]
+status: full
+---
+
+Let $x_0 < x_1 < \cdots < x_{n-1}$ be nonnegative integers, and let $F \ge 0$ be the fixed cost of a chunk. A partition is a list of cuts $0 = c_0 < c_1 < \cdots < c_m = n$, and chunk $t$ is $x_{c_{t-1}}, \ldots, x_{c_t - 1}$. For a chunk $x_i, \ldots, x_{j-1}$, let $\beta = 0$ if $i = 0$ and $\beta = x_{i-1} + 1$ otherwise, let $U = x_{j-1} - \beta + 1$, and let $b = j - i$. Write $\text{COST}(i, j) = 0$ if $b = U$, and $\text{COST}(i, j) = \min(U, E(b, U))$ otherwise, where $E(b, U) = b\ell + b + \lfloor (U-1)/2^\ell \rfloor + 1$ with $\ell = \lfloor \lg(U/b) \rfloor$ is the length of the Elias-Fano code of $b$ values in $[0, U)$.
+
+1. **The chunk values fit their universe.** For $i \le k < j$, $x_k \ge x_i \ge \beta$, because $x_i > x_{i-1}$ when $i > 0$. Also $x_k \le x_{j-1} = \beta + U - 1$. So the values $v_k = x_k - \beta$ are $b$ distinct integers in $[0, U)$, in increasing order, and $b \le U$.
+
+2. **Each chunk code gives back its values.** If $b = U$, then $b$ distinct integers in $[0, U)$ are all of $0, \ldots, U - 1$, so $v_k = k - i$ and the run needs no bits; the element of rank $k - i$ is $\beta + (k - i)$. If the chunk is a bitmap (line L10), bit $v$ of the $U$ bits is 1 exactly when $v$ is a value, so the position of the $(r+1)$-th 1 is the value of rank $r$. Otherwise line L11 stores the Elias-Fano code of the $v_k$ in $[0, U)$, which is valid by step 1, and its access gives back $v_k$. In all three cases the reader adds $\beta$, so it returns $x_k$. The payload has exactly $\text{COST}(i, j)$ bits: the run has none, and line L10 picks the bitmap exactly when $U \le E(b, U)$.
+
+3. **The cost of a partition is a sum over its chunks.** The stored size is $F$ for each chunk plus its payload, and by step 2 the payload of a chunk depends only on its ends $i$ and $j$. So a partition with cuts $c_0, \ldots, c_m$ costs $\sum_{t=1}^{m} (F + \text{COST}(c_{t-1}, c_t))$.
+
+4. **The recurrence finds the cheapest partition of each prefix.** Let $\text{OPT}(j)$ be the least cost of a partition of $x_0, \ldots, x_{j-1}$ into chunks, with $\text{OPT}(0) = 0$. We show $C[j] = \text{OPT}(j)$ by induction on $j$. Line L1 gives $C[0] = 0$. For $j \ge 1$, the last chunk of any partition of the prefix is $x_i, \ldots, x_{j-1}$ for some $0 \le i < j$, and the cuts before it form a partition of $x_0, \ldots, x_{i-1}$. The value $\beta$ of the last chunk depends only on $i$, not on the earlier cuts, so by step 3 the cost is that of the earlier part plus $F + \text{COST}(i, j)$, and it is least when the earlier part is optimal. So $\text{OPT}(j) = \min_{0 \le i < j} (\text{OPT}(i) + F + \text{COST}(i, j))$. Lines L4 and L5 compute this minimum with $C[i] = \text{OPT}(i)$ for $i < j$, by the hypothesis, and record in $\text{back}[j]$ an $i$ that attains it.
+
+5. **The back pointers give a partition of that cost.** Line L6 starts at $n$ and steps to $\text{back}[n]$, then to $\text{back}[\text{back}[n]]$, and so on. Each step goes to a smaller index, so it reaches 0. By step 4, if $i = \text{back}[j]$ then $C[j] = C[i] + F + \text{COST}(i, j)$, so summing along the path, the cuts found have cost $C[n] = \text{OPT}(n)$.
+
+6. **Access returns $x_q$.** Line L12 appends the first index $c_{t-1}$ of each chunk to the list of starts, which is strictly increasing. For $0 \le q < n$, line L13 picks the last chunk $t$ whose start is $\le q$. Then $c_{t-1} \le q < c_t$, because the next start is $c_t > q$, or $t = m$ and $c_m = n > q$. So $x_q$ is the element of rank $q - c_{t-1}$ of chunk $t$, and line L14 returns it by step 2.
+
+7. **Next-geq returns the least $q$ with $x_q \ge y$.** The list of last values $x_{c_1 - 1} < x_{c_2 - 1} < \cdots$ is strictly increasing. Line L15 finds the first chunk $t$ whose last value is $\ge y$. If there is none, every element is at most the last value of the last chunk, which is $< y$, and the answer is $n$. Otherwise every chunk before $t$ ends with a value $< y$, so all its elements are $< y$, and chunk $t$ has at least one element $\ge y$, its last. Line L16 reads the elements of chunk $t$ in increasing order and returns the index of the first one that is $\ge y$. That index is the least $q$ with $x_q \ge y$. $\blacksquare$
+
+The cost of a chunk depends on the cut before it only through $\beta = x_{i-1} + 1$, which is fixed once $i$ is fixed. This is why the problem splits into prefixes, and why a shortest path over the prefix positions $0, \ldots, n$, with an edge from $i$ to $j$ of weight $F + \text{COST}(i, j)$, solves it.
