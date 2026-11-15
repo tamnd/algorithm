@@ -87,7 +87,7 @@ The data are $x = (3, 7, 7, 9, 14)$, in exact arithmetic.
 
 So $\bar x = 8$, $\mathrm{SS} = 64$ and $V = 64/4 = 16$, the values on [sample variance](/sample-variance/). Each $S_k$ is the sum of squared deviations of the first $k$ values; for $k = 3$, the values $3, 7, 7$ have mean $17/3$ and $(8/3)^2 + 2(4/3)^2 = 96/9 = 32/3$.
 
-**The same data, shifted.** Add $10^9$ to each value. The spread is unchanged, so $S^2$ is still 16. In IEEE double precision, the textbook formula $(\sum_i x_i^2 - n\bar x^2)/(n-1)$ returns $-256$, a negative variance, because $\sum_i x_i^2 \approx 5 \times 10^{18}$ is stored with a spacing of 1024 between neighbouring doubles. The two-pass formula returns 16.0 and Welford's algorithm returns 16.000000044703484, a relative error of $2.8 \times 10^{-9}$.
+**The same data, shifted.** Add $10^9$ to each value. The spread is unchanged, so $S^2$ is still 16. In IEEE double precision, the textbook formula $(\sum_i x_i^2 - n\bar x^2)/(n-1)$ returns $-256$, a negative variance, when $n\bar x^2$ is computed as $n \cdot (\sum_i x_i/n)^2$, and 0 when it is computed as $(\sum_i x_i)^2/n$. Either way no digit of 16 is left, because $\sum_i x_i^2 \approx 5 \times 10^{18}$ is stored with a spacing of 1024 between neighbouring doubles. The two-pass formula returns 16.0 and Welford's algorithm returns 16.000000044703484, a relative error of $2.8 \times 10^{-9}$.
 
 ## Correctness
 

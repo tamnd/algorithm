@@ -93,7 +93,7 @@ The relative error is $\sigma^2/(2n\mu^2)$, so the approximation is poor when $\
 
 | $n$ | $p = 0.1$ | $p = 0.3$ | $p = 0.5$ |
 |---|---|---|---|
-| 20 | 0.3865 | 0.2714 | 0.2640 |
+| 20 | 0.3864 | 0.2714 | 0.2640 |
 | 100 | 0.2608 | 0.2533 | 0.2526 |
 
 The entries of the second table are $n\operatorname{Var}(\arcsin\sqrt{\hat p})$.

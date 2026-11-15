@@ -164,7 +164,7 @@ Use the Tukey median for a robust centre of two- or three-dimensional data when 
 - **Counting only one side.** The half-turns that start at a data direction do not cover all halfplanes. Line L8 must also use the complement $m - (e - j)$. Without it, the depth of $(0, 0)$ in the points $(0,0)$, $(4,0)$, $(0,4)$, $(4,4)$ comes out as 2, not 1.
 - **Collinear data.** If all points are on one line, the two-dimensional regions are segments and the normals of $U$ are all parallel. Treat this case by the one-dimensional median, as line L10 does.
 - **Repeated points.** Each copy counts in the depth. A point equal to $x$ is in every halfplane through $x$, which is why line L1 counts them apart.
-- **Breakdown is not 1/2.** The Tukey median tolerates about one third of bad points in the plane, and fewer in higher dimension. A claim of 50 percent is wrong.
+- **Breakdown is not 1/2.** The Tukey median tolerates at most about one third of bad points. For samples from a centrosymmetric continuous law its breakdown point tends to 1/3 in every dimension; only the guaranteed lower bound $1/(d+1)$ for data in general position falls with $d$. A claim of 50 percent is wrong.
 - **The deepest data point is not the Tukey median.** The deepest data point can be much shallower than $k^*$; in the example the data points have depth at most 2, while $k^* = 3$.
 
 ## Implementations
