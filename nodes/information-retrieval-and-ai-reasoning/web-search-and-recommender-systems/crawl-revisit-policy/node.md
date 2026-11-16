@@ -49,7 +49,7 @@ Both depend on the page only through $r$, the expected number of changes between
 
 ## Variants
 
-- **Order of refreshes.** Cho and Garcia-Molina also study random-order refresh, which refreshes each page once per cycle in a new random order, and purely random refresh, which picks the next page at random. For purely random refresh at rate $f$, the copy is a two-state [Markov chain](/markov-chain/) that goes stale at rate $\lambda$ and fresh at rate $f$, so $\bar F = f/(f + \lambda) = 1/(1 + r)$. Fixed order gives the highest freshness of the three.
+- **Order of refreshes.** Cho and Garcia-Molina also study random-order refresh, which refreshes each page once per cycle in a new random order, and purely random refresh, which picks the next page at random. For purely random refresh at rate $f$, the copy is a two-state [Markov chain](/markov-chain/) that goes stale at rate $\lambda$ and fresh at rate $f$, so $\bar F = f/(f + \lambda) = 1/(1 + r)$. Fixed order gives the highest freshness of the three, as Cho and Garcia-Molina show; this page proves only the comparison with purely random refresh, below.
 - **Weights.** Weigh page $i$ by an importance $w_i$, such as its [PageRank](/pagerank/) or how often users click it, and maximize $\sum_i w_i \bar F_i$.
 - **Unknown rates.** The rates are not given and must be estimated from past visits, which show only whether the page changed since the last visit, not how many times.
 - **Degree of change.** Count a change only if it matters, for example if the page is no longer a [near duplicate](/near-duplicate-document-detection/) of the copy, or if the change affects search results.

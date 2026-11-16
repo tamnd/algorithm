@@ -138,7 +138,7 @@ Use the noisy channel when you have word counts from the target domain and some 
 - **Order of the indexes.** Papers write the confusion matrices with different index orders, such as $\mathrm{sub}[x, w]$ or $\mathrm{sub}[w, x]$. State which letter is the intended one and which is the typed one, as the table of this page does.
 - **Unknown words.** A correct word that is not in the vocabulary, such as a new product name, is "corrected" to a known one. Keep $x$ unless the best candidate beats it by a margin, or ask the user.
 - **Mixing the two models.** The prior and the channel are on very different scales. Many systems put a weight on the log of one of them, tuned on held-out data.
-- **Several derivations.** One word can reach $x$ by two edits of the same kind, as "acres" reaches "acress" by two deletions. Add their probabilities, or the channel is too small.
+- **Several derivations.** One word can reach $x$ by two edits of the same kind, as "acres" reaches "acress" by two insertions, $\mathrm{ins}[e, s]$ and $\mathrm{ins}[s, s]$. Add their probabilities, or the channel is too small.
 
 ## Implementations
 

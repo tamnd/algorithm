@@ -45,7 +45,7 @@ Joachims, Granka, Pan, Hembrooke and Gay measured the effect with eye tracking o
 Three ways to deal with the bias follow from this:
 
 - **Model it.** Fit a [click model](/click-model/) to the logs and use its attractiveness or satisfaction parameters as the relevance signal.
-- **Weight it out.** If $\gamma_r$ is known, a click at rank $r$ weighted by $1/\gamma_r$ is an unbiased estimate of attractiveness. This inverse propensity weighting is the basis of [unbiased learning to rank](/unbiased-learning-to-rank/). The propensities $\gamma_r$ come from randomized experiments, such as swapping results, or from a fitted click model.
+- **Weight it out.** Under the position-based model, if $\gamma_r > 0$ is known, a click at rank $r$ weighted by $1/\gamma_r$ is an unbiased estimate of attractiveness. Under the cascade model a weight that depends on the rank alone does not remove the bias, because there the examination depends on the documents above. This inverse propensity weighting is the basis of [unbiased learning to rank](/unbiased-learning-to-rank/). The propensities $\gamma_r$ come from randomized experiments, such as swapping results, or from a fitted click model.
 - **Compare within one list.** Use relative preferences, such as Click > Skip Above, or compare two rankers by [interleaving](/interleaved-evaluation/) their results into one list, so that both face the same position bias.
 
 ## Examples

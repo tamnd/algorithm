@@ -56,7 +56,7 @@ the probability that a random user finds at least one satisfying result in $S$. 
 - **Explicit diversification.** The intents are given or estimated: categories of a taxonomy in Agrawal et al., query reformulations used as sub-queries in Santos et al.
 - **Implicit diversification.** There are no intents. The method penalizes a candidate for its similarity to the documents already chosen, on the assumption that similar documents cover similar aspects. MMR is the standard example.
 - **Novelty against diversity.** Clarke et al. (Section 1) separate novelty, the need to avoid redundancy, where a document repeats nuggets already seen, from diversity, the need to resolve ambiguity, where the query has several meanings. Near-duplicate pages are the extreme case of redundancy.
-- **Fixed set against ranking.** The objective above is for a set of size $k$. A ranking version asks for one order that is good for every prefix, which the greedy methods give by construction.
+- **Fixed set against ranking.** The objective above is for a set of size $k$. A ranking version asks for one order that is good for every prefix. The greedy methods give one order whose every prefix is the greedy list of that length: for IA-Select and xQuAD each prefix carries the $1 - 1/e$ bound, though a prefix need not be optimal, and MMR gives no guarantee.
 - **Other lists.** The same problem appears for recommendation lists, news feeds and summaries, with items or sentences in the place of documents.
 
 ## Examples

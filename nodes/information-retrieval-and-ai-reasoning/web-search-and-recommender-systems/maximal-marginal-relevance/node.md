@@ -49,7 +49,7 @@ With $S$ the list chosen so far, the next document is
 
 $$d^\ast = \arg\max_{d \in R \setminus S} \Big[ \lambda\, \mathrm{Sim}_1(d, q) - (1 - \lambda) \max_{d' \in S} \mathrm{Sim}_2(d, d') \Big].$$
 
-The maximum over the empty set is taken as 0, so the first pick is the most relevant document. Ties go to the smaller document id. The largest similarity of each candidate to $S$ only changes by one new term per step, so the procedure keeps it in an array:
+The maximum over the empty set is taken as 0, so for $\lambda > 0$ the first pick is the most relevant document. Ties go to the smaller document id. The largest similarity of each candidate to $S$ only changes by one new term per step, so the procedure keeps it in an array:
 
 ```pseudo id=main
 MMR(R, rel, sim, λ, k)
@@ -88,7 +88,7 @@ At step 2, d3 loses $0.3 \cdot 0.4226 = 0.1268$ for its overlap with d4, while d
 
 ## Correctness
 
-The file proofs/correctness.md proves that the loop picks, at every step, the document of the MMR formula with the tie rule. The invariant is that before each pass, $\mathrm{closest}[d]$ is the largest similarity of $d$ to the chosen documents, or 0 before the first pick. Line L9 keeps it, because the maximum over $S \cup \{b\}$ is the larger of the maximum over $S$ and $\mathrm{sim}(d, b)$. Then line L6 computes the MMR score exactly. The proof also shows the two ends of the range: $\lambda = 1$ gives the ranking by relevance, and $\lambda = 0$ ignores relevance after the first pick and always takes the document least similar to the chosen ones.
+The file proofs/correctness.md proves that the loop picks, at every step, the document of the MMR formula with the tie rule. The invariant is that before each pass, $\mathrm{closest}[d]$ is the largest similarity of $d$ to the chosen documents, or 0 before the first pick. Line L9 keeps it, because the maximum over $S \cup \{b\}$ is the larger of the maximum over $S$ and $\mathrm{sim}(d, b)$. Then line L6 computes the MMR score exactly. The proof also shows the two ends of the range: $\lambda = 1$ gives the ranking by relevance, and $\lambda = 0$ ignores relevance entirely: every first score is 0, so the first pick is the smallest id, and each later pick is the document least similar to the chosen ones.
 
 ## Complexity
 

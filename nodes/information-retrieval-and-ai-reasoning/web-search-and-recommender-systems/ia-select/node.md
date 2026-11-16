@@ -37,7 +37,7 @@ IA-Select is a greedy algorithm for [search result diversification](/search-resu
 
 ## In plain words
 
-A short query such as "jaguar" can mean a car, an animal or a football team. A list of ten car pages is perfect for some users and useless for the rest. IA-Select knows roughly how many users mean each thing, and how well each page serves each meaning. It picks the page that helps the most users first. After that, the users who are already served count for less, so the next page is the one that helps most of the users who are still waiting. Repeating this gives a list where popular meanings come first, but rare meanings still get a page before a popular meaning gets its fifth. The list is never far from the best possible list, and the method can prove how far.
+A short query such as "jaguar" can mean a car, an animal or a football team. A list of ten car pages is perfect for some users and useless for the rest. IA-Select knows roughly how many users mean each thing, and how well each page serves each meaning. It picks the page that helps the most users first. After that, the users who are already served count for less, so the next page is the one that helps most of the users who are still waiting. Repeating this gives a list where popular meanings come first, and a rare meaning gets a page once a page for it would help more of the waiting users than one more page for a popular meaning. The list is never far from the best possible list, and the method can prove how far.
 
 ## The problem
 
@@ -94,7 +94,7 @@ The paper's Theorem 2 states this for "a submodular set function"; the bound als
 
 ## Complexity
 
-Each of the at most $k$ passes computes $n$ gains, each a sum over the categories of a document, and updates at most $m$ values of $U$. With at most $m$ categories per document the time is $O(n \log n + nkm)$, including the sort of the ids, and with sparse values it is $O(n \log n + ke)$, where $e$ is the number of nonzero values. The extra space is $O(n + m)$. Lazy evaluation with a [priority queue](/priority-queue/) of stale gains, which is valid for any submodular objective, usually cuts the number of gain computations a lot.
+Each of the at most $k$ passes computes $n$ gains, each a sum over the categories of a document, and updates at most $m$ values of $U$. With at most $m$ categories per document the time is $O(n \log n + nkm)$, including the sort of the ids, and with sparse values it is $O(n \log n + k(n + e))$, where $e$ is the number of nonzero values. The extra space is $O(n + m)$. Lazy evaluation with a [priority queue](/priority-queue/) of stale gains, which is valid for any submodular objective, usually cuts the number of gain computations a lot.
 
 ## Properties
 

@@ -55,7 +55,7 @@ Use anchor text when the documents link to each other and the links carry text w
 | ibm.com | home | no, same site |
 | e.org | click here | no, generic |
 
-The anchor field of T then has the term counts ibm 3, big 1, blue 1, homepage 1. The query "big blue" matches nothing in the body of T, but it matches the anchor field. Three of four outside sites call the page "IBM", a strong sign that T is the page for that name.
+The anchor field of T then has the term counts ibm 3, big 1, blue 1, homepage 1. The query "big blue" matches nothing in the body of T, but it matches the anchor field. Three of the four kept anchors, all from outside sites, call the page "IBM", a strong sign that T is the page for that name.
 
 **The World Wide Web Worm and Google.** Oliver McBryan's World Wide Web Worm of 1994 indexed the titles and anchor texts of pages. Brin and Page associated the anchor text with the target page in Google, for two reasons that they state: anchors often describe a page better than the page itself, and anchors exist for documents that a text engine cannot index, such as images, programs and pages that have not been crawled.
 
