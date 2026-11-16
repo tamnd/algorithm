@@ -7,7 +7,7 @@ aliases:
 - gain margin of a feedback loop
 area: control/classical-control
 level: intro
-summary: "The factor 1/|L(j omega_pc)| by which the loop gain can grow before the closed loop loses asymptotic stability, read where the phase is -180 degrees. With several crossings, the smallest counts."
+summary: "The factor 1/|L(j omega_pc)| by which the loop gain can grow before the closed loop loses asymptotic stability, read where the phase is -180 degrees. With several crossings, the least above 1 counts."
 prereqs: [nyquist-stability-criterion, bode-plot]
 see_also: [phase-margin, nyquist-plot, sensitivity-function, nichols-chart, ziegler-nichols-tuning, relay-autotuning, root-locus, lqr-stability-margins]
 sources:
@@ -24,7 +24,7 @@ sources:
     locator: the chapters on feedback amplifier design (the margins in gain and phase that a practical amplifier needs); no chapter locator confirmed
 ---
 
-The gain margin of a feedback loop is the factor by which the loop gain can be multiplied before the closed loop loses asymptotic stability. For a loop transfer function $L$ whose closed loop is asymptotically stable, it is read at a phase crossover frequency $\omega_{pc}$, where the phase of $L(j\omega)$ is $-180$ degrees: there the [Nyquist plot](/nyquist-plot/) crosses the negative real axis at $L(j\omega_{pc})$, and the gain margin is $g_m = 1/|L(j\omega_{pc})|$, or $-20\log_{10}|L(j\omega_{pc})|$ in dB. If there are several crossings, the margin is the smallest factor among them. A common target is $g_m \ge 2$ (6 dB), but the gain margin is a heuristic: a loop can have a large gain margin and still come close to $-1$ at another frequency.
+The gain margin of a feedback loop is the factor by which the loop gain can be multiplied before the closed loop loses asymptotic stability. For a loop transfer function $L$ whose closed loop is asymptotically stable, it is read at a phase crossover frequency $\omega_{pc}$, where the phase of $L(j\omega)$ is $-180$ degrees: there the [Nyquist plot](/nyquist-plot/) crosses the negative real axis at $L(j\omega_{pc})$, and the gain margin is $g_m = 1/|L(j\omega_{pc})|$, or $-20\log_{10}|L(j\omega_{pc})|$ in dB. If there are several crossings, the margin is the smallest factor greater than 1 among them, or $\infty$ if there is none. A common target is $g_m \ge 2$ (6 dB), but the gain margin is a heuristic: a loop can have a large gain margin and still come close to $-1$ at another frequency.
 
 ## Definition
 
@@ -55,7 +55,7 @@ So $M_s = 2$ guarantees $g_m \ge 2$, and $M_s = 1.4$ guarantees $g_m \ge 3.5$. T
 
 **A conditionally stable loop.** For $L(s) = 3(s + 6)^2/(s(s + 1)^2)$, the plot crosses the negative real axis at $-12$ (at $\omega = 2$) and at $-4.5$ (at $\omega = 3$). Both are to the left of $-1$, so $k_{\max} = \infty$ and $k_{\min} = \max(1/12, 1/4.5) = 0.2222$, or $-13.06$ dB. Reading only the first crossing, $1/12$, would give a false lower margin: the loop is unstable for every $k$ between $1/12$ and $2/9$.
 
-**A large margin that says little.** The loop $L(s) = 0.38(s^2 + 0.1s + 0.55)/(s(s + 1)(s^2 + 0.06s + 0.5))$ is from the section on stability margins in Åström and Murray. Its imaginary part is negative at every $\omega > 0$, so the Nyquist plot never crosses the negative real axis and $g_m = \infty$. Its phase margin is 69.77 degrees, also large. But the lightly damped pole pair near $\omega = 0.7$ pulls the curve close to $-1$: $M_s = 3.69098$ at $\omega = 0.7145$, so the curve comes within $1/M_s = 0.27093$ of the critical point. A small change of the plant near that frequency, not a change of gain, makes this loop unstable.
+**A large margin that says little.** The loop $L(s) = 0.38(s^2 + 0.1s + 0.55)/(s(s + 1)(s^2 + 0.06s + 0.5))$ is from the section on stability margins in Åström and Murray. Its imaginary part is negative at every $\omega > 0$, so the Nyquist plot never crosses the negative real axis and $g_m = \infty$. Its phase margin is 69.77 degrees, also large. But the lightly damped pole pair near $\omega = 0.7$ pulls the curve close to $-1$: $M_s = 3.69101$ at $\omega = 0.7145$, so the curve comes within $1/M_s = 0.27093$ of the critical point. A small change of the plant near that frequency, not a change of gain, makes this loop unstable.
 
 ## Related definitions
 

@@ -92,7 +92,7 @@ The product is not even symmetric, while $A + B$ is symmetric and so is its expo
 
 **Non-example: the entrywise exponential.** Applying $\exp$ to each entry of $A$ is a different operation. For the double integrator matrix above it gives $\begin{bmatrix} 1 & e \\ 1 & 1 \end{bmatrix}$, not $\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}$. The two agree only for very special $A$, such as $A = 0$.
 
-**Non-example as an algorithm: the summed series.** In double precision, summing the Taylor series of the $1 \times 1$ matrix $A = [-49]$ term by term until the terms vanish gives $-30.53$. The true value is $e^{-49} = 5.24 \times 10^{-22}$. The terms grow to about $10^{20}$ before they shrink, and their rounding errors swamp the result. Moler and Van Loan (1978) discuss this failure of the series. Scaling and squaring avoids the cancellation.
+**Non-example as an algorithm: the summed series.** In double precision, summing the Taylor series of the $1 \times 1$ matrix $A = [-49]$ term by term until the terms vanish gives a number that is pure rounding error: with the term recurrence $t_k = t_{k-1} \cdot (-49/k)$ it is $-30.53$, while computing $t_k = (t_{k-1} \cdot (-49))/k$ instead gives $1546.17$. The true value is $e^{-49} = 5.24 \times 10^{-22}$. The terms grow to about $10^{20}$ before they shrink, and their rounding errors swamp the result. Moler and Van Loan (1978) discuss this failure of the series. Scaling and squaring avoids the cancellation.
 
 **Non-example: the exponential of the integral.** For a time-varying $A(t)$, $\exp(\int_0^t A(\sigma)\, d\sigma)$ is the solution matrix of $\dot x = A(t) x$ only when $A(t)$ commutes with its integral; the [state-transition matrix](/state-transition-matrix/) page gives a counterexample.
 

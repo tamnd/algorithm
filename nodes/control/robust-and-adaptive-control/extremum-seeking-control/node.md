@@ -84,9 +84,9 @@ Take $J(\theta) = (\theta - 2)^2 + 1$, the start $\hat\theta(0) = 0$, the dither
 | 15 | 1.8975 | 1.9004 | 1.0022 |
 | 30 | 1.9947 | 1.9950 | 1.0416 |
 
-This is a measurement: the largest gap between $\hat\theta$ and $\bar\theta$ over the run is 0.011. The output $y$ stays above the minimum 1 by up to $a^2 = 0.04$, because the dither never stops; this is the price of the method.
+This is a measurement: the largest gap between $\hat\theta$ and $\bar\theta$ over the run is 0.011. The output $y$ exceeds the minimum 1 by $(a\sin\omega t + \hat\theta - 2)^2$, which does not die out because the dither never stops; this is the price of the method. The excess is at most $(a + |\hat\theta - 2|)^2$, which tends to $a^2 = 0.04$ as $\hat\theta \to 2$; at $t = 30$ it is at most $0.2053^2 = 0.0421$, and $y = 1.0416$.
 
-The same loop with $a = 0.1$, $\omega = 10$, $k = 5$ and $h = 1$ has the same averaged rate $ka = 0.5$, but the time scales are not well separated. Then $\hat\theta(1) = 2.04$ while $\bar\theta(1) = 0.79$: the washout lags, $y - \eta$ is large, and the oscillation of $\hat\theta$ is no longer small. The loop still reaches $|\hat\theta - 2| < 0.002$ at $t = 30$, but the averaged model fails to describe the transient (a measurement).
+The same loop with $a = 0.1$, $\omega = 10$, $k = 5$ and $h = 1$ has the averaged rate $ka = 0.5$ in place of 0.2, but the time scales are not well separated. Then $\hat\theta(1) = 2.04$ while $\bar\theta(1) = 0.79$: the washout lags, $y - \eta$ is large, and the oscillation of $\hat\theta$ is no longer small. The loop still reaches $|\hat\theta - 2| < 0.002$ at $t = 30$, but the averaged model fails to describe the transient (a measurement).
 
 For two parameters with $J = (\theta_1 - 1)^2 + 2(\theta_2 + 1)^2 + 3$, the frequencies 50 and 70 rad/s, $a = 0.2$ and $k = 1$, the averaged rates are 0.2 and 0.4, and the simulation stays within 0.03 of $(1 - e^{-0.2t}, -1 + e^{-0.4t})$.
 
