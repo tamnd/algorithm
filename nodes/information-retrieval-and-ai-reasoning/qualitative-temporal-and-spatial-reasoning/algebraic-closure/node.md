@@ -122,7 +122,7 @@ The algorithm decides only closure, not consistency. The problem of consistency 
 
 ## Variants and improvements
 
-- **Allen's incremental form.** Start from a closed network, add one constraint, and put only that pair in the queue. This is [Allen's constraint propagation](/allen-constraint-propagation/). Over a run of $a$ additions the total cost is $O(n^3 + a n)$ compositions.
+- **Allen's incremental form.** Start from a closed network, add one constraint, and if it shrinks the label put only that pair in the queue. This is [Allen's constraint propagation](/allen-constraint-propagation/). Over a run of $a$ additions the total cost is $O(n^3 + a)$, since an addition that changes no label stops at once.
 - **Triangle queue.** Keep triples $(i, k, j)$ in the queue instead of pairs, as [PC-2](/pc-2/) does. This gives the same result with more queue entries.
 - **Queue order.** Van Beek and Manchak (1996) measured that the order in which pairs leave the queue changes the running time on interval networks, and they gave heuristics for it. The result does not change.
 - **Partial closure.** Close only the triangles of a chordal graph that contains the constraint graph. This keeps the network sparse. It gives the same answer as full closure for some classes, but not in general.

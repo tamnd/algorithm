@@ -25,7 +25,12 @@ sources:
   - paper: "Léon Planken, Mathijs de Weerdt and Roman van der Krogt, P3C: a new algorithm for the simple temporal problem, Proceedings of ICAPS 2008, pages 256 to 263"
     locator: the minimal network on a chordal graph in time that depends on the triangulation, not on n cubed
   - paper: "Paul Morris, Nicola Muscettola and Thierry Vidal, Dynamic control of plans with temporal uncertainty, Proceedings of IJCAI 2001, pages 494 to 499"
-    locator: simple temporal networks with uncertainty and the polynomial test for dynamic controllability
+    locator: simple temporal networks with uncertainty and a pseudo-polynomial test for dynamic controllability
+  - paper: "Paul Morris and Nicola Muscettola, Temporal dynamic controllability revisited, Proceedings of AAAI-05, AAAI Press, 2005"
+    locator: pages 1193 to 1198 (the first strongly polynomial check, in O(N^5) time)
+  - paper: doi:10.1007/11889205_28
+    title: Paul Morris, A structural characterization of temporal dynamic controllability, CP 2006, Lecture Notes in Computer Science 4204, Springer, 2006
+    locator: pages 375 to 389 (Section 3.3, the procedure fastDCcheck with its O(N^4) bound)
 ---
 
 The simple temporal problem (STP) asks whether events can be placed in time when each constraint bounds the time between two events: $a \le X_j - X_i \le b$. Dechter, Meiri and Pearl (1991) showed that an STP is consistent if and only if its *distance graph* has no cycle of negative weight. So [Bellman-Ford](/bellman-ford/) decides it in $O(n m)$ time, and [Floyd-Warshall](/floyd-warshall/) computes in $O(n^3)$ time the *minimal network*, the tightest bound on every difference that follows from the constraints. The minimal network is also *decomposable*: any choice of times for some events that meets it can be extended to a solution without backtracking. As a conjunction of difference constraints, the STP is the same as conjunctive [difference logic](/difference-logic-satisfiability/). The STP is the tractable core of temporal reasoning in planning and scheduling. When a constraint may be a disjunction of intervals, the problem (TCSP) is NP-hard.
@@ -50,7 +55,7 @@ The questions are: is the STP consistent; find a solution; and compute the minim
 
 - **TCSP.** Each constraint is a disjunction of intervals, $X_j - X_i \in [a_1, b_1] \cup \cdots \cup [a_k, b_k]$. Deciding consistency is NP-hard (Dechter, Meiri and Pearl, 1991). A TCSP is solved by search over the choice of one interval for each constraint, which leaves an STP for each choice.
 - **DTP.** Disjunctive temporal problems allow disjunctions of difference constraints over different pairs. This is the full [difference logic](/difference-logic-satisfiability/), and it is NP-complete.
-- **STNU.** Some durations are set by nature, not by the planner. The question is whether a strategy for the other time points always works. Dynamic controllability can be decided in polynomial time (Morris, Muscettola and Vidal, 2001).
+- **STNU.** Some durations are set by nature, not by the planner. The question is whether a strategy for the other time points always works. Dynamic controllability can be decided in polynomial time (Morris and Muscettola, 2005), and in $O(n^4)$ time by [Morris's algorithm](/morris-dynamic-controllability/) (2006). The first algorithm, of Morris, Muscettola and Vidal (2001), is pseudo-polynomial.
 - **Incremental and dynamic STP.** Constraints are added or removed one at a time, as in a planner. A new constraint needs only a local update when the old network is consistent.
 - **Qualitative temporal reasoning.** [Allen's interval algebra](/allens-interval-algebra/) uses relations such as "before" and "overlaps" between intervals. It is NP-hard in general, but some of its fragments map to STPs.
 
