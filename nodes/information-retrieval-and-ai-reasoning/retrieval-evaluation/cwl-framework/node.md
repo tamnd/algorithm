@@ -71,7 +71,7 @@ At the cut depth the tool sets $C = 0$, which makes $\sum_i L(i) = 1$. EU is ETU
 | Precision at $k$ | 1 for $i < k$, 0 for $i = k$ |
 | RBP with persistence $p$ | $p$ |
 | Scaled DCG at $k$ | $\log_2(i + 1)/\log_2(i + 2)$ for $i < k$, 0 for $i = k$ |
-| Reciprocal rank, binary gains | $1 - g_i$ |
+| Reciprocal rank | 1 if $g_i = 0$, 0 if $g_i > 0$ |
 | Average precision, binary gains | $\sum_{j > i} g_j / j \;/\; \sum_{j \ge i} g_j / j$ |
 | INST with target $T$ | $((i + T + T_i - 1)/(i + T + T_i))^2$, with $T_i = T - \sum_{j \le i} g_j$ |
 
@@ -102,7 +102,7 @@ The AP row is the average precision $29/36$ of the run, since all three relevant
 
 ### The example topic of cwl_eval
 
-The cwl_eval paper uses a topic T1 with the gains 0, 0, 0.2, 0.4, 1, 0.2, 0, 0, 1, 0, 0, 0.4, 0, 0, 0 and no costs. The $C$ functions of the table above, computed to depth 1000, give the values of its Table 1 and Table 2:
+The cwl_eval paper uses a topic T1 with the gains 0, 0, 0.2, 0.4, 1, 0.2, 0, 0, 1, 0, 0, 0.4, 0, 0, 0 and no costs. The $C$ functions of the table above, computed to depth 1000, give the values of its Table 1 and Table 2. RR stops at rank 3, the first item of positive gain, and credits its graded gain 0.2, so ETU is 0.2 and EU is 0.2/3.
 
 | Metric | EU | ETU | ED |
 |---|---|---|---|
