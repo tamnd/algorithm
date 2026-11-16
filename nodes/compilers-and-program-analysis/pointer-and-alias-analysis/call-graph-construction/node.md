@@ -34,6 +34,9 @@ sources:
     locator: call graphs of programs with procedure parameters
   - paper: "Olin Shivers, Control-Flow Analysis of Higher-Order Languages, or Taming Lambda, PhD thesis, Carnegie Mellon University, 1991, technical report CMU-CS-91-145"
     locator: the call graph problem for higher-order languages, and 0CFA and 1CFA as its solutions
+  - paper: doi:10.1145/1291151.1291166
+    title: David Van Horn and Harry G. Mairson, Relating complexity and precision in control flow analysis, Proceedings of ICFP 2007, 85 to 96
+    locator: Theorem 2, the PTIME-completeness of 0-CFA
 ---
 
 Call graph construction is the analysis that computes, for a program with virtual calls, function pointers or closures, a set of edges from call sites to procedures that contains every call that a run can make. The [call graph](/call-graph/) page defines the graph itself and its structure; this page is about the problem of computing a sound and precise superset of it when the text of a call does not name its callee. The exact answer is undecidable, so every algorithm over-approximates, and the algorithms form a ladder of precision and cost: [class hierarchy analysis](/class-hierarchy-analysis/) looks only at declared types, [rapid type analysis](/rapid-type-analysis/) also looks at which classes the program creates, [variable type analysis](/variable-type-analysis/) tracks the types that reach each variable, and analyses built on [points-to analysis](/points-to-analysis/) or control flow analysis ([0-CFA](/zero-cfa/), [k-CFA](/k-cfa/)) track values. Almost every interprocedural analysis needs a call graph first, and most of them get a better answer from a better graph.

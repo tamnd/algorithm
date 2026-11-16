@@ -145,7 +145,7 @@ The constant is what matters in practice. Xu and Kjolstad report, as measurement
 - **Each stencil is copied unchanged except at its holes.** The quality of the code inside a stencil is the quality of the compiler that made the stencil.
 - **The compiled code does the same steps in the same order as the interpreter.** The number of TICKs equals the fuel that the interpreter uses, on every run.
 - **No optimization crosses a stencil boundary**, except what the variants express, such as a constant operand in place of a load, or a jump that is left out when its target comes next.
-- **The library grows with the variants.** One more operand kind for each of two operands multiplies the number of `op` stencils by the square of the number of kinds.
+- **The library grows with the variants.** The number of `op` stencils is the number of operators times the square of the number of operand kinds, so a third kind for each of the two operands takes the 56 `op` stencils here to 126.
 
 ## Variants and improvements
 
