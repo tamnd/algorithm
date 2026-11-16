@@ -8,7 +8,7 @@ aliases:
 - Kalman inequality
 area: control/optimal-and-predictive-control
 level: advanced
-summary: "For continuous-time LQR with one input, |1 + L(j omega)| >= 1, so the loop has gain margin [1/2, infinity) and phase margin at least 60 degrees."
+summary: "For continuous-time LQR with one input, |1 + L(j omega)| >= 1, so the loop has gain margin (1/2, infinity) and phase margin at least 60 degrees."
 prereqs: [infinite-horizon-lqr, gain-margin, phase-margin, nyquist-stability-criterion]
 see_also: [lqg-guaranteed-margins-counterexample, loop-transfer-recovery, sensitivity-function, kalman-yakubovich-popov-lemma, circle-criterion, continuous-algebraic-riccati-equation, discrete-algebraic-riccati-equation, lqr-problem]
 sources:
@@ -23,7 +23,7 @@ sources:
     locator: the chapters on the properties of regulators, with the return difference equality and the gain and phase margins
 ---
 
-A continuous-time [LQR](/infinite-horizon-lqr/) state feedback loop is robust without any design for robustness. Kalman (1964) showed that the return difference $1 + L(j\omega)$ of a single-input LQR loop has modulus at least one at every frequency. The Nyquist plot of the loop gain therefore stays out of the unit disk centered at $-1$. From this follow the guaranteed margins: the closed loop stays stable when the loop gain is multiplied by any factor in $[1/2, \infty)$, and the [phase margin](/phase-margin/) is at least 60 degrees. Safonov and Athans (1977) showed that the same margins hold in every input channel at the same time when $R$ is diagonal. The result is for continuous-time state feedback only. It is false for discrete-time LQR, and Doyle (1978) showed that an [LQG](/lqg-control/) loop with an observer has no guaranteed margins at all; see the [LQG counterexample](/lqg-guaranteed-margins-counterexample/).
+A continuous-time [LQR](/infinite-horizon-lqr/) state feedback loop is robust without any design for robustness. Kalman (1964) showed that the return difference $1 + L(j\omega)$ of a single-input LQR loop has modulus at least one at every frequency. The Nyquist plot of the loop gain therefore stays out of the unit disk centered at $-1$. From this follow the guaranteed margins: the closed loop stays stable when the loop gain is multiplied by any factor in $(1/2, \infty)$, and the [phase margin](/phase-margin/) is at least 60 degrees. Safonov and Athans (1977) showed that the same margins hold in every input channel at the same time when $R$ is diagonal. The result is for continuous-time state feedback only. It is false for discrete-time LQR, and Doyle (1978) showed that an [LQG](/lqg-control/) loop with an observer has no guaranteed margins at all; see the [LQG counterexample](/lqg-guaranteed-margins-counterexample/).
 
 ## Statement
 
@@ -34,7 +34,7 @@ A continuous-time [LQR](/infinite-horizon-lqr/) state feedback loop is robust wi
 1. *Return difference equality.* For every $s$ that is not an eigenvalue of $A$ or $-A$,
 $$\left(I + L(-s)\right)^T R \left(I + L(s)\right) = R + \Phi(-s)^T Q\, \Phi(s).$$
 2. *Return difference inequality.* For real $\omega$ with $j\omega$ not an eigenvalue of $A$, $(I + L(j\omega))^* R (I + L(j\omega)) \ge R$. For one input ($m = 1$) this is $|1 + L(j\omega)| \ge 1$.
-3. *Margins, one input.* For $m = 1$, the closed loop $\dot x = (A - \beta B K) x$ is stable for every real $\beta > 1/2$, and for every complex $\beta = e^{-j\varphi}$ with $|\varphi| < 60°$. So the [gain margin](/gain-margin/) is $[1/2, \infty)$ and the phase margin is at least 60 degrees.
+3. *Margins, one input.* For $m = 1$, the closed loop $\dot x = (A - \beta B K) x$ is stable for every real $\beta > 1/2$, and for every complex $\beta = e^{-j\varphi}$ with $|\varphi| < 60°$. So the [gain margin](/gain-margin/) is $(1/2, \infty)$ and the phase margin is at least 60 degrees.
 4. *Margins, several inputs.* If $R$ is diagonal, $A - B \Delta K$ is Hurwitz for every real diagonal $\Delta = \operatorname{diag}(\beta_1, \dots, \beta_m)$ with all $\beta_i > 1/2$: each channel can change its gain independently.
 
 ## In plain words

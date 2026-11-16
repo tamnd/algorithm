@@ -120,7 +120,7 @@ Each sign function step inverts a $2n \times 2n$ matrix and costs $O(n^3)$. The 
 - **Order.** The controller has the order $n$ of the plant. Lower order controllers that minimize $J$ have no such closed form.
 - **Certainty equivalence.** The controller acts on $\hat x$ as LQR acts on $x$. This holds for the linear plant with Gaussian noise and quadratic cost; it fails in general for nonlinear plants or other costs.
 - **Same as H2.** With the noise and the weighted outputs put into one generalized plant, $J^*$ is the squared [H2 norm](/h2-norm/) of the closed loop, and the LQG controller is the [H2 optimal controller](/h2-optimal-control/).
-- **No guaranteed margins.** LQR with the full state has the gain margin $[1/2, \infty)$ and at least 60 degrees of phase margin ([LQR stability margins](/lqr-stability-margins/)). The LQG loop has no such bounds: Doyle (1978) gave a plant where the gain margin shrinks to 1 as the weights grow.
+- **No guaranteed margins.** LQR with the full state has the gain margin $(1/2, \infty)$ and at least 60 degrees of phase margin ([LQR stability margins](/lqr-stability-margins/)). The LQG loop has no such bounds: Doyle (1978) gave a plant where the gain margin shrinks to 1 as the weights grow.
 
 ## Variants and improvements
 
@@ -137,7 +137,7 @@ Use LQG when only some states are measured, the plant is linear near the operati
 
 ## Pitfalls
 
-- **Assuming LQR margins.** The 60 degree and $[1/2, \infty)$ margins of LQR do not survive the estimator. In the example the upper gain margin drops from infinity to 4. Compute the margins of the actual loop.
+- **Assuming LQR margins.** The 60 degree and $(1/2, \infty)$ margins of LQR do not survive the estimator. In the example the upper gain margin drops from infinity to 4. Compute the margins of the actual loop.
 - **Breaking the loop at the wrong point.** Margins at the plant input and at the plant output are different for multivariable plants. Check both.
 - **Fast filters with poor models.** A large $W$ gives a fast filter that relies on the model. Unmodeled dynamics at high frequencies then reduce robustness.
 - **Noise intensities as tuning knobs.** $W$ and $V$ are rarely known. Treat them as design parameters and check the result, not as facts.

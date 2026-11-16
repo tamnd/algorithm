@@ -23,7 +23,7 @@ sources:
     locator: the loss of the state feedback robustness when an observer is added, and its recovery for minimum phase plants
 ---
 
-This page is a counterexample, not a positive result. A continuous-time [LQR](/infinite-horizon-lqr/) loop with the full state has guaranteed margins: every input gain in $[1/2, \infty)$ and every phase lag below 60 degrees keep the closed loop Hurwitz ([LQR stability margins](/lqr-stability-margins/)). One could hope that an [LQG](/lqg-control/) loop, which applies the same gain to a Kalman-Bucy estimate, keeps some margin of this kind. Doyle (1978) showed that it does not. He gave a plant with two states for which the LQG loop becomes unstable under input gains arbitrarily close to 1 as the weights grow. So no positive margin holds for all LQG designs.
+This page is a counterexample, not a positive result. A continuous-time [LQR](/infinite-horizon-lqr/) loop with the full state has guaranteed margins: every input gain in $(1/2, \infty)$ and every phase lag below 60 degrees keep the closed loop Hurwitz ([LQR stability margins](/lqr-stability-margins/)). One could hope that an [LQG](/lqg-control/) loop, which applies the same gain to a Kalman-Bucy estimate, keeps some margin of this kind. Doyle (1978) showed that it does not. He gave a plant with two states for which the LQG loop becomes unstable under input gains arbitrarily close to 1 as the weights grow. So no positive margin holds for all LQG designs.
 
 ## Statement
 

@@ -11,7 +11,7 @@ summary: Solves nonlinear MPC by one sequential quadratic programming step per s
 model: real-ram
 complexity:
   vars: {n: the number of states, m: the number of inputs, N: the number of shooting intervals, I: the number of active set iterations of the QP}
-  time: {worst: "O(N^3 m^2 n + N n^2 (n + m) + I N^3 m^3)"}
+  time: {worst: "O(N^3 m^2 n + N^2 n^2 m + N n^2 (n + m) + I N^3 m^3)"}
   space: {extra: "O(N^2 m (n + m))"}
 properties: {deterministic: true, exact: false, recursive: false, online: true}
 history:
@@ -112,7 +112,7 @@ The preparation phase does $N$ RK4 steps with derivatives, $O(N n^2 (n + m))$ fo
 - **One SQP step per sample,** always the same amount of work, so the timing is predictable.
 - **Small feedback delay,** since the integration, the derivatives and the condensing are done before the measurement.
 - **Exact Gauss-Newton step** for a least squares cost, with no Hessian of the model.
-- **Initial value embedding.** The measured state enters linearly, so the feedback is a first-order correct prediction of the exact solution even when the guess was prepared for a different state.
+- **Initial value embedding.** The measured state enters linearly, so the feedback is a linear prediction of the exact solution even when the guess was prepared for a different state. From a converged guess the prediction is first-order correct with an exact Hessian; the Gauss-Newton Hessian drops the curvature of the model, so with it the prediction has a first-order error that is small when that curvature or its multipliers are small.
 - **Approximate.** The input is not the exact solution of the nonlinear program. The error is small when the guess is good and the sampling is fast compared to the plant.
 - **Fixed points are KKT points.** If the iteration stands still, it stands at a KKT point of the nonlinear MPC problem.
 

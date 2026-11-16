@@ -86,7 +86,7 @@ For $d = 1$ the condition is $0.95^S \le 10^{-6}$. The count grows roughly linea
 
 ## Pitfalls
 
-- **Wrong distribution.** The Gaussian tightening is exact only for Gaussian noise. With heavier tails, the violation rate is higher than $\varepsilon$. Use the Cantelli factor when unsure.
+- **Wrong distribution.** The Gaussian tightening is exact only for Gaussian noise. With heavier tails, the violation rate can be higher than $\varepsilon$, more often for small $\varepsilon$. Use the Cantelli factor when unsure.
 - **Unbounded noise and hard constraints.** With Gaussian noise, any hard state constraint will be violated eventually, and a hard constraint in the QP can make it infeasible. Use soft constraints or a feasible fallback.
 - **Confusing the two probabilities.** The chance constraint is about the next prediction, not about the closed loop over time.
 - **Many joint constraints.** Splitting $\varepsilon$ over many rows and steps makes each tightening large. Check how conservative the split is.

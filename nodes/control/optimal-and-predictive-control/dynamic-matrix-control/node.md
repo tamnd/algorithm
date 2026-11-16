@@ -34,7 +34,7 @@ sources:
     locator: the history of DMC, IDCOM and QDMC in industry
 ---
 
-Dynamic matrix control (DMC) is the first [model predictive control](/model-predictive-control/) method that spread in industry. Its model is the measured step response of the plant: $s_i$ is the output $i$ samples after a unit step of the input. With this model, the future outputs are a linear function of the future input moves $\Delta u(k) = u(k) - u(k-1)$, and the matrix of that function is the dynamic matrix $S$ that gives the method its name. At each sampling instant DMC takes the difference between the measured and the model output as a constant output disturbance, predicts the outputs over $P$ samples, chooses $M$ moves by regularized least squares, and applies the first move. Without constraints the result is a fixed linear controller with integral action.
+Dynamic matrix control (DMC) is one of the first [model predictive control](/model-predictive-control/) methods that spread in industry. Its model is the measured step response of the plant: $s_i$ is the output $i$ samples after a unit step of the input. With this model, the future outputs are a linear function of the future input moves $\Delta u(k) = u(k) - u(k-1)$, and the matrix of that function is the dynamic matrix $S$ that gives the method its name. At each sampling instant DMC takes the difference between the measured and the model output as a constant output disturbance, predicts the outputs over $P$ samples, chooses $M$ moves by regularized least squares, and applies the first move. Without constraints the result is a fixed linear controller with integral action.
 
 ## In plain words
 

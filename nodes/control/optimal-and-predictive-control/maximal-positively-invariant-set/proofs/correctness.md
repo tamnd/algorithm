@@ -56,7 +56,7 @@ Step 2: late constraints are automatic. Since $A$ is Schur, $A^k \to 0$, so ther
 
 Step 3: let $t = \max(n - 1, k_0)$. For $x \in O_t \subseteq O_{n-1}$ the condition of step $t + 1 \ge k_0$ holds by Step 2. So $O_{t+1} = O_t$. $\square$
 
-The bound $t^* \le \max(n - 1, k_0)$ from the proof depends on how fast $\|C A^k\|$ decays, so $t^*$ grows without bound as the spectral radius of $A$ tends to 1. This is why the iteration count is part of the output and not a constant.
+The bound $t^* \le \max(n - 1, k_0)$ from the proof depends on how fast $\|C A^k\|$ decays, so the bound grows without limit as the spectral radius of $A$ tends to 1. The index $t^*$ itself need not grow: for $A = s I$ with $|s| < 1$ and a box symmetric about 0, $t^* = 0$. This is why the iteration count is part of the output and not a constant.
 
 ## Part 4: the linear programs
 

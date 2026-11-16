@@ -63,6 +63,6 @@ So $M_s = 2$ guarantees $g_m \ge 2$, and $M_s = 1.4$ guarantees $g_m \ge 3.5$. T
 - The [Nichols chart](/nichols-chart/) shows the gain margin as the vertical distance below the point (-180 degrees, 0 dB).
 - A [root locus](/root-locus/) crosses the imaginary axis at the gain $k_{\max}$ and the frequency $\omega_{pc}$.
 - [Relay autotuning](/relay-autotuning/) measures the phase crossover frequency and the gain there by an experiment, and [Ziegler-Nichols tuning](/ziegler-nichols-tuning/) uses them.
-- The continuous-time LQR loop has the gain margin interval $[1/2, \infty)$ per channel; see [LQR stability margins](/lqr-stability-margins/).
+- The continuous-time LQR loop has the gain margin interval $(1/2, \infty)$ per channel; see [LQR stability margins](/lqr-stability-margins/).
 
 ## References

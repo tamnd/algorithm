@@ -111,7 +111,7 @@ The closed loop has the characteristic polynomial $s^2 + \sqrt 3\, s + 1$, with 
 
 - State feedback design for aircraft, spacecraft attitude and other multivariable plants, where pole placement leaves too many free parameters and the weights are easier to tune.
 - The state feedback half of [LQG control](/lqg-control/), with a [Kalman filter](/kalman-filter/) as the other half. The margins of the next point are then lost (see the [LQR stability margins](/lqr-stability-margins/) page).
-- A design with guaranteed robustness: in continuous time with one input, the LQR loop has a gain margin of $[1/2, \infty)$ and a phase margin of at least 60 degrees.
+- A design with guaranteed robustness: in continuous time with one input, the LQR loop has a gain margin of $(1/2, \infty)$ and a phase margin of at least 60 degrees.
 - The terminal cost and the local controller of [model predictive control](/mpc-stability-theorem/): the infinite-horizon cost $x^T P x$ and the gain $K$ are the usual choices.
 - Inside iterative methods for nonlinear optimal control, which solve a time-varying LQR problem around the current trajectory at each step.
 
