@@ -2,7 +2,7 @@
 tag: 4HTN7N
 kind: theorem
 slug: backurs-indyk-lcs-lower-bound
-name: Backurs-Indyk lower bound for edit distance and LCS
+name: SETH lower bounds for edit distance and LCS
 aliases:
 - SETH hardness of LCS
 area: sequences/subsequence-problems
@@ -29,7 +29,7 @@ sources:
     locator: the circuit lower bounds that would follow from shaving all polylogarithmic factors from the quadratic time of edit distance and LCS
 ---
 
-The Backurs-Indyk lower bound and its LCS form say that the length of a [longest common subsequence](/longest-common-subsequence/) of two strings of length $n$ cannot be computed in $O(n^{2 - \varepsilon})$ time for any $\varepsilon > 0$, unless the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) (SETH) is false. The bound holds already for a constant-size alphabet, and the same is true for the [edit distance](/edit-distance/). The proof is a [fine-grained reduction](/fine-grained-reduction/) from the [orthogonal vectors](/orthogonal-vectors/) problem. Backurs and Indyk proved the edit distance case in 2015; the LCS case is due to Abboud, Backurs and Vassilevska Williams, and independently Bringmann and Künnemann, in the same year.
+The SETH lower bounds for edit distance and LCS say that the length of a [longest common subsequence](/longest-common-subsequence/) of two strings of length $n$ cannot be computed in $O(n^{2 - \varepsilon})$ time for any $\varepsilon > 0$, unless the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) (SETH) is false. The bound holds already for a constant-size alphabet, and the same is true for the [edit distance](/edit-distance/). The proof is a [fine-grained reduction](/fine-grained-reduction/) from the [orthogonal vectors](/orthogonal-vectors/) problem. Backurs and Indyk proved the edit distance case in 2015; the LCS case is due to Abboud, Backurs and Vassilevska Williams, and independently Bringmann and Künnemann, in the same year.
 
 ## Statement
 

@@ -16,7 +16,7 @@ sources:
     locator: Definition 5 and Theorem 3 (p. 93), the Main Theorem and the list of 21 problems (pp. 94 to 97), Figure 1 (p. 96), the reductions (pp. 97 to 100), the credits and the automata problems (pp. 100 to 101)
   - paper: doi:10.1007/978-3-540-68279-0_8
     title: Richard M. Karp, Reducibility among combinatorial problems, reprint with an introduction by the author, in M. Junger et al. (eds.), 50 Years of Integer Programming 1958-2008, Springer (2010), 219 to 241
-    locator: Introduction by Richard M. Karp, pp. 219 to 220 (the seminar at Knuth's home, the April 1972 IBM symposium, the undirected Hamilton circuit reduction by Lawler and Tarjan)
+    locator: Introduction by Richard M. Karp, pp. 219 to 220 (the seminar at Knuth's home, the IBM symposium, which Karp recalls as April 1972, the undirected Hamilton circuit reduction by Lawler and Tarjan)
   - paper: doi:10.1145/800157.805047
     title: Stephen A. Cook, The complexity of theorem-proving procedures, Proceedings of the 3rd ACM Symposium on Theory of Computing (1971), 151 to 158
     locator: Theorem 1 (the root of the tree) and the reduction to clauses with at most 3 literals
@@ -110,7 +110,7 @@ The theorem does not separate P from NP, and nothing in it can: it proves only t
 
 ## History
 
-Cook's 1971 paper showed that every set accepted in polynomial time by a nondeterministic machine reduces to the DNF tautologies, and showed the reduction from SAT to clauses with at most 3 literals. Karp wrote in 2010 that it was "immediately apparent" to him that many familiar combinatorial problems "were likely to have the same universal role as satisfiability". He first presented the results at an informal seminar at Donald Knuth's home and then, in April 1972, at an IBM symposium; the paper appeared in the proceedings, edited by Miller and Thatcher. Karp used many-one reductions and called the problems "complete" (Definition 5). The term "NP-complete" came later, from Knuth's 1974 poll. Leonid Levin, working independently, published similar results in 1973.
+Cook's 1971 paper showed that every set accepted in polynomial time by a nondeterministic machine reduces to the DNF tautologies, and showed the reduction from SAT to clauses with at most 3 literals. Karp wrote in 2010 that it was "immediately apparent" to him that many familiar combinatorial problems "were likely to have the same universal role as satisfiability". He first presented the results at an informal seminar at Donald Knuth's home and then at an IBM symposium at Yorktown Heights, held on 20 to 22 March 1972 (Karp recalled it in 2010 as April); the paper appeared in the proceedings, edited by Miller and Thatcher. Karp used many-one reductions and called the problems "complete" (Definition 5). The term "NP-complete" came later, from Knuth's 1974 poll. Leonid Levin, working independently, published similar results in 1973.
 
 Karp credits several reductions to others (pages 100 to 101). The reduction from SAT to clique is implicit in Cook's work and was also known to Raymond Reiter. Node cover to feedback node set came from the Algorithms Seminar at Cornell. Node cover to feedback arc set was found by Lawler and Karp, and exact cover to 3-dimensional matching by Lawler. Tarjan showed exact cover to directed Hamilton circuit and, independently, Lawler showed node cover to directed Hamilton circuit; Tarjan also gave the step from directed to undirected Hamilton circuit. In the 2010 introduction, Karp says that he failed to prove the undirected case himself.
 

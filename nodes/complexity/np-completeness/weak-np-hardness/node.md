@@ -25,7 +25,7 @@ sources:
     locator: Section 6.4 (the pseudo-polynomial algorithm for subset sum) and Section 8.8 (subset sum is NP-complete)
 ---
 
-A problem is weakly NP-hard when it is [NP-hard](/np-hard/) and also has a [pseudo-polynomial](/pseudo-polynomial-time/) algorithm, one whose time is polynomial in the input length and in the largest number of the input. The hardness of such a problem needs numbers that are exponentially large in the input length: when the numbers are small, the pseudo-polynomial algorithm is fast. The standard examples are [subset sum](/subset-sum-problem/), [partition](/partition-problem/) and the [knapsack problem](/knapsack-problem/). Unless P = NP, a weakly NP-hard problem is not [strongly NP-hard](/strong-np-hardness/), so the two terms divide the NP-hard number problems into two groups. Some authors call these problems NP-hard in the ordinary sense.
+A problem is weakly NP-hard when it is [NP-hard](/np-hard/) and also has a [pseudo-polynomial](/pseudo-polynomial-time/) algorithm, one whose time is polynomial in the input length and in the largest number of the input. The hardness of such a problem needs numbers that are exponentially large in the input length: when the numbers are small, the pseudo-polynomial algorithm is fast. The standard examples are [subset sum](/subset-sum-problem/), [partition](/partition-problem/) and the [knapsack problem](/knapsack-problem/). Unless P = NP, a weakly NP-hard problem is not [strongly NP-hard](/strong-np-hardness/), so the two terms name disjoint groups of NP-hard number problems; the groups need not cover all of them. Some authors call these problems NP-hard in the ordinary sense.
 
 ## Definition
 
