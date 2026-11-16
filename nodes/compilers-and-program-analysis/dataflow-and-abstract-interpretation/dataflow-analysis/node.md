@@ -47,7 +47,7 @@ It draws the program as a map of straight-line pieces joined by jumps. At each p
 
 **The equations.** For a forward problem, with the empty meet equal to $\top$:
 
-$$\mathrm{IN}[B] = \Big(\iota \text{ if } B \text{ is the entry}\Big) \sqcap \bigsqcap_{P \in \mathrm{pred}(B)} \mathrm{OUT}[P], \qquad \mathrm{OUT}[B] = f_B(\mathrm{IN}[B]).$$
+$$\mathrm{IN}[B] = \Big(\iota \text{ if } B \text{ is the entry}\Big) \sqcap \mathop{\large\sqcap}_{P \in \mathrm{pred}(B)} \mathrm{OUT}[P], \qquad \mathrm{OUT}[B] = f_B(\mathrm{IN}[B]).$$
 
 For a backward problem, swap IN with OUT and predecessors with successors, and put $\iota$ in the meet of each block that ends in `ret`.
 

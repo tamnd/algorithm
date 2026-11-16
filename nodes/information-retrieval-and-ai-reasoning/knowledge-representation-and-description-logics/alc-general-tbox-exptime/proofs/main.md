@@ -58,13 +58,13 @@ For an input $w$ of length $n$, write $p = p(n)$. Use the concept names $S_q$ (t
 
 1. axioms that say that exactly one $S_q$, exactly one $H_i$, and for each $i$ exactly one $T_{i,a}$ hold at each element, such as $\top \sqsubseteq \bigsqcup_q S_q$ and $S_q \sqcap S_{q'} \sqsubseteq \bot$ for $q \ne q'$;
 2. $S_{q_r} \sqsubseteq \bot$;
-3. $S_q \sqcap H_i \sqcap T_{i,a} \sqsubseteq \bigsqcup_{\mu \in \delta(q,a)} \exists r_\mu.\top$ for existential $q$, and the same with $\bigsqcap$ for universal $q$;
+3. $S_q \sqcap H_i \sqcap T_{i,a} \sqsubseteq \bigsqcup_{\mu \in \delta(q,a)} \exists r_\mu.\top$ for existential $q$, and the same with $\mathop{\large\sqcap}$ for universal $q$;
 4. $S_q \sqcap H_i \sqcap T_{i,a} \sqsubseteq \forall r_\mu.(S_{q'} \sqcap H_{i+d} \sqcap T_{i,b})$ for each $\mu = (q', b, d) \in \delta(q, a)$;
 5. $H_j \sqcap T_{i,a} \sqsubseteq \forall r_\mu.T_{i,a}$ for $j \ne i$.
 
-The concept $C_w$ is $S_{q_0} \sqcap H_0 \sqcap \bigsqcap_{i<p} T_{i,w_i}$, with the blank symbol for $i \ge n$. $M$ is fixed, so $\mathcal T_w$ has $O(p^2)$ axioms of size $O(p)$, and $\mathcal T_w$ and $C_w$ are built in polynomial time.
+The concept $C_w$ is $S_{q_0} \sqcap H_0 \sqcap \mathop{\large\sqcap}_{i<p} T_{i,w_i}$, with the blank symbol for $i \ge n$. $M$ is fixed, so $\mathcal T_w$ has $O(p^2)$ axioms of size $O(p)$, and $\mathcal T_w$ and $C_w$ are built in polynomial time.
 
-An element $e$ *encodes* the configuration with state $q$, head position $i$ and tape $c_0 \cdots c_{p-1}$ if $e \in S_q \sqcap H_i \sqcap \bigsqcap_j T_{j,c_j}$. In a model of $\mathcal T_w$ each element encodes exactly one configuration, by item 1. For a configuration $c$ and a move $\mu$ that applies to it, write $c_\mu$ for the configuration that $\mu$ produces.
+An element $e$ *encodes* the configuration with state $q$, head position $i$ and tape $c_0 \cdots c_{p-1}$ if $e \in S_q \sqcap H_i \sqcap \mathop{\large\sqcap}_j T_{j,c_j}$. In a model of $\mathcal T_w$ each element encodes exactly one configuration, by item 1. For a configuration $c$ and a move $\mu$ that applies to it, write $c_\mu$ for the configuration that $\mu$ produces.
 
 **Lemma 3.** If $I$ is a model of $\mathcal T_w$ and $e$ encodes $c$, then $c$ is accepting.
 

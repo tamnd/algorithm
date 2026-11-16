@@ -17,7 +17,7 @@ sources:
     locator: the whole paper (the lattice framework, the iterative algorithm from the top element, and the result that it reaches the meet over all paths when the functions are distributive)
   - paper: doi:10.1007/BF00290339
     title: "John B. Kam and Jeffrey D. Ullman, Monotone data flow analysis frameworks, Acta Informatica 7(3), 1977, 305-317"
-    locator: the whole paper (monotone frameworks, the maximal fixed point below the meet over all paths, and no algorithm for the meet over all paths in general)
+    locator: the whole paper (monotone frameworks, the maximal fixed point below the meet over all paths, a gap in some instance of every monotone framework that is not distributive, and no algorithm for the meet over all paths in general)
   - book: isbn:9780321486813
     title: Alfred V. Aho, Monica S. Lam, Ravi Sethi and Jeffrey D. Ullman, Compilers, Principles, Techniques, and Tools, second edition, Pearson Addison-Wesley, 2007
     locator: Section 9.3.4 (Meaning of a Data-Flow Solution, the maximum fixedpoint against the meet-over-paths solution)
@@ -34,17 +34,17 @@ The page uses the meet convention of Kildall and the dragon book. $(L, \sqcap)$ 
 
 **The instance.** A [control flow graph](/control-flow-graph/) $G = (V, E)$ with $n$ blocks and an entry block $s$, a monotone transfer function $f_B \in F$ for each block $B$, and a boundary value $\iota \in L$. Let $init(s) = \iota$ and $init(B) = \top$ for $B \ne s$. The equation function is
 
-$$F(X)[B] = init(B) \sqcap \bigsqcap_{(P, B) \in E} f_P(X[P]),$$
+$$F(X)[B] = init(B) \sqcap \mathop{\large\sqcap}_{(P, B) \in E} f_P(X[P]),$$
 
 where $X$ gives each block the fact at its start and the empty meet is $\top$. MFP is the greatest fixed point of $F$.
 
 **Paths and walks.** A *walk* of length $k$ is a sequence of blocks $w = (B_0, B_1, \ldots, B_k)$ with $(B_{i-1}, B_i) \in E$ for each $i$. Its function is $f_w = f_{B_{k-1}} \circ \cdots \circ f_{B_0}$, the identity when $k = 0$. A *path* to $B$ is a walk with $B_0 = s$ and $B_k = B$. Write $\mathrm{Paths}_{<j}(B)$ for the paths to $B$ of length less than $j$, and $\mathrm{Walks}_j(B)$ for the walks of length exactly $j$ that end at $B$, from any start block. Then
 
-$$\mathrm{MOP}[B] = \bigsqcap_{\pi \text{ a path to } B} f_\pi(\iota).$$
+$$\mathrm{MOP}[B] = \mathop{\large\sqcap}_{\pi \text{ a path to } B} f_\pi(\iota).$$
 
 **The iterates.** $X_0 = \top$ at every block, and $X_{j+1} = F(X_j)$. Define the *path bound*
 
-$$R_j[B] = \bigsqcap_{\pi \in \mathrm{Paths}_{<j}(B)} f_\pi(\iota) \;\sqcap \bigsqcap_{w \in \mathrm{Walks}_j(B)} f_w(\top).$$
+$$R_j[B] = \mathop{\large\sqcap}_{\pi \in \mathrm{Paths}_{<j}(B)} f_\pi(\iota) \;\sqcap \mathop{\large\sqcap}_{w \in \mathrm{Walks}_j(B)} f_w(\top).$$
 
 **Theorem.** For every instance of a monotone framework of finite height:
 
@@ -72,7 +72,7 @@ Two facts are used. First, the iterates go down and stop: $X_0 \sqsupseteq X_1 \
 
 *Proof.* Remove the last block of a path or walk of length at least 1; what remains ends at a predecessor $P$ of $B$ and is one edge shorter. The only path of length 0 is $(s)$. The function of a walk applies the function of each block except the last, so adding $B$ at the end adds $f_P$ on the outside. $\square$
 
-Let $S_j(B)$ be the set of the elements met in $R_j[B]$, that is $\{f_\pi(\iota) : \pi \in \mathrm{Paths}_{<j}(B)\} \cup \{f_w(\top) : w \in \mathrm{Walks}_j(B)\}$. It is finite, since $G$ is finite and the lengths are bounded, so $R_j[B] = \bigsqcap S_j(B)$ is a finite meet.
+Let $S_j(B)$ be the set of the elements met in $R_j[B]$, that is $\{f_\pi(\iota) : \pi \in \mathrm{Paths}_{<j}(B)\} \cup \{f_w(\top) : w \in \mathrm{Walks}_j(B)\}$. It is finite, since $G$ is finite and the lengths are bounded, so $R_j[B] = \mathop{\large\sqcap} S_j(B)$ is a finite meet.
 
 **Lemma 2 (the meet of the set is nonempty when $B$ is reachable).** If $B$ is reachable from $s$, then $S_j(B)$ is not empty for every $j$.
 
@@ -80,13 +80,13 @@ Let $S_j(B)$ be the set of the elements met in $R_j[B]$, that is $\{f_\pi(\iota)
 
 **Part 1.** Induction on $j$. For $j = 0$, $\mathrm{Paths}_{<0}(B)$ is empty and $\mathrm{Walks}_0(B) = \{(B)\}$ with the identity function, so $R_0[B] = \top = X_0[B]$. Assume $X_j[P] \sqsubseteq R_j[P]$ for every $P$. For each $r \in S_j(P)$ we have $R_j[P] \sqsubseteq r$, so monotonicity gives $f_P(X_j[P]) \sqsubseteq f_P(R_j[P]) \sqsubseteq f_P(r)$. So $f_P(X_j[P])$ is a lower bound of $\{f_P(r) : r \in S_j(P)\}$, and
 
-$$X_{j+1}[B] = init(B) \sqcap \bigsqcap_{(P, B) \in E} f_P(X_j[P]) \;\sqsubseteq\; init(B) \sqcap \bigsqcap_{(P, B) \in E} \; \bigsqcap_{r \in S_j(P)} f_P(r).$$
+$$X_{j+1}[B] = init(B) \sqcap \mathop{\large\sqcap}_{(P, B) \in E} f_P(X_j[P]) \;\sqsubseteq\; init(B) \sqcap \mathop{\large\sqcap}_{(P, B) \in E} \; \mathop{\large\sqcap}_{r \in S_j(P)} f_P(r).$$
 
 By Lemma 1, the right side meets exactly the elements of $S_{j+1}(B)$: the term $init(s) = \iota = f_{(s)}(\iota)$ is the path $(s)$, the term $init(B) = \top$ for $B \ne s$ changes nothing, and the other terms are $f_P(f_\pi(\iota)) = f_{\pi \cdot B}(\iota)$ and $f_P(f_w(\top)) = f_{w \cdot B}(\top)$. So $X_{j+1}[B] \sqsubseteq R_{j+1}[B]$. $\square$
 
 **Part 2.** Take $J$ with $X_j = \mathrm{MFP}$ for all $j \ge J$. Let $\pi$ be a path to $B$ of length $\ell$, and $j = \max(J, \ell + 1)$. Then $\pi \in \mathrm{Paths}_{<j}(B)$, so by part 1, $\mathrm{MFP}[B] = X_j[B] \sqsubseteq R_j[B] \sqsubseteq f_\pi(\iota)$. So $\mathrm{MFP}[B]$ is a lower bound of all path facts, and therefore $\mathrm{MFP}[B] \sqsubseteq \mathrm{MOP}[B]$. If no path reaches $B$, then $\mathrm{MOP}[B] = \top$ and the claim is trivial. $\square$
 
-**Part 3, the iterates.** Repeat the induction of part 1 with equalities. The only step that was an inequality is $f_P(R_j[P]) \sqsubseteq \bigsqcap_{r \in S_j(P)} f_P(r)$. A distributive function satisfies $f(x_1 \sqcap \cdots \sqcap x_k) = f(x_1) \sqcap \cdots \sqcap f(x_k)$ for every $k \ge 1$, by induction on $k$. By Lemma 2, $S_j(P)$ is a nonempty finite set, so the step is an equality, and with $X_j[P] = R_j[P]$ we get $f_P(X_j[P]) = \bigsqcap_{r \in S_j(P)} f_P(r)$. So $X_{j+1}[B] = R_{j+1}[B]$. The nonempty condition matters: for the empty set the left side would be $f_P(\top)$ and the right side $\top$, and these differ for most functions. $\square$
+**Part 3, the iterates.** Repeat the induction of part 1 with equalities. The only step that was an inequality is $f_P(R_j[P]) \sqsubseteq \mathop{\large\sqcap}_{r \in S_j(P)} f_P(r)$. A distributive function satisfies $f(x_1 \sqcap \cdots \sqcap x_k) = f(x_1) \sqcap \cdots \sqcap f(x_k)$ for every $k \ge 1$, by induction on $k$. By Lemma 2, $S_j(P)$ is a nonempty finite set, so the step is an equality, and with $X_j[P] = R_j[P]$ we get $f_P(X_j[P]) = \mathop{\large\sqcap}_{r \in S_j(P)} f_P(r)$. So $X_{j+1}[B] = R_{j+1}[B]$. The nonempty condition matters: for the empty set the left side would be $f_P(\top)$ and the right side $\top$, and these differ for most functions. $\square$
 
 **Part 3, MOP is below MFP.** We show $\mathrm{MOP}[B] \sqsubseteq r$ for every $r \in S_j(B)$. If $r = f_\pi(\iota)$ for a path $\pi$, this holds because $\mathrm{MOP}[B]$ is the meet over all paths. If $r = f_w(\top)$ for a walk $w = (B_0, \ldots, B_j)$ with $B_j = B$, take a path $\alpha$ from $s$ to $B_0$, which exists because $B_0$ is reachable. Joining $\alpha$ and $w$ at $B_0$ gives a path $\alpha w$ to $B$ with $f_{\alpha w} = f_w \circ f_\alpha$. Since $f_\alpha(\iota) \sqsubseteq \top$ and $f_w$ is monotone,
 
@@ -122,13 +122,13 @@ The edges are entry to head, head to body, body to head and head to exit. The it
 
 ## Tightness
 
-- **Distributivity is needed.** Let $f \in F$ and $x, y \in L$ with $f(x \sqcap y) \ne f(x) \sqcap f(y)$, and let $g_1, g_2 \in F$ produce $x = g_1(\iota)$ and $y = g_2(\iota)$. Build a diamond: the entry has the identity function and two successors $A$ and $C$ with the functions $g_1$ and $g_2$, both go to a block $J$ with the function $f$, and $J$ goes to an exit. The two paths give $\mathrm{MOP}[\text{exit}] = f(x) \sqcap f(y)$. MFP meets first, so $\mathrm{MFP}[J] = x \sqcap y$ and $\mathrm{MFP}[\text{exit}] = f(x \sqcap y)$, which is strictly below $f(x) \sqcap f(y)$ by monotonicity and the choice of $f$. Constant propagation with $(x, y) = (2, 3)$ on one branch and $(3, 2)$ on the other, followed by `z = x + y`, is this case: MOP finds $z = 5$ and MFP does not. So a framework that is not distributive has an instance where MFP differs from MOP whenever such $x$ and $y$ come from one boundary value through functions of $F$. Without this condition it may have none: on the lattice with $\bot \sqsubset a, b \sqsubset \top$, take $F = \{id, f\}$ with $f(\bot) = \bot$ and $f(a) = f(b) = f(\top) = \top$. Then $f(a \sqcap b) \ne f(a) \sqcap f(b)$, but the values of each instance lie on the chain $\iota \sqsubseteq f(\iota) \sqsubseteq \top$, where $f$ distributes, and MFP = MOP in every instance.
+- **Distributivity is needed.** Let $f \in F$ and $x, y \in L$ with $f(x \sqcap y) \ne f(x) \sqcap f(y)$, and let $g_1, g_2 \in F$ produce $x = g_1(\iota)$ and $y = g_2(\iota)$. Build a diamond: the entry has the identity function and two successors $A$ and $C$ with the functions $g_1$ and $g_2$, both go to a block $J$ with the function $f$, and $J$ goes to an exit. The two paths give $\mathrm{MOP}[\text{exit}] = f(x) \sqcap f(y)$. MFP meets first, so $\mathrm{MFP}[J] = x \sqcap y$ and $\mathrm{MFP}[\text{exit}] = f(x \sqcap y)$, which is strictly below $f(x) \sqcap f(y)$ by monotonicity and the choice of $f$. Constant propagation with $(x, y) = (2, 3)$ on one branch and $(3, 2)$ on the other, followed by `z = x + y`, is this case: MOP finds $z = 5$ and MFP does not. Kam and Ullman (1977) showed that every monotone framework that is not distributive has an instance where MFP differs from MOP.
 - **Reachability is needed.** A block that the entry does not reach still passes its function value to its successors in every solution of the equations, while MOP ignores it. The [distributive dataflow framework](/distributive-dataflow-framework/) page gives an instance where this makes MFP strictly below MOP.
 - **Distributivity is not necessary on a given instance.** If every block has at most one predecessor, the CFG is a tree, each block has exactly one path, no meet is ever taken, and MFP = MOP for every monotone framework.
 - **Finite height is needed for the finite iteration.** Take $L = \mathbb{Z} \cup \{-\infty, +\infty\}$ with the meet $\min$ and $\top = +\infty$, an entry with the identity and $\iota = 0$, and a loop block $H$ with a self-loop and $f_H(x) = x - 1$, which is distributive. The iterates at $H$ are $+\infty, +\infty, 0, -1, -2, \ldots$ and never stop. The greatest fixed point and MOP are both $-\infty$, but they are reached only in the limit. Abstract interpreters on such lattices use a [widening operator](/widening-operator/).
 
 ## History
 
-Kildall (1973) set dataflow analysis in a semilattice with distributive transfer functions. He gave the iterative algorithm that starts from the top element and showed that it computes the meet over all paths. Kam and Ullman (1977) noticed that useful analyses, constant propagation first, are monotone but not distributive. They defined monotone frameworks, proved that the maximal fixed point exists and is below the meet over all paths, and proved that the meet over all paths cannot be computed in general. Textbooks give the result in both conventions: the dragon book with meets, and Nielson, Nielson and Hankin with joins and least fixed points.
+Kildall (1973) set dataflow analysis in a semilattice with distributive transfer functions. He gave the iterative algorithm that starts from the top element and showed that it computes the meet over all paths. Kam and Ullman (1977) noticed that useful analyses, constant propagation first, are monotone but not distributive. They defined monotone frameworks, proved that the maximal fixed point exists and is below the meet over all paths, showed that every monotone framework that is not distributive has an instance with a gap, and proved that the meet over all paths cannot be computed in general. Textbooks give the result in both conventions: the dragon book with meets, and Nielson, Nielson and Hankin with joins and least fixed points.
 
 ## References

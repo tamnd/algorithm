@@ -6,7 +6,7 @@ status: full
 
 **Setting.** $(L, \sqcap)$ is a meet semilattice: $\sqcap$ is idempotent, commutative and associative. $x \sqsubseteq y$ means $x \sqcap y = x$; this is a partial order in which $x \sqcap y$ is the greatest lower bound of $x$ and $y$, and $\sqcap$ is monotone in each argument. $\top$ is the identity of $\sqcap$, so $x \sqsubseteq \top$ for all $x$. The height $h$ is finite: every chain $x_0 \sqsupset x_1 \sqsupset \cdots \sqsupset x_k$ has $k \le h$. $G = (V, E)$ is a directed graph with $n$ nodes and $m$ edges, $S \subseteq V$ is the set of start nodes, $\iota \in L$ is the boundary value, and each $f_v : L \to L$ is monotone: $x \sqsubseteq y$ implies $f_v(x) \sqsubseteq f_v(y)$. Let $init(s) = \iota$ for $s \in S$ and $init(s) = \top$ otherwise. An *assignment* $X$ gives each node a value, and $X \sqsubseteq Y$ means $X[v] \sqsubseteq Y[v]$ for all $v$. Define
 
-$$F(X)[s] = init(s) \sqcap \bigsqcap_{(v, s) \in E} f_v(X[v]),$$
+$$F(X)[s] = init(s) \sqcap \mathop{\large\sqcap}_{(v, s) \in E} f_v(X[v]),$$
 
 where the empty meet is $\top$. The maximal fixed-point solution (MFP) is the greatest $X$ with $X = F(X)$. $F$ is monotone, because each $f_v$ and the meet are.
 
@@ -47,15 +47,15 @@ When the algorithm stops, $W$ is empty, so P gives $R[s] \sqsubseteq f_u(R[u])$ 
 
 *Proof.* By Lemma 1 and induction over the run, $R[s] = init(s) \sqcap o_1 \sqcap \cdots \sqcap o_k$, where $o_1, \ldots, o_k$ are all the values $out$ used at line L8 for edges into $s$. Each $o_j$ belongs to an edge $(v_j, s)$ and equals $f_{v_j}(IN_0[v_j])$ for a value $IN_0[v_j]$ that $IN[v_j]$ had during the run. By Lemma 1, $IN_0[v_j] \sqsupseteq R[v_j]$, so $o_j \sqsupseteq f_{v_j}(R[v_j])$ by monotonicity. Every node is removed from $W$ at least once, because it is in $W$ after line L3 and the run stops only when $W$ is empty, so every edge $(v, s)$ is among the $(v_j, s)$. Since the meet is monotone in each argument and idempotent,
 
-$$R[s] \sqsupseteq init(s) \sqcap \bigsqcap_j f_{v_j}(R[v_j]) = init(s) \sqcap \bigsqcap_{(v, s) \in E} f_v(R[v]) = F(R)[s]. \qquad \square$$
+$$R[s] \sqsupseteq init(s) \sqcap \mathop{\large\sqcap}_j f_{v_j}(R[v_j]) = init(s) \sqcap \mathop{\large\sqcap}_{(v, s) \in E} f_v(R[v]) = F(R)[s]. \qquad \square$$
 
 **Theorem 2 (correctness).** $R$ is the maximal fixed-point solution. It is also the greatest assignment $X$ with $X \sqsubseteq F(X)$. In particular the MFP exists, and the result does not depend on the order of the queue in line L3.
 
 *Proof.* By Lemmas 4 and 5 and antisymmetry, $R = F(R)$, so $R$ is a fixed point. If $X$ is any fixed point, or any assignment with $X \sqsubseteq F(X)$, then Lemma 3 at the end of the run gives $X \sqsubseteq R$. So $R$ is the greatest fixed point, and also the greatest such $X$. Greatest elements are unique, so every order of the queue gives the same $R$. $\square$
 
-**Meet over all paths.** A path $\pi = v_0, v_1, \ldots, v_k$ in $G$ with $v_0 \in S$ is a path *to* $v_k$; its function is $f_\pi = f_{v_{k-1}} \circ \cdots \circ f_{v_0}$, the functions of the nodes before $v_k$, and the identity if $k = 0$. Let $P_s$ be the set of paths to $s$. The meet-over-all-paths solution is $\mathrm{MOP}[s] = \bigsqcap_{\pi \in P_s} f_\pi(\iota)$, which is $\top$ if $P_s$ is empty. $P_s$ can be infinite, so we first show that this meet exists.
+**Meet over all paths.** A path $\pi = v_0, v_1, \ldots, v_k$ in $G$ with $v_0 \in S$ is a path *to* $v_k$; its function is $f_\pi = f_{v_{k-1}} \circ \cdots \circ f_{v_0}$, the functions of the nodes before $v_k$, and the identity if $k = 0$. Let $P_s$ be the set of paths to $s$. The meet-over-all-paths solution is $\mathrm{MOP}[s] = \mathop{\large\sqcap}_{\pi \in P_s} f_\pi(\iota)$, which is $\top$ if $P_s$ is empty. $P_s$ can be infinite, so we first show that this meet exists.
 
-**Lemma 6 (meets of arbitrary sets).** Every nonempty set $A \subseteq L$ has a greatest lower bound $\bigsqcap A$, and it is the meet of at most $h + 1$ members of $A$.
+**Lemma 6 (meets of arbitrary sets).** Every nonempty set $A \subseteq L$ has a greatest lower bound $\mathop{\large\sqcap} A$, and it is the meet of at most $h + 1$ members of $A$.
 
 *Proof.* Pick $a_0 \in A$ and set $g_0 = a_0$. While some $a \in A$ has $g_i \sqcap a \ne g_i$, pick such an $a_{i+1}$ and set $g_{i+1} = g_i \sqcap a_{i+1}$, which is strictly below $g_i$. The chain $g_0 \sqsupset g_1 \sqsupset \cdots$ has at most $h$ steps, so it stops at some $g_k$, $k \le h$, with $g_k \sqsubseteq a$ for all $a \in A$. Any lower bound $b$ of $A$ is below $a_0, \ldots, a_k$, hence below their meet $g_k$. So $g_k$ is the greatest lower bound. $\square$
 
@@ -69,11 +69,11 @@ So $R[s]$ is a lower bound of all $f_\pi(\iota)$ with $\pi \in P_s$, and $R[s] \
 
 **Theorem 4 (MFP equals MOP for distributive frameworks).** Suppose every $f_v$ is distributive, $f_v(x \sqcap y) = f_v(x) \sqcap f_v(y)$ for all $x, y$, and every node is reachable from $S$. Then $R = \mathrm{MOP}$.
 
-*Proof.* A distributive $f$ is monotone: if $x \sqsubseteq y$, then $x = x \sqcap y$, so $f(x) = f(x) \sqcap f(y) \sqsubseteq f(y)$. It also distributes over every nonempty set $A$: by Lemma 6, $\bigsqcap A = a_0 \sqcap \cdots \sqcap a_k$ for some members, so $f(\bigsqcap A) = f(a_0) \sqcap \cdots \sqcap f(a_k) \sqsupseteq \bigsqcap f(A)$, and $f(\bigsqcap A) \sqsubseteq f(a)$ for every $a \in A$ by monotonicity, so $f(\bigsqcap A) = \bigsqcap f(A)$.
+*Proof.* A distributive $f$ is monotone: if $x \sqsubseteq y$, then $x = x \sqcap y$, so $f(x) = f(x) \sqcap f(y) \sqsubseteq f(y)$. It also distributes over every nonempty set $A$: by Lemma 6, $\mathop{\large\sqcap} A = a_0 \sqcap \cdots \sqcap a_k$ for some members, so $f(\mathop{\large\sqcap} A) = f(a_0) \sqcap \cdots \sqcap f(a_k) \sqsupseteq \mathop{\large\sqcap} f(A)$, and $f(\mathop{\large\sqcap} A) \sqsubseteq f(a)$ for every $a \in A$ by monotonicity, so $f(\mathop{\large\sqcap} A) = \mathop{\large\sqcap} f(A)$.
 
 Let $M = \mathrm{MOP}$. We show $M \sqsubseteq F(M)$. Fix a node $s$. If $s \in S$, the path of length zero gives the term $\iota$, so $M[s] \sqsubseteq \iota = init(s)$; otherwise $init(s) = \top$. For an edge $(v, s)$, the set $P_v$ is nonempty because $v$ is reachable, so
 
-$$f_v(M[v]) = f_v\Big(\bigsqcap_{\pi \in P_v} f_\pi(\iota)\Big) = \bigsqcap_{\pi \in P_v} f_v(f_\pi(\iota)).$$
+$$f_v(M[v]) = f_v\Big(\mathop{\large\sqcap}_{\pi \in P_v} f_\pi(\iota)\Big) = \mathop{\large\sqcap}_{\pi \in P_v} f_v(f_\pi(\iota)).$$
 
 Each $f_v(f_\pi(\iota))$ is $f_{\pi s}(\iota)$ for the path $\pi$ followed by $s$, which is in $P_s$, so it is above $M[s]$. Hence $M[s] \sqsubseteq f_v(M[v])$. So $M[s]$ is below every term of $F(M)[s]$, and $M \sqsubseteq F(M)$. Lemma 3, applied at the end of the run, gives $M \sqsubseteq R$, and Theorem 3 gives $R \sqsubseteq M$. $\square$
 

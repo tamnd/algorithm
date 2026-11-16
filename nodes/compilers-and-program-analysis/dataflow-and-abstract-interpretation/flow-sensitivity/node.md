@@ -47,7 +47,7 @@ $$x(\mathit{entry}) \sqsubseteq \iota, \qquad x(n) \sqsubseteq f_s(x(m)) \text{ 
 
 $$I \sqsubseteq \iota \qquad\text{and}\qquad I \sqsubseteq f_s(I) \text{ for every statement } s.$$
 
-The best one is the greatest solution $I^*$, the greatest fixed point of $g(I) = \iota \sqcap \bigsqcap_s f_s(I)$. It exists by the [Knaster-Tarski theorem](/knaster-tarski-theorem/), and in a lattice of finite height $h$ the [Kleene iteration](/kleene-fixed-point-theorem/) from $\top$ reaches it in at most $h + 1$ rounds over the statements.
+The best one is the greatest solution $I^*$, the greatest fixed point of $g(I) = \iota \sqcap \mathop{\large\sqcap}_s f_s(I)$. It exists by the [Knaster-Tarski theorem](/knaster-tarski-theorem/), and in a lattice of finite height $h$ the [Kleene iteration](/kleene-fixed-point-theorem/) from $\top$ reaches it in at most $h + 1$ rounds over the statements.
 
 | item | flow-sensitive | flow-insensitive |
 |---|---|---|

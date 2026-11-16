@@ -6,7 +6,7 @@ status: full
 
 We use the pseudocode of the page, lines L1 to L12. FL- concepts are built from concept names, $\top$, $C \sqcap D$, $\forall r.C$ and $\exists r.\top$ (written $\exists r$). There is no TBox. A normal form node $x$ has a set $N_x$ of concept names, a set $E_x$ of roles and a partial map $V_x$ from roles to nodes. The concept of a node is
 
-$$\mathrm{con}(x) = \bigsqcap_{A \in N_x} A \;\sqcap\; \bigsqcap_{r \in E_x} \exists r \;\sqcap\; \bigsqcap_{r \in \mathrm{dom}(V_x)} \forall r.\mathrm{con}(V_x(r)),$$
+$$\mathrm{con}(x) = \mathop{\large\sqcap}_{A \in N_x} A \;\sqcap\; \mathop{\large\sqcap}_{r \in E_x} \exists r \;\sqcap\; \mathop{\large\sqcap}_{r \in \mathrm{dom}(V_x)} \forall r.\mathrm{con}(V_x(r)),$$
 
 with the empty conjunction equal to $\top$. A node is empty when $N_x$, $E_x$ and $V_x$ are all empty; then $\mathrm{con}(x) = \top$.
 

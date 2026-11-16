@@ -49,7 +49,7 @@ So the method has two phases. On the way up, it builds summaries for bigger and 
 
 Write the equations of a forward problem with one unknown $X_v$ per block, for the fact at its start:
 
-$$X_v = b_v \sqcap \bigsqcap_{u} a_{u,v}(X_u).$$
+$$X_v = b_v \sqcap \mathop{\large\sqcap}_{u} a_{u,v}(X_u).$$
 
 At the start, $a_{u,v} = f_u$ for each edge $(u, v)$, $b_s = \iota$ for the entry $s$, and $b_v = \top$ otherwise. A missing entry $a_{u,v}$ stands for the constant function $\top$. The holes are ORDER, the elimination order of the blocks, and the four operations on functions: COMPOSE, MEET, STAR and APPLY.
 
@@ -72,7 +72,7 @@ Lines L2 to L4 solve the equation of $v_k$ for $X_{v_k}$: a self term $a(X) \sqc
 
 **Correctness.** Assume a distributive framework of finite height, with every block reachable.
 
-*Lemma A (the closure).* For a distributive $a$ and any $r$, the greatest $x$ with $x = r \sqcap a(x)$ is $a^*(r) = \bigsqcap_{i \ge 0} a^i(r)$. The partial meets $y_k = \bigsqcap_{i \le k} a^i(r)$ go down, so they stop at some $y$ by finite height. By distributivity, $r \sqcap a(y_k) = y_{k+1}$, so $y = r \sqcap a(y)$. If $x = r \sqcap a(x)$, then $x \sqsubseteq r$, and $x \sqsubseteq a^i(r)$ gives $x \sqsubseteq a(x) \sqsubseteq a^{i+1}(r)$. So $x \sqsubseteq y$.
+*Lemma A (the closure).* For a distributive $a$ and any $r$, the greatest $x$ with $x = r \sqcap a(x)$ is $a^*(r) = \mathop{\large\sqcap}_{i \ge 0} a^i(r)$. The partial meets $y_k = \mathop{\large\sqcap}_{i \le k} a^i(r)$ go down, so they stop at some $y$ by finite height. By distributivity, $r \sqcap a(y_k) = y_{k+1}$, so $y = r \sqcap a(y)$. If $x = r \sqcap a(x)$, then $x \sqsubseteq r$, and $x \sqsubseteq a^i(r)$ gives $x \sqsubseteq a(x) \sqsubseteq a^{i+1}(r)$. So $x \sqsubseteq y$.
 
 *Lemma B (each step keeps the greatest solution).* Lines L5 to L8 replace $a_{v,w}(X_v)$ in the equation of $w$ by $a_{v,w}$ applied to the right side of the equation of $v$, and distribute. Since the equation of $v$ stays in the system, this keeps the set of solutions exactly. Lines L2 to L4 replace $X_v = R(X) \sqcap a(X_v)$ by $X_v = a^*(R(X))$, where $R$ does not use $X_v$. By Lemma A, every solution of the new system solves the old one. Let $Y$ be the greatest solution of the old system, and let $Y'$ be $Y$ with $Y'_v = a^*(R(Y))$. Then $Y'_v \sqsupseteq Y_v$ by Lemma A, so $Y'$ is below the right sides of the old equations at every block. A vector with this property is below the greatest solution, by the dual of part 3 of the [Kleene fixed-point theorem](/kleene-fixed-point-theorem/). So $Y' \sqsubseteq Y$, hence $Y' = Y$ and $Y_v = a^*(R(Y))$, and $Y$ solves the new system. The two systems therefore have the same greatest solution.
 

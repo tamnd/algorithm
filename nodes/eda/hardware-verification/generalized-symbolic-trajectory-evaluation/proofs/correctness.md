@@ -8,7 +8,7 @@ status: full
 
 For a state $\sigma$ write $\mathrm{empty}(\sigma)$ if some node of $\sigma$ is $\top$. Let $\mathrm{norm}(\sigma, b)$ be the state with every node $\top$ if $b$ or $\mathrm{empty}(\sigma)$ holds, and $\sigma$ otherwise. Let $F$ map an assignment of states to edges, $\mathrm{sim}$, to the states $\mathrm{new}$ of lines L4 to L7:
 
-$$\mathrm{pre}_e = I_e \sqcap \bigsqcap_{\mathrm{dst}(e') = \mathrm{src}(e)} \mathrm{sim}(e'), \qquad \sigma_e = \mathrm{close}\bigl(\delta(\mathrm{ant}(e)) \sqcup \mathrm{shift}(\mathrm{pre}_e)\bigr), \qquad F(\mathrm{sim})(e) = \mathrm{norm}(\sigma_e, \mathrm{empty}(\mathrm{pre}_e)).$$
+$$\mathrm{pre}_e = I_e \sqcap \mathop{\large\sqcap}_{\mathrm{dst}(e') = \mathrm{src}(e)} \mathrm{sim}(e'), \qquad \sigma_e = \mathrm{close}\bigl(\delta(\mathrm{ant}(e)) \sqcup \mathrm{shift}(\mathrm{pre}_e)\bigr), \qquad F(\mathrm{sim})(e) = \mathrm{norm}(\sigma_e, \mathrm{empty}(\mathrm{pre}_e)).$$
 
 Here $I_e$ is the all-X state if $\mathrm{src}(e) = v_0$ and the all-$\top$ state otherwise, $\mathrm{shift}(p)$ has $p(\mathrm{next}(s))$ at each latch $s$ and X elsewhere, and $\mathrm{close}$ is line L6, which joins each gate in topological order with $\widehat{\mathrm{op}}$ of its fanins.
 

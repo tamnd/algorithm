@@ -42,9 +42,9 @@ and $f_\pi$ is the identity for the path $(B_0)$ of length zero. The fact that $
 
 **Definition.** For each block $B$,
 
-$$\mathrm{MOP}[B] = \bigsqcap_{\pi \in \mathrm{Paths}(B)} f_\pi(\iota),$$
+$$\mathrm{MOP}[B] = \mathop{\large\sqcap}_{\pi \in \mathrm{Paths}(B)} f_\pi(\iota),$$
 
-where $\mathrm{Paths}(B)$ is the set of paths to $B$. The value at the end of $B$ uses the paths that go through $B$ itself: $\mathrm{MOP}_{\mathrm{out}}[B] = \bigsqcap_{\pi} f_B(f_\pi(\iota))$. For a backward problem, the paths run from the end of a block to the end of a `ret` block, on the reverse CFG, and $\iota$ holds after each `ret` block.
+where $\mathrm{Paths}(B)$ is the set of paths to $B$. The value at the end of $B$ uses the paths that go through $B$ itself: $\mathrm{MOP}_{\mathrm{out}}[B] = \mathop{\large\sqcap}_{\pi} f_B(f_\pi(\iota))$. For a backward problem, the paths run from the end of a block to the end of a `ret` block, on the reverse CFG, and $\iota$ holds after each `ret` block.
 
 **The meet exists.** A loop makes $\mathrm{Paths}(B)$ infinite, so the meet needs care. In a semilattice of finite height $h$ with a top, every set $S$ has a greatest lower bound, and when $S$ is not empty it is the meet of at most $h + 1$ members of $S$. *Proof.* Start with any $c \in S$. While some $s \in S$ has $c \sqcap s \ne c$, replace $c$ with $c \sqcap s$; each replacement goes strictly down, so there are at most $h$. At the end $c \sqsubseteq s$ for all $s \in S$, and every lower bound of $S$ is below the members used and hence below $c$. The empty set has meet $\top$. $\square$ So $\mathrm{MOP}[B]$ is well defined, and it is $\top$ exactly when no path reaches $B$ or all paths give $\top$.
 
@@ -74,7 +74,7 @@ join:
 
 - *Acyclic CFG.* The paths are finite in number, so MOP is computable by enumeration. Their number can be exponential: a chain of $k$ diamonds has $2^k$ paths from the first block to the last.
 - *Distributive frameworks.* MOP = MFP, and a worklist solver finds it with $O(n h)$ transfer functions and $O(m h)$ meets on $n$ blocks and $m$ edges.
-- *Finite lattices.* If $L$ has finitely many elements, MOP is computable for any monotone framework. Solve the problem on sets of facts instead: the fact at a point is the set $R[B] \subseteq L$ of values $f_\pi(\iota)$ over paths to $B$, with $R[\mathrm{entry}] \ni \iota$, union as the merge, and $f_B$ applied to each element. This lifted problem is distributive over union and has height at most $|L|$, so iteration finds the exact sets, and $\mathrm{MOP}[B] = \bigsqcap R[B]$. The cost grows with $|L|$, which is usually huge.
+- *Finite lattices.* If $L$ has finitely many elements, MOP is computable for any monotone framework. Solve the problem on sets of facts instead: the fact at a point is the set $R[B] \subseteq L$ of values $f_\pi(\iota)$ over paths to $B$, with $R[\mathrm{entry}] \ni \iota$, union as the merge, and $f_B$ applied to each element. This lifted problem is distributive over union and has height at most $|L|$, so iteration finds the exact sets, and $\mathrm{MOP}[B] = \mathop{\large\sqcap} R[B]$. The cost grows with $|L|$, which is usually huge.
 - *Infinite lattices of finite height.* Kam and Ullman (1977) showed that no algorithm computes MOP for every instance of every monotone framework. Constant propagation is of this kind: its lattice is infinite, so the method for finite lattices does not apply. This is why analyses compute MFP.
 
 ## Examples and non-examples
