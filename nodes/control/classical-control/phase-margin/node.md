@@ -30,7 +30,7 @@ The phase margin of a feedback loop is the extra phase lag that the loop can tak
 
 **Gain crossover.** A gain crossover frequency is an $\omega_c > 0$ with $|L(j\omega_c)| = 1$. On the [Bode plot](/bode-plot/) it is where the gain curve crosses 0 dB. On the Nyquist plot it is where the curve crosses the unit circle.
 
-**Definition.** At each gain crossover $\omega_i$, the phase margin is $\varphi_i = 180 + \arg L(j\omega_i)$, with the argument taken so that $\varphi_i$ lies in $(-180, 180]$ degrees. The phase margin of the loop is $\varphi_m = \min_i \varphi_i$. If $L$ is multiplied by the pure phase shift $e^{-j\varphi}$, then $e^{-j\varphi}L(j\omega_i) = -1$ when $\varphi = \varphi_i$, so $\varphi_m$ is the smallest phase lag, applied at all frequencies, that puts a closed-loop pole on the imaginary axis. A negative phase margin on a loop with no unstable poles means that the closed loop is unstable.
+**Definition.** At each gain crossover $\omega_i$, the phase margin is $\varphi_i = 180 + \arg L(j\omega_i)$, with the argument taken so that $\varphi_i$ lies in $(-180, 180]$ degrees. The phase margin of the loop is $\varphi_m = \min_i \varphi_i$. If $L$ is multiplied by the pure phase shift $e^{-j\varphi}$, then $e^{-j\varphi}L(j\omega_i) = -1$ when $\varphi = \varphi_i$, so $\varphi_m$ is the smallest phase lag, applied at all frequencies, that puts a closed-loop pole on the imaginary axis. A negative phase margin on a loop with no unstable poles and a single gain crossover means that the closed loop is unstable; with several crossovers the [Nyquist stability criterion](/nyquist-stability-criterion/) decides.
 
 **Delay margin.** A real phase lag usually grows with frequency. A [time delay](/time-delay-system/) $\tau$ adds the lag $\omega\tau$ radians at $\omega$, and the loop $e^{-s\tau}L$ first reaches $-1$ when $\omega_i\tau = \varphi_i$ (in radians) at some crossover. So the delay margin is $\tau_m = \min_i \varphi_i/\omega_i$. It can come from a crossover that does not give the smallest $\varphi_i$, because a high crossover frequency makes a small delay costly.
 
@@ -65,7 +65,7 @@ So the rule of thumb $\varphi_m \approx 100\zeta$ degrees holds well up to $\zet
 
 **A negative margin.** For $10/(s(s + 1)(s + 2))$ the phase margin is $-13.0$ degrees, and the closed loop has the poles $0.15445 \pm 1.73156j$ in the right half plane.
 
-**A large margin that says little.** The loop $L(s) = 0.38(s^2 + 0.1s + 0.55)/(s(s + 1)(s^2 + 0.06s + 0.5))$, from the section on stability margins in Åström and Murray, has its gain crossover at $\omega_c = 0.40578$ with a phase margin of 69.77 degrees, and no phase crossover at all. Yet its peak sensitivity is $M_s = 3.69098$ at $\omega = 0.7145$: the Nyquist plot passes within $0.27093$ of $-1$, at a frequency where neither margin is read.
+**A large margin that says little.** The loop $L(s) = 0.38(s^2 + 0.1s + 0.55)/(s(s + 1)(s^2 + 0.06s + 0.5))$, from the section on stability margins in Åström and Murray, has its gain crossover at $\omega_c = 0.40578$ with a phase margin of 69.77 degrees, and no phase crossover at all. Yet its peak sensitivity is $M_s = 3.69101$ at $\omega = 0.7145$: the Nyquist plot passes within $0.27093$ of $-1$, at a frequency where neither margin is read.
 
 ## Related definitions
 
