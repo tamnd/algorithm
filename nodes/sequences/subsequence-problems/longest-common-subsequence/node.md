@@ -100,7 +100,7 @@ The structure that all exact methods use is the [optimal substructure of LCS](/l
 
 - **Upper bound.** $O(nm)$ by the DP, and $O(n^2 / \log n)$ for constant alphabets by the Four Russians method. For unbounded alphabets, slightly sub-quadratic bounds exist, by factors polylogarithmic in $n$.
 - **Comparison lower bound.** Aho, Hirschberg and Ullman (1976) proved that an algorithm that only tests pairs of items for equal or not equal needs $\Omega(nm)$ tests in the worst case when the alphabet is not bounded. With a total order on the items, their bound is $\Omega(n \log n)$ comparisons.
-- **Conditional lower bound.** If the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) holds, no algorithm computes $\mathrm{lcs}$ of two binary strings of length $n$ in $O(n^{2 - \varepsilon})$ time for any $\varepsilon > 0$. See the [Backurs-Indyk lower bound](/backurs-indyk-lcs-lower-bound/) and the [LCS SETH lower bound](/lcs-seth-lower-bound/).
+- **Conditional lower bound.** If the [Strong Exponential Time Hypothesis](/strong-exponential-time-hypothesis/) holds, no algorithm computes $\mathrm{lcs}$ of two binary strings of length $n$ in $O(n^{2 - \varepsilon})$ time for any $\varepsilon > 0$. See the [SETH lower bounds for edit distance and LCS](/backurs-indyk-lcs-lower-bound/) and the [LCS SETH lower bound](/lcs-seth-lower-bound/).
 - **Many sequences.** For $k$ sequences with $k$ part of the input, the problem is NP-hard (Maier 1978).
 
 ## Reductions
