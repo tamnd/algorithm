@@ -25,7 +25,7 @@ sources:
     locator: the chapter on controller design, with LQG control and loop transfer recovery
 ---
 
-Loop transfer recovery (LTR) is a design step that gives back to an [LQG](/lqg-control/) controller the robustness of the [LQR](/infinite-horizon-lqr/) loop it is built from. The LQR gain $K$ is fixed first. Then the Kalman filter is designed with fictitious process noise of intensity $q^2$ that enters at the plant input. As $q$ grows, the loop transfer function at the plant input tends, at every frequency, to the LQR loop $K (sI - A)^{-1} B$, and with it the gain margin $[1/2, \infty)$ and the 60 degree phase margin come back. The recovery needs a plant that is square and minimum phase. It fails for a plant with zeros in the right half plane.
+Loop transfer recovery (LTR) is a design step that gives back to an [LQG](/lqg-control/) controller the robustness of the [LQR](/infinite-horizon-lqr/) loop it is built from. The LQR gain $K$ is fixed first. Then the Kalman filter is designed with fictitious process noise of intensity $q^2$ that enters at the plant input. As $q$ grows, the loop transfer function at the plant input tends, at every frequency, to the LQR loop $K (sI - A)^{-1} B$, and with it the gain margin $(1/2, \infty)$ and the 60 degree phase margin come back. The recovery needs a plant that is square and minimum phase. It fails for a plant with zeros in the right half plane.
 
 ## In plain words
 
@@ -42,7 +42,7 @@ For a plant with right half plane zeros, LTR still helps at frequencies well bel
 
 ## The template
 
-1. **Target loop.** Choose $K$, for example by LQR with weights $Q$ and $R$, so that $L_T(s) = K \Phi(s) B$ with $\Phi(s) = (sI - A)^{-1}$ has the wanted crossover frequency and shape. By the [LQR stability margins](/lqr-stability-margins/) theorem it has the gain margin $[1/2, \infty)$ and at least 60 degrees of phase margin in each channel when $R$ is diagonal.
+1. **Target loop.** Choose $K$, for example by LQR with weights $Q$ and $R$, so that $L_T(s) = K \Phi(s) B$ with $\Phi(s) = (sI - A)^{-1}$ has the wanted crossover frequency and shape. By the [LQR stability margins](/lqr-stability-margins/) theorem it has the gain margin $(1/2, \infty)$ and at least 60 degrees of phase margin in each channel when $R$ is diagonal.
 2. **Fictitious noise.** For a scalar $q \ge 0$, design the Kalman filter with
 $$W(q) = W_0 + q^2 B B^T, \qquad V = V_0,$$
 where $W_0 \ge 0$ and $V_0 > 0$ are nominal intensities. The filter gain is $L_o(q) = S(q) C^T V_0^{-1}$ with the filter Riccati solution $S(q)$.

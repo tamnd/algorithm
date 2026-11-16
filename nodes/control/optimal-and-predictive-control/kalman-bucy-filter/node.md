@@ -91,7 +91,7 @@ which takes the values $0.3159, 0.7560, 1.6895, 2.3578, 2.4108$ at $t = 0.25, 0.
 
 $$S_\infty = \begin{bmatrix} \sqrt3 & 1 \\ 1 & \sqrt3 \end{bmatrix}, \qquad L_o = \begin{bmatrix} \sqrt3 \\ 1 \end{bmatrix},$$
 
-and $A - L_o C$ has the characteristic polynomial $s^2 + \sqrt3\, s + 1$. This is the dual of the LQR problem with $Q = I$ and $R = 1$ for the same plant, whose gain is $K = \begin{bmatrix} 1 & \sqrt3 \end{bmatrix} = L_o^T$.
+and $A - L_o C$ has the characteristic polynomial $s^2 + \sqrt3\, s + 1$. This is the dual of the LQR problem with $Q = I$ and $R = 1$ for the dual plant $(A^T, C^T)$, whose gain is $K = \begin{bmatrix} \sqrt3 & 1 \end{bmatrix} = L_o^T$.
 
 **Against a fixed gain.** For any constant gain $G$, the error covariance obeys $\dot P = (A - G C) P + P (A - G C)^T + W + G V G^T$. Started from the same $S_0$, $P(t) - S(t)$ stays positive semidefinite for every $t$.
 

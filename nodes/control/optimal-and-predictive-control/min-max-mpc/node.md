@@ -109,7 +109,7 @@ The tree has $(V^{N+1} - 1)/(V - 1)$ nodes for $V \ge 2$, so the LP has $L$ of o
 
 ## Variants and improvements
 
-- **Infinity-norm costs.** Replace the sum by a maximum; the problem is still an LP. Quadratic costs give a QP for the open-loop form, and a convex problem over the tree for the feedback form.
+- **Infinity-norm costs.** Replace the sum by a maximum; the problem is still an LP. Quadratic costs give a convex quadratically constrained program (an SOCP) for the open-loop form, since the epigraph bound $t$ must lie above a quadratic cost for each vertex sequence, and a convex problem over the tree for the feedback form.
 - **Explicit solution.** With 1-norm or infinity-norm costs, the first input is a piecewise affine function of $x_0$, and it can be computed offline as in [explicit MPC](/explicit-mpc/).
 - **Affine disturbance feedback.** Restrict the policy to inputs affine in the past disturbances. The problem is then convex with size polynomial in $N$, at the price of some conservatism.
 - **[Tube MPC](/tube-mpc/).** Fix the feedback to $u = v + K (x - z)$ with a nominal state $z$, and plan only $v$ with tightened constraints. The size does not grow with the number of vertices.

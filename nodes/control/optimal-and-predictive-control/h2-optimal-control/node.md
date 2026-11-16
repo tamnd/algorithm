@@ -80,7 +80,7 @@ The controller is $u = K(s) y$ with $K(s) = -(3 + 2\sqrt2)/(s + 1 + 2\sqrt2)$, a
 
 **The double integrator.** With $A = \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}$, $B_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$, $C_2 = \begin{bmatrix} 1 & 0 \end{bmatrix}$ and the LQG data $Q = I$, $R = 1$, $W = I$, $V = 1$, the optimum is $\|T_{zw}\|_2^2 = 8\sqrt3 \approx 13.856$, so $\|T_{zw}\|_2 \approx 3.722$. This is the cost $J^*$ on the [LQG page](/lqg-control/), with the controller $(2\sqrt3\, s + 1)/(s^2 + 2\sqrt3\, s + 5)$ from $y$ to $-u$.
 
-**Not well posed.** If $D_{11} \ne 0$, every closed loop has a direct term from $w$ to $z$, and its H2 norm is infinite for every controller. If the plant has an unstable mode that $B_2$ cannot reach, no controller makes the closed loop Hurwitz.
+**Not well posed.** If $D_{11} \ne 0$, a controller with feedthrough $D_K$ gives the closed loop the direct term $D_{11} + D_{12} D_K D_{21}$ from $w$ to $z$, and its H2 norm is infinite unless this term is 0; for a strictly proper controller it is $D_{11}$, so the norm is infinite. If the plant has an unstable mode that $B_2$ cannot reach, no controller makes the closed loop Hurwitz.
 
 ## Known algorithms
 
