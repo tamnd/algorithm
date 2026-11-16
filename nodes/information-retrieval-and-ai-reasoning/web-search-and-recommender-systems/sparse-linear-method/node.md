@@ -98,7 +98,7 @@ The full matrix, with $W_{kj}$ the weight of item $k$ in the prediction of item 
 | $i_3$ | 0 | 1/3 | 0 | 1/9 |
 | $i_4$ | 1/5 | 0 | 1/5 | 0 |
 
-The diagonal is zero, every entry is nonnegative, and 4 of the 12 entries off the diagonal are 0. User $u_1$ has $a_1 = (1, 1, 0, 0)$, so the scores are rows $i_1$ plus $i_2$: $(3/7, 1/3, 3/7, 1/9)$. Among the unused items, $i_3$ scores $3/7$ and $i_4$ scores $1/9$, so SLIM recommends $i_3$ first. The test file checks these numbers.
+The diagonal is zero, every entry is nonnegative, and 4 of the 12 entries off the diagonal are 0. User $u_1$ has $a_{u_1} = (1, 1, 0, 0)$, so the scores are rows $i_1$ plus $i_2$: $(3/7, 1/3, 3/7, 1/9)$. Among the unused items, $i_3$ scores $3/7$ and $i_4$ scores $1/9$, so SLIM recommends $i_3$ first. The test file checks these numbers.
 
 ## Correctness
 

@@ -133,7 +133,7 @@ The number of epochs that gives a good model is not fixed by the method. It depe
 
 - **[Alternating least squares](/alternating-least-squares/).** Fixes one side of the factors and solves a ridge regression for each vector of the other side, which parallelizes well and suits [implicit feedback](/implicit-feedback-als/).
 - **[SVD++](/svd-plus-plus/).** Adds to $p_u$ a sum of item vectors over the items the user rated, so that the fact of rating counts as a signal.
-- **[Probabilistic matrix factorization](/probabilistic-matrix-factorization/).** Reads $J$ as the negative log posterior of a Gaussian model, with $\lambda$ as a ratio of variances.
+- **[Probabilistic matrix factorization](/probabilistic-matrix-factorization/).** Reads the squared error with the penalty counted once per parameter, not inside the sum as in $J$, as the negative log posterior of a Gaussian model, with $\lambda$ as a ratio of variances.
 - **Nonnegative factors.** [Nonnegative matrix factorization](/nonnegative-matrix-factorization/) keeps all entries at or above zero, which can make the factors easier to read.
 - **One factor at a time.** Funk's post trains one feature for many epochs, adds it to the finished features, and then trains the next one on what the finished features do not explain.
 - **[Factorization machines](/factorization-machine/)** generalize the dot product to any set of features of the user, the item and the context.

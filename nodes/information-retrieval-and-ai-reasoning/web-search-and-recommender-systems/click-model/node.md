@@ -53,7 +53,7 @@ The models differ in what examination depends on:
 
 **Estimation.** When the model makes every hidden event observable from the clicks, as the cascade model does by treating every result above the click as examined, the [maximum likelihood](/maximum-likelihood-estimation/) estimates are ratios of counts. Otherwise the parameters are fitted by [EM](/expectation-maximization/), which needs the posterior of the hidden events in each session (Chapter 4 of Chuklin, Markov and de Rijke).
 
-**Evaluation.** A click model is judged by how well it predicts held-out clicks: by log likelihood, and by perplexity, $2$ to the power of the average negative $\log_2$ probability of the observed click at each rank (Equation 5.4 of Chuklin, Markov and de Rijke, after Dupret and Piwowarski). A perfect prediction has perplexity 1, a coin with probability $0.5$ has perplexity 2, and lower is better. All such comparisons are measurements on a particular log; a better fit on one engine's users is not a law about users in general.
+**Evaluation.** A click model is judged by how well it predicts held-out clicks: by log likelihood, and by perplexity, which at each rank is $2$ to the power of the average negative $\log_2$ probability of the observed click or skip at that rank (Equation 5.4 of Chuklin, Markov and de Rijke, after Dupret and Piwowarski) and is then averaged over the ranks. A perfect prediction has perplexity 1, a coin with probability $0.5$ has perplexity 2, and lower is better. All such comparisons are measurements on a particular log; a better fit on one engine's users is not a law about users in general.
 
 ## Examples
 

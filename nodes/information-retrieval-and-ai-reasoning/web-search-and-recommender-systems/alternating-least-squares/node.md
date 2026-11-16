@@ -102,7 +102,7 @@ Then each item gets $q_i = \sum_{u \in U_i} r_{ui} p_u / (\sum_{u \in U_i} p_u^2
 
 The objective goes from $J = 155 + 4 = 159$ at the start, where $P = 0$, to $60$ after the user step and to about $54.9526$ after the item step. With one factor and a start of all ones, the model can only say how much each user likes items in general. The toy matrix has two groups of users with opposite tastes, and $r = 1$ from this start does not separate them.
 
-With the ALS-WR penalty, $c_u = |I_u|$, the user step gives $p_u = b / (2 |I_u|)$, so $p = (5/3, 15/8, 5/4, 1)$: the users with more ratings are shrunk more in absolute terms.
+With the ALS-WR penalty, $c_u = |I_u|$, the user step gives $p_u = b / (2 |I_u|)$, so $p = (5/3, 15/8, 5/4, 1)$: every user gets half the mean of their ratings, whatever their number. Against the plain step, $p_u = b / (|I_u| + 1)$, the ratio is $(|I_u| + 1) / (2 |I_u|)$, which is $2/3$ for three ratings and $5/8$ for four, so the users with more ratings are shrunk more in relative terms.
 
 If the start is $q_i = 0$ for all items, every $b$ is 0, so every $p_u = 0$, and then every $q_i = 0$. The run stays at $P = Q = 0$ with $J = 155$, a stationary point that is not a minimum.
 

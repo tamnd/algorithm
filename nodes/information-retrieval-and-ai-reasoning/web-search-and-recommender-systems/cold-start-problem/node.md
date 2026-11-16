@@ -41,7 +41,7 @@ The [rating matrix](/rating-matrix/) of a collaborative method has a row for eac
 - **New item.** The column of $i$ is empty. No user can be similar on it, no item can be similar to it, and its factor $q_i$ has not been trained, so it is almost never ranked high. If it is never shown, it never gets ratings, and the gap persists.
 - **New system.** All rows and columns are sparse at the start of a service, and every method is weak.
 
-The cold start is a matter of degree, not only of empty rows. A user with one rating still has no Pearson correlation with anyone, since the variance on one co-rated item is 0, and a similarity computed on two or three items is mostly noise.
+The cold start is a matter of degree, not only of empty rows. A user with one rating still has no useful Pearson correlation with anyone: with each user centered on the mean of all their ratings, as on the [user-based filtering](/user-based-collaborative-filtering/) page, the one rating equals the mean, so its centered value is 0 and the weight is 0 by convention; and a similarity computed on two or three items is mostly noise.
 
 The remedies sort into four groups:
 
@@ -62,7 +62,7 @@ Add a new user $u_5$ with no ratings and a new item $i_5$ with no ratings to the
 | $u_4$ | - | 1 | 1 | 4 | - |
 | $u_5$ | - | - | - | - | - |
 
-- **For $u_5$**, [user-based filtering](/user-based-collaborative-filtering/) has no co-rated items with anyone and gives no prediction. A non-personal fallback ranks items by their mean rating: $i_1$ has $10/3$, $i_2$ and $i_4$ have 3, and $i_3$ has $7/3$, so every new user gets $i_1$ first. If $u_5$ then rates $i_2$ with 5, the only co-rated item with each other user is $i_2$, and the Pearson correlation on one item is still undefined.
+- **For $u_5$**, [user-based filtering](/user-based-collaborative-filtering/) has no co-rated items with anyone and gives no prediction. A non-personal fallback ranks items by their mean rating: $i_1$ has $10/3$, $i_2$ and $i_4$ have 3, and $i_3$ has $7/3$, so every new user gets $i_1$ first. If $u_5$ then rates $i_2$ with 5, the only co-rated item with each other user is $i_2$, but 5 is also the mean of $u_5$, so every Pearson weight of $u_5$ is 0 and the prediction is still the mean of $u_5$, 5, for every item.
 - **For $i_5$**, [item-based filtering](/item-based-collaborative-filtering/) and [Slope One](/slope-one/) have no pair of ratings that includes $i_5$, so they give nothing. With the features of the [content-based filtering](/content-based-filtering/) page, $i_5 = (0, 0, 1)$ is a comedy, and the content profile of $u_1$ gives it a negative cosine, so $u_1$ is not offered it; the [hybrid recommender](/hybrid-recommender/) page works out a switching hybrid on this case.
 
 Large services have this problem without end: a news site has new articles every hour, a shop adds new products every day, and every service gets new users.

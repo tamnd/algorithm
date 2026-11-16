@@ -62,7 +62,7 @@ Other examples are news filters that score articles by the words of the articles
 
 ## Variations
 
-- **Uncentered profiles.** The plain average of the features of the liked items ignores dislikes. On the example it gives $(3, 2, 1/3)$, a profile that likes all three genres.
+- **Uncentered profiles.** The mean of $r_{ui} x_i$ over the rated items, with the raw ratings in place of the centered ones, ignores dislikes, because every rating is positive. On the example it gives $(3, 2, 1/3)$, a profile that likes all three genres.
 - **Classifiers per user.** A [naive Bayes classifier](/naive-bayes-classifier/) or a linear classifier per user predicts "liked" from the features.
 - **Learned item features.** Features from [embeddings](/embedding/) of text or images, or topics from [latent semantic analysis](/latent-semantic-analysis/), in place of raw words.
 - **Knowledge-based recommendation.** The user states the required attributes, and the system filters by rules; no history is needed.

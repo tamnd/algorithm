@@ -44,11 +44,11 @@ The input is a set $S$ of positive pairs of $m$ users and $n$ items, $I_u^+ = \{
 
 $$D_S = \{(u, i, j) : i \in I_u^+, \; j \in I \setminus I_u^+\}.$$
 
-Each triple says that $u$ prefers $i$ to $j$; the pairs with both items used, or both unused, are not compared. With $x_{uij} = x_{ui} - x_{uj}$, BPR-Opt (Section 4.1) is
+Each triple says that $u$ prefers $i$ to $j$; the pairs with both items used, or both unused, are not compared. With $x_{uij} = x_{ui} - x_{uj}$, BPR-Opt (Section 4.1) is the sum of $\ln \sigma(x_{uij})$ over $D_S$ minus a penalty. The paper writes the penalty once, as $\lambda_\Theta \lVert \Theta \rVert^2$ with $\Theta$ all parameters, which makes BPR-Opt the log posterior of the parameters when each triple is an independent event with probability $\sigma(x_{uij})$ and the prior on $\Theta$ is a zero mean Gaussian. The updates of LearnBPR penalize instead the three vectors of each triple, and this page and its proof use that form:
 
-$$\text{BPR-Opt} = \sum_{(u, i, j) \in D_S} \ln \sigma(x_{uij}) - \lambda_\Theta \lVert \Theta \rVert^2,$$
+$$\text{BPR-Opt} = \sum_{(u, i, j) \in D_S} \Bigl[ \ln \sigma(x_{uij}) - \tfrac12 \bigl(\lambda_W \lVert w_u \rVert^2 + \lambda_{H^+} \lVert h_i \rVert^2 + \lambda_{H^-} \lVert h_j \rVert^2\bigr) \Bigr],$$
 
-where $\sigma(z) = 1 / (1 + e^{-z})$ and $\Theta$ holds all parameters. It is the log posterior of the parameters when each triple is an independent event with probability $\sigma(x_{uij})$ and the prior on $\Theta$ is a zero mean Gaussian. The output is a score for every user and item; the recommendation for $u$ is the unused items in order of score.
+where $\sigma(z) = 1 / (1 + e^{-z})$. The output is a score for every user and item; the recommendation for $u$ is the unused items in order of score.
 
 ## The algorithm
 

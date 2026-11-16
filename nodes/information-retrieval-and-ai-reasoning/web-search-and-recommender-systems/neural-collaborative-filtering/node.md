@@ -12,9 +12,9 @@ summary: Replaces the dot product of matrix factorization by a neural network ov
 solves: [recommendation-problem]
 model: word-ram
 complexity:
-  vars: {s: the number of positive pairs, q: the number of negatives per positive, E: the number of epochs, k: the embedding size, P: the number of weights of the hidden layers}
+  vars: {m: the number of users, n: the number of items, s: the number of positive pairs, q: the number of negatives per positive, E: the number of epochs, k: the embedding size, P: the number of weights of the hidden layers}
   time: {worst: O(E s (q + 1) (k + P))}
-  space: {extra: O(P + k)}
+  space: {extra: O((m + n) k + P)}
 properties: {deterministic: false, exact: false, online: false, recursive: false}
 history:
   year: 2017
@@ -123,7 +123,7 @@ The proof in `proofs/correctness.md` shows that the hand-written backward pass i
 
 He et al. evaluated on MovieLens 1M (6,040 users, 3,706 items) and Pinterest (55,187 users, 9,916 items) with one held-out item per user ranked against 100 sampled items, measuring HR@10 and NDCG@10, and reported that NeuMF did better than their baselines.
 
-Rendle, Krichene, Zhang and Anderson (2020) reran these experiments on the same splits and metrics, with a dot product model with biases trained by the same log loss and negative sampling, and with the hyperparameters chosen on a validation set. In their experiments the dot product beat the MLP on all data sets, metrics and embedding sizes they tried ($d$ from 16 to 192), and beat NeuMF except at one point, HR on MovieLens with $d = 192$, where the pre-trained NeuMF was ahead. They also reported that the NCF numbers had been selected at the best iteration on the test set, as found by Dacrema, Boglio, Cremonesi and Jannach (2019), and that an MLP trained only to fit a dot product still had a large error, which grew with the embedding size (their Section 4 and Figure 3). These are measurements on two data sets with one protocol. They do not prove that a dot product is always better, but they show that a tuned dot product is the baseline to beat. Use NCF when there is a reason to expect that the plain dot product is the wrong form, and compare it with a well-tuned matrix factorization.
+Rendle, Krichene, Zhang and Anderson (2020) reran these experiments on the same splits and metrics, with a dot product model with biases trained by the same log loss and negative sampling, and with the hyperparameters chosen on a validation set. In their experiments the dot product beat the MLP on all data sets, metrics and embedding sizes they tried ($d$ from 16 to 192), and beat NeuMF except at one point, HR on MovieLens with $d = 192$, where the pre-trained NeuMF was ahead. They also reported that the NCF numbers had been selected at the best iteration on the test set, as found by Ferrari Dacrema, Boglio, Cremonesi and Jannach (2019), and that an MLP trained only to fit a dot product still had a large error, which grew with the embedding size (their Section 4 and Figure 3). These are measurements on two data sets with one protocol. They do not prove that a dot product is always better, but they show that a tuned dot product is the baseline to beat. Use NCF when there is a reason to expect that the plain dot product is the wrong form, and compare it with a well-tuned matrix factorization.
 
 ## Pitfalls
 
@@ -138,6 +138,6 @@ Rendle, Krichene, Zhang and Anderson (2020) reran these experiments on the same 
 
 ## History
 
-He et al. presented NCF at WWW 2017, and it became a common baseline for neural recommenders. In 2019, Dacrema, Cremonesi, Jannach and coauthors studied the reproducibility of neural recommendation papers, including NCF, and compared them with simple, well-tuned baselines. Rendle, Krichene, Zhang and Anderson revisited the NCF experiments at RecSys 2020 and found that a tuned dot product beat the learned similarity in their experiments, that an MLP has difficulty learning a dot product, and that MLP scores are costly to serve.
+He et al. presented NCF at WWW 2017, and it became a common baseline for neural recommenders. In 2019, Ferrari Dacrema, Cremonesi, Jannach and coauthors studied the reproducibility of neural recommendation papers, including NCF, and compared them with simple, well-tuned baselines. Rendle, Krichene, Zhang and Anderson revisited the NCF experiments at RecSys 2020 and found that a tuned dot product beat the learned similarity in their experiments, that an MLP has difficulty learning a dot product, and that MLP scores are costly to serve.
 
 ## References

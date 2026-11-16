@@ -13,7 +13,7 @@ see_also: [exact-matrix-completion-theorem, semidefinite-programming, convex-rel
 sources:
   - paper: doi:10.1007/s10208-009-9045-5
     title: Emmanuel J. Candès and Benjamin Recht, Exact matrix completion via convex optimization, Foundations of Computational Mathematics 9(6), 717-772, 2009
-    locator: Abstract and Section 1 (the problem, the nuclear norm program, the assumptions A0 and A1, and the first bound of order n^(6/5) r log n)
+    locator: Abstract and Section 1 (the problem, the nuclear norm program, the assumptions A0 and A1, and the first bounds, of order n^(5/4) r log n for most matrices and n^(6/5) r log n when r <= n^(1/5))
   - url: https://www.jmlr.org/papers/volume12/recht11a/recht11a.pdf
     title: Benjamin Recht, A simpler approach to matrix completion, Journal of Machine Learning Research 12, 3413-3430, 2011
     locator: Section 1 (the problem, lowest rank completion is NP-hard, the nuclear norm as a semidefinite program) and Theorem 2 (the bound of order r (n1 + n2) log^2 n2)
@@ -69,8 +69,8 @@ Remove instead $M_{12}$ and $M_{22}$, so that the whole second column is missing
 
 ## Bounds
 
-- **Upper bound for nuclear norm minimization.** Recht (2011, Theorem 2): under coherence bounds $\mu_0$ and $\mu_1$, $m \ge 32 \max\{\mu_1^2, \mu_0\} r (n_1 + n_2) \beta \log^2(2 n_2)$ uniformly random entries suffice for exact recovery with probability at least $1 - 6 \log(n_2) (n_1 + n_2)^{2 - 2\beta} - n_2^{2 - 2\beta^{1/2}}$. Earlier bounds were of order $n^{6/5} r \log n$ (Candès and Recht 2009) and $\mu^2 n r \log^6 n$ under a stronger incoherence condition (Candès and Tao 2010, Theorem 1.2).
-- **Lower bound for any method.** Candès and Tao (2010, Theorem 1.7 and Equation 1.21): in the Bernoulli model, recovering every rank-$r$ matrix of coherence $\mu_0$ with probability at least $1 - \delta$ needs about $\mu_0 n r \log(n / (2\delta))$ entries. So the upper bound is tight up to a constant and one factor of $\log n$.
+- **Upper bound for nuclear norm minimization.** Recht (2011, Theorem 2): under coherence bounds $\mu_0$ and $\mu_1$, $m \ge 32 \max\{\mu_1^2, \mu_0\} r (n_1 + n_2) \beta \log^2(2 n_2)$ uniformly random entries suffice for exact recovery with probability at least $1 - 6 \log(n_2) (n_1 + n_2)^{2 - 2\beta} - n_2^{2 - 2\beta^{1/2}}$. Earlier bounds were of order $n^{5/4} r \log n$, or $n^{6/5} r \log n$ when $r \le n^{1/5}$, for most matrices (Candès and Recht 2009) and $\mu^2 n r \log^6 n$ under a stronger incoherence condition (Candès and Tao 2010, Theorem 1.2).
+- **Lower bound for any method.** Candès and Tao (2010, Theorem 1.7 and Equation 1.21): in the Bernoulli model, recovering every rank-$r$ matrix of coherence $\mu_0$ with probability at least $1 - \delta$ needs about $\mu_0 n r \log(n / (2\delta))$ entries. So when the coherences are bounded by constants, the upper bound is tight up to a constant and one factor of $\log n$.
 - **Counting.** A rank-$r$ matrix of size $n \times n$ has $r (2n - r)$ degrees of freedom, so fewer entries than that cannot determine it.
 - **Hardness.** With an arbitrary pattern of known entries, finding the lowest rank completion is NP-hard (Recht 2011, Section 1), and low-rank approximation with missing data is NP-hard already for rank one (Gillis and Glineur 2011). The positive results above depend on the random sampling.
 

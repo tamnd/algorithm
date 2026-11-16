@@ -50,7 +50,7 @@ Any number of clicks is possible, and the click at one rank says nothing about t
 - **User browsing model.** The UBM of Dupret and Piwowarski (2008) makes the examination depend on the rank and on the distance to the previous click; the PBM is the case where it depends on the rank only.
 - **DBN.** The [DBN model](/dbn-click-model/) keeps a top-down scan, like the cascade model, and adds satisfaction after a click.
 - **Click-through rate models.** Without $\gamma$, all ranks are examined and $\alpha_d$ is the click-through rate of the document. Those raw rates mix the attraction of a document with the ranks where it was shown, which is the bias the PBM removes.
-- **Unbiased learning to rank.** If $\gamma_r$ is known, weighting each click at rank $r$ by $1 / \gamma_r$ gives an unbiased estimate of attractiveness. This inverse propensity weighting is the core of [unbiased learning to rank](/unbiased-learning-to-rank/), and the PBM is its usual model of examination.
+- **Unbiased learning to rank.** If the clicks follow the PBM and $\gamma_r > 0$ is known, weighting each click at rank $r$ by $1 / \gamma_r$ gives an unbiased estimate of attractiveness. This inverse propensity weighting is the core of [unbiased learning to rank](/unbiased-learning-to-rank/), and the PBM is its usual model of examination.
 
 ## Known results in the model
 
