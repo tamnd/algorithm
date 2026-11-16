@@ -10,7 +10,7 @@ area: compilers-and-program-analysis/dataflow-and-abstract-interpretation
 level: core
 summary: The greatest solution of the dataflow equations of a monotone framework, which iterative algorithms compute and which is below the MOP.
 prereqs: [monotone-dataflow-framework, meet-over-all-paths-solution, knaster-tarski-theorem]
-see_also: [worklist-dataflow-algorithm, meet-over-all-paths-solution, mop-mfp-coincidence-theorem, distributive-dataflow-framework, kleene-fixed-point-theorem, fixed-point-iteration, kam-ullman-iteration-bound, abstract-interpretation]
+see_also: [worklist-dataflow-algorithm, meet-over-all-paths-solution, mop-mfp-coincidence-theorem, distributive-dataflow-framework, kleene-fixed-point-theorem, kam-ullman-iteration-bound, abstract-interpretation]
 sources:
   - paper: doi:10.1007/BF00290339
     title: "John B. Kam and Jeffrey D. Ullman, Monotone data flow analysis frameworks, Acta Informatica 7(3), 1977, 305-317"
@@ -64,7 +64,7 @@ using the induction hypothesis $X[P] \sqsubseteq f_{\pi'}(\iota)$ and the monoto
 
 **Cost.** The plain iteration $X_{i+1} = F(X_i)$ takes at most $n h + 1$ rounds, each with $n$ transfer functions and $m$ meets. The [worklist dataflow algorithm](/worklist-dataflow-algorithm/) recomputes only what can change: each entry falls at most $h$ times, so it uses at most $n(h + 1)$ transfer functions and $m(h + 1)$ meets. For rapid frameworks, round-robin iteration in reverse postorder needs only $d + 2$ rounds, with $d$ the loop-connectedness depth ([Kam-Ullman iteration bound](/kam-ullman-iteration-bound/)).
 
-**Any fair order gives MFP.** The result does not depend on the order in which blocks are updated. Any update $X[B] \leftarrow F(X)[B]$ applied to an $X \sqsupseteq \mathrm{MFP}$ gives a value $\sqsupseteq \mathrm{MFP}[B]$, since $F(X)[B] \sqsupseteq F(\mathrm{MFP})[B] = \mathrm{MFP}[B]$. So every order stays above MFP, and an order that stops only when no update changes anything stops at a fixed point, which must then be MFP. This is why round-robin, worklist and other chaotic iteration orders of [fixed-point iteration](/fixed-point-iteration/) all agree.
+**Any fair order gives MFP.** The result does not depend on the order in which blocks are updated. Any update $X[B] \leftarrow F(X)[B]$ applied to an $X \sqsupseteq \mathrm{MFP}$ gives a value $\sqsupseteq \mathrm{MFP}[B]$, since $F(X)[B] \sqsupseteq F(\mathrm{MFP})[B] = \mathrm{MFP}[B]$. So every order stays above MFP, and an order that stops only when no update changes anything stops at a fixed point, which must then be MFP. This is why round-robin, worklist and other chaotic iteration orders of the [Kleene iteration](/kleene-fixed-point-theorem/) from $\top$ all agree.
 
 ## Examples and non-examples
 
@@ -81,7 +81,7 @@ using the induction hypothesis $X[P] \sqsubseteq f_{\pi'}(\iota)$ and the monoto
 - [Meet-over-all-paths solution](/meet-over-all-paths-solution/): the ideal answer, at least as precise as MFP.
 - [MOP-MFP coincidence theorem](/mop-mfp-coincidence-theorem/): MFP = MOP for distributive frameworks.
 - [Kleene fixed-point theorem](/kleene-fixed-point-theorem/) and [Knaster-Tarski theorem](/knaster-tarski-theorem/): fixed points of monotone functions by iteration and by lattice theory.
-- [Fixed-point iteration](/fixed-point-iteration/) and [worklist dataflow algorithm](/worklist-dataflow-algorithm/): ways to compute MFP.
+- Fixed-point iteration and the [worklist dataflow algorithm](/worklist-dataflow-algorithm/): ways to compute MFP.
 - [Abstract interpretation](/abstract-interpretation/): the same idea with the order reversed (least fixed points from $\bot$) and with [widening](/widening-operator/) for lattices of infinite height.
 
 ## References

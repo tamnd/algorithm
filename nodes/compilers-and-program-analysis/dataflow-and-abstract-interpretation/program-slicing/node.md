@@ -156,7 +156,7 @@ The same argument, with "the slice keeps statement $s$" as the property, shows t
 - **From halting.** The proof above reduces the halting problem to finding a minimal slice.
 - **To graph reachability.** A dependence slice is the set of nodes from which the criterion node is reachable in the program dependence graph ([graph reachability](/graph-reachability/)).
 - **To CFL reachability.** With procedures, a precise slice is the set of nodes that reach the criterion by a path whose call and return edges match, which is a [CFL reachability](/cfl-reachability/) problem over a Dyck language of call sites (Reps 1998).
-- **Dead code.** [Aggressive dead code elimination](/aggressive-dead-code-elimination/) keeps exactly the slice of all output statements and removes the rest.
+- **Dead code.** [Aggressive dead code elimination](/aggressive-dead-code-elimination/) keeps exactly the slice of all critical statements, such as returns, stores, calls and operations that may trap, and removes the rest.
 
 ## Applications
 

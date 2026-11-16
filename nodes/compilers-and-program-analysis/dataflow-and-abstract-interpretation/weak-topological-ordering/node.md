@@ -136,6 +136,7 @@ The edges are entry $\to$ outer, outer $\to$ init, outer $\to$ exit, init $\to$ 
 | VISIT(init) | 3 | 2 | not a root |
 | VISIT(exit) | 7 | 7 | a root with no loop: $P$ = [exit] |
 | VISIT(outer) | 2 | 2 | a root with a loop: pop next, body, inner, init and set their DFN to 0; call COMPONENT(outer) |
+| inside: VISIT(body) | 10 | 9 | sees inner with DFN 9, so it is not a root |
 | inside: VISIT(next) | 11 | 11 | outer has DFN $+\infty$; a root with no loop: $C$ = [next] |
 | inside: VISIT(body) | 12 | 12 | called by COMPONENT(inner); inner has DFN $+\infty$: $C'$ = [body] |
 | inside: VISIT(inner) | 9 | 9 | a root with a loop: $C$ = [(inner body), next] |
@@ -208,7 +209,7 @@ Use a WTO in an abstract interpreter over a domain of infinite height, such as [
 
 ## Pitfalls
 
-- **A strict test in line L9.** With `min < head` in place of `min ≤ head`, the flag $\mathit{loop}$ stays false at the root of every part, because every cycle through the root returns exactly $\mathit{DFN}[v]$. Then no loop gets a component. ITERATE passes over each loop once, and the result is not a post-fixed point, so it is unsound. Line L9 must use $\le$.
+- **A strict test in line L9.** With `min < head` in place of `min ≤ head`, the flag $\mathit{loop}$ stays false at the root of every part, because every cycle through the root returns exactly $\mathit{DFN}[v]$. Then no loop gets a component: line L15 places the root alone, and the other vertices of its part stay on the stack and never enter the WTO. On the example above the result is `entry outer exit`. ITERATE never computes the dropped vertices, and the result is not a post-fixed point, so it is unsound. Line L9 must use $\le$.
 - **No reset in line L13.** If the vertices taken off the stack keep their old DFN, COMPONENT in line L14 sees them as visited and returns an empty body, and the loop body is lost. Line L13 must set their DFN to 0.
 - **Widening at every vertex in line L22.** Writing $x[v] \leftarrow x[v] \nabla F_v(x)$ for every vertex still stops, but it loses bounds that a guard has just set. In the example, `init` has $i \in [0, 0]$ after the first pass, and in the second pass $F$ gives $[0, 2]$, so the widening sets $i \in [0, +\infty]$ and the guard `i < 3` is lost. Line L22 must assign, and only lines L24 and L29 widen.
 - **Widening on re-entry in line L24.** The old value of an inner head comes from the last pass of the outer loop. Widening with it can jump over a bound that the outer loop has just changed, as in step 10 of the example. Use the restart variant with a widening that stops on every sequence, or recover the bound with narrowing.

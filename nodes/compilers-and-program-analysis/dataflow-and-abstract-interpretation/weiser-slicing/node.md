@@ -12,7 +12,7 @@ solves: [program-slicing]
 model: word-ram
 complexity:
   vars: {n: the number of statements, m: the number of control flow edges between statements, v: the number of variables, c: the number of branches}
-  time: {worst: O((c + 1) (n + m) v^2)}
+  time: {worst: O((c + 1) ((n + m) v^2 + c n))}
   space: {extra: O(n v + c n)}
 properties: {deterministic: true, recursive: false, online: false, executable_result: true}
 history:
@@ -195,7 +195,7 @@ The full proof is in the proof file. Its steps:
 
 ## Complexity
 
-**Proved.** Each round runs RELEVANT-SETS once. A statement is added to the worklist only when its set grows, and a set grows at most $v$ times, so each statement is removed at most $v + 1$ times and each edge is handled at most $v + 1$ times, with $O(1)$ set operations each. A round costs $O(v (n + m))$ set operations, and line L8 adds $O(n + m)$ more. There are at most $c + 1$ rounds. The $INFL$ sets cost one search each, $O(c (n + m))$ in total, and line L9 tests them once per round. With sets of $v$ variables as arrays of flags, a set operation costs $O(v)$ word operations, or $O(\lceil v / w \rceil)$ with words of $w$ flags each. The total is $O((c + 1)(n + m) v^2)$ time, plus the post-dominators, which take $O((n + m)\, \alpha(n + m))$ time with [Lengauer and Tarjan](/lengauer-tarjan-algorithm/) on the reverse graph. The space is $O(n v)$ for the relevant sets and $O(c n)$ for the influence sets.
+**Proved.** Each round runs RELEVANT-SETS once. A statement is added to the worklist only when its set grows, and a set grows at most $v$ times, so each statement is removed at most $v + 1$ times and each edge is handled at most $v + 1$ times, with $O(1)$ set operations each. A round costs $O(v (n + m))$ set operations, and line L8 adds $O(n + m)$ more. There are at most $c + 1$ rounds. The $INFL$ sets cost one search each, $O(c (n + m))$ in total, and line L9 tests them once per round, $O(c n)$ per round with an array of flags for the blocks of $S$. With sets of $v$ variables as arrays of flags, a set operation costs $O(v)$ word operations, or $O(\lceil v / w \rceil)$ with words of $w$ flags each. The total is $O((c + 1)((n + m) v^2 + c n))$ time, plus the post-dominators, which take $O((n + m)\, \alpha(n + m))$ time with [Lengauer and Tarjan](/lengauer-tarjan-algorithm/) on the reverse graph. The space is $O(n v)$ for the relevant sets and $O(c n)$ for the influence sets.
 
 **Reached.** The bound of $c + 1$ rounds is reached when each test reads a variable that is written only under the next test, so that each round adds one more test. In a seeded run over 300 random programs, some programs needed exactly $c + 1$ rounds and none needed more.
 
