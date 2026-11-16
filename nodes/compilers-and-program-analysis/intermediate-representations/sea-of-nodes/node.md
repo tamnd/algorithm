@@ -164,7 +164,7 @@ There are two claims. First, BUILD keeps the meaning: for every run of the sourc
 The model is the word RAM, and the unit step is one node operation or one expected-constant-time hash table operation. Let $n$ be the number of instructions, $b$ the number of blocks, $v$ the number of variables and $g$ the number of nodes plus edges.
 
 - **BUILD.** The maximal PHIs make $O(b v)$ nodes, and each instruction makes at most one node, so lines L1 to L14 take $O(n + b v)$ expected time. Building from the parser with PHIs only where needed, as production compilers do, makes far fewer PHIs. Line L15, done with use lists and a worklist of PHIs whose inputs changed, costs $O(g)$ per round of removals.
-- **SCHEDULE.** Dominators of the $b$ blocks cost $O(b \alpha(b, b))$ with the [Lengauer-Tarjan algorithm](/lengauer-tarjan-algorithm/). Each LCA step and each step of the walk of line L22 moves up the dominator tree, so it is $O(b)$ per edge in the worst case, and $O(g b)$ in total. With a constant-time LCA structure the LCA part drops to $O(g)$, and the walk of line L22 is short in practice.
+- **SCHEDULE.** Dominators of the $b$ blocks cost $O(m\, \alpha(m, b))$ with the [Lengauer-Tarjan algorithm](/lengauer-tarjan-algorithm/), for the $m$ control edges between them, and $m \le 2b$ because a block ends with at most a two-way IF. Each LCA step and each step of the walk of line L22 moves up the dominator tree, so it is $O(b)$ per edge in the worst case, and $O(g b)$ in total. With a constant-time LCA structure the LCA part drops to $O(g)$, and the walk of line L22 is short in practice.
 - **Space.** $O(g)$, with $g = O(n + b v)$.
 
 ## Variants

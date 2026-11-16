@@ -62,7 +62,7 @@ A source program that can read a variable before it assigns it, on some path, ha
 
 ### Size
 
-A program in SSA form has at most one phi-function per variable per block, so the phi-functions add at most $|V| \cdot |N|$ instructions, for $|V|$ variables and $|N|$ blocks. Each phi-function has one operand per incoming edge. The iterated dominance frontiers can be quadratic in the number of blocks, so in the worst case minimal SSA has $\Theta(|N|^2)$ phi-functions for $\Theta(|N|)$ variables. Cytron et al. measured the number of phi-functions on real programs and found it grew about linearly with the size of the program.
+A program in SSA form has at most one phi-function per variable per block, so the phi-functions add at most $|V| \cdot |N|$ instructions, for $|V|$ variables and $|N|$ blocks. Each phi-function has one operand per incoming edge. One iterated dominance frontier has at most $|N|$ blocks, but the total size of the dominance frontiers can be quadratic in the number of blocks, and in the worst case minimal SSA has $\Theta(|N|^2)$ phi-functions for $\Theta(|N|)$ variables. Cytron et al. measured the number of phi-functions on real programs and found it grew about linearly with the size of the program.
 
 ### Why it helps
 

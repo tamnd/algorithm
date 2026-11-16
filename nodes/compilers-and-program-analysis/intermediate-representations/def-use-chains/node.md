@@ -126,7 +126,7 @@ Let $B$ be the number of blocks, $E$ the number of edges, $I$ the number of inst
 | the scan (lines L8 to L12) | $O(I + C)$ set operations plus reading the IN sets | |
 | the chains | | $\Theta(C)$, with $C \le D \cdot U$ |
 
-**Proved.** At most $B D + 1$ passes, in the proof file. The number of links can be quadratic: $k$ blocks that each set `x` and jump to one join block, followed by $k$ reads of `x` and `ret x`, give $k (k + 1)$ links, because each of the $k + 1$ uses is reached by all $k$ definitions. In SSA form the join gets one phi with $k$ operands and the count is $2k$.
+**Proved.** At most $B D + 1$ passes, in the proof file. The number of links can be quadratic: $k$ blocks that each set `x` and jump to one join block, followed by $k$ reads of `x` and `ret x`, give $k (k + 1)$ links, because each of the $k + 1$ uses is reached by all $k$ definitions. In SSA form the join gets one phi with $k$ operands and the count is $2k + 1$: $k$ links into the phi and $k + 1$ out of it.
 
 **Cited, not proved.** For bit-vector problems such as reaching definitions, round-robin iteration in reverse postorder needs at most the loop connectedness plus 2 passes ([Kam-Ullman bound](/kam-ullman-iteration-bound/)). Structured programs have small loop connectedness, so a few passes are usual.
 

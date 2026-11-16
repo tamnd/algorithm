@@ -148,7 +148,7 @@ The proof uses the split edges in three lemmas. After the split, a node with two
 
 ## Complexity
 
-Let $n$ be the number of nodes and $m$ the number of expressions. Each node has at most two successors, so a pass of any of the four iterative analyses costs $O(n m)$ bit operations, which is $O(n \lceil m / w \rceil)$ word operations on a machine with $w$-bit words. A round-robin pass in a good order reaches the fixed point after a number of passes bounded by the loop depth plus two, by the [Kam and Ullman bound](/kam-ullman-iteration-bound/), which is at most $n + 1$. So the worst case is $O(n^2 m)$ and the usual case is close to $O(n m)$. The sets take $\Theta(n m)$ bits. Working on basic blocks instead of single instructions, with local summary sets for each block, divides $n$ by the block length.
+Let $n$ be the number of nodes and $m$ the number of expressions. Each node has at most two successors, so a pass of any of the four iterative analyses costs $O(n m)$ bit operations, which is $O(n \lceil m / w \rceil)$ word operations on a machine with $w$-bit words. A round-robin pass in a good order reaches the fixed point after a number of passes bounded by $d + 2$, by the [Kam and Ullman bound](/kam-ullman-iteration-bound/), where $d$ is the loop-connectedness depth, the most back edges on a simple path. This is at most $n + 1$. So the worst case is $O(n^2 m)$ and the usual case is close to $O(n m)$. The sets take $\Theta(n m)$ bits. Working on basic blocks instead of single instructions, with local summary sets for each block, divides $n$ by the block length.
 
 ## Properties
 

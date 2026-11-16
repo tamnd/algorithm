@@ -164,7 +164,7 @@ The proof file gives the full proof in two parts.
 
 Let $I$ be the number of instructions, $V$ the number of variables, $n$ and $m$ the numbers of blocks and edges, and $D$ the total size of the dominance frontiers.
 
-- **Dominance.** The immediate dominators take $O(m \log n)$ time with [Lengauer-Tarjan](/lengauer-tarjan-algorithm/), or a few passes of the Cooper-Harvey-Kennedy iteration in practice. The frontiers take $\Theta(n + m + D)$.
+- **Dominance.** The immediate dominators take $O(m \log n)$ time with the simple version of [Lengauer-Tarjan](/lengauer-tarjan-algorithm/), or $O(m\, \alpha(m, n))$ with its sophisticated version, or a few passes of the Cooper-Harvey-Kennedy iteration in practice. The frontiers take $\Theta(n + m + D)$.
 - **Placement.** For one variable, the worklist takes each block of $S_v \cup DF^+(S_v)$ once and reads its frontier once, which is $O(n + D)$. Over all variables this is $O(I + V(n + D))$.
 - **Renaming.** Each instruction, each phi-function and each phi operand is handled once. The output has at most $V$ phi-functions per block, so this is $O(I + V m)$.
 
