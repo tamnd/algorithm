@@ -76,6 +76,6 @@ The theorem is about the stable model semantics. It does not carry over to the [
 
 ## History
 
-Pearce introduced equilibrium logic in the 1990s, which defines stable models within the logic of here-and-there. Lifschitz, Pearce and Valverde (2001) used it to characterize strong equivalence. Turner gave the SE-model form in 2001 and extended it to weight constraints in 2003. Lin (2002) gave the reduction to classical logic, and the coNP-completeness was shown in the same period by several groups. Uniform equivalence and relativized notions, where $R$ is restricted to some atoms, were studied later.
+Pearce introduced equilibrium logic in the 1990s, which defines stable models within the logic of here-and-there. Lifschitz, Pearce and Valverde (2001) used it to characterize strong equivalence. Turner gave the SE-model form in a conference paper in 2001, and in the journal paper of 2003 cited here he extended it to nested expressions and weight constraints. Lin (2002) gave the reduction to classical logic, and the coNP-completeness was shown in the same period by several groups. Uniform equivalence and relativized notions, where $R$ is restricted to some atoms, were studied later.
 
 ## References

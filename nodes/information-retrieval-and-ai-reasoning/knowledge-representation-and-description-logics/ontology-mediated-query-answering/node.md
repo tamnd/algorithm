@@ -20,7 +20,7 @@ sources:
   - paper: "Ullrich Hustadt, Boris Motik and Ulrike Sattler, Data complexity of reasoning in very expressive description logics, Proceedings of the 19th International Joint Conference on Artificial Intelligence (IJCAI), 2005"
     locator: the coNP data complexity of reasoning in SHIQ (general locator)
   - paper: "Carsten Lutz, The complexity of conjunctive query answering in expressive description logics, Proceedings of the 4th International Joint Conference on Automated Reasoning (IJCAR), LNAI 5195, Springer, 2008"
-    locator: the 2EXPTIME combined complexity of conjunctive query answering in ALCI (general locator)
+    locator: the 2EXPTIME combined complexity of conjunctive query answering in ALCI, and the EXPTIME upper bound for conjunctive queries over ALC (general locator)
   - paper: "Meghyn Bienvenu, Balder ten Cate, Carsten Lutz and Frank Wolter, Ontology-based data access: a study through disjunctive Datalog, CSP, and MMSNP, ACM Transactions on Database Systems 39(4), 2014"
     locator: ontology-mediated queries as pairs of an ontology and a query, and their relation to disjunctive Datalog and constraint satisfaction (general locator)
   - book: isbn:9780521695428
@@ -79,10 +79,10 @@ Complexity is measured in two ways. In *data complexity* the TBox and the query 
 | DL-Lite$_R$ | UCQ | in [AC0](/ac0/) | [NP-complete](/np-complete/) |
 | EL | instance query | P-complete | P-complete |
 | ALC | instance query | [coNP](/co-np/)-complete | EXPTIME-complete |
-| ALC | CQ | coNP-hard | EXPTIME-hard |
+| ALC | CQ | coNP-hard | EXPTIME-complete (Lutz 2008) |
 | ALCI | CQ | coNP-hard | 2EXPTIME-complete (Lutz 2008) |
 
-The DL-Lite row is from Calvanese et al. (2007). The coNP upper bound for instance queries in ALC is a case of the result of Hustadt, Motik and Sattler (2005) for SHIQ. The EXPTIME lower bounds for ALC come from the [general TBox theorem](/alc-general-tbox-exptime/), and the textbook of Baader, Horrocks, Lutz and Sattler (2017) gives the matching upper bound for instance queries. For the lower bound, $C$ is satisfiable with respect to $\mathcal T$ if and only if $(\mathcal T \cup \{A \sqsubseteq C\}, \{A(a)\})$ is consistent for a new name $A$, which holds if and only if $a$ is not a certain answer of $N(x)$ for a new name $N$. Two lower bounds have short proofs.
+The DL-Lite row is from Calvanese et al. (2007). The coNP upper bound for instance queries in ALC is a case of the result of Hustadt, Motik and Sattler (2005) for SHIQ. The EXPTIME lower bounds for ALC come from the [general TBox theorem](/alc-general-tbox-exptime/), and the textbook of Baader, Horrocks, Lutz and Sattler (2017) gives the matching upper bound for instance queries; Lutz (2008) gives the one for CQs. For the lower bound, $C$ is satisfiable with respect to $\mathcal T$ if and only if $(\mathcal T \cup \{A \sqsubseteq C\}, \{A(a)\})$ is consistent for a new name $A$, which holds if and only if $a$ is not a certain answer of $N(x)$ for a new name $N$. Two lower bounds have short proofs.
 
 *EL is P-hard in data complexity.* Fix $\mathcal T_H = \{\exists \mathit{first}.\mathit{True} \sqcap \exists \mathit{second}.\mathit{True} \sqsubseteq \mathit{Fired},\ \exists \mathit{rule}.\mathit{Fired} \sqsubseteq \mathit{True}\}$. For a set of propositional Horn clauses with at most two body atoms, let the ABox have $\mathit{True}(p)$ for each fact $p$, and for each clause $c = (p \leftarrow s \wedge t)$ the facts $\mathit{rule}(p, c)$, $\mathit{first}(c, s)$ and $\mathit{second}(c, t)$, with $s = t$ for clauses with one body atom. If $p$ is derivable, then $\mathit{True}(p)$ follows, by induction on the derivation. In the other direction, the interpretation with the individuals as domain, the ABox edges, $\mathit{True}$ the derivable variables and $\mathit{Fired}$ the clauses whose body atoms are derivable is a model of $\mathcal T_H$ and the ABox. So $p$ is a certain answer of $\mathit{True}(x)$ if and only if $p$ is derivable. Derivability in Horn logic is P-complete ([Horn satisfiability](/horn-sat/)), and the ABox is built in logarithmic space. The upper bound holds because an ABox can be written with nominals, $\{a\} \sqsubseteq A$ and $\{a\} \sqsubseteq \exists r.\{b\}$, and subsumption in EL with nominals is polynomial (Baader, Brandt and Lutz 2005).
 

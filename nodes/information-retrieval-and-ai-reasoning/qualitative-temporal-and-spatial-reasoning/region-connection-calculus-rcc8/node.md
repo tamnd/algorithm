@@ -72,6 +72,6 @@ An input is a [qualitative constraint network](/qualitative-constraint-network/)
 
 **Hardness and membership.** Renz and Nebel (1999) prove NP-hardness by a reduction from propositional satisfiability, and the problem is in NP because a network is consistent exactly when some refinement of its labels to base relations is, and that refinement can be checked in polynomial time. The exact statement of the tractability results, with a proof sketch, is on the page [maximal tractable subclasses of RCC8](/rcc8-tractable-subclasses/).
 
-**Realization.** Consistency here means a solution by regular closed regions, which may have several pieces. If every region must be connected in the plane, the problem is a different one; with thin curves as regions, deciding which pairs may be DC and which must meet is close to the recognition of [string graphs](/string-graph/).
+**Realization.** Consistency here means a solution by regular closed regions, which may have several pieces. If every region must be connected in the plane, the problem is a different one; with thin curves as regions, deciding which pairs may be DC and which must meet is close to the recognition of string graphs, the intersection graphs of curves in the plane.
 
 ## References

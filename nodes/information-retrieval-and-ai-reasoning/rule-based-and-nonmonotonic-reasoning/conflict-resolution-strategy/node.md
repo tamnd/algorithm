@@ -41,7 +41,7 @@ A rule engine often finds several rules that are ready to run at the same time, 
 - **Priority.** The programmer gives each rule a number, called *salience* in CLIPS, and the highest number wins. A strict priority on rules is the control of a [Markov algorithm](/markov-algorithm/).
 - **Order.** Prefer the rule that comes first in the program text, or choose at random.
 
-**LEX.** The LEX strategy of OPS5 applies refraction first. Then it sorts the time tags of each instantiation in decreasing order and compares the sorted lists element by element; the first larger tag wins. If the lists tie, the rule with more tests in its conditions wins. If the tie remains, the choice is arbitrary.
+**LEX.** The LEX strategy of OPS5 applies refraction first. Then it sorts the time tags of each instantiation in decreasing order and compares the sorted lists element by element; the first larger tag wins, and if one list is a prefix of the other, the longer list wins. If the lists are equal, the rule with more tests in its conditions wins. If the tie remains, the choice is arbitrary.
 
 **MEA.** The MEA strategy, named after means-ends analysis, applies refraction and then compares the time tag of the WME that matches the first condition of each rule; the larger one wins. Ties go to LEX. A program that puts a goal WME in the first condition of each rule thus works on its most recent goal first.
 
