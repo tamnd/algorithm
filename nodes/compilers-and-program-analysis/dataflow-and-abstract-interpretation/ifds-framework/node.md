@@ -208,7 +208,7 @@ Use IFDS when the facts are a finite set that you can list per procedure, every 
 - **Large fact sets.** The bound has $D^3$, and $D$ can be large. With access paths as facts, the number of facts grows quickly, so tools cut access paths at a fixed length.
 - **No $\mathbf{0}$.** Without the fact $\mathbf{0}$, a fact that a statement makes from nothing never appears. Every edge must also map $\mathbf{0}$ to $\mathbf{0}$, or whole regions of the graph go missing.
 - **Locals through the callee.** The caller's locals belong on the call-to-return edge. If the call edge passes them into the callee, every callee must carry every caller local back, which costs more and can lose precision.
-- **Facts that need two inputs.** A distributive function treats each fact alone. "x is constant if a and b are constant" needs two facts at once, and IFDS cannot express it. Use IDE or a non-distributive method.
+- **Facts that need two inputs.** A distributive function treats each fact alone. "x is constant if a and b are constant" needs two facts at once, and IFDS cannot express it. IDE cannot either, since `x = a + b` is not distributive over its value lattice and IDE sends `x` to $\bot$. Use a non-distributive method.
 - **Seeds outside main.** If the analysis starts inside a procedure, the facts at its exit must return to every caller, with no matching call. Forgetting this loses results.
 - **Data flow only.** The taint instance here does not follow branches. A secret that only decides which constant is stored does not taint the result.
 

@@ -114,7 +114,7 @@ The shape property that holds at the loop head in every trip, for every list len
 | storage shape graphs (Chase, Wegman and Zadeck 1990) | one node per allocation site, with counts of heap references | keeps simple lists and trees, loses them under destructive update |
 | Ghiya and Hendren (1996) | path facts between pointers | classifies each structure as a tree, a DAG or a cyclic graph, for parallelizing C |
 | shape graphs (Sagiv, Reps and Wilhelm 1998) | nodes named by the variables that point to them, with sharing bits | proves in-place list reversal and insertion keep a list acyclic |
-| [three-valued logic shape analysis](/three-valued-logic-shape-analysis/) (2002) | logical structures with a value for "unknown", canonical abstraction | parametric in the predicates; TVLA is the tool |
+| [three-valued logic shape analysis](/three-valued-logic-shape-analysis/) (1999, 2002) | logical structures with a value for "unknown", canonical abstraction | parametric in the predicates; TVLA is the tool |
 | separation logic with list segments (Distefano, O'Hearn and Yang 2006) | points-to facts and list segments, joined by $*$ | abstraction by rewriting long segments into one |
 | [bi-abduction](/bi-abduction/) (Calcagno, Distefano, O'Hearn and Yang 2009) | the same formulas, per procedure | compositional; the basis of Infer |
 | PALE (Møller and Schwartzbach 2001) | monadic second-order logic over graph types | checks given invariants; decidable but costly |
@@ -122,7 +122,7 @@ The shape property that holds at the loop head in every trip, for every list len
 ## Bounds
 
 - **Undecidable in general.** Landi (1992) showed that may alias is undecidable for languages with `if`, loops, dynamic storage and recursive data structures, and must alias is not even recursively enumerable. Shape properties are at least as hard: "x and y never point to the same cell at $p$" is an alias question. The reduction under Reductions gives the same result for pointer programs without integers. See also [the undecidability of may alias](/may-alias-undecidability/) and [Rice's theorem](/rice-theorem/).
-- **Finite abstractions terminate.** With canonical abstraction over $k$ unary predicates, each abstract heap has at most $2^k$ nodes, so there are finitely many abstract heaps, and the fixed point is reached. The bound on the number of abstract heaps is doubly exponential in $k$; in practice the predicates are chosen so that it is much smaller.
+- **Finite abstractions terminate.** With canonical abstraction over $k$ unary predicates, each abstract heap has at most $3^k$ nodes, one per vector of values $0$, $1$ or $\tfrac12$ of the predicates ($2^k$ when every predicate is definite), so there are finitely many abstract heaps, and the fixed point is reached. The bound on the number of abstract heaps is doubly exponential in $k$; in practice the predicates are chosen so that it is much smaller.
 - **Decidable entailment for lists.** Berdine, Calcagno and O'Hearn (2004) showed that entailment between separation logic formulas built from points-to facts and list segments is decidable, which lets an analysis check that one abstract heap is covered by another.
 - **Bounded heaps.** If the number of cells is bounded, the state space is finite and every property is decidable by exploring it, but the bound is a restriction on the program, not an analysis.
 
