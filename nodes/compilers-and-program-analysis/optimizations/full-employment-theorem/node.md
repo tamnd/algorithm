@@ -93,7 +93,7 @@ done:
   ret 0
 ```
 
-For `n = 27` it applies the map 111 times and executes 711 instructions and terminators before it returns 0. For every `n` below 2 it returns 0 at once. It returns 0 for all `n` up to 2000. It is equivalent to the one-block program `entry: ret 0` if and only if the Collatz conjecture is true. So a perfect size optimizer applied to these 15 lines would settle an open problem in number theory.
+For `n = 27` it applies the map 111 times and executes 711 instructions and terminators before it returns 0. For every `n` below 2 it returns 0 at once. It returns 0 for all `n` up to 2000. It is equivalent to the one-block program `entry: ret 0` if and only if the Collatz conjecture is true. So a perfect size optimizer applied to these 17 lines would settle an open problem in number theory.
 
 ## Consequences
 

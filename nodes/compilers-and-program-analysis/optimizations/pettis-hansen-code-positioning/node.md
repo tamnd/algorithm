@@ -112,7 +112,7 @@ Sorting the edges takes $O(E \log E)$. With head and tail markers per block and 
 
 - Greedy and deterministic for a fixed tie rule.
 - It only uses edge weights, so an edge profile is enough. A path profile adds nothing for this model.
-- It is not optimal: it is a greedy algorithm for an NP-hard problem, and it has no constant-factor guarantee in this form.
+- It is not optimal: it is a greedy algorithm for an NP-hard problem. It keeps at least one third of the best fall-through weight. The fall-through edges of a layout have at most one edge out of each block, at most one into each block and none into the entry, and no cycle. These are three matroids, L1 to L5 is the greedy algorithm on their intersection, and that greedy keeps at least a third of the best weight. The bound is tight up to $\varepsilon$: with entry D, edges D$\to$B, B$\to$A, A$\to$C of weight 1 and A$\to$B of weight $1 + \varepsilon$, the greedy joins A$\to$B first and lays out D A B C, of weight $1 + \varepsilon$, while D B A C has weight 3.
 - An edge into the entry is never a fall-through, and in each loop at least one edge of the cycle is not a fall-through.
 
 ## Variants and improvements
