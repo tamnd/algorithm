@@ -57,7 +57,7 @@ where $e$ is any edge that is not a call or return edge. These are the languages
 
 **Three solutions.** Use the meet convention of Kildall for a [monotone framework](/monotone-dataflow-framework/): $\top$ is the start value, lower is less precise, and $f_\pi$ is the composition of the edge functions along a path $\pi$. (The join convention of Cousot flips the order.) For a point $n$:
 
-- $\mathrm{MVP}(n) = \bigsqcap \{ f_\pi(\iota) : \pi \text{ a valid path from } \mathit{entry}_{main} \text{ to } n \}$, the goal.
+- $\mathrm{MVP}(n) = \mathop{\large\sqcap} \{ f_\pi(\iota) : \pi \text{ a valid path from } \mathit{entry}_{main} \text{ to } n \}$, the goal.
 - $\mathrm{MOP}_{SG}(n)$, the same meet over *all* paths of the supergraph.
 - $\mathrm{MFP}_{SG}$, the greatest fixed point of the equations of the supergraph, as for one big procedure.
 

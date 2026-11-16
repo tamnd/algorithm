@@ -53,11 +53,11 @@ So a monotone function may lose information at a meet: applying $f$ after the me
 
 **The equations.** For a forward instance, with the empty meet equal to $\top$:
 
-$$\mathrm{IN}[B] = \Big(\iota \text{ if } B \text{ is the entry}\Big) \sqcap \bigsqcap_{(P, B) \in E} \mathrm{OUT}[P], \qquad \mathrm{OUT}[B] = f_B(\mathrm{IN}[B]).$$
+$$\mathrm{IN}[B] = \Big(\iota \text{ if } B \text{ is the entry}\Big) \sqcap \mathop{\large\sqcap}_{(P, B) \in E} \mathrm{OUT}[P], \qquad \mathrm{OUT}[B] = f_B(\mathrm{IN}[B]).$$
 
 A backward instance has the same equations on the reverse CFG, with $\iota$ in the meet of each exit block.
 
-**The two answers.** The ideal answer is $\mathrm{MOP}[B] = \bigsqcap_{\pi} f_\pi(\iota)$, the meet over all paths $\pi$ from the start to $B$. The equations have a greatest solution, the maximal fixed point MFP, and iteration from $\top$ computes it. In every monotone framework MFP $\sqsubseteq$ MOP, so the computed answer is safe. The proofs are on the [maximal fixed-point solution](/maximal-fixed-point-solution/) page.
+**The two answers.** The ideal answer is $\mathrm{MOP}[B] = \mathop{\large\sqcap}_{\pi} f_\pi(\iota)$, the meet over all paths $\pi$ from the start to $B$. The equations have a greatest solution, the maximal fixed point MFP, and iteration from $\top$ computes it. In every monotone framework MFP $\sqsubseteq$ MOP, so the computed answer is safe. The proofs are on the [maximal fixed-point solution](/maximal-fixed-point-solution/) page.
 
 **Soundness.** Assume that each $f_B$ is a safe description of block $B$: if a fact $x$ holds before the block runs, then $f_B(x)$ holds after it. Every execution follows some path of the CFG, so the fact after an execution is at least $f_\pi(\iota)$ for its path $\pi$, and MOP and MFP are below that. Paths of the CFG that no input follows only lower the answer, which keeps it safe.
 

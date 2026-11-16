@@ -38,7 +38,7 @@ In words, running a function on a fact $x$ loses nothing beyond what it loses on
 
 **The solver (round robin).** Fix a linear order $B_1, \ldots, B_n$ of the blocks. Start with $IN[B] = \top$ for every $B$. A *pass* visits the blocks in this order and at each block $u$ sets
 
-$$IN[u] := init(u) \sqcap \bigsqcap_{(p, u) \in E} f_p(IN[p]),$$
+$$IN[u] := init(u) \sqcap \mathop{\large\sqcap}_{(p, u) \in E} f_p(IN[p]),$$
 
 using the newest values of its predecessors. The solver runs passes until a pass changes no value.
 
@@ -60,7 +60,7 @@ Let $X$ denote the current value of the array $IN$, and let $\mathrm{MFP}$ and $
 
 **Lemma 1 (the solver goes down and stays above MFP).** At every moment, each value of $IN$ is at most its previous values and at least $\mathrm{MFP}$. When a pass changes nothing, $IN = \mathrm{MFP}$, and the solver stops after finitely many passes.
 
-*Proof.* Both claims are by induction on the number of updates. The first update of $IN[u]$ gives a value below $\top$. A later update uses the current values of the predecessors, which are below the values used by the previous update of $u$, so by monotonicity the new value is below the old one. For the second claim, if every $IN[p] \sqsupseteq \mathrm{MFP}[p]$, then the new value $init(u) \sqcap \bigsqcap_p f_p(IN[p]) \sqsupseteq init(u) \sqcap \bigsqcap_p f_p(\mathrm{MFP}[p]) = \mathrm{MFP}[u]$, because MFP is a fixed point. A pass that changes nothing leaves $IN$ equal to the right side of the equations, so $IN$ is a fixed point. It is above the greatest fixed point MFP, so it equals MFP. Each value can fall at most $h$ times, so at most $n h + 1$ passes run. $\square$
+*Proof.* Both claims are by induction on the number of updates. The first update of $IN[u]$ gives a value below $\top$. A later update uses the current values of the predecessors, which are below the values used by the previous update of $u$, so by monotonicity the new value is below the old one. For the second claim, if every $IN[p] \sqsupseteq \mathrm{MFP}[p]$, then the new value $init(u) \sqcap \mathop{\large\sqcap}_p f_p(IN[p]) \sqsupseteq init(u) \sqcap \mathop{\large\sqcap}_p f_p(\mathrm{MFP}[p]) = \mathrm{MFP}[u]$, because MFP is a fixed point. A pass that changes nothing leaves $IN$ equal to the right side of the equations, so $IN$ is a fixed point. It is above the greatest fixed point MFP, so it equals MFP. Each value can fall at most $h$ times, so at most $n h + 1$ passes run. $\square$
 
 **Lemma 2 (how fast a route is covered).** For a walk $w = (u_0, \ldots, u_k)$, let $r(w)$ be the number of retreating edges among its edges, and $r'(w)$ the number among its edges except the first.
 
@@ -71,7 +71,7 @@ Let $X$ denote the current value of the array $IN$, and let $\mathrm{MFP}$ and $
 
 Call a walk $w = (u_0, \ldots, u_k)$ with $k \ge 1$ *tail-simple* if $(u_1, \ldots, u_k)$ is a simple path; $u_0$ may equal one of the other blocks. A simple path $\sigma$ has $r(\sigma) \le d$, and a tail-simple walk $w$ has $r'(w) \le d$, because $r'(w)$ counts the retreating edges of the simple path $(u_1, \ldots, u_k)$. For a block $v$, let $T(v)$ be the finite set of the values $f_\sigma(\iota)$ for the simple paths $\sigma$ to $v$ and $f_w(\top)$ for the tail-simple walks $w$ that end at $v$.
 
-**Lemma 3 (only simple routes matter).** If the framework is distributive and rapid, then $\bigsqcap T(v) \sqsubseteq f_w(\top)$ for every walk $w$ of length at least 1 that ends at $v$, and $\bigsqcap T(v) \sqsubseteq f_\pi(\iota)$ for every path $\pi$ to $v$.
+**Lemma 3 (only simple routes matter).** If the framework is distributive and rapid, then $\mathop{\large\sqcap} T(v) \sqsubseteq f_w(\top)$ for every walk $w$ of length at least 1 that ends at $v$, and $\mathop{\large\sqcap} T(v) \sqsubseteq f_\pi(\iota)$ for every path $\pi$ to $v$.
 
 *Proof.* The key step is this. Let $w = (u_0, \ldots, u_k)$ be any walk with $u_i = u_j$ for some $i < j$. Split it into the part $\alpha = (u_0, \ldots, u_i)$, the cycle $\gamma = (u_i, \ldots, u_j)$ and the rest $\delta = (u_j, \ldots, u_k)$. Let $y$ be the start value of $w$, either $\iota$ or $\top$, and $x = f_\alpha(y)$. The function $f_\gamma$ is in $F$, so the rapid property gives $f_\gamma(x) \sqsupseteq x \sqcap f_\gamma(\top)$. Apply $f_\delta$, which is monotone, and then distributive:
 
@@ -79,11 +79,11 @@ $$f_w(y) = f_\delta(f_\gamma(x)) \;\sqsupseteq\; f_\delta(x \sqcap f_\gamma(\top
 
 Here $\alpha\delta$ is $w$ with the cycle cut out, of length $k - (j - i)$, and $\gamma\delta$ is the walk $(u_i, \ldots, u_k)$, of length $k - i$. When $j = k$, $f_\delta$ is the identity and distributivity is not needed.
 
-*Walks.* Induction on the length $k$ of $w$. If $w$ is tail-simple, its value is in $T(v)$. Otherwise two of $u_1, \ldots, u_k$ are equal, so the key step applies with $1 \le i < j$. Both $\alpha\delta$ and $\gamma\delta$ are shorter than $k$, have length at least 1 and end at $v$. By induction, $\bigsqcap T(v)$ is below both values, hence below their meet, hence below $f_w(\top)$.
+*Walks.* Induction on the length $k$ of $w$. If $w$ is tail-simple, its value is in $T(v)$. Otherwise two of $u_1, \ldots, u_k$ are equal, so the key step applies with $1 \le i < j$. Both $\alpha\delta$ and $\gamma\delta$ are shorter than $k$, have length at least 1 and end at $v$. By induction, $\mathop{\large\sqcap} T(v)$ is below both values, hence below their meet, hence below $f_w(\top)$.
 
 *Paths.* Induction on the length of $\pi$. If $\pi$ is simple, its value is in $T(v)$. Otherwise the key step applies with $y = \iota$. The path $\alpha\delta$ is shorter, so the induction covers it, and the walk $\gamma\delta$ has length $k - i \ge j - i \ge 1$, so the walk case covers it. $\square$
 
-**The theorem.** Look at the end of pass $d + 1$. Every element of $T(v)$ comes from a simple path $\sigma$ with $r(\sigma) + 1 \le d + 1$ or from a tail-simple walk $w$ with $r'(w) + 1 \le d + 1$. By Lemma 2, $IN[v]$ is below each of them, so $IN[v] \sqsubseteq \bigsqcap T(v)$. By Lemma 3, this is below $f_\pi(\iota)$ for every path $\pi$ to $v$, so $IN[v] \sqsubseteq \mathrm{MOP}[v]$. Every block is reachable and the framework is distributive, so $\mathrm{MOP} = \mathrm{MFP}$ by the [coincidence theorem](/mop-mfp-coincidence-theorem/). With Lemma 1, $\mathrm{MFP} \sqsubseteq IN \sqsubseteq \mathrm{MFP}$, so $IN = \mathrm{MFP}$ after pass $d + 1$. Pass $d + 2$ recomputes every value from a fixed point and changes nothing, so the solver stops. $\blacksquare$
+**The theorem.** Look at the end of pass $d + 1$. Every element of $T(v)$ comes from a simple path $\sigma$ with $r(\sigma) + 1 \le d + 1$ or from a tail-simple walk $w$ with $r'(w) + 1 \le d + 1$. By Lemma 2, $IN[v]$ is below each of them, so $IN[v] \sqsubseteq \mathop{\large\sqcap} T(v)$. By Lemma 3, this is below $f_\pi(\iota)$ for every path $\pi$ to $v$, so $IN[v] \sqsubseteq \mathrm{MOP}[v]$. Every block is reachable and the framework is distributive, so $\mathrm{MOP} = \mathrm{MFP}$ by the [coincidence theorem](/mop-mfp-coincidence-theorem/). With Lemma 1, $\mathrm{MFP} \sqsubseteq IN \sqsubseteq \mathrm{MFP}$, so $IN = \mathrm{MFP}$ after pass $d + 1$. Pass $d + 2$ recomputes every value from a fixed point and changes nothing, so the solver stops. $\blacksquare$
 
 **A worked example.** [Reaching definitions](/reaching-definitions/) on the loop of the coincidence theorem page: `entry` defines $d_1$, `head` defines $d_3$, `body` defines $d_2$, and the edges are entry to head, head to body, body to head and head to exit. A depth-first search from `entry` that visits `body` last gives the reverse postorder entry, head, exit, body. The only retreating edge is (body, head), so $d = 1$.
 

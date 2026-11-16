@@ -70,7 +70,7 @@ A block applies its instructions in order. Each rule is monotone: if the operand
 
 **Equations.**
 
-$$\mathrm{IN}[\mathrm{entry}] = \iota \sqcap \bigsqcap_{P \in \mathrm{pred}(\mathrm{entry})} \mathrm{OUT}[P], \qquad \mathrm{IN}[B] = \bigsqcap_{P \in \mathrm{pred}(B)} \mathrm{OUT}[P], \qquad \mathrm{OUT}[B] = f_B(\mathrm{IN}[B]).$$
+$$\mathrm{IN}[\mathrm{entry}] = \iota \sqcap \mathop{\large\sqcap}_{P \in \mathrm{pred}(\mathrm{entry})} \mathrm{OUT}[P], \qquad \mathrm{IN}[B] = \mathop{\large\sqcap}_{P \in \mathrm{pred}(B)} \mathrm{OUT}[P], \qquad \mathrm{OUT}[B] = f_B(\mathrm{IN}[B]).$$
 
 **Meet over all paths.** For a path $\pi$ from the entry to the start of $B$, $f_\pi(\iota)$ gives each variable the value it has after the instructions along $\pi$, $\bot$ if it depends on a parameter or on a trap, and $\top$ if $\pi$ does not define it. The [meet-over-all-paths solution](/meet-over-all-paths-solution/) makes $x$ a constant $c$ at $B$ when every path that defines $x$ gives it $c$. This is the ideal answer for the CFG, with every branch taken as possible.
 
@@ -162,7 +162,7 @@ Simple constant propagation finds $c = 1$ but takes both edges, so $y = 2 \sqcap
 
 **MFP is cheap.** The bound $O((n + m) v^2 + s v)$ above is polynomial, and the sparse algorithms are linear in the size of the SSA form.
 
-**MFP can be strictly weaker than MOP.** The opposite branches example has $\mathrm{MFP}(z) = \bot$ and $\mathrm{MOP}(z) = 5$. The tightness part of the [MOP-MFP coincidence theorem](/mop-mfp-coincidence-theorem/) builds such an instance from any failure of distributivity whose two arguments the transfer functions can produce from one boundary value.
+**MFP can be strictly weaker than MOP.** The opposite branches example has $\mathrm{MFP}(z) = \bot$ and $\mathrm{MOP}(z) = 5$. By the tightness part of the [MOP-MFP coincidence theorem](/mop-mfp-coincidence-theorem/), every framework that is not distributive has such an instance.
 
 **Iteration speed.** Constant propagation is not rapid. Round robin can need more passes than the $d + 2$ of the [Kam-Ullman iteration bound](/kam-ullman-iteration-bound/), which gives a loop with $d = 1$ that needs 6 passes. The worklist bound $2v + 1$ evaluations per block always holds.
 

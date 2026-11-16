@@ -71,7 +71,7 @@ L17 return X
 
 UPDATE$(n, g)$ sets $\varphi[n] \leftarrow \varphi[n] \sqcap g$ and adds $n$ to $W$ if this changes $\varphi[n]$. After phase 1, $\varphi[n]$ maps the fact at the entry of the procedure of $n$ to the fact at $n$, and $\varphi[\mathit{exit}_q]$ is the summary of $q$. Line L8 handles recursion and calls to procedures whose summary is not final yet: when a summary drops, every call site that used it is looked at again.
 
-**Correctness.** Call a path *same-level valid* if its call and return edges match as brackets, as on the [interprocedural dataflow analysis](/interprocedural-dataflow-analysis/) page. A path may also take a call-to-return edge. Let $\mathrm{SL}(n) = \bigsqcap \{ f_\pi : \pi$ a same-level valid path from $\mathit{entry}_p$ to $n \}$, where $f_\pi$ is the composition of the functions along $\pi$.
+**Correctness.** Call a path *same-level valid* if its call and return edges match as brackets, as on the [interprocedural dataflow analysis](/interprocedural-dataflow-analysis/) page. A path may also take a call-to-return edge. Let $\mathrm{SL}(n) = \mathop{\large\sqcap} \{ f_\pi : \pi$ a same-level valid path from $\mathit{entry}_p$ to $n \}$, where $f_\pi$ is the composition of the functions along $\pi$.
 
 *Lemma 1 (phase 1).* If all functions are monotone, $\varphi[n] \sqsubseteq \mathrm{SL}(n)$. If they are also distributive, $\varphi[n] = \mathrm{SL}(n)$.
 

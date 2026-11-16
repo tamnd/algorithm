@@ -18,11 +18,11 @@ By (F3), the meet of any set of functions of $F$, even an infinite set, is the m
 
 Every edge $e = (n, m)$ of $G^*$ and every pair $d \in D_n \cup \{\mathbf{0}\}$, $d' \in D_m \cup \{\mathbf{0}\}$ have a micro-function $\varphi_e(d, d')$. The function is $\lambda l.\top$ when there is no exploded edge, and $\varphi_e(\mathbf{0}, \mathbf{0})$ is the identity. An *environment* $\rho$ maps the facts of a procedure to $L$, with $\rho(\mathbf{0}) = \bot$. The edge $e$ has the environment transformer
 
-$$t_e(\rho)(d') = \bigsqcap_{d} \varphi_e(d, d')(\rho(d)).$$
+$$t_e(\rho)(d') = \mathop{\large\sqcap}_{d} \varphi_e(d, d')(\rho(d)).$$
 
 For a path $\pi = e_1 \dots e_k$, $t_\pi = t_{e_k} \circ \dots \circ t_{e_1}$. The start environment $\rho_0$ gives $\bot$ to $\mathbf{0}$, the seed value or $\bot$ to each parameter of main, and $\top$ to the other variables of main. *Valid* and *same-level* paths are defined by matched brackets, as for IFDS. The meet over all valid paths is
 
-$$\mathrm{MVP}(n)(d) = \bigsqcap \{ t_\pi(\rho_0)(d) : \pi \text{ a valid path from } s_{main} \text{ to } n \}.$$
+$$\mathrm{MVP}(n)(d) = \mathop{\large\sqcap} \{ t_\pi(\rho_0)(d) : \pi \text{ a valid path from } s_{main} \text{ to } n \}.$$
 
 The *exploded supergraph* $G^\#$ has a node $\langle n, d \rangle$ for every node $n$ and fact $d$, and an edge $\langle n, d \rangle \to \langle m, d' \rangle$ labelled $\varphi_e(d, d')$ for every edge $e = (n, m)$ with $\varphi_e(d, d') \ne \lambda l.\top$. For a path $\sigma$ of $G^\#$, $\varphi_\sigma$ is the composition of its labels, and the identity for the empty path. No label is $\lambda l.\top$, and a composition is $\lambda l.\top$ only if one of its parts is. So $\varphi_\sigma \ne \lambda l.\top$.
 
@@ -30,11 +30,11 @@ We use the lines L1 to L23 of the pseudocode. $J(n, d_1, d_2)$ is the jump funct
 
 **Lemma 1 (one path, many facts).** For a path $\pi$ of $G^*$ from $n$ to $m$, an environment $\rho$ and a fact $d'$,
 
-$$t_\pi(\rho)(d') = \bigsqcap \{ \varphi_\sigma(\rho(d)) : \sigma \text{ a path of } G^\# \text{ that follows } \pi \text{ from some } \langle n, d \rangle \text{ to } \langle m, d' \rangle \}.$$
+$$t_\pi(\rho)(d') = \mathop{\large\sqcap} \{ \varphi_\sigma(\rho(d)) : \sigma \text{ a path of } G^\# \text{ that follows } \pi \text{ from some } \langle n, d \rangle \text{ to } \langle m, d' \rangle \}.$$
 
 *Proof.* Induction on the length of $\pi$. For the empty path the only $\sigma$ is the empty path from $\langle n, d' \rangle$, and both sides are $\rho(d')$. Let $\pi = \pi' e$. By induction and by (F2),
 
-$$t_\pi(\rho)(d') = \bigsqcap_d \varphi_e(d, d')\Big(\bigsqcap_{\sigma'} \varphi_{\sigma'}(\rho(d_0))\Big) = \bigsqcap_d \bigsqcap_{\sigma'} \varphi_e(d, d')(\varphi_{\sigma'}(\rho(d_0))),$$
+$$t_\pi(\rho)(d') = \mathop{\large\sqcap}_d \varphi_e(d, d')\Big(\mathop{\large\sqcap}_{\sigma'} \varphi_{\sigma'}(\rho(d_0))\Big) = \mathop{\large\sqcap}_d \mathop{\large\sqcap}_{\sigma'} \varphi_e(d, d')(\varphi_{\sigma'}(\rho(d_0))),$$
 
 where $\sigma'$ runs over the paths that follow $\pi'$ and end at $\langle \cdot, d \rangle$. An empty meet is $\top$, and every micro-function maps $\top$ to $\top$, so empty meets do no harm. A term with $\varphi_e(d, d') = \lambda l.\top$ is $\top$ and drops out. The other terms are exactly the paths $\sigma = \sigma' e$ of $G^\#$. $\square$
 
@@ -46,11 +46,11 @@ A path that starts at $\langle s_{main}, d_0 \rangle$ for a variable $d_0$ of ma
 
 **Decomposition.** Cut a valid path of $G^\#$ from $\langle s_{main}, d_0 \rangle$ at its last call edge that is never closed. This gives $\alpha \cdot \sigma$, where $\alpha$ is empty or ends with that call edge, and $\sigma$ is a same-level path from some $\langle s_p, d_1 \rangle$. We call $\alpha$ an *entry path* to $\langle s_p, d_1 \rangle$ and $d_1$ the *entry fact*. Let
 
-$$\mathrm{SL}(n, d_1, d_2) = \bigsqcap \{ \varphi_\sigma : \sigma \text{ same-level from } \langle s_p, d_1 \rangle \text{ to } \langle n, d_2 \rangle \}, \qquad \mathrm{EN}(p, d_1) = \bigsqcap \{ \varphi_\alpha(\rho_0(d_0)) : \alpha \text{ an entry path to } \langle s_p, d_1 \rangle \}.$$
+$$\mathrm{SL}(n, d_1, d_2) = \mathop{\large\sqcap} \{ \varphi_\sigma : \sigma \text{ same-level from } \langle s_p, d_1 \rangle \text{ to } \langle n, d_2 \rangle \}, \qquad \mathrm{EN}(p, d_1) = \mathop{\large\sqcap} \{ \varphi_\alpha(\rho_0(d_0)) : \alpha \text{ an entry path to } \langle s_p, d_1 \rangle \}.$$
 
 By Corollary 2, (F2) and the remark after (F3),
 
-$$\mathrm{MVP}(n)(d_2) = \bigsqcap_{d_1} \mathrm{SL}(n, d_1, d_2)(\mathrm{EN}(p, d_1)). \qquad (\ast)$$
+$$\mathrm{MVP}(n)(d_2) = \mathop{\large\sqcap}_{d_1} \mathrm{SL}(n, d_1, d_2)(\mathrm{EN}(p, d_1)). \qquad (\ast)$$
 
 **Phase I.**
 
@@ -114,9 +114,9 @@ $$\mathrm{val}(n, d) \sqsubseteq J(n, d_1, d)(\mathrm{val}(s_p, d_1)) \sqsubsete
 
 *Proof.* For $n \in \mathcal{K}$, this is Lemma 6, Lemma 7 and Corollary 2. For another node $n$ of $p$, L20 sets
 
-$$\mathrm{val}(n, d_2) = \bigsqcap_{d_1} J(n, d_1, d_2)(\mathrm{val}(s_p, d_1)) = \bigsqcap_{d_1} \mathrm{SL}(n, d_1, d_2)(\mathrm{MVP}(s_p)(d_1)).$$
+$$\mathrm{val}(n, d_2) = \mathop{\large\sqcap}_{d_1} J(n, d_1, d_2)(\mathrm{val}(s_p, d_1)) = \mathop{\large\sqcap}_{d_1} \mathrm{SL}(n, d_1, d_2)(\mathrm{MVP}(s_p)(d_1)).$$
 
-Keys that do not exist give $\top$ and drop out. We show that the right side is $\mathrm{MVP}(n)(d_2)$. Every entry path to $\langle s_p, d_1 \rangle$ is a valid path, so $\mathrm{MVP}(s_p)(d_1) \sqsubseteq \mathrm{EN}(p, d_1)$, and by $(\ast)$ and monotonicity the right side is at most $\mathrm{MVP}(n)(d_2)$. For the other direction, $(\ast)$ for $s_p$ gives $\mathrm{MVP}(s_p)(d_1) = \bigsqcap_{d_1'} \mathrm{SL}(s_p, d_1', d_1)(\mathrm{EN}(p, d_1'))$. A same-level path to $\langle s_p, d_1 \rangle$ followed by one from $\langle s_p, d_1 \rangle$ to $\langle n, d_2 \rangle$ is same-level, so $\mathrm{SL}(n, d_1, d_2) \circ \mathrm{SL}(s_p, d_1', d_1) \sqsupseteq \mathrm{SL}(n, d_1', d_2)$. With (F2), the right side is at least $\bigsqcap_{d_1'} \mathrm{SL}(n, d_1', d_2)(\mathrm{EN}(p, d_1')) = \mathrm{MVP}(n)(d_2)$. $\square$
+Keys that do not exist give $\top$ and drop out. We show that the right side is $\mathrm{MVP}(n)(d_2)$. Every entry path to $\langle s_p, d_1 \rangle$ is a valid path, so $\mathrm{MVP}(s_p)(d_1) \sqsubseteq \mathrm{EN}(p, d_1)$, and by $(\ast)$ and monotonicity the right side is at most $\mathrm{MVP}(n)(d_2)$. For the other direction, $(\ast)$ for $s_p$ gives $\mathrm{MVP}(s_p)(d_1) = \mathop{\large\sqcap}_{d_1'} \mathrm{SL}(s_p, d_1', d_1)(\mathrm{EN}(p, d_1'))$. A same-level path to $\langle s_p, d_1 \rangle$ followed by one from $\langle s_p, d_1 \rangle$ to $\langle n, d_2 \rangle$ is same-level, so $\mathrm{SL}(n, d_1, d_2) \circ \mathrm{SL}(s_p, d_1', d_1) \sqsupseteq \mathrm{SL}(n, d_1', d_2)$. With (F2), the right side is at least $\mathop{\large\sqcap}_{d_1'} \mathrm{SL}(n, d_1', d_2)(\mathrm{EN}(p, d_1')) = \mathrm{MVP}(n)(d_2)$. $\square$
 
 **Lemma 8 (termination).** The algorithm stops.
 

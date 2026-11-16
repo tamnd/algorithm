@@ -56,7 +56,7 @@ The input is an instance of a monotone framework, in the meet convention used by
 
 Let $init(s) = \iota$ if $s \in S$ and $init(s) = \top$ otherwise. The output is the greatest assignment $IN$ with
 
-$$IN[s] = init(s) \sqcap \bigsqcap_{(v, s) \in E} f_v(IN[v]) \quad \text{for every node } s,$$
+$$IN[s] = init(s) \sqcap \mathop{\large\sqcap}_{(v, s) \in E} f_v(IN[v]) \quad \text{for every node } s,$$
 
 the [maximal fixed-point solution](/maximal-fixed-point-solution/). For a forward problem, $G$ is the [control flow graph](/control-flow-graph/), $S$ holds the entry block, and $IN[s]$ is the fact at the start of block $s$. For a backward problem, $G$ is the reverse CFG, $S$ holds the blocks that end in `ret`, and $IN[s]$ is the fact at the end of block $s$. The facts on the other side of each block are $f_s(IN[s])$.
 

@@ -50,13 +50,13 @@ IFDS answers yes or no questions, such as "may this variable hold a secret". Man
 
 An IDE instance is a supergraph $G^*$, a finite set of facts $D_p$ for each procedure $p$, a value lattice $L$ of finite height, and for each edge an environment transformer $t : (D_p \to L) \to (D_q \to L)$ that distributes over the pointwise meet. The output is, for every node $n$ and fact $d$, the meet over all valid paths
 
-$$\mathrm{MVP}(n)(d) = \bigsqcap \{ t_\pi(\rho_0)(d) : \pi \text{ a valid path from } s_{main} \text{ to } n \},$$
+$$\mathrm{MVP}(n)(d) = \mathop{\large\sqcap} \{ t_\pi(\rho_0)(d) : \pi \text{ a valid path from } s_{main} \text{ to } n \},$$
 
 where $\rho_0$ is the start environment. This page uses the meet convention of Kildall: the start value is $\top$ and the result is the greatest solution. In the join convention of Cousot the order flips and the same result is the least solution.
 
 A distributive transformer is given by micro-functions. For each pair of facts $d, d'$ there is a function $f_{d,d'} : L \to L$, and
 
-$$t(\rho)(d') = \bigsqcap_{d \in D \cup \{\mathbf{0}\}} f_{d,d'}(\rho(d)),$$
+$$t(\rho)(d') = \mathop{\large\sqcap}_{d \in D \cup \{\mathbf{0}\}} f_{d,d'}(\rho(d)),$$
 
 where the extra fact $\mathbf{0}$ always has the value $\bot$. The pair $(\mathbf{0}, d')$ carries the part of $t$ that does not depend on any input, such as `x = 5`. A pair with $f_{d,d'} = \lambda l.\top$ has no edge.
 
