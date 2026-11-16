@@ -1,0 +1,25 @@
+---
+title: Correctness of the MSER sweep
+proves: [correctness]
+status: full
+---
+
+We prove that the sweep of lines L1 to L7 builds the connected components of every threshold set, that the tracks and their areas are the ones of the definition, and that lines L8 and L9 report exactly the maximally stable regions. Write $X_g = \{p : I(p) \le g\}$ and call a connected component of $X_g$ a region at level $g$.
+
+**Lemma 1 (the forest).** After the pixels of level $g$ have been processed, the sets of the disjoint-set forest are exactly the regions at level $g$.
+
+*Proof.* By induction on $g$. Before level $0$ no pixel is added and $X_{-1}$ is empty. Assume the claim after level $g - 1$. Line L1 sorts by gray level, so at level $g$ lines L3 and L4 add exactly the pixels of $X_g \setminus X_{g-1}$. Each added pixel $p$ is joined with the sets of all its neighbours that are already added. Two pixels of $X_g$ are in one region exactly when a path of neighbours in $X_g$ joins them. Every step of such a path is an edge between two pixels of $X_g$, and when the later of its two pixels is added, the earlier one is already added, so line L6 joins their sets. So every region is inside one set. Conversely, every join is along an edge between two pixels of $X_g$, so every set is connected in $X_g$. After the last pixel of level $g$ the sets are the regions at level $g$. $\square$
+
+**Lemma 2 (the tracks).** After level $g$, each set of the forest belongs to exactly one live track, and that track's seed is in the set. Line L7 records $a_T(g)$, the size of the region of $T$ at level $g$.
+
+*Proof.* A new set from line L5 gets a new track whose seed is its only pixel. When line L6 joins sets, the merged set takes the track of one of them, and that track's seed is in the merged set; the other tracks are no longer live. No other line changes sets or tracks. So the claim holds after each pixel, and line L7 reads the size of the set of each live track, which by Lemma 1 is a region at level $g$. $\square$
+
+The choice of line L6 uses $a(g - 1)$, the last area recorded for each track before level $g$, which is $0$ for a track born at level $g$. This choice does not depend on the order in which the joins of level $g$ happen: the continuing track of a group of sets is the one with the largest pair $(a(g - 1), -\text{index})$, and taking a maximum of pairs is associative. So the tracks are a function of the image alone. A new track born at level $g$ gets its index in the order of its seed, and its seed is the first pixel of its region in index order, because that pixel has no added neighbour inside the region when it is added.
+
+**Lemma 3 (the stability values).** For each track $T$ and each level $g$ from the birth of $T$ to $\min(\text{end}(T), M - 1 - \Delta)$, line L8 computes $q_T(g) = (A_T(g + \Delta) - a_T(g - \Delta)) / a_T(g)$, where $A_T(g + \Delta)$ is the area of the region at level $g + \Delta$ that contains the region of $T$ at level $g$.
+
+*Proof.* $a_T(g)$ and $a_T(g - \Delta)$ are read from the areas recorded by line L7, with $0$ before the birth. For $A_T$: regions at different levels are nested, so the region at level $g + \Delta$ that contains the region of $T$ at $g$ is the one that contains the seed of $T$. If $T$ is live at $g + \Delta$, this is the region of $T$ by Lemma 2. Otherwise $T$ ended at a level $e < g + \Delta$ and was joined, at level $e + 1$, into the set of a track $T'$, which contains the seed of $T$ from then on. Following the links $T \to T' \to \dots$ reaches the track that is live at $g + \Delta$ and whose set holds the seed of $T$, and its recorded area is $A_T(g + \Delta)$. Each link goes to a track that ends later, so the walk stops. The value is a quotient of two integers with $a_T(g) \ge 1$, computed exactly. $\square$
+
+**Theorem.** MSER returns exactly the pairs (level, seed) such that the region of a track $T$ at level $g$ is the first level of a maximal run of equal values of $q_T$, both neighbouring values along the track exist and are larger, $a_{\min} \le a_T(g) \le a_{\max}$ and $q_T(g) \le v_{\max}$; it does this for $I$ and for $M - 1 - I$. The returned region of a pair $(g, p)$ is the component of $\{I \le g\}$ that contains $p$ for a dark region, and the component of $\{I \ge g\}$ that contains $p$ for a bright one.
+
+*Proof.* By Lemma 3 the values $q_T(g)$ are exact. Line L9 walks the values of each track in the order of $g$ and splits them into maximal runs of equal values. A run is reported, at its first level, exactly when it has a value on each side and both are larger, and when the area and variation filters hold; nothing else is reported. By Lemma 2 the region of $T$ at level $g$ is the component of $X_g$ that holds the seed. For the bright regions, line L10 runs the same steps on $I' = M - 1 - I$, whose values are again in $0, \dots, M - 1$. The set $\{I' \le g\}$ is $\{I \ge M - 1 - g\}$, so the region found at level $g$ of $I'$ is the bright region at level $M - 1 - g$ of $I$, which is the level that is returned. $\blacksquare$

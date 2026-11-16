@@ -1,0 +1,39 @@
+---
+title: Correctness of KAZE features
+proves: [correctness]
+status: full
+---
+
+Pixels are $(u, v)$ with $u$ the column and $v$ the row. For one row or one column of $n$ pixels with the values $f$ and the conductivities $c_j > 0$, let $w_j = (c_j + c_{j+1}) / 2$ for $j = 0, \dots, n - 2$, and let $A$ be the matrix with $(A x)_j = \sum_{l} w_{jl} (x_l - x_j)$, where $l$ runs over the neighbors $j - 1$ and $j + 1$ that exist and $w_{j, j+1} = w_{j+1, j} = w_j$. For $\tau \ge 0$ the implicit step solves $M x = f$ with $M = I - \tau A$.
+
+**Lemma 1 (the Thomas algorithm).** $M$ is tridiagonal with the diagonal $b_j = 1 + \tau \sum_l w_{jl}$ and the off-diagonal entries $-\tau w_{jl} \le 0$, so $b_j - \sum_l \tau w_{jl} = 1$. On such a matrix the Thomas algorithm never divides by 0 and returns the solution of $M x = f$.
+
+*Proof.* The form of $M$ follows from the definition of $A$. The forward pass computes $c'_0 = c_0 / b_0$ and $c'_j = c_j / (b_j - a_j c'_{j-1})$, where $a_j$ and $c_j$ are the entries left and right of the diagonal. Suppose $|c'_{j-1}| \le 1$, which holds for $j = 1$ since $|c_0| \le b_0 - 1 < b_0$. Then $|b_j - a_j c'_{j-1}| \ge b_j - |a_j| \ge |c_j| + 1 > 0$, so the division is safe and $|c'_j| < 1$. By induction every pivot is at least 1. The forward pass is Gaussian elimination without pivoting on a tridiagonal matrix, which keeps the zeros outside the band, and the backward pass is back substitution, so the result solves $M x = f$. $\square$
+
+**Lemma 2 (sum and range).** Let $x$ solve $M x = f$. Then $\sum_j x_j = \sum_j f_j$ and $\min_j f_j \le x_i \le \max_j f_j$ for every $i$. The same holds for the AOS step $\frac{1}{2} (x_\text{rows} + x_\text{columns})$ with $M = I - 2 \tau A_l$ on every row and every column.
+
+*Proof.* $M$ is symmetric and its row sums are 1, so its column sums are 1, and $\sum_j f_j = \sum_j (M x)_j = \sum_j x_j$. Let $i$ be an index with the largest $x_i$. Then $f_i = x_i + \tau \sum_l w_{il} (x_i - x_l) \ge x_i$, since every term of the sum is nonnegative, so $x_i \le f_i \le \max f$. In the same way, at an index with the smallest $x_i$, $f_i \le x_i$. For the AOS step, the rows keep the sum of each row and the columns the sum of each column, so both keep the sum of the image, and so does their mean. Each value of both is in the range of the image, and so is their mean. $\square$
+
+So each level of the nonlinear scale space keeps the mean of the first level, and its values stay between the smallest and the largest value of the first level, for every step size.
+
+**Lemma 3 (small steps).** For $0 \le c_j \le 1$, the solution of $M x = f$ satisfies $\lVert x - (f + \tau A f) \rVert_\infty \le 4 \tau^2 \lVert f \rVert_\infty$. So the AOS step agrees with the explicit step $L + \tau (A_1 + A_2) L$ of the diffusion up to a term of order $\tau^2$.
+
+*Proof.* From $M x = f$, $x = f + \tau A x$, and putting this into itself gives $x = f + \tau A f + \tau^2 A^2 x$. Each row of $A$ has at most two weights $w_{jl} \le 1$ and the diagonal $-\sum_l w_{jl}$, so $\lVert A \rVert_\infty \le 2$ and $\lVert A^2 \rVert_\infty \le 4$. By Lemma 2, $\lVert x \rVert_\infty \le \lVert f \rVert_\infty$. For the AOS step each direction uses $2 \tau$, so it gives $L + 2 \tau A_l L$ up to $O(\tau^2)$, and the mean of the two directions is $L + \tau (A_1 + A_2) L$ up to $O(\tau^2)$. $\square$
+
+**Lemma 4 (detection).** The detector returns exactly the pixels $(u, v)$ of the levels $1, \dots, N - 2$, at least one pixel from the border, whose response is above the threshold and larger than the responses of the 26 other pixels of the $3 \times 3 \times 3$ block around them.
+
+*Proof.* The code visits these pixels, skips those with a response at most the threshold, and keeps a pixel exactly when every one of the 26 comparisons holds. $\square$
+
+**Lemma 5 (gain).** If the image is multiplied by $a > 0$, every level is multiplied by $a$, and the orientation and the descriptor of every point do not change.
+
+*Proof.* The first blur is linear, so $L_0$ is multiplied by $a$. The Scharr filters are linear, so every gradient magnitude is multiplied by $a$; the order of the sorted magnitudes and the set of the nonzero ones do not change, so $k$ is multiplied by $a$. The blur with $\sigma = 1$ is linear, so $|\nabla L_\sigma|^2 / k^2$ and the conductivity do not change. For a fixed conductivity the AOS step is linear in the level, so by induction every level is multiplied by $a$, and so are $L_u$ and $L_v$. In the orientation all weighted gradients are multiplied by $a$, so every window sum is multiplied by $a$, the longest one is the same, and its angle is the same. In the descriptor every value is multiplied by $a$, and the scaling to unit length removes $a$. $\square$
+
+The response $\sigma^2 (L_{uu} L_{vv} - L_{uv}^2)$ is multiplied by $a^2$, so the set of keypoints for a fixed threshold can change.
+
+**Lemma 6 (a quarter turn).** Let $J(u', v') = I(v', n - 1 - u')$ on a square image of side $n$, so that the pixel $p = (u, v)$ of $I$ is the pixel $p' = (n - 1 - v, u)$ of $J$. Then in exact arithmetic every level of $J$ is the level of $I$ turned the same way, the orientation at $p'$ is the orientation at $p$ plus $\pi / 2$, and the descriptor of $J$ at $p'$ with the orientation $\theta + \pi / 2$ equals the descriptor of $I$ at $p$ with the orientation $\theta$.
+
+*Proof.* The Gaussian kernels are symmetric and the borders repeat the pixels, so the separable blur commutes with the turn. For a Scharr filter with the step $s$, the sum for $\partial / \partial u'$ on $J$ at $p'$ is the sum for $-\partial / \partial v$ on $I$ at $p$, term by term, and the sum for $\partial / \partial v'$ on $J$ is the sum for $\partial / \partial u$ on $I$. So the gradient of $J$ at $p'$ is $(-g_v, g_u)$, the gradient of $I$ turned by $+\pi / 2$, with the same magnitude; the sorted magnitudes, $k$ and the conductivities are the same at the matching pixels. The rows of $J$ are the columns of $I$ in the reverse order, and a tridiagonal system read in the reverse order has the reversed solution, so the AOS step turns with the image. By induction this holds for every level. The orientation samples the disk at the offsets $\sigma (i, j)$ with $i^2 + j^2 \le 36$, a set that the turn maps onto itself, with weights that depend only on $i^2 + j^2$; bilinear reads, with the clamp, commute with the turn. So the sampled gradients of $J$ are those of $I$ turned by $\pi / 2$, every angle grows by $\pi / 2$, the windows that start at the sample angles hold the same samples, and the longest sum is turned by $\pi / 2$. In the descriptor, the point $(x, y)$ of the grid is read at the offset $\sigma R(\theta + \pi / 2) (x, y)$ in $J$, which is the offset $\sigma R(\theta)(x, y)$ in $I$. There the gradient of $J$ is $R(\pi / 2) g$, and turning it back by $\theta + \pi / 2$ gives the same $(d_u, d_v)$ as turning $g$ back by $\theta$. So every sum, and the descriptor, is the same. $\square$
+
+**Theorem.** The code builds levels that each keep the sum and the range of the first level (Lemma 2), each the AOS step of the Perona and Malik diffusion with the conductivity $g_2$ (Lemmas 1 and 3). It returns the keypoints of Lemma 4, each with the orientation and the 64 values of M-SURF at its level. The orientation and the descriptor do not change under a positive gain (Lemma 5), and they turn with the image under a quarter turn (Lemma 6).
+
+*Proof.* Line L1 computes the first level and $k$. Lines L2 and L3 compute each next level by the AOS step, whose systems the Thomas algorithm solves by Lemma 1, and Lemmas 2 and 3 give its properties. Lines L4 and L5 compute the responses and keep the points of Lemma 4. Lines L6 and L7 compute the orientation and the descriptor as defined. Lemmas 5 and 6 give the two invariances. $\square$
