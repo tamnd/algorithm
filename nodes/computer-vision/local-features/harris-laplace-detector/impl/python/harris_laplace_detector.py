@@ -1,0 +1,108 @@
+# SPDX-License-Identifier: MIT
+# Part of https://algorithm.tamnd.com/harris-laplace-detector/. The authors are listed in prov/B4GHVB.jsonl.
+
+"""Harris-Laplace detector, the simplified form of Mikolajczyk and Schmid (2004).
+
+An image is a list of H rows of W floats; pixel (u, v) is img[v][u], with u
+the column (to the right) and v the row (down). Gaussian blurs are sampled,
+cut at radius ceil(3 sigma), normalized, separable, with the clamp border rule.
+
+For each scale sigma_n = sigma0 xi^n (n = 0, ..., K - 1), with the integration
+scale sigma_I = sigma_n and the differentiation scale sigma_D = s sigma_n:
+
+    mu_n = sigma_D^2 g(sigma_I) * [[Lx^2, Lx Ly], [Lx Ly, Ly^2]],
+    R_n  = det mu_n - alpha (trace mu_n)^2,
+    F_n  = sigma_n^2 |Lxx + Lyy|    (the scale-normalized Laplacian at sigma_n).
+
+Lx and Ly are central differences (divided by 2) of the image blurred with
+sigma_D. A point (u, v, n) with 1 <= n <= K - 2, off the border, is kept when
+R_n > tau_h, R_n is larger than at the 8 spatial neighbours, F_n > tau_l and
+F_n is larger than F_(n-1) and F_(n+1) at the same pixel.
+"""
+
+import math
+from typing import List, Sequence, Tuple
+
+Image = List[List[float]]
+
+
+def gaussian_kernel(sigma: float) -> List[float]:
+    if sigma <= 0:
+        return [1.0]
+    rad = max(1, int(math.ceil(3 * sigma)))
+    k = [math.exp(-(i * i) / (2 * sigma * sigma)) for i in range(-rad, rad + 1)]
+    s = sum(k)
+    return [x / s for x in k]
+
+
+def blur(img: Sequence[Sequence[float]], sigma: float) -> Image:
+    """Separable Gaussian blur with standard deviation sigma, clamp border."""
+    h, w = len(img), len(img[0])
+    k = gaussian_kernel(sigma)
+    r = len(k) // 2
+    tmp = [[sum(k[j] * row[min(max(u + j - r, 0), w - 1)] for j in range(len(k))) for u in range(w)]
+           for row in img]
+    return [[sum(k[j] * tmp[min(max(v + j - r, 0), h - 1)][u] for j in range(len(k))) for u in range(w)]
+            for v in range(h)]
+
+
+def _clamp(x: int, lo: int, hi: int) -> int:
+    return lo if x < lo else hi if x > hi else x
+
+
+def harris_measure(img: Sequence[Sequence[float]], sigma_i: float, sigma_d: float, alpha: float) -> Image:
+    """R = det mu - alpha trace(mu)^2 with the scale-adapted second moment matrix mu."""
+    L = blur(img, sigma_d)
+    h, w = len(L), len(L[0])
+    lx = [[(L[v][_clamp(u + 1, 0, w - 1)] - L[v][_clamp(u - 1, 0, w - 1)]) / 2 for u in range(w)] for v in range(h)]
+    ly = [[(L[_clamp(v + 1, 0, h - 1)][u] - L[_clamp(v - 1, 0, h - 1)][u]) / 2 for u in range(w)] for v in range(h)]
+    c = sigma_d * sigma_d
+    a = blur([[c * x * x for x in r] for r in lx], sigma_i)
+    b = blur([[c * y * y for y in r] for r in ly], sigma_i)
+    m = blur([[c * x * y for x, y in zip(rx, ry)] for rx, ry in zip(lx, ly)], sigma_i)
+    return [[a[v][u] * b[v][u] - m[v][u] ** 2 - alpha * (a[v][u] + b[v][u]) ** 2 for u in range(w)]
+            for v in range(h)]
+
+
+def normalized_laplacian(img: Sequence[Sequence[float]], sigma: float) -> Image:
+    """sigma^2 |Lxx + Lyy| with the 5-point Laplacian; 0 on the one-pixel border."""
+    L = blur(img, sigma)
+    h, w = len(L), len(L[0])
+    out = [[0.0] * w for _ in range(h)]
+    for v in range(1, h - 1):
+        for u in range(1, w - 1):
+            out[v][u] = sigma * sigma * abs(L[v][u + 1] + L[v][u - 1] + L[v + 1][u] + L[v - 1][u] - 4 * L[v][u])
+    return out
+
+
+def select_points(R: List[Image], F: List[Image], tau_h: float, tau_l: float) -> List[Tuple[int, int, int]]:
+    """Points (n, u, v): spatial Harris maxima that are Laplacian maxima over scale."""
+    out = []
+    k, h, w = len(R), len(R[0]), len(R[0][0])
+    for n in range(1, k - 1):  # @line L6
+        for v in range(1, h - 1):
+            for u in range(1, w - 1):
+                r = R[n][v][u]
+                f = F[n][v][u]
+                if r <= tau_h or f <= tau_l or not (f > F[n - 1][v][u] and f > F[n + 1][v][u]):  # @line L7
+                    continue
+                if all(R[n][v + b][u + a] < r for a in (-1, 0, 1) for b in (-1, 0, 1) if a or b):
+                    out.append((n, u, v))  # @line L8
+    return out
+
+
+def harris_laplace(img: Sequence[Sequence[float]], sigma0: float = 1.0, xi: float = 1.4, levels: int = 6,
+                   s: float = 0.7, alpha: float = 0.06, tau_h: float = 1e-5, tau_l: float = 0.05):
+    """Return points (u, v, sigma_I) sorted by v, u and sigma.
+
+    Precondition: img is a rectangular list of rows of floats, at least 3 x 3,
+    sigma0 > 0, xi > 1, levels >= 3 and 0 < s <= 1.
+    """
+    R, F, sig = [], [], []
+    for n in range(levels):
+        sn = sigma0 * xi ** n  # @line L1
+        R.append(harris_measure(img, sn, s * sn, alpha))  # @line L2 @line L3
+        F.append(normalized_laplacian(img, sn))  # @line L4
+        sig.append(sn)
+    pts = [(u, v, sig[n]) for n, u, v in select_points(R, F, tau_h, tau_l)]  # @line L5
+    return sorted(pts, key=lambda p: (p[1], p[0], p[2]))  # @line L9

@@ -1,0 +1,37 @@
+---
+title: Correctness of the Harris-affine detector
+proves: [correctness]
+status: full
+---
+
+We prove that the $2 \times 2$ formulas are exact, that line L10 keeps a valid shape and makes the patch isotropic to first order, that the second moment matrix is covariant under affine maps, and that the shape of an elongated Gaussian blob is a fixed point of the loop. Convergence of the loop from an arbitrary start is not claimed.
+
+Write a symmetric matrix as $m = \begin{pmatrix} a & b \\ b & c \end{pmatrix}$.
+
+**Lemma 1 (eigenvalues).** The eigenvalues of $m$ are $\frac{a + c}{2} \pm \sqrt{\big(\frac{a - c}{2}\big)^2 + b^2}$.
+
+*Proof.* They are the roots of $\lambda^2 - (a + c)\lambda + (ac - b^2) = 0$. The discriminant is $(a + c)^2 - 4(ac - b^2) = (a - c)^2 + 4b^2 \ge 0$, and the quadratic formula gives the stated values. $\square$
+
+**Lemma 2 (square root).** If $m$ is positive definite, let $d = \sqrt{\det m}$ and $\tau = \sqrt{\operatorname{tr} m + 2d}$. Then $r = (m + d\,\mathrm{Id}) / \tau$ is symmetric positive definite and $r^2 = m$. So $r^{-1} = m^{-1/2}$.
+
+*Proof.* By the Cayley-Hamilton theorem $m^2 = (\operatorname{tr} m)\, m - d^2\, \mathrm{Id}$. Then $(m + d\,\mathrm{Id})^2 = m^2 + 2dm + d^2\mathrm{Id} = (\operatorname{tr} m + 2d)\, m = \tau^2 m$, so $r^2 = m$. The eigenvalues of $r$ are $(\lambda_i + d) / \tau$ with $\lambda_i > 0$ the eigenvalues of $m$, so $r$ is positive definite, and it is symmetric because $m$ is. The positive definite square root is unique, so $r = m^{1/2}$. $\square$
+
+**Lemma 3 (the shape step).** Let $U$ and $P$ be symmetric positive definite. Then $S = \sqrt{(UP)(UP)^{\mathsf T}}$ is symmetric positive definite, $UP = SQ$ for a rotation $Q$, and after line L10 $U$ is symmetric positive definite with largest eigenvalue $1$.
+
+*Proof.* $V = UP$ is invertible, so $VV^{\mathsf T}$ is symmetric positive definite and $S$ exists by Lemma 2. Let $Q = S^{-1}V$. Then $QQ^{\mathsf T} = S^{-1}VV^{\mathsf T}S^{-1} = S^{-1}S^2S^{-1} = \mathrm{Id}$, and $\det Q = \det U \det P / \det S > 0$, so $Q$ is a rotation. Dividing $S$ by its largest eigenvalue, which is positive, keeps it symmetric positive definite and makes its largest eigenvalue $1$. $\square$
+
+**Lemma 4 (affine covariance of the second moment matrix).** In the continuous plane, let $W(\mathbf p)$ be a patch, $B$ an invertible matrix and $W'(\mathbf p) = W(B\mathbf p)$. Let $\mu$ be the second moment matrix of $W$ with Gaussian derivative and integration windows of covariances $\Sigma_D$ and $\Sigma_I$ at $B\mathbf p$. Then the matrix of $W'$ at $\mathbf p$ with the windows $B^{-1}\Sigma_D B^{-\mathsf T}$ and $B^{-1}\Sigma_I B^{-\mathsf T}$ is $B^{\mathsf T}\mu B$.
+
+*Proof.* By the chain rule $\nabla W'(\mathbf p) = B^{\mathsf T} \nabla W(B\mathbf p)$, and smoothing commutes with the change of variables when the window is carried along: a Gaussian with covariance $\Sigma$ at $B\mathbf p$ becomes, after the substitution $\mathbf y = B\mathbf y'$, a Gaussian with covariance $B^{-1}\Sigma B^{-\mathsf T}$ in $\mathbf y'$, with the same total weight. So $\nabla L' \nabla L'^{\mathsf T} = B^{\mathsf T}\, \nabla L \nabla L^{\mathsf T}\, B$ pointwise, and the integration window carries over in the same way. $\square$
+
+This is the relation $M_L = A^{\mathsf T} M_R A$ of Mikolajczyk and Schmid. Two consequences follow. First, take $B = P = M^{-1/2}$ with $M = \mu$: then $B^{\mathsf T}MB = M^{-1/2}MM^{-1/2} = \mathrm{Id}$. The windows also change by $B$, and the algorithm uses round windows in the new patch instead, so the new patch is isotropic only to first order; this is why line L10 is repeated. A rotation $Q$ changes $\mu$ to $Q^{\mathsf T}\mu Q$, which has the same eigenvalues, so by Lemma 3 dropping $Q$ does not change the isotropy. Second, let $I'(\mathbf x) = I(A^{-1}\mathbf x)$ and $\mathbf x' = A\mathbf x$. The patch of $I'$ with shape $U'$ is $W'(\mathbf p) = I(\mathbf x + A^{-1}U'\mathbf p)$, the patch of $I$ with the matrix $A^{-1}U'$. If $A^{-1}U' = UQ$ for a rotation $Q$, the two patches differ by the rotation $Q$, so every test of lines L6 to L12 has the same outcome on both, and the ellipse $\mathbf x' + \sigma_I U'\mathbf p$ is the image under $A$ of the ellipse $\mathbf x + \sigma_I UQ\mathbf p$, which is the same set as $\mathbf x + \sigma_I U\mathbf p$ over the unit disk. So converged regions correspond under $A$. The normalization of the largest eigenvalue to $1$ changes only $\sigma_I$, which line L6 sets again.
+
+**Proposition 5 (the fixed point for a Gaussian blob).** Let $I(\mathbf x) = \exp\!\big(-\frac12 (\mathbf x - \mathbf c)^{\mathsf T}\Sigma^{-1}(\mathbf x - \mathbf c)\big)$ with $\Sigma$ positive definite, and let $U$ be symmetric positive definite with $UU^{\mathsf T} = \kappa\Sigma$ for some $\kappa > 0$. Then the patch $W(\mathbf p) = I(\mathbf c + U\mathbf p)$ is the isotropic Gaussian $\exp(-\kappa|\mathbf p|^2 / 2)$, and its second moment matrix at $\mathbf p = 0$ with round windows is a multiple of the identity.
+
+*Proof.* $W(\mathbf p) = \exp\!\big(-\frac12 \mathbf p^{\mathsf T}U^{\mathsf T}\Sigma^{-1}U\mathbf p\big)$, and $\Sigma^{-1} = \kappa\,(UU^{\mathsf T})^{-1} = \kappa\, U^{-\mathsf T}U^{-1}$, so $U^{\mathsf T}\Sigma^{-1}U = \kappa\,\mathrm{Id}$ and $W(\mathbf p) = \exp(-\kappa|\mathbf p|^2/2)$, which is isotropic. A round Gaussian smoothing of an isotropic function is isotropic, so $\nabla L(\mathbf p) = \phi(|\mathbf p|)\,\mathbf p$ for some function $\phi$. Then $\nabla L \nabla L^{\mathsf T} = \phi^2\, \mathbf p\mathbf p^{\mathsf T}$, and its round Gaussian sum at $0$ is $\int g(\mathbf p)\, \phi(|\mathbf p|)^2\, \mathbf p\mathbf p^{\mathsf T}\, d\mathbf p$. By symmetry under the swap of the two coordinates the diagonal entries are equal, and by symmetry under $p_1 \mapsto -p_1$ the off-diagonal entry is $0$. $\square$
+
+So at this shape $P = M^{-1/2}$ is a multiple of the identity, $1 - \lambda_{\min}(P)/\lambda_{\max}(P) = 0 < \varepsilon_C$, and line L12 stops. For Hessian-affine, the center of the isotropic patch is the maximum of $\det \mathcal H L$, because $L$ is a round Gaussian there, so line L8 does not move the point.
+
+**Theorem.** Every region that HARRIS-AFFINE returns is a triple $(\mathbf x, \sigma_I, U)$ where $U$ is symmetric positive definite with largest eigenvalue $1$ and axis ratio at most $\varepsilon_l$, and where the second moment matrix $M$ of the last patch satisfies $\sqrt{\lambda_{\min}(M)/\lambda_{\max}(M)} > 1 - \varepsilon_C$. In the continuous setting the returned regions are covariant with affine maps of the image, and the shape of an elongated Gaussian blob is a fixed point.
+
+*Proof.* Line L3 starts with the identity, which is a valid shape. By Lemma 3 every pass of line L10 gives a valid shape, and line L11 drops the point when the axis ratio is above $\varepsilon_l$. Line L9 drops the point when $M$ is singular, so $P = M^{-1/2}$ exists by Lemma 2, and its eigenvalues are $\lambda^{-1/2}$ for the eigenvalues $\lambda$ of $M$, so $\lambda_{\min}(P)/\lambda_{\max}(P) = \sqrt{\lambda_{\min}(M)/\lambda_{\max}(M)}$. Line L12 adds a region only when $1 - \lambda_{\min}(P)/\lambda_{\max}(P) < \varepsilon_C$, which is the stated bound. Lines L1, L2 and L13 collect the regions of all points that pass, and nothing else adds to the list. Covariance follows from Lemma 4 and the remarks after it, and the fixed point from Proposition 5. $\blacksquare$
