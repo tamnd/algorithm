@@ -42,7 +42,7 @@ Fischer and Heun choose a tree in which each position hangs under the last earli
 
 **Input.** A static array $A[1 \ldots n]$ over a totally ordered set.
 
-**Queries.** $\textsc{rmq}(i, j)$ for $1 \le i \le j \le n$: the position of the leftmost minimum of $A[i \ldots j]$.
+**Queries.** $\textsf{rmq}(i, j)$ for $1 \le i \le j \le n$: the position of the leftmost minimum of $A[i \ldots j]$.
 
 **Goal.** An *encoding*: a structure that answers every query without access to $A$, in $O(1)$ time on a word RAM with $\Theta(\log n)$-bit words, with $2n + o(n)$ bits, built in $O(n)$ time.
 
@@ -83,9 +83,9 @@ $E = \texttt{(} \; \texttt{((()} \; \texttt{)} \; \texttt{()} \; \texttt{)} \; \
 
 The ")" are at 5, 6, 8, 9, 12, 13 and 14, which end the descriptions of nodes 0 to 6.
 
-- $\textsc{rmq}(3, 6)$: $x = \mathrm{select}_0(4) = 9$, $y = \mathrm{select}_0(6) = 13$, and $D[9 \ldots 13] = 1, 2, 3, 2, 1$ has its leftmost minimum at $w = 9$. The match of the ")" at 9 is the "(" at 2, and $\mathrm{rank}_0(2) = 0 \ne 3$, so the answer is $\mathrm{rank}_0(9) = 4$: the minimum of $5, 1, 6, 3$ is at position 4.
-- $\textsc{rmq}(1, 3)$: $x = 6$, $y = 8$, $D = 2, 3, 2$, so $w = 6$; its match is at 3, with $\mathrm{rank}_0(3) = 0 \ne 1$, so the answer is $\mathrm{rank}_0(6) = 2$.
-- $\textsc{rmq}(2, 3)$: $x = y = 8$, so $w = 8$, whose match is at 7, and $\mathrm{rank}_0(7) = 2 = i$, so the answer is $i = 2$: node 2 is the parent of node 3, and $A[2] = 2 < A[3] = 5$.
+- $\textsf{rmq}(3, 6)$: $x = \mathrm{select}_0(4) = 9$, $y = \mathrm{select}_0(6) = 13$, and $D[9 \ldots 13] = 1, 2, 3, 2, 1$ has its leftmost minimum at $w = 9$. The match of the ")" at 9 is the "(" at 2, and $\mathrm{rank}_0(2) = 0 \ne 3$, so the answer is $\mathrm{rank}_0(9) = 4$: the minimum of $5, 1, 6, 3$ is at position 4.
+- $\textsf{rmq}(1, 3)$: $x = 6$, $y = 8$, $D = 2, 3, 2$, so $w = 6$; its match is at 3, with $\mathrm{rank}_0(3) = 0 \ne 1$, so the answer is $\mathrm{rank}_0(6) = 2$.
+- $\textsf{rmq}(2, 3)$: $x = y = 8$, so $w = 8$, whose match is at 7, and $\mathrm{rank}_0(7) = 2 = i$, so the answer is $i = 2$: node 2 is the parent of node 3, and $A[2] = 2 < A[3] = 5$.
 
 ## Correctness
 

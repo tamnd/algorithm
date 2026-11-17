@@ -30,9 +30,9 @@ An enumeration problem asks, for each input, for the list of all its solutions, 
 
 Let $\Sigma$ be a finite alphabet and let $R \subseteq \Sigma^* \times \Sigma^*$ be a binary relation. For an input $x$, write $R(x) = \{ y : (x, y) \in R \}$ for its set of *solutions*. Assume that $R(x)$ is finite for each $x$.
 
-**Definition.** The *enumeration problem* of $R$, written $\textsc{Enum}\cdot R$, is this task: given $x$, output the elements of $R(x)$, each exactly once and in any order, and then halt.
+**Definition.** The *enumeration problem* of $R$, written $\textsf{Enum}\cdot R$, is this task: given $x$, output the elements of $R(x)$, each exactly once and in any order, and then halt.
 
-An algorithm *solves* $\textsc{Enum}\cdot R$ when, for each input $x$, the sequence $y_1, \ldots, y_N$ that it outputs before it halts satisfies $\{y_1, \ldots, y_N\} = R(x)$ and $y_i \ne y_j$ for $i \ne j$. So $N = |R(x)|$. An *ordered* enumeration problem also fixes the order of the output, for example lexicographic order.
+An algorithm *solves* $\textsf{Enum}\cdot R$ when, for each input $x$, the sequence $y_1, \ldots, y_N$ that it outputs before it halts satisfies $\{y_1, \ldots, y_N\} = R(x)$ and $y_i \ne y_j$ for $i \ne j$. So $N = |R(x)|$. An *ordered* enumeration problem also fixes the order of the output, for example lexicographic order.
 
 The usual complexity theory adds two conditions, which define the class **EnumP**: $R$ is *polynomially balanced*, so $|y| \le p(|x|)$ for a polynomial $p$ and each $y \in R(x)$, and the test "$(x, y) \in R$?" runs in polynomial time. These are the conditions of [NP](/np/) witnesses, so each problem of NP has a natural enumeration problem: list all witnesses.
 
@@ -44,7 +44,7 @@ The usual complexity theory adds two conditions, which define the class **EnumP*
 
 [Output-sensitive enumeration](/output-sensitive-enumeration/) defines the classes of tractable enumeration from these measures: polynomial total time, incremental polynomial time and polynomial delay (Johnson, Yannakakis and Papadimitriou, 1988).
 
-**Proposition.** If $\textsc{Enum}\cdot R$ has an algorithm with total time at most $p(|x|, |R(x)|)$ for a polynomial $p$, then the decision problem "is $R(x) \ne \emptyset$?" is in polynomial time.
+**Proposition.** If $\textsf{Enum}\cdot R$ has an algorithm with total time at most $p(|x|, |R(x)|)$ for a polynomial $p$, then the decision problem "is $R(x) \ne \emptyset$?" is in polynomial time.
 
 *Proof.* Given $x$, run the algorithm for $p(|x|, 0) + 1$ steps. If $R(x) = \emptyset$, the algorithm halts within $p(|x|, 0)$ steps with no output. So if within these steps the algorithm outputs a solution or does not halt, then $R(x) \ne \emptyset$; if it halts with no output, $R(x) = \emptyset$. The time is $p(|x|, 0) + 1$ steps plus the cost of the simulation, which is polynomial in $|x|$. $\square$
 

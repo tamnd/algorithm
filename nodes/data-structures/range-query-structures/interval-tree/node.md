@@ -44,10 +44,10 @@ The tree sorts the meetings by their start time, and every node also remembers t
 
 A dynamic set $S$ of closed intervals $[lo, hi]$ with $lo \le hi$, with duplicates allowed. Two intervals $[lo, hi]$ and $[a, b]$ *overlap* when $lo \le b$ and $a \le hi$. The operations are:
 
-- $\textsc{insert}([lo, hi])$ and $\textsc{delete}([lo, hi])$, which removes one copy;
-- $\textsc{search}([a, b])$: return one interval of $S$ that overlaps $[a, b]$, or nil;
-- $\textsc{report}([a, b])$: return all intervals of $S$ that overlap $[a, b]$;
-- the stabbing query $\textsc{report}([p, p])$: all intervals that contain the point $p$.
+- $\textsf{insert}([lo, hi])$ and $\textsf{delete}([lo, hi])$, which removes one copy;
+- $\textsf{search}([a, b])$: return one interval of $S$ that overlaps $[a, b]$, or nil;
+- $\textsf{report}([a, b])$: return all intervals of $S$ that overlap $[a, b]$;
+- the stabbing query $\textsf{report}([p, p])$: all intervals that contain the point $p$.
 
 These are the [interval overlap query](/interval-overlap-query/) and the [interval stabbing query](/interval-stabbing-query/).
 
@@ -97,9 +97,9 @@ Insert $[16, 21]$, $[8, 9]$, $[25, 30]$, $[5, 10]$, $[15, 23]$, $[17, 19]$, $[26
 | $[26, 26]$ | | | 26 |
 | $[0, 3]$, $[6, 7]$, $[19, 20]$ | | | 3, 7, 20 |
 
-$\textsc{search}(22, 25)$: the root $[16, 21]$ ends before 22, and its left child has $\mathit{max} = 23 \ge 22$, so go left. $[8, 9]$ does not overlap, and its left child has $\mathit{max} = 10 < 22$, so go right. $[15, 23]$ overlaps $[22, 25]$, and the search returns it.
+$\textsf{search}(22, 25)$: the root $[16, 21]$ ends before 22, and its left child has $\mathit{max} = 23 \ge 22$, so go left. $[8, 9]$ does not overlap, and its left child has $\mathit{max} = 10 < 22$, so go right. $[15, 23]$ overlaps $[22, 25]$, and the search returns it.
 
-$\textsc{report}(22, 25)$ goes into the subtree of $[8, 9]$, skips $[5, 10]$ at once because $10 < 22$, and outputs $[15, 23]$. At the root it goes right, skips $[17, 19]$ because $20 < 22$, outputs $[25, 30]$, and at $[26, 26]$ it stops, because $26 > 25$ means that this interval and its right subtree start too late. The answer is $[15, 23]$ and $[25, 30]$. The stabbing query $\textsc{report}(9, 9)$ returns $[5, 10]$ and $[8, 9]$.
+$\textsf{report}(22, 25)$ goes into the subtree of $[8, 9]$, skips $[5, 10]$ at once because $10 < 22$, and outputs $[15, 23]$. At the root it goes right, skips $[17, 19]$ because $20 < 22$, outputs $[25, 30]$, and at $[26, 26]$ it stops, because $26 > 25$ means that this interval and its right subtree start too late. The answer is $[15, 23]$ and $[25, 30]$. The stabbing query $\textsf{report}(9, 9)$ returns $[5, 10]$ and $[8, 9]$.
 
 ## Correctness
 

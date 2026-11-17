@@ -41,9 +41,9 @@ Running totals do not help here, because you cannot take a minimum back out like
 
 **Operations.** A sequence of operations, each answered before the next one is read:
 
-- $\textsc{update}(i, x)$ with $1 \le i \le n$: set $A[i] \leftarrow x$;
-- $\textsc{min}(l, r)$ with $1 \le l \le r \le n$: return $\min \{A[k] : l \le k \le r\}$;
-- the position form $\textsc{argmin}(l, r)$: return the least $k \in [l, r]$ with $A[k] = \textsc{min}(l, r)$.
+- $\textsf{update}(i, x)$ with $1 \le i \le n$: set $A[i] \leftarrow x$;
+- $\textsf{min}(l, r)$ with $1 \le l \le r \le n$: return $\min \{A[k] : l \le k \le r\}$;
+- the position form $\textsf{argmin}(l, r)$: return the least $k \in [l, r]$ with $A[k] = \textsf{min}(l, r)$.
 
 **Cost.** The preprocessing cost, the cost $t_u$ of an update and the cost $t_q$ of a query. In the comparison model the cost counts comparisons between items; on the word RAM it is time.
 
@@ -64,13 +64,13 @@ Start with $A = [5, 2, 8, 6, 3, 7, 9, 1]$.
 
 | operation | array after | answer |
 |---|---|---|
-| $\textsc{min}(1, 8)$ | $[5, 2, 8, 6, 3, 7, 9, 1]$ | 1 (at position 8) |
-| $\textsc{min}(3, 6)$ | $[5, 2, 8, 6, 3, 7, 9, 1]$ | 3 (at position 5) |
-| $\textsc{update}(5, 10)$ | $[5, 2, 8, 6, 10, 7, 9, 1]$ | |
-| $\textsc{min}(3, 6)$ | $[5, 2, 8, 6, 10, 7, 9, 1]$ | 6 (at position 4) |
-| $\textsc{update}(7, 0)$ | $[5, 2, 8, 6, 10, 7, 0, 1]$ | |
-| $\textsc{min}(4, 8)$ | $[5, 2, 8, 6, 10, 7, 0, 1]$ | 0 (at position 7) |
-| $\textsc{min}(1, 3)$ | $[5, 2, 8, 6, 10, 7, 0, 1]$ | 2 (at position 2) |
+| $\textsf{min}(1, 8)$ | $[5, 2, 8, 6, 3, 7, 9, 1]$ | 1 (at position 8) |
+| $\textsf{min}(3, 6)$ | $[5, 2, 8, 6, 3, 7, 9, 1]$ | 3 (at position 5) |
+| $\textsf{update}(5, 10)$ | $[5, 2, 8, 6, 10, 7, 9, 1]$ | |
+| $\textsf{min}(3, 6)$ | $[5, 2, 8, 6, 10, 7, 9, 1]$ | 6 (at position 4) |
+| $\textsf{update}(7, 0)$ | $[5, 2, 8, 6, 10, 7, 0, 1]$ | |
+| $\textsf{min}(4, 8)$ | $[5, 2, 8, 6, 10, 7, 0, 1]$ | 0 (at position 7) |
+| $\textsf{min}(1, 3)$ | $[5, 2, 8, 6, 10, 7, 0, 1]$ | 2 (at position 2) |
 
 The third row shows why a sparse table fails here: the stored minimum 3 of $A[4 \ldots 5]$ and of $A[5 \ldots 6]$ becomes wrong after the update, and so does every table entry whose range contains position 5, which is about $2n$ entries in a table over $n$ items.
 
@@ -93,7 +93,7 @@ All times are worst case. The segment tree is the standard choice: an update wal
 
 $$ P(n) + n \, (t_u + t_q) \ge \lg (n!) = n \lg n - O(n). $$
 
-*Proof.* Build the structure on $n$ distinct items. Repeat $n$ times: $k \leftarrow \textsc{argmin}(1, n)$, output $A[k]$, and $\textsc{update}(k, +\infty)$, where $+\infty$ is a new item larger than all others, whose comparisons need no work. The outputs are the items in increasing order, so the whole run is a comparison sort, which needs $\lg(n!)$ comparisons in the worst case by the decision-tree argument (CLRS, Section 8.1). $\square$
+*Proof.* Build the structure on $n$ distinct items. Repeat $n$ times: $k \leftarrow \textsf{argmin}(1, n)$, output $A[k]$, and $\textsf{update}(k, +\infty)$, where $+\infty$ is a new item larger than all others, whose comparisons need no work. The outputs are the items in increasing order, so the whole run is a comparison sort, which needs $\lg(n!)$ comparisons in the worst case by the decision-tree argument (CLRS, Section 8.1). $\square$
 
 So any structure built with $P(n) = O(n)$ comparisons, such as a segment tree, has $t_u + t_q = \Omega(\log n)$ amortized, and the segment tree is optimal up to a constant. The bound is the [comparison sort lower bound](/comparison-sort-lower-bound/) in disguise, and the same argument gives the classic lower bound for [priority queues](/priority-queue/).
 

@@ -52,13 +52,13 @@ A new letter changes one counter. The first question adds up a front part of the
 
 **Operations.** Online, each answered before the next one is read:
 
-- $\textsc{update}(k, \Delta)$: set $A[k] \leftarrow A[k] + \Delta$. Fredman's original form also allows $A[k] \leftarrow \Delta$, which is the same over a group if a copy of $A$ is kept.
-- $\textsc{sum}(k)$: return $A[1] + A[2] + \dots + A[k]$.
-- $\textsc{select}(s)$, when the entries are non-negative integers: return the least $k$ with $\textsc{sum}(k) \ge s$.
+- $\textsf{update}(k, \Delta)$: set $A[k] \leftarrow A[k] + \Delta$. Fredman's original form also allows $A[k] \leftarrow \Delta$, which is the same over a group if a copy of $A$ is kept.
+- $\textsf{sum}(k)$: return $A[1] + A[2] + \dots + A[k]$.
+- $\textsf{select}(s)$, when the entries are non-negative integers: return the least $k$ with $\textsf{sum}(k) \ge s$.
 
 **Cost.** Let $t_u$, $t_q$ and $t_s$ be the worst-case or amortized costs of the three operations. In the [cell-probe model](/cell-probe-model/) they count the memory cells of $w$ bits that an operation reads or writes. In the algebraic models they count the semigroup or group operations. The parameters are $n$, the cell size $w$, and the number of bits $\delta$ of an update argument.
 
-**Relation to range sums.** Over a group, the range sum $A[l] + \dots + A[r]$ is $\textsc{sum}(r) - \textsc{sum}(l - 1)$, so this problem and the [point update range sum query](/point-update-range-sum-query/) problem have the same complexity. Over a semigroup the range form can be harder, because a prefix cannot be subtracted. This page is about the prefix form and its models. The range form, with its data structures, is on the page of the point update range sum query.
+**Relation to range sums.** Over a group, the range sum $A[l] + \dots + A[r]$ is $\textsf{sum}(r) - \textsf{sum}(l - 1)$, so this problem and the [point update range sum query](/point-update-range-sum-query/) problem have the same complexity. Over a semigroup the range form can be harder, because a prefix cannot be subtracted. This page is about the prefix form and its models. The range form, with its data structures, is on the page of the point update range sum query.
 
 ## Variants
 
@@ -75,15 +75,15 @@ Take $n = 8$ and $A = [3, 1, 4, 1, 5, 9, 2, 6]$ over the integers.
 
 | operation | array after | answer |
 |---|---|---|
-| $\textsc{sum}(5)$ | $[3, 1, 4, 1, 5, 9, 2, 6]$ | $3 + 1 + 4 + 1 + 5 = 14$ |
-| $\textsc{update}(2, +4)$ | $[3, 5, 4, 1, 5, 9, 2, 6]$ | |
-| $\textsc{sum}(5)$ | $[3, 5, 4, 1, 5, 9, 2, 6]$ | $18$ |
-| $\textsc{select}(20)$ | $[3, 5, 4, 1, 5, 9, 2, 6]$ | $6$, since the prefix sums are $3, 8, 12, 13, 18, 27, \dots$ |
-| $\textsc{select}(13)$ | $[3, 5, 4, 1, 5, 9, 2, 6]$ | $4$ |
+| $\textsf{sum}(5)$ | $[3, 1, 4, 1, 5, 9, 2, 6]$ | $3 + 1 + 4 + 1 + 5 = 14$ |
+| $\textsf{update}(2, +4)$ | $[3, 5, 4, 1, 5, 9, 2, 6]$ | |
+| $\textsf{sum}(5)$ | $[3, 5, 4, 1, 5, 9, 2, 6]$ | $18$ |
+| $\textsf{select}(20)$ | $[3, 5, 4, 1, 5, 9, 2, 6]$ | $6$, since the prefix sums are $3, 8, 12, 13, 18, 27, \dots$ |
+| $\textsf{select}(13)$ | $[3, 5, 4, 1, 5, 9, 2, 6]$ | $4$ |
 
-Over $\mathbb{Z}/2$ with $A = [1, 0, 1, 1, 0, 1]$, the query $\textsc{sum}(4)$ returns the parity $1 + 0 + 1 + 1 \equiv 1$, and after $\textsc{update}(3, 1)$ it returns $0$.
+Over $\mathbb{Z}/2$ with $A = [1, 0, 1, 1, 0, 1]$, the query $\textsf{sum}(4)$ returns the parity $1 + 0 + 1 + 1 \equiv 1$, and after $\textsf{update}(3, 1)$ it returns $0$.
 
-As a subset rank instance, $A = [0, 1, 0, 1, 1, 0, 0, 1]$ is the set $\{2, 4, 5, 8\}$. The rank of $6$ is $\textsc{sum}(6) = 3$, and the third smallest member is $\textsc{select}(3) = 5$.
+As a subset rank instance, $A = [0, 1, 0, 1, 1, 0, 0, 1]$ is the set $\{2, 4, 5, 8\}$. The rank of $6$ is $\textsf{sum}(6) = 3$, and the third smallest member is $\textsf{select}(3) = 5$.
 
 ## Known algorithms
 

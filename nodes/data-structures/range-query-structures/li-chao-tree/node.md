@@ -38,8 +38,8 @@ The tree splits the chart into halves, quarters, and so on. Each piece keeps the
 
 A set $L$ of lines, empty at the start, over a fixed domain $X = \{x_0 < x_1 < \cdots < x_{C-1}\}$ of query abscissas, often the integers in $[X_0, X_1)$. The operations are:
 
-- $\textsc{insert}(f)$: add the line $f(x) = a x + b$ to $L$;
-- $\textsc{query}(x)$ with $x \in X$: return $\min_{f \in L} f(x)$, or $+\infty$ if $L$ is empty.
+- $\textsf{insert}(f)$: add the line $f(x) = a x + b$ to $L$;
+- $\textsf{query}(x)$ with $x \in X$: return $\min_{f \in L} f(x)$, or $+\infty$ if $L$ is empty.
 
 The maximum version negates the lines. The structure never deletes lines. The same code works for any functions in which each two cross at most once on $X$, such as segments of parabolas $y = (x - c)^2 + d$ with equal leading coefficients.
 
@@ -92,7 +92,7 @@ Take the integer domain $[0, 8)$ and insert, in this order, $A: y = 5$, $B: y = 
 | $C$ | $C(4) = 3 < B(4) = 4$: swap, carry $B$ | $B(0) = 0 < C(0) = 7$: go left, place $B$ at $[0, 4)$ | root $C$, $[0,4)$: $B$, $[4,8)$: $A$ |
 | $D$ | $D(4) = 4 \ge C(4) = 3$: keep $C$; $D(7) = -2 < C(7) = 0$: go right | at $[4, 8)$, mid 6: $D(6) = 0 < A(6) = 5$, swap, carry $A$; $A(4) = 5 \ge 4$ and $A(7) = 5 \ge -2$: drop $A$ | root $C$, $[0,4)$: $B$, $[4,8)$: $D$ |
 
-The line $A$ is dropped, which is right: on $[4, 8)$ it is above $D$ everywhere. The queries give $\textsc{query}(2) = \min(C(2), B(2)) = \min(5, 2) = 2$, $\textsc{query}(5) = \min(C(5), D(5)) = \min(2, 2) = 2$ and $\textsc{query}(7) = \min(0, -2) = -2$, which are the true minima over the four lines.
+The line $A$ is dropped, which is right: on $[4, 8)$ it is above $D$ everywhere. The queries give $\textsf{query}(2) = \min(C(2), B(2)) = \min(5, 2) = 2$, $\textsf{query}(5) = \min(C(5), D(5)) = \min(2, 2) = 2$ and $\textsf{query}(7) = \min(0, -2) = -2$, which are the true minima over the four lines.
 
 ## Correctness
 

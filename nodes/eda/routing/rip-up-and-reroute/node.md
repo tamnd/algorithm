@@ -43,14 +43,14 @@ Nothing makes this always work. The wires can trade places forever, or the probl
 
 ## The template
 
-The input is a routing graph with capacities, a set of nets, and a single-net router $\textsc{Route}(i, \mathrm{cost})$ that returns a cheapest route of net $i$ under the given edge costs.
+The input is a routing graph with capacities, a set of nets, and a single-net router $\textsf{Route}(i, \mathrm{cost})$ that returns a cheapest route of net $i$ under the given edge costs.
 
 1. **Initial routing.** Route every net once, in some order, for example by increasing bounding box. Record the usage $u_e$ of each edge.
 2. **Find the violations.** Let $F$ be the set of edges with $u_e > c_e$ (or the rule violations of a detailed routing). If $F$ is empty, stop.
 3. **Choose the victims.** Pick a set $Q$ of nets to rip up. Common choices: all nets that use an edge of $F$; only the nets that are cheapest to move; or the failed net and the nets that block it.
 4. **Rip up.** Remove the routes of the nets in $Q$ and lower the usage.
 5. **Change the costs or the order.** Raise the cost of the edges in $F$, keep a history of how often each edge was overflowed, or move the victims to the front of the order.
-6. **Reroute.** Route each net of $Q$ with $\textsc{Route}$ under the new costs, and update the usage after each net.
+6. **Reroute.** Route each net of $Q$ with $\textsf{Route}$ under the new costs, and update the usage after each net.
 7. **Decide.** Keep the new routing, or keep it only if the total overflow went down. Go back to step 2 until a round limit or a time limit is reached.
 
 **A termination fact.** Suppose step 7 keeps a new routing only when the total overflow $\mathrm{TOF}$ drops. $\mathrm{TOF}$ is a nonnegative integer, so it drops by at least 1 at each accepted round, and at most $\mathrm{TOF}_0$ rounds are accepted, where $\mathrm{TOF}_0$ is the overflow of the initial routing. This rule stops the loop, but it can stop at a routing with overflow that a worse intermediate step would have fixed. Routers that accept worse rounds, as in [negotiated congestion routing](/negotiated-congestion-routing/), give up this argument and need a round limit.

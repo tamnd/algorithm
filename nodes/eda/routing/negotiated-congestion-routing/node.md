@@ -77,7 +77,7 @@ L10     pres_fac ← pres_init if pres_fac = 0, else pres_fac · pres_mult
 L11 return the best routing recorded
 ```
 
-$\textsc{Route-Tree}(T_i, \mathrm{cost})$ grows a tree from one terminal. At each step it runs Dijkstra's algorithm with all tree gcells as sources at distance 0, stops at the nearest terminal that is not yet in the tree, and adds the path to that terminal. This is the expansion of PathFinder for one sink at a time. The defaults of the implementation are $\mathrm{pres\_first} = 0$, $\mathrm{pres\_init} = 1/2$, $\mathrm{pres\_mult} = 3/2$ and $\mathrm{hist\_fac} = 1$, all as exact fractions. With $\mathrm{pres\_first} = 0$ the first iteration routes every net by its cheapest tree and ignores the other nets.
+$\textsf{Route-Tree}(T_i, \mathrm{cost})$ grows a tree from one terminal. At each step it runs Dijkstra's algorithm with all tree gcells as sources at distance 0, stops at the nearest terminal that is not yet in the tree, and adds the path to that terminal. This is the expansion of PathFinder for one sink at a time. The defaults of the implementation are $\mathrm{pres\_first} = 0$, $\mathrm{pres\_init} = 1/2$, $\mathrm{pres\_mult} = 3/2$ and $\mathrm{hist\_fac} = 1$, all as exact fractions. With $\mathrm{pres\_first} = 0$ the first iteration routes every net by its cheapest tree and ignores the other nets.
 
 ## Example
 
@@ -106,17 +106,17 @@ Now no edge is overflowed, and the loop stops after 2 iterations with wirelength
 
 The [proof](proofs/correctness.md) shows the following. It does not show that the loop reaches a legal routing, because that is not true in general.
 
-- **Valid trees.** $\textsc{Route-Tree}$ returns a tree that holds all terminals of the net, and every leaf is a terminal.
-- **Cheapest step.** Each step of $\textsc{Route-Tree}$ adds a cheapest path, under the current costs, from the tree to the nearest unreached terminal. All costs are at least $b_e > 0$, so Dijkstra's algorithm applies.
+- **Valid trees.** $\textsf{Route-Tree}$ returns a tree that holds all terminals of the net, and every leaf is a terminal.
+- **Cheapest step.** Each step of $\textsf{Route-Tree}$ adds a cheapest path, under the current costs, from the tree to the nearest unreached terminal. All costs are at least $b_e > 0$, so Dijkstra's algorithm applies.
 - **Exact usage.** After line L7, $u_e$ is the number of nets whose route contains $e$.
 - **Legal on early stop.** If the loop stops at line L8, the returned routing has no overflow. In every case it returns the routing with the least total overflow, then the least wirelength, of all iterations.
 - **Growing penalties.** $h_e$ never decreases, and it grows by at least $\mathrm{hist\_fac}$ in each iteration that ends with $e$ overflowed. $\mathrm{pres\_fac}$ never decreases after the first iteration.
-- **Termination.** The loop runs at most $\mathrm{max\_iters}$ iterations, and each call of $\textsc{Route-Tree}$ makes at most $|T_i| - 1$ searches.
+- **Termination.** The loop runs at most $\mathrm{max\_iters}$ iterations, and each call of $\textsf{Route-Tree}$ makes at most $|T_i| - 1$ searches.
 
 ## Complexity
 
 - **One search.** Dijkstra's algorithm with a binary heap takes $O(E \log V)$ time on the grid.
-- **One net.** $\textsc{Route-Tree}$ adds at least one terminal per search, so it makes at most $|T_i| - 1$ searches. Line L5 computes all edge costs in $O(E)$ time. A router can update only the costs of the edges whose usage changed.
+- **One net.** $\textsf{Route-Tree}$ adds at least one terminal per search, so it makes at most $|T_i| - 1$ searches. Line L5 computes all edge costs in $O(E)$ time. A router can update only the costs of the edges whose usage changed.
 - **One iteration.** Over all nets there are at most $P - m$ searches, so an iteration takes $O(P E \log V + m E)$ time. Lines L9 and L10 take $O(E)$.
 - **Whole run.** $O(I (P E \log V + m E))$ for $I$ iterations. The number of iterations is not bounded by any proved function of the input; it is a parameter.
 - **Space.** $O(E)$ for the costs, the usage and the history, and $O(m V)$ for the routes, since each tree has fewer than $V$ edges.

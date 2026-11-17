@@ -45,7 +45,7 @@ The trick needs a special array, one in which each item is exactly one more or o
 
 **Input.** A static array $A[0 \ldots n-1]$ over a totally ordered set.
 
-**Queries.** $\textsc{rmq}(l, r)$ for $0 \le l \le r < n$: the position of the leftmost minimum of $A[l \ldots r]$.
+**Queries.** $\textsf{rmq}(l, r)$ for $0 \le l \le r < n$: the position of the leftmost minimum of $A[l \ldots r]$.
 
 **Goal.** $O(n)$ preprocessing time and space, and $O(1)$ time per query, on a word RAM with words of $\Theta(\log n)$ bits.
 
@@ -85,10 +85,10 @@ Take $A = [4, 2, 5, 1, 6, 3]$. The Cartesian tree has the root 3 (value 1), whos
 
 So $F = [2, 1, 4, 0, 8, 7]$ for the positions $0, \ldots, 5$. To show the blocks on so small an input, take $b = 3$ instead of the formula. The blocks of $D$ are $[0, 1, 2]$, $[1, 2, 1]$, $[0, 1, 2]$ and $[1, 0]$, with the minimum positions $M = [0, 3, 6, 10]$ and the signatures $11$, $10$, $11$ and $0$. Blocks 0 and 2 share one table, so three tables are built for four blocks.
 
-- $\textsc{rmq}(0, 2)$: $x = F[0] = 2$, $y = F[2] = 4$, in blocks 0 and 1. Block 0 from 2 to 2 gives index 2 (depth 2), block 1 from 3 to 4 gives index 3 (depth 1), and no block is in between. The least is index 3, and $E[3] = 1$: the minimum of $4, 2, 5$ is at position 1.
-- $\textsc{rmq}(2, 5)$: $x = 4$, $y = 7$, in blocks 1 and 2. The candidates are index 5 (depth 1) and index 6 (depth 0), so $E[6] = 3$.
-- $\textsc{rmq}(4, 5)$: $F[4] = 8 > F[5] = 7$, so $x = 7$, $y = 8$, both in block 2, and the table gives index 7, so $E[7] = 5$.
-- $\textsc{rmq}(0, 5)$: $x = 2$, $y = 7$; block 1 lies in between and the sparse table gives $M[1] = 3$ (depth 1), so the candidates have depths 2, 1 and 0, and $E[6] = 3$.
+- $\textsf{rmq}(0, 2)$: $x = F[0] = 2$, $y = F[2] = 4$, in blocks 0 and 1. Block 0 from 2 to 2 gives index 2 (depth 2), block 1 from 3 to 4 gives index 3 (depth 1), and no block is in between. The least is index 3, and $E[3] = 1$: the minimum of $4, 2, 5$ is at position 1.
+- $\textsf{rmq}(2, 5)$: $x = 4$, $y = 7$, in blocks 1 and 2. The candidates are index 5 (depth 1) and index 6 (depth 0), so $E[6] = 3$.
+- $\textsf{rmq}(4, 5)$: $F[4] = 8 > F[5] = 7$, so $x = 7$, $y = 8$, both in block 2, and the table gives index 7, so $E[7] = 5$.
+- $\textsf{rmq}(0, 5)$: $x = 2$, $y = 7$; block 1 lies in between and the sparse table gives $M[1] = 3$ (depth 1), so the candidates have depths 2, 1 and 0, and $E[6] = 3$.
 
 ## Correctness
 
