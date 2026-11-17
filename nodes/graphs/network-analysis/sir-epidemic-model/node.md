@@ -2,7 +2,7 @@
 tag: A9PY9C
 kind: model
 slug: sir-epidemic-model
-name: SIR epidemic model
+name: SIR model on networks
 aliases:
 - susceptible-infected-recovered
 area: graphs/network-analysis

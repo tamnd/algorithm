@@ -2,10 +2,7 @@
 tag: 6N6A1S
 kind: model
 slug: epidemic-model
-name: SIR epidemic model
-aliases:
-- SIR model
-- Kermack-McKendrick model
+name: Epidemic model of gossip
 area: distributed/gossip
 level: intro
 summary: Nodes are susceptible, infective or removed, and infectives meet random nodes. Its equations predict how gossip grows and what fraction it misses, s = e^(-R0(1-s)).

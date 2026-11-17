@@ -172,6 +172,8 @@
       name: String hashing
     - id: string-combinatorics
       name: String combinatorics
+    - id: text-processing-and-typesetting
+      name: Text processing and typesetting
 - id: automata-and-parsing
   name: Automata and parsing
   summary: Finite automata, regular expressions and parsers.
@@ -462,8 +464,6 @@
       name: Memory allocation
     - id: garbage-collection
       name: Garbage collection
-    - id: database-algorithms
-      name: Database algorithms
     - id: networking-algorithms
       name: Networking algorithms
     - id: load-balancing-and-hashing
@@ -482,6 +482,18 @@
       name: Phylogenetics
     - id: structure-prediction
       name: Structure prediction
+    - id: read-mapping-and-variant-calling
+      name: Read mapping and variant calling
+    - id: population-genetics
+      name: Population genetics
+    - id: gene-finding-and-motifs
+      name: Gene finding and motifs
+    - id: transcriptomics
+      name: Gene expression and transcriptomics
+    - id: systems-biology
+      name: Systems biology
+    - id: epidemic-and-ecological-models
+      name: Epidemic and ecological models
 - id: graphics-and-signals
   name: Graphics and signals
   summary: Algorithms for images, curves, rendering and signals.
@@ -498,6 +510,18 @@
       name: Image processing
     - id: signal-processing
       name: Signal processing
+    - id: real-time-rendering
+      name: Real-time rendering
+    - id: keyframing-and-deformation
+      name: Keyframing and deformation
+    - id: character-animation
+      name: Character animation
+    - id: rigid-body-simulation
+      name: Rigid body simulation
+    - id: deformable-body-simulation
+      name: Deformable body simulation
+    - id: fluid-animation
+      name: Fluid animation
 - id: games-and-search
   name: Games and search
   summary: Algorithms that play games, plan and solve puzzles.
@@ -708,3 +732,25 @@
       name: Communication and query complexity
     - id: computability
       name: Computability
+- id: databases
+  name: Databases
+  summary: Algorithms that store, index, query, update and integrate data, from relational theory and query optimization to transactions, recovery and streams.
+  children:
+    - id: relational-theory
+      name: Relational model and theory
+    - id: storage-and-indexing
+      name: Storage and indexing
+    - id: query-processing
+      name: Query processing
+    - id: query-planning
+      name: Query optimization
+    - id: transactions-and-concurrency
+      name: Transactions and concurrency control
+    - id: logging-and-recovery
+      name: Logging and recovery
+    - id: distributed-databases
+      name: Distributed and replicated databases
+    - id: data-integration-and-cleaning
+      name: Data integration and cleaning
+    - id: stream-and-incremental-processing
+      name: Stream and incremental processing
