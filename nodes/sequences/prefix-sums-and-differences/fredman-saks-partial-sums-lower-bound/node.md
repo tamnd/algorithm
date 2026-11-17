@@ -29,11 +29,11 @@ The Fredman-Saks lower bound for partial sums says that a data structure which k
 
 ## Statement
 
-**Problem.** Prefix parity on $n$ bits: an array $A[1..n]$ over $\mathbb{Z}/2$, all zero at the start. $\textsc{update}(k, v)$ adds $v \in \{0, 1\}$ to $A[k]$ modulo $2$, and $\textsc{sum}(x)$ returns $A[1] + \dots + A[x] \bmod 2$.
+**Problem.** Prefix parity on $n$ bits: an array $A[1..n]$ over $\mathbb{Z}/2$, all zero at the start. $\textsf{update}(k, v)$ adds $v \in \{0, 1\}$ to $A[k]$ modulo $2$, and $\textsf{sum}(x)$ returns $A[1] + \dots + A[x] \bmod 2$.
 
 **Model.** A deterministic cell-probe structure with cells of $b \ge 1$ bits and at most $2^b$ cells. An operation is a decision tree that reads and writes cells, and its cost is the number of probes. Every update costs at most $t_u \ge 1$ probes.
 
-**Theorem.** Let $\beta$ be the least power of $2$ that is at least $\max(64\, t_u b,\ 1024)$, and let $n = \beta^K$ for an integer $K \ge 1$. Then there is a sequence of fewer than $2n$ updates after which the average cost of $\textsc{sum}(x)$, over $x$ chosen uniformly from $\{1, \dots, n\}$ and with each query run on the memory left by the updates, is greater than
+**Theorem.** Let $\beta$ be the least power of $2$ that is at least $\max(64\, t_u b,\ 1024)$, and let $n = \beta^K$ for an integer $K \ge 1$. Then there is a sequence of fewer than $2n$ updates after which the average cost of $\textsf{sum}(x)$, over $x$ chosen uniformly from $\{1, \dots, n\}$ and with each query run on the memory left by the updates, is greater than
 
 $$\frac{K}{8} = \frac{\lg n}{8 \lg \beta}.$$
 
@@ -61,7 +61,7 @@ All the eras after a given era wrote only a few cells, far fewer than the number
 
 Each field has a length that is known from the fields before it, so the code is prefix-free.
 
-**Decoding.** The decoder knows the structure and all epochs except $i$. It runs epochs $K, \dots, i + 1$ and gets the memory $M_0$ just before epoch $i$. It runs each good query $x_l$ and serves each read of a cell $c$ that the query has not written as follows: the sent content if $c$ is in field 2, otherwise $M_0[c]$. Since the query is good, $c$ was not last written in epoch $i$, so this is the true content, and the simulation returns the true answer. Fields 4 and 5 give the answers of the bad queries. From the answer of $\textsc{sum}(x_l)$ the decoder subtracts the part of the other epochs, which it knows, and gets $\sum_{j \,:\, j n/\beta^i \le x_l} v^{(i)}_j$. This is the prefix of length $l - 1$ of $v^{(i)}$ if $y < n/\beta^i$, or of length $l$ if $y = n/\beta^i$. The differences of consecutive prefixes give at least $N - 1$ of the bits $v^{(i)}_j$.
+**Decoding.** The decoder knows the structure and all epochs except $i$. It runs epochs $K, \dots, i + 1$ and gets the memory $M_0$ just before epoch $i$. It runs each good query $x_l$ and serves each read of a cell $c$ that the query has not written as follows: the sent content if $c$ is in field 2, otherwise $M_0[c]$. Since the query is good, $c$ was not last written in epoch $i$, so this is the true content, and the simulation returns the true answer. Fields 4 and 5 give the answers of the bad queries. From the answer of $\textsf{sum}(x_l)$ the decoder subtracts the part of the other epochs, which it knows, and gets $\sum_{j \,:\, j n/\beta^i \le x_l} v^{(i)}_j$. This is the prefix of length $l - 1$ of $v^{(i)}$ if $y < n/\beta^i$, or of length $l$ if $y = n/\beta^i$. The differences of consecutive prefixes give at least $N - 1$ of the bits $v^{(i)}_j$.
 
 **Counting.** The message determines $N - 1$ independent uniform bits, so its entropy is at least $N - 1$, and by the [source coding theorem](/source-coding-theorem/) a prefix-free message has expected length at least its entropy. Epochs $i - 1, \dots, 1$ have fewer than $2\beta^{i-1}$ updates, so $s < 2 t_u \beta^{i-1}$, and field 2 has fewer than $4 t_u b \beta^{i-1} \le N/16$ bits, by $\beta \ge 64 t_u b$. Also $b + 1 \le N/64 + 1$, and $\lg N + 4 \le N/64$ because $N \ge \beta \ge 1024$. Let $g(c) = \lg \binom{N}{c} + c$. Then
 

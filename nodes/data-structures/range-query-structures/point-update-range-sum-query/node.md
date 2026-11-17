@@ -44,20 +44,20 @@ If you store only the numbers, a change is fast but a total needs a long loop. I
 
 **Operations.** A sequence of operations, each answered before the next one is read (online):
 
-- $\textsc{update}(i, x)$ with $1 \le i \le n$: set $A[i] \leftarrow x$. The additive form $\textsc{add}(i, \delta)$ sets $A[i] \leftarrow A[i] + \delta$.
-- $\textsc{sum}(l, r)$ with $1 \le l \le r \le n$: return $\sum_{k=l}^{r} A[k]$ for the current array.
+- $\textsf{update}(i, x)$ with $1 \le i \le n$: set $A[i] \leftarrow x$. The additive form $\textsf{add}(i, \delta)$ sets $A[i] \leftarrow A[i] + \delta$.
+- $\textsf{sum}(l, r)$ with $1 \le l \le r \le n$: return $\sum_{k=l}^{r} A[k]$ for the current array.
 
 **Cost.** The preprocessing time, the worst-case or amortized time $t_u$ of an update, the time $t_q$ of a query, and the space. A good solution has $O(n)$ space and small $t_u$ and $t_q$ at once.
 
-The two forms of update are equivalent: $\textsc{update}(i, x)$ is $\textsc{add}(i, x - A[i])$ if a copy of $A$ is kept, and $\textsc{add}(i, \delta)$ is $\textsc{update}(i, A[i] + \delta)$. A query $\textsc{sum}(l, r)$ is $\textsc{prefix}(r) - \textsc{prefix}(l - 1)$, so over a group the problem is the same as the *dynamic partial sums* problem, which asks only for prefix sums.
+The two forms of update are equivalent: $\textsf{update}(i, x)$ is $\textsf{add}(i, x - A[i])$ if a copy of $A$ is kept, and $\textsf{add}(i, \delta)$ is $\textsf{update}(i, A[i] + \delta)$. A query $\textsf{sum}(l, r)$ is $\textsf{prefix}(r) - \textsf{prefix}(l - 1)$, so over a group the problem is the same as the *dynamic partial sums* problem, which asks only for prefix sums.
 
 ## Variants
 
-- **Prefix sums only.** $\textsc{prefix}(i) = A[1] + \cdots + A[i]$. Equivalent over a group, as above.
+- **Prefix sums only.** $\textsf{prefix}(i) = A[1] + \cdots + A[i]$. Equivalent over a group, as above.
 - **Without an inverse.** Over a commutative monoid without subtraction, such as $\max$ on non-negative numbers, the range form is harder than the prefix form. With $\min$ it is the [point update range minimum query](/point-update-range-min-query/).
 - **Range update, point query.** Add $\delta$ to $A[l \ldots r]$ and read one item. It is the same problem on the [difference array](/difference-array/), see [range update point query](/range-update-point-query/).
 - **Range update, range query.** Both operations act on ranges. Two Fenwick trees or a segment tree with [lazy propagation](/lazy-propagation/) solve it in $O(\log n)$, see [range update range query](/range-update-range-query/).
-- **Search.** Find the least $i$ with $\textsc{prefix}(i) \ge s$ when all items are non-negative. This is the *select* query of a dynamic multiset of counts.
+- **Search.** Find the least $i$ with $\textsf{prefix}(i) \ge s$ when all items are non-negative. This is the *select* query of a dynamic multiset of counts.
 - **Offline.** All operations are known in advance, as in [offline query processing](/offline-query-processing/). The same structures still apply, and offline order is used mainly to turn other problems into this one.
 - **Two dimensions.** Points in a grid with updates and rectangle sums, see the [two-dimensional range sum query](/two-dimensional-range-sum-query/).
 
@@ -67,12 +67,12 @@ Start with $A = [2, 7, 1, 8, 2, 8]$.
 
 | operation | array after | answer |
 |---|---|---|
-| $\textsc{sum}(2, 4)$ | $[2, 7, 1, 8, 2, 8]$ | $7 + 1 + 8 = 16$ |
-| $\textsc{update}(3, 5)$ | $[2, 7, 5, 8, 2, 8]$ | |
-| $\textsc{sum}(2, 4)$ | $[2, 7, 5, 8, 2, 8]$ | $20$ |
-| $\textsc{add}(6, -8)$ | $[2, 7, 5, 8, 2, 0]$ | |
-| $\textsc{sum}(1, 6)$ | $[2, 7, 5, 8, 2, 0]$ | $24$ |
-| $\textsc{sum}(5, 5)$ | $[2, 7, 5, 8, 2, 0]$ | $2$ |
+| $\textsf{sum}(2, 4)$ | $[2, 7, 1, 8, 2, 8]$ | $7 + 1 + 8 = 16$ |
+| $\textsf{update}(3, 5)$ | $[2, 7, 5, 8, 2, 8]$ | |
+| $\textsf{sum}(2, 4)$ | $[2, 7, 5, 8, 2, 8]$ | $20$ |
+| $\textsf{add}(6, -8)$ | $[2, 7, 5, 8, 2, 0]$ | |
+| $\textsf{sum}(1, 6)$ | $[2, 7, 5, 8, 2, 0]$ | $24$ |
+| $\textsf{sum}(5, 5)$ | $[2, 7, 5, 8, 2, 0]$ | $2$ |
 
 With prefix sums stored in a plain array, the update of position 3 would have to change the four prefix sums of positions 3 to 6. With only the array, the last-but-one query would need five additions.
 
@@ -102,7 +102,7 @@ with the logarithms read as $\log_2(2 + x)$, even with amortization and Las Vega
 
 ## Reductions
 
-- **Ranges to prefixes.** $\textsc{sum}(l, r) = \textsc{prefix}(r) - \textsc{prefix}(l - 1)$, one extra query and one subtraction. Prefixes are ranges with $l = 1$. So the two problems have the same complexity over a group.
+- **Ranges to prefixes.** $\textsf{sum}(l, r) = \textsf{prefix}(r) - \textsf{prefix}(l - 1)$, one extra query and one subtraction. Prefixes are ranges with $l = 1$. So the two problems have the same complexity over a group.
 - **Range update point query to this problem.** Store $D[i] = A[i] - A[i - 1]$. A range add is two point adds on $D$, and $A[i]$ is a prefix sum of $D$. The reduction works in both directions with $O(1)$ overhead.
 - **Counting inversions to this problem.** Scan the array from left to right over the compressed values. For each item $x$, query the number of earlier items greater than $x$, then add 1 at $x$. This gives $n$ updates and $n$ queries, so [counting inversions](/counting-inversions/) takes $O(n \log n)$ time.
 - **Offline dominance counting to this problem.** Points $(x, y)$ and queries "how many points have $x' \le x$ and $y' \le y$" are sorted by $x$ and swept, with the $y$ values in a Fenwick tree. This is the base of offline [two-dimensional range sum queries](/two-dimensional-range-sum-query/).

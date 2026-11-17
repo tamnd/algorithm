@@ -40,7 +40,7 @@ To answer "what is the total from mark $l$ to mark $r$?", find the first cut tha
 
 A static array $A[0 \ldots n-1]$ over a semigroup $(S, \cdot)$, that is, a set with an associative operation. The only operation after the build is
 
-- $\textsc{query}(l, r)$ with $0 \le l \le r < n$: return $A[l] \cdot A[l+1] \cdots A[r]$, in this order.
+- $\textsf{query}(l, r)$ with $0 \le l \le r < n$: return $A[l] \cdot A[l+1] \cdots A[r]$, in this order.
 
 No updates are supported. The operation need not be commutative: matrix products, string concatenation and composition of functions all work.
 
@@ -90,10 +90,10 @@ Take $A = [3, 1, 4, 1, 5, 9, 2, 6]$ with addition, so $n = N = 8$ and $K = 3$.
 
 At level 2, the block $[4, 8)$ has the middle 6: $T[2][4] = A[4] + A[5] = 14$, $T[2][5] = 9$, $T[2][6] = 2$ and $T[2][7] = 2 + 6 = 8$.
 
-- $\textsc{query}(2, 5)$: $2 \oplus 5 = 7$, bit length 3, so the answer is $T[3][2] + T[3][5] = 5 + 14 = 19 = 4 + 1 + 5 + 9$.
-- $\textsc{query}(4, 7)$: $4 \oplus 7 = 3$, bit length 2, so $T[2][4] + T[2][7] = 14 + 8 = 22$.
-- $\textsc{query}(1, 2)$: $1 \oplus 2 = 3$, so $T[2][1] + T[2][2] = 1 + 4 = 5$.
-- $\textsc{query}(3, 3) = A[3] = 1$.
+- $\textsf{query}(2, 5)$: $2 \oplus 5 = 7$, bit length 3, so the answer is $T[3][2] + T[3][5] = 5 + 14 = 19 = 4 + 1 + 5 + 9$.
+- $\textsf{query}(4, 7)$: $4 \oplus 7 = 3$, bit length 2, so $T[2][4] + T[2][7] = 14 + 8 = 22$.
+- $\textsf{query}(1, 2)$: $1 \oplus 2 = 3$, so $T[2][1] + T[2][2] = 1 + 4 = 5$.
+- $\textsf{query}(3, 3) = A[3] = 1$.
 
 ## Correctness
 

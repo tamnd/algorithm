@@ -42,8 +42,8 @@ So the frame gets a third handle: a clock. Turning the clock forward by one repl
 
 **Input.** An array $A[0 \ldots n-1]$ and a sequence of operations, known in advance, of two kinds:
 
-- $\textsc{update}(p, x)$: set $A[p] \leftarrow x$;
-- $\textsc{query}(l, r)$ with $0 \le l \le r \le n$: a value $f(A[l \ldots r-1])$ of the current array.
+- $\textsf{update}(p, x)$: set $A[p] \leftarrow x$;
+- $\textsf{query}(l, r)$ with $0 \le l \le r \le n$: a value $f(A[l \ldots r-1])$ of the current array.
 
 **Tools.** As in Mo's algorithm, a state for the window with ADD$(x)$, REMOVE$(x)$ and ANSWER, each in $O(1)$ time, where $x$ is a value, so that the state after any sequence of ADD and REMOVE calls depends only on the multiset of values in the window.
 
@@ -78,7 +78,7 @@ The block size $B = \lceil n^{2/3} \rceil$ is the usual choice. For other ratios
 
 Take $A = [1, 2, 1, 3, 2]$ and the operations
 
-$\textsc{query}(0, 3)$, $\textsc{update}(1, 1)$, $\textsc{query}(0, 3)$, $\textsc{query}(1, 5)$, $\textsc{update}(3, 2)$, $\textsc{query}(1, 5)$,
+$\textsf{query}(0, 3)$, $\textsf{update}(1, 1)$, $\textsf{query}(0, 3)$, $\textsf{query}(1, 5)$, $\textsf{update}(3, 2)$, $\textsf{query}(1, 5)$,
 
 where each query asks for the number of distinct values. The queries are $(0, 3, 0)$, $(0, 3, 1)$, $(1, 5, 1)$ and $(1, 5, 2)$, with $U[1] = (1, 1)$ and $U[2] = (3, 2)$. With $B = \lceil 5^{2/3} \rceil = 3$, every query has the key $(0, 1, t)$, so the sorted order is the input order.
 

@@ -42,8 +42,8 @@ A dynamic segment tree builds the boxes only when it needs them. It starts with 
 
 The structure keeps an array $A[0 \ldots U-1]$ over a [monoid](/monoid/) $(M, \oplus, e)$, with all items equal to $e$ at the start. The operations are:
 
-- $\textsc{update}(i, x)$: set $A[i] \leftarrow A[i] \oplus x$, for $0 \le i < U$; with a commutative monoid such as integer addition this is the point add of the [point update range sum query](/point-update-range-sum-query/);
-- $\textsc{query}(l, r)$: return $A[l] \oplus A[l+1] \oplus \cdots \oplus A[r-1]$ for $0 \le l \le r \le U$, or $e$ when $l = r$.
+- $\textsf{update}(i, x)$: set $A[i] \leftarrow A[i] \oplus x$, for $0 \le i < U$; with a commutative monoid such as integer addition this is the point add of the [point update range sum query](/point-update-range-sum-query/);
+- $\textsf{query}(l, r)$: return $A[l] \oplus A[l+1] \oplus \cdots \oplus A[r-1]$ for $0 \le l \le r \le U$, or $e$ when $l = r$.
 
 The point assignment $A[i] \leftarrow x$ works the same way, with the leaf set to $x$ and the inner nodes recomputed on the way up.
 
@@ -84,18 +84,18 @@ A query never creates nodes, so a read-only workload does not grow the tree. The
 
 ## Example
 
-Take $U = 16$, integer addition, and the updates $\textsc{update}(3, 5)$, $\textsc{update}(10, 2)$ and $\textsc{update}(11, 4)$.
+Take $U = 16$, integer addition, and the updates $\textsf{update}(3, 5)$, $\textsf{update}(10, 2)$ and $\textsf{update}(11, 4)$.
 
 | operation | new nodes (by range) | nodes in total |
 |---|---|---|
 | start | the root $[0, 16)$ | 1 |
-| $\textsc{update}(3, 5)$ | $[0, 8)$, $[0, 4)$, $[2, 4)$, $[3, 4)$ | 5 |
-| $\textsc{update}(10, 2)$ | $[8, 16)$, $[8, 12)$, $[10, 12)$, $[10, 11)$ | 9 |
-| $\textsc{update}(11, 4)$ | $[11, 12)$ | 10 |
+| $\textsf{update}(3, 5)$ | $[0, 8)$, $[0, 4)$, $[2, 4)$, $[3, 4)$ | 5 |
+| $\textsf{update}(10, 2)$ | $[8, 16)$, $[8, 12)$, $[10, 12)$, $[10, 11)$ | 9 |
+| $\textsf{update}(11, 4)$ | $[11, 12)$ | 10 |
 
 The stored values are $\mathit{val} = 11$ at the root, 5 on the path to position 3, $6$ at $[8, 16)$, $[8, 12)$ and $[10, 12)$, 2 at $[10, 11)$ and 4 at $[11, 12)$. The full tree would have 31 nodes.
 
-$\textsc{query}(2, 12)$ visits the root, then $[0, 8)$: its left child $[0, 4)$ splits into $[0, 2)$, which is absent and gives 0, and $[2, 4)$, which lies inside the query and gives 5; its right child $[4, 8)$ is absent and gives 0. On the right side, $[8, 16)$ splits into $[8, 12)$, which lies inside and gives 6, and $[12, 16)$, which is absent. The answer is $5 + 6 = 11$. $\textsc{query}(0, 8) = 5$, and $\textsc{query}(4, 10) = 0$, which ends at absent nodes and at the absent left child $[8, 10)$ of $[8, 12)$.
+$\textsf{query}(2, 12)$ visits the root, then $[0, 8)$: its left child $[0, 4)$ splits into $[0, 2)$, which is absent and gives 0, and $[2, 4)$, which lies inside the query and gives 5; its right child $[4, 8)$ is absent and gives 0. On the right side, $[8, 16)$ splits into $[8, 12)$, which lies inside and gives 6, and $[12, 16)$, which is absent. The answer is $5 + 6 = 11$. $\textsf{query}(0, 8) = 5$, and $\textsf{query}(4, 10) = 0$, which ends at absent nodes and at the absent left child $[8, 10)$ of $[8, 12)$.
 
 ## Correctness
 

@@ -38,8 +38,8 @@ Writing the new price on each seat is slow for long stretches. A faster way keep
 
 **Input.** An array $A[0 \ldots n-1]$ of numbers, then a sequence of operations, with $0 \le l \le r \le n - 1$:
 
-- $\textsc{assign}(l, r, c)$: set $A[i] \leftarrow c$ for each $l \le i \le r$;
-- $\textsc{sum}(l, r)$: return $A[l] + A[l+1] + \cdots + A[r]$.
+- $\textsf{assign}(l, r, c)$: set $A[i] \leftarrow c$ for each $l \le i \le r$;
+- $\textsf{sum}(l, r)$: return $A[l] + A[l+1] + \cdots + A[r]$.
 
 **Output.** The answer of each sum, for the array as it is after all earlier operations; the operations are given one at a time (online).
 
@@ -59,18 +59,18 @@ Let $A = [2, 3, 1, 1, 5, 3, 0, 4]$.
 
 | step | operation | array after | answer |
 |---|---|---|---|
-| 1 | $\textsc{sum}(0, 7)$ | 2 3 1 1 5 3 0 4 | 19 |
-| 2 | $\textsc{assign}(1, 5, 2)$ | 2 2 2 2 2 2 0 4 | |
-| 3 | $\textsc{sum}(0, 7)$ | | 16 |
-| 4 | $\textsc{assign}(3, 6, 7)$ | 2 2 2 7 7 7 7 4 | |
-| 5 | $\textsc{sum}(2, 4)$ | | 16 |
-| 6 | $\textsc{sum}(0, 7)$ | | 38 |
+| 1 | $\textsf{sum}(0, 7)$ | 2 3 1 1 5 3 0 4 | 19 |
+| 2 | $\textsf{assign}(1, 5, 2)$ | 2 2 2 2 2 2 0 4 | |
+| 3 | $\textsf{sum}(0, 7)$ | | 16 |
+| 4 | $\textsf{assign}(3, 6, 7)$ | 2 2 2 7 7 7 7 4 | |
+| 5 | $\textsf{sum}(2, 4)$ | | 16 |
+| 6 | $\textsf{sum}(0, 7)$ | | 38 |
 
 In a lazy segment tree on this array, step 2 splits $[1, 5]$ into the canonical nodes $[1, 1]$, $[2, 3]$ and $[4, 5]$. They get the tag 2 and the sums $2$, $2 \cdot 2 = 4$ and $4$, and their ancestors are recomputed: $[0, 1]$ has the sum $2 + 2 = 4$, $[0, 3]$ has $8$, $[4, 7]$ has $4 + 4 = 8$, and the root has $16$. The leaves $[2, 2]$ and $[3, 3]$ still hold the old values 1 and 1, but the tag on $[2, 3]$ makes them irrelevant.
 
 Step 4 splits $[3, 6]$ into $[3, 3]$, $[4, 5]$ and $[6, 6]$. To reach the leaf $[3, 3]$ the walk passes $[2, 3]$, so it first pushes the tag 2 down: both leaves get the value 2 and the tag on $[2, 3]$ is cleared. Then $[3, 3]$ gets 7, $[4, 5]$ gets the tag 7 in place of 2 and the sum 14, and $[6, 6]$ gets 7. Recomputing gives $[2, 3] = 9$, $[0, 3] = 13$, $[4, 7] = 14 + 7 + 4 = 25$ and the root $38$.
 
-With adds as well, the CSES example with $A = [2, 3, 1, 1, 5, 3]$ (positions from 1) gives $\textsc{sum}(3, 5) = 7$, then after adding 2 on $[2, 4]$ the sum $11$, then after setting $[2, 4]$ to 5 the sum $15$.
+With adds as well, the CSES example with $A = [2, 3, 1, 1, 5, 3]$ (positions from 1) gives $\textsf{sum}(3, 5) = 7$, then after adding 2 on $[2, 4]$ the sum $11$, then after setting $[2, 4]$ to 5 the sum $15$.
 
 ## Known algorithms
 
@@ -86,7 +86,7 @@ With adds as well, the CSES example with $A = [2, 3, 1, 1, 5, 3]$ (positions fro
 
 ## Bounds
 
-**Lower bound.** $\textsc{assign}(i, i, c)$ is the point update $A[i] \leftarrow c$, and $\textsc{sum}(0, p)$ is a prefix sum. So any structure for this problem solves dynamic partial sums, and in the [cell-probe model](/cell-probe-model/) with cells of $\Theta(\log n)$ bits, Patrascu and Demaine (2006) proved a trade-off between the amortized update time $t_u$ and query time $t_q$ which gives, in particular, $\max(t_u, t_q) = \Omega(\log n)$. See the [dynamic partial sums lower bound](/dynamic-partial-sums-lower-bound/).
+**Lower bound.** $\textsf{assign}(i, i, c)$ is the point update $A[i] \leftarrow c$, and $\textsf{sum}(0, p)$ is a prefix sum. So any structure for this problem solves dynamic partial sums, and in the [cell-probe model](/cell-probe-model/) with cells of $\Theta(\log n)$ bits, Patrascu and Demaine (2006) proved a trade-off between the amortized update time $t_u$ and query time $t_q$ which gives, in particular, $\max(t_u, t_q) = \Omega(\log n)$. See the [dynamic partial sums lower bound](/dynamic-partial-sums-lower-bound/).
 
 **Upper bound.** $O(\log n)$ worst case per operation, with $O(n)$ preprocessing and $O(n)$ words, by the lazy segment tree. So the problem has the same complexity as the point update version, up to a constant.
 

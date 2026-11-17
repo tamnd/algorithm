@@ -42,8 +42,8 @@ Painting a stretch of the fence in one colour is cheap in this notebook. You cro
 
 The structure keeps an array $A[0 \ldots n-1]$ of values. The core operations are:
 
-- $\textsc{assign}(l, r, v)$: set $A[k] \leftarrow v$ for $l \le k < r$;
-- $\textsc{each}(l, r, f)$: call $f(s, e, v)$ for each run $[s, e)$ of value $v$ that tiles $[l, r)$, from left to right, where $f$ may change $v$.
+- $\textsf{assign}(l, r, v)$: set $A[k] \leftarrow v$ for $l \le k < r$;
+- $\textsf{each}(l, r, f)$: call $f(s, e, v)$ for each run $[s, e)$ of value $v$ that tiles $[l, r)$, from left to right, where $f$ may change $v$.
 
 Range add, range sum, range sum of powers, and the $k$-th smallest value of a range are all instances of EACH: the sum adds $v \cdot (e - s)$ over the runs, and the $k$-th smallest sorts the runs of the range by value and walks the lengths.
 
@@ -90,9 +90,9 @@ Take $n = 10$ and $A = [1, 1, 2, 2, 2, 3, 3, 3, 3, 1]$, which is the four runs $
 
 | operation | runs after | note |
 |---|---|---|
-| $\textsc{assign}(3, 7, 5)$ | $[0,2){=}1$, $[2,3){=}2$, $[3,7){=}5$, $[7,9){=}3$, $[9,10){=}1$ | SPLIT(7) cuts $[5,9)$, SPLIT(3) cuts $[2,5)$, then $[3,5)$ and $[5,7)$ go |
-| $\textsc{sum}(1, 8)$ | unchanged except a cut at 1 and 8 | $1 \cdot 1 + 2 \cdot 1 + 5 \cdot 4 + 3 \cdot 1 = 26$ |
-| $\textsc{add}(0, 4, 1)$ | $[0,1){=}2$, $[1,2){=}2$, $[2,3){=}3$, $[3,4){=}6$, $[4,7){=}5$, ... | SPLIT(4) cuts $[3,7)$ |
+| $\textsf{assign}(3, 7, 5)$ | $[0,2){=}1$, $[2,3){=}2$, $[3,7){=}5$, $[7,9){=}3$, $[9,10){=}1$ | SPLIT(7) cuts $[5,9)$, SPLIT(3) cuts $[2,5)$, then $[3,5)$ and $[5,7)$ go |
+| $\textsf{sum}(1, 8)$ | unchanged except a cut at 1 and 8 | $1 \cdot 1 + 2 \cdot 1 + 5 \cdot 4 + 3 \cdot 1 = 26$ |
+| $\textsf{add}(0, 4, 1)$ | $[0,1){=}2$, $[1,2){=}2$, $[2,3){=}3$, $[3,4){=}6$, $[4,7){=}5$, ... | SPLIT(4) cuts $[3,7)$ |
 | $k$-th smallest of $[0, 10)$, $k = 5$ | unchanged | the values sorted are $1, 2, 2, 3, 3, 3, 5, 5, 5, 6$, so 3 |
 
 After these operations $A = [2, 2, 3, 6, 5, 5, 5, 3, 3, 1]$. The sum and the add each made new cuts and created runs with equal neighbours, which the structure keeps.

@@ -40,9 +40,9 @@ To ask "how many numbers between position $l$ and position $r$ are smaller than 
 
 A static array $A[0 \ldots n-1]$ of items from a totally ordered set. The queries are:
 
-- $\textsc{count}(l, r, x)$ with $0 \le l \le r \le n$: the number of $k \in [l, r)$ with $A[k] < x$; the forms "at most $x$" and "in $[x, y)$" follow by one or two calls;
-- $\textsc{successor}(l, r, x)$: the least $A[k] \ge x$ with $k \in [l, r)$, or none;
-- $\textsc{kth}(l, r, k)$ with $1 \le k \le r - l$: the $k$-th smallest item of $A[l \ldots r-1]$.
+- $\textsf{count}(l, r, x)$ with $0 \le l \le r \le n$: the number of $k \in [l, r)$ with $A[k] < x$; the forms "at most $x$" and "in $[x, y)$" follow by one or two calls;
+- $\textsf{successor}(l, r, x)$: the least $A[k] \ge x$ with $k \in [l, r)$, or none;
+- $\textsf{kth}(l, r, k)$ with $1 \le k \le r - l$: the $k$-th smallest item of $A[l \ldots r-1]$.
 
 ## Representation
 
@@ -90,9 +90,9 @@ Take $A = [5, 2, 8, 6, 3, 7, 9, 1]$, so $n = N = 8$.
 | fours | $[2, 5, 6, 8]$, $[1, 3, 7, 9]$ |
 | root | $[1, 2, 3, 5, 6, 7, 8, 9]$ |
 
-$\textsc{count}(1, 7, 7)$ asks how many of $A[1 \ldots 6] = 2, 8, 6, 3, 7, 9$ are below 7. The canonical nodes of $[1, 7)$ are the leaf $[1, 2)$ with $[2]$, the pair $[2, 4)$ with $[6, 8]$, the pair $[4, 6)$ with $[3, 7]$ and the leaf $[6, 7)$ with $[9]$. The binary searches give $1 + 1 + 1 + 0 = 3$, for the items 2, 6 and 3.
+$\textsf{count}(1, 7, 7)$ asks how many of $A[1 \ldots 6] = 2, 8, 6, 3, 7, 9$ are below 7. The canonical nodes of $[1, 7)$ are the leaf $[1, 2)$ with $[2]$, the pair $[2, 4)$ with $[6, 8]$, the pair $[4, 6)$ with $[3, 7]$ and the leaf $[6, 7)$ with $[9]$. The binary searches give $1 + 1 + 1 + 0 = 3$, for the items 2, 6 and 3.
 
-$\textsc{kth}(1, 7, 3)$ searches the root list $1, 2, 3, 5, 6, 7, 8, 9$ for the least value $v$ with at least 3 items $\le v$ in the range: 5 gives 2 items (2 and 3), 6 gives 3, so the answer is 6, and indeed $2, 3, 6, 7, 8, 9$ is the range sorted.
+$\textsf{kth}(1, 7, 3)$ searches the root list $1, 2, 3, 5, 6, 7, 8, 9$ for the least value $v$ with at least 3 items $\le v$ in the range: 5 gives 2 items (2 and 3), 6 gives 3, so the answer is 6, and indeed $2, 3, 6, 7, 8, 9$ is the range sorted.
 
 ## Correctness
 
