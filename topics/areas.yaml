@@ -754,3 +754,133 @@
       name: Data integration and cleaning
     - id: stream-and-incremental-processing
       name: Stream and incremental processing
+- id: natural-language-and-speech
+  name: Natural language and speech
+  summary: Algorithms that segment, model, tag, parse, translate and generate human language, and that analyze, recognize and synthesize speech.
+  children:
+    - id: tokenization-and-text-normalization
+      name: Tokenization and text normalization
+    - id: word-and-sentence-embeddings
+      name: Word and sentence embeddings
+    - id: language-modeling
+      name: Language modeling
+    - id: text-generation-and-decoding
+      name: Text generation and decoding
+    - id: tagging-and-information-extraction
+      name: Tagging and information extraction
+    - id: natural-language-parsing
+      name: Syntactic and semantic parsing
+    - id: machine-translation-and-alignment
+      name: Machine translation and alignment
+    - id: speech-analysis-and-synthesis
+      name: Speech analysis and synthesis
+    - id: speech-recognition
+      name: Speech recognition
+- id: algorithmic-game-theory
+  name: Algorithmic game theory
+  summary: Algorithms for settings with self-interested agents, such as computing equilibria, designing mechanisms and auctions, voting, fair division and markets.
+  children:
+    - id: strategic-games
+      name: Games and solution concepts
+    - id: computing-equilibria
+      name: Computing equilibria
+    - id: inefficiency-of-equilibria
+      name: Price of anarchy and selfish routing
+    - id: mechanism-design
+      name: Mechanism design
+    - id: auctions
+      name: Auctions
+    - id: social-choice-and-voting
+      name: Social choice and voting
+    - id: fair-division
+      name: Fair division
+    - id: matching-markets-and-market-equilibria
+      name: Matching markets and market equilibria
+    - id: cooperative-games
+      name: Cooperative games and cost sharing
+- id: scientific-computing
+  name: Scientific computing
+  summary: Algorithms that simulate physical systems on computers, such as particle and N-body methods, molecular dynamics, fluid flow, finite elements, particle transport, multiscale models, uncertainty quantification and data assimilation.
+  children:
+    - id: n-body-and-particle-methods
+      name: N-body and particle methods
+    - id: molecular-simulation
+      name: Molecular simulation
+    - id: conservation-laws-and-shock-capturing
+      name: Conservation laws and shock capturing
+    - id: incompressible-flow-and-turbulence
+      name: Incompressible flow and turbulence
+    - id: finite-element-practice
+      name: Finite element practice
+    - id: particle-transport
+      name: Particle transport
+    - id: multiscale-methods
+      name: Multiscale methods
+    - id: uncertainty-quantification
+      name: Uncertainty quantification
+    - id: data-assimilation
+      name: Data assimilation
+- id: communications
+  name: Communications
+  summary: Algorithms that send data over a physical channel and recover it at the receiver, such as modulation, synchronization, equalization, OFDM, MIMO and multiple access.
+  children:
+    - id: modulation-and-detection
+      name: Modulation and detection
+    - id: synchronization
+      name: Synchronization
+    - id: fading-channels
+      name: Fading channels
+    - id: channel-estimation-and-equalization
+      name: Channel estimation and equalization
+    - id: ofdm-and-multicarrier
+      name: OFDM and multicarrier
+    - id: mimo-communications
+      name: MIMO communications
+    - id: multiple-access-and-spread-spectrum
+      name: Multiple access and spread spectrum
+    - id: link-adaptation-and-resource-allocation
+      name: Link adaptation and resource allocation
+    - id: radar-waveforms
+      name: Radar waveforms and detection
+- id: security-and-privacy
+  name: Security and privacy
+  summary: Algorithms and models that control who may do what with data, find and stop attacks on programs and networks, and release data without exposing the people in it.
+  children:
+    - id: access-control-and-information-flow
+      name: Access control and information flow
+    - id: memory-safety-defenses
+      name: Memory safety defenses
+    - id: fuzzing-and-vulnerability-discovery
+      name: Fuzzing and vulnerability discovery
+    - id: side-channel-attacks
+      name: Side channels
+    - id: network-and-web-security
+      name: Network and web security
+    - id: intrusion-and-malware-detection
+      name: Intrusion and malware detection
+    - id: data-anonymization
+      name: Anonymization and disclosure control
+    - id: differential-privacy
+      name: Differential privacy
+    - id: adversarial-machine-learning
+      name: Adversarial machine learning
+- id: imaging-and-inverse-problems
+  name: Imaging and inverse problems
+  summary: Algorithms that recover an image or a model from indirect, noisy measurements, such as regularization, tomography, MRI, radar and seismic imaging, phase retrieval and deconvolution.
+  children:
+    - id: regularization-of-inverse-problems
+      name: Regularization of inverse problems
+    - id: variational-and-learned-reconstruction
+      name: Variational, sparse and learned reconstruction
+    - id: tomographic-reconstruction
+      name: Tomographic reconstruction
+    - id: mri-reconstruction
+      name: MRI reconstruction
+    - id: ultrasound-and-radar-imaging
+      name: Ultrasound and radar imaging
+    - id: seismic-imaging
+      name: Seismic imaging
+    - id: phase-retrieval-and-coherent-imaging
+      name: Phase retrieval and coherent imaging
+    - id: deconvolution-and-astronomical-imaging
+      name: Deconvolution, super-resolution and astronomical imaging
