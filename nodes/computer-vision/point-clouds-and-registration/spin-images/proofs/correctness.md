@@ -1,0 +1,25 @@
+---
+title: A spin image counts each supported point with total weight 1, in the cells around its cylindrical coordinates, and does not change under rigid motions
+proves: [correctness]
+status: full
+---
+
+Fix the oriented point $(p, \mathbf{n})$ with $\lVert \mathbf{n} \rVert = 1$, the bin size $b > 0$, the width $W \ge 2$ and the support angle $A$. Let $\beta_{\max} = (W - 1) b / 2$ and $\alpha_{\max} = (W - 1) b$. For a point $x$ with normal $\mathbf{n}_x$, write $d = x - p$. A point is *supported* when it passes the tests of lines L3 and L5: $\mathbf{n} \cdot \mathbf{n}_x \ge \cos A$, $\alpha \le \alpha_{\max}$ and $\lvert \beta \rvert \le \beta_{\max}$. The *tent* is $t(z) = \max(0, 1 - \lvert z \rvert)$.
+
+**Lemma 1 (the coordinates).** With $\beta = \mathbf{n} \cdot d$ and $\alpha = \sqrt{\lVert d \rVert^2 - \beta^2}$ as in line L4, $\beta$ is the signed height of $x$ along the line $L = \{p + t\mathbf{n}\}$, and $\alpha$ is the distance from $x$ to $L$. Two points have the same $(\alpha, \beta)$ if and only if a rotation about $L$ maps one to the other.
+
+*Proof.* Write $d = \beta \mathbf{n} + d_\perp$ with $d_\perp \cdot \mathbf{n} = 0$. By Pythagoras, $\lVert d \rVert^2 = \beta^2 + \lVert d_\perp \rVert^2$, so $\alpha = \lVert d_\perp \rVert \ge 0$, and the square root is real. The nearest point of $L$ to $x$ is $p + \beta \mathbf{n}$, at distance $\lVert d_\perp \rVert$. A rotation about $L$ fixes $p$ and $\mathbf{n}$ and turns $d_\perp$ in the plane orthogonal to $\mathbf{n}$, so it keeps $\beta$ and $\lVert d_\perp \rVert$. Conversely, two vectors $d_\perp$ and $d'_\perp$ of the same length in that plane differ by a rotation about $\mathbf{n}$, which maps $x$ to $x'$ when the heights are also equal. $\square$
+
+**Lemma 2 (bilinear weights).** For a supported point, let $u = (\beta_{\max} - \beta)/b$ and $s = \alpha / b$ as in line L6. Then $u, s \in [0, W - 1]$, and lines L7 and L8 add $t(u - r)\, t(s - c)$ to every cell $(r, c)$ of the grid and nothing else. These amounts are nonnegative and their sum over the grid is 1.
+
+*Proof.* From $\lvert \beta \rvert \le \beta_{\max}$ follows $0 \le u \le 2 \beta_{\max} / b = W - 1$, and from $0 \le \alpha \le \alpha_{\max}$ follows $0 \le s \le W - 1$. Line L7 sets $i = \min(W - 1, \lfloor u \rfloor)$ and $a = u - i \in [0, 1)$. If $u < W - 1$, then $i = \lfloor u \rfloor \le W - 2$, both rows $i$ and $i + 1$ are in the grid, and $t(u - i) = 1 - a$, $t(u - i - 1) = a$, and $t(u - r) = 0$ for every other row, since $\lvert u - r \rvert \ge 1$ there. If $u = W - 1$, then $i = W - 1$, $a = 0$, row $i$ gets $1 = t(0)$, and row $i + 1$ is outside the grid but its weight $a$ is 0, so leaving it out loses nothing; every other row has $t(u - r) = 0$. The same holds for the columns with $j$ and $c$. Line L8 adds the product of a row weight and a column weight to the four cells, so cell $(r, c)$ gets $t(u - r)\, t(s - c)$. The row weights sum to $(1 - a) + a = 1$ and the column weights to 1, so the four products sum to 1, and all are nonnegative. $\square$
+
+**Theorem 1 (the image).** The image of line L9 has, in cell $(r, c)$, the value $\sum_x t(u_x - r)\, t(s_x - c)$ over the supported points $x$. Its entries are nonnegative and sum to the number of supported points.
+
+*Proof.* Line L1 starts from zeros, and line L2 visits every point once. Lines L3 and L5 skip exactly the points that are not supported, and by Lemma 2 each supported point adds $t(u_x - r)\, t(s_x - c)$ to each cell, with total 1. Summing over the points gives the claim. $\square$
+
+**Theorem 2 (invariance).** Let $g(x) = Q x + t$ with $Q$ a rotation. Move every point $x$ to $g(x)$, every normal $\mathbf{n}_x$ to $Q \mathbf{n}_x$, and the oriented point to $(g(p), Q \mathbf{n})$. Then the spin image does not change. In particular, a rotation of the cloud about the line $L$, which fixes $p$ and $\mathbf{n}$, does not change it.
+
+*Proof.* The offset becomes $g(x) - g(p) = Q d$. Since $Q^\top Q = I$, the new height is $Q \mathbf{n} \cdot Q d = \mathbf{n} \cdot d = \beta$, the new length is $\lVert Q d \rVert = \lVert d \rVert$, so $\alpha$ is the same, and the normal test uses $Q \mathbf{n} \cdot Q \mathbf{n}_x = \mathbf{n} \cdot \mathbf{n}_x$. So the same points are supported, with the same $u$ and $s$, and Theorem 1 gives the same image. A rotation about $L$ is the case $g(p) = p$ and $Q \mathbf{n} = \mathbf{n}$. $\square$
+
+**What the image does not keep.** By Lemma 1, the image forgets the angle of each point about $L$. So two surfaces that differ by turning parts of them about $L$ by different angles can give the same image, and this is the price of the invariance. The weights $t(u - r)\, t(s - c)$ are continuous in the point positions, so a small move of a point that stays supported gives a small change of the image. The support tests are not continuous: a point that crosses the support angle or the edge of the support region adds or removes up to 1 at the border of the image, and this is why a small support angle and a support region that is not too large make the image less sensitive to clutter and self occlusion. $\blacksquare$
