@@ -1,0 +1,33 @@
+---
+title: The tableau test stops and decides whether a decomposition has a lossless join under functional dependencies
+proves: [correctness, termination, complexity]
+status: full
+---
+
+We use the pseudocode of the page and set semantics. $U$ is a set of $a$ attributes, $F$ is a finite set of functional dependencies (FDs) over $U$ of total size $m$, and $\rho = (R_1, \ldots, R_k)$ is a decomposition with $R_1 \cup \cdots \cup R_k = U$. For a relation $r$ over $U$ write $m_\rho(r) = \pi_{R_1}(r) \bowtie \cdots \bowtie \pi_{R_k}(r)$. The decomposition is *lossless under $F$* when $m_\rho(r) = r$ for each finite relation $r$ over $U$ that satisfies $F$. For each $r$ we have $r \subseteq m_\rho(r)$, since each tuple $t \in r$ agrees with itself on each $R_i$. So the decomposition is lossless exactly when $m_\rho(r) \subseteq r$ for each such $r$.
+
+The tableau $T$ has the rows $1, \ldots, k$. Each column has its own symbols: $0$, the *distinguished* symbol, and the positive integers. Line L1 gives row $i$ the symbol $0$ in each column of $R_i$ and the symbol $i$ in each other column. A *step* is one execution of line L8: in one column $A$ it replaces a set $S$ of two or more symbols, which occur in column $A$ of rows that agree on the left side $X$ of an FD $X \to Y$ with $A \in Y$, by $s = \min S$ in each row.
+
+**Claim.** LOSSLESS-JOIN-TEST$(U, F, R_1, \ldots, R_k)$ stops after at most $a(k-1) + 1$ rounds of line L2. It returns *lossless* exactly when $\rho$ is lossless under $F$. When it returns *lossy*, the final tableau $T^*$, read as a relation whose values are the symbols, satisfies $F$ and has $m_\rho(T^*) \ne T^*$.
+
+**Lemma 1 (symbols).** (a) A step removes at least one symbol from column $A$, and no step adds a symbol to a column. (b) The symbol $0$ is never replaced. (c) If row $i$ holds $0$ in column $A$ at some time, it holds $0$ there at each later time.
+
+*Proof.* (a) The step replaces each symbol of $S$ by $s \in S$, so the symbols of $S - \{s\}$, at least one, leave column $A$, and no new symbol appears. (b) $0$ is the smallest symbol, so if $0 \in S$ then $s = 0$. (c) follows from (b). $\square$
+
+**Lemma 2 (termination and round bound).** Column $A$ starts with at most $k$ symbols, one in each row. A column with one symbol allows no step. By Lemma 1(a), each step lowers the number of symbols in its column by at least one, so there are at most $k - 1$ steps in each column and at most $a(k-1)$ steps in all. Each round of line L2 other than the last one sets *changed* at line L8, so it makes a step. So there are at most $a(k-1) + 1$ rounds. $\square$
+
+**Lemma 3 (the final tableau satisfies $F$).** In the last round, *changed* stays false, so line L8 does not run. So for each FD $X \to Y$ (line L4) and each group $G$ of rows that agree on $X$ (line L5), the rows of $G$ have one symbol in each column of $Y$ (line L6). The tableau does not change in this round, so these checks are on $T^*$. So any two rows of $T^*$ that agree on $X$ agree on $Y$, and $T^*$ satisfies $X \to Y$. $\square$
+
+**Lemma 4 (one step keeps an embedding).** A *valuation* $h$ maps each symbol of column $A$ to a value of attribute $A$, and maps a row $w$ to the tuple $h(w)$ with $h(w)[A] = h(w[A])$. Say that $h$ *embeds* $T$ in $r$ when $h(w) \in r$ for each row $w$. Let $r$ satisfy $F$, let $h$ embed $T$ in $r$, and let a step change $T$ into $T'$. Then $h$ maps all symbols of $S$ to the same value, so $h$ embeds $T'$ in $r$.
+
+*Proof.* The rows of $G$ agree on $X$, so their images under $h$ are tuples of $r$ that agree on $X$. As $r$ satisfies $X \to Y$ and $A \in Y$, these tuples agree on $A$. Each symbol of $S$ occurs in column $A$ of some row of $G$, so $h$ maps all of $S$ to one value, and in particular $h(x) = h(s)$ for each $x \in S$. Each row of $T'$ is a row of $T$ with some entries $x \in S$ changed to $s$, so it has the same image under $h$, which is in $r$. $\square$
+
+**Proof of the claim: a lossless answer is right.** Suppose some row of $T^*$ is all $0$. Let $r$ satisfy $F$ and let $w \in m_\rho(r)$. Then there are tuples $t_1, \ldots, t_k \in r$ with $t_i[R_i] = w[R_i]$. In column $A$ let $h(0) = w[A]$ and $h(i) = t_i[A]$. The symbol $i$ occurs only in row $i$ at the start, so $h$ is well defined. Row $i$ maps to $t_i$: on $R_i$ the entry is $0$ and $h(0) = w[A] = t_i[A]$, and off $R_i$ the entry is $i$ and $h(i) = t_i[A]$. So $h$ embeds the start in $r$. By Lemma 4 and induction on the steps, $h$ embeds $T^*$ in $r$, and $h(0) = w[A]$ is not changed. So the all-$0$ row of $T^*$ maps to $w$, and $w \in r$. Thus $m_\rho(r) \subseteq r$, and $\rho$ is lossless under $F$. $\square$
+
+**Proof of the claim: a lossy answer is right.** Suppose no row of $T^*$ is all $0$. By Lemma 3, $T^*$ satisfies $F$. By Lemma 1(c), row $i$ of $T^*$ holds $0$ in each column of $R_i$, so the projection of row $i$ on $R_i$ is all $0$. These projections agree on all common attributes, since all entries are $0$, so the all-$0$ tuple is in $m_\rho(T^*)$. It is not in $T^*$. So $T^*$ is a finite relation that satisfies $F$ with $m_\rho(T^*) \ne T^*$, and $\rho$ is not lossless under $F$. $\square$
+
+**The case $k = 2$.** Let $\rho = (R_1, R_2)$ and $X = R_1 \cap R_2$. Each column holds $0$ in at least one row, because the parts cover $U$. The rows agree on a set of columns, the *agreement set*, which starts as $X$, and both rows hold $0$ in each column of it. A step for $V \to W$ applies exactly when $V$ is in the agreement set and some column of $W$ is not, and it adds the columns of $W$ to the agreement set. This is one step of the attribute closure of $X$ under $F$, so at the end the agreement set is $X^+$. Row $1$ is all $0$ exactly when $R_2 - R_1 \subseteq X^+$, that is $X \to R_2$, and row $2$ is all $0$ exactly when $X \to R_1$. So the test agrees with the binary test of the lossless-join page.
+
+**Complexity.** Store $T$ as $k$ rows of $a$ small integers, $O(ka)$ space, built in $O(ka)$ time at line L1. In one round, take one FD $X \to Y$. Grouping the rows by their entries on $X$ (line L5) takes $O(k|X| \log k)$ time by sorting, or $O(k|X|)$ expected time with a hash table. Line L6 looks at each row once for each attribute of $Y$, $O(k|Y|)$ time in all. Line L8 costs $O(k)$ for one step, and there are at most $a(k-1)$ steps over the whole run by Lemma 2, so all steps together cost $O(a k^2)$. So one round costs $O(k m \log k)$ apart from the steps, and with at most $a(k-1) + 1$ rounds the total time is
+$$O\bigl(ka + a k^2 m \log k + a k^2\bigr) = O\bigl(k^2 a\,(1 + m \log k)\bigr)$$
+in the worst case. With hashing the expected time is $O(k^2 a (1 + m))$. The extra space is $O(ka + m)$ for the tableau, the groups and the FDs as column indexes. $\square$
