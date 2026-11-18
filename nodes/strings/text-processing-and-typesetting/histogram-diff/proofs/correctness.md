@@ -1,0 +1,29 @@
+---
+title: Histogram diff returns a matching of equal lines, and uses the fallback only where every common line is too frequent
+proves: [correctness]
+status: full
+---
+
+We use the pseudocode of the page, with half-open ranges $A[alo \ldots ahi - 1]$ and $B[blo \ldots bhi - 1]$. For a line $x$, $\mathrm{cnt}(x)$ is the number of its copies in the old side of the current range. A *run* is a quadruple $(as, ae, bs, be)$ with $ae - as = be - bs$ and $A[as + t] = B[bs + t]$ for $0 \le t < ae - as$; its *count* is the least $\mathrm{cnt}$ of its lines. The bound on counts is $c$, the parameter max_chain.
+
+**Lemma 1 (the region step).** Let REGION run on a range.
+
+1. If it returns a quadruple, that quadruple is a run inside the range.
+2. It returns an empty run if and only if no line occurs in both sides of the range.
+3. It returns no run, the answer None of line L11, if and only if some line occurs in both sides and every such line has $\mathrm{cnt} > c$.
+
+*Proof.* Part 1. The start value is the empty run at $(alo, blo)$. Line L8 starts from a pair $A[i] = B[j]$ inside the range, and the two loops grow it one equal pair at a time, backward while $as > alo$ and $bs > blo$, forward while $ae < ahi$ and $be < bhi$. So every quadruple stored at line L10 is a run inside the range.
+
+Part 3. The value cnt starts at $c + 1$, and line L10 only replaces it with the count $rc$ of a run tried at line L8. Such a run was tried only if $\mathrm{cnt}(B[j]) \le$ cnt, and $rc \le \mathrm{cnt}(B[j])$, so cnt never grows. Suppose a common line $x$ has $\mathrm{cnt}(x) \le c$. Look at a copy $B[j] = x$. If the scan visits $j$ and cnt is already at most $c$, we are done. Otherwise line L7 tries the copies of $x$, and after line L10 either the run was stored and cnt $= rc \le \mathrm{cnt}(x) \le c$, or it was not stored, which needs $rc \ge$ cnt, so cnt $\le rc \le c$. If the scan skips $j$, then $j$ lies inside the $B$ part of a run grown at an earlier position, so that run contains $x$ and has $rc \le c$, and the same two cases apply. In all cases cnt ends at most $c$ and line L11 does not return None. Conversely, if every common line has $\mathrm{cnt} > c$, every run has count above $c$, cnt stays above $c$, and line L11 returns None, since some line is common.
+
+Part 2. If no line is common, line L7 never runs, the empty start value stays, and has_common stays false, so the empty run is returned. If some line is common, has_common becomes true at the first position of $B$ that holds a common line, since the scan visits that position: it lies before every run that the scan grows. Then either line L11 returns None, or cnt ends at most $c$. In the second case cnt changed, which happens only when line L10 stores a run tried at line L8, and such a run has length at least 1. A later run replaces it only with another run of length at least 1. So the returned run is not empty. $\square$
+
+**Theorem 1 (a valid diff).** The method terminates, the result $M$ is a matching of $A$ and $B$, and the script of line L15 turns $A$ into $B$.
+
+*Proof.* Line L1 matches the equal first lines $(t, t)$ for $t <$ head and the equal last lines, and leaves the range between them for MATCH. We show by induction on the size of the range that a call MATCH appends a matching of its range, in increasing order. If one side is empty, line L3 appends nothing. If REGION returns None, the fallback appends nothing, or a longest matching of the range from the helper, in order. If REGION returns the empty run, line L13 appends nothing. Otherwise, by Lemma 1, the run is a block of equal pairs inside the range, of length at least 1. Line L14 calls MATCH on the part before the run, which lies before it in both files, then appends the pairs of the run, then calls MATCH on the part after it. Both parts are strictly smaller than the range, since they leave out the run, so by induction they append matchings in order, and the three pieces follow each other in both files. With the pairs of line L1 before and after, $M$ is a matching of $A$ and $B$. The helper matching_to_script keeps the pairs of $M$ and deletes and inserts the other lines in order, so the script turns $A$ into $B$. $\square$
+
+**What the run choice gives.** By Lemma 1, part 3, the fallback runs only in a range whose common lines all occur more than $c$ times in the old side. In every other range with a common line, the method makes progress with a run of its own. This is the property that separates histogram diff from [patience diff](/patience-diff/), which needs a line that is unique on both sides.
+
+**The result is not always minimal.** For $A = [u, a, a, a, v]$ and $B = [a, a, a, u, v]$, line L1 matches $v$. In the range that is left, $\mathrm{cnt}(a) = 3$ and $\mathrm{cnt}(u) = 1$. The scan of $B$ first grows the run $a, a, a$ of count 3, then at $B$ position 4, in the numbering from 1, it grows the run $u$ of count 1, which replaces it since $1 < 3$. The parts before and after $u$ are each empty on one side, so the result has 2 pairs and the script has 6 operations, while the common subsequence $a, a, a, v$ gives 2. Even when every line is unique, taking a longest run first can lose: for $A = [1, 2, 3, 4, 5, 6, 7]$ and $B = [6, 7, 1, 3, 5]$ the run $6, 7$ is kept, the rest of $A$ lies before it and the rest of $B$ after it, and the result has 2 pairs, while $1, 3, 5$ has 3.
+
+**Cost.** One call of REGION on a range of $s$ lines counts the old side in $O(s)$ expected time. Each position of $B$ that the scan visits tries at most $c + 1$ copies, since only lines with $\mathrm{cnt} \le$ cnt $\le c + 1$ are tried, and each try grows a run in $O(s)$ steps; so the call costs $O(c s^2)$. Ranges at the same depth of the recursion are disjoint, and each call removes at least one pair, so the depth is at most $n$ and the total is $O(c n^3)$ expected. The fallback runs on disjoint ranges, so the helper costs $O(n^2)$ in total.
