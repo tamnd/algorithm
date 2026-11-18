@@ -33,7 +33,7 @@ sources:
     locator: the first molecular dynamics simulation
   - paper: doi:10.1103/PhysRev.136.A405
     title: Aneesur Rahman, Correlations in the motion of atoms in liquid argon, Physical Review 136(2A), 1964, A405-A411
-    locator: the first simulation with a continuous potential
+    locator: an early simulation with a continuous potential, for liquid argon
   - paper: doi:10.1038/267585a0
     title: J. Andrew McCammon, Bruce R. Gelin and Martin Karplus, Dynamics of folded proteins, Nature 267(5612), 1977, 585-590
     locator: the first molecular dynamics simulation of a protein

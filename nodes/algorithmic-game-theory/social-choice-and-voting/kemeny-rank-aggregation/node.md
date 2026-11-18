@@ -129,7 +129,7 @@ The answer is $f(U)$. With the sums kept per set, this takes $O(2^n n^2)$ time a
 
 **Hardness with few voters.** Dwork, Kumar, Naor and Sivakumar (2001) proved NP-hardness for $k = 4$ and for every even $k \ge 4$. Bachmeier and coauthors (2019) proved it for every odd $k \ge 7$. The case $k = 3$ stayed open until 2026, when a preprint by Dominik Peters and an independent preprint by Péter Madarasi gave NP-hardness for three rankings, and with the reduction that adds a ranking and its reverse, also for five. At the time of writing these are preprints, not reviewed papers. For $k = 1$ and $k = 2$ an input ranking is optimal, as the example shows.
 
-**Approximation.** The PTAS of Kenyon-Mathieu and Schudy shows that the problem is not APX-hard. NP-hardness rules out an exact polynomial algorithm unless P = NP.
+**Approximation.** The PTAS of Kenyon-Mathieu and Schudy shows that the problem is not APX-hard unless P = NP. NP-hardness rules out an exact polynomial algorithm unless P = NP.
 
 ## Reductions
 
