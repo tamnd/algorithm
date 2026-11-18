@@ -1,0 +1,35 @@
+---
+title: The bucket algorithm returns a maximally contained rewriting of a conjunctive query using conjunctive views
+proves: [correctness, termination, time.worst]
+status: full
+---
+
+**Setting.** The query is $Q(\bar x) \text{ :- } g_1, \ldots, g_n$, and each of the $k$ views is $V(\bar Y) \text{ :- } v_1, \ldots, v_r$ with $r \le m$. All terms are variables, there are no comparisons, and set semantics holds. A variable of a view is a *head variable* if it is in $\bar Y$ and *existential* otherwise. A rewriting $P$ is a conjunctive query over the view names. Its expansion $P^{exp}$ replaces the $j$-th atom $V(\bar a)$ of $P$ by the body of $V$ under the renaming $ren_j$ that sends the head variable at position $p$ to $a_p$ and each existential $u$ to a new variable $u_j$. $P$ is *contained* in $Q$ if $P^{exp} \subseteq Q$. By the Chandra-Merlin theorem, $A \subseteq B$ if and only if there is a containment mapping from $B$ to $A$. A containment mapping from $A$ to $B$ also shows that $B \subseteq A$ whenever $B$ is obtained from $A$ by a substitution, and that $A \subseteq A'$ when $A'$ has the same head and a subset of the body of $A$.
+
+**Lemma 1 (bucket entries).** Line L4 accepts a subgoal $v$ of a view $V$ for a subgoal $g$ if and only if, in the classes made by unifying $g$ with $v$ position by position, the class of each head variable of $Q$ in $g$ holds a head variable of $V$. Line L5 then adds the atom $V(\bar e)$, where $e_p$ is a query variable in the class of $Y_p$ if there is one, and a fresh variable otherwise.
+
+*Proof.* This is what lines L3 to L5 compute. $\square$
+
+**Lemma 2 (equatings).** For a candidate $C$, line L9 yields maps $\theta$ on the variables of $C$ such that $\theta(C) \subseteq Q$. If $\sigma$ maps the variables of $C$ to variables and there is a containment mapping $\tau$ from $Q$ to $\sigma(C)^{exp}$ that sends each subgoal $g_i$ to $\hat\sigma(A_i)$ for an atom $A_i$ of $C^{exp}$, where $\hat\sigma$ is $\sigma$ on the variables of $C$ and one to one on the existentials of $C^{exp}$ with values outside the variables of $\sigma(C)$, then line L9 yields a $\theta$ and a map $\sigma'$ with $\sigma = \sigma' \circ \theta$.
+
+*Proof.* The search picks an atom $A_i$ of $C^{exp}$ for each $g_i$ and unifies them. It keeps a state only if no class holds two terms of $C^{exp}$ one of which is an existential. At the end, $\theta$ sends each variable of $C$ to the first variable of $C$ in its class. Map each query variable $x$ to the term of $C^{exp}$ in its class, after $\theta$. A class with an existential holds only that one term of $C^{exp}$, and the head variables of $Q$ start in the class of the head of $C$. So this map sends $\bar x$ to the head of $\theta(C)$ and each $g_i$ to $\theta(A_i)$, an atom of $\theta(C)^{exp}$. If $\theta$ makes two atoms of $C$ equal, line L10 keeps one copy, and the existentials of the other copy map onto those of the kept copy. So $\theta(C) \subseteq Q$.
+
+For the second claim, follow the branch that picks the atoms $A_i$. Every term placed in the class of $x$ has the image $\tau(x)$ under $\hat\sigma$, since each unification step joins terms whose images are equal. An existential $u$ has an image that no other term of $C^{exp}$ has, so its class holds no other term of $C^{exp}$ and the branch is kept. Variables of $C$ in one class have one image under $\sigma$, so $\sigma$ is constant on the classes, and $\sigma = \sigma' \circ \theta$ for the map $\sigma'$ that sends $\theta(y)$ to $\sigma(y)$. $\square$
+
+**Lemma 3 (minimize).** The procedure applied at line L10 returns a query equivalent to its input.
+
+*Proof.* It drops an atom only when the shorter query, which contains the longer one, is also contained in it. $\square$
+
+**Theorem.** BUCKET stops, and the union $R$ of its output is a maximally contained rewriting of $Q$ among unions of conjunctive queries over the views: $R \subseteq Q$, and $P \subseteq R$ for each union of conjunctive queries $P$ over the views with $P \subseteq Q$.
+
+*Proof.* *Termination.* The buckets, the candidates and the search branches are finite.
+
+*Soundness.* Each rewriting added at line L10 is equivalent to some $\theta(C) \subseteq Q$ by Lemmas 2 and 3. Line L11 only removes rewritings.
+
+*Completeness.* It suffices to treat a conjunctive rewriting $P \subseteq Q$, since a union is contained in $Q$ exactly when each disjunct is. Take a containment mapping $\tau$ from $Q$ to $P^{exp}$. Each $\tau(g_i)$ is $ren_j(v)$ for an atom $j = j(i)$ of $P$ and a subgoal $v = v_i$ of its view. Write $\rho_i = ren_{j(i)}$.
+
+Unify $g_i$ with $v_i$. Every member of a class has the same image, $\tau$ of the query variables and $\rho_i$ of the view variables. A head variable $x$ of $Q$ has $\tau(x)$ in the head of $P$, a variable of $P$. An existential has an image $u_j$ that is not a variable of $P$. So the class of $x$ holds a head variable of the view, and by Lemma 1 the bucket of $g_i$ holds an entry $E_i = V(\bar e)$ built from $v_i$. Let $C$ be the candidate with these entries, and define $\sigma$ on its variables: a query variable $x$ in an entry goes to $\tau(x)$, and a fresh variable at position $p$ of $E_i$ goes to $\rho_i(Y_p)$. In both cases the variable at position $p$ of $E_i$ goes to $\rho_i(Y_p)$, the $p$-th argument of atom $j(i)$ of $P$. So $\sigma(E_i)$ is atom $j(i)$ of $P$, and $\sigma$ sends the head $\bar x$ of $C$ to $\tau(\bar x)$, the head of $P$.
+
+For each atom $j$ of $P$ that some $g_i$ uses, fix one such $i_0(j)$, and let $A_i$ be the atom of the expansion of $E_{i_0(j(i))}$ that comes from $v_i$. Let $\hat\sigma$ send the existential $u$ of the expansion of $E_{i_0(j)}$ to $u_j$. Then $\hat\sigma(A_i) = \rho_i(v_i) = \tau(g_i)$, and $\hat\sigma$ is one to one on these existentials with values outside the variables of $P$. Line L7 reaches $C$, and by Lemma 2, line L9 yields a $\theta$ with $\sigma = \sigma' \circ \theta$. The map $\sigma'$ sends the head of $\theta(C)$ to the head of $P$ and each atom $\theta(E_i)$ to an atom of $P$, so $P \subseteq \theta(C)$, and the rewriting added at line L10 is equivalent to $\theta(C)$. Line L11 drops a rewriting only if it is contained in one that stays, so $P$ is contained in a member of $R$. $\blacksquare$
+
+**Running time.** Let $a$ be the largest arity. Each bucket has at most $k m$ entries, so line L7 makes at most $(k m)^n$ candidates. For one candidate, the expansion has at most $n m$ atoms, so the search of line L9 has at most $(n m)^n$ leaves and depth $n$, and each step costs $O(n m a)$. A containment test between two rewritings of at most $n$ atoms is a backtracking search with at most $n^n$ leaves of depth $n$, each step $O(a)$, so it costs $O(n^{n+1} a)$, and minimizing one rewriting takes $n$ such tests. So at most $F = (k m)^n (n m)^n$ rewritings are found, in $O(F\, n^{n+3} m\, a)$ time. Line L11 makes at most $F^2$ containment tests. The total is $O(a\, n\, (k m)^{2n} (n m)^{3n})$ time in combined complexity, using $n^n \le (n m)^n$.
