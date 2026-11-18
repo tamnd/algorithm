@@ -1,0 +1,41 @@
+---
+title: Analysis after a fuzzy checkpoint with tables copied at different times rebuilds exact tables
+proves: [correctness]
+status: full
+---
+
+**Model.** Each page holds one value and a pageLSN. Locking is strict at the level of pages: a transaction that wrote a page holds its lock until its END record. The buffer obeys the WAL rule: a page with pageLSN $n$ is written to disk only after the log is stable up to $n$. A commit is reported only after its commit record is stable. A rollback writes one CLR per undone update, with undoNextLSN equal to the prevLSN of that update. A crash keeps the disk, the stable log $R$ and the master record, and loses the rest. The log only grows at its end, so $R$ is a prefix of the log that the run appended.
+
+In normal processing the system keeps two tables exactly. The ATT holds each transaction that has a BEGIN record and no END record, with its status, its lastLSN and its undoNext (the head of its chain: the next update to undo). The DPT holds each page whose buffer copy differs from its disk copy, with its recLSN, the LSN of the first change since the page was last written.
+
+A checkpoint runs lines L1 to L6 at four times: line L1 at $t_b$, which appends record $b$; line L2 at $t_a$; line L3 at $t_d$; lines L4 to L6 at $t_e$, which append record $e$, make it stable and set the master record to $b$. The only constraints are $t_b < t_a < t_e$ and $t_b < t_d < t_e$. Any other step can run between them. A page version with pageLSN $n$ holds the effects of exactly the updates and CLRs on that page with LSN at most $n$ (the page invariant of the [ARIES](/aries-recovery/) proof). Say that a record $r$ on page $P$ is *missing* if $r$.lsn is larger than the pageLSN of the disk copy of $P$.
+
+**Lemma 0 (live DPT).** At every time of normal processing, for every update or CLR $r$ on a page $P$ that is missing, $P$ is in the live DPT and its recLSN is at most $r$.lsn.
+
+*Proof.* When $r$ changes the buffer copy, either $P$ was dirty, and its recLSN is the first change of the current dirty period, which is at most $r$.lsn, or $P$ becomes dirty with recLSN $r$.lsn. A write of $P$ to disk puts all changes made so far on disk, so no record on $P$ stays missing, and removing $P$ is safe. After a recovery, which runs before normal processing goes on, redo has applied every missing record of $R$ (by Lemma 1 for that recovery, which uses this lemma only for earlier times, so the proof is by induction on the number of crashes, and by the pageLSN test), and the first record that redo applies to $P$ sets the recLSN; every missing record on $P$ is at or after it. CLRs that recovery writes follow the first case. $\square$
+
+**Lemma 1 (coverage).** After analysis (lines L7 to L16), for every update or CLR $r$ in $R$ on page $P$ that is missing, $P$ is in the DPT and DPT$[P] \le r$.lsn. Hence redoLSN $\le r$.lsn.
+
+*Proof.* If there is no master record, analysis reads all of $R$, and line L10 puts $P$ in the table at its first record, at most $r$.lsn. Otherwise the master names $b$, and by line L5 before line L6 the record $e$ is in $R$. Values in the table only go down after they are set, since line L14 takes a minimum. Two cases.
+
+Case $r$.lsn $\ge b$. Line L8 reads $r$. If $P$ is not in the table then, line L10 sets DPT$[P] = r$.lsn. If it is, its value came from an earlier scanned record, which is smaller than $r$, or from line L14, which only stores LSNs of records appended before $t_d < t_e$; if $r$ comes after $e$ these are smaller than $r$.lsn, and if $r$ comes before $e$, line L10 or an earlier record already gave a value at most $r$.lsn, and the minimum keeps it.
+
+Case $r$.lsn $< b$. Then $r$ was appended before $t_b < t_d$. The page $P$ was not written to disk between $r$ and the crash, since that write would hold $r$. So $r$ was missing at $t_d$, and Lemma 0 gives that the live DPT held $P$ with recLSN at most $r$.lsn at $t_d$. Line L3 copied that entry, and line L14 makes DPT$[P]$ at most it. $\square$
+
+**Lemma 2 (transactions).** After line L14 has run for $e$ and the scan has ended, the ATT holds exactly the transactions with a record in $R$ and no END record in $R$. For each one, lastLSN is the LSN of its last record in $R$, undoNext is the head of its chain in $R$, and the status is committed if and only if its COMMIT record is in $R$.
+
+*Proof.* Line L9 sets an entry from one record alone: lastLSN is that record's LSN, and undoNext is the LSN of an update, the undoNextLSN of a CLR, the prevLSN of an abort (the chain head then, since no CLR precedes the abort), or 0 after a BEGIN. A COMMIT can only be followed by the END. So once the scan has read the last record of $T$ in $R$, the entry is exact. Take $T$ with a record in $R$ and no END in $R$.
+
+Case: $T$ has a record in $R$ at or after $b$. The scan reads its last record, and only an END removes it. Line L13 cannot overwrite the entry, since it adds only missing transactions; if $T$ first appears after $e$, line L13 may add the copy first and the scan then overwrites it.
+
+Case: all records of $T$ in $R$ are before $b$. $T$ has no END before $t_e$: an END before $t_b$ would be in $R$, and an END between $t_b$ and $t_e$ would be in $R$ (line L5 makes everything up to $e$ stable) at or after $b$. So $T$ was in the live ATT at $t_a$. Any record of $T$ appended between $t_b$ and $t_e$ would be in $R$ at or after $b$, so $T$ appended no record between $t_b$ and $t_a$, and the copy holds the exact entry for its last record, which is before $b$. At $e$, $T$ is not in the table (no scanned record) and not in the ended set (no END after $b$), so line L13 adds it, and no later record changes it.
+
+Now take $T$ with an END in $R$. If the END is at or after $b$, line L11 removes $T$ and puts it in the ended set, so line L13 does not add it back, and if the END is after $e$, line L11 removes the entry that line L13 added. If the END is before $b$, $T$ was not in the live ATT at $t_a$, so it is not in the copy, and the scan meets none of its records. Finally, every transaction in the copy has its BEGIN before $t_a$, so in $R$. $\square$
+
+**Theorem.** If the redo and undo passes of [ARIES recovery](/aries-recovery/) (lines L17 and L18) run after this analysis, and recovery forces the log at its end (line L19), then after a crash at any point, also during recovery, any number of times, a recovery that runs to the end leaves every page with the value of the newest uncompensated update by a transaction whose commit record is in $R$, or with its initial value.
+
+*Proof.* The correctness proof of ARIES recovery uses two properties of analysis: its Lemma 3 (every missing record is covered by the DPT) and its Lemma 4 (the ATT holds exactly the losers, with the heads of their chains). Lemmas 1 and 2 give both for tables copied at different times, and the rest of that proof does not depend on how the tables were built. A crash during recovery leaves the master record unchanged and a stable log that only has more records at its end, so Lemmas 0 to 2 apply to it. Line L19 puts the END records of recovery in $R$ before normal processing goes on; without it, a loser whose END was lost and whose records are all before a later checkpoint would appear neither in the scan nor in that checkpoint's copy. $\square$
+
+**Remark (the ARIES merge rule).** ARIES, at the end_checkpoint record, sets DPT$[P]$ to the copied recLSN instead of the minimum. This is also correct. Let $c$ be the copied value and $r$ a missing record on $P$. If $r$ is before $b$, Lemma 0 at $t_d$ gives $c \le r$.lsn. If $r$ is at or after $b$ and $r$.lsn $< c$, then at $t_d$ the dirty period of $P$ began at $c$, after $r$, so $P$ was written between $r$ and $c$ and $r$ is not missing. So $c$ is at most every missing record on $P$. The test file runs the crash tests with both rules.
+
+**Remark (why the times matter).** The proof of Lemma 1 uses $t_d > t_b$: a page dirtied before $t_b$ and copied before it was dirtied is in neither the scan nor the copy. The proof of Lemma 2 uses $t_a > t_b$ in the same way, and it uses the ended set when $t_a < t_e$: a transaction that ends between $t_a$ and $t_e$ is in the copy, and without the ended set line L13 would add it back as a loser. The test file builds the first and the last of these cases.
