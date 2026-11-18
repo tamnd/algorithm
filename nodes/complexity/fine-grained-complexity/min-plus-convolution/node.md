@@ -28,7 +28,7 @@ sources:
 
 Min-plus convolution takes two integer sequences $a_0, \ldots, a_{n-1}$ and $b_0, \ldots, b_{n-1}$ and computes $c_k = \min_{i+j=k} (a_i + b_j)$ for each $k$. It is ordinary [convolution](/convolution/) with the operations $(+, \times)$ replaced by $(\min, +)$. The direct method takes $O(n^2)$ time. The [fast Fourier transform](/fast-fourier-transform/) does not apply, because $\min$ has no inverse, and for decades only subpolynomial factors were saved.
 
-In 2017, Cygan, Mucha, Węgrzycki and Włodarczyk proposed the hypothesis that min-plus convolution has no $O(n^{2-\varepsilon})$ algorithm, and showed that it is equivalent to several other problems, among them 0/1 knapsack and unbounded knapsack with capacity $t$ in time $O((n+t)^{2-\varepsilon})$. Künnemann, Paturi and Schneider found some of the same results at the same time. Min-plus convolution reduces both to [3SUM](/3sum/) and to [APSP](/apsp-conjecture/), so its hypothesis was weaker than both. In October 2026, Alman and Vassilevska Williams posted a preprint that makes 3SUM truly subquadratic. Through the reduction to 3SUM, this makes min-plus convolution truly subquadratic too, if the preprint is correct.
+In 2017, Cygan, Mucha, Węgrzycki and Włodarczyk proposed the hypothesis that min-plus convolution has no $O(n^{2-\varepsilon})$ algorithm, and showed that it is equivalent to several other problems, among them 0/1 knapsack and unbounded knapsack with capacity $t$ in time $O((n+t)^{2-\varepsilon})$. Künnemann, Paturi and Schneider found some of the same results at the same time. Min-plus convolution reduces both to [3SUM](/3sum/) and to [APSP](/apsp-conjecture/), so its hypothesis was stronger than both: it implied the 3SUM conjecture and the APSP conjecture. In October 2026, Alman and Vassilevska Williams posted a preprint that makes 3SUM truly subquadratic. Through the reduction to 3SUM, this makes min-plus convolution truly subquadratic too, if the preprint is correct.
 
 ## In plain words
 
@@ -78,7 +78,7 @@ For example, $c_2 = \min(a_0 + b_2, a_1 + b_1, a_2 + b_0) = \min(7, 5, 5) = 5$, 
 ## Bounds
 
 - **Unconditional.** $\Omega(n)$, to read the input. In the nonuniform decision tree model, depth $O(n^{1.5})$ is enough, so no quadratic lower bound can be proved there.
-- **Conditional, before 2026.** The hypothesis below. Since min-plus convolution reduces to both 3SUM and APSP, the 3SUM conjecture and the APSP conjecture each implied it. No relation to SETH or to [Orthogonal Vectors](/orthogonal-vectors/) is known. Cygan et al. prove that there is no deterministic reduction from SAT to unbounded knapsack that rules out time $O(n^{1-\varepsilon} t)$, unless the nondeterministic form of SETH fails.
+- **Conditional, before 2026.** The hypothesis below. Since min-plus convolution reduces to both 3SUM and APSP, its hypothesis implied the 3SUM conjecture and the APSP conjecture. No relation to SETH or to [Orthogonal Vectors](/orthogonal-vectors/) is known. Cygan et al. prove that there is no deterministic reduction from SAT to unbounded knapsack that rules out time $O(n^{1-\varepsilon} t)$, unless the nondeterministic form of SETH fails.
 
 ### Hypothesis (min-plus convolution)
 

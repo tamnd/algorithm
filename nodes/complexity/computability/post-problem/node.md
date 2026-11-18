@@ -7,7 +7,7 @@ aliases:
 - intermediate degree problem
 area: complexity/computability
 level: research
-summary: "Post asked in 1944 whether some c.e. set is undecidable but does not compute the halting problem. Friedberg and Muchnik answered yes in 1956 and 1957 with the priority method."
+summary: "Post asked in 1944 whether some c.e. set is undecidable but does not compute the halting problem. Muchnik (1956) and Friedberg (1957) answered yes with the priority method."
 prereqs: [turing-degrees, turing-jump]
 see_also: [turing-degrees, turing-jump, oracle-turing-machine, halting-problem, many-one-reducibility, ladners-theorem, np-intermediate, recursively-enumerable-language]
 sources:
