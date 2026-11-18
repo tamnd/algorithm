@@ -1,0 +1,35 @@
+---
+title: Two-level restart leaves exactly the changes of committed transactions
+proves: [correctness]
+status: full
+---
+
+**Model.** This is the model of the implementation. Items are counters $x$ on pages, and $t$ is the total. A level 1 operation $O = \mathrm{ADD}(x, d)$ of transaction $T$ appends, in this order, an update of $x$ from $v$ to $v + d$, an update of $t$ from $w$ to $w + d$, and an op_commit record with the inverse $\mathrm{ADD}(x, -d)$ and $\mathrm{opPrev}(O)$, the lastLSN of $T$ before $O$. $O$ holds a level 0 lock on each item from its update to its op_commit. A compensation of $O$ is an operation of the same form with delta $-d$, closed by a comp_commit record with $\mathrm{undone} = O$ and $\mathrm{undoNextLSN} = \mathrm{opPrev}(O)$. A transaction runs one operation or compensation at a time. It commits only between operations, and its commit record is forced. The buffer obeys the write-ahead rule. A crash keeps the disk and the stable log, which is a prefix of the log, and loses the rest. The delta of an update or CLR record $r$ is $\delta(r) = r.\mathrm{after} - r.\mathrm{before}$, where for a CLR the before value is the value of the item just before the CLR was applied.
+
+Every record of $T$ except its begin record has prevLSN equal to the previous record of $T$.
+
+**Lemma 1 (repeating history).** After line L6, every page holds the effect of all update and CLR records of the stable log on that page, applied in LSN order.
+
+*Proof.* Each page version on disk with pageLSN $p$ holds the effect of the records on it with LSN at most $p$, in LSN order: normal work and restart set the pageLSN to the LSN of each record they apply, and by the write-ahead rule every such record is in the stable log. Lines L5 and L6 apply, in LSN order, exactly the records with LSN above $p$. There is no checkpoint, so no record is skipped. $\square$
+
+**Lemma 2 (level 0 isolation).** Let $u$ be an update of $T$ on item $x$ in the stable log, and let $u$ belong to an operation or compensation $O$ of $T$. If the stable log has no op_commit or comp_commit that closes $O$, then the stable log holds no update or CLR on $x$ by another transaction after $u$.
+
+*Proof.* In normal work $O$ holds the lock on $x$ from $u$ to its closing record. Since the closing record is not in the stable log and the stable log is a prefix, every record after $u$ that is in the stable log was appended while $O$ still held the lock, or after a crash. After a crash, the lock is gone, but the restart that follows writes on $x$ only in its level 0 pass for $T$ itself (line L10), or in a compensation of its level 1 pass. Every compensation starts after the level 0 pass has ended. When the level 0 pass ends, $u$ is compensated by a CLR of $T$ that is earlier in the log than any compensation of that restart, so if a later compensation's update on $x$ is in the stable log, then so is that CLR, and $O$ ends at level 0 before it. $\square$
+
+**Lemma 3 (chain).** For a transaction $T$ and a prefix of the log, follow the chain from $T$'s head: an update or abort record leads to its prevLSN, a CLR or a comp_commit to its undoNextLSN, an op_commit to its prevLSN at level 0 and to its opPrev at level 1. Then (a) at level 0 the chain visits exactly the updates of $T$ that are not compensated by a CLR and that belong to an operation or compensation without a closing record; (b) after these, at level 1, the chain visits exactly the completed operations of $T$ that have no comp_commit, newest first.
+
+*Proof.* By induction over the records of $T$, as Lemma 1 of the proof of ARIES. An update is put at the head. An op_commit closes the current operation: its opPrev skips the operation's level 0 updates, which are now part of a completed operation. A CLR for the head update $u$ has undoNextLSN equal to $u.\mathrm{prevLSN}$, which removes $u$ and nothing else. A comp_commit for $O$ has undoNextLSN equal to $\mathrm{opPrev}(O)$, which removes $O$ and the level 0 updates of the compensation itself. Line L3 sets the head to this pointer for a CLR or a comp_commit, and to the record itself otherwise, so analysis finds the head of each loser. $\square$
+
+**Lemma 4 (operation consistency).** After the level 0 pass, the value of every item equals its initial value plus $\sum \delta$ over the updates of completed operations and completed compensations in the log.
+
+*Proof.* By Lemma 1, after redo the value of $x$ is its initial value plus the deltas of all updates and CLRs on $x$. A CLR for an update $u$ of $T$ writes the before image of $u$. By Lemma 2, no other transaction changed $x$ between $u$ and the CLR, and by Lemma 3(a) the CLRs of $T$ undo the updates of the open operation newest first, so the CLR's delta is $-\delta(u)$. The level 0 pass compensates every update of Lemma 3(a). So the updates of open operations and their CLRs cancel in pairs, and what is left is the deltas of closed operations and compensations. $\square$
+
+**Lemma 5 (no double compensation).** For each op_commit $O$, the log holds at most one comp_commit with $\mathrm{undone} = O$.
+
+*Proof.* A comp_commit for $O$ is written only when the chain of the level 1 pass, or of a normal rollback, is at $O$. Once it is in the log, by Lemma 3(b) no chain of any later prefix visits $O$ again. If it is in the volatile tail at a crash, it is lost together with every later record, and the stable log has none. $\square$
+
+**Theorem.** After any number of crashes, also during restarts, a restart that runs to the end leaves every item $x$ at its initial value plus $\sum d$ over the operations $\mathrm{ADD}(x, d)$ of the transactions whose commit record is in the stable log.
+
+*Proof.* By Lemma 4, after the level 0 pass the value of $x$ is its initial value plus the deltas of all closed operations and compensations. A winner committed between operations, so all its operations are closed. For a loser, by Lemma 3(b), the level 1 pass compensates every completed operation that has no comp_commit, one at a time, and each compensation of $\mathrm{ADD}(x, d)$ adds $-d$ to $x$ and to $t$ from whatever state it meets. This is correct because additions commute: the effect of a set of additions on a counter is their sum in any order. A compensation that a crash cuts off is open at the next restart, so it is undone at level 0 and run again; Lemma 5 rules out a second comp_commit. When the loser's chain reaches its begin record, each of its operations is paired with exactly one compensation, and its net delta is 0. Transactions that rolled back before the crash and wrote end records are in the same state. So the value is the initial value plus the deltas of the winners. The same holds for $t$. $\square$
+
+With operations that do not commute, the argument needs one more hypothesis: a transaction holds a level 1 lock on each object until it ends, so that no operation of another transaction that does not commute with $O$ comes between $O$ and its compensation. Under that hypothesis, the step "each compensation removes $O$ from any state it meets" holds for any inverse that is correct on the states that commuting operations reach.
