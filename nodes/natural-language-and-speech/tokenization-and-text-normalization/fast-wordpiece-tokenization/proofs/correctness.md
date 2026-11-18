@@ -1,0 +1,39 @@
+---
+title: LinMaxMatch gives the tokens of greedy longest match first, with at most 2n trie steps
+proves: [correctness, termination, complexity]
+status: full
+---
+
+Notation. $V$ is the vocabulary, $\sharp$ is the suffix indicator "##", and no token is $\sharp$ itself or holds the end mark ␣. The trie holds every prefix of every string in $V \cup \{\sharp\}$; $\chi_v$ is the string of node $v$, $r$ is the root and $r_\sharp$ is the node of $\sharp$. A node whose string starts with $\sharp$ lies in the $\sharp$ subtree; its *content* is $\chi_v$ without the leading $\sharp$. For any other node the content is $\chi_v$. The *level* of $v$ is the length of its content.
+
+A string $x$ is read in one of two contexts. In the *word-start* context, a *candidate* for $x$ is any token that is a prefix of $x$. In the *suffix* context, $x = \sharp y$ and a candidate is a token $\sharp y'$ with $y'$ a nonempty prefix of $y$. Strings in the $\sharp$ subtree are read in the suffix context, all others in the word-start context.
+
+**Pops.** For a node $v \notin \{r, r_\sharp\}$, set $x_0 = \chi_v$ and repeat: let $p_t$ be the longest candidate for $x_{t-1}$; if there is none, the pops *fail*; else $x_t$ is $\sharp$ followed by the content of $x_{t-1}$ after $p_t$, read in the suffix context. Stop at the first $t \ge 1$ for which $x_t$ is a trie node. The content gets shorter at each step, and $x_t = \sharp$ is the node $r_\sharp$, so exactly one of the two endings happens. This is Definition 1 of Song et al.: if the pops stop at $t = k$, then $F(v) = [p_1, \ldots, p_k]$ and $f(v)$ is the node of $x_k$; if they fail, $f(v) = $ none and $F(v) = []$. For $r$ and $r_\sharp$ both are empty.
+
+**Lemma 0 (extension).** Let $y$ be a string that is not a trie node, read in some context, and let $c$ be a character. Then $y c$ is not a trie node, and $y$ and $y c$ have the same longest candidate (or both have none).
+
+*Proof.* The trie is closed under prefixes, so $y c$ is not a node. A candidate for $y c$ that is not a prefix of $y$ is $y c$ itself, which would make $y c$ a node. $\square$
+
+**Lemma 1 (PRECOMPUTE).** After PRECOMPUTE, $f(v)$ and $F(v)$ are as defined by the pops, for every node $v$.
+
+*Proof.* Line P7 skips $r_\sharp$ as a child, so a node of the $\sharp$ subtree is reached only from $r_\sharp$, and the queue of line P3 holds $r$ and $r_\sharp$, both at level 0. Each other child has the level of its parent plus one, so the search takes the nodes in order of level. Every failure link points to a node of smaller level, because the content of $x_k$ is a proper suffix of the content of $\chi_v$. So when $v$ gets its values (while its parent $u$ is dequeued), $f$ and $F$ are final for $u$ and for every node that line P11 can reach from $f(u)$. Use induction on this order. The values of $r$ and $r_\sharp$ stay empty, which is right.
+
+Let $v = \delta(u, c)$, so $\chi_v = \chi_u c$, read in the same context as $\chi_u$. If $\chi_v \in V$, the longest candidate for $\chi_v$ is $\chi_v$ itself, $x_1 = \sharp$ is a node, and the pops give $F(v) = [\chi_v]$ and $f(v) = r_\sharp$, as line P8 sets.
+
+Otherwise $\chi_v \notin V$, so its longest candidate is that of $\chi_u$. If $u \in \{r, r_\sharp\}$, then $\chi_u$ has no candidate (its content is empty), so the pops of $v$ fail; line P10 sets $z$ = none and line P13 leaves $v$ empty, which is right. Else let the pops of $u$ give $y_1, y_2, \ldots$. The strings $y_t$ before the stop are not nodes, so by Lemma 0 the pops of $\chi_v$ take the same tokens and give the remainders $y_t c$, which are not nodes either. If the pops of $u$ fail, those of $v$ fail at the same step, and line P10 sets $z = f(u) =$ none. If they stop at $y_k = \chi_{f(u)}$, the pops of $v$ have taken $F(u)$ and reached $\chi_z c$ with $z = f(u)$. If $\delta(z, c)$ exists, this is a node and the pops stop with $F(v) = F(u)$ and $f(v) = \delta(z, c)$. If not, $\chi_z c$ is not a node, and the same argument applied to $z$ (whose values are final) shows that the pops go on with $F(z)$ and reach $\chi_{f(z)} c$, or fail if $f(z) =$ none. Lines P11 and P12 follow exactly this chain and collect $Z$, and line P13 sets $f(v) = \delta(z, c)$ and $F(v) = F(u) + Z$, or leaves $v$ empty when the chain ends at none. $\square$
+
+**Theorem 1 (output).** Let $w$ be a word without ␣. Assume that $w$ does not start with $\sharp$, or that the one-character token "#" is not in $V$. Then LINMAXMATCH($w$) equals the output of greedy longest match first (MAXMATCH) on $w$, where MAXMATCH returns [UNK] when some position has no token.
+
+*Proof.* Let $s = w$␣. MAXMATCH emits tokens $t_1, t_2, \ldots$ that cover $w[0..j_1), w[j_1..j_2), \ldots$, with the usual span convention: $w[i..j)$ holds the characters $i + 1$ to $j$. Call the *pending text* at a moment of the loop $w[0..i)$ if no token has been emitted, and $\sharp\, w[j..i)$ if the tokens emitted so far end at $j$.
+
+Invariant: at each test of line L4, the tokens list is a prefix $t_1, \ldots, t_q$ of the MAXMATCH output, and $\chi_u$ equals the pending text. It holds at line L2 with $q = 0$ and $u = r$. When line L8 runs, $\delta(u, s[i])$ exists, the pending text grows by $s[i]$ and $u$ moves along the same edge.
+
+Suppose line L4 finds no edge for $s[i]$. Any token that starts where the pending text starts and is longer than it would have the pending text followed by $s[i]$ as a prefix, so that string would be a node. Hence the next MAXMATCH token is the longest candidate for the pending text, which is $p_1$ of the pops of $u$, and the following tokens are $p_2, \ldots$ by Lemma 0, as long as the remainders are not nodes. The candidates are the same in both contexts: for $q > 0$ the pending text is read in the suffix context in both, and for $q = 0$ the two contexts differ only when $\chi_u$ starts with $\sharp$ and "#" $\in V$, which the assumption excludes. So by Lemma 1, line L6 appends the next MAXMATCH tokens, and line L7 moves to the node of the new pending text. If $f(u) =$ none, the pops fail, so MAXMATCH reaches a position with no token, and its output is [UNK].
+
+Termination: ␣ is in no token, so line L4 finds no edge for it, and each failure step lowers the level (Theorem 2), so the loop exits through line L5, where $f(u) =$ none. If $u \notin \{r, r_\sharp\}$, the pops of $u$ fail and MAXMATCH gives [UNK], as shown above. If $u \in \{r, r_\sharp\}$ and $i < |w|$, the pending text has empty content, or it is "##" at the word start with "#" $\notin V$; no token extends it by $s[i]$, so no token starts at that position and MAXMATCH gives [UNK]. Line L9 returns [UNK] in both cases. Otherwise $i = |w|$ and $\chi_u$ is the empty pending text, $\sharp$ after a token or the empty word at $r$, and the tokens list is the full MAXMATCH output. The single exception is $u = r_\sharp$ with no token: then $w$ is "##" itself, which line L10 hands to MAXMATCH. $\square$
+
+The assumption is needed. With $V = \{\#, \#\#\#c\}$, MAXMATCH turns "##c" into #, ###c, while line L5 stops at $r_\sharp$, whose failure link is none, and gives [UNK]. BERT splits "#" off as punctuation before WordPiece, so such words do not reach the encoder there.
+
+**Theorem 2 (linear time).** On a word of $n$ characters, line L8 runs at most $n$ times and line L7 runs at most $n$ times. The tokens appended by line L6 number at most $n$.
+
+*Proof.* Line L8 consumes one character of $w$ each time, and never ␣. A step of line L8 raises the level by 1, except the step from the node "#" to $r_\sharp$, which lowers it from 1 to 0. A step of line L7 lowers the level by at least 1, because the content of $f(u)$ is a proper suffix of the content of $u$. The level is never negative, so the number of runs of line L7 is at most the number of runs of line L8. Each appended token covers characters of $w$ that no other appended token covers, so there are at most $n$ of them. $\blacksquare$
