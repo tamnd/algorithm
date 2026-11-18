@@ -1,0 +1,35 @@
+---
+title: DPccp enumerates every csg-cmp pair once, in a valid order, and finds the cheapest bushy plan without cross products
+proves: [correctness]
+status: full
+---
+
+**Setting.** The query graph $G$ has the relations $v_0, \ldots, v_{n-1}$ and is connected. $N(S)$ is the set of relations outside $S$ with an edge into $S$, and $B_i = \{v_j : j \le i\}$. A *csg* is a nonempty set of relations that induces a connected subgraph. A *csg-cmp pair* is an unordered pair $\{S_1, S_2\}$ of disjoint csgs with an edge between them. A plan *without cross products* is a leaf $v$, or a join of two plans without cross products, for sets $S_1$ and $S_2$, with an edge between $S_1$ and $S_2$. The cost of a join is $c(P_1) + c(P_2) + j(|S_1|, |S_2|, |S_1 \cup S_2|)$, where the sizes depend only on the sets. Lines L13 and L14 go through the nonempty subsets of $N$ in increasing order as integers, so every subset comes before its proper supersets.
+
+**Lemma 1.** Let $S$ be a csg and $S \subseteq X$. The call ENUMERATE-CSG-REC$(S, X)$ emits, each exactly once, the sets $T$ with $T \supsetneq S$, $T$ connected and $T \cap X = S$. If $U \subsetneq T$ are two of them, $U$ is emitted before $T$.
+
+*Proof.* By induction on the number of relations outside $X$. Let $N = N(S) - X$ (line L12). A set $T$ of the lemma has a relation in $T - S$ with an edge into $S$, because $T$ is connected; that relation is not in $X$, so $S' = T \cap N$ is not empty. If $T = S \cup S'$, then line L13 emits $T$ for this $S'$. Otherwise $T \supsetneq S \cup S'$ and $T \cap (X \cup N) = S \cup S'$; the recursive call of line L14 for $S'$ has a larger $X$ (since $N \neq \emptyset$) and emits $T$ by induction. The other calls of line L14 emit only sets whose intersection with $X \cup N$ is $S \cup S''$ for their own $S''$, and line L13 emits only sets inside $X \cup N$, so $T$ is emitted exactly once. Conversely every emitted set is connected (each relation of $S'$ has an edge into the connected $S$), strictly contains $S$, and meets $X$ only in $S$, because $N \cap X = \emptyset$. If $N$ is empty, no set $T$ exists and nothing is emitted.
+
+For the order, let $U \subsetneq T$, and let $S'_U = U \cap N \subseteq S'_T = T \cap N$. If $T$ is emitted by line L13, then $U \subseteq X \cup N$, so $U = S \cup S'_U$ is emitted by line L13 too, at an earlier subset. If $T$ is emitted inside the call for $S'_T$ and $U$ by line L13, then $U$ comes first, because line L13 runs before line L14. If both come from recursive calls, then either $S'_U = S'_T$ and the induction hypothesis applies to the one call, or $S'_U \subsetneq S'_T$ and the call for $S'_U$ comes first. $\square$
+
+**Lemma 2 (csgs).** ENUMERATE-CSG emits every csg exactly once, and it emits all csgs with smallest index $i$ before all csgs with a smaller smallest index. Two csgs $U \subsetneq T$ with the same smallest index are emitted with $U$ first.
+
+*Proof.* The iteration for $i$ emits $\{v_i\}$ and, by Lemma 1 with $S = \{v_i\}$ and $X = B_i$, every connected $T \supsetneq \{v_i\}$ with $T \cap B_i = \{v_i\}$, that is, with smallest index $i$. The iterations run for $i = n-1$ down to $0$. The order inside one iteration is the order of Lemma 1, and $\{v_i\}$ comes first. $\square$
+
+**Lemma 3 (complements).** For a csg $S_1$ with smallest index $m$, ENUMERATE-CMP$(S_1)$ emits, each exactly once, the csgs $S_2$ that are disjoint from $S_1$, have an edge into $S_1$, and have a smallest index larger than $m$.
+
+*Proof.* Let $X = B_m \cup S_1$ and $N = N(S_1) - X$ (lines L15 and L16). A set $S_2$ as in the lemma is disjoint from $X$ and meets $N(S_1)$, so it meets $N$. Let $v_i$ be the member of $S_2 \cap N$ with the smallest index. Then $S_2 \cap (X \cup (B_i \cap N)) = \{v_i\}$, so the iteration of line L17 for $v_i$ emits $S_2$, at line L18 if $S_2 = \{v_i\}$ and by Lemma 1 otherwise. Every set that the iteration for $v_j$ emits contains $v_j$ and no other member of $B_j \cap N$, so $v_j$ is its member of $N$ with the smallest index; hence no other iteration emits $S_2$. Conversely every emitted set is connected, disjoint from $X$ (so from $S_1$, and with all indexes above $m$), and contains $v_i \in N(S_1)$. $\square$
+
+By Lemmas 2 and 3, lines L3 and L4 produce every csg-cmp pair exactly once, as $(S_1, S_2)$ with the smaller smallest index in $S_1$.
+
+**Lemma 4 (final plans).** When lines L5 to L7 use a pair $(S_1, S_2)$, every pair whose union is $S_1$, and every pair whose union is $S_2$, has been used already.
+
+*Proof.* A pair $(U_1, U_2)$ is used in the iteration of line L3 for $U_1$, and $U_1$ has the same smallest index as $U_1 \cup U_2$. If $U_1 \cup U_2 = S_1$, then $U_1 \subsetneq S_1$ are csgs with the same smallest index, so $U_1$ comes before $S_1$ by Lemma 2. If $U_1 \cup U_2 = S_2$, then the smallest index of $U_1$ is that of $S_2$, which is larger than that of $S_1$, so $U_1$ comes before $S_1$ by Lemma 2. In both cases the whole iteration for $U_1$ ends before the iteration for $S_1$ starts. $\square$
+
+The proof does not use the breadth-first numbering of line L1; any numbering gives the same guarantees.
+
+**Theorem.** Line L8 returns a cheapest plan without cross products for all $n$ relations.
+
+*Proof.* Let $\mathrm{opt}(S)$ be the least cost of a plan without cross products for a csg $S$. We show that after all pairs with union $S$ are used, $\mathrm{best}[S]$ is a plan for $S$ without cross products with cost $\mathrm{opt}(S)$. For a single relation this holds by line L2. Every entry that line L7 stores joins two stored plans across an edge, so it is a plan without cross products for its set. Take a cheapest plan $Q$ for $S$ with $|S| \ge 2$; its last join combines plans $Q_1$ and $Q_2$ for sets $S_1$ and $S_2$. By induction on the plan, the set of every plan without cross products is connected, so $\{S_1, S_2\}$ is a csg-cmp pair, and it is used once. By Lemma 4 and induction on $|S|$, at that moment $\mathrm{best}[S_1]$ and $\mathrm{best}[S_2]$ cost $\mathrm{opt}(S_1) \le c(Q_1)$ and $\mathrm{opt}(S_2) \le c(Q_2)$. Line L6 tries both orders of the two inputs, and the join term depends only on the sets, so one of the candidates costs at most $c(Q) = \mathrm{opt}(S)$, and line L7 keeps a plan of that cost. Later pairs can only lower $\mathrm{best}[S]$, and no plan is cheaper than $\mathrm{opt}(S)$. Since $G$ is connected, the set of all relations is a csg. $\blacksquare$
+
+**Work.** Each call of ENUMERATE-CSG-REC, other than the top call of an iteration, is for a set that line L13 has just emitted, so the number of calls is at most the number of emitted sets plus $n$. A call costs $O(n)$ for the neighborhood and $O(1)$ per emitted set. Every csg with two or more relations is the union of at least one csg-cmp pair (split it along an edge of a spanning tree), so there are at most $c + n$ csgs, where $c$ is the number of pairs. Line L4 emits $c$ sets in total. So with the sizes stored per set, the work is $O(n (c + n)) = O(n c)$ for a connected graph, where $c \ge n - 1$.
