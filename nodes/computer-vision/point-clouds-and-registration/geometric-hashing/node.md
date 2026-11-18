@@ -20,7 +20,7 @@ history:
   people: [Yehezkel Lamdan, Haim J. Wolfson]
   note: "Lamdan and Wolfson presented geometric hashing at ICCV 1988. Grimson and Huttenlocher (1990) showed how fast it degrades with noise and clutter."
 prereqs: [hash-table, object-recognition]
-see_also: [alignment-recognition, generalized-hough-transform, four-points-congruent-sets, ransac, affine-camera-model, locality-sensitive-hashing, point-cloud-registration, similarity-transformation]
+see_also: [alignment-recognition, generalized-hough-transform, four-points-congruent-sets, ransac, affine-camera-model, locality-sensitive-hashing, point-cloud-registration]
 sources:
   - paper: "Yehezkel Lamdan and Haim J. Wolfson, Geometric hashing: a general and efficient model-based recognition scheme, Proceedings of the Second International Conference on Computer Vision (ICCV 1988), 238-249"
     title: "Yehezkel Lamdan and Haim J. Wolfson, Geometric hashing: a general and efficient model-based recognition scheme, Proceedings of the Second International Conference on Computer Vision (ICCV 1988), 238-249"
@@ -47,7 +47,7 @@ Now take a picture where the shape may be stretched, turned or slid, among stray
 
 **Output.** A model and an affine map under which the model points land near scene points, or no model if none is present.
 
-The method is a randomized search. The same idea works for other groups of maps: for rigid motions or [similarity transformations](/similarity-transformation/) of the plane, a basis is two points; in 3D, it needs more points.
+The method is a randomized search. The same idea works for other groups of maps: for rigid motions or similarity transformations of the plane, a basis is two points; in 3D, it needs more points.
 
 ## The algorithm
 
