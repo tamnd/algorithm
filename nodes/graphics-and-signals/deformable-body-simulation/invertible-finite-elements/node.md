@@ -91,7 +91,7 @@ Any time integrator can use these forces; the test code uses [symplectic Euler](
 
 ## Example
 
-Take one triangle with the rest nodes $(0, 0)$, $(1, 0)$ and $(0, 1)$ in m, $E = 1$ Pa and $\nu = 0.3$, so $\mu = 0.384615$ N/m and $\lambda = 0.576923$ N/m, and $c = 0.3$.
+Take one triangle with the rest nodes $(0, 0)$, $(1, 0)$ and $(0, 1)$ in m, $E = 1$ Pa and $\nu = 0.3$, so $\mu = 5/13$ N/m and $\lambda = 15/26$ N/m, and $c = 0.3$. The table uses the six-place values $\mu = 0.384615$ N/m and $\lambda = 0.576923$ N/m, as the tests do, so its last digits can differ from the exact values by a few units (the extended neo-Hookean $\hat P_2$ at $(0, 0)$ is $-9.117844$ with the exact $\mu$ and $\lambda$).
 Nodes 0 and 1 stay in place, and node 2 moves down.
 
 | Node 2 at | $\det F$ | $(\sigma_1, \sigma_2)$ | plain neo-Hookean $\hat P_2$ | extended neo-Hookean $\hat P_2$ | force on node 2, extended neo-Hookean (N) | force on node 2, corotated (N) |
