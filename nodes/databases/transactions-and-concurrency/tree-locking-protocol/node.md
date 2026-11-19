@@ -71,7 +71,7 @@ The tree has the root $a$ with children $b$ and $c$; $b$ has the children $d$ an
 | 2 | $w_1(d)$; $T_1$ unlocks $d$, which it needs no more | 1: $b$ |
 | 3 | $T_2$ asks for $b$ and waits | 1: $b$ |
 | 4 | $T_1$ locks $e$, then unlocks $b$: it has no access to $b$, and both its children on the paths are locked | 1: $e$ |
-| 5 | $T_2$ locks $b$; $r_2(b)$; it locks $d$ and unlocks $b$ | 2: $d$ |
+| 5 | $T_2$ locks $b$; $r_2(b)$; it locks $d$ and unlocks $b$ | 1: $e$; 2: $d$ |
 | 6 | $r_2(d)$; $T_2$ unlocks $d$; $c_2$ | 1: $e$ |
 | 7 | $w_1(e)$; $T_1$ unlocks $e$; $c_1$ | |
 

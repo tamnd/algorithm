@@ -16,7 +16,7 @@ sources:
   - paper: "Yoav Raz, The principle of commitment ordering, or guaranteeing serializability in a heterogeneous environment of multiple autonomous resource managers using atomic commitment, Proceedings of the 18th VLDB Conference, 1992, pages 292 to 312"
     locator: "the definition of commitment ordering, the proof that CO implies serializability, the commitment ordering algorithm with its abort set, and global serializability under atomic commitment"
   - book: isbn:9781558605084
-    title: "Gerhard Weikum and Gottfried Vossen, Transactional Information Systems, Morgan Kaufmann, 2002"
+    title: "Gerhard Weikum and Gottfried Vossen, Transactional Information Systems, Morgan Kaufmann, 2001"
     locator: "Chapter 3, the classes of order-preserving and commit order-preserving conflict serializable schedules, chapter level only"
   - book: isbn:9780201107159
     title: "Philip A. Bernstein, Vassos Hadzilacos and Nathan Goodman, Concurrency Control and Recovery in Database Systems, Addison-Wesley, 1987"

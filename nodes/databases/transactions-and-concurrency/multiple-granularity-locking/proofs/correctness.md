@@ -27,7 +27,7 @@ The tests also check that the matrix is symmetric, that it follows from the mean
 - A grant on the parent $p$ of $v$. This replaces the mode of $T$ on $p$ by a supremum, which is at least the old mode, so the claim for $v$ still holds.
 - A release of the lock of $T$ on the parent $p$. Line L8 refuses it while $T$ holds a lock on a child of $p$, and release at the end goes deepest first, so by the time $p$ is released, $T$ holds nothing on its children. $\square$
 
-For the second sentence: $\mathrm{need}(m') = \mathrm{need}(m)$ or IS when $m' \ge \mathrm{need}(m)$, because $\mathrm{need}(m') = IX$ exactly when $m' \ge IX$. Applying the first sentence to the parent, then to its parent, and so on, gives a mode $\ge \mathrm{need}(m)$ on each ancestor.
+For the second sentence: $\mathrm{need}(m') \ge \mathrm{need}(m)$ when $m' \ge \mathrm{need}(m)$. If $\mathrm{need}(m) = IS$ this holds because every mode needs at least IS; if $\mathrm{need}(m) = IX$, then $m' \ge IX$, and $\mathrm{need}(m') = IX$ exactly when $m' \ge IX$. Applying the first sentence to the parent, then to its parent, and so on, gives a mode $\ge \mathrm{need}(m)$ on each ancestor.
 
 **Theorem 1 (implicit locks never conflict).** At every moment, if $T$ implicitly holds X on a leaf $\ell$, then no other transaction $U$ implicitly holds S or X on $\ell$.
 

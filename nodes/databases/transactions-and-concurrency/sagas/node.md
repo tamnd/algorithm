@@ -19,7 +19,7 @@ sources:
     title: "Jim Gray and Andreas Reuter, Transaction Processing, Concepts and Techniques, Morgan Kaufmann, 1993"
     locator: "Chapter 4, Transaction Models, the sections on chained transactions, sagas and long-lived transactions, chapter level only"
   - book: isbn:9781558605084
-    title: "Gerhard Weikum and Gottfried Vossen, Transactional Information Systems, Morgan Kaufmann, 2002"
+    title: "Gerhard Weikum and Gottfried Vossen, Transactional Information Systems, Morgan Kaufmann, 2001"
     locator: "the chapters on multilevel and open nested transactions and on compensation, chapter level only"
   - paper: doi:10.1145/211414.211427
     title: "Dennis Shasha, François Llirbat, Eric Simon and Patrick Valduriez, Transaction chopping, algorithms and performance studies, ACM Transactions on Database Systems 20(3), 1995, pages 325 to 363"
