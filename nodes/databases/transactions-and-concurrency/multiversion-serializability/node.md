@@ -23,7 +23,7 @@ sources:
     title: "Philip A. Bernstein, Vassos Hadzilacos and Nathan Goodman, Concurrency Control and Recovery in Database Systems, Addison-Wesley, 1987"
     locator: "Chapter 5, Multiversion Concurrency Control (multiversion histories, one-copy serializability and the MVSG theorem)"
   - book: isbn:9781558605084
-    title: "Gerhard Weikum and Gottfried Vossen, Transactional Information Systems, Morgan Kaufmann, 2002"
+    title: "Gerhard Weikum and Gottfried Vossen, Transactional Information Systems, Morgan Kaufmann, 2001"
     locator: "Chapter 5, Multiversion Concurrency Control (the classes MVSR and MCSR, VSR inside MVSR, and the NP-completeness of MVSR)"
 ---
 

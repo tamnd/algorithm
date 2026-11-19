@@ -19,7 +19,7 @@ sources:
     title: "Jim Gray and Andreas Reuter, Transaction Processing, Concepts and Techniques, Morgan Kaufmann, 1993"
     locator: "the discussion of hot spots, field calls and escrow in the chapters on locking, chapter level only"
   - book: isbn:9781558605084
-    title: "Gerhard Weikum and Gottfried Vossen, Transactional Information Systems, Morgan Kaufmann, 2002"
+    title: "Gerhard Weikum and Gottfried Vossen, Transactional Information Systems, Morgan Kaufmann, 2001"
     locator: "the chapters on semantic and multilevel concurrency control, where increments and escrow are operations that commute under conditions, chapter level only"
 ---
 
