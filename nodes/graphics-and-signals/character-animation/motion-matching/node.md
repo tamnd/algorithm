@@ -3,8 +3,6 @@ tag: GYSR9F
 kind: algorithm
 slug: motion-matching
 name: Motion matching
-aliases:
-- learned motion matching
 area: graphics-and-signals/character-animation
 level: research
 summary: Every few frames, search a motion database for the frame whose pose and future trajectory features best match the current state and the user input.
@@ -36,7 +34,7 @@ Motion matching animates a character from a large database of captured motion wi
 Every frame of the database gets a feature vector: a few numbers about the current pose (foot positions and velocities, hip velocity) and a few about the near future (where the character will be and which way it will face in a third, two thirds and one second).
 At run time, every few frames, the game builds the same vector from the current pose and the trajectory that the player asks for, finds the database frame with the nearest vector, and jumps there with a short [blend](/motion-blending/).
 The search is a [nearest neighbor search](/nearest-neighbor-search/) with $f$ frames and $d$ dimensions, $O(f d)$ by brute force, or faster with a [k-d tree](/kd-tree/) or other index.
-The page describes the search of Clavet (2016); the alias "learned motion matching" names a later method of Holden and coworkers (2020), which replaces the database by neural networks, and is not the method of this page.
+The page describes the search of Clavet (2016); the name "learned motion matching" belongs to a later method of Holden and coworkers (2020), which replaces the database by neural networks, and is not the method of this page.
 
 ## In plain words
 

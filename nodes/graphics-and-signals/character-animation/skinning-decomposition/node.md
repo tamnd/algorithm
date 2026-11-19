@@ -88,7 +88,7 @@ The paper also re-initializes bones that end up with too few vertices; the code 
 
 The weight step for one vertex with two bones and one 2D frame: let the two candidate positions be $(1, 0)$ for bone 1 and $(0, 1)$ for bone 2.
 
-| target | weights | error |
+| target | weights | squared error |
 |---|---|---|
 | $(0.5, 0.5)$ | $(0.5, 0.5)$ | 0 |
 | $(1, 1)$ | $(0.5, 0.5)$ | 0.5 |
@@ -96,7 +96,7 @@ The weight step for one vertex with two bones and one 2D frame: let the two cand
 
 The target $(0.5, 0.5)$ is on the segment between the two positions, so the error is zero.
 The target $(1, 1)$ projects onto the middle of the segment, and the distance is $\sqrt{0.5}$.
-The target $(2, 0)$ projects onto the line beyond $(1, 0)$, at the weights $(1.5, -0.5)$, which are not allowed, so the best convex weights are $(1, 0)$ with the error $1$.
+The target $(2, 0)$ projects onto the line beyond $(1, 0)$, at the weights $(1.5, -0.5)$, which are not allowed, so the best convex weights are $(1, 0)$ with the squared error $1$.
 
 In the tests, a strip of 39 vertices is skinned to a chain of three bones in six poses, with blended weights near the two joints.
 From the k-means start, the error goes from 0.0798 to $4.3 \times 10^{-8}$ in 40 iterations with $K = 2$, and it never increases.
