@@ -113,7 +113,9 @@ def train_wordpiece(freq: Mapping[str, int], merges: int) -> Tuple[Set[str], Lis
 
     Return the vocabulary (all initial units and all merged units) and the
     list of merges in the order they were made. Ties in the gain go to the
-    smallest pair in string order, so the result is deterministic.
+    smallest pair in string order, so the result is deterministic. Gains are
+    compared to 9 decimals, so that rounding in the logarithms cannot break
+    an exact tie.
     Cost per merge: O(L) for the counts, where L is the total word length.
     """
     seg = {w: initial_units(w) for w in freq}  # @line L1
@@ -124,7 +126,7 @@ def train_wordpiece(freq: Mapping[str, int], merges: int) -> Tuple[Set[str], Lis
         if not p:  # @line L5
             break
         gain = {pair: merge_gain(c, pair[0], pair[1], k) for pair, k in p.items()}  # @line L6
-        a, b = min(gain, key=lambda pair: (-gain[pair], pair))  # @line L7
+        a, b = min(gain, key=lambda pair: (-round(gain[pair], 9), pair))  # @line L7
         seg = {w: merge_units(units, a, b) for w, units in seg.items()}  # @line L8
         vocab.add(join_units(a, b))  # @line L9
         done.append((a, b))

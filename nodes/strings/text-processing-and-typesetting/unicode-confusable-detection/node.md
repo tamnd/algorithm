@@ -12,7 +12,7 @@ summary: "Map each string to a skeleton by NFD, removal of default ignorable cod
 model: word-ram
 complexity:
   vars: {n: the length of the input in code points}
-  time: {worst: Θ(n), best: Θ(n)}
+  time: {worst: Θ(n^2), best: Θ(n)}
   space: {extra: Θ(n)}
 properties: {deterministic: true, recursive: false, online: false}
 prereqs: [unicode-normalization-algorithm, unicode-code-point]
@@ -118,15 +118,15 @@ The function INTERNAL-SKELETON is the four steps of UTS 39 written out, so it is
 
 ## Complexity
 
-In the [word-RAM model](/word-ram/), the lookups of DICP, of the prototype and of the script cost $O(1)$ each, with a large constant: confusables.txt has thousands of lines. Prototypes have bounded length. So each step is linear:
+In the [word-RAM model](/word-ram/), the lookups of DICP, of the prototype and of the script cost $O(1)$ each, with a large constant: confusables.txt has thousands of lines. Prototypes have bounded length. So each step is linear, except the sorting of long runs of combining marks in NFD:
 
-- NFD is $\Theta(n)$ for text with short runs of combining marks.
+- NFD is $\Theta(n)$ for text with short runs of combining marks. A single run of $n$ combining marks costs $\Theta(n^2)$ in the worst case, as in the [normalization algorithm](/unicode-normalization-algorithm/).
 - Removing DICP and mapping by prototypes are $\Theta(n)$, and the result has $O(n)$ code points.
 - Comparing two skeletons is linear in their length.
 
 | operation | time | extra space |
 |---|---|---|
-| skeleton | $\Theta(n)$ | $\Theta(n)$ |
+| skeleton | $\Theta(n)$ for short runs of combining marks, $\Theta(n^2)$ in the worst case | $\Theta(n)$ |
 | CONFUSABLE, CLASSIFY | $\Theta(n)$ for strings of total length $n$ | $\Theta(n)$ |
 | test a new name against a registry of $N$ names | $\Theta(n)$ expected with a hash table of skeletons | $\Theta(N n)$ for the table |
 

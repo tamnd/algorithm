@@ -116,7 +116,7 @@ Take the counts hug 2, pug 2, pun 2, bun 10 and hugs 10. The first segmentation 
 | b ##u | 10 | 13.8333 |
 | p ##u | 4 | 5.1095 |
 
-The most frequent pair is ##u ##g, which BPE would merge first. WordPiece merges ##g ##s, because every ##s follows a ##g, so the merge removes the unit ##s and makes the model sharper. The next four merges are ##u ##n, h ##u, hu ##gs and b ##un. In the second step, h ##u and ##u ##n tie at 15.5424, and the tie goes to ##u ##n because "##u" sorts before "h". After five merges, $V$ has 12 units: ##g, ##gs, ##n, ##s, ##u, ##un, b, bun, h, hu, hugs and p.
+The most frequent pair is ##u ##g, which BPE would merge first. WordPiece merges ##g ##s, because every ##s follows a ##g, so the merge removes the unit ##s and makes the model sharper. The next four merges are ##u ##n, h ##u, b ##un and hu ##gs. In the second step, h ##u and ##u ##n tie at 15.5424, and the tie goes to ##u ##n because "##u" sorts before "h". In the fourth step, b ##un and hu ##gs tie at 20.4682, and the tie goes to b ##un. After five merges, $V$ has 12 units: ##g, ##gs, ##n, ##s, ##u, ##un, b, bun, h, hu, hugs and p.
 
 Encoding "bugs" tries bugs, bug, bu and b, and takes b. At position 1 it tries ##ugs, ##ug and ##u, and takes ##u. At position 2 it takes ##gs at once. The result is b, ##u, ##gs after 8 lookups. The word "gun" gives [UNK], because no unit is a word-initial g. The word "hun" gives hu, ##n, while replaying the merges in order gives h, ##un: the encoder does not reproduce the training segmentation.
 
@@ -134,7 +134,7 @@ Training takes, at each step, the merge with the largest exact gain in the unigr
 
 - **Open vocabulary up to the alphabet.** Every character of the training text is a unit, so any word made only of training characters has an encoding. A word with an unseen character becomes [UNK] as a whole.
 - **Not frequency order.** The merge order differs from the BPE order, as the example shows.
-- **Gains can be negative.** In the fifth step of the example the pair p ##un has the gain $-0.0434$. A fixed target size can therefore lower the likelihood near the end; Schuster and Nakajima also stop when the gain falls below a threshold.
+- **Gains can be negative.** In the fifth step of the example the pair hu ##g has the gain $-0.0434$. A fixed target size can therefore lower the likelihood near the end; Schuster and Nakajima also stop when the gain falls below a threshold.
 - **Greedy encoding.** The encoder is a function of $V$ only, not of the merge order or of the counts. Hugging Face describes WordPiece models that save only the final vocabulary, not the merges.
 - **Deterministic.** The same word always gets the same pieces, which is what subword regularization changes.
 

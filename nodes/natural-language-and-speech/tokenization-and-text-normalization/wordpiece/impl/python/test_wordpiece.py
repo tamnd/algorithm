@@ -90,7 +90,7 @@ def test_closed_form_gain_equals_recount():
 
 def test_training_picks_the_best_gain_each_step():
     vocab, merges = train_wordpiece(FREQ, 5)
-    assert merges == [("##g", "##s"), ("##u", "##n"), ("h", "##u"), ("hu", "##gs"), ("b", "##un")]
+    assert merges == [("##g", "##s"), ("##u", "##n"), ("h", "##u"), ("b", "##un"), ("hu", "##gs")]
     seg = {w: initial_units(w) for w in FREQ}
     for a, b in merges:
         p = pair_counts(seg, FREQ)
