@@ -71,7 +71,7 @@ Take $T = $ abracadabra and the positions $0, 3, 6, 9$, every third one. The cho
 | root | | a, dabra$ (6), ra$ (9) |
 | a | a | bracadabra$ (0), cadabra$ (3) |
 
-It has 6 nodes; the full suffix tree of abracadabra$ has 12 leaves. SEARCH(a) ends at node a and returns the chosen positions 0 and 3. SEARCH-ALL(abra, 3) runs three searches. For $r = 0$, abra matches at 0. For $r = 1$, bra matches no chosen suffix. For $r = 2$, ra matches at 9, and the cut symbols $T[7 \ldots 8] = $ ab equal $P[0 \ldots 1]$, so 7 is reported. The answer is $\{0, 7\}$, the two occurrences of abra.
+It has 6 nodes; the full suffix tree of abracadabra$ has 12 leaves. SEARCH(a) ends at node a and returns the chosen positions 0 and 3. SEARCH-ALL(abra, 3) runs three searches. For $r = 0$, abra matches at 0. For $r = 1$, bra matches no chosen suffix. For $r = 2$, ra matches at 9, and the cut symbols $T[7 \ldots 8]$ = ab equal $P[0 \ldots 1]$, so 7 is reported. The answer is $\{0, 7\}$, the two occurrences of abra.
 
 ## Correctness
 
