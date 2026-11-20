@@ -7,7 +7,7 @@ aliases:
 - tree softmax
 area: natural-language-and-speech/word-and-sentence-embeddings
 level: core
-summary: "Replace the softmax over V words by the product of the binary logistic decisions on the path to the word in a binary tree. A balanced tree has paths of length ceil(log2 V)."
+summary: "Replace the softmax over V words by the product of the binary logistic decisions on the path to the word in a binary tree. A balanced tree has paths of length at most ceil(log2 V)."
 model: real-ram
 complexity:
   vars: {d: "the dimension of the vectors", V: "the vocabulary size, the number of types", H: "the base 2 entropy of the word distribution"}

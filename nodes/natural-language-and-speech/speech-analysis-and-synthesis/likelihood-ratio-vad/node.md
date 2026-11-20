@@ -81,7 +81,7 @@ Take $f_s = 8000$ Hz, white Gaussian noise with standard deviation 0.01 for one 
 | 40 | 5120 | 0.41 | 2.61 | 0 |
 | 42 | 5376 | -0.42 | 1.77 | 0 |
 
-The decisions are frames 22 to 39, all inside the tone. Frames 20, 21 and 40 hold the tone for only part of their length and are labeled noise. The tone lies in a few bins, so it is found even though its total power is below the noise. In frame 42 the frame alone favors noise ($\log \Lambda < 0$), and the memory of the previous speech frames raises $\log G$ to 1.77, still below the threshold. These values are measurements of this run.
+The decisions are frames 22 to 39. Frames 22 to 38 lie wholly inside the tone, and frame 39 (samples 4992 to 5247) holds it for 208 of its 256 samples. Frames 20, 21 and 40 hold the tone for only part of their length and are labeled noise. The tone lies in a few bins, so it is found even though its total power is below the noise. In frame 42 the frame alone favors noise ($\log \Lambda < 0$), and the memory of the previous speech frames raises $\log G$ to 1.77, still below the threshold. These values are measurements of this run.
 
 ## Correctness
 

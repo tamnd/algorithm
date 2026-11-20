@@ -7,7 +7,7 @@ aliases:
 - A* PCFG parsing
 area: natural-language-and-speech/natural-language-parsing
 level: advanced
-summary: Agenda-based exact Viterbi parsing that pops chart items by inside score plus an admissible estimate of the outside score.
+summary: Agenda-based exact Viterbi parsing that pops chart items by inside score plus an admissible and monotonic estimate of the outside score.
 solves: [most-probable-parse]
 model: word-ram
 complexity:

@@ -5,7 +5,6 @@ slug: unit-selection-synthesis
 name: Unit selection synthesis
 aliases:
 - concatenative synthesis
-- diphone synthesis
 area: natural-language-and-speech/speech-analysis-and-synthesis
 level: core
 summary: "Speech synthesis that picks recorded units from a large database to minimize the sum of target costs and join costs, found by a Viterbi search over the candidates, and joins them."

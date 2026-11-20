@@ -113,7 +113,7 @@ Each frame visits every state and arc of the denominator graph once, forward and
 
 ## When to use it
 
-Use it to train the acoustic model of a hybrid HMM recognizer with a decoding graph such as [HCLG](/hclg-decoding-graph/). On the Switchboard Hub5'00 set, Povey et al. (2016) report word error rates of 18.2% (cross-entropy), 16.9% (cross-entropy then sMBR), 15.5% (LF-MMI) and 15.1% (LF-MMI then sMBR), with 12.5%, 11.4%, 10.2% and 10.0% on its Switchboard part. That is about 11.5% relative better than cross-entropy and 8% better than cross-entropy followed by sMBR. Their Table 4 gives 4.28% on LibriSpeech and 11.2% on TED-LIUM.
+Use it to train the acoustic model of a hybrid HMM recognizer with a decoding graph such as [HCLG](/hclg-decoding-graph/). On the Switchboard Hub5'00 set, Povey et al. (2016) report word error rates of 18.2% (cross-entropy), 16.9% (cross-entropy then sMBR), 15.5% (LF-MMI) and 15.1% (LF-MMI then sMBR), with 12.5%, 11.4%, 10.2% and 10.0% on its Switchboard part. That is about 15% relative better than cross-entropy and 8% better than cross-entropy followed by sMBR. Their Table 4 gives 4.28% on LibriSpeech and 11.2% on TED-LIUM.
 
 ## Pitfalls
 

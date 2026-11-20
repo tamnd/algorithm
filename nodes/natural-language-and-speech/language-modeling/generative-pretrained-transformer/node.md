@@ -67,7 +67,7 @@ with the same matrix $W_e$ as the input (GPT-1, equation 2). Row $t$ of $\mathrm
 
 ## What it counts
 
-One step is one floating-point multiply-add. The forward pass on $n$ tokens costs $\Theta(n d^2)$ per block for the projections and the feed-forward layer and $\Theta(n^2 d)$ per block for the attention scores, so $\Theta(L (n d^2 + n^2 d))$ in total. Kaplan et al. (Section 2.1) count a forward pass as about $2N + 2 L n_{\text{ctx}} d$ floating-point operations per token, with $N$ the number of non-embedding parameters, and training as about three times that, $6N$ per token. For GPT-3 the two terms are $3.5 \times 10^{11}$ and $4.8 \times 10^{9}$, so the weights dominate. With 300B training tokens, $6ND = 3.15 \times 10^{23}$, close to the $3.14 \times 10^{23}$ of Table D.1 of Brown et al.
+One step is one floating-point multiply-add. The forward pass on $n$ tokens costs $\Theta(n d^2)$ per block for the projections and the feed-forward layer and $\Theta(n^2 d)$ per block for the attention scores, so $\Theta(L (n d^2 + n^2 d))$ in total. Kaplan et al. (Section 2.1) count a forward pass as about $2N + 2 L n_{\text{ctx}} d$ floating-point operations per token, with $N$ the number of non-embedding parameters, and training as about three times that, $6N$ per token. For GPT-3 the two terms are $3.5 \times 10^{11}$ and $4.8 \times 10^{9}$, so the weights dominate. With 300B training tokens, $6ND \approx 3.13 \times 10^{23}$, close to the $3.14 \times 10^{23}$ of Table D.1 of Brown et al.
 
 During generation a [key-value cache](/key-value-cache/) stores the keys and values of earlier positions, $2 L n d$ numbers. Each new token then costs $\Theta(L (d^2 + n d))$ instead of a full forward pass.
 
