@@ -9,7 +9,7 @@ area: cryptography/protocols
 level: advanced
 summary: A party commits to many copies of an object, the other party opens a random subset to check them, and the unopened copies are used. A cheater who corrupts copies is caught with high probability.
 prereqs: [yao-garbled-circuits, malicious-adversary-model]
-see_also: [zero-knowledge-proof, chaum-blind-signature, blind-signature, oblivious-transfer-extension, commitment-scheme, secure-multiparty-computation, gmw-protocol, fair-coin-flipping]
+see_also: [zero-knowledge-proof, chaum-blind-signature, divide-and-choose, oblivious-transfer-extension, commitment-scheme, secure-multiparty-computation, gmw-protocol, fair-coin-flipping]
 sources:
   - paper: doi:10.1007/978-3-540-72540-4_4
     title: "Yehuda Lindell and Benny Pinkas, An efficient protocol for secure two-party computation in the presence of malicious adversaries, EUROCRYPT 2007, LNCS 4515, pages 52 to 78"
@@ -34,7 +34,7 @@ sources:
     locator: Section 6.1 (cut-and-choose for garbled circuits)
 ---
 
-Cut-and-choose is a way to force a party to build an object honestly when the object cannot be checked without destroying it. The party makes many copies and commits to all of them. The other party picks a random subset and asks for those copies to be opened in full; it checks them and throws them away. The copies that are left are used, unopened. A cheater who corrupts a few copies is likely to have one of them opened; a cheater who corrupts many copies is sure to. The name comes from the old way to split a cake between two people: one cuts, and the other chooses. The technique appears in [zero-knowledge proofs](/zero-knowledge-proof/), in the electronic cash of Chaum, Fiat and Naor (1988), and most of all in [Yao's garbled circuits](/yao-garbled-circuits/) against a [malicious](/malicious-adversary-model/) garbler.
+Cut-and-choose is a way to force a party to build an object honestly when the object cannot be checked without destroying it. The party makes many copies and commits to all of them. The other party picks a random subset and asks for those copies to be opened in full; it checks them and throws them away. The copies that are left are used, unopened. A cheater who corrupts a few copies is likely to have one of them opened; a cheater who corrupts many copies is sure to. The name comes from the old way to split a cake between two people, [divide and choose](/divide-and-choose/): one cuts, and the other chooses. The technique appears in [zero-knowledge proofs](/zero-knowledge-proof/), in the electronic cash of Chaum, Fiat and Naor (1988), and most of all in [Yao's garbled circuits](/yao-garbled-circuits/) against a [malicious](/malicious-adversary-model/) garbler.
 
 **Notation.** $s$ is the number of copies (the statistical security parameter is about $s$). $k$ is the number of bad copies the cheater makes. $c$ is the number of copies checked and $e = s - c$ the number evaluated, when the check set has a fixed size.
 
