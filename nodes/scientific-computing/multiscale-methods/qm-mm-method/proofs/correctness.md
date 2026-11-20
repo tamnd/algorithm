@@ -1,0 +1,32 @@
+---
+title: The toy QM/MM forces are the exact gradient of the QM/MM energy, and the energy has the right limits
+proves: [correctness]
+status: full
+---
+
+Setup. Atoms $0, \dots, n - 1$ sit at $y_0 < y_1 < \dots < y_{n-1}$ on a line. The QM region is the block $Q = \{q_0, \dots, q_1 - 1\}$. Each cut bond $(a, b)$, with $a \in Q$ and $b \notin Q$ a neighbor of $a$, gets a link atom at $y_L = (1 - g) y_a + g y_b$ with a fixed $0 < g < 1$. The model system is the ordered list of sites: the left link atom if there is one, the atoms of $Q$, and the right link atom if there is one. Each site position is $s_m = \sum_{\text{atom } c} W_{m c}\, y_c$ with fixed weights $W$ (line L1). For sites $s_0 < \dots < s_{M-1}$ with bond lengths $r_i = s_{i+1} - s_i$ and $t(r) = t_0 e^{-\beta (r - r_0)}$, the tight-binding matrix $H$ has $H_{i, i+1} = H_{i+1, i} = -t(r_i)$ and zeros elsewhere, and
+$$E_{QM}(s) = 2 \sum_{k = 1}^{M/2} \lambda_k(H) + \sum_i A e^{-2 \beta (r_i - r_0)},$$
+with the eigenvalues $\lambda_1 \le \dots \le \lambda_M$ and $M$ even. The additive energy is $E = E_{QM}(W y) + E_{MM}(y)$, where $E_{MM}$ sums $(k / 2)(y_{i+1} - y_i - d_0)^2$ over all bonds with at least one atom outside $Q$. We assume exact arithmetic and an exact eigensolver.
+
+**Lemma 1 (a gap at half filling).** If $M$ is even and every $t(r_i) > 0$, then $\lambda_{M/2} < 0 < \lambda_{M/2 + 1}$.
+
+*Proof.* $H$ has a zero diagonal and the sites form a path, so the matrix $D = \operatorname{diag}(1, -1, 1, \dots)$ satisfies $D H D = -H$, and the spectrum is symmetric about $0$. Expanding the determinant of a tridiagonal matrix with zero diagonal along the first row gives $\det H_M = -t_1^2 \det H_{M-2}$, so $\det H = (-1)^{M/2} \prod_{i \text{ odd}} t(r_i)^2 \ne 0$, and $0$ is not an eigenvalue. A symmetric spectrum without $0$ has exactly $M/2$ negative eigenvalues. $\square$
+
+**Lemma 2 (Hellmann-Feynman for the occupied sum).** Let $c_1, \dots, c_{M/2}$ be orthonormal eigenvectors of the occupied eigenvalues. Under the gap of Lemma 1,
+$$\frac{\partial}{\partial r_i} \, 2 \sum_{k \le M/2} \lambda_k = 2 \sum_{k \le M/2} c_k^T \frac{\partial H}{\partial r_i} c_k = 2 P_i\, \beta\, t(r_i), \qquad P_i = 2 \sum_{k \le M/2} c_{k, i}\, c_{k, i+1}.$$
+
+*Proof.* Let $\Pi = \sum_{k \le M/2} c_k c_k^T$, the projector onto the occupied space, so $\sum_{k \le M/2} \lambda_k = \operatorname{tr}(\Pi H)$. Because of the gap, $\Pi$ is a smooth function of $H$ (it is the Riesz projector, a contour integral of the resolvent around the negative eigenvalues). Differentiate: $d \operatorname{tr}(\Pi H) = \operatorname{tr}(\Pi\, dH) + \operatorname{tr}(H\, d\Pi)$. From $\Pi^2 = \Pi$ we get $d\Pi = \Pi\, d\Pi + d\Pi\, \Pi$, so $\Pi\, d\Pi\, \Pi = 0$ and $(I - \Pi)\, d\Pi\, (I - \Pi) = 0$. Hence $d\Pi = \Pi\, d\Pi\, (I - \Pi) + (I - \Pi)\, d\Pi\, \Pi$. Since $H$ commutes with $\Pi$, $\operatorname{tr}(H \Pi\, d\Pi\, (I - \Pi)) = \operatorname{tr}((I - \Pi) H \Pi\, d\Pi) = 0$, and the same holds for the other term. So $d \operatorname{tr}(\Pi H) = \operatorname{tr}(\Pi\, dH) = \sum_k c_k^T dH\, c_k$. Only $H_{i, i+1} = H_{i+1, i} = -t(r_i)$ depend on $r_i$, with derivative $\beta t(r_i)$, so $c_k^T (\partial H / \partial r_i) c_k = 2 \beta t(r_i) c_{k,i} c_{k,i+1}$. Summing over $k$ and multiplying by $2$ gives the formula. $\square$
+
+**Lemma 3 (the QM site forces).** Function qm_chain returns $f_m = -\partial E_{QM} / \partial s_m$.
+
+*Proof.* By Lemma 2 and $\frac{d}{dr} A e^{-2\beta (r - r_0)} = -2 \beta A e^{-2\beta (r - r_0)}$, the code computes $\partial E_{QM} / \partial r_i$ as de_dr. Since $r_i = s_{i+1} - s_i$, bond $i$ contributes $-\partial E_{QM} / \partial r_i$ to $\partial E_{QM} / \partial s_i$ and $+\partial E_{QM} / \partial r_i$ to $\partial E_{QM} / \partial s_{i+1}$. The code adds the negatives of these: de_dr to $f_i$ and minus de_dr to $f_{i+1}$. $\square$
+
+**Lemma 4 (the link atom forces).** Line L3 returns $-\partial E_{QM}(W y) / \partial y_c = \sum_m W_{mc} f_m$ for each atom $c$.
+
+*Proof.* $s = W y$ is linear, so $\partial E_{QM}(W y) / \partial y_c = \sum_m (\partial E_{QM} / \partial s_m) W_{mc}$. Function _spread adds $W_{mc} f_m$ for every site $m$ and every atom $c$ in it. For a link atom of the cut bond $(a, b)$ this gives $(1 - g) f_L$ to $a$ and $g f_L$ to $b$. $\square$
+
+**Theorem (correctness).** (i) Lines L1 to L5 return $E$ and $F = -\nabla_y E$ exactly. (ii) $\sum_c F_c = 0$. (iii) If $Q$ contains all atoms, the additive and the subtractive energies both equal $E_{QM}(y)$. (iv) If a bond to a link atom gets the MM parameters $(k / g^2, g d_0)$ in the model system, then $E_{\text{additive}} - E_{\text{ONIOM}}$ is the MM energy of the cut bonds.
+
+*Proof.* (i) Lemmas 3 and 4 for the QM part; for the MM part, $\frac{\partial}{\partial y_j} \frac{k}{2} (y_j - y_i - d_0)^2 = k (y_j - y_i - d_0)$ and the code adds $k \cdot \text{stretch}$ to $F_i$ and subtracts it from $F_j$. (ii) $E$ depends on the positions only through differences, because the rows of $W$ sum to $1$, so $E(y + \epsilon \mathbf{1}) = E(y)$ and $\sum_c \partial E / \partial y_c = 0$. (iii) With $Q$ equal to all atoms there are no cut bonds, $W = I$ and every bond has both atoms in $Q$, so $E_{MM} = 0$ and $E = E_{QM}(y)$. In ONIOM, the model system is the real system and has the same MM bonds, so $E_{MM}(\text{real}) - E_{MM}(\text{model}) = 0$. (iv) For a cut bond $(a, b)$, the link bond has length $|y_L - y_a| = g |y_b - y_a|$, so its MM energy in the model is $\frac{k}{2 g^2} (g r_{ab} - g d_0)^2 = \frac{k}{2} (r_{ab} - d_0)^2$, the MM energy of the cut bond. So $E_{MM}(\text{model})$ is the MM energy of the bonds inside $Q$ plus that of the cut bonds, and $E_{\text{ONIOM}} = E_{MM}(\text{real}) - E_{MM}(\text{model}) + E_{QM}$ is $E_{QM}$ plus the MM energy of the bonds with both atoms outside $Q$. The additive energy is $E_{QM}$ plus the MM energy of all bonds with at least one atom outside $Q$, which also counts the cut bonds. $\square$
+
+Remark. Statement (i) is what makes molecular dynamics with these forces conserve the total energy up to the error of the integrator, which the tests measure. In real QM/MM programs, the QM energy comes from a self-consistent method, and the Hellmann-Feynman step of Lemma 2 needs the self-consistent solution to be converged; a partly converged solution gives forces that are not the exact gradient. $\blacksquare$
