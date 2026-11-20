@@ -39,7 +39,7 @@ Start with a simple guess: every word gets the tag it had most often in a corpus
 
 ## The problem
 
-Input: a training corpus of sentences with gold tags from a tag set of $k$ tags, a set of rule templates, and a threshold $\theta \ge 1$. Output: an initial annotator and an ordered list of rules $r_1, \ldots, r_R$. A rule $(e, a, b)$ changes tag $a$ to tag $b$ at each position where the environment $e$ is true. The templates are the eleven nonlexicalized templates of Brill (1995, Section 4.1), where $z$ and $w$ are tags: the previous (next) tag is $z$; the tag two before (after) is $z$; one of the two previous (next) tags is $z$; one of the three previous (next) tags is $z$; the previous tag is $z$ and the next tag is $w$; the previous (next) two tags are $z$ and $w$. The code adds the lexicalized template "the current word is $w$" from Section 4.2. Positions before the sentence read the tag <s> and positions after it read </s>.
+Input: a training corpus of sentences with gold tags from a tag set of $k$ tags, a set of rule templates, and a threshold $\theta \ge 1$. Output: an initial annotator and an ordered list of rules $r_1, \ldots, r_R$. A rule $(e, a, b)$ changes tag $a$ to tag $b$ at each position where the environment $e$ is true. The templates are the eleven nonlexicalized templates of Brill (1995, Section 4.1), where $z$ and $w$ are tags: the previous (next) tag is $z$; the tag two before (after) is $z$; one of the two previous (next) tags is $z$; one of the three previous (next) tags is $z$; the previous tag is $z$ and the next tag is $w$; the previous (next) two tags are $z$ and $w$. The code adds the lexicalized template "the current word is $w$" from Section 4.2. Positions before the sentence read the tag `<s>` and positions after it read `</s>`.
 
 The learner is greedy. Each step chooses the rule $r$ with the largest score $E(c) - E(r(c))$, where $E(c)$ is the number of training errors of the current tags $c$. It stops when the best score is below $\theta$. The rule list is not optimal in any sense: the template set is a heuristic, and so is the greedy choice. Only the single step is exact.
 
@@ -77,7 +77,7 @@ The learner scores the candidates. Seven rules change NN to VB with $\mathrm{goo
 | one of the two previous tags is VBP | 2 | 0 | 2 |
 | one of the three previous tags is PRP | 2 | 0 | 2 |
 | one of the three previous tags is VBP | 2 | 0 | 2 |
-| previous tag is TO and next tag is </s> | 2 | 0 | 2 |
+| previous tag is TO and next tag is `</s>` | 2 | 0 | 2 |
 | previous two tags are VBP and TO | 2 | 0 | 2 |
 | one of the two previous tags is TO | 2 | 1 | 1 |
 | the current word is race | 2 | 4 | -2 |

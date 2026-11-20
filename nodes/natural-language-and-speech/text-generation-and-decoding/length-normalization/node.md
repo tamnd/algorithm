@@ -48,7 +48,7 @@ L4      if best = none or v > best.score then best ← (Y, v)    ▷ ties: the f
 L5  return best
 ```
 
-The length $|Y|$ counts every predicted token, the end token "</s>" included. Toolkits differ on this point; whatever rule you use, use the same one everywhere.
+The length $|Y|$ counts every predicted token, the end token `</s>` included. Toolkits differ on this point; whatever rule you use, use the same one everywhere.
 
 Inside the beam search, open hypotheses are still ranked by their raw log probability, because all open hypotheses at one step have the same length. Only finished hypotheses are compared by $s(Y)$. The search can stop early with a bound: if lp is positive and does not decrease with the length, an open hypothesis with raw score $s \le 0$ can reach at most $s / \text{lp}(n_{\max})$ for a length limit $n_{\max}$, because its log probability can only go down and its penalty can grow at most to $\text{lp}(n_{\max})$. When no open hypothesis can beat the best finished one by this bound, the search stops. The proof is in [proofs/correctness.md](proofs/correctness.md), with the facts that RERANK returns a hypothesis of best normalized score and that a beam of unbounded width returns the best normalized output.
 
@@ -77,13 +77,13 @@ The GNMT penalty grows more slowly with the length than $|Y|^\alpha$ for the sam
 - **Word reward** $+ r |Y|$, an additive form. It can also be applied to open hypotheses during the search, since all of them get the same reward at one step.
 - **Length ratio.** Penalize the gap between $|Y|$ and an expected length, for example a fixed ratio times the source length.
 - **A length model.** Add $\log p(|Y| \mid X)$ from a separate predictor of the length.
-- **Minimum length.** Forbid "</s>" before a minimum number of tokens, a hard constraint in place of a score change.
+- **Minimum length.** Forbid `</s>` before a minimum number of tokens, a hard constraint in place of a score change.
 
 ## Pitfalls
 
 - **The bias comes back with wide beams.** Normalization fixes the comparison of the finished outputs that the beam finds, but a wider beam finds more short outputs to compare. Koehn and Knowles 2017 measured lower quality with very wide beams, most strongly without normalization, and also with it for several language pairs. The deeper cause is described in [inadequacy of the mode](/inadequacy-of-the-mode/).
 - **Normalized scores are not monotone.** The raw log probability never increases when a token is added, but the normalized score can: with $\alpha = 1$, a hypothesis at $-1.0$ after one token goes to $(-1.0 + \log 0.9) / 2 \approx -0.553$ after two. So do not prune open hypotheses by their normalized score as if it were a bound.
-- **Count the length the same way.** Counting "</s>" or not, and counting subword tokens or words, changes the effective $\alpha$.
+- **Count the length the same way.** Counting `</s>` or not, and counting subword tokens or words, changes the effective $\alpha$.
 - **Do not use underflowing probabilities.** Divide the log probability, not the probability. For 1000 tokens of probability 0.4 each, the probability is 0 in double precision, while the log probability is $-916.29$ and its mean is $\log 0.4$.
 - **Tune per task and per model.** The best $\alpha$ depends on the model, the data and the beam width. Report it.
 

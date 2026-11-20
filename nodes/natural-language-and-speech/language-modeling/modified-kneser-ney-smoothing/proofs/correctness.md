@@ -4,7 +4,7 @@ proves: [correctness]
 status: full
 ---
 
-We use the notation of the page. Level $n$ uses the raw counts $a_n(g) = c(g)$, and each level $m < n$ uses the continuation counts $a_m(g) = N_{1+}(\cdot\, g)$. Lines L1 and L2 compute them as on the [Kneser-Ney](/kneser-ney-smoothing/) page, with the same proof: every $(m+1)$-gram that ends at a predicted token is the suffix of the n-gram that ends there, because of the padding with $n - 1$ copies of <s>. For a history $h$ of length $m - 1$ we write $T(h) = \sum_x a_m(h x)$ and $N_r(h\, \cdot)$ for the number of $x$ with $a_m(h x) = r$, with $N_{3+}(h\, \cdot)$ for $r \ge 3$. The discount of a count $k$ at level $m$ is $D(0) = 0$, $D(1) = D_1$, $D(2) = D_2$ and $D(k) = D_{3+}$ for $k \ge 3$.
+We use the notation of the page. Level $n$ uses the raw counts $a_n(g) = c(g)$, and each level $m < n$ uses the continuation counts $a_m(g) = N_{1+}(\cdot\, g)$. Lines L1 and L2 compute them as on the [Kneser-Ney](/kneser-ney-smoothing/) page, with the same proof: every $(m+1)$-gram that ends at a predicted token is the suffix of the n-gram that ends there, because of the padding with $n - 1$ copies of `<s>`. For a history $h$ of length $m - 1$ we write $T(h) = \sum_x a_m(h x)$ and $N_r(h\, \cdot)$ for the number of $x$ with $a_m(h x) = r$, with $N_{3+}(h\, \cdot)$ for $r \ge 3$. The discount of a count $k$ at level $m$ is $D(0) = 0$, $D(1) = D_1$, $D(2) = D_2$ and $D(k) = D_{3+}$ for $k \ge 3$.
 
 **Theorem 1 (a proper distribution).** Assume that at every level $0 \le D_1 \le 1$, $0 \le D_2 \le 2$ and $0 \le D_{3+} \le 3$, that is $0 \le D(k) \le k$ for every $k$. Then for every level $m \ge 0$ and every history $h$ of length $m - 1$, $P_m(w \mid h) \ge 0$ and $\sum_{w \in V} P_m(w \mid h) = 1$.
 

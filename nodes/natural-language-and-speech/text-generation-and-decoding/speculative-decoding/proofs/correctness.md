@@ -4,7 +4,7 @@ proves: [correctness]
 status: full
 ---
 
-We use the notation of the page. For a prefix $y$, $p_y = p(\cdot \mid y)$ and $q_y = q(\cdot \mid y)$ are distributions over $V$, which contains "</s>". The decoder has a length limit $n$; the target law is the law of [ancestral sampling](/ancestral-sampling/) from $p$ stopped at "</s>" or after $n$ tokens. We assume exact arithmetic and an exact uniform generator.
+We use the notation of the page. For a prefix $y$, $p_y = p(\cdot \mid y)$ and $q_y = q(\cdot \mid y)$ are distributions over $V$, which contains `</s>`. The decoder has a length limit $n$; the target law is the law of [ancestral sampling](/ancestral-sampling/) from $p$ stopped at `</s>` or after $n$ tokens. We assume exact arithmetic and an exact uniform generator.
 
 **Lemma 1 (one position).** Let $p$ and $q$ be distributions on $V$ and $\alpha = \sum_x \min(p(x), q(x))$. Draw $X \sim q$ and $R$ uniform on $[0, 1)$. If $R \, q(X) < p(X)$, output $X$ and call the draw accepted; otherwise output a draw from $r = \max(0, p - q) / (1 - \alpha)$. Then the output has law $p$, and the draw is accepted with probability $\alpha$.
 
@@ -22,11 +22,11 @@ Let $\mathcal{F}_{t-1}$ be everything drawn before the mechanism that produces $
 
 *Proof.* In case 2 this is the definition of the bonus draw. In cases 1 and 3, the draft $x$ at the position has law $q_{z_{<t}}$ given $\mathcal{F}_{t-1}$, the uniform $R$ and the residual draw are independent of $\mathcal{F}_{t-1}$, and Lemma 1 applies with $p = p_{z_{<t}}$ and $q = q_{z_{<t}}$. The prefix $z_{<t}$ is a function of $\mathcal{F}_{t-1}$, so the conditional law is $p_{z_{<t}}$. $\square$
 
-**Theorem 3 (exactness).** The output of SPECULATIVE-DECODE has the target law: for every sequence $y = y_1 \ldots y_m$ that ends with "</s>" (with no earlier "</s>") and has $m \le n$, or that has $m = n$ tokens and no "</s>", $P(\text{output} = y) = \prod_{t=1}^{m} p(y_t \mid y_{<t})$.
+**Theorem 3 (exactness).** The output of SPECULATIVE-DECODE has the target law: for every sequence $y = y_1 \ldots y_m$ that ends with `</s>` (with no earlier `</s>`) and has $m \le n$, or that has $m = n$ tokens and no `</s>`, $P(\text{output} = y) = \prod_{t=1}^{m} p(y_t \mid y_{<t})$.
 
-*Proof.* The decoder stops exactly when the emitted stream ends with "</s>" or reaches $n$ tokens: line L8 returns after an accepted "</s>" draft without a bonus, line L1 stops drafting after "</s>", and the room argument keeps every step within $n$ tokens. So the output is $z_1 \ldots z_m$ with the same stopping rule as ancestral sampling. By Lemma 2 and the tower rule, $P(z_1 = y_1, \ldots, z_m = y_m) = \prod_t p(y_t \mid y_{<t})$, by induction on $m$: the event $\{z_{<t} = y_{<t}\}$ is a union of events in $\mathcal{F}_{t-1}$, and on each of them $P(z_t = y_t \mid \mathcal{F}_{t-1}) = p(y_t \mid y_{<t})$. $\square$
+*Proof.* The decoder stops exactly when the emitted stream ends with `</s>` or reaches $n$ tokens: line L8 returns after an accepted `</s>` draft without a bonus, line L1 stops drafting after `</s>`, and the room argument keeps every step within $n$ tokens. So the output is $z_1 \ldots z_m$ with the same stopping rule as ancestral sampling. By Lemma 2 and the tower rule, $P(z_1 = y_1, \ldots, z_m = y_m) = \prod_t p(y_t \mid y_{<t})$, by induction on $m$: the event $\{z_{<t} = y_{<t}\}$ is a union of events in $\mathcal{F}_{t-1}$, and on each of them $P(z_t = y_t \mid \mathcal{F}_{t-1}) = p(y_t \mid y_{<t})$. $\square$
 
-**Theorem 4 (tokens per step).** Suppose that at every position the draft token is accepted with probability $\alpha$, independently of everything before it, and that no "</s>" and no length limit interrupts the step. Then a step emits $(1 - \alpha^{\gamma + 1}) / (1 - \alpha)$ tokens on average, and $\gamma + 1$ if $\alpha = 1$.
+**Theorem 4 (tokens per step).** Suppose that at every position the draft token is accepted with probability $\alpha$, independently of everything before it, and that no `</s>` and no length limit interrupts the step. Then a step emits $(1 - \alpha^{\gamma + 1}) / (1 - \alpha)$ tokens on average, and $\gamma + 1$ if $\alpha = 1$.
 
 *Proof.* Let $K$ be the number of accepted drafts. Then $P(K \ge i) = \alpha^i$ for $0 \le i \le \gamma$. The step emits $K + 1$ tokens: the $K$ accepted drafts and either the residual draw (if $K < \gamma$) or the bonus draw (if $K = \gamma$). So the mean is $1 + E[K] = 1 + \sum_{i=1}^{\gamma} P(K \ge i) = \sum_{i=0}^{\gamma} \alpha^i$. $\square$
 

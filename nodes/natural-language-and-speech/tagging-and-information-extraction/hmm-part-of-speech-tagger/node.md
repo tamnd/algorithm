@@ -79,19 +79,19 @@ The decoder works in log space with log 0 = -inf, because a product of a few hun
 
 ## Example
 
-Take a corpus of five tagged sentences, with D for determiner, J for adjective, N for noun and V for verb: "the/D dog/N runs/V", "the/D old/J dog/N runs/V", "dogs/N run/V", "the/D runs/N" and "old/J dogs/N walk/V". The bigram tagger ($m = 1$) has $N = 19$ predicted events. The tag counts are D 3, J 2, N 5, V 4 and </s> 5, and the history counts are <s> 5, D 3, J 2, N 5 and V 4. Deleted interpolation looks at the nine bigrams:
+Take a corpus of five tagged sentences, with D for determiner, J for adjective, N for noun and V for verb: "the/D dog/N runs/V", "the/D old/J dog/N runs/V", "dogs/N run/V", "the/D runs/N" and "old/J dogs/N walk/V". The bigram tagger ($m = 1$) has $N = 19$ predicted events. The tag counts are D 3, J 2, N 5, V 4 and `</s>` 5, and the history counts are `<s>` 5, D 3, J 2, N 5 and V 4. Deleted interpolation looks at the nine bigrams:
 
 | bigram | count | bigram estimate | unigram estimate | winner |
 |---|---|---|---|---|
-| (<s>, D) | 3 | 2/4 | 2/18 | λ_1 |
+| (`<s>`, D) | 3 | 2/4 | 2/18 | λ_1 |
 | (D, N) | 2 | 1/2 | 4/18 | λ_1 |
 | (N, V) | 4 | 3/4 | 3/18 | λ_1 |
-| (V, </s>) | 4 | 3/3 | 4/18 | λ_1 |
+| (V, `</s>`) | 4 | 3/3 | 4/18 | λ_1 |
 | (J, N) | 2 | 1/1 | 4/18 | λ_1 |
 | (D, J) | 1 | 0/2 | 1/18 | λ_0 |
-| (<s>, N) | 1 | 0/4 | 4/18 | λ_0 |
-| (N, </s>) | 1 | 0/4 | 4/18 | λ_0 |
-| (<s>, J) | 1 | 0/4 | 1/18 | λ_0 |
+| (`<s>`, N) | 1 | 0/4 | 4/18 | λ_0 |
+| (N, `</s>`) | 1 | 0/4 | 4/18 | λ_0 |
+| (`<s>`, J) | 1 | 0/4 | 1/18 | λ_0 |
 
 So $\lambda_0 = 4/19$ and $\lambda_1 = 15/19$. For example $P(N \mid D) = \frac{4}{19} \cdot \frac{5}{19} + \frac{15}{19} \cdot \frac{2}{3} = 210/361$, $P(V \mid D) = \frac{4}{19} \cdot \frac{4}{19} = 16/361$, $P(D \mid \langle s \rangle) = 183/361$, $P(\langle /s \rangle \mid N) = 77/361$ and $P(\langle /s \rangle \mid V) = 305/361$.
 

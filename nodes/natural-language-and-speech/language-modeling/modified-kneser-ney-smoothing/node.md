@@ -42,7 +42,7 @@ The amounts are chosen from how many word pairs were seen once, twice, three tim
 
 ## The problem
 
-The setting is that of [Kneser-Ney smoothing](/kneser-ney-smoothing/). Sentences are padded with $n - 1$ copies of <s> and one </s>; </s> is predicted and counted, <s> is never predicted. Level $n$ of the model uses the raw counts $a_n(g) = c(g)$, and each lower level $m$ uses the continuation counts $a_m(g) = N_{1+}(\cdot\, g)$, the number of distinct tokens $x$ such that $x g$ was seen. For a history $h$ of length $m - 1$ let $T(h) = \sum_x a_m(h x)$, and let $N_1(h\, \cdot)$, $N_2(h\, \cdot)$ and $N_{3+}(h\, \cdot)$ be the numbers of words $x$ with $a_m(h x)$ equal to 1, equal to 2, and at least 3.
+The setting is that of [Kneser-Ney smoothing](/kneser-ney-smoothing/). Sentences are padded with $n - 1$ copies of `<s>` and one `</s>`; `</s>` is predicted and counted, `<s>` is never predicted. Level $n$ of the model uses the raw counts $a_n(g) = c(g)$, and each lower level $m$ uses the continuation counts $a_m(g) = N_{1+}(\cdot\, g)$, the number of distinct tokens $x$ such that $x g$ was seen. For a history $h$ of length $m - 1$ let $T(h) = \sum_x a_m(h x)$, and let $N_1(h\, \cdot)$, $N_2(h\, \cdot)$ and $N_{3+}(h\, \cdot)$ be the numbers of words $x$ with $a_m(h x)$ equal to 1, equal to 2, and at least 3.
 
 The discount of a count $k$ is $D(0) = 0$, $D(1) = D_1$, $D(2) = D_2$ and $D(k) = D_{3+}$ for $k \ge 3$, with a separate triple for each level. The model is
 
@@ -74,7 +74,7 @@ Lines L1 and L2 are the counting of Kneser-Ney. Line L3 is new. The check in lin
 
 ## Example
 
-Take six sentences: "x y" three times, "x z" twice and "x u" once, with $n = 2$. After the history x the counts are y 3, z 2 and u 1, so $T = 6$ and each count class has one word. The text has 7 bigram types, and the continuation unigram is $1/7$ for each of x, y, z and u and $3/7$ for </s>, which follows three words.
+Take six sentences: "x y" three times, "x z" twice and "x u" once, with $n = 2$. After the history x the counts are y 3, z 2 and u 1, so $T = 6$ and each count class has one word. The text has 7 bigram types, and the continuation unigram is $1/7$ for each of x, y, z and u and $3/7$ for `</s>`, which follows three words.
 
 With the discounts $D_1 = 1/2$, $D_2 = 1$ and $D_{3+} = 3/2$, $\gamma(\text{x}) = (1/2 + 1 + 3/2) / 6 = 1/2$. Kneser-Ney with $D = 3/4$ has $\gamma(\text{x}) = (3/4) \cdot 3 / 6 = 3/8$. The two rows after x are:
 
@@ -83,7 +83,7 @@ With the discounts $D_1 = 1/2$, $D_2 = 1$ and $D_{3+} = 3/2$, $\gamma(\text{x}) 
 | y | 3 | 3/2 | $1.5/6 + 1/14 = 9/28$ | $2.25/6 + 3/56 = 3/7$ |
 | z | 2 | 1 | $1/6 + 1/14 = 5/21$ | $1.25/6 + 3/56 = 11/42$ |
 | u | 1 | 1/2 | $0.5/6 + 1/14 = 13/84$ | $0.25/6 + 3/56 = 2/21$ |
-| </s> | 0 | 0 | $3/14$ | $9/56$ |
+| `</s>` | 0 | 0 | $3/14$ | $9/56$ |
 | x | 0 | 0 | $1/14$ | $3/56$ |
 
 Both rows sum to 1. Here the modified form takes more from the frequent word and less from the singleton. On real data the estimates come from equation 17. For a trigram model on 300 random sentences over 50 words with Zipf weights, the top level had $n_1, \ldots, n_4 = 605, 75, 16, 8$, which gives $Y = 121/151 \approx 0.80$ and $D_1 \approx 0.80$, $D_2 = 5614/3775 \approx 1.49$ and $D_{3+} = 211/151 \approx 1.40$.

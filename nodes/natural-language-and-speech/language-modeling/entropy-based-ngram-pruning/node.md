@@ -71,7 +71,7 @@ L6      if e^D - 1 < θ then mark h w
 L7  remove the marked n-grams and recompute α(h) for every h
 ```
 
-Line L2 multiplies the model probabilities of the tokens of $h$, each after the tokens before it; leading <s> pads count as 1. Lines L3 and L4 use $S_1(h)$ and $S_2(h)$, which are computed once per history. Line L5 is the relative entropy of the row of $h$, weighted by $p(h)$. Line L6 compares the relative increase of the [perplexity](/perplexity/), $e^D - 1$, with $\theta$.
+Line L2 multiplies the model probabilities of the tokens of $h$, each after the tokens before it; leading `<s>` pads count as 1. Lines L3 and L4 use $S_1(h)$ and $S_2(h)$, which are computed once per history. Line L5 is the relative entropy of the row of $h$, weighted by $p(h)$. Line L6 compares the relative increase of the [perplexity](/perplexity/), $e^D - 1$, with $\theta$.
 
 The implementation builds the input model from a corpus with [absolute discounting](/absolute-discounting/), $p^*(w \mid h) = (c(h w) - d)/c(h)$ for every seen n-gram and $d = 1/2$, and keeps the unigram undiscounted. It computes the costs from exact fractions and takes the logs in floats.
 
@@ -81,7 +81,7 @@ Take the four sentences "a b", "a c", "b c" and "a b" with $n = 2$ and $d = 1/2$
 
 $$\alpha(\text{a}) = \frac{1 - 2/3}{1 - (1/4 + 1/6)} = \frac47.$$
 
-To remove a c: $\alpha'(\text{a}) = (1 - 1/2)/(1 - 1/4) = 2/3$, so c would get $\frac23 \cdot \frac16 = \frac19$ instead of $\frac16$. The backed off words a and </s> have $B = 1/3$, and $p(\text{a}) = 1/4$ as a history. So
+To remove a c: $\alpha'(\text{a}) = (1 - 1/2)/(1 - 1/4) = 2/3$, so c would get $\frac23 \cdot \frac16 = \frac19$ instead of $\frac16$. The backed off words a and `</s>` have $B = 1/3$, and $p(\text{a}) = 1/4$ as a history. So
 
 $$D = \frac14 \left[ \frac16 \ln \frac{1/6}{1/9} + \frac13 \ln \frac{4/7}{2/3} \right] \approx 0.004048.$$
 
@@ -89,15 +89,15 @@ All seven explicit bigrams:
 
 | n-gram | $p(h)$ | $p^*(w \mid h)$ | $D$ | $e^D - 1$ |
 |---|---|---|---|---|
-| <s> a | 1 | 5/8 | 0.264513 | 0.302796 |
-| <s> b | 1 | 1/8 | 0 | 0 |
+| `<s>` a | 1 | 5/8 | 0.264513 | 0.302796 |
+| `<s>` b | 1 | 1/8 | 0 | 0 |
 | a b | 1/4 | 1/2 | 0.040009 | 0.040820 |
 | a c | 1/4 | 1/6 | 0.004048 | 0.004057 |
-| b </s> | 1/4 | 1/2 | 0.016894 | 0.017038 |
+| b `</s>` | 1/4 | 1/2 | 0.016894 | 0.017038 |
 | b c | 1/4 | 1/6 | 0.002172 | 0.002174 |
-| c </s> | 1/6 | 3/4 | 0.060498 | 0.062366 |
+| c `</s>` | 1/6 | 3/4 | 0.060498 | 0.062366 |
 
-The bigram <s> b costs nothing: after its removal $\alpha'(\text{<s>}) \cdot p(\text{b}) = \frac12 \cdot \frac14 = \frac18$, which is the stored value. With $\theta = 0.01$ the bigrams <s> b, a c and b c are removed. The new weights are $\alpha(\text{a}) = 2/3$ and $\alpha(\text{b}) = 3/4$, every row still sums to 1, and the perplexity of the training text goes from about 2.383 to about 2.525.
+The bigram `<s>` b costs nothing: after its removal $\alpha'(\text{<s>}) \cdot p(\text{b}) = \frac12 \cdot \frac14 = \frac18$, which is the stored value. With $\theta = 0.01$ the bigrams `<s>` b, a c and b c are removed. The new weights are $\alpha(\text{a}) = 2/3$ and $\alpha(\text{b}) = 3/4$, every row still sums to 1, and the perplexity of the training text goes from about 2.383 to about 2.525.
 
 ## Correctness
 

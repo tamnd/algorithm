@@ -38,7 +38,7 @@ A big model writes well but slowly, one word at a time. A small model writes fas
 
 ## The problem
 
-The target and the draft give, for every prefix $y$, distributions $p(\cdot \mid y)$ and $q(\cdot \mid y)$ over a vocabulary $V$ that contains "</s>". The task is to draw an output $y$ with $P(y) = \prod_t p(y_t \mid y_{<t})$, exactly the law of [ancestral sampling](/ancestral-sampling/) from $p$, with as few sequential calls of $p$ as possible. A call of $p$ on several prefixes of the same sequence counts as one call, because a transformer with a [key-value cache](/key-value-cache/) scores them in one forward pass.
+The target and the draft give, for every prefix $y$, distributions $p(\cdot \mid y)$ and $q(\cdot \mid y)$ over a vocabulary $V$ that contains `</s>`. The task is to draw an output $y$ with $P(y) = \prod_t p(y_t \mid y_{<t})$, exactly the law of [ancestral sampling](/ancestral-sampling/) from $p$, with as few sequential calls of $p$ as possible. A call of $p$ on several prefixes of the same sequence counts as one call, because a transformer with a [key-value cache](/key-value-cache/) scores them in one forward pass.
 
 For one position, write $p$ and $q$ for the two distributions of the next token. The acceptance rate is
 
@@ -63,13 +63,13 @@ L8  if x_γ = "</s>" then return x_1 .. x_γ
 L9  return x_1 .. x_γ and a token drawn from p(· | y x_1 .. x_γ)
 ```
 
-The decoder repeats steps from the growing output until it ends with "</s>" or reaches the length limit; near the limit, the step drafts fewer tokens so that it never overshoots. The test in line L6 is written without a division, so a draft probability of 0 needs no special case: a token with $q(x) = 0$ is never drafted. If $p = q$, the residual has mass 0, but then no rejection happens.
+The decoder repeats steps from the growing output until it ends with `</s>` or reaches the length limit; near the limit, the step drafts fewer tokens so that it never overshoots. The test in line L6 is written without a division, so a draft probability of 0 needs no special case: a token with $q(x) = 0$ is never drafted. If $p = q$, the residual has mass 0, but then no rejection happens.
 
 ## Example
 
 The target $p$ is the model M1 of [greedy decoding](/greedy-decoding/). At the empty prefix the two models are
 
-| token | a | b | </s> |
+| token | a | b | `</s>` |
 |---|---|---|---|
 | $p$ | 0.5 | 0.4 | 0.1 |
 | $q$ | 0.7 | 0.2 | 0.1 |
@@ -80,11 +80,11 @@ So $\alpha = 0.8$, and the residual puts all its mass on b. Check the law of the
 
 - a is drafted with probability 0.7 and accepted with probability $0.5 / 0.7$, so it is output with probability 0.5;
 - b is drafted with probability 0.2 and always accepted, and every rejection (probability $1 - \alpha = 0.2$) outputs b too, so b comes out with probability 0.4;
-- "</s>" is drafted with probability 0.1 and always accepted: 0.1.
+- `</s>` is drafted with probability 0.1 and always accepted: 0.1.
 
 That is $p$. The draft offers too much a and too little b, and the rejection step moves exactly the excess of a to b.
 
-If every draft token were accepted with probability $\alpha = 0.8$ independently, a step with $\gamma = 4$ would yield $(1 - 0.8^5) / (1 - 0.8) = 3.3616$ tokens per call of the target on average. The test runs 10000 steps on a pair of models that give the rows of the table at every position, with a third token c in place of "</s>", so that the rate is 0.8 at every position and the acceptances are independent. It measures an acceptance rate near 0.8 and about 3.36 tokens per call. When the two models are equal, every draft token is accepted, and 400 tokens take 100 target calls with $\gamma = 3$.
+If every draft token were accepted with probability $\alpha = 0.8$ independently, a step with $\gamma = 4$ would yield $(1 - 0.8^5) / (1 - 0.8) = 3.3616$ tokens per call of the target on average. The test runs 10000 steps on a pair of models that give the rows of the table at every position, with a third token c in place of `</s>`, so that the rate is 0.8 at every position and the acceptances are independent. It measures an acceptance rate near 0.8 and about 3.36 tokens per call. When the two models are equal, every draft token is accepted, and 400 tokens take 100 target calls with $\gamma = 3$.
 
 ## Correctness
 

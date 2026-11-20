@@ -42,7 +42,7 @@ The model gives a distribution $P = P(\cdot \mid y_{<t})$ over the vocabulary $V
 
 $$q_p(i) = \frac{P_i \, [i \in V^{(p)}]}{\sum_{j \in V^{(p)}} P_j}.$$
 
-This is Equations 2 and 3 of Holtzman et al. 2020. The full output repeats the step until the end token "</s>" or a length limit. The output distribution is not the model distribution $P(y)$; the method is defined by the rule.
+This is Equations 2 and 3 of Holtzman et al. 2020. The full output repeats the step until the end token `</s>` or a length limit. The output distribution is not the model distribution $P(y)$; the method is defined by the rule.
 
 ## The algorithm
 

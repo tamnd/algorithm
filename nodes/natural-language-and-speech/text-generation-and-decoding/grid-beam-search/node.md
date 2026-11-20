@@ -38,7 +38,7 @@ You want the model to write a text that uses some given words. If you just add t
 
 ## The problem
 
-The model gives $\log p(w \mid y)$ for every prefix $y$ and every token $w$ of the vocabulary $V$, which contains "</s>". All logs are natural logs. The constraints are $m$ phrases $P_1, \ldots, P_m$, each a non-empty sequence of tokens without "</s>", with $c = |P_1| + \cdots + |P_m|$ tokens in all. An output $y$ of at most $n$ tokens, "</s>" included, holds the constraints if each phrase appears in $y$ as a contiguous block and the $m$ blocks take disjoint positions. The task is
+The model gives $\log p(w \mid y)$ for every prefix $y$ and every token $w$ of the vocabulary $V$, which contains `</s>`. All logs are natural logs. The constraints are $m$ phrases $P_1, \ldots, P_m$, each a non-empty sequence of tokens without `</s>`, with $c = |P_1| + \cdots + |P_m|$ tokens in all. An output $y$ of at most $n$ tokens, `</s>` included, holds the constraints if each phrase appears in $y$ as a contiguous block and the $m$ blocks take disjoint positions. The task is
 
 $$y^* = \arg\max \{ \log p(y) : y \text{ holds } P_1, \ldots, P_m \}.$$
 
@@ -65,19 +65,19 @@ L9      for each c': empty Next[c'] if c' < c - (n - 1 - t), else keep its k bes
 L10 return best                                          ▷ none if no output held every phrase
 ```
 
-Line L9 drops cells that cannot reach $c$ covered tokens with the tokens that remain before "</s>". The code numbers the steps as the pseudocode does and counts the model calls.
+Line L9 drops cells that cannot reach $c$ covered tokens with the tokens that remain before `</s>`. The code numbers the steps as the pseudocode does and counts the model calls.
 
 ## Example
 
-Take the model M1 of [greedy decoding](/greedy-decoding/): at the empty prefix $p(a) = 0.5$, $p(b) = 0.4$, $p(\text{</s>}) = 0.1$; after a, $0.4, 0.3, 0.3$; after b, $0.05, 0.05, 0.9$; after two tokens, "</s>" has probability 1. Without constraints the best output is b</s> (0.36). Require the phrase "a", so $c = 1$, with $n = 3$ and $k = 1$.
+Take the model M1 of [greedy decoding](/greedy-decoding/): at the empty prefix $p(a) = 0.5$, $p(b) = 0.4$, $p(\text{</s>}) = 0.1$; after a, $0.4, 0.3, 0.3$; after b, $0.05, 0.05, 0.9$; after two tokens, `</s>` has probability 1. Without constraints the best output is b`</s>` (0.36). Require the phrase "a", so $c = 1$, with $n = 3$ and $k = 1$.
 
 - Step 1. The empty prefix (call 1) generates a ($-0.693$) and b ($-0.916$) into cell 0, and starts the phrase with a ($-0.693$) into cell 1. Each cell keeps one: a in cell 0, and the constraint a in cell 1.
-- Step 2. The free a (call 2) generates aa and ab into cell 0 and starts the phrase: aa ($-1.609$) into cell 1. The constraint a (call 3) is closed in cell $c$, so it finishes a</s> ($\log 0.15 = -1.897$); it also generates aa ($-1.609$) and ab ($-1.897$) into cell 1. Cell 0 can no longer reach $c$ in time, so line L9 empties it. Cell 1 holds aa twice, one copy from each route, and keeps the first.
-- Step 3. aa (call 4) finishes aa</s> ($\log 0.2 = -1.609$), better than a</s>.
+- Step 2. The free a (call 2) generates aa and ab into cell 0 and starts the phrase: aa ($-1.609$) into cell 1. The constraint a (call 3) is closed in cell $c$, so it finishes a`</s>` ($\log 0.15 = -1.897$); it also generates aa ($-1.609$) and ab ($-1.897$) into cell 1. Cell 0 can no longer reach $c$ in time, so line L9 empties it. Cell 1 holds aa twice, one copy from each route, and keeps the first.
+- Step 3. aa (call 4) finishes aa`</s>` ($\log 0.2 = -1.609$), better than a`</s>`.
 
-The result is aa</s> with probability 0.2, after 4 calls, which is the best output that contains a. With the phrase "b" the search returns b</s> (0.36).
+The result is aa`</s>` with probability 0.2, after 4 calls, which is the best output that contains a. With the phrase "b" the search returns b`</s>` (0.36).
 
-A narrow grid can fail. On a random model with tokens a, b, c and "</s>" (seed 0 in the test), the phrase "b c", $n = 5$ and $k = 1$, grid beam search returns b c </s> with log probability $-5.020$, but the best output that holds the phrase is a c b c </s>, with $-2.745$. A grid with an unbounded beam finds it. On 40 random models with $k = 1$ the narrow grid misses the best output on some of them and not on all; the test checks both.
+A narrow grid can fail. On a random model with tokens a, b, c and `</s>` (seed 0 in the test), the phrase "b c", $n = 5$ and $k = 1$, grid beam search returns b c `</s>` with log probability $-5.020$, but the best output that holds the phrase is a c b c `</s>`, with $-2.745$. A grid with an unbounded beam finds it. On 40 random models with $k = 1$ the narrow grid misses the best output on some of them and not on all; the test checks both.
 
 ## Correctness
 

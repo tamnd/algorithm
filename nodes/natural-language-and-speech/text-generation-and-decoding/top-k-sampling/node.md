@@ -42,7 +42,7 @@ The model gives a distribution $p = p(\cdot \mid y_{<t})$ over the vocabulary $V
 
 $$q_k(i) = \frac{p_i \, [i \in K]}{\sum_{j \in K} p_j},$$
 
-where $K$ is a set of $\min(k, |V|)$ tokens of largest probability. On ties at the boundary, the tokens with smaller indices are kept. The whole output is built by repeating the step until the end token "</s>" or a length limit, as in greedy decoding. The output distribution is not the model distribution $p(y)$, and no single sequence is the target; the method is defined by the rule itself.
+where $K$ is a set of $\min(k, |V|)$ tokens of largest probability. On ties at the boundary, the tokens with smaller indices are kept. The whole output is built by repeating the step until the end token `</s>` or a length limit, as in greedy decoding. The output distribution is not the model distribution $p(y)$, and no single sequence is the target; the method is defined by the rule itself.
 
 ## The algorithm
 

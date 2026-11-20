@@ -48,7 +48,7 @@ $$s(w, c) = \sum_{g \in \mathcal{G}_w} \vec z_g \cdot \vec v_c = \Big(\sum_{g \i
 
 and the loss of an observed pair with noise words $n_1, \ldots, n_k$ is the negative sampling loss $-\log\sigma(s(w, c)) - \sum_i \log\sigma(-s(w, n_i))$. The output is $Z$, from which any word, seen or not, gets the vector $\sum_{g \in \mathcal{G}_w} \vec z_g$.
 
-The boundary symbols make prefixes and suffixes different from the same letters inside a word: the word "her" is the sequence "<her>", which differs from the trigram "her" of "where". The paper uses $n$ from 3 to 6 and $B = 2$ million, and hashes with the [FNV-1a hash](/fnv-hash/).
+The boundary symbols make prefixes and suffixes different from the same letters inside a word: the word "her" is the sequence `<her>`, which differs from the trigram "her" of "where". The paper uses $n$ from 3 to 6 and $B = 2$ million, and hashes with the [FNV-1a hash](/fnv-hash/).
 
 ## The algorithm
 
@@ -69,7 +69,7 @@ Line L1 builds the list of rows of each word once. Line L2 makes one row for eac
 
 ## Example
 
-The word "where" becomes "<where>". Its 14 n-grams, by start position, are
+The word "where" becomes `<where>`. Its 14 n-grams, by start position, are
 
 <wh, <whe, <wher, <where, whe, wher, where, where>, her, here, here>, ere, ere>, re>
 
@@ -84,9 +84,9 @@ The hash maps each n-gram to a bucket. With the sign quirk of the library descri
 | her | f4b48d8c | 1473420 |
 | ere | 7b978ac9 | 1529033 |
 | re> | 7af4dc2a | 867498 |
-| <her> | 65814d14 | 972692 |
+| `<her>` | 65814d14 | 972692 |
 
-The trigram "her" of "where" and the word "her" (the sequence <her>) get different rows. The word "her" also has the trigram "her" (from "<her>"), so the two words share that row.
+The trigram "her" of "where" and the word "her" (the sequence `<her>`) get different rows. The word "her" also has the trigram "her" (from `<her>`), so the two words share that row.
 
 On a planted corpus whose words in one group all start with "pak" and in the other with "zot", trained with n-grams of length 3 and 4, the unseen word "pakar" gets a vector closer to the mean of the "pak" group than to the mean of the "zot" group, through the shared n-grams "<pa", "<pak" and "pak".
 

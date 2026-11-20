@@ -22,7 +22,7 @@ sources:
     locator: the hardness of finding the most probable string emitted by a hidden Markov model
 ---
 
-Autoregressive decoding is the problem of producing an output sequence from a model that gives, for every prefix, a distribution over the next token. The model defines $p(y \mid x) = \prod_{t=1}^{|y|} p(y_t \mid y_{<t}, x)$ over sequences that end with an end token "</s>". Two questions are asked. The search question asks for the mode, $\arg\max_y p(y \mid x)$, which is what translation and speech recognition have usually wanted. The sampling question asks for a random $y$ drawn from $p(\cdot \mid x)$, or from a changed version of it, which is what open text generation usually wants. Sampling is easy: [ancestral sampling](/ancestral-sampling/) draws one token at a time and costs one model call per token. The exact mode is hard: for recurrent networks the general problem is undecidable, and NP-complete for outputs of polynomial length (Chen et al. 2018), so practical systems use [greedy decoding](/greedy-decoding/) or [beam search](/beam-search/), which can miss the mode.
+Autoregressive decoding is the problem of producing an output sequence from a model that gives, for every prefix, a distribution over the next token. The model defines $p(y \mid x) = \prod_{t=1}^{|y|} p(y_t \mid y_{<t}, x)$ over sequences that end with an end token `</s>`. Two questions are asked. The search question asks for the mode, $\arg\max_y p(y \mid x)$, which is what translation and speech recognition have usually wanted. The sampling question asks for a random $y$ drawn from $p(\cdot \mid x)$, or from a changed version of it, which is what open text generation usually wants. Sampling is easy: [ancestral sampling](/ancestral-sampling/) draws one token at a time and costs one model call per token. The exact mode is hard: for recurrent networks the general problem is undecidable, and NP-complete for outputs of polynomial length (Chen et al. 2018), so practical systems use [greedy decoding](/greedy-decoding/) or [beam search](/beam-search/), which can miss the mode.
 
 ## In plain words
 
@@ -30,9 +30,9 @@ A language model writes text one piece at a time. At each step it says how likel
 
 ## Definition
 
-**Input.** A vocabulary $V$ that contains "</s>", a length limit $n$, a context $x$ (a prompt, a source sentence or an audio signal, possibly empty), and a model that, given $x$ and a prefix $y_{<t}$, returns the [conditional probabilities](/conditional-probability/) $p(w \mid y_{<t}, x)$ for all $w \in V$. The model is a black box; one call costs $M$.
+**Input.** A vocabulary $V$ that contains `</s>`, a length limit $n$, a context $x$ (a prompt, a source sentence or an audio signal, possibly empty), and a model that, given $x$ and a prefix $y_{<t}$, returns the [conditional probabilities](/conditional-probability/) $p(w \mid y_{<t}, x)$ for all $w \in V$. The model is a black box; one call costs $M$.
 
-**Outputs.** The candidates are the sequences $y$ that end with their first "</s>" and have at most $n$ tokens, and the sequences of exactly $n$ tokens without "</s>".
+**Outputs.** The candidates are the sequences $y$ that end with their first `</s>` and have at most $n$ tokens, and the sequences of exactly $n$ tokens without `</s>`.
 
 - **Mode (MAP decoding).** Find $\arg\max_y p(y \mid x)$, or equivalently the largest $\sum_t \log p(y_t \mid y_{<t}, x)$.
 - **Sampling.** Output $y$ with probability $p(y \mid x)$, or with probability proportional to a changed distribution, such as one with a temperature or a truncated vocabulary.
@@ -48,7 +48,7 @@ A language model writes text one piece at a time. At each step it says how likel
 
 ## Examples
 
-Let $V = \{a, b, \text{</s>}\}$ and $n = 2$. The first step gives $p(a) = 0.6$ and $p(b) = 0.4$. After $a$ the model gives "</s>" $0.4$, $a$ $0.3$ and $b$ $0.3$; after $b$ it gives "</s>" $0.9$ and $0.05$ to each of $a$ and $b$. The output a</s> has probability $0.6 \times 0.4 = 0.24$, and b</s> has $0.4 \times 0.9 = 0.36$, while the outputs of two tokens without "</s>", such as ab, have at most $0.6 \times 0.3 = 0.18$. The mode is b</s>. Greedy decoding takes $a$ first, because $0.6 > 0.4$, and returns a</s>. A beam of width 2 keeps both $a$ and $b$ and finds b</s>. Ancestral sampling returns b</s> with probability $0.36$.
+Let $V = \{a, b, \text{</s>}\}$ and $n = 2$. The first step gives $p(a) = 0.6$ and $p(b) = 0.4$. After $a$ the model gives `</s>` $0.4$, $a$ $0.3$ and $b$ $0.3$; after $b$ it gives `</s>` $0.9$ and $0.05$ to each of $a$ and $b$. The output a`</s>` has probability $0.6 \times 0.4 = 0.24$, and b`</s>` has $0.4 \times 0.9 = 0.36$, while the outputs of two tokens without `</s>`, such as ab, have at most $0.6 \times 0.3 = 0.18$. The mode is b`</s>`. Greedy decoding takes $a$ first, because $0.6 > 0.4$, and returns a`</s>`. A beam of width 2 keeps both $a$ and $b$ and finds b`</s>`. Ancestral sampling returns b`</s>` with probability $0.36$.
 
 In real translation models the mode can be very bad: Stahlberg and Byrne 2019 ran exact search on a Transformer model for English to German and measured that the most probable translation was the empty one for more than half of the test sentences (see [inadequacy of the mode](/inadequacy-of-the-mode/)).
 

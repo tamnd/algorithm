@@ -35,7 +35,7 @@ Think of all possible texts as the leaves of a tree, where each branch adds one 
 
 ## The problem
 
-The model gives $\log p(w \mid y)$ for every prefix $y$ and token $w$ of the vocabulary $V$, which contains "</s>"; all logs are natural logs. Every output ends with "</s>" within $n$ tokens. A sample of $k$ outputs without replacement is a sequence $y^{(1)}, \ldots, y^{(k)}$ of distinct outputs with probability
+The model gives $\log p(w \mid y)$ for every prefix $y$ and token $w$ of the vocabulary $V$, which contains `</s>`; all logs are natural logs. Every output ends with `</s>` within $n$ tokens. A sample of $k$ outputs without replacement is a sequence $y^{(1)}, \ldots, y^{(k)}$ of distinct outputs with probability
 
 $$P\big(y^{(1)}, \ldots, y^{(k)}\big) = \prod_{i=1}^{k} \frac{p(y^{(i)})}{1 - \sum_{j < i} p(y^{(j)})}.$$
 
@@ -69,23 +69,23 @@ where $\log(1 - e^{a})$ for $a \le 0$ is computed with expm1 for $a > -\ln 2$ an
 
 ## Example
 
-Take the model M1 of [greedy decoding](/greedy-decoding/): at the empty prefix $p(a) = 0.5$, $p(b) = 0.4$, $p(\text{</s>}) = 0.1$; after a, $0.4, 0.3, 0.3$; after b, $0.05, 0.05, 0.9$; after two tokens, "</s>" has probability 1. Its seven outputs and their probabilities are </s> 0.1, a</s> 0.15, aa</s> 0.2, ab</s> 0.15, b</s> 0.36, ba</s> 0.02 and bb</s> 0.02. Run $k = 2$ with random.Random(3).
+Take the model M1 of [greedy decoding](/greedy-decoding/): at the empty prefix $p(a) = 0.5$, $p(b) = 0.4$, $p(\text{</s>}) = 0.1$; after a, $0.4, 0.3, 0.3$; after b, $0.05, 0.05, 0.9$; after two tokens, `</s>` has probability 1. Its seven outputs and their probabilities are `</s>` 0.1, a`</s>` 0.15, aa`</s>` 0.2, ab`</s>` 0.15, b`</s>` 0.36, ba`</s>` 0.02 and bb`</s>` 0.02. Run $k = 2$ with random.Random(3).
 
 | step | parent ($G$) | child | $\phi$ | Gumbel $g$ | $G$ after line L7 |
 |---|---|---|---|---|---|
 | 1 | root (0) | a | $-0.693$ | $-1.055$ | $-0.855$ |
 | 1 | root (0) | b | $-0.916$ | $-0.419$ | $0.000$ |
-| 1 | root (0) | </s> | $-2.303$ | $-2.297$ | $-2.243$ |
+| 1 | root (0) | `</s>` | $-2.303$ | $-2.297$ | $-2.243$ |
 | 2 | b (0) | ba | $-3.912$ | $-3.227$ | $-2.926$ |
 | 2 | b (0) | bb | $-3.912$ | $-3.155$ | $-2.826$ |
-| 2 | b (0) | b</s> | $-1.022$ | $-2.024$ | $0.000$ |
+| 2 | b (0) | b`</s>` | $-1.022$ | $-2.024$ | $0.000$ |
 | 2 | a ($-0.855$) | aa | $-1.609$ | $-3.075$ | $-3.128$ |
 | 2 | a ($-0.855$) | ab | $-1.897$ | $-0.168$ | $-0.855$ |
-| 2 | a ($-0.855$) | a</s> | $-1.897$ | $-2.197$ | $-2.319$ |
+| 2 | a ($-0.855$) | a`</s>` | $-1.897$ | $-2.197$ | $-2.319$ |
 
-At step 1 the largest Gumbel, b's, is shifted to the root's value 0, and the others move with it; the beam keeps b (0) and a ($-0.855$). At step 2 each parent's largest child takes the parent's value: b</s> gets 0 and ab gets $-0.855$. The beam keeps b</s> (finished) and ab. At step 3 ab gets its only child ab</s>, with $G = -0.855$. The sample is b</s>, then ab</s>.
+At step 1 the largest Gumbel, b's, is shifted to the root's value 0, and the others move with it; the beam keeps b (0) and a ($-0.855$). At step 2 each parent's largest child takes the parent's value: b`</s>` gets 0 and ab gets $-0.855$. The beam keeps b`</s>` (finished) and ab. At step 3 ab gets its only child ab`</s>`, with $G = -0.855$. The sample is b`</s>`, then ab`</s>`.
 
-For this model, the exact probability that the ordered sample is (b</s>, aa</s>) is $0.36 \cdot 0.2 / 0.64 = 0.1125$, and the probability of the set {b</s>, aa</s>} is $0.1125 + 0.2 \cdot 0.36 / 0.8 = 0.2025$. The tests draw 20000 samples of size 1 and 2 and compare the frequencies with these exact values, with a tolerance of 0.01, and 10000 samples of size 3 on a random model with a tolerance of 0.015.
+For this model, the exact probability that the ordered sample is (b`</s>`, aa`</s>`) is $0.36 \cdot 0.2 / 0.64 = 0.1125$, and the probability of the set {b`</s>`, aa`</s>`} is $0.1125 + 0.2 \cdot 0.36 / 0.8 = 0.2025$. The tests draw 20000 samples of size 1 and 2 and compare the frequencies with these exact values, with a tolerance of 0.01, and 10000 samples of size 3 on a random model with a tolerance of 0.015.
 
 ## Correctness
 
