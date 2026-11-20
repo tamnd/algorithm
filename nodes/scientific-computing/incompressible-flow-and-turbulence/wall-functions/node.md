@@ -89,7 +89,7 @@ So $u_\tau = 0.6882$ m/s, $y^+ = 45.9$ (inside the 30 to 300 range), $\tau_w/\rh
 
 **Spalding's law.** Spalding's formula
 $$y^+ = u^+ + e^{-\kappa B}\left(e^{\kappa u^+} - 1 - \kappa u^+ - \frac{(\kappa u^+)^2}{2} - \frac{(\kappa u^+)^3}{6}\right)$$
-gives $y^+$ as an increasing function of $u^+$ that is $u^+$ in the sublayer and tends to the log law far out, with a smooth buffer layer between. With $\kappa = 0.41$ and $B = 5.2$: $u^+(1) = 1.000$, $u^+(11) = 8.83$ (the two-law value is 11.05), $u^+(30) = 12.79$ and $u^+(300) = 19.07$ against the log law's 19.11. Inverting it by [bisection](/bisection-method/) gives a wall function valid at any $y^+$.
+gives $y^+$ as an increasing function of $u^+$ that is $u^+$ in the sublayer and tends to the log law far out, with a smooth buffer layer between. With $\kappa = 0.41$ and $B = 5.2$: $u^+(1) = 1.000$, $u^+(11) = 8.83$ (the two-law value is 11.00 from the linear law, since $11 < 11.06$; the log law alone gives 11.05), $u^+(30) = 12.79$ and $u^+(300) = 19.07$ against the log law's 19.11. Inverting it by [bisection](/bisection-method/) gives a wall function valid at any $y^+$.
 
 ## Variations
 

@@ -91,7 +91,7 @@ Theorem, in the [real-RAM](/real-ram/) model: each face flux costs $O(m)$ operat
 - **First order.** The measured order on the smooth wave is 1.00. For higher order, put reconstructed face values into the flux.
 - **Upwind for supersonic flow.** If $M \ge 1$ on both sides, the face flux is $F(U_L)$.
 - **Keeps contacts at rest.** Proved and tested exactly. Van Leer's flux vector splitting moves mass across such a contact.
-- **Does not keep moving contacts.** The two sides use their own sound speeds, so a contact moving at $u = 1$ gets a mass flux of 0.453 instead of 0.5 in the example. After the contact has moved 0.2 on 100 cells, $u$ and $p$ are off by about 0.03.
+- **Does not keep moving contacts.** The two sides use their own sound speeds, so a contact moving at $u = 0.5$ gets a mass flux of 0.453 instead of 0.5 in the example. After the contact has moved 0.2 on 100 cells, $u$ and $p$ are off by about 0.03.
 - **Not positivity preserving.** On Sod's tube the first step gives a negative pressure for Courant numbers above 0.6574 (proved). The code fails at 0.7 to 0.9 and runs at 0.5 and 0.6.
 
 ## Variants and improvements

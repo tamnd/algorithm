@@ -108,7 +108,7 @@ A sweep visits each of the $N^2$ faces in its direction once, and each face cost
 
 ## Variants and improvements
 
-- **[PLIC](/piecewise-linear-interface-calculation/).** Youngs (1982) and later work reconstruct the interface in each cell as a straight line with normal from the gradient of $F$, placed to cut off the volume $F$, and compute the fluxes as the area of the polygon that crosses each face. This is the standard in modern VOF codes and is second order for smooth interfaces.
+- **[PLIC](/piecewise-linear-interface-calculation/).** Youngs (1982) and later work reconstruct the interface in each cell as a straight line with normal from the gradient of $F$, placed to cut off the volume $F$, and compute the fluxes as the area of the polygon that crosses each face. This is the standard in modern VOF codes. With Youngs' normals the reconstruction is first order; with normals that reproduce every straight line, such as those of ELVIRA, it is second order for smooth interfaces.
 - **SLIC.** The simple line interface calculation of Noh and Woodward (1976) places a line parallel to a cell face, chosen per sweep. It is close to the donor-acceptor rule.
 - **Unsplit schemes.** Rider and Kothe (1998) trace the backward flux regions in two dimensions at once, which removes the splitting error and the compressible sweeps.
 - **Algebraic VOF.** Codes such as those with compressive interface capturing do not reconstruct a line. They advect $F$ with a high-resolution scheme and add a compressive term or a limiter that steepens the profile. They are simpler on unstructured meshes but less sharp.

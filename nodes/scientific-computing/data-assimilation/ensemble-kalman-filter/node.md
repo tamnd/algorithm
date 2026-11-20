@@ -135,7 +135,7 @@ Use the EnKF when the model is large and nonlinear, when no adjoint model is ava
 - **Small ensembles without localization (line L3).** With $N$ much smaller than $n$, the sample covariance has spurious long range correlations. Distant observations then change the state where they should not. In the measurement, no inflation factor made the filter work without localization.
 - **Spread collapse.** The sample error makes the ensemble too confident over many cycles. Use [inflation](/covariance-inflation/).
 - **Forming $P^f$.** For large $n$ the $n \times n$ matrix does not fit in memory. Line L3 forms only the $n \times p$ and $p \times p$ blocks.
-- **A singular $S$ (line L7).** If the localization weights of the observations are not positive semidefinite, $S$ can lose positive definiteness. Weights from a valid correlation function such as Gaspari-Cohn avoid this.
+- **A singular $S$ (line L7).** If the localization weights of the observations are not positive semidefinite, $S$ can lose positive definiteness. Weights from a valid correlation function avoid this, such as the Gaspari-Cohn function of the distance in the plane. The Gaspari-Cohn function of the distance along a ring is not one when its support is more than half the ring: on the 40-point ring of Lorenz-96 its matrix has a negative eigenvalue for $c \ge 11$.
 
 ## Implementations
 

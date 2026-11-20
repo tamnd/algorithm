@@ -52,7 +52,7 @@ L8  return u
 $$\begin{pmatrix} K_{II} & K_{IB} \\ K_{BI} & K_{BB}\end{pmatrix}\begin{pmatrix} u_I \\ u_B\end{pmatrix} = \begin{pmatrix} F_I \\ F_B\end{pmatrix}.$$
 The first block row gives $u_I = K_{II}^{-1}(F_I - K_{IB}u_B)$. Put it into the second row: $(K_{BB} - K_{BI}K_{II}^{-1}K_{IB})u_B = F_B - K_{BI}K_{II}^{-1}F_I$. Because the interior unknowns of different elements do not couple, the global $K_{II}$ is block diagonal with one block per element. So its inverse is the block diagonal of the element inverses, and the global Schur complement is the sum of the element Schur complements, assembled like ordinary element matrices. Line L5 does exactly that, and line L7 is the first block row.
 
-**Energy view.** For an SPD element matrix, $u_B^{\mathsf T}Su_B = \min_{u_I}(u_I, u_B)^{\mathsf T}K(u_I, u_B)$, and the minimizer is the recovered $u_I$ when the load is 0. So $S$ is SPD, and the condensed element is the stiffest response of the element to given boundary values.
+**Energy view.** For an SPD element matrix, $u_B^{\mathsf T}Su_B = \min_{u_I}(u_I, u_B)^{\mathsf T}K(u_I, u_B)$, and the minimizer is the recovered $u_I$ when the load is 0. So $S$ is SPD, and the condensed element gives the response of least energy of the element to given boundary values.
 
 ## Classic examples
 

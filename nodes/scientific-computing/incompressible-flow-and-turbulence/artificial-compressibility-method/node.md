@@ -121,6 +121,6 @@ Use artificial compressibility for steady incompressible flow when a compressibl
 
 ## History
 
-Chorin (1967) introduced the method in the first volume of the Journal of Computational Physics, as a way to compute steady viscous incompressible flow by explicit marching. A year later Chorin (1968) proposed the projection method for time-accurate flow. Artificial compressibility returned in the 1980s in upwind and implicit form in collocated finite volume codes, often with dual time stepping for unsteady problems.
+Chorin (1967) introduced the method in the second volume of the Journal of Computational Physics, as a way to compute steady viscous incompressible flow by explicit marching. A year later Chorin (1968) proposed the projection method for time-accurate flow. Artificial compressibility returned in the 1980s in upwind and implicit form in collocated finite volume codes, often with dual time stepping for unsteady problems.
 
 ## References
