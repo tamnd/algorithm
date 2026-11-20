@@ -98,7 +98,7 @@ and its optimum is $\min_y \max_i (M y)_i = \min_y \max_x x^{\mathsf T} M y$. Bo
 The proof hides the real work in strong duality, which in turn rests on [Farkas' lemma](/farkas-lemma/) or the [separating hyperplane theorem](/separating-hyperplane-theorem/). The other classical proofs use the same geometry directly or use a fixed point theorem:
 
 - **Separating hyperplane (Ville 1938, von Neumann and Morgenstern 1944).** Let $w = \min_y \max_i (M y)_i$. The convex set $C = \{M y : y \in \Delta_n\}$ does not meet the convex set $O = \{z : z_i < w \text{ for all } i\}$, so a hyperplane separates them: there is a vector $x \ne 0$ with $x^{\mathsf T} z \le x^{\mathsf T} c$ for all $z \in O$ and $c \in C$. Since $O$ goes to $-\infty$ in every coordinate, $x \ge 0$, and we can scale it to $x \in \Delta_m$. Then $x^{\mathsf T} M y \ge \sup_{z \in O} x^{\mathsf T} z = w$ for every $y$, so the row player can guarantee $w$. Ville's note was the first proof of this kind.
-- **Fixed points.** Von Neumann's 1928 proof was topological. [Kakutani's 1941 fixed point theorem](/kakutani-fixed-point-theorem/) for set-valued maps was made to give a short proof: a fixed point of the best-response map is a pair of optimal strategies.
+- **Fixed points.** Von Neumann's 1928 proof was topological. [Kakutani's 1941 fixed point theorem](/nash-existence-theorem/) for set-valued maps was made to give a short proof: a fixed point of the best-response map is a pair of optimal strategies.
 - **Learning.** If both players run a no-regret method such as [multiplicative weights](/multiplicative-weights-update/), the averages of their strategies have payoff guarantees that approach each other, which proves the theorem again with an algorithm inside the proof.
 
 ## Consequences
