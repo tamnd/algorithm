@@ -34,7 +34,7 @@ sources:
     locator: the section on fine-tuning
 ---
 
-Connectionist temporal classification (CTC) trains a network that reads $T$ frames and must output a shorter label sequence $l$, when nobody has marked which frame belongs to which label. The network outputs, at each frame, a distribution over the labels and one extra symbol, the blank. The probability of $l$ is the sum over all frame-level paths that become $l$ after merging repeats and deleting blanks. A [forward-backward](/forward-backward-algorithm/) recursion on the sequence $l$ with blanks inserted computes this sum and its gradient in $\Theta(T U)$ steps, although the number of paths grows exponentially in $T$. The loss is $-\ln p(l \mid x)$ in nats.
+Connectionist temporal classification (CTC) trains a network that reads $T$ frames and must output a shorter label sequence $l$, when nobody has marked which frame belongs to which label. The network outputs, at each frame, a distribution over the labels and one extra symbol, the blank. The probability of $l$ is the sum over all frame-level paths that become $l$ after merging repeats and deleting blanks. A [forward-backward](/forward-backward-algorithm/) recursion on the sequence $l$ with blanks inserted computes this sum in $\Theta(T U)$ steps and its gradient with respect to the outputs in $\Theta(T (U + K))$, although the number of paths grows exponentially in $T$. The loss is $-\ln p(l \mid x)$ in nats.
 
 ## In plain words
 

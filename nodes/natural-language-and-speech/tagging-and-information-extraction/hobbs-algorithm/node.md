@@ -78,7 +78,7 @@ Take "his" in the second sentence. Its NP is the determiner of "his lot".
 4. Step 6: the path passes through the Nominal of this NP, so it is not proposed. "The Fords in his lot" cannot be what "his" refers to.
 5. Step 7: below X to the left of the path there are only "the" and "Fords", no NP. Step 8: X is not an S.
 6. Back to step 4, then step 5: climb through the PP "at the Fords in his lot" and the VP to the S of the second sentence.
-7. Step 7: walk left of the path. The first row below S holds the NP "John" and the VP. "John" is proposed, it is masculine and singular like "his", and it is the answer.
+7. Step 7: walk left of the path. The first row below S holds the NP "John" and the VP. "John" is proposed, it is masculine and singular like "his", and the algorithm returns it. A reader takes "his" to be Bob, whose dealership it is, so the algorithm errs here: its search prefers an NP of the same sentence and uses no knowledge of the world.
 
 Now take "He" in the third sentence. It is the subject, so step 2 gives the S node, which is the highest S. Step 3 finds nothing to the left. Step 4 walks the second sentence breadth first: the first NP in the first row is "John", which agrees, so "He" is John. Jurafsky and Martin point out that the centering algorithm of Brennan, Friedman and Pollard picks Bob here instead (see [centering theory](/centering-theory/)); a reader picks John.
 

@@ -5,7 +5,6 @@ slug: sakoe-chiba-band
 name: Sakoe-Chiba band
 aliases:
 - Sakoe-Chiba constraint
-- Itakura parallelogram
 area: natural-language-and-speech/speech-recognition
 level: core
 summary: Restrict the warping path of DTW to the cells within a fixed distance r of the diagonal. This saves time and stops degenerate alignments, but it can miss the optimum.

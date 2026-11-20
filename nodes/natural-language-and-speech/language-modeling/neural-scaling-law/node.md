@@ -81,7 +81,7 @@ With $C \approx 6ND$, the best split is $N_{\text{opt}} \propto C^{a}$ and $D_{\
 
 **Table 3 of Hoffmann et al.** For a compute-optimal run, 1B parameters need 20.2B tokens, 10B need 205.1B, 67B need 1.5T and 175B need 3.7T (Approach 1).
 
-**The 6N rule.** Kaplan et al. (Section 2.1) count about $2N$ operations per token for the forward pass and $6N$ for training. GPT-3 has $N \approx 1.74 \times 10^{11}$ non-embedding parameters and saw 300B tokens, so $6ND \approx 3.15 \times 10^{23}$.
+**The 6N rule.** Kaplan et al. (Section 2.1) count about $2N$ operations per token for the forward pass and $6N$ for training. GPT-3 has $N \approx 1.74 \times 10^{11}$ non-embedding parameters and saw 300B tokens, so $6ND \approx 3.13 \times 10^{23}$.
 
 ## Where it is used
 

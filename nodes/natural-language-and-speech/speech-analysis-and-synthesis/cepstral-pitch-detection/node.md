@@ -65,7 +65,7 @@ L8  return fs / q*
 
 Lines L1 to L4 compute the real cepstrum. Since $y$ is real, $|Y[k]| = |Y[M-k]|$, so $L$ is real and even, and its inverse DFT is real and equals its forward DFT divided by $M$; the code uses the same FFT twice. Line L5 turns the frequency range into a range of periods, which must stay below $M / 2$. Line L6 is the peak search. Line L7 is the voicing decision with a threshold $\theta$; its value is a heuristic, set on labeled speech, and this page does not take one from Noll. The floor in line L3 is $10^{-12}$ times the largest magnitude.
 
-Noll squared the log of the power spectrum and transformed again, so his cepstrum is $(2 c[q])^2$ in the notation here, up to a constant. Its largest peak is at the same quefrency whenever that peak of $c$ is positive, so the two forms pick the same period.
+Noll took the power spectrum of the log power spectrum, so his cepstrum is $(2 c[q])^2$ in the notation here, up to a constant. Its largest peak is at the same quefrency whenever that peak of $c$ is positive, so the two forms pick the same period.
 
 ## Example
 

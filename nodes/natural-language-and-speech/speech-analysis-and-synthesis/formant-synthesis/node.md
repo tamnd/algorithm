@@ -120,6 +120,6 @@ Use formant synthesis for speech perception experiments, where each cue must be 
 
 ## History
 
-Electrical formant synthesizers appeared in the 1950s, among them Walter Lawrence's Parametric Artificial Talking device in England and Gunnar Fant's OVE in Sweden. John Holmes and others built rule systems for them in the 1960s. Dennis Klatt at MIT published a software design in 1980 with both a cascade and a parallel branch, sampled at 10 kHz and updated every 5 ms, and printed its FORTRAN code. Klatt's work led to the MITalk system and to DECtalk, which gave a voice to many users of speech aids. Since the 1990s, concatenative and then neural methods have replaced formant synthesis in products.
+Electrical formant synthesizers appeared in the 1950s, among them Walter Lawrence's Parametric Artificial Talker (PAT) in England and Gunnar Fant's OVE in Sweden. John Holmes and others built rule systems for them in the 1960s. Dennis Klatt at MIT published a software design in 1980 with both a cascade and a parallel branch, sampled at 10 kHz and updated every 5 ms, and printed its FORTRAN code. Klatt's work led to the MITalk system and to DECtalk, which gave a voice to many users of speech aids. Since the 1990s, concatenative and then neural methods have replaced formant synthesis in products.
 
 ## References

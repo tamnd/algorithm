@@ -54,7 +54,7 @@ and each discriminator minimizes $L_{\text{adv}}(D_k)$. Both are trained with [A
 The generator is a deterministic function from a mel spectrogram of shape $M \times T$ to a waveform of $T H$ samples. It has no noise input. The discriminators exist only for training.
 
 - **Lengths.** Each mel frame becomes exactly $H$ samples. For example, 3 s at 22050 Hz is 66150 samples, about 258 frames at a hop of 256.
-- **Cost of one pass.** Every layer is a convolution over the whole sequence, so the cost is linear in $N$ and all positions are computed in parallel. Most of the arithmetic is in the last stages, where the length is largest and the channel count is smallest.
+- **Cost of one pass.** Every layer is a convolution over the whole sequence, so the cost is linear in $N$ and all positions are computed in parallel. The arithmetic of a stage grows with its length times the square of its channel count. In the V1 setting (upsampling by 8, 8, 2 and 2, channels 256, 128, 64 and 32) that is 0.52M, 1.05M, 0.52M and 0.26M multiply-adds per layer, kernel tap and mel frame, so the second stage costs most and the last stage least.
 - **Size.** The paper gives three settings: V1 for quality, and V2 and V3 with fewer channels or fewer blocks for speed.
 - **Period view.** For period $p$ the reshaped array has $\lceil N / p \rceil$ rows. With $N = 66150$ and $p = 11$ the waveform is padded to 66154 samples and gives 6014 rows of 11 columns.
 
