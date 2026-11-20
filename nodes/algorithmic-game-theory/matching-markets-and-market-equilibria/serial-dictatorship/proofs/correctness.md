@@ -1,0 +1,25 @@
+---
+title: Serial dictatorship is Pareto optimal, strategyproof and reaches every Pareto optimal matching
+proves: [correctness, termination]
+status: full
+---
+
+Fix agents $1, \dots, n$, objects $O$, and for each agent $i$ a strict list of its acceptable objects. Write $x \succ_i y$ if $i$ prefers $x$ to $y$; every acceptable object is preferred to nothing ($\emptyset$), and nothing is preferred to every object that $i$ does not list. Let $\pi$ be the order, and let $T_k$ be the set of objects with $\text{taken} = \text{true}$ at the start of the $k$-th pass of line L3.
+
+**Termination.** The loop of line L3 makes $n$ passes, and each scan of line L5 reads a finite list. So the algorithm stops.
+
+**Claim 1 (each agent gets its best free object).** Let $i = \pi(k)$. After the pass, $M[i]$ is the object of the list of $i$ that $i$ ranks highest among those not in $T_k$, or NIL if every object of the list is in $T_k$. Also $T_{k+1} = T_k \cup \{M[i]\}$ when $M[i] \ne$ NIL, and $T_{k+1} = T_k$ otherwise. *Proof.* Line L5 reads the list best first, and line L6 stops at the first object not in $T_k$ and marks only that one. $\square$
+
+**The output is a matching.** By Claim 1 each agent gets at most one object, from its list, and an object leaves the free set when it is given, so no object is given twice.
+
+**Pareto optimality.** Suppose a matching $M'$ satisfies $M'(j) \succeq_j M(j)$ for all $j$ and $M'(j) \succ_j M(j)$ for some $j$. Then $M' \ne M$. Let $k$ be the smallest index with $M'(\pi(k)) \ne M(\pi(k))$ and $i = \pi(k)$. The lists are strict, so $M'(i) \succ_i M(i)$; in particular $M'(i)$ is an acceptable object $o$. If $o \notin T_k$, Claim 1 says that $i$ gets $o$ or an object it ranks higher, which contradicts $o \succ_i M(i)$. So $o \in T_k$, and by Claim 1 some agent $j = \pi(l)$ with $l < k$ has $M(j) = o$. By the choice of $k$, $M'(j) = M(j) = o = M'(i)$ with $j \ne i$, so $M'$ is not a matching. This contradiction proves that $M$ is Pareto optimal.
+
+**Strategyproofness.** Let $i = \pi(k)$ report any list in place of its true one, and let $\hat M$ be the result. The passes $1, \dots, k - 1$ read only the lists of the agents $\pi(1), \dots, \pi(k-1)$, so $T_k$ is the same in both runs. With the false list, $\hat M(i)$ is an object outside $T_k$ or nothing. If it is an object that $i$ truly finds acceptable, Claim 1 for the true run says $M(i) \succeq_i \hat M(i)$. If it is nothing or an object that $i$ does not accept, then $M(i) \succeq_i \emptyset \succ_i \hat M(i)$ or $M(i) \succeq_i \hat M(i) = \emptyset$. So no false list gives $i$ a better result.
+
+**Claim 2 (some agent has its top choice).** Let $M$ be a Pareto optimal matching for a set $R$ of agents and a set $F$ of objects, where each agent of $R$ accepts only the objects of its list that lie in $F$ and gets one of them or nothing. Then some agent $i \in R$ has $M(i)$ equal to its best acceptable object in $F$, or has $M(i) = \emptyset$ and accepts no object of $F$. *Proof.* Suppose not. Then each $i \in R$ has an object $t(i) \in F$ that it accepts and prefers to $M(i)$. If some $t(i)$ is assigned to nobody in $M$, giving $t(i)$ to $i$ (and freeing $M(i)$) makes $i$ better off and nobody worse off, a contradiction. Otherwise each $t(i)$ is $M(j)$ for a unique agent $j = s(i) \in R$, with $j \ne i$ because $i$ prefers $t(i)$ to $M(i)$. The map $s$ on the finite set $R$ has a cycle $i_1, \dots, i_r$ with $s(i_q) = i_{q+1}$ and $s(i_r) = i_1$. Give each $i_q$ the object $t(i_q)$. The objects $t(i_q) = M(i_{q+1})$ are distinct and were held by the cycle itself, so this is a matching, it makes every agent of the cycle better off, and nobody else changes. This contradicts Pareto optimality. $\square$
+
+**Every Pareto optimal matching is reached.** Let $M$ be a Pareto optimal matching of the whole instance. Build the order step by step. Suppose $\pi(1), \dots, \pi(k-1)$ are chosen, let $R$ be the other agents, and let $F$ be $O$ minus the objects $M(\pi(1)), \dots, M(\pi(k-1))$. The restriction of $M$ to $R$ uses only objects of $F$, and it is Pareto optimal for $R$ and $F$: a matching of $R$ into $F$ that dominates it would, together with the objects of the chosen agents, dominate $M$. By Claim 2, some $i \in R$ has $M(i)$ equal to its best acceptable object in $F$, or nothing if it accepts no object of $F$. Let $\pi(k) = i$.
+
+Run serial dictatorship with this order. By induction on $k$, after $k$ passes every agent $\pi(l)$ with $l \le k$ has $M(\pi(l))$, and $T_{k+1}$ is the set of these objects. The step: at the start of pass $k$ the free objects are exactly $F$, and by Claim 1 agent $\pi(k)$ gets its best acceptable object of $F$, or nothing, which is $M(\pi(k))$ by the choice of $\pi(k)$. So the output is $M$. $\blacksquare$
+
+**Cost.** By Claim 1, $|T_k| \le k - 1$. The scan of line L5 for agent $\pi(k)$ reads objects of $T_k$ until it meets a free one or the list ends, so it reads at most $|T_k| + 1 \le k$ entries. Summing over $k$ gives at most $n(n+1)/2$ entries; lines L1 and L2 cost $O(m + n)$. The total is $O(m + n^2)$.
