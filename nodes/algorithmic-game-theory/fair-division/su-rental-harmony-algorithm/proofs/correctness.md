@@ -1,0 +1,51 @@
+---
+title: Su's path-following algorithm returns a fully labeled cell with nearly envy-free prices
+proves: [correctness]
+status: partial
+---
+
+**Setting.** There are $n \ge 2$ rooms and $n$ tenants, both numbered $0$ to $n - 1$, a total rent $R > 0$ and a grid size $N \ge n$. Let $d = n - 1$. A grid point is an integer vector $s = (s_0, \dots, s_{d-1})$ in the region $T = \{0 \le s_0 \le s_1 \le \dots \le s_{d-1} \le N\}$. Its room prices are $p_j = R x_j / N$, where $x_0 = s_0$, $x_j = s_j - s_{j-1}$ for $1 \le j \le d - 1$ and $x_{n-1} = N - s_{d-1}$. So $x \ge 0$ and $\sum_j x_j = N$, and $s \mapsto x$ is a bijection from the grid points of $T$ to the integer points of the price simplex scaled by $N/R$. Room $j$ is free at $s$ when $x_j = 0$. A tenant is *miserly* if it chooses a free room whenever one exists. The owner of $s$ is $\sigma(s) = (s_0 + \dots + s_{d-1}) \bmod n$, and the label $\ell(s)$ is the room that the owner chooses at the prices of $s$. We refer to the lines L1 to L10 of the page.
+
+A cell is a pair $(b, \pi)$ of an integer vector $b$ and a permutation $\pi = (\pi_1, \dots, \pi_d)$ of the coordinates. Its vertices are $y^0 = b$ and $y^t = y^{t-1} + e_{\pi_t}$ for $t = 1, \dots, d$. These are the simplices of the Freudenthal (Kuhn) triangulation of $\mathbb{R}^d$. We use the standard facts about this triangulation: the cells cover $\mathbb{R}^d$, two cells meet in a common face, and each facet of a cell lies in exactly one other cell. The hyperplanes $s_0 = 0$, $s_j = s_{j-1}$ and $s_{d-1} = N$ that bound $T$ are hyperplanes of the triangulation, so the cells whose vertices all lie in $T$ triangulate $T$.
+
+**Lemma 1 (the pivot).** Let $C = (b, \pi)$. The other cell that contains the facet $C \setminus \{y^t\}$ is: for $0 < t < d$, $(b, \pi')$ where $\pi'$ swaps $\pi_t$ and $\pi_{t+1}$; for $t = 0$, $(b + e_{\pi_1}, (\pi_2, \dots, \pi_d, \pi_1))$; for $t = d$, $(b - e_{\pi_d}, (\pi_d, \pi_1, \dots, \pi_{d-1}))$. The facet lies on the boundary of $T$ if and only if this cell is not inside $T$.
+
+*Proof.* For $0 < t < d$, the new cell has the vertices $y^0, \dots, y^{t-1}$, then $y^{t-1} + e_{\pi_{t+1}}$, then $y^{t+1}, \dots, y^d$, so it shares every vertex but $y^t$. For $t = 0$, the new chain starts at $y^1$, adds $e_{\pi_2}, \dots, e_{\pi_d}$ to reach $y^d$, and then adds $e_{\pi_1}$; it shares $y^1, \dots, y^d$. For $t = d$, the new chain starts at $b - e_{\pi_d}$, adds $e_{\pi_d}$ to reach $b$, and then follows $y^1, \dots, y^{d-1}$. In each case the new vertex differs from $y^t$, so the cell is the other cell of the facet. The facet lies inside $T$, and the two cells lie on its two sides. If the facet is on the boundary of $T$, the other side is outside $T$, so the other cell is not inside $T$. If it is not on the boundary, both sides near the facet are in $T$, and the other cell is a cell of the triangulation of $T$. $\square$
+
+**Lemma 2 (owners).** The $n$ vertices of a cell have $n$ different owners.
+
+*Proof.* The coordinate sums of $y^0, \dots, y^d$ are $\sum b, \sum b + 1, \dots, \sum b + d$. These are $n$ consecutive integers, so they are different modulo $n$. $\square$
+
+**Lemma 3 (prices in one cell).** Within one cell, each $x_j$ takes at most two values, and they differ by 1. So the price of each room varies by at most $R/N$ over the vertices of a cell.
+
+*Proof.* Along the chain $y^0, \dots, y^d$, each coordinate $s_k$ grows by 1 exactly once. For $1 \le j \le d - 1$, $x_j = s_j - s_{j-1}$ grows by 1 at the step of $s_j$ and drops by 1 at the step of $s_{j-1}$, and is constant otherwise. So it takes two adjacent values. $x_0 = s_0$ and $x_{n-1} = N - s_{d-1}$ change once each. $\square$
+
+A *door* is a facet whose $d$ vertices have the labels $0, 1, \dots, n - 2$, each once. A cell is *fully labeled* if its $n$ vertices have all $n$ labels.
+
+**Lemma 4 (doors of a cell).** A fully labeled cell has exactly one door. Any other cell has zero or two doors.
+
+*Proof.* If the cell is fully labeled, the only door is the facet without the vertex labeled $n - 1$. Otherwise, if the labels $0, \dots, n - 2$ all appear, one of them appears twice and $n - 1$ does not appear, and the doors are the two facets without one of the two vertices with the repeated label. If some label of $0, \dots, n - 2$ is missing, no facet is a door. $\square$
+
+**Lemma 5 (the walk).** Start in the cell of $T$ that has a boundary door $D$, as in line L2. Lines L3 to L10 visit distinct cells, and they stop either at a fully labeled cell (line L5) or when they leave $T$ through a boundary door other than $D$ (line L9).
+
+*Proof.* At each visit, the facet we came through is a door; call its vertex set the entry. If the cell is not fully labeled, the vertex outside the entry has a label $\ell \le n - 2$ that repeats one vertex $u$ of the entry, and by Lemma 4 the other door is the facet without $u$. Line L8 finds $u$ and line L9 moves to the cell across that door, by Lemma 1. Consider the graph whose nodes are the cells of $T$ and one extra node "outside", with an edge for each door, joining the two cells that share it, or a cell and "outside" for a boundary door. By Lemma 4 each cell has degree at most 2, and fully labeled cells have degree 1. The walk follows this graph from "outside" without using an edge twice in a row. A walk in a graph whose inner nodes have degree at most 2 cannot return to a node it has visited before without coming through a node of degree 3 or more, so it never repeats a cell. There are finitely many cells, so it stops at a node of degree 1 or at "outside". $\square$
+
+**Theorem 1 (the output is right).** If the algorithm returns, then the rooms form a permutation, tenant $i$ chose its room $r_i$ at the prices of some vertex $v_i$ of the returned cell, and the returned prices $q$ are nonnegative, sum to $R$, and satisfy $|q_j - p_j(v_i)| \le R/N$ for every room $j$ and tenant $i$.
+
+*Proof.* The owners of the cell are all tenants (Lemma 2) and the labels are all rooms (line L5), so line L6 gives each tenant one room and each room one tenant. The owner of $v_i$ is $i$, and $\ell(v_i) = r_i$ is its choice at $p(v_i)$. $q$ is the average of $n$ price vectors, each nonnegative with sum $R$. By Lemma 3, $p_j(v)$ lies in an interval of length $R/N$ for the vertices $v$ of the cell, and $q_j$ is in the same interval. $\square$
+
+So if each tenant's preference changes little when prices change by $R/N$, the result is close to envy-free. For the test tenants that pay $c_i(j)\, p_j$ in their own eyes, Theorem 1 gives $c_i(r_i) q_{r_i} - c_i(j) q_j \le (c_i(r_i) + c_i(j)) R/N$, since $c_i(r_i) p_{r_i}(v_i) \le c_i(j) p_j(v_i)$.
+
+**Lemma 6 (where the boundary doors are).** If all tenants are miserly and $N \ge n$, every boundary door lies in a cell whose base $b$ has all coordinates at most $n - 2$.
+
+*Proof.* A vertex on a boundary facet has a free room, so its label is a free room there. Suppose the door lies on the facet $x_{n-1} = 0$. For each label $k \le n - 2$, some vertex of the door has $x_k = 0$, so by Lemma 3, $x_k \le 1$ at every vertex. Then $N = \sum_j x_j \le n - 1 < N$ at any vertex, a contradiction. So the door lies on a facet $x_j = 0$ with $j \le n - 2$. For each $k \le n - 2$ with $k \ne j$, some vertex has $x_k = 0$, so $x_k \le 1$ everywhere; also $x_j = 0$ on the door. So at each vertex of the door, $s_{d-1} = N - x_{n-1} = \sum_{k \le n - 2} x_k \le n - 2$. The base $b$ is the least vertex of its cell in every coordinate, and the door has $d \ge 1$ vertices, so $b_{d-1} \le n - 2$, and $0 \le b_0 \le \dots \le b_{d-1}$. $\square$
+
+So line L2 needs to search only a part of $T$ whose size does not depend on $N$.
+
+**Theorem 2 (termination for two and three rooms).** For $n = 2$ and $n = 3$ with miserly tenants and $N \ge n$, there is exactly one boundary door. So the walk from it ends at a fully labeled cell.
+
+*Proof.* For $n = 2$, a grid point is $s_0 \in \{0, \dots, N\}$ with prices proportional to $(s_0, N - s_0)$, a cell is an edge $\{a, a + 1\}$, and a door is one vertex with label 0. The boundary points are $s_0 = 0$, where only room 0 is free, so the label is 0, and $s_0 = N$, where only room 1 is free, so the label is 1. Exactly one boundary door.
+
+For $n = 3$, a door is an edge with labels $\{0, 1\}$, and by Lemma 6 it is not on $x_2 = 0$. Let $c$ be the corner $s = (0, 0)$, with prices proportional to $(0, 0, N)$; its label is 0 or 1. On the facet $x_0 = 0$ ($s_0 = 0$), the edges are $\{(0, a), (0, a + 1)\}$. Room 0 is free there, and label 1 needs room 1 free too, so $x_1 = a = 0$ at that vertex: the only candidate is $\{c, (0, 1)\}$. At $(0, 1)$ only room 0 is free, so its label is 0, and the edge is a door if and only if $\ell(c) = 1$. On the facet $x_1 = 0$ ($s_0 = s_1$), the edges are $\{(a, a), (a + 1, a + 1)\}$; label 0 needs $x_0 = a = 0$, so the only candidate is $\{c, (1, 1)\}$. At $(1, 1)$ only room 1 is free, so its label is 1, and the edge is a door if and only if $\ell(c) = 0$. Exactly one of the two holds. Both edges lie in the cell with base $(0, 0)$ that first raises $s_1$ and then $s_0$, with the vertices $(0, 0), (0, 1), (1, 1)$, which is inside $T$, and by Lemma 1 the cells across them are outside $T$. By Lemma 5, the walk from the only boundary door cannot leave through another boundary door, so it ends at a fully labeled cell. $\square$
+
+**For four or more rooms.** The graph of Lemma 5 shows that the number of fully labeled cells has the same parity as the number of boundary doors, because every path in it has two ends. If the number of boundary doors is odd, some walk from a boundary door does not end at another boundary door, so it ends at a fully labeled cell, and line L2 tries every boundary door. We do not prove here that the number is odd for $n \ge 4$, and this is why the proof is marked partial. Su (1999, Section 7) proves that a fully labeled cell exists for a barycentric subdivision, with a dual form of Sperner's lemma that he credits to Scarf, and he notes that other triangulations can be used. The implementation raises an error if no walk succeeds. In the tests, which count the boundary doors by brute force for four rooms, the number is always odd.
