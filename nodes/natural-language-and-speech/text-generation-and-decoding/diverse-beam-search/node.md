@@ -38,7 +38,7 @@ Plain beam search keeps a few good partial texts and grows them together. They t
 
 ## The problem
 
-The model gives $\log p(w \mid y)$ for every prefix $y$ and every token $w$ of the vocabulary $V$, which contains "</s>". The score of a prefix is the sum of its token log probabilities; all logs are natural logs. The task is to return a short list of finished outputs, ending with "</s>", that are probable under the model and not near copies of each other. No single objective defines "diverse", so the method fixes one: at step $t$, group $g$ maximizes
+The model gives $\log p(w \mid y)$ for every prefix $y$ and every token $w$ of the vocabulary $V$, which contains `</s>`. The score of a prefix is the sum of its token log probabilities; all logs are natural logs. The task is to return a short list of finished outputs, ending with `</s>`, that are probable under the model and not near copies of each other. No single objective defines "diverse", so the method fixes one: at step $t$, group $g$ maximizes
 
 $$\sum_{y \in \text{beam}_g} \Big( s(y) - \lambda \sum_{h < g} \big|\{ y' \in \text{beam}_h : y'_t = y_t \}\big| \Big),$$
 
@@ -61,23 +61,23 @@ L9          a kept candidate that ends with "</s>" goes to F with its score and 
 L10 return F sorted by score, best first
 ```
 
-A candidate that ends with "</s>" uses one of the $B'$ slots of its group at the step it finishes, and then leaves the beam. So a group can shrink. This is one of several conventions for finished hypotheses in beam search; the code and the tests use it for both plain and diverse beam search.
+A candidate that ends with `</s>` uses one of the $B'$ slots of its group at the step it finishes, and then leaves the beam. So a group can shrink. This is one of several conventions for finished hypotheses in beam search; the code and the tests use it for both plain and diverse beam search.
 
 ## Example
 
-Take the model M1 of [greedy decoding](/greedy-decoding/): at the empty prefix $p(a) = 0.5$, $p(b) = 0.4$, $p(\text{</s>}) = 0.1$; after a, $0.4, 0.3, 0.3$; after b, $0.05, 0.05, 0.9$; after two tokens, "</s>" has probability 1. Its most probable output is b</s> (0.36), and greedy decoding returns aa</s> (0.2). Run diverse beam search with $G = 2$ groups of $B' = 1$ and $\lambda = 0.5$.
+Take the model M1 of [greedy decoding](/greedy-decoding/): at the empty prefix $p(a) = 0.5$, $p(b) = 0.4$, $p(\text{</s>}) = 0.1$; after a, $0.4, 0.3, 0.3$; after b, $0.05, 0.05, 0.9$; after two tokens, `</s>` has probability 1. Its most probable output is b`</s>` (0.36), and greedy decoding returns aa`</s>` (0.2). Run diverse beam search with $G = 2$ groups of $B' = 1$ and $\lambda = 0.5$.
 
 | step | group | candidates, rank (score) | kept |
 |---|---|---|---|
-| 1 | 1 | a $-0.693$, b $-0.916$, </s> $-2.303$ | a |
-| 1 | 2 | a $-1.193$ ($-0.693$), b $-0.916$, </s> $-2.303$ | b |
-| 2 | 1 | aa $-1.609$, ab $-1.897$, a</s> $-1.897$ | aa |
-| 2 | 2 | ba $-3.912$, bb $-3.912$, b</s> $-1.022$ | b</s>, finished |
-| 3 | 1 | aa</s> $-1.609$ | aa</s>, finished |
+| 1 | 1 | a $-0.693$, b $-0.916$, `</s>` $-2.303$ | a |
+| 1 | 2 | a $-1.193$ ($-0.693$), b $-0.916$, `</s>` $-2.303$ | b |
+| 2 | 1 | aa $-1.609$, ab $-1.897$, a`</s>` $-1.897$ | aa |
+| 2 | 2 | ba $-3.912$, bb $-3.912$, b`</s>` $-1.022$ | b`</s>`, finished |
+| 3 | 1 | aa`</s>` $-1.609$ | aa`</s>`, finished |
 
-At step 1, group 1 chose a, so group 2 pays 0.5 for a and chooses b. At step 2 nobody has chosen "</s>" before group 2, so b</s> pays nothing. The result is b</s> ($\log 0.36 = -1.022$, group 2) and aa</s> ($\log 0.2 = -1.609$, group 1): two different outputs, and one of them is the mode.
+At step 1, group 1 chose a, so group 2 pays 0.5 for a and chooses b. At step 2 nobody has chosen `</s>` before group 2, so b`</s>` pays nothing. The result is b`</s>` ($\log 0.36 = -1.022$, group 2) and aa`</s>` ($\log 0.2 = -1.609$, group 1): two different outputs, and one of them is the mode.
 
-With $\lambda = 0.2$, group 2 ranks a at $-0.893$ above b at $-0.916$, follows group 1, and the result is aa</s> twice. Here diverse beam search misses the mode and returns no variety at all. The switch happens at $\lambda = \ln(0.5 / 0.4) = 0.2231$, the gap between a and b at the first step. The test checks both sides.
+With $\lambda = 0.2$, group 2 ranks a at $-0.893$ above b at $-0.916$, follows group 1, and the result is aa`</s>` twice. Here diverse beam search misses the mode and returns no variety at all. The switch happens at $\lambda = \ln(0.5 / 0.4) = 0.2231$, the gap between a and b at the first step. The test checks both sides.
 
 ## Correctness
 

@@ -4,7 +4,7 @@ proves: [correctness]
 status: full
 ---
 
-We use the notation of the page. Every output ends with "</s>" within $n$ tokens, so the tree of prefixes of positive probability is finite; its leaves are the outputs. For a node $y$, $\phi_y = \log p(y)$ is the log of the total probability of the outputs below it (for a prefix, the product of its token probabilities is the total probability of its completions, since the model ends within $n$ tokens). We work with exact real numbers and exact Gumbel draws. All logs are natural logs.
+We use the notation of the page. Every output ends with `</s>` within $n$ tokens, so the tree of prefixes of positive probability is finite; its leaves are the outputs. For a node $y$, $\phi_y = \log p(y)$ is the log of the total probability of the outputs below it (for a prefix, the product of its token probabilities is the total probability of its completions, since the model ends within $n$ tokens). We work with exact real numbers and exact Gumbel draws. All logs are natural logs.
 
 $\text{Gumbel}(\phi)$ has the distribution function $F_\phi(x) = \exp(-e^{\phi - x})$. The map $E = e^{-G}$ turns $G \sim \text{Gumbel}(\phi)$ into an exponential variable with rate $\lambda = e^{\phi}$, since $P(E > u) = P(G < -\log u) = e^{-\lambda u}$. It reverses the order: the largest $G$ is the smallest $E$.
 

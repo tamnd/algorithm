@@ -80,7 +80,7 @@ The calls of line L6 can run as one batch of $k$ sequences, and with a [key-valu
 
 With $\alpha = 0.6$, the step picks C, the least probable candidate, because its state points away from the context. With $\alpha = 0.3$ the scores are 0.0515, $-0.03$ and 0.056, and C still wins by a little. With $\alpha = 0.2$ they are 0.2010, 0.08 and 0.104, and A wins. With $\alpha = 0$ the step is greedy and picks A.
 
-**A loop.** Take a toy model that gives a 0.5, b 0.3, c 0.15 and "</s>" 0.05 after every prefix, and whose state for a token is a one-hot vector of that token. Greedy decoding writes a a a a forever. Contrastive search with $k = 3$ and $\alpha = 0.6$ writes a (no penalty yet), then b (a now has penalty 1 and score $-0.4$, b has $0.12$), then c. At the fourth step all three candidates have penalty 1, the probability decides, and it writes a again. The penalty spreads the text over the candidates; it does not forbid a token.
+**A loop.** Take a toy model that gives a 0.5, b 0.3, c 0.15 and `</s>` 0.05 after every prefix, and whose state for a token is a one-hot vector of that token. Greedy decoding writes a a a a forever. Contrastive search with $k = 3$ and $\alpha = 0.6$ writes a (no penalty yet), then b (a now has penalty 1 and score $-0.4$, b has $0.12$), then c. At the fourth step all three candidates have penalty 1, the probability decides, and it writes a again. The penalty spreads the text over the candidates; it does not forbid a token.
 
 ## Correctness
 

@@ -26,7 +26,7 @@ sources:
     locator: the definition of decoding as the search for the most probable output, and beam search with width 1 as greedy search
 ---
 
-Greedy decoding turns an autoregressive [language model](/language-model/) into a generator: at each step it appends the single most probable next token, and it stops when it emits the end token "</s>". It makes one call of the model per output token, so it is the cheapest search for a likely output. It is a heuristic for the [autoregressive decoding](/autoregressive-decoding/) problem: the product of locally best choices can be much less probable than the most probable whole sequence, and the page gives a model where the ratio is as small as you like.
+Greedy decoding turns an autoregressive [language model](/language-model/) into a generator: at each step it appends the single most probable next token, and it stops when it emits the end token `</s>`. It makes one call of the model per output token, so it is the cheapest search for a likely output. It is a heuristic for the [autoregressive decoding](/autoregressive-decoding/) problem: the product of locally best choices can be much less probable than the most probable whole sequence, and the page gives a model where the ratio is as small as you like.
 
 ## In plain words
 
@@ -34,7 +34,7 @@ The model reads the words so far and gives a score to every word that can come n
 
 ## The problem
 
-A model gives, for every prefix $y_{<t} = y_1 \ldots y_{t-1}$, a distribution $p(\cdot \mid y_{<t})$ over a vocabulary $V$ that contains "</s>". For a conditional model the input $x$ is fixed and is left out of the notation. An output is a sequence $y = y_1 \ldots y_n$ that ends with "</s>" and has no "</s>" before it. Its probability is the product of the conditionals,
+A model gives, for every prefix $y_{<t} = y_1 \ldots y_{t-1}$, a distribution $p(\cdot \mid y_{<t})$ over a vocabulary $V$ that contains `</s>`. For a conditional model the input $x$ is fixed and is left out of the notation. An output is a sequence $y = y_1 \ldots y_n$ that ends with `</s>` and has no `</s>` before it. Its probability is the product of the conditionals,
 
 $$\log p(y) = \sum_{t=1}^{n} \log p(y_t \mid y_{<t}).$$
 
@@ -42,7 +42,7 @@ All logs are natural logs. The decoding problem asks for $\arg\max_y p(y)$ among
 
 ## The algorithm
 
-The model is a function that takes a prefix and returns $\log p(w \mid \text{prefix})$ for every $w \in V$. The limit $N$ stops a model that never chooses "</s>".
+The model is a function that takes a prefix and returns $\log p(w \mid \text{prefix})$ for every $w \in V$. The limit $N$ stops a model that never chooses `</s>`.
 
 ```pseudo id=main
 GREEDY-DECODE(model, N)              ▷ model(y) = log p(· | y), N = the most tokens to emit
@@ -69,13 +69,13 @@ Take the model M1 over $V = \{a, b, \text{</s>}\}$:
 | b | 0.05 | 0.05 | 0.9 |
 | any longer prefix | 0 | 0 | 1 |
 
-It has seven outputs: </s> (0.1), a</s> (0.15), aa</s> (0.2), ab</s> (0.15), b</s> (0.36), ba</s> (0.02) and bb</s> (0.02). They sum to 1.
+It has seven outputs: `</s>` (0.1), a`</s>` (0.15), aa`</s>` (0.2), ab`</s>` (0.15), b`</s>` (0.36), ba`</s>` (0.02) and bb`</s>` (0.02). They sum to 1.
 
-Greedy decoding chooses a (0.5 against 0.4), then a again (0.4), then "</s>" (1). It returns aa</s> with probability $0.5 \cdot 0.4 \cdot 1 = 0.2$, or $\log 0.2 = -1.609$. The most probable output is b</s>, with $0.4 \cdot 0.9 = 0.36$. The first step chose a because a has more mass in total, but that mass is spread over three continuations, while the mass of b is nearly all on one. A [beam search](/beam-search/) of width 2 keeps a and b after step 1. At step 2 the two best of the six extensions are b</s> ($\log 0.36 = -1.022$, finished) and aa ($-1.609$), so it finds b</s>.
+Greedy decoding chooses a (0.5 against 0.4), then a again (0.4), then `</s>` (1). It returns aa`</s>` with probability $0.5 \cdot 0.4 \cdot 1 = 0.2$, or $\log 0.2 = -1.609$. The most probable output is b`</s>`, with $0.4 \cdot 0.9 = 0.36$. The first step chose a because a has more mass in total, but that mass is spread over three continuations, while the mass of b is nearly all on one. A [beam search](/beam-search/) of width 2 keeps a and b after step 1. At step 2 the two best of the six extensions are b`</s>` ($\log 0.36 = -1.022$, finished) and aa ($-1.609$), so it finds b`</s>`.
 
 ## Correctness
 
-The proof is in [proofs/correctness.md](proofs/correctness.md). It shows three things. The decoder stops after at most $N$ calls. The output satisfies the greedy rule at every step and its score is its exact log probability. And no constant bounds the ratio between the probability of the mode and the probability of the greedy output (a theorem): with $p(a) = 1/2 + \delta$ and $p(b) = 1/2 - \delta$ at the first step, an output b</s> of probability $1/2 - \delta$, and $L$ uniform steps over 4 tokens after a, the greedy output has probability $(1/2 + \delta) 4^{-L}$. The test checks $\delta = 0.01$ and $L = 6$, where the ratio is below 0.001.
+The proof is in [proofs/correctness.md](proofs/correctness.md). It shows three things. The decoder stops after at most $N$ calls. The output satisfies the greedy rule at every step and its score is its exact log probability. And no constant bounds the ratio between the probability of the mode and the probability of the greedy output (a theorem): with $p(a) = 1/2 + \delta$ and $p(b) = 1/2 - \delta$ at the first step, an output b`</s>` of probability $1/2 - \delta$, and $L$ uniform steps over 4 tokens after a, the greedy output has probability $(1/2 + \delta) 4^{-L}$. The test checks $\delta = 0.01$ and $L = 6$, where the ratio is below 0.001.
 
 So greedy decoding is a heuristic for the mode. The tests compare it with exhaustive search over all outputs of up to 5 tokens on 200 random models with 4 tokens: the greedy output never scores more than the best, and it is worse than the best on some models.
 
@@ -107,7 +107,7 @@ Use greedy decoding when a single short answer is needed and latency matters, fo
 
 ## Pitfalls
 
-- **No end token.** A model can loop without choosing "</s>". Always pass a limit $N$, and treat an output without "</s>" as unfinished.
+- **No end token.** A model can loop without choosing `</s>`. Always pass a limit $N$, and treat an output without `</s>` as unfinished.
 - **Ties.** Two tokens with the same score give different outputs under different tie rules. Fix the rule (here, the first token in the order of $V$) if outputs must be reproducible. On a GPU, small differences in the order of floating-point sums can change which token is the largest.
 - **Products of probabilities.** Multiplying probabilities underflows on long outputs. Add log probabilities.
 - **A greedy output is not the mode.** Do not call the greedy output "the most likely output" of the model; the example above shows the difference.

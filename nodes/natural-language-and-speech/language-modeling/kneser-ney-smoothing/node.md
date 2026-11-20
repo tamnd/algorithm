@@ -50,7 +50,7 @@ The pool and the simpler guess together fill the gap, so the chances after every
 
 ## The problem
 
-The training corpus is a list of sentences. Each sentence is padded with $n - 1$ copies of <s> on the left and one </s> on the right; </s> is predicted and counted, <s> is never predicted. The vocabulary $V$ is the set of predicted tokens, or a given closed set that contains them. For an order $n$, the task is to give a conditional distribution $P(w \mid h)$ over $V$ for every history $h$ of $n - 1$ tokens, with no zero for a word that was not seen after $h$, and with the counts of the training text used as well as possible.
+The training corpus is a list of sentences. Each sentence is padded with $n - 1$ copies of `<s>` on the left and one `</s>` on the right; `</s>` is predicted and counted, `<s>` is never predicted. The vocabulary $V$ is the set of predicted tokens, or a given closed set that contains them. For an order $n$, the task is to give a conditional distribution $P(w \mid h)$ over $V$ for every history $h$ of $n - 1$ tokens, with no zero for a word that was not seen after $h$, and with the counts of the training text used as well as possible.
 
 Write $c(g)$ for the number of times the n-gram $g$ ends at a predicted token, and $N_{1+}(\cdot\, g)$ for the number of distinct tokens $x$ such that $x g$ was seen. The model has one level for each order $m = 1, \ldots, n$. Level $n$ uses $a_n(g) = c(g)$, and each lower level uses $a_m(g) = N_{1+}(\cdot\, g)$. For a history $h$ of length $m - 1$ let
 
@@ -84,29 +84,29 @@ Line L1 is the only pass over the text. Line L2 turns the distinct $(m+1)$-grams
 
 ## Example
 
-Take the three sentences "a b", "a c" and "b c" with $n = 2$, $D_2 = 3/4$ and $D_1 = 0$. The padded text has the 7 bigram types <s> a (seen twice), <s> b, a b, a c, b c, b </s> and c </s> (seen twice). Line L2 counts the distinct left contexts:
+Take the three sentences "a b", "a c" and "b c" with $n = 2$, $D_2 = 3/4$ and $D_1 = 0$. The padded text has the 7 bigram types `<s>` a (seen twice), `<s>` b, a b, a c, b c, b `</s>` and c `</s>` (seen twice). Line L2 counts the distinct left contexts:
 
 | $w$ | left contexts | $N_{1+}(\cdot\, w)$ | $P_1(w)$ |
 |---|---|---|---|
-| a | <s> | 1 | 1/7 |
-| b | <s>, a | 2 | 2/7 |
+| a | `<s>` | 1 | 1/7 |
+| b | `<s>`, a | 2 | 2/7 |
 | c | a, b | 2 | 2/7 |
-| </s> | b, c | 2 | 2/7 |
+| `</s>` | b, c | 2 | 2/7 |
 
-After <s>, $T = 3$ and $N_{1+}(\text{<s>}\, \cdot) = 2$, so $\gamma = (3/4) \cdot 2 / 3 = 1/2$. Then
+After `<s>`, $T = 3$ and $N_{1+}(\text{<s>}\, \cdot) = 2$, so $\gamma = (3/4) \cdot 2 / 3 = 1/2$. Then
 
 $$P(\text{a} \mid \text{<s>}) = \frac{2 - 3/4}{3} + \frac12 \cdot \frac17 = \frac{41}{84}, \qquad P(\text{</s>} \mid \text{c}) = \frac{2 - 3/4}{2} + \frac38 \cdot \frac27 = \frac{41}{56}.$$
 
 The whole model is:
 
-| $h$ | a | b | c | </s> |
+| $h$ | a | b | c | `</s>` |
 |---|---|---|---|---|
-| <s> | 41/84 | 19/84 | 1/7 | 1/7 |
+| `<s>` | 41/84 | 19/84 | 1/7 | 1/7 |
 | a | 3/28 | 19/56 | 19/56 | 3/14 |
 | b | 3/28 | 3/14 | 19/56 | 19/56 |
 | c | 3/56 | 3/28 | 3/28 | 41/56 |
 
-Every row sums to 1. The word a is seen as often as b and c, but always after <s>, so after any other history it gets the least. With $n = 3$ on the same text, level 2 counts <s> a once, not twice, because both occurrences have the same left context <s>.
+Every row sums to 1. The word a is seen as often as b and c, but always after `<s>`, so after any other history it gets the least. With $n = 3$ on the same text, level 2 counts `<s>` a once, not twice, because both occurrences have the same left context `<s>`.
 
 ## Correctness
 
@@ -141,8 +141,8 @@ Use it as the default smoothing for a count-based n-gram model, for example in a
 - **Raw counts in the lower levels.** The continuation counts are the point of the method. With $c(w)$ in the lower levels it is absolute discounting.
 - **Only the unigram level changed.** Every level below $n$ uses continuation counts, not only level 1.
 - **A discount above 1.** Then words seen once lose more than their count, and the sum exceeds 1. The default $n_1 / (n_1 + 2 n_2)$ is always in $(0, 1]$, but it fails when $n_1 = 0$.
-- **Sentence starts.** Without the padding, an n-gram at the start of a sentence has no left context, and its continuation count is 0. The padding with <s> gives it the context <s>.
-- **Unseen words.** With $D_1 = 0$ a word that never appeared in training gets 0. Map such words to <unk>, or use $D_1 > 0$ so the uniform level gets some mass.
+- **Sentence starts.** Without the padding, an n-gram at the start of a sentence has no left context, and its continuation count is 0. The padding with `<s>` gives it the context `<s>`.
+- **Unseen words.** With $D_1 = 0$ a word that never appeared in training gets 0. Map such words to `<unk>`, or use $D_1 > 0$ so the uniform level gets some mass.
 - **Testing with floats.** Check that rows sum to 1 in exact arithmetic; float sums hide small errors in the weights.
 
 ## Implementations

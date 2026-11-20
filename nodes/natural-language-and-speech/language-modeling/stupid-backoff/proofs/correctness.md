@@ -4,7 +4,7 @@ proves: [correctness]
 status: full
 ---
 
-We use the notation of the page. Each sentence is padded with $n - 1$ copies of <s> and one </s>. For an m-gram $g$ with $1 \le m \le n$, $c(g)$ is the number of predicted positions where $g$ ends, and for a history $h$ of length $m - 1$ we write $c(h) = \sum_x c(h x)$. The vocabulary $V$ is the set of predicted tokens, so $c(w) \ge 1$ for every $w \in V$. The score is
+We use the notation of the page. Each sentence is padded with $n - 1$ copies of `<s>` and one `</s>`. For an m-gram $g$ with $1 \le m \le n$, $c(g)$ is the number of predicted positions where $g$ ends, and for a history $h$ of length $m - 1$ we write $c(h) = \sum_x c(h x)$. The vocabulary $V$ is the set of predicted tokens, so $c(w) \ge 1$ for every $w \in V$. The score is
 
 $$S(w \mid h) = \frac{c(h w)}{c(h)} \text{ if } c(h w) > 0, \qquad S(w \mid h) = \alpha\, S(w \mid h') \text{ otherwise}, \qquad S(w \mid ()) = \frac{c(w)}{N} \text{ or } 0,$$
 
@@ -31,4 +31,4 @@ with $h'$ the history $h$ without its first token, $N = c(())$ the number of pre
 
 For part 2 use induction on $m$. For $m = 1$ the sum is $\sum_w c(w)/N = 1 = B_1$. For $m \ge 2$ the words of $A$ give at most 1 (exactly 1 if $A$ is not empty, 0 if it is), and the rest give at most $\alpha \sum_{w \in V} S(w \mid h') \le \alpha B_{m-1}$ by the induction hypothesis. So the sum is at most $1 + \alpha B_{m-1} = B_m$. $\square$
 
-The bound is reached only in the limit, but the sum is often above 1. On the three sentences "a b", "a c" and "b c" with $n = 2$ and $\alpha = 2/5$, the scores after <s> are 2/3, 1/3, 4/45 and 2/15, which sum to 11/9. After a history that was never seen the sum can be below 1: with $n = 3$ on the same text, the scores after <s> c sum to 38/75. So no choice of a constant $\alpha > 0$ makes all rows sum to 1, and the scores are not a probability distribution. This is why stupid backoff has no [perplexity](/perplexity/).
+The bound is reached only in the limit, but the sum is often above 1. On the three sentences "a b", "a c" and "b c" with $n = 2$ and $\alpha = 2/5$, the scores after `<s>` are 2/3, 1/3, 4/45 and 2/15, which sum to 11/9. After a history that was never seen the sum can be below 1: with $n = 3$ on the same text, the scores after `<s>` c sum to 38/75. So no choice of a constant $\alpha > 0$ makes all rows sum to 1, and the scores are not a probability distribution. This is why stupid backoff has no [perplexity](/perplexity/).

@@ -38,7 +38,7 @@ The scores do not add up to one. That is fine for a translation system that only
 
 ## The problem
 
-The training corpus is a list of sentences. Each sentence is padded with $n - 1$ copies of <s> on the left and one </s> on the right; </s> is predicted and counted, <s> is never predicted. Write $c(g)$ for the number of times the m-gram $g$ ($1 \le m \le n$) ends at a predicted token, $N$ for the number of predicted tokens and $V$ for the set of predicted tokens. For a history $h$ write $c(h) = \sum_x c(h x)$, the number of times $h$ is followed by a predicted token, and $h'$ for $h$ without its first token.
+The training corpus is a list of sentences. Each sentence is padded with $n - 1$ copies of `<s>` on the left and one `</s>` on the right; `</s>` is predicted and counted, `<s>` is never predicted. Write $c(g)$ for the number of times the m-gram $g$ ($1 \le m \le n$) ends at a predicted token, $N$ for the number of predicted tokens and $V$ for the set of predicted tokens. For a history $h$ write $c(h) = \sum_x c(h x)$, the number of times $h$ is followed by a predicted token, and $h'$ for $h$ without its first token.
 
 The task is to give a score to every word $w$ after every history $h$ of $n - 1$ tokens. The score must be cheap to compute from raw counts held on many machines, it must prefer words seen after longer histories, and it does not have to be a probability. The definition of Brants and colleagues is
 
@@ -58,20 +58,20 @@ L3  if h is empty then return 0        ▷ w was never seen
 L4  return α · SB-SCORE(w, h')
 ```
 
-The implementation keeps $c(h)$ in its own table. Brants and colleagues divide by the raw frequency of the history; the two are equal for every history without <s>, because such a history is always followed by a predicted token, at least </s>.
+The implementation keeps $c(h)$ in its own table. Brants and colleagues divide by the raw frequency of the history; the two are equal for every history without `<s>`, because such a history is always followed by a predicted token, at least `</s>`.
 
 ## Example
 
-Take the three sentences "a b", "a c" and "b c" with $n = 2$ and $\alpha = 2/5$. There are $N = 9$ predicted tokens: a, b and c twice each, and </s> three times, so the unigram scores are 2/9, 2/9, 2/9 and 3/9. After <s>, a was seen twice and b once out of $c(\text{<s>}) = 3$; c and </s> were not seen there, so they back off to $\frac25 \cdot \frac29 = \frac4{45}$ and $\frac25 \cdot \frac39 = \frac2{15}$. The whole model is:
+Take the three sentences "a b", "a c" and "b c" with $n = 2$ and $\alpha = 2/5$. There are $N = 9$ predicted tokens: a, b and c twice each, and `</s>` three times, so the unigram scores are 2/9, 2/9, 2/9 and 3/9. After `<s>`, a was seen twice and b once out of $c(\text{<s>}) = 3$; c and `</s>` were not seen there, so they back off to $\frac25 \cdot \frac29 = \frac4{45}$ and $\frac25 \cdot \frac39 = \frac2{15}$. The whole model is:
 
-| $h$ | a | b | c | </s> | sum |
+| $h$ | a | b | c | `</s>` | sum |
 |---|---|---|---|---|---|
-| <s> | 2/3 | 1/3 | 4/45 | 2/15 | 11/9 |
+| `<s>` | 2/3 | 1/3 | 4/45 | 2/15 | 11/9 |
 | a | 4/45 | 1/2 | 1/2 | 2/15 | 11/9 |
 | b | 4/45 | 4/45 | 1/2 | 1/2 | 53/45 |
 | c | 4/45 | 4/45 | 4/45 | 1 | 19/15 |
 
-Every row sums to more than 1: the seen words alone already sum to 1, and the backed off words add to it. With $n = 3$ on the same text, the history <s> c was never seen; </s> then gets $\frac25 \cdot 1$ and each other word $\frac4{25} \cdot \frac29 = \frac8{225}$, which sums to 38/75, less than 1.
+Every row sums to more than 1: the seen words alone already sum to 1, and the backed off words add to it. With $n = 3$ on the same text, the history `<s>` c was never seen; `</s>` then gets $\frac25 \cdot 1$ and each other word $\frac4{25} \cdot \frac29 = \frac8{225}$, which sums to 38/75, less than 1.
 
 ## Correctness
 
@@ -104,7 +104,7 @@ Use it when the training text is so large that counting is the only affordable s
 
 - **Reporting perplexity.** The scores are not probabilities, so a perplexity computed from them has no meaning.
 - **The wrong denominator.** Dividing by the count of the history as a whole n-gram includes positions where it is not followed by a predicted token, for example the pads at the start of a sentence.
-- **Unseen words.** A word not in the training text scores 0 at every order. Map such words to <unk>.
+- **Unseen words.** A word not in the training text scores 0 at every order. Map such words to `<unk>`.
 - **Comparing across histories.** Since rows sum to different totals, the score of a word after one history cannot be compared with its score after another as if they were probabilities.
 - **Underflow.** The scores of a long sentence multiply to a number below the smallest double. Sum logs instead.
 
