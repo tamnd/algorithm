@@ -14,7 +14,7 @@ status: full
 
 **Lemma 1 (decomposition, lines L6 to L9).** FULL-DECOMPOSE$(c)$ returns the full canonical decomposition of $c$, or the full compatibility decomposition if the form is NFKD or NFKC.
 
-*Proof.* By induction on the depth of the mapping graph, which is finite by (F1). A Hangul syllable gets the jamo of section 3.12.2 at line L6, and jamo do not decompose further. A code point without a mapping of the selected kind is its own full decomposition (line L8). Otherwise line L9 replaces each code point of the mapping by its full decomposition, which is the definition. For canonical decomposition, compatibility mappings (those with a tag such as <compat>) are skipped. For compatibility decomposition, both kinds are applied, as D65 requires. $\square$
+*Proof.* By induction on the depth of the mapping graph, which is finite by (F1). A Hangul syllable gets the jamo of section 3.12.2 at line L6, and jamo do not decompose further. A code point without a mapping of the selected kind is its own full decomposition (line L8). Otherwise line L9 replaces each code point of the mapping by its full decomposition, which is the definition. For canonical decomposition, compatibility mappings (those with a tag such as `<compat>`) are skipped. For compatibility decomposition, both kinds are applied, as D65 requires. $\square$
 
 So after line L2, $d$ is the concatenation of the full decompositions of the characters of $X$.
 
