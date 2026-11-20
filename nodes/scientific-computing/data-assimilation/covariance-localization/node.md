@@ -78,14 +78,14 @@ Lines L1 and L2 compute the weights from the distances. Lines L3 and L4 localize
 ## Variations
 
 - **Choice of taper.** The Gaspari-Cohn function is the usual choice because it looks like a Gaussian and has compact support. Any compactly supported correlation function of the right dimension works.
-- **Length scale.** $c$ is tuned. A small $c$ removes more noise but also removes true correlations; a large $c$ keeps more noise. In the EnSRF measurement above the error fell as $c$ grew up to $15$, the largest value tried, and the EnKF did best near $c = 8$ to $10$, so the best value depends on the filter.
+- **Length scale.** $c$ is tuned. A small $c$ removes more noise but also removes true correlations; a large $c$ keeps more noise. In the EnSRF measurement above the error fell as $c$ grew up to $15$, the largest value tried (with the distance along the ring, for which the taper matrix at $c = 15$ has a negative eigenvalue; see the pitfall on the wrong distance below), and the EnKF did best near $c = 8$ to $10$, so the best value depends on the filter.
 - **Several distances.** A separate length scale can be used for each direction, for example for the vertical in a model of the atmosphere.
 - **Localization in time.** In a [smoother](/ensemble-kalman-smoother/), the spurious correlations between distant times are not removed by a spatial taper. A shorter lag does this.
 
 ## Pitfalls
 
 - **A taper that is not positive definite (line L1).** A function that is $1$ at zero and falls to zero, such as a cut-off step or a triangle in two dimensions, can give a matrix $\rho$ with negative eigenvalues. Then $\rho \circ P^f$ can fail to be a covariance and the analysis can be unstable.
-- **The wrong distance (line L1).** A correlation function of $\mathbb R^3$ stays positive definite on a sphere or a circle with the chordal distance, because these lie in $\mathbb R^3$. With the distance along the circle this holds only while the support is at most half the circle. On the Lorenz-96 ring of 40 points the Gaspari-Cohn matrix with the distance along the ring has a negative eigenvalue for $c = 12$ and more; see the [Gaspari-Cohn function](/gaspari-cohn-function/) page.
+- **The wrong distance (line L1).** A correlation function of $\mathbb R^3$ stays positive definite on a sphere or a circle with the chordal distance, because these lie in $\mathbb R^3$. With the distance along the circle this holds only while the support is at most half the circle. On the Lorenz-96 ring of 40 points the Gaspari-Cohn matrix with the distance along the ring has a negative eigenvalue for $c = 11$ and more; see the [Gaspari-Cohn function](/gaspari-cohn-function/) page.
 - **Half-width or support.** With the Gaspari-Cohn function, $c$ is the half-width and the weight is zero beyond $2c$. A stated "localization radius" can mean either of the two. Check which one a value means.
 - **Imbalance.** Localization also removes true long-range correlations, for example physical balances between variables, so the analysis can be out of balance.
 - **Nonlocal observations.** An observation of an integral over many grid points, such as a satellite radiance, has no single position, so its distance to a grid point is not well defined.

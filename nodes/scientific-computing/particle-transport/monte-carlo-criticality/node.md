@@ -85,7 +85,7 @@ The cycle gives $k_g = 1.2$ and a bank with one site. This is the first test of 
 
 **An infinite medium.** With $\Sigma_t = 1$, $\Sigma_s = 0.9$ and $\nu\Sigma_f = 0.12$, the exact value is $k_\infty = \nu\Sigma_f/(\Sigma_t - \Sigma_s) = 1.2$. A run with $N = 500$, 2 inactive and 20 active cycles (`random.Random(1)`) gives $1.1888 \pm 0.0077$.
 
-**A bare slab.** The same material in a slab of $L = 20$ cm has $k_{\mathrm{eff}} = 1.12006$ from a discrete ordinates solve ($S_8$, 80 cells). A run with $N = 500$, 10 inactive and 30 active cycles (`random.Random(2)`) gives $1.1171 \pm 0.0086$.
+**A bare slab.** The same material in a slab of $L = 20$ cm has $k_{\mathrm{eff}} = 1.12006$ from a discrete ordinates solve ($S_{16}$, 320 cells). A run with $N = 500$, 10 inactive and 30 active cycles (`random.Random(2)`) gives $1.1171 \pm 0.0086$.
 
 **A bad first source.** Start all $N = 2000$ neutrons at $x = 1$, near the left face (`random.Random(3)`). Many of them leak, so the first cycles give small values of $k$:
 
