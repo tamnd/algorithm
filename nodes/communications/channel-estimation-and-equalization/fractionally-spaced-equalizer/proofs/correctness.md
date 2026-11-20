@@ -1,0 +1,37 @@
+---
+title: The MMSE fractionally spaced equalizer is the Wiener solution on the polyphase model, and at T/2 a finite FSE can remove the ISI exactly when the two phases share no zero
+proves: [correctness]
+status: full
+---
+
+The receiver takes $L_s$ samples per symbol. The sampled pulse is $p[0], \ldots, p[L_p - 1]$, with $p[t] = 0$ outside this range and $\sum_t |p[t]|^2 = 1$. The samples are $y[m] = \sum_k x[k]\, p[m - L_s k] + w[m]$, where the symbols are independent with mean zero and energy $E_s$, and the noise samples are independent $\mathcal{CN}(0, N_0)$, independent of the symbols. The equalizer has $N_f$ taps and one output per symbol, $z[k] = \sum_{i=0}^{N_f - 1} c_i\, y[L_s k - i]$, which estimates $x[k - \Delta]$.
+
+**Lemma 1 (the polyphase model).** Let $u = (y[L_s k], y[L_s k - 1], \ldots, y[L_s k - N_f + 1])^T$ and $s = (x[k], x[k-1], \ldots, x[k - Q + 1])^T$ with $Q = \lfloor (L_p + N_f - 2)/L_s \rfloor + 1$ (line L1). Then $u = H s + v$, where $H_{ij} = p[L_s j - i]$ (line L2) and $v$ is the noise vector, with $E[v v^H] = N_0 I$.
+
+*Proof.* Put $k' = k - j$ in the sum: $y[L_s k - i] = \sum_j x[k - j]\, p[L_s j - i] + w[L_s k - i]$. The term is nonzero only if $0 \le L_s j - i \le L_p - 1$, so $j \ge 0$ and $j \le (L_p - 1 + i)/L_s \le (L_p + N_f - 2)/L_s$. So the symbols $x[k], \ldots, x[k - Q + 1]$ are all that enter $u$. The noise samples $w[L_s k - i]$ are distinct for distinct $i$, so they are independent with variance $N_0$. $\square$
+
+**Theorem 1 (the Wiener solution).** Let $R = E_s H H^H + N_0 I$ (line L3) and $r = E_s H e_\Delta$ (line L4). If $R$ is nonsingular, which holds whenever $N_0 > 0$, then $c = \bar f$ with $R f = r$ (lines L5 and L6) is the unique minimizer of $J = E|z[k] - x[k - \Delta]|^2$ over all $N_f$-tap filters, and the minimum is $J = E_s - r^H f$ (line L7). Moreover $J = N_0 E_s [(E_s H^H H + N_0 I)^{-1}]_{\Delta\Delta}$ when $N_0 > 0$, and for any taps $c$, $J(c) = E_s \|H^T c - e_\Delta\|^2 + N_0 \|c\|^2$.
+
+*Proof.* With $f = \bar c$, $z[k] = f^H u$. By Lemma 1, $E[u u^H] = R$ and $E[u\, \overline{x[k - \Delta]}] = E_s H e_\Delta = r$, because $x[k - \Delta]$ is entry $\Delta$ of $s$. Then $J(f) = f^H R f - 2\,\mathrm{Re}(f^H r) + E_s = E_s - r^H R^{-1} r + (f - R^{-1} r)^H R (f - R^{-1} r)$. $R$ is positive semidefinite, and positive definite when it is nonsingular, so the last term is positive for $f \ne R^{-1} r$. The formula for $J(c)$ follows from $z[k] - x[k - \Delta] = \sum_j ((H^T c)_j - [j = \Delta])\, x[k-j] + \sum_i c_i w[L_s k - i]$ and the independence of all terms. The closed form follows from the push-through identity $H^H (E_s H H^H + N_0 I)^{-1} = (E_s H^H H + N_0 I)^{-1} H^H$: $J = E_s - E_s^2 e_\Delta^T H^H R^{-1} H e_\Delta = E_s e_\Delta^T M^{-1}(M - E_s H^H H) e_\Delta = N_0 E_s [M^{-1}]_{\Delta\Delta}$ with $M = E_s H^H H + N_0 I$. $\square$
+
+With $L_s = 1$, $H_{ij} = p[j - i]$, and Theorem 1 is the MMSE linear equalizer. The bias $E[z \mid x[k-\Delta]] = (1 - J/E_s)\, x[k-\Delta]$ and the unbiased SINR $E_s/J - 1$ follow exactly as on that page, since the proof there uses only $u = Hs + v$.
+
+**Lemma 2 (the subchannels).** For $b = 0, \ldots, L_s - 1$, define the subchannel $h_b[t] = p[L_s t - b]$ and the subequalizer $c_b[a] = c[L_s a + b]$, the taps of phase $b$. Then the combined response $g = H^T c$ is $g = \sum_b c_b * h_b$. In the variable $\zeta = z^{-1}$, $G(\zeta) = \sum_b C_b(\zeta) H_b(\zeta)$.
+
+*Proof.* $g_j = \sum_i c_i\, p[L_s j - i]$. Write $i = L_s a + b$ with $0 \le b < L_s$. Then $p[L_s j - i] = p[L_s (j - a) - b] = h_b[j - a]$, so $g_j = \sum_b \sum_a c_b[a]\, h_b[j - a]$. $\square$
+
+**Theorem 2 (exact zero forcing at T/2).** Let $L_s = 2$, let $A = H_0$ and $B = H_1$ have the degrees $m$ and $n$ in $\zeta$ (their last coefficients are nonzero), and let $A$ and $B$ have no common complex root. If the even taps number at least $n$ and the odd taps at least $m$, that is, $\lceil N_f/2 \rceil \ge n$ and $\lfloor N_f/2 \rfloor \ge m$, then for every delay $0 \le \Delta < m + n$ there are taps with $g = e_\Delta$ exactly. So with $N_0 = 0$ the error $J = 0$ is reachable, and when $R = H H^H$ is nonsingular, the algorithm returns $J = 0$ and these taps.
+
+*Proof.* Use only the first $n$ even taps and the first $m$ odd taps, so $C_0 = U$ with $\deg U < n$ and $C_1 = V$ with $\deg V < m$. By Lemma 2, $G = U A + V B$, a polynomial of degree less than $m + n$. The map $(U, V) \mapsto UA + VB$ is linear from a space of dimension $n + m$ to the space of polynomials of degree less than $m + n$, also of dimension $m + n$. It is injective: if $UA = -VB$, then $A$ divides $VB$; since $A$ and $B$ have no common root, every root of $A$, with its multiplicity, is a root of $V$; so $A$ divides $V$, and $\deg V < m = \deg A$ forces $V = 0$, and then $U A = 0$ gives $U = 0$. So the map is onto, and $\zeta^\Delta$ is reached for each $\Delta < m + n$. These taps give $J = E_s \|g - e_\Delta\|^2 = 0$ by Theorem 1, and since $J \ge 0$ always, the minimizer of Theorem 1 also has $J = 0$. $\square$
+
+**Remark (the converse).** If $A$ and $B$ share a root $\zeta_0 \ne 0$, then $G(\zeta_0) = 0$ for every choice of taps, while $\zeta_0^\Delta \ne 0$. So no FSE of any length removes the ISI exactly. In such cases $H$ can also lose rank, and then $R$ is singular at $N_0 = 0$; the implementation reports this. Note that $B(0) = p[-1] = 0$ always, so $\zeta = 0$ is a root of $B$; it is not shared as long as $p[0] \ne 0$.
+
+**Remark (the symbol-spaced case).** With $L_s = 1$, there is one subchannel, and $G = C_0 A = \zeta^\Delta$ needs $A$ to divide $\zeta^\Delta$, so $A$ must be a single tap. A symbol-spaced FIR equalizer removes all ISI only when there is none to remove. This is why two phases help.
+
+**Lemma 3 (the null of the symbol-spaced model at half the symbol rate).** Let $P(f)$ be the spectrum of a real, even pulse $q(t)$, with $P(f) = 0$ for $|f| \ge 1/T$. The symbol-spaced samples $q(kT + \tau)$ have the folded spectrum $F(f) = \frac{1}{T} \sum_l P(f - l/T)\, e^{j 2\pi (f - l/T) \tau}$, and at $f = 1/(2T)$ this is $\frac{2}{T} P(\tfrac{1}{2T}) \cos(\pi \tau / T)$, which is zero at $\tau = T/2$.
+
+*Proof.* The folded spectrum follows from the Poisson sum formula for the samples of $q(t + \tau)$, whose transform is $P(f) e^{j 2 \pi f \tau}$. At $f = 1/(2T)$, only $l = 0$ and $l = 1$ give nonzero terms, since $|f - l/T| \ge 3/(2T)$ for the others. They are $P(\tfrac{1}{2T}) e^{j\pi\tau/T}$ and $P(-\tfrac{1}{2T}) e^{-j\pi\tau/T}$. $P$ is real and even, so the sum is $2 P(\tfrac{1}{2T}) \cos(\pi\tau/T)$. $\square$
+
+So the symbol-spaced equalizer after a raised cosine pulse with excess bandwidth $\beta > 0$ sees a channel with a spectral null at the band edge when it samples at $\tau = T/2$, and its MSE grows. The T/2 samples do not alias, because $P(f) = 0$ for $|f| \ge (1 + \beta)/(2T)$, which is below the half sampling rate $1/T$. The FSE then sees the whole spectrum, and a delay $\tau$ is only a linear phase. That the infinite-length FSE is exactly insensitive to $\tau$ is shown by Ungerboeck (1976) and by Gitlin and Weinstein (1981); this file does not prove it. The tests check it numerically for $\beta = 0.35$ and $\tau \in \{0, T/4, T/2\}$.
+
+**Remark (the cost).** Line L3 costs $O(N_f^2 Q)$ with $Q \approx (L_p + N_f)/L_s$, line L5 costs $O(N_f^3)$, and line L7 costs $O(N_f)$, once per channel and delay. One inverse of $M$, a $Q \times Q$ matrix, gives $J$ for every delay.
