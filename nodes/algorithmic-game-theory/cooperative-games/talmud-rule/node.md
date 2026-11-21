@@ -129,7 +129,7 @@ Use the Talmud rule when an estate, a budget or a capacity must be divided among
 
 ## Pitfalls
 
-- **CEL in place of CEA below half.** Both branches use the half claims, and the lower branch is CEA, not CEL. Using CEL on the half claims for $E = 200$ gives $(0, 50, 150)$ in place of $(50, 75, 75)$.
+- **CEL in place of CEA below half.** Both branches use the half claims, and the lower branch is CEA, not CEL. Using CEL on the half claims for $E = 200$ gives $(50/3, 200/3, 350/3)$ in place of $(50, 75, 75)$, and CEL on the full claims gives $(0, 50, 150)$.
 - **Full claims in place of half claims.** CEA on the full claims gives $(200/3, 200/3, 200/3)$ for $E = 200$, which is the rule of Maimonides, not the Talmud rule.
 - **The upper branch without the half claims.** For $E > C/2$ the award is $c/2$ plus CEL on $c/2$ with the excess $E - C/2$, not CEL on $c$ with $E$. For $E = 400$ the second gives $(100/3, 400/3, 700/3)$.
 - **Floating point.** The level $\lambda$ is a ratio, and float rounding can break the exact sum $E$ or the order of equal claims. Use fractions.

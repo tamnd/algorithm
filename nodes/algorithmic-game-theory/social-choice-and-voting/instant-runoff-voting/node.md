@@ -85,7 +85,7 @@ Plurality elects $a$ here, which loses to both other candidates in pairs. IRV el
 
 IRV can still miss the Condorcet winner. With 2 voters $a \succ b \succ c$, 1 voter $b \succ a \succ c$ and 2 voters $c \succ b \succ a$, the moderate $b$ beats $a$ by 3 to 2 and $c$ by 3 to 2, but it has the fewest first places. Round 1 has counts $(2, 1, 2)$ and eliminates $b$, and $a$ then wins by 3 to 2. This is the center squeeze.
 
-Two more failures, both with no ties in any round, show that more support can hurt a candidate:
+Two more failures, both with no tie for last place in any round, show that more support can hurt a candidate:
 
 - **Not monotone.** With 6 voters $a \succ b \succ c$, 2 voters $b \succ a \succ c$, 4 voters $b \succ c \succ a$ and 5 voters $c \succ a \succ b$, the first counts are $(6, 6, 5)$, $c$ is eliminated, and $a$ wins by 11 to 6. If the 2 voters $b \succ a \succ c$ move $a$ to the top, the counts are $(8, 4, 5)$, now $b$ is eliminated, its 4 ballots go to $c$, and $c$ wins by 9 to 8. The winner lost by gaining votes.
 - **No-show paradox.** With 2 voters $a \succ c \succ b$, 4 voters $b \succ c \succ a$ and 3 voters $c \succ b \succ a$, $a$ is eliminated first and $c$ wins by 5 to 4. If 2 more voters $a \succ c \succ b$ come to vote, the counts are $(4, 4, 3)$, $c$ is eliminated, and $b$ wins by 7 to 4. The two new voters prefer $c$ to $b$, so they would do better to stay at home.

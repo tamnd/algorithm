@@ -7,7 +7,7 @@ aliases:
 - "Orlin's algorithm for linear Fisher markets"
 area: algorithmic-game-theory/matching-markets-and-market-equilibria
 level: research
-summary: The first strongly polynomial algorithm for linear Fisher market equilibrium, by scaling and contraction of tight edges.
+summary: The first strongly polynomial algorithm for linear Fisher market equilibrium, by scaling and contraction of abundant edges.
 model: real-ram
 complexity:
   vars: {n: the number of buyers plus the number of goods, m: the number of pairs of a buyer and a good with positive utility}

@@ -57,7 +57,7 @@ for an optimal profile $s^*$, so $\mathrm{PoS} \le AB$. The same bound holds for
 
 **Nonatomic routing.** In a [selfish routing](/selfish-routing-model/) instance all Wardrop equilibria have the same cost ([Beckmann potential](/beckmann-potential/)), so $\mathrm{PoS} = \mathrm{PoA}$. In Pigou's network both are $4/3$.
 
-**Atomic linear congestion games.** For pure equilibria the price of anarchy is $5/2$ ([atomic linear congestion bound](/atomic-linear-congestion-price-of-anarchy/)). The price of stability is smaller: Christodoulou and Koutsoupias (2005) showed that it is at least $1 + 1/\sqrt{3} \approx 1.577$ and at most $1.6$.
+**Atomic linear congestion games.** For pure equilibria the price of anarchy is $5/2$ ([atomic linear congestion bound](/atomic-linear-congestion-price-of-anarchy/)). The price of stability is smaller: Christodoulou and Koutsoupias (2005) showed that it is at least $1 + 1/\sqrt{3} \approx 1.577$ and at most $1.6$, and Caragiannis, Flammini, Kaklamanis, Kanellopoulos and Moscardelli (2006) proved the matching upper bound, so it is exactly $1 + 1/\sqrt{3}$.
 
 **Load balancing.** On identical machines, take the schedule whose machine loads, sorted in decreasing order, form the lexicographically smallest vector. Its largest load is least, so it is optimal. A job that gains by a move would make the sorted vector smaller, so no job gains, and it is a pure equilibrium. So $\mathrm{PoS} = 1$. The pure price of anarchy of two machines is $4/3$, for example with jobs 2, 2, 1, 1 ([load balancing game](/load-balancing-game/)).
 

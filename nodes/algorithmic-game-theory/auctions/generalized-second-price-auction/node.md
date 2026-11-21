@@ -86,7 +86,7 @@ Sorting the bids takes $O(n \log n)$ time and $O(n)$ space, and lines L2 to L7 t
 
 ## Properties
 
-- **Not DSIC** when $k \ge 2$ and the click-through rates differ by little.
+- **Not DSIC** when $k \ge 2$ and $\alpha_1 > \alpha_2 > 0$, whatever the rates; the gain from bidding for a lower slot is largest when the click-through rates differ by little.
 - **Ex post individually rational** for truthful bids, and every winner pays at most its bid.
 - **Efficient equilibrium.** Every envy-free equilibrium in the sense of Varian gives the slots in the order of the values and pays at least the VCG payments; the bidder-optimal one has exactly the VCG outcome (Edelman, Ostrovsky and Schwarz 2007; Varian 2007).
 - **Same bids, more money.** For the same bids GSP charges each bidder at least the VCG payment. In the equilibrium with the VCG outcome the revenue is the same as VCG, because the bids are lower.

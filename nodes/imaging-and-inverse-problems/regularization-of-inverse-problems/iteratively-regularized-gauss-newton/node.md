@@ -104,7 +104,7 @@ For nonlinear $F$, convergence as $\delta \to 0$ and the rates $O(\delta^{2\nu/(
 ## Complexity
 
 - **Per step.** One evaluation of $F$ at line L3, one Jacobian at line L4, forming $J^T J$ in $O(m n^2)$, and solving the $n \times n$ system in $O(n^3)$. With $f$ and $j$ the costs of $F$ and $F'$, that is $O(f + j + m n^2 + n^3)$.
-- **Steps.** Each step divides $\alpha$ by $1/q$. The rule stops once $\alpha_k$ is small enough for the data error to reach the noise level, so the number of steps grows like $\log(1/\delta)$ when the a priori analysis applies; in the example it went from $9$ to $12$ when $\delta$ fell by a factor of $10$.
+- **Steps.** Each step multiplies $\alpha$ by $q$. The rule stops once $\alpha_k$ is small enough for the data error to reach the noise level, so the number of steps grows like $\log(1/\delta)$ when the a priori analysis applies; in the example it went from $9$ to $12$ when $\delta$ fell by a factor of $10$.
 - **Space.** $O(m n + n^2)$ for the Jacobian and the normal matrix.
 - **Large problems.** For images and wave fields, $J$ is never formed. Line L5 is solved approximately by [conjugate gradients](/conjugate-gradient-method/) on $J^* J + \alpha I$, with products $J h$ and $J^* r$ computed by linearized and [adjoint](/adjoint-state-method/) solves. Then a step costs a few tens of forward and adjoint solves.
 
