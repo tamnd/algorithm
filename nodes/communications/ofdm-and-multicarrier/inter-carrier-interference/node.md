@@ -51,7 +51,7 @@ The term $m = k$ is the wanted signal, scaled by $S(\varepsilon)$: its size drop
 
 **Leakage for N = 64.** These values follow from the closed form above (exact for the model, computed to the digits shown):
 
-| $\varepsilon$ | $\lvert S(\varepsilon)\rvert^2$ | ICI power $1 - \lvert S\rvert^2$ | $(\pi\varepsilon)^2/3$ | signal to ICI ratio |
+| $\varepsilon$ | $\lvert S(\varepsilon)\rvert^2$ | ICI power $1 - \lvert S\rvert^2$ | $(\pi\varepsilon)^2/3$ | $E_s$ to ICI ratio |
 |---|---|---|---|---|
 | 0.02 | 0.998685 | 0.001315 | 0.001316 | 28.81 dB |
 | 0.05 | 0.991804 | 0.008196 | 0.008225 | 20.86 dB |
@@ -59,7 +59,7 @@ The term $m = k$ is the wanted signal, scaled by $S(\varepsilon)$: its size drop
 | 0.2 | 0.875168 | 0.124832 | 0.131595 | 9.04 dB |
 | 0.5 | 0.405366 | 0.594634 | 0.822467 | 2.26 dB |
 
-For $\varepsilon = 0.1$, the two nearest subcarriers contribute $0.01195$ and $0.00800$ of the power, more than half of the total ICI. The small-offset form is good up to about $\varepsilon = 0.1$ and poor at $0.5$.
+For $\varepsilon = 0.1$, the two nearest subcarriers contribute $0.01195$ and $0.00800$ of the power, more than half of the total ICI. The small-offset form is good up to about $\varepsilon = 0.1$ and poor at $0.5$. The last column is $10 \log_{10}(1 / (1 - |S|^2))$; the ratio of the scaled signal $|S|^2 E_s$ to the ICI is lower, $28.81$, $20.83$, $14.74$, $8.46$ and $-1.66$ dB.
 
 **SNR loss at 10 dB.** Treat the ICI as noise, so the SINR is $|S(\varepsilon)|^2 E_s / (N_0 + (1 - |S(\varepsilon)|^2) E_s)$. At $E_s / N_0 = 10$ dB the loss $10 \log_{10}(\text{SNR}/\text{SINR})$ is $0.378$ dB for $\varepsilon = 0.05$ and $1.364$ dB for $\varepsilon = 0.1$. Pollet's approximation gives $0.357$ dB and $1.429$ dB. So a residual offset of a few percent of the spacing is the usual target for an OFDM synchronizer.
 

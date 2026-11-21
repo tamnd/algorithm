@@ -43,7 +43,7 @@ A measurement of an image is never perfect, and many different images explain it
 
 $$T_\lambda(x) = \tfrac12\|Ax - y^\delta\|^2 + \lambda R(x),$$
 
-which is the form of the variational pages of this area. Other noise laws change only the first term (see [data fidelity term](/data-fidelity-term/)). The rz pages write $\alpha$ for the same weight.
+which is the form of the variational pages of this area. Other noise laws change only the first term (see [data fidelity term](/data-fidelity-term/)). The pages on the regularization of inverse problems, such as [Tikhonov regularization](/tikhonov-regularization/), write $\alpha$ for the same weight.
 
 Use the technique when the problem is ill-posed and the prior knowledge is a statement about structure, not only about size: edges, sparsity in a basis or frame, piecewise smooth regions, nonnegativity. It also applies when no closed form exists, because the energy is minimized by a numerical solver.
 

@@ -74,7 +74,7 @@ In the bribery problem, the input also has a budget $B$. In the basic form, the 
 - **Plurality.** Constructive control by adding candidates and by deleting candidates is NP-complete (Bartholdi, Tovey and Trick 1992).
 - **Condorcet voting.** Constructive control by adding voters and by deleting voters is NP-complete (Bartholdi, Tovey and Trick 1992).
 - **Copeland voting.** Copeland voting and Llull's rule resist bribery and many types of constructive control (Faliszewski, Hemaspaandra, Hemaspaandra and Rothe 2009, and Theorem 7.4 of the Handbook).
-- **Priced and weighted bribery.** Weights or prices can make bribery hard even for plurality, through problems such as partition, while the basic form is polynomial (Faliszewski, Hemaspaandra and Hemaspaandra 2009).
+- **Priced and weighted bribery.** Weights and prices together make bribery NP-complete even for plurality, by a reduction from partition, while bribery with weights alone, with prices alone, or with neither is polynomial (Faliszewski, Hemaspaandra and Hemaspaandra 2009).
 - **Worst case only.** As with manipulation, these bounds say that some instances are hard unless P = NP, not that typical instances are hard.
 
 ## Reductions

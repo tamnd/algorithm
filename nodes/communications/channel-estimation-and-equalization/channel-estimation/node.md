@@ -53,7 +53,7 @@ A radio channel changes the signal: it delays it, scales it, and adds echoes. To
 
 $$X = \begin{pmatrix} -1 & 1 \\ 1 & -1 \\ 1 & 1 \end{pmatrix}, \qquad X^H X = \begin{pmatrix} 3 & -1 \\ -1 & 3 \end{pmatrix}, \qquad (X^H X)^{-1} = \frac{1}{8} \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}.$$
 
-Without noise, $y = X h = (-0.5, 0.5, 1.5)$, and $\hat h = (X^H X)^{-1} X^H y = (1, 0.5)$, the true taps. With noise, the LS error is $N_0\, \mathrm{tr}((X^H X)^{-1}) = 0.75\, N_0$. Three orthogonal pilot rows of the same energy would give $X^H X = 3I$ and the error $2N_0/3$, which is the best possible for this energy.
+Without noise, $y = X h = (-0.5, 0.5, 1.5)$, and $\hat h = (X^H X)^{-1} X^H y = (1, 0.5)$, the true taps. With noise, the LS error is $N_0\, \mathrm{tr}((X^H X)^{-1}) = 0.75\, N_0$. A matrix $X$ with orthogonal columns of the same energy would give $X^H X = 3I$ and the error $2N_0/3$, the bound of the pilot design below. Pilots of $\pm 1$ cannot reach it here: two columns of length 3 with entries $\pm 1$ have an odd inner product, so $X^H X$ has off-diagonal entries at least 1 in size, and $0.75\, N_0$ is already the best error for such pilots.
 
 **LMMSE with a prior.** Let the taps be independent with variances $R_h = \mathrm{diag}(1, 0.25)$ and $N_0 = 0.1$. The LMMSE error covariance is $(R_h^{-1} + X^H X/N_0)^{-1}$. Here $R_h^{-1} + X^H X / N_0 = \begin{pmatrix} 31 & -10 \\ -10 & 34 \end{pmatrix}$, with determinant 954, so the error is $(34 + 31)/954 = 0.0681$, against $0.075$ for LS.
 

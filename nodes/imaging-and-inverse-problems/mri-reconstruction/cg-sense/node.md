@@ -89,7 +89,7 @@ In the [real RAM](/real-ram/), one iteration costs one application of $E$ and on
 ## Properties
 
 - **Least squares solution.** With full column rank, the iteration reaches $x^\star$ in at most $n^2$ steps in exact arithmetic (theorem).
-- **Monotone error in the energy norm.** $\lVert x_t - x^\star \rVert_A$ does not increase (theorem). The test of this page checks it at each step on a radial problem. The Euclidean error and the data residual $\lVert E x_t - y \rVert$ are not proved monotone for this iteration, and the tests do not check them.
+- **Monotone error.** $\lVert x_t - x^\star \rVert_A$ does not increase (theorem). The test of this page checks it at each step on a radial problem. The Euclidean error $\lVert x_t - x^\star \rVert$ does not increase either (Hestenes and Stiefel 1952), and the weighted residual $\lVert D^{1/2}(E x_t - y) \rVert$ does not increase, because its square differs from $\lVert x_t - x^\star \rVert_A^2$ by a constant. The plain data residual $\lVert E x_t - y \rVert$ is not monotone in general when $D$ is not a multiple of the identity. The tests do not check these.
 - **Same as SENSE for uniform Cartesian sampling.** For $D = I$, the limit is the SENSE output (theorem). The test of this page checks it on a $32 \times 32$ image with $R = 2$ and noise to $10^{-8}$.
 - **Matrix free.** Only $E$ and $E^H$ are needed, so any trajectory, field map or other linear term can be added to $E$.
 - **Same noise as SENSE at convergence.** At the solution the noise covariance is the one of the least squares estimate; the [g-factor](/g-factor/) describes it for uniform Cartesian sampling.
