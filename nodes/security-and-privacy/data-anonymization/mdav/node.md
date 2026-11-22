@@ -71,7 +71,7 @@ L13     replace each record of g by the centroid of g
 L14 return G and the replaced records
 ```
 
-Line L6 picks $s$ after line L5 has removed the group of $r$. Domingo-Ferrer and Torra (2005) take the record farthest from $r$ in the set before the removal. The two choices are the same: the farthest record from $r$ is not among its $k - 1$ nearest unless all the distances tie. With the tie rule here, the version on this page can always form the second group.
+Line L6 picks $s$ after line L5 has removed the group of $r$. Domingo-Ferrer and Torra (2005) take the record farthest from $r$ in the set before the removal. The two choices are the same except when the largest distance from $r$ is tied and the tie reaches into the $k - 1$ nearest records, so that a farthest record has already been removed; then the version before the removal may pick a record that is gone. With the tie rule here, the version on this page can always form the second group.
 
 ## Example
 
