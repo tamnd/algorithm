@@ -90,7 +90,7 @@ The table is a measurement on this toy model: 20 texts of $T = 200$ tokens for e
 | 2 | 0.671 | 13.05 | 11.35 |
 | 4 | 0.938 | 20.68 | 19.92 |
 
-The z-score grows like $\sqrt T$ for a fixed green fraction: with half of the tokens green, $z = 2.66$ at $T = 25$, $4.08$ at $T = 50$, $5.77$ at $T = 100$ and $8.16$ at $T = 200$. So short texts cannot be flagged with confidence.
+The z-score grows like $\sqrt T$ for a fixed green fraction: with half of the tokens green, $z = 2.89$ at $T = 25$, $4.08$ at $T = 50$, $5.77$ at $T = 100$ and $8.16$ at $T = 200$. So short texts cannot be flagged with confidence.
 
 ## Correctness
 
@@ -133,7 +133,7 @@ Use it when the provider of a model wants to detect its own output later, for ex
 
 ## Pitfalls
 
-- **Too short a text.** At line L14 the z-score grows like $\sqrt T$, so a text of 25 tokens with half of them green gives only $z = 2.66$. Set a minimum length before flagging.
+- **Too short a text.** At line L14 the z-score grows like $\sqrt T$, so a text of 25 tokens with half of them green gives only $z = 2.89$. Set a minimum length before flagging.
 - **Counting repeated pairs.** If lines L11 and L12 are removed, a repeated phrase is counted many times and can give a large $z$ for human text. Score each pair once.
 - **Using $\gamma$ when $\gamma |V|$ is not a whole number.** Line L8 takes $\lfloor \gamma |V| \rfloor$ tokens, so line L14 must use $\gamma' = \lfloor \gamma |V| \rfloor / |V|$; otherwise the z-score is biased.
 - **The normal tail as a guarantee.** The value $3 \times 10^{-5}$ at $z^* = 4$ is the normal approximation. For a guaranteed rate, use the Hoeffding bound or an exact binomial tail.
