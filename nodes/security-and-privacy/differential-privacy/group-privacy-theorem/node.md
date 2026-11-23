@@ -7,7 +7,7 @@ aliases:
 - group privacy theorem
 area: security-and-privacy/differential-privacy
 level: core
-summary: "An epsilon-DP mechanism protects any group of k records with parameter k times epsilon; with delta the additive term grows to about k e^((k-1) epsilon) delta."
+summary: "An epsilon-DP mechanism protects any group of k records with parameter k times epsilon; with delta the additive term grows to delta (e^(k epsilon) - 1)/(e^epsilon - 1), at most k e^((k-1) epsilon) delta."
 prereqs: [differential-privacy-definition, approximate-differential-privacy]
 see_also: [post-processing-theorem, sequential-composition-theorem, packing-lower-bound, laplace-mechanism, gaussian-mechanism, gaussian-differential-privacy, hamming-distance, induction]
 sources:
